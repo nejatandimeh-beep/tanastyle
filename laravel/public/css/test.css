@@ -1,0 +1,9 @@
+@media screen and (max-width: 800px) {
+    .tableHint {
+        display: block !important;
+    }
+}
+
+.tableHint {
+    display: none;
+}
