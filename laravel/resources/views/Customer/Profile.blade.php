@@ -603,7 +603,7 @@
                                 </div>
                             @else
                                 @foreach($address as $key => $row)
-                                    <div class="card g-brd-none rounded-0 g-mb-40 g-mb-1--lg">
+                                    <div id="{{'addressRow'.$key}}" class="card g-brd-none rounded-0 g-mb-40 g-mb-1--lg">
                                         <div id="{{ 'accordion-13-heading-'.$key }}" class="u-accordion__header g-pa-0"
                                              role="tab">
                                             <div style="direction: rtl" class="w-100 d-md-table g-color-gray-dark-v5"
@@ -644,18 +644,21 @@
                                                         {{ $row->ReceiverName.' '.$row->ReceiverFamily }}</h6>
                                                     <!-- End Article Title -->
 
-
+                                                    {{--delete button small device--}}
                                                     @if($row->Status === 1)
-                                                        <a
-                                                           class="float-left g-color-gray-dark-v5 g-text-underline--none--hover smallDevice"
-                                                           data-toggle="tooltip"
-                                                           data-placement="top" data-original-title="آدرس فعال">
+                                                        <span style="cursor: default"
+                                                              class="float-left g-color-gray-dark-v5 smallDevice"
+                                                              data-toggle="tooltip"
+                                                              data-placement="top" data-original-title="آدرس فعال">
                                                             <i class="icon-target g-font-size-18 g-color-primary"></i>
-                                                        </a>
+                                                        </span>
                                                     @else
+                                                        <i id="{{'waitingAddressDelete'.$key}}" style="display: none"
+                                                           class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
                                                         <a style="cursor: pointer"
                                                            class="float-left g-color-gray-dark-v5 g-text-underline--none--hover smallDevice"
-                                                           onclick="deleteAddress({{ $row->ID }})"
+                                                           id="{{ 'deleteBtn'.$key }}"
+                                                           onclick="deleteAddress({{ $row->ID }}, {{$key}})"
                                                            data-toggle="tooltip"
                                                            data-placement="top" data-original-title="حذف آدرس">
                                                             <i class="icon-trash g-font-size-18 g-color-lightred g-color-red--hover"></i>
@@ -672,23 +675,25 @@
                                                 <!-- حذف آدرس -->
                                                 <div
                                                     class="text-md-right d-md-table-cell g-valign-middle g-pa-20 bigDevice">
+                                                    {{--delete button big device--}}
                                                     @if($row->Status === 1)
-                                                        <a
-                                                           class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                                           data-toggle="tooltip"
-                                                           data-placement="top" data-original-title="آدرس فعال">
+                                                        <span style="cursor: default"
+                                                              class="g-color-gray-dark-v5 g-pa-5"
+                                                              data-toggle="tooltip"
+                                                              data-placement="top" data-original-title="آدرس فعال">
                                                             <i class="icon-target g-font-size-18 g-color-primary"></i>
-                                                        </a>
+                                                        </span>
                                                     @else
-                                                        <div class="d-flex">
+                                                            <i id="{{'waitingAddressDelete'.$key}}" style="display: none"
+                                                               class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
                                                             <a style="cursor: pointer"
-                                                               onclick="deleteAddress({{ $row->ID }})"
+                                                               onclick="deleteAddress({{ $row->ID }}, {{$key}})"
+                                                               id="{{ 'deleteBtn'.$key }}"
                                                                class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
                                                                data-toggle="tooltip"
                                                                data-placement="top" data-original-title="حذف آدرس">
                                                                 <i class="icon-trash g-font-size-18 g-color-lightred g-color-red--hover"></i>
                                                             </a>
-                                                        </div>
                                                     @endif
                                                 </div>
                                             </div>

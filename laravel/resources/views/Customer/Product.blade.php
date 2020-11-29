@@ -417,8 +417,9 @@
                                             class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify">
                                             <h5 class="d-lg-inline-block d-block g-color-gray-dark-v2">آدرس
                                                 ارسال:</h5>
-                                            <span id="receiverState">{{ $sendAddress->State }}</span>
-                                            <span id="receiverCity">{{ $sendAddress->City }}</span>
+                                            <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
+                                            <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
+                                            <span class="receiverStateCity"></span>
                                             <span id="receiverAddress">{{ $sendAddress->Address }}</span>
                                             <strong
                                                 class="d-lg-inline-block d-block g-color-gray-dark-v2">گیرنده:</strong>

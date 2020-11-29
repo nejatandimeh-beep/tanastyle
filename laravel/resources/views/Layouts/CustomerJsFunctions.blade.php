@@ -70,9 +70,7 @@
         document.onreadystatechange = function () {
             let state = document.readyState;
             if (state === 'complete') {
-                setTimeout(function () {
-                    document.getElementById('load').style.display = "none";
-                }, 1000);
+                document.getElementById('load').style.display = "none";
             }
         }
 
@@ -433,13 +431,29 @@
         });
 
         // ---------------------------------------------------My Function-----------------------------------------------
-        function deleteAddress(id) {
-            console.log(id);
-            $.ajax({
-                type: 'GET',
-                url: "/User-Address-Delete/" + id,
-                success: function(data) {
-                    console.log(id);
+        function deleteAddress(id, idBtn) {
+            $.confirm({
+                title: 'حذف آدرس',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#deleteBtn'+idBtn).hide();
+                        $('#waitingAddressDelete'+idBtn).show();
+                        $.ajax({
+                            type: 'GET',
+                            url: "/User-Address-Delete/" + id,
+                            success: function (data) {
+                                $('#addressRow'+idBtn).remove();
+                            },
+                            error: function () {
+                                $('#deleteBtn'+idBtn).show();
+                                $('#waitingAddressDelete'+idBtn).hide();
+                                alert('قبلا برای این آدرس فاکتور صادر شده است و قابل حذف نیست.');
+                            }
+                        });
+                    },
+                    انصراف: function () {
+                    },
                 }
             });
         }
@@ -453,24 +467,24 @@
                 case 'addAddress':
                     setTimeout(function () {
                         $("#newAddressLink").trigger("click");
-                    }, 1500);
+                    }, 500);
                     $('#newAddressLink').text('افزودن آدرس و ادامه خرید');
                     $('#submitAddress').text('ثبت آدرس جدید و ادامه خرید');
                     break;
                 case 'deliveryStatus':
                     setTimeout(function () {
                         $("#filter-user-delivery").trigger("click");
-                    }, 1500);
+                    }, 500);
                     break;
                 case 'personData':
                     setTimeout(function () {
                         $("#filter-user-data").trigger("click");
-                    }, 1500);
+                    }, 500);
                     break;
                 case 'addressStatus':
                     setTimeout(function () {
                         $("#filter-user-address").trigger("click");
-                    }, 1500);
+                    }, 500);
                     break;
                 default:
                     break;
@@ -493,6 +507,7 @@
             $('#orderProductQtyPrice').text($('#orderProductQtyPrice').text().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#orderPrice').text($('#orderProductQtyPrice').text());
             $('#orderDate').text(nowDate());
+            $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }
 
         // تابع اضافه کردن نظرات
@@ -795,11 +810,11 @@
         // -------------------------------------------------State And City----------------------------------------------
         function changeState(state, city) {
             $('#' + city).find('option').remove().end();
-            autoCity($('#' + state).val(), city);
+            autoCity($('#' + state).val(), city, 'createOptions');
         }
 
         // تابع انتخاب شهر به ازای هر استان
-        function autoCity(state, city) {
+        function autoCity(state, city, type) {
             let s = [], i,
                 select = document.getElementById(city);
             switch (state) {
@@ -825,13 +840,16 @@
                     s[18] = "هشترود";
                     s[19] = "هوراند";
 
-                    for (i = 0; i <= 19; i++) {
-                        let opt = document.createElement('option');
-                        opt.value = i;
-                        opt.innerHTML = s[i];
-                        select.appendChild(opt);
-                    }
-                    break;
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 19; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.appendChild(opt);
+                        }
+                        break;
+                    } else
+                        return 'آذربایجان شرقی ' + s[city];
 
                 case '2':
                     s[0] = "آواجیق";
@@ -880,13 +898,16 @@
                     s[43] = "نوشین شهر";
                     s[44] = "یولاگادی";
 
-                    for (i = 0; i <= 44; i++) {
-                        let opt = document.createElement('option');
-                        opt.value = i;
-                        opt.innerHTML = s[i];
-                        select.appendChild(opt);
-                    }
-                    break;
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 44; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.appendChild(opt);
+                        }
+                        break;
+                    } else
+                        return 'آذربایجان غربی ' + s[city];
             }
         }
 
