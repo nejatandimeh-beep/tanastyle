@@ -2095,5 +2095,4 @@
         </div>
     </header>
     <div id="load"></div>
-    <div id="baseContainer" style="display: none">
 @endsection

@@ -5,7 +5,6 @@
          }" data-offset-top="400" data-compensation="#js-header2" style="display: inline-block; position: fixed; bottom: 15px; right: 15px;">
         <i class="hs-icon hs-icon-arrow-top"></i>
     </a>
-    </div>
     <!---------------------------------------Java Script Links--------------------------------------->
     <!-- JS Global Compulsory -->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>

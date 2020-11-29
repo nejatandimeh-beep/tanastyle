@@ -1,7 +1,6 @@
 @section('CustomerJsFunction')
     <script>
         $(document).ready(function () {
-            console.log('okkkkkkkkkkkkkkkkk');
             if ($('#checkLike').text() === 'like')
                 $('#customerLike').removeClass('d-none');
             else {
@@ -73,7 +72,6 @@
             if (state === 'complete') {
                 setTimeout(function () {
                     document.getElementById('load').style.display = "none";
-                    document.getElementById('baseContainer').style.display = "block";
                 }, 1000);
             }
         }
