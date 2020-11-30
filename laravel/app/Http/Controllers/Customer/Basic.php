@@ -111,7 +111,8 @@ class Basic extends Controller
 
         return redirect()->route('userProfile', 'addressStatus');
     }
-
+fdghfghfgh
+fghfghfghfghfdx
     public function addAddress(Request $request)
     {
         $id = $request->get('receiver-id');
