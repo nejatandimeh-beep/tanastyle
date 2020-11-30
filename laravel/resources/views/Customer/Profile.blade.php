@@ -1021,6 +1021,7 @@
                                                 ثابت</label>
                                             <div class="col-sm-10 force-col-12 d-flex">
                                                 <input style="width: 70%; direction: ltr"
+                                                       id="receiver-phone-new"
                                                        class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
                                                        name="receiver-phone"
                                                        maxlength="8"
@@ -1031,6 +1032,7 @@
                                                        maxlength="3"
                                                        class="text-left form-control form-control-md rounded-0 g-bg-white g-brd-right-none g-font-size-16"
                                                        value=""
+                                                       oninput="if($(this).val().length === 3) $('.custombox-content #receiver-phone-new').focus();"
                                                        placeholder="0xx">
                                             </div>
                                         </div>
@@ -1056,7 +1058,7 @@
                                                     <select id="stateSelectReceiver-new"
                                                             style="direction: rtl; padding-right: 30px !important;"
                                                             name="receiver-state"
-                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1 g-bg-white"
+                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-white"
                                                             tabindex="3"
                                                             onchange="changeState('stateSelectReceiver-new','citySelectReceiver-new')">
                                                         <option value="0">استان</option>
@@ -1096,7 +1098,7 @@
                                                     <select id="citySelectReceiver-new"
                                                             style="direction: rtl; padding-right: 30px !important;"
                                                             name="receiver-city"
-                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1 g-bg-white"
+                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-white"
                                                             tabindex="4">
                                                         <option value="0">شهر</option>
                                                     </select>

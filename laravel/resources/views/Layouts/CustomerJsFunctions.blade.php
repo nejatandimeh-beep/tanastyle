@@ -787,7 +787,7 @@
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        $('#addAddress').submit();
+                        $('.custombox-content #addAddress').submit();
                     },
                     انصراف: function () {
                     },
@@ -827,16 +827,18 @@
         }
         // -------------------------------------------------State And City----------------------------------------------
         function changeState(state, city) {
-            $('#' + city).find('option').remove().end();
-            if(city !== 'citySelectReceiver-new')
+            if(city !== 'citySelectReceiver-new'){
+                $('#' + city).find('option').remove().end();
                 autoCity($('#' + state).val(), city, 'createOptions');
-            else
+            }
+            else {
+                $('.custombox-content #' + city).find('option').remove().end();
                 autoCity($('.custombox-content #' + state).val(), city, 'createOptions');
+            }
         }
 
         // تابع انتخاب شهر به ازای هر استان
         function autoCity(state, city, type) {
-            console.log($('.custombox-content #citySelectReceiver-new').val());
             let s = [], i,
                 select = '';
             if(city === 'citySelectReceiver-new')

@@ -111,11 +111,9 @@ class Basic extends Controller
 
         return redirect()->route('userProfile', 'addressStatus');
     }
-fdghfghfgh
-fghfghfghfghfdx
+
     public function addAddress(Request $request)
     {
-        $id = $request->get('receiver-id');
         $name = $request->get('receiver-name');
         $family = $request->get('receiver-family');
         $postalCode = $request->get('receiver-postalCode');
@@ -126,7 +124,27 @@ fghfghfghfghfdx
         $city = $request->get('receiver-city');
         $address = $request->get('receiver-address');
 
-        dd($id,$name,$family,$postalCode,$prePhone,$phone,$mobile,$state,$city,$address);
+        DB::table('customer_address')
+            ->where('CustomerID', Auth::user()->id)
+            ->update([
+                'Status' => 0,
+            ]);
+
+        DB::table('customer_address')->insert([
+            'CustomerID' => Auth::user()->id,
+            'ReceiverName' => $name,
+            'ReceiverFamily' => $family,
+            'PostalCode' => $postalCode,
+            'PrePhone' => $prePhone,
+            'Phone' => $phone,
+            'Mobile' => $mobile,
+            'State' => $state,
+            'City' => $city,
+            'Address' => $address,
+            'Status' => 1,
+        ]);
+
+        return redirect()->route('userProfile', 'addressStatus');
     }
 
     public function addressDelete($id)
