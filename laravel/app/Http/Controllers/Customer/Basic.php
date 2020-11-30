@@ -64,29 +64,75 @@ class Basic extends Controller
         return redirect()->route('userProfile', 'personData');
     }
 
-    public function addressUpdate($id)
+    public function addressActive($id)
     {
         DB::table('customer_address')
             ->where('ID', $id)
             ->update([
-                'Status'=>1
+                'Status' => 1
             ]);
 
         DB::table('customer_address')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ID','<>', $id)
+            ->where('ID', '<>', $id)
             ->update([
-                'Status'=>0
+                'Status' => 0
             ]);
 
         return redirect()->route('userProfile', 'addressStatus');
+    }
+
+    public function addressUpdate(Request $request)
+    {
+        $id = $request->get('receiver-id');
+        $name = $request->get('receiver-name');
+        $family = $request->get('receiver-family');
+        $postalCode = $request->get('receiver-postalCode');
+        $prePhone = $request->get('receiver-prePhone');
+        $phone = $request->get('receiver-phone');
+        $mobile = $request->get('receiver-mobile');
+        $state = $request->get('receiver-state');
+        $city = $request->get('receiver-city');
+        $address = $request->get('receiver-address');
+
+        DB::table('customer_address')
+            ->where('ID', $id)
+            ->update([
+                'ReceiverName' => $name,
+                'ReceiverFamily' => $family,
+                'PostalCode' => $postalCode,
+                'PrePhone' => $prePhone,
+                'Phone' => $phone,
+                'Mobile' => $mobile,
+                'State' => $state,
+                'City' => $city,
+                'Address' => $address,
+            ]);
+
+        return redirect()->route('userProfile', 'addressStatus');
+    }
+
+    public function addAddress(Request $request)
+    {
+        $id = $request->get('receiver-id');
+        $name = $request->get('receiver-name');
+        $family = $request->get('receiver-family');
+        $postalCode = $request->get('receiver-postalCode');
+        $prePhone = $request->get('receiver-prePhone');
+        $phone = $request->get('receiver-phone');
+        $mobile = $request->get('receiver-mobile');
+        $state = $request->get('receiver-state');
+        $city = $request->get('receiver-city');
+        $address = $request->get('receiver-address');
+
+        dd($id,$name,$family,$postalCode,$prePhone,$phone,$mobile,$state,$city,$address);
     }
 
     public function addressDelete($id)
     {
         DB::table('customer_address')
             ->select('ID')
-            ->where('ID',$id)
+            ->where('ID', $id)
             ->delete();
     }
 
@@ -526,13 +572,13 @@ class Basic extends Controller
         return Verta::getJalali($year, $mon, $day);
     }
 
-//  Convert Date to Gregorian Calender
+    //  Convert Date to Gregorian Calender
     public function convertDateToGregorian($d)
     {
         return Verta::getGregorian($d->y, $d->m, $d->d);
     }
 
-// Add Zero Number to Day and Month of Converted Dates
+    // Add Zero Number to Day and Month of Converted Dates
     public function addZero($d)
     {
         for ($i = 0; $i < 3; $i++)
@@ -542,7 +588,7 @@ class Basic extends Controller
         return $d[0] . '-' . $d[1] . '-' . $d[2];
     }
 
-//  Minutes Passed of Spacial Time
+    //  Minutes Passed of Spacial Time
     public function dateLenToNow($date, $time)
     {
         $orderDateTime = $date . ' ' . $time;
@@ -556,7 +602,7 @@ class Basic extends Controller
         return (int)$minutes;
     }
 
-//    how past Days of Current Days
+    //    how past Days of Current Days
     public function howDays($day)
     {
         switch (true) {

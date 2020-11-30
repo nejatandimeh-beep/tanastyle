@@ -8,13 +8,14 @@
             $('#basketNum').text(num);
         }
 
-        $(function () {
-            $(document).on('shown.bs.tooltip', function (e) {
-                setTimeout(function () {
-                    $(e.target).tooltip('hide');
-                }, 2000);
-            });
-        });
+        // Hide Tooltip After 2s
+        // setInterval($(function () {
+        //     $(document).on('shown.bs.tooltip', function (e) {
+        //         setTimeout(function () {
+        //             $(e.target).tooltip('hide');
+        //         }, 2000);
+        //     });
+        // });
 
         $(document).on('ready', function () {
             // initialization of tabs

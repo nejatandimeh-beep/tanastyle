@@ -487,11 +487,11 @@
                                 <label
                                     class="col-sm-2 col-form-label align-self-center">موبایل</label>
                                 <div class="col-sm-10 force-col-12">
-                                    <input
+                                    <input style="direction: ltr"
                                         class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
                                         id="user-mobile"
                                         name="mobile"
-                                        maxlength="10"
+                                        maxlength="11"
                                         value="{{ $customer->Mobile }}"
                                         placeholder="09xxxxxxxx"
                                         readonly="">
@@ -599,11 +599,12 @@
                             @if(!isset($address[0]->ID))
                                 <div class="alert alert-danger g-px-15--lg g-px-5 text-lg-right text-center"
                                      role="alert">
-                                    <strong>توجه!</strong> لیست آدرس های شما خالی است.
+                                    <strong>اخطار!</strong> لیست آدرس های شما خالی است.
                                 </div>
                             @else
                                 @foreach($address as $key => $row)
-                                    <div id="{{'addressRow'.$key}}" class="card g-brd-none rounded-0 g-mb-40 g-mb-1--lg">
+                                    <div id="{{'addressRow'.$key}}"
+                                         class="card g-brd-none rounded-0 g-mb-40 g-mb-1--lg">
                                         <div id="{{ 'accordion-13-heading-'.$key }}" class="u-accordion__header g-pa-0"
                                              role="tab">
                                             <div style="direction: rtl" class="w-100 d-md-table g-color-gray-dark-v5"
@@ -643,27 +644,29 @@
                                                     <h6 class="d-inline-block g-font-size-13 g-font-weight-700 g-color-black mb-0">
                                                         {{ $row->ReceiverName.' '.$row->ReceiverFamily }}</h6>
                                                     <!-- End Article Title -->
-
-                                                    {{--delete button small device--}}
-                                                    @if($row->Status === 1)
-                                                        <span style="cursor: default"
-                                                              class="float-left g-color-gray-dark-v5 smallDevice"
-                                                              data-toggle="tooltip"
-                                                              data-placement="top" data-original-title="آدرس فعال">
+                                                    <div class="float-left d-inline-block smallDevice">
+                                                        {{--delete button small device--}}
+                                                        @if($row->Status === 1)
+                                                            <span style="cursor: default"
+                                                                  class="g-color-gray-dark-v5"
+                                                                  data-toggle="tooltip"
+                                                                  data-placement="top" data-original-title="آدرس فعال">
                                                             <i class="icon-target g-font-size-18 g-color-primary"></i>
                                                         </span>
-                                                    @else
-                                                        <i id="{{'waitingAddressDelete'.$key}}" style="display: none"
-                                                           class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-                                                        <a style="cursor: pointer"
-                                                           class="float-left g-color-gray-dark-v5 g-text-underline--none--hover smallDevice"
-                                                           id="{{ 'deleteBtn'.$key }}"
-                                                           onclick="deleteAddress({{ $row->ID }}, {{$key}})"
-                                                           data-toggle="tooltip"
-                                                           data-placement="top" data-original-title="حذف آدرس">
-                                                            <i class="icon-trash g-font-size-18 g-color-lightred g-color-red--hover"></i>
-                                                        </a>
-                                                    @endif
+                                                        @else
+                                                            <i id="{{'waitingAddressDelete'.$key}}"
+                                                               style="display: none"
+                                                               class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                                            <a style="cursor: pointer"
+                                                               class="g-color-gray-dark-v5 g-text-underline--none--hover"
+                                                               id="{{ 'deleteBtn'.$key }}"
+                                                               onclick="deleteAddress({{ $row->ID }},$(this).attr('id'))"
+                                                               data-toggle="tooltip"
+                                                               data-placement="top" data-original-title="حذف آدرس">
+                                                                <i class="icon-trash g-font-size-18 g-color-lightred g-color-red--hover"></i>
+                                                            </a>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                                 <!-- آدرس دقیق ارسالی -->
                                                 <div
@@ -684,218 +687,231 @@
                                                             <i class="icon-target g-font-size-18 g-color-primary"></i>
                                                         </span>
                                                     @else
-                                                            <i id="{{'waitingAddressDelete'.$key}}" style="display: none"
-                                                               class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-                                                            <a style="cursor: pointer"
-                                                               onclick="deleteAddress({{ $row->ID }}, {{$key}})"
-                                                               id="{{ 'deleteBtn'.$key }}"
-                                                               class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                                               data-toggle="tooltip"
-                                                               data-placement="top" data-original-title="حذف آدرس">
-                                                                <i class="icon-trash g-font-size-18 g-color-lightred g-color-red--hover"></i>
-                                                            </a>
+                                                        <i id="{{'waitingAddressDelete'.$key}}" style="display: none"
+                                                           class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                                        <a style="cursor: pointer"
+                                                           onclick="deleteAddress({{ $row->ID }},$(this).attr('id'))"
+                                                           id="{{ 'deleteBtn'.$key }}"
+                                                           class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                                           data-toggle="tooltip"
+                                                           data-placement="top" data-original-title="حذف آدرس">
+                                                            <i class="icon-trash g-font-size-18 g-color-lightred g-color-red--hover"></i>
+                                                        </a>
                                                     @endif
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="{{ 'accordion-13-body-'.$key }}" class="collapse g-bg-white"
-                                             role="tabpanel"
-                                             aria-labelledby="{{ 'accordion-13-heading-'.$key }}">
-                                            <div class="u-accordion__body g-pl-0">
-                                                <div class="g-pt-15 g-py-30--lg g-pr-10 g-px-60--lg">
-                                                    {{--نام گیرنده--}}
-                                                    <div class="form-group row g-mb-15">
-                                                        <label
-                                                            class="col-sm-2 col-form-label align-self-center">نام
-                                                            گیرنده</label>
-                                                        <div class="col-sm-10 force-col-12">
-                                                            <input
-                                                                id="{{ 'receiver-name-'.$key }}"
-                                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                type="text"
-                                                                maxlength="15"
-                                                                value="{{ $row->ReceiverName }}"
-                                                                placeholder="الزاماً فارسی"
-                                                                {{--                                           lang="fa"--}}
-                                                                onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
+                                        <form id="{{ 'addressUpdate'.$key }}" action="{{route('addressUpdate')}}" method="POST">
+                                            @csrf
+                                            <input name="receiver-id" class="d-none" value="{{$row->ID}}">
+                                            <div id="{{ 'accordion-13-body-'.$key }}" class="collapse g-bg-white"
+                                                 role="tabpanel"
+                                                 aria-labelledby="{{ 'accordion-13-heading-'.$key }}">
+                                                <div class="u-accordion__body g-pl-0">
+                                                    <div class="g-pt-15 g-py-30--lg g-pr-10 g-px-60--lg">
+                                                        {{--نام گیرنده--}}
+                                                        <div class="form-group row g-mb-15">
+                                                            <label
+                                                                class="col-sm-2 col-form-label align-self-center">نام
+                                                                گیرنده</label>
+                                                            <div class="col-sm-10 force-col-12">
+                                                                <input
+                                                                    id="{{ 'receiver-name-'.$key }}"
+                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    type="text"
+                                                                    name="receiver-name"
+                                                                    maxlength="15"
+                                                                    value="{{ $row->ReceiverName }}"
+                                                                    placeholder="الزاماً فارسی"
+                                                                    {{--                                           lang="fa"--}}
+                                                                    onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
                                                             str = $(this).val();
                                                             str = str.substring(0, str.length - 1);
                                                             $(this).val(str);
                                                             $(this).attr('autocomplete', 'off');
                                                             } else
                                                             $(this).attr('autocomplete', 'name');"
-                                                                readonly="">
-                                                        </div>
-                                                    </div>
-                                                    {{--نام خانوادگی گیرنده--}}
-                                                    <div class="form-group row g-mb-15">
-                                                        <label
-                                                            class="col-sm-2 col-form-label align-self-center">نام
-                                                            خانوادگی
-                                                        </label>
-                                                        <div class="col-sm-10 force-col-12">
-                                                            <input
-                                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                type="text"
-                                                                maxlength="15"
-                                                                value="{{ $row->ReceiverFamily }}"
-                                                                placeholder="الزاماً فارسی"
-                                                                {{--                                           lang="fa"--}}
-                                                                onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                            str = $(this).val();
-                                                            str = str.substring(0, str.length - 1);
-                                                            $(this).val(str);
-                                                            $(this).attr('autocomplete', 'off');
-                                                            } else
-                                                            $(this).attr('autocomplete', 'name');"
-                                                                readonly="">
-                                                        </div>
-                                                    </div>
-                                                    {{--کد پستی گیرنده--}}
-                                                    <div class="form-group row g-mb-15">
-                                                        <label class="col-sm-2 col-form-label align-self-center">کد
-                                                            پستی</label>
-                                                        <div class="col-sm-10 force-col-12">
-                                                            <input
-                                                                class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                value="{{ $row->PostalCode }}"
-                                                                maxlength="10"
-                                                                placeholder="فقط اعداد"
-                                                                readonly="">
-                                                        </div>
-                                                    </div>
-                                                    {{--تلفن ثابت گیرنده--}}
-                                                    <div class="form-group row g-mb-15">
-                                                        <label class="col-sm-2 col-form-label align-self-center">تلفن
-                                                            ثابت</label>
-                                                        <div class="col-sm-10 force-col-12 d-flex">
-                                                            <input style="width: 70%"
-                                                                   class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                   id="{{ 'receiverPhoneNum'.$key }}"
-                                                                   maxlength="8"
-                                                                   value="{{ $row->Phone }}"
-                                                                   placeholder="xxxxxxxx"
-                                                                   readonly="">
-                                                            <input style="width: 30%"
-                                                                   class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-brd-right-none g-font-size-16"
-                                                                   maxlength="3"
-                                                                   value="{{ $row->PrePhone }}"
-                                                                   oninput="if($(this).val().length === 3) $('#receiverPhoneNum'+{{ $key }}).focus();"
-                                                                   placeholder="0xx"
-                                                                   readonly="">
-                                                        </div>
-                                                    </div>
-                                                    {{--موبایل گیرنده--}}
-                                                    <div class="form-group row g-mb-15">
-                                                        <label
-                                                            class="col-sm-2 col-form-label align-self-center">موبایل</label>
-                                                        <div class="col-sm-10 force-col-12">
-                                                            <input
-                                                                class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                placeholder="09xxxxxxxx"
-                                                                maxlength="10"
-                                                                value="{{ $row->Mobile }}"
-                                                                readonly="">
-                                                        </div>
-                                                    </div>
-                                                    {{--استان/شهر گیرنده--}}
-                                                    <div class="form-group row g-mb-15">
-                                                        <label
-                                                            class="col-sm-2 col-form-label align-self-center">استان/شهر</label>
-                                                        <div class="col-sm-10 force-col-12">
-                                                            <div id="{{'stateCity'.$key}}" class="d-flex">
-                                                                <input id="{{ 'stateReceiver'.$key }}" class="d-none"
-                                                                       value="{{ $row->State }}">
-                                                                <select id="{{ 'stateSelectReceiver-'.$key }}"
-                                                                        style="direction: rtl; padding-right: 30px !important; pointer-events: none"
-                                                                        name="{{ 'stateReceiver'.$key }}"
-                                                                        class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-gray-light-v5"
-                                                                        tabindex="3"
-                                                                        onchange="changeState('stateSelectReceiver-'+ {{$key}} , 'citySelectReceiver-' + {{$key}})">
-                                                                    <option value="0">استان</option>
-                                                                    <option value="1">آذربایجان شرقی</option>
-                                                                    <option value="2">آذربایجان غربی</option>
-                                                                    <option value="3">اردبیل</option>
-                                                                    <option value="4">اصفهان</option>
-                                                                    <option value="5">البرز</option>
-                                                                    <option value="6">ایلام</option>
-                                                                    <option value="7">بوشهر</option>
-                                                                    <option value="8">تهران</option>
-                                                                    <option value="9">چهارمحال و بختیاری</option>
-                                                                    <option value="10">خراسان جنوبی</option>
-                                                                    <option value="11">خراسان رضوی</option>
-                                                                    <option value="12">خراسان شمالی</option>
-                                                                    <option value="13">خوزستان</option>
-                                                                    <option value="14">زنجان</option>
-                                                                    <option value="15">سمنان</option>
-                                                                    <option value="16">سیستان و بلوچستان</option>
-                                                                    <option value="17">فارس</option>
-                                                                    <option value="18">قزوین</option>
-                                                                    <option value="19">قم</option>
-                                                                    <option value="20">کردستان</option>
-                                                                    <option value="21">کرمان</option>
-                                                                    <option value="22">کرمانشاه</option>
-                                                                    <option value="23">کهگیلویه و بویراحمد</option>
-                                                                    <option value="24">گلستان</option>
-                                                                    <option value="25">گیلان</option>
-                                                                    <option value="26">لرستان</option>
-                                                                    <option value="27">مازندران</option>
-                                                                    <option value="28">مرکزی</option>
-                                                                    <option value="29">هرمزگان</option>
-                                                                    <option value="30">همدان</option>
-                                                                    <option value="31">یزد</option>
-                                                                </select>
-
-                                                                <input id="{{ 'cityReceiver'.$key }}" class="d-none"
-                                                                       value="{{ $row->City }}">
-                                                                <select id="{{ 'citySelectReceiver-'.$key }}"
-                                                                        style="direction: rtl; padding-right: 30px !important; pointer-events: none"
-                                                                        name="{{ 'cityReceiver'.$key }}"
-                                                                        class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-gray-light-v5"
-                                                                        tabindex="4">
-                                                                    <option value="0">شهر</option>
-                                                                </select>
+                                                                    readonly="">
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    {{--آدرس دقیق--}}
-                                                    <div class="form-group row g-mb-25">
-                                                        <label class="col-sm-2 col-form-label">آدرس دقیق</label>
-                                                        <div class="col-sm-10 force-col-12">
-                                                            <input
-                                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                maxlength="300"
-                                                                placeholder="الزاماً فارسی"
-                                                                value="{{$row->Address}}"
-                                                                {{--                                           lang="fa"--}}
-                                                                onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                            str = $(this).val();
-                                                            str = str.substring(0, str.length - 1);
-                                                            $(this).val(str);
-                                                            $(this).attr('autocomplete', 'off');
-                                                            } else
-                                                            $(this).attr('autocomplete', 'name');"
-                                                                readonly>
+                                                        {{--نام خانوادگی گیرنده--}}
+                                                        <div class="form-group row g-mb-15">
+                                                            <label
+                                                                class="col-sm-2 col-form-label align-self-center">نام
+                                                                خانوادگی
+                                                            </label>
+                                                            <div class="col-sm-10 force-col-12">
+                                                                <input
+                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    type="text"
+                                                                    name="receiver-family"
+                                                                    maxlength="15"
+                                                                    value="{{ $row->ReceiverFamily }}"
+                                                                    placeholder="الزاماً فارسی"
+                                                                    {{--                                           lang="fa"--}}
+                                                                    onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
+                                                                    str = $(this).val();
+                                                                    str = str.substring(0, str.length - 1);
+                                                                    $(this).val(str);
+                                                                    $(this).attr('autocomplete', 'off');
+                                                                    } else
+                                                                    $(this).attr('autocomplete', 'name');"
+                                                                            readonly="">
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                        {{--کد پستی گیرنده--}}
+                                                        <div class="form-group row g-mb-15">
+                                                            <label class="col-sm-2 col-form-label align-self-center">کد
+                                                                پستی</label>
+                                                            <div class="col-sm-10 force-col-12">
+                                                                <input style="direction: ltr"
+                                                                    class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    value="{{ $row->PostalCode }}"
+                                                                    name="receiver-postalCode"
+                                                                    maxlength="10"
+                                                                    placeholder="فقط اعداد"
+                                                                    readonly="">
+                                                            </div>
+                                                        </div>
+                                                        {{--تلفن ثابت گیرنده--}}
+                                                        <div class="form-group row g-mb-15">
+                                                            <label class="col-sm-2 col-form-label align-self-center">تلفن
+                                                                ثابت</label>
+                                                            <div class="col-sm-10 force-col-12 d-flex">
+                                                                <input style="width: 70%; direction: ltr"
+                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                       id="{{ 'receiverPhoneNum'.$key }}"
+                                                                       name="receiver-phone"
+                                                                       maxlength="8"
+                                                                       value="{{ $row->Phone }}"
+                                                                       placeholder="xxxxxxxx"
+                                                                       readonly="">
+                                                                <input style="width: 30%; direction: ltr"
+                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-brd-right-none g-font-size-16"
+                                                                       name="receiver-prePhone"
+                                                                       maxlength="3"
+                                                                       value="{{ $row->PrePhone }}"
+                                                                       oninput="if($(this).val().length === 3) $('#receiverPhoneNum'+{{ $key }}).focus();"
+                                                                       placeholder="0xx"
+                                                                       readonly="">
+                                                            </div>
+                                                        </div>
+                                                        {{--موبایل گیرنده--}}
+                                                        <div class="form-group row g-mb-15">
+                                                            <label
+                                                                class="col-sm-2 col-form-label align-self-center">موبایل</label>
+                                                            <div class="col-sm-10 force-col-12">
+                                                                <input style="direction: ltr"
+                                                                    class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    placeholder="09xxxxxxxx"
+                                                                    name="receiver-mobile"
+                                                                    maxlength="11"
+                                                                    value="{{ $row->Mobile }}"
+                                                                    readonly="">
+                                                            </div>
+                                                        </div>
+                                                        {{--استان/شهر گیرنده--}}
+                                                        <div class="form-group row g-mb-15">
+                                                            <label
+                                                                class="col-sm-2 col-form-label align-self-center">استان/شهر</label>
+                                                            <div class="col-sm-10 force-col-12">
+                                                                <div id="{{'stateCity'.$key}}" class="d-flex">
+                                                                    <input id="{{ 'stateReceiver'.$key }}"
+                                                                           class="d-none"
+                                                                           value="{{ $row->State }}">
+                                                                    <select id="{{ 'stateSelectReceiver-'.$key }}"
+                                                                            style="direction: rtl; padding-right: 30px !important; pointer-events: none"
+                                                                            name="receiver-state"
+                                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-gray-light-v5"
+                                                                            tabindex="3"
+                                                                            onchange="changeState('stateSelectReceiver-'+ {{$key}} , 'citySelectReceiver-' + {{$key}})">
+                                                                        <option value="0">استان</option>
+                                                                        <option value="1">آذربایجان شرقی</option>
+                                                                        <option value="2">آذربایجان غربی</option>
+                                                                        <option value="3">اردبیل</option>
+                                                                        <option value="4">اصفهان</option>
+                                                                        <option value="5">البرز</option>
+                                                                        <option value="6">ایلام</option>
+                                                                        <option value="7">بوشهر</option>
+                                                                        <option value="8">تهران</option>
+                                                                        <option value="9">چهارمحال و بختیاری</option>
+                                                                        <option value="10">خراسان جنوبی</option>
+                                                                        <option value="11">خراسان رضوی</option>
+                                                                        <option value="12">خراسان شمالی</option>
+                                                                        <option value="13">خوزستان</option>
+                                                                        <option value="14">زنجان</option>
+                                                                        <option value="15">سمنان</option>
+                                                                        <option value="16">سیستان و بلوچستان</option>
+                                                                        <option value="17">فارس</option>
+                                                                        <option value="18">قزوین</option>
+                                                                        <option value="19">قم</option>
+                                                                        <option value="20">کردستان</option>
+                                                                        <option value="21">کرمان</option>
+                                                                        <option value="22">کرمانشاه</option>
+                                                                        <option value="23">کهگیلویه و بویراحمد</option>
+                                                                        <option value="24">گلستان</option>
+                                                                        <option value="25">گیلان</option>
+                                                                        <option value="26">لرستان</option>
+                                                                        <option value="27">مازندران</option>
+                                                                        <option value="28">مرکزی</option>
+                                                                        <option value="29">هرمزگان</option>
+                                                                        <option value="30">همدان</option>
+                                                                        <option value="31">یزد</option>
+                                                                    </select>
 
-                                                    <div class="text-left">
-                                                        <a style="cursor: pointer"
-                                                           onclick="editUserAddress({{$key}})"
-                                                           id="{{ 'editAddress'.$key }}"
-                                                           class="btn btn-md u-btn-outline-primary g-color-primary g-color-white--hover g-font-weight-600 g-letter-spacing-0_5 rounded-0 g-mb-15">
-                                                            ویرایش
-                                                        </a>
-                                                        <a style="cursor: pointer; display: none"
-                                                           onclick="saveUserAddress({{$key}})"
-                                                           id="{{ 'saveAddress'.$key }}"
-                                                           class="btn btn-md g-bg-primary g-color-white g-color-white--hover g-font-weight-600 g-letter-spacing-0_5 rounded-0 g-mb-15">
-                                                            بروزرسانی
-                                                        </a>
+                                                                    <input id="{{ 'cityReceiver'.$key }}" class="d-none"
+                                                                           name="receiver-city"
+                                                                           value="{{ $row->City }}">
+                                                                    <select id="{{ 'citySelectReceiver-'.$key }}"
+                                                                            style="direction: rtl; padding-right: 30px !important; pointer-events: none"
+                                                                            name="receiver-city"
+                                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-gray-light-v5"
+                                                                            tabindex="4">
+                                                                        <option value="0">شهر</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{--آدرس دقیق--}}
+                                                        <div class="form-group row g-mb-25">
+                                                            <label class="col-sm-2 col-form-label">آدرس دقیق</label>
+                                                            <div class="col-sm-10 force-col-12">
+                                                                <input
+                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    maxlength="300"
+                                                                    name="receiver-address"
+                                                                    placeholder="الزاماً فارسی"
+                                                                    value="{{$row->Address}}"
+                                                                    {{--                                           lang="fa"--}}
+                                                                    onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
+                                                                    str = $(this).val();
+                                                                    str = str.substring(0, str.length - 1);
+                                                                    $(this).val(str);
+                                                                    $(this).attr('autocomplete', 'off');
+                                                                    } else
+                                                                    $(this).attr('autocomplete', 'name');"
+                                                                            readonly>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="text-left">
+                                                            <a style="cursor: pointer"
+                                                               onclick="editUserAddress({{$key}})"
+                                                               id="{{ 'editAddress'.$key }}"
+                                                               class="btn btn-md u-btn-outline-primary g-color-primary g-color-white--hover g-font-weight-600 g-letter-spacing-0_5 rounded-0 g-mb-15">
+                                                                ویرایش
+                                                            </a>
+                                                            <a style="cursor: pointer; display: none"
+                                                               onclick="saveUserAddress({{$key}})"
+                                                               id="{{ 'saveAddress'.$key }}"
+                                                               class="btn btn-md g-bg-primary g-color-white g-color-white--hover g-font-weight-600 g-letter-spacing-0_5 rounded-0 g-mb-15">
+                                                                بروزرسانی
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </form>
                                     </div>
                                 @endforeach
                             @endif
@@ -916,185 +932,202 @@
                             <div id="modal17"
                                  class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll modal17"
                                  style="display: none; overflow-y: auto; height: auto !important;">
-                                <button style="outline: none" type="button" class="close float-left g-pt-15 g-pl-20"
-                                        onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-address').trigger('click')}, 400); ">
-                                    <i class="hs-icon hs-icon-close"></i>
-                                </button>
-                                <h5 class="g-py-15 g-pr-20 m-0 text-right g-brd-bottom g-brd-gray-light-v4">افزودن آدرس
-                                    جدید</h5>
-                                <div style="direction: rtl; overflow-y: auto"
-                                     class="container g-px-30 g-px-60--lg text-right g-py-0">
-                                    <p style="text-align: justify;" class="g-pt-20 g-pb-15 g-mb-0 g-mb-20--lg"><span
-                                            class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>آدرس
-                                        جدید بصورت خودکار فعال خواهد شد و از این پس محصولات به این آدرس ارسال
-                                        می گردد. (می توانید در هر زمان از طریق منوی آدرس ها آدرس دیگری را فعال
-                                        کنید). </p>
-                                    <div style="direction: rtl" class="alert alert-warning smallDevice" role="alert">
-                                        <strong>اخطار! کشیدن صفحه به پایین</strong>
-                                        <p class="text-justify">اگر روی جعبه های ورودی عمل کشیدن را انجام دهید صفحه به
-                                            پایین کشیده نمی شود. این یک باگ در دستگاه های کوچک است.</p>
-                                    </div>
-                                    {{--نام گیرنده--}}
-                                    <div class="form-group row g-mb-30 g-mb-15--lg">
-                                        <label
-                                            class="col-sm-2 col-form-label align-self-center">نام
-                                            گیرنده</label>
-                                        <div class="col-sm-10 force-col-12">
-                                            <input
-                                                id="receiver-name"
-                                                class="form-control form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
-                                                type="text"
-                                                value=""
-                                                placeholder="الزاماً فارسی"
-                                                {{--                                           lang="fa"--}}
-                                                onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
+                                <form id="addAddress" action="{{route('addAddress')}}" method="POST">
+                                    @csrf
+                                    <button style="outline: none" type="button" class="close float-left g-pt-15 g-pl-20"
+                                            onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-address').trigger('click')}, 400); ">
+                                        <i class="hs-icon hs-icon-close"></i>
+                                    </button>
+                                    <h5 class="g-py-15 g-pr-20 m-0 text-right g-brd-bottom g-brd-gray-light-v4">افزودن
+                                        آدرس
+                                        جدید</h5>
+                                    <div style="direction: rtl; overflow-y: auto"
+                                         class="container g-px-30 g-px-60--lg text-right g-py-0">
+                                        <p style="text-align: justify;" class="g-pt-20 g-pb-15 g-mb-0 g-mb-20--lg"><span
+                                                class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>آدرس
+                                            جدید بصورت خودکار فعال خواهد شد و از این پس محصولات به این آدرس ارسال
+                                            می گردد. (می توانید در هر زمان از طریق منوی آدرس ها آدرس دیگری را فعال
+                                            کنید). </p>
+                                        <div style="direction: rtl" class="alert alert-warning smallDevice"
+                                             role="alert">
+                                            <strong>توجه! کشیدن صفحه به پایین</strong>
+                                            <p class="text-justify">اگر روی جعبه های ورودی عمل کشیدن را انجام دهید صفحه
+                                                به
+                                                پایین کشیده نمی شود. این یک باگ در دستگاه های کوچک است.</p>
+                                        </div>
+                                        {{--نام گیرنده--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label
+                                                class="col-sm-2 col-form-label align-self-center">نام
+                                                گیرنده</label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <input
+                                                    id="receiver-name"
+                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
+                                                    name="receiver-name"
+                                                    maxlength="15"
+                                                    type="text"
+                                                    value=""
+                                                    placeholder="الزاماً فارسی"
+                                                    {{--                                           lang="fa"--}}
+                                                    onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
                                                         str = $(this).val();
                                                         str = str.substring(0, str.length - 1);
                                                         $(this).val(str);
                                                         $(this).attr('autocomplete', 'off');
                                                         } else
                                                         $(this).attr('autocomplete', 'name');">
+                                            </div>
                                         </div>
-                                    </div>
-                                    {{--نام خانوادگی گیرنده--}}
-                                    <div class="form-group row g-mb-30 g-mb-15--lg">
-                                        <label
-                                            class="col-sm-2 col-form-label align-self-center">نام خانوادگی
-                                        </label>
-                                        <div class="col-sm-10 force-col-12">
-                                            <input
-                                                class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                type="text"
-                                                value=""
-                                                placeholder="الزاماً فارسی"
-                                                {{--                                           lang="fa"--}}
-                                                onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
+                                        {{--نام خانوادگی گیرنده--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label
+                                                class="col-sm-2 col-form-label align-self-center">نام خانوادگی
+                                            </label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <input
+                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    type="text"
+                                                    name="receiver-family"
+                                                    maxlength="15"
+                                                    value=""
+                                                    placeholder="الزاماً فارسی"
+                                                    {{--                                           lang="fa"--}}
+                                                    onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
                                                         str = $(this).val();
                                                         str = str.substring(0, str.length - 1);
                                                         $(this).val(str);
                                                         $(this).attr('autocomplete', 'off');
                                                         } else
                                                         $(this).attr('autocomplete', 'name');">
+                                            </div>
                                         </div>
-                                    </div>
-                                    {{--کد پستی گیرنده--}}
-                                    <div class="form-group row g-mb-30 g-mb-15--lg">
-                                        <label class="col-sm-2 col-form-label align-self-center">کد
-                                            پستی</label>
-                                        <div class="col-sm-10 force-col-12">
-                                            <input
-                                                class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                value=""
-                                                placeholder="فقط اعداد">
+                                        {{--کد پستی گیرنده--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label class="col-sm-2 col-form-label align-self-center">کد
+                                                پستی</label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <input style="direction: ltr"
+                                                    class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    name="receiver-postalCode"
+                                                    maxlength="10"
+                                                    value=""
+                                                    placeholder="فقط اعداد">
+                                            </div>
                                         </div>
-                                    </div>
-                                    {{--تلفن ثابت گیرنده--}}
-                                    <div class="form-group row g-mb-30 g-mb-15--lg">
-                                        <label class="col-sm-2 col-form-label align-self-center">تلفن
-                                            ثابت</label>
-                                        <div class="col-sm-10 force-col-12 d-flex">
-                                            <input style="width: 70%"
-                                                   class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                   value=""
-                                                   placeholder="xxxxxxxx">
-                                            <input style="width: 30%"
-                                                   class="text-left form-control form-control-md rounded-0 g-bg-white g-brd-right-none g-font-size-16"
-                                                   value=""
-                                                   placeholder="0xx">
+                                        {{--تلفن ثابت گیرنده--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label class="col-sm-2 col-form-label align-self-center">تلفن
+                                                ثابت</label>
+                                            <div class="col-sm-10 force-col-12 d-flex">
+                                                <input style="width: 70%; direction: ltr"
+                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                       name="receiver-phone"
+                                                       maxlength="8"
+                                                       value=""
+                                                       placeholder="xxxxxxxx">
+                                                <input style="width: 30%; direction: ltr"
+                                                       name="receiver-prePhone"
+                                                       maxlength="3"
+                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-brd-right-none g-font-size-16"
+                                                       value=""
+                                                       placeholder="0xx">
+                                            </div>
                                         </div>
-                                    </div>
-                                    {{--موبایل گیرنده--}}
-                                    <div class="form-group row g-mb-30 g-mb-15--lg">
-                                        <label
-                                            class="col-sm-2 col-form-label align-self-center">موبایل</label>
-                                        <div class="col-sm-10 force-col-12">
-                                            <input
-                                                class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                placeholder="09xxxxxxxx"
-                                                value="">
+                                        {{--موبایل گیرنده--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label style="direction: ltr"
+                                                class="col-sm-2 col-form-label align-self-center">موبایل</label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <input
+                                                    class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    name="receiver-mobile"
+                                                    maxlength="11"
+                                                    placeholder="09xxxxxxxx"
+                                                    value="">
+                                            </div>
                                         </div>
-                                    </div>
-                                    {{--آدرس سکونت گیرنده--}}
-                                    <div class="form-group row g-mb-30 g-mb-15--lg">
-                                        <label
-                                            class="col-sm-2 col-form-label align-self-center">استان/شهر</label>
-                                        <div class="col-sm-10 force-col-12">
-                                            <div class="d-flex">
-                                                <select id="stateSelectReceiver-new"
-                                                        style="direction: rtl; padding-right: 30px !important;"
-                                                        class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1 g-bg-white"
-                                                        tabindex="3"
-                                                        onchange="changeState('stateSelectReceiver-new','citySelectReceiver-new')">
-                                                    <option
-                                                        value="0">استان
-                                                    </option>
-                                                    <option value="1">آذربایجان شرقی</option>
-                                                    <option value="2">آذربایجان غربی</option>
-                                                    <option value="3">اردبیل</option>
-                                                    <option value="4">اصفهان</option>
-                                                    <option value="5">البرز</option>
-                                                    <option value="6">ایلام</option>
-                                                    <option value="7">بوشهر</option>
-                                                    <option value="8">تهران</option>
-                                                    <option value="9">چهارمحال و بختیاری</option>
-                                                    <option value="10">خراسان جنوبی</option>
-                                                    <option value="11">خراسان رضوی</option>
-                                                    <option value="12">خراسان شمالی</option>
-                                                    <option value="13">خوزستان</option>
-                                                    <option value="14">زنجان</option>
-                                                    <option value="15">سمنان</option>
-                                                    <option value="16">سیستان و بلوچستان</option>
-                                                    <option value="17">فارس</option>
-                                                    <option value="18">قزوین</option>
-                                                    <option value="19">قم</option>
-                                                    <option value="20">کردستان</option>
-                                                    <option value="21">کرمان</option>
-                                                    <option value="22">کرمانشاه</option>
-                                                    <option value="23">کهگیلویه و بویراحمد</option>
-                                                    <option value="24">گلستان</option>
-                                                    <option value="25">گیلان</option>
-                                                    <option value="26">لرستان</option>
-                                                    <option value="27">مازندران</option>
-                                                    <option value="28">مرکزی</option>
-                                                    <option value="29">هرمزگان</option>
-                                                    <option value="30">همدان</option>
-                                                    <option value="31">یزد</option>
-                                                </select>
+                                        {{--آدرس سکونت گیرنده--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label
+                                                class="col-sm-2 col-form-label align-self-center">استان/شهر</label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <div class="d-flex">
+                                                    <select id="stateSelectReceiver-new"
+                                                            style="direction: rtl; padding-right: 30px !important;"
+                                                            name="receiver-state"
+                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1 g-bg-white"
+                                                            tabindex="3"
+                                                            onchange="changeState('stateSelectReceiver-new','citySelectReceiver-new')">
+                                                        <option value="0">استان</option>
+                                                        <option value="1">آذربایجان شرقی</option>
+                                                        <option value="2">آذربایجان غربی</option>
+                                                        <option value="3">اردبیل</option>
+                                                        <option value="4">اصفهان</option>
+                                                        <option value="5">البرز</option>
+                                                        <option value="6">ایلام</option>
+                                                        <option value="7">بوشهر</option>
+                                                        <option value="8">تهران</option>
+                                                        <option value="9">چهارمحال و بختیاری</option>
+                                                        <option value="10">خراسان جنوبی</option>
+                                                        <option value="11">خراسان رضوی</option>
+                                                        <option value="12">خراسان شمالی</option>
+                                                        <option value="13">خوزستان</option>
+                                                        <option value="14">زنجان</option>
+                                                        <option value="15">سمنان</option>
+                                                        <option value="16">سیستان و بلوچستان</option>
+                                                        <option value="17">فارس</option>
+                                                        <option value="18">قزوین</option>
+                                                        <option value="19">قم</option>
+                                                        <option value="20">کردستان</option>
+                                                        <option value="21">کرمان</option>
+                                                        <option value="22">کرمانشاه</option>
+                                                        <option value="23">کهگیلویه و بویراحمد</option>
+                                                        <option value="24">گلستان</option>
+                                                        <option value="25">گیلان</option>
+                                                        <option value="26">لرستان</option>
+                                                        <option value="27">مازندران</option>
+                                                        <option value="28">مرکزی</option>
+                                                        <option value="29">هرمزگان</option>
+                                                        <option value="30">همدان</option>
+                                                        <option value="31">یزد</option>
+                                                    </select>
 
-                                                <select id="citySelectReceiver-new"
-                                                        style="direction: rtl; padding-right: 30px !important;"
-                                                        class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1 g-bg-white"
-                                                        tabindex="4">
-                                                    <option
-                                                        value="0">شهر
-                                                    </option>
-                                                </select>
+                                                    <select id="citySelectReceiver-new"
+                                                            style="direction: rtl; padding-right: 30px !important;"
+                                                            name="receiver-city"
+                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1 g-bg-white"
+                                                            tabindex="4">
+                                                        <option value="0">شهر</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{--آدرس دقیق--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label class="col-sm-2 col-form-label">آدرس دقیق</label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <input
+                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    name="receiver-address"
+                                                    placeholder="الزاماً فارسی"
+                                                    {{--                                           lang="fa"--}}
+                                                    onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
+                                                        str = $(this).val();
+                                                        str = str.substring(0, str.length - 1);
+                                                        $(this).val(str);
+                                                        $(this).attr('autocomplete', 'off');
+                                                        } else
+                                                        $(this).attr('autocomplete', 'name');">
                                             </div>
                                         </div>
                                     </div>
-                                    {{--آدرس دقیق--}}
-                                    <div class="form-group row g-mb-30 g-mb-15--lg">
-                                        <label class="col-sm-2 col-form-label">آدرس دقیق</label>
-                                        <div class="col-sm-10 force-col-12">
-                                            <input
-                                                class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                placeholder="الزاماً فارسی"
-                                                {{--                                           lang="fa"--}}
-                                                onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                        str = $(this).val();
-                                                        str = str.substring(0, str.length - 1);
-                                                        $(this).val(str);
-                                                        $(this).attr('autocomplete', 'off');
-                                                        } else
-                                                        $(this).attr('autocomplete', 'name');">
-                                        </div>
-                                    </div>
-                                </div>
-                                <a onclick=""
-                                   id="submitAddress"
-                                   class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white w-100 g-mt-15">
-                                    ثبت آدرس جدید
-                                </a>
+                                    <a onclick="addUserAddress({{ $key }})"
+                                       id="submitAddress"
+                                       class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white w-100 g-mt-15">
+                                        ثبت آدرس جدید
+                                    </a>
+                                </form>
                             </div>
                             <!-- End Demo modal window -->
                         </div>

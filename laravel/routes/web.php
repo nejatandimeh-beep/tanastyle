@@ -162,7 +162,11 @@ Route::get('/Female-Product-removeCallCustomer/{id}', 'Customer\Basic@removeCall
 
 Route::post('/User-Profile-Update', 'Customer\Basic@profileUpdate')->name('profileUpdate');
 
-Route::get('/User-Address-Update/{id}', 'Customer\Basic@addressUpdate')->name('addressUpdate');
+Route::get('/User-Address-Active/{id}', 'Customer\Basic@addressActive')->name('addressActive');
+
+Route::post('/User-Address-Add', 'Customer\Basic@addAddress')->name('addAddress');
+
+Route::post('/User-Address-Update', 'Customer\Basic@addressUpdate')->name('addressUpdate');
 
 Route::get('/User-Address-Delete/{id}', 'Customer\Basic@addressDelete');
 

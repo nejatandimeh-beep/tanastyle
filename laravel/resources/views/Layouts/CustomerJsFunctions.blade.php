@@ -27,6 +27,7 @@
             let mq = window.matchMedia("(max-width: 900px)");
             if (mq.matches) {
                 $('#bigDevice').remove();
+                $('.bigDevice').remove();
 
                 // تنظیم منوی فیلترها در صفحه نمایش محصولات برای نمایشگرهای کوچک و بزرگ
                 $('#stickyDiv1').removeClass('sticky-top');
@@ -60,6 +61,7 @@
 
             } else {
                 $('#smallDevice').remove();
+                $('.smallDevice').remove();
 
                 $('#smallFilterDiv').on('click', function () {
                     showSideBar();
@@ -431,37 +433,6 @@
         });
 
         // ---------------------------------------------------My Function-----------------------------------------------
-        function deleteAddress(id, idBtn) {
-            $.confirm({
-                title: 'حذف آدرس',
-                content: 'آیا مطمئن هستید؟',
-                buttons: {
-                    تایید: function () {
-                        $('#deleteBtn'+idBtn).hide();
-                        $('#waitingAddressDelete'+idBtn).show();
-                        $.ajax({
-                            type: 'GET',
-                            url: "/User-Address-Delete/" + id,
-                            success: function (data) {
-                                $('#addressRow'+idBtn).remove();
-                            },
-                            error: function () {
-                                $('#deleteBtn'+idBtn).show();
-                                $('#waitingAddressDelete'+idBtn).hide();
-                                alert('قبلا برای این آدرس فاکتور صادر شده است و قابل حذف نیست.');
-                            }
-                        });
-                    },
-                    انصراف: function () {
-                    },
-                }
-            });
-        }
-
-        function activeAddress(id) {
-            window.location = "/User-Address-Update/" + id;
-        }
-
         function modalTrigger() {
             switch ($('#pageLocation').text()) {
                 case 'addAddress':
@@ -785,15 +756,18 @@
         }
 
         function saveUserAddress(num) {
+            // let row = 'addressUpdate' + num;
+            // console.log($('#'+row+' [name="receiver-state"]').val());
             $.confirm({
                 title: 'بروز رسانی آدرس',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
+                        $('#addressUpdate'+num).submit();
                     },
                     انصراف: function () {
-                        $('#saveAddress-' + num).hide();
-                        $('#editAddress-' + num).show();
+                        $('#saveAddress' + num).hide();
+                        $('#editAddress' + num).show();
 
                         let clone = $('#accordion-13-body-' + num + ' :input');
                         clone.attr("readonly", true);
@@ -807,16 +781,69 @@
             });
         }
 
+        function addUserAddress(){
+            $.confirm({
+                title: 'بروز رسانی آدرس',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#addAddress').submit();
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+
+        function deleteAddress(id, idBtn) {
+            $.confirm({
+                title: 'حذف آدرس',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#'+idBtn).hide();
+                        $('#waitingAddressDelete'+idBtn.replace(/[^0-9]/gi, '')).show();
+                        $.ajax({
+                            type: 'GET',
+                            url: "/User-Address-Delete/" + id,
+                            success: function (data) {
+                                $('#addressRow'+idBtn.replace(/[^0-9]/gi, '')).remove();
+                            },
+                            error: function () {
+                                $('#'+idBtn).show();
+                                $('#waitingAddressDelete'+idBtn.replace(/[^0-9]/gi, '')).hide();
+                                alert('قبلا برای این آدرس فاکتور صادر شده است و قابل حذف نیست.');
+                            }
+                        });
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+
+        function activeAddress(id) {
+            window.location = "/User-Address-Active/" + id;
+        }
         // -------------------------------------------------State And City----------------------------------------------
         function changeState(state, city) {
             $('#' + city).find('option').remove().end();
-            autoCity($('#' + state).val(), city, 'createOptions');
+            if(city !== 'citySelectReceiver-new')
+                autoCity($('#' + state).val(), city, 'createOptions');
+            else
+                autoCity($('.custombox-content #' + state).val(), city, 'createOptions');
         }
 
         // تابع انتخاب شهر به ازای هر استان
         function autoCity(state, city, type) {
+            console.log($('.custombox-content #citySelectReceiver-new').val());
             let s = [], i,
+                select = '';
+            if(city === 'citySelectReceiver-new')
+                select = $('.custombox-content #citySelectReceiver-new');
+            else
                 select = document.getElementById(city);
+
             switch (state) {
                 case '1':
                     s[0] = "آذرشهر";
@@ -845,7 +872,7 @@
                             let opt = document.createElement('option');
                             opt.value = i;
                             opt.innerHTML = s[i];
-                            select.appendChild(opt);
+                            select.append(opt);
                         }
                         break;
                     } else
@@ -903,7 +930,7 @@
                             let opt = document.createElement('option');
                             opt.value = i;
                             opt.innerHTML = s[i];
-                            select.appendChild(opt);
+                            select.append(opt);
                         }
                         break;
                     } else
