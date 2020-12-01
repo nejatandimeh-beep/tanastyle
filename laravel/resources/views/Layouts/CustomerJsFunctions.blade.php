@@ -434,13 +434,13 @@
 
         // ---------------------------------------------------My Function-----------------------------------------------
         function modalTrigger() {
-            switch ($('#pageLocation').text()) {
+            switch ($('#pageLocation').text().replace(/\d+/g, '')) {
                 case 'addAddress':
                     setTimeout(function () {
                         $("#newAddressLink").trigger("click");
                     }, 500);
-                    $('#newAddressLink').text('افزودن آدرس و ادامه خرید');
                     $('#submitAddress').text('ثبت آدرس جدید و ادامه خرید');
+                    $('#productIDFromBuy').val($('#pageLocation').text().replace(/[^0-9]/gi, ''));
                     break;
                 case 'deliveryStatus':
                     setTimeout(function () {
@@ -763,7 +763,7 @@
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        $('#addressUpdate'+num).submit();
+                        $('#addressUpdate' + num).submit();
                     },
                     انصراف: function () {
                         $('#saveAddress' + num).hide();
@@ -781,7 +781,7 @@
             });
         }
 
-        function addUserAddress(){
+        function addUserAddress() {
             $.confirm({
                 title: 'بروز رسانی آدرس',
                 content: 'آیا مطمئن هستید؟',
@@ -801,17 +801,17 @@
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        $('#'+idBtn).hide();
-                        $('#waitingAddressDelete'+idBtn.replace(/[^0-9]/gi, '')).show();
+                        $('#' + idBtn).hide();
+                        $('#waitingAddressDelete' + idBtn.replace(/[^0-9]/gi, '')).show();
                         $.ajax({
                             type: 'GET',
                             url: "/User-Address-Delete/" + id,
                             success: function (data) {
-                                $('#addressRow'+idBtn.replace(/[^0-9]/gi, '')).remove();
+                                $('#addressRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
                             },
                             error: function () {
-                                $('#'+idBtn).show();
-                                $('#waitingAddressDelete'+idBtn.replace(/[^0-9]/gi, '')).hide();
+                                $('#' + idBtn).show();
+                                $('#waitingAddressDelete' + idBtn.replace(/[^0-9]/gi, '')).hide();
                                 alert('قبلا برای این آدرس فاکتور صادر شده است و قابل حذف نیست.');
                             }
                         });
@@ -825,13 +825,13 @@
         function activeAddress(id) {
             window.location = "/User-Address-Active/" + id;
         }
+
         // -------------------------------------------------State And City----------------------------------------------
         function changeState(state, city) {
-            if(city !== 'citySelectReceiver-new'){
+            if (city !== 'citySelectReceiver-new') {
                 $('#' + city).find('option').remove().end();
                 autoCity($('#' + state).val(), city, 'createOptions');
-            }
-            else {
+            } else {
                 $('.custombox-content #' + city).find('option').remove().end();
                 autoCity($('.custombox-content #' + state).val(), city, 'createOptions');
             }
@@ -841,7 +841,7 @@
         function autoCity(state, city, type) {
             let s = [], i,
                 select = '';
-            if(city === 'citySelectReceiver-new')
+            if (city === 'citySelectReceiver-new')
                 select = $('.custombox-content #citySelectReceiver-new');
             else
                 select = document.getElementById(city);

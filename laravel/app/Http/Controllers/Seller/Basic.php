@@ -9,7 +9,8 @@ use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
+
+
 
 class Basic extends Controller
 {
@@ -116,6 +117,7 @@ class Basic extends Controller
 //  Delete Product From Store
     public function deleteProduct($id)
     {
+
         DB::table('product_cart')
             ->where('ProductDetailID', $id)
             ->delete();
@@ -135,9 +137,15 @@ class Basic extends Controller
             })->first();
 
         if (isset($deleteID->ID)) {
+            $picPath = DB::table('product')
+                ->select('PicPath')
+                ->where('ID', $deleteID->ID)
+                ->first();
             DB::table('product')
                 ->where('ID', $deleteID->ID)
                 ->delete();
+
+            File::deleteDirectory(public_path($picPath->PicPath));
         }
         return redirect('/Seller-Store')->with('status', 'success');
     }
@@ -331,12 +339,12 @@ class Basic extends Controller
                 'scd.ConversationID',
                 'scd.ID as conversationDetailID')
             ->leftJoin('seller_conversation_detail as scd', 'scd.ConversationID', '=', 'sc.ID')
-            ->where('sc.SellerID', Auth::user()->id)
+            ->where('sc.SellerID', Auth::guard('seller')->user()->id)
             ->orderBy('sc.Status')
             ->orderBy(DB::raw('IF(sc.Status=0 || sc.Status=1, sc.Priority, false)'), 'ASC')
             ->orderBy('sc.ID', 'DESC')
             ->get();
-dd($data);
+
         // Convert Date
         $persianDate = array();
         foreach ($data as $key => $rec) {

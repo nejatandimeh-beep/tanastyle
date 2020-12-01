@@ -406,7 +406,7 @@
                                         <i class="icon-communication-011 u-line-icon-pro g-color-white g-pt-5"></i>
                                     </span>
                                 @if(!isset($sendAddress))
-                                    <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', ['id'=>'addAddress']) : route('login') }}"
+                                    <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', ['id'=>'addAddress'.$data->ID]) : route('login') }}"
                                        id="addAddress"
                                        class="g-color-darkred g-color-primary--hover align-self-center g-text-underline--none--hover">
                                         افزودن آدرس<i class="icon-paper-clip g-mr-5 align-middle"></i>

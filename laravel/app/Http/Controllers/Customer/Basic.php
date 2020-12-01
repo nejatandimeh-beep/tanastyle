@@ -26,7 +26,25 @@ class Basic extends Controller
             ->orderBy('Status', 'DESC')
             ->get();
 
-        return view('Customer.Profile', compact('id', 'customer', 'address'));
+        $order=DB::table('product_order as po')
+            ->select('*')
+            ->leftJoin('product_order_detail as pod', 'pod.OrderID','=','po.ID')
+            ->where('po.CustomerID', Auth::user()->id)
+            ->get();
+
+        $orderHowDay = array();
+        $persianDate = array();
+        foreach ($order as $key => $rec) {
+            $d = $rec->Date;
+            $PersianDate[$key] = $this->convertDateToPersian($d);
+            $orderMinuets[$key] = $this->dateLenToNow($rec->Date, $rec->Time);
+            $orderHowDay[$key] = null;
+            if ($orderMinuets[$key] < 11520) {
+                $orderHowDay[$key] = $this->howDays($orderMinuets[$key]);
+            }
+        }
+
+        return view('Customer.Profile', compact('id', 'customer', 'address','persianDate','orderHowDay'));
     }
 
     public function profileUpdate(Request $request)
@@ -114,6 +132,7 @@ class Basic extends Controller
 
     public function addAddress(Request $request)
     {
+        $productID = $request->get('productIDFromBuy');
         $name = $request->get('receiver-name');
         $family = $request->get('receiver-family');
         $postalCode = $request->get('receiver-postalCode');
@@ -144,7 +163,11 @@ class Basic extends Controller
             'Status' => 1,
         ]);
 
-        return redirect()->route('userProfile', 'addressStatus');
+        if ($productID === 'empty')
+            return redirect()->route('userProfile', 'addressStatus');
+        else{
+            return redirect()->route('productDetail', $productID);
+        }
     }
 
     public function addressDelete($id)

@@ -882,15 +882,7 @@
                                                                     name="receiver-address"
                                                                     placeholder="الزاماً فارسی"
                                                                     value="{{$row->Address}}"
-                                                                    {{--                                           lang="fa"--}}
-                                                                    onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                                    str = $(this).val();
-                                                                    str = str.substring(0, str.length - 1);
-                                                                    $(this).val(str);
-                                                                    $(this).attr('autocomplete', 'off');
-                                                                    } else
-                                                                    $(this).attr('autocomplete', 'name');"
-                                                                            readonly>
+                                                                    readonly>
                                                             </div>
                                                         </div>
 
@@ -934,6 +926,7 @@
                                  style="display: none; overflow-y: auto; height: auto !important;">
                                 <form id="addAddress" action="{{route('addAddress')}}" method="POST">
                                     @csrf
+                                    <input id="productIDFromBuy" name="productIDFromBuy" class="d-none" value="empty">
                                     <button style="outline: none" type="button" class="close float-left g-pt-15 g-pl-20"
                                             onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-address').trigger('click')}, 400); ">
                                         <i class="hs-icon hs-icon-close"></i>
@@ -1112,19 +1105,11 @@
                                                 <input
                                                     class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
                                                     name="receiver-address"
-                                                    placeholder="الزاماً فارسی"
-                                                    {{--                                           lang="fa"--}}
-                                                    onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                        str = $(this).val();
-                                                        str = str.substring(0, str.length - 1);
-                                                        $(this).val(str);
-                                                        $(this).attr('autocomplete', 'off');
-                                                        } else
-                                                        $(this).attr('autocomplete', 'name');">
+                                                    placeholder="الزاماً فارسی">
                                             </div>
                                         </div>
                                     </div>
-                                    <a onclick="addUserAddress({{ $key }})"
+                                    <a onclick="addUserAddress()"
                                        id="submitAddress"
                                        class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white w-100 g-mt-15">
                                         ثبت آدرس جدید
