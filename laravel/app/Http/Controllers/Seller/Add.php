@@ -124,6 +124,8 @@ class Add extends Controller
 
         return view('Seller.AddProduct', compact('gender','cat', 'name', 'hintCat', 'qty', 'size'));
     }
+    sdfgsiklfjgkljdfkjgsfdgsfdg
+dfgdfgfdgfds
 
     // Insert Form Data to Database
     public function SaveProduct(Request $request)
