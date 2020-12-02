@@ -351,9 +351,9 @@
                             </div>
                             {{--با تخفیف--}}
                             <div
-                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
                                 <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    تخفیف<span id="orderProductDiscount" class="g-mr-5 g-color-gray-dark-v3"></span>
+                                    با<span id="orderProductDiscount" class="g-mr-5 g-color-gray-dark-v3"></span>% تخفیف
                                 </h6>
                                 <span class="g-py-5 g-px-5 g-pt-40--lg g-color-darkred">
                                         <span id="orderProductFinalPrice" class="g-mr-5 g-color-gray-dark-v3"></span>
@@ -361,7 +361,7 @@
                             </div>
                             {{--قیمت در تعداد--}}
                             <div
-                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                class="d-none flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
                                 <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
                                     قیمت در تعداد
                                 </h6>

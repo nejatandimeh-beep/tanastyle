@@ -232,14 +232,14 @@ class Basic extends Controller
 //  Order Detail
     public function orderDetail($addressID, $id)
     {
-        // Get Product Data Detail
-        $dataDetail = DB::table('customer_address')
-            ->where('ID', $addressID)
-            ->first();
+        // Get Customer Data
+//        $dataDetail = DB::table('customer_address')
+//            ->where('ID', $addressID)
+//            ->first();
 
         // Get Product Data
         $data = DB::table('product_order_detail as pod')
-            ->select('pod.*', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct')
+            ->select('pod.*','pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -255,7 +255,7 @@ class Basic extends Controller
         $d = $data->Date;
         $persianDate = $this->convertDateToPersian($d);
 
-        return view('Seller.OrderDetail', compact('data', 'dataDetail', 'falseProduct', 'persianDate'));
+        return view('Seller.OrderDetail', compact('data', 'falseProduct', 'persianDate'));
     }
 //    ---------> End Sale
 

@@ -488,13 +488,13 @@
                                     class="col-sm-2 col-form-label align-self-center">موبایل</label>
                                 <div class="col-sm-10 force-col-12">
                                     <input style="direction: ltr"
-                                        class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                        id="user-mobile"
-                                        name="mobile"
-                                        maxlength="11"
-                                        value="{{ $customer->Mobile }}"
-                                        placeholder="09xxxxxxxx"
-                                        readonly="">
+                                           class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                           id="user-mobile"
+                                           name="mobile"
+                                           maxlength="11"
+                                           value="{{ $customer->Mobile }}"
+                                           placeholder="09xxxxxxxx"
+                                           readonly="">
                                 </div>
                             </div>
                             {{--آدرس سکونت--}}
@@ -701,7 +701,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <form id="{{ 'addressUpdate'.$key }}" action="{{route('addressUpdate')}}" method="POST">
+                                        <form id="{{ 'addressUpdate'.$key }}" action="{{route('addressUpdate')}}"
+                                              method="POST">
                                             @csrf
                                             <input name="receiver-id" class="d-none" value="{{$row->ID}}">
                                             <div id="{{ 'accordion-13-body-'.$key }}" class="collapse g-bg-white"
@@ -756,7 +757,7 @@
                                                                     $(this).attr('autocomplete', 'off');
                                                                     } else
                                                                     $(this).attr('autocomplete', 'name');"
-                                                                            readonly="">
+                                                                    readonly="">
                                                             </div>
                                                         </div>
                                                         {{--کد پستی گیرنده--}}
@@ -765,12 +766,12 @@
                                                                 پستی</label>
                                                             <div class="col-sm-10 force-col-12">
                                                                 <input style="direction: ltr"
-                                                                    class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                    value="{{ $row->PostalCode }}"
-                                                                    name="receiver-postalCode"
-                                                                    maxlength="10"
-                                                                    placeholder="فقط اعداد"
-                                                                    readonly="">
+                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                       value="{{ $row->PostalCode }}"
+                                                                       name="receiver-postalCode"
+                                                                       maxlength="10"
+                                                                       placeholder="فقط اعداد"
+                                                                       readonly="">
                                                             </div>
                                                         </div>
                                                         {{--تلفن ثابت گیرنده--}}
@@ -802,12 +803,12 @@
                                                                 class="col-sm-2 col-form-label align-self-center">موبایل</label>
                                                             <div class="col-sm-10 force-col-12">
                                                                 <input style="direction: ltr"
-                                                                    class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                    placeholder="09xxxxxxxx"
-                                                                    name="receiver-mobile"
-                                                                    maxlength="11"
-                                                                    value="{{ $row->Mobile }}"
-                                                                    readonly="">
+                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                       placeholder="09xxxxxxxx"
+                                                                       name="receiver-mobile"
+                                                                       maxlength="11"
+                                                                       value="{{ $row->Mobile }}"
+                                                                       readonly="">
                                                             </div>
                                                         </div>
                                                         {{--استان/شهر گیرنده--}}
@@ -1001,11 +1002,11 @@
                                                 پستی</label>
                                             <div class="col-sm-10 force-col-12">
                                                 <input style="direction: ltr"
-                                                    class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                    name="receiver-postalCode"
-                                                    maxlength="10"
-                                                    value=""
-                                                    placeholder="فقط اعداد">
+                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                       name="receiver-postalCode"
+                                                       maxlength="10"
+                                                       value=""
+                                                       placeholder="فقط اعداد">
                                             </div>
                                         </div>
                                         {{--تلفن ثابت گیرنده--}}
@@ -1032,7 +1033,7 @@
                                         {{--موبایل گیرنده--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
                                             <label style="direction: ltr"
-                                                class="col-sm-2 col-form-label align-self-center">موبایل</label>
+                                                   class="col-sm-2 col-form-label align-self-center">موبایل</label>
                                             <div class="col-sm-10 force-col-12">
                                                 <input
                                                     class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
@@ -1467,7 +1468,7 @@
                 <div style="display: none" id="user-bought">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
                         <div style="padding-bottom: 13px;"
-                             class="g-pr-15 d-flex g-pt-25 g-color-primary justify-content-between">
+                             class="g-pr-15 g-pt-25 g-color-primary">
                             <div class="d-flex m-0 p-0">
                                 <i class="icon-tag g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
@@ -1475,195 +1476,186 @@
                                     خریداری شده
                                 </h6>
                             </div>
-                            <a style="cursor: pointer" onclick=""
-                               class="g-color-gray-dark-v5 g-text-underline--none--hover g-line-height-0_7 g-ml-15 g-ml-30--lg"
-                               data-toggle="tooltip"
-                               data-placement="top" data-original-title="چاپ فاکتورها">
-                                <i class="icon-printer g-font-size-20 g-color-primary--hover"></i>
-                            </a>
-
                         </div>
                         <hr style="z-index: 100 !important" class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
                     </div>
-                    <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
-                        <article class="d-md-table w-100 g-bg-white g-mb-1">
-                            <!-- Date -->
-                            <div
-                                class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-py-10 g-px-20">
-                                <div class="g-mb-15 g-mb-0--lg">
+                    @foreach($order as $key => $row)
+                        <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                            <article class="d-md-table w-100 g-bg-white g-mb-1">
+                                <!-- Date -->
+                                <div
+                                    class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-py-10 g-px-20">
+                                    <div class="g-mb-15 g-mb-0--lg">
                                     <span
-                                        class="d-block g-color-black g-font-weight-700 g-font-size-40 g-line-height-1">05</span>
-                                    شهریور 1399
-                                </div>
-                            </div>
-                            <!-- End Date -->
-
-                            <!-- Article Image -->
-                            <a class="d-md-table-cell align-middle g-width-130" href="#">
-                                <img class="d-block info-v5-2__image g-ml-minus-1"
-                                     src="{{ asset('img/products/2-2020.11.04-19.58.38/pic1.jpg') }}"
-                                     alt="Image Description">
-                            </a>
-                            <!-- End Article Image -->
-
-                            <!-- Article Content -->
-                            <div
-                                class="d-flex justify-content-between d-lg-table-cell align-middle g-py-15 g-pr-20 g-px-20--lg table-cell-responsive">
-                                <div>
-                                    <h3 class="h6 g-font-weight-700 ">
-                                        <span class="g-color-gray-dark-v2">شماره فاکتور</span>
-                                    </h3>
-                                    <em class="g-color-gray-dark-v5 g-font-style-normal">128563</em>
-                                </div>
-
-                                <a href="#modal16"
-                                   onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
-                                   data-modal-target="#modal16"
-                                   data-modal-effect="slidetogether"
-                                   class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pt-0 smallDevice">
-                                    <i class="icon-eye g-font-size-20 g-color-gray-dark-v2 g-color-primary--hover"></i>
-                                </a>
-                            </div>
-                            <!-- End Article Content -->
-
-                            <!-- Price -->
-                            <div class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
-                                <span
-                                    class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-25">256</span>
-                                <span
-                                    class="g-color-gray-dark-v5 g-font-size-11 ">هزار تومان</span>
-                            </div>
-                            <!-- End Price -->
-
-                            <!-- Actions -->
-                            <div class="d-md-table-cell align-middle text-md-right g-py-30 g-px-0 g-pa-20--lg">
-                                <div class="g-mt-minus-10 g-mx-minus-5">
-                                    <div class="text-left g-mt-15 g-mt-0--lg">
-                                        <a href="#modal16"
-                                           onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
-                                           data-modal-target="#modal16"
-                                           data-modal-effect="slidetogether"
-                                           class="d-lg-flex justify-content-end g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pt-10 bigDevice">
-                                            <i class="icon-eye g-font-size-20 g-color-gray-dark-v2 g-color-primary--hover"></i>
-                                        </a>
-                                        <!-- Demo modal window -->
-                                        <div id="modal16"
-                                             class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20"
-                                             style="display: none; overflow-y: auto">
-                                            <button style="outline: none" type="button" class="g-py-15 close float-left"
-                                                    onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
-                                                <i class="hs-icon hs-icon-close"></i>
-                                            </button>
-                                            <h5 class="g-py-15 text-right m-0">فاکتور فروش</h5>
-                                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
-
-                                            <div style="direction: rtl"
-                                                 class="d-lg-flex col-12 g-pa-15 g-pt-20 g-brd-around g-brd-gray-light-v4">
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        کد محصول
-                                                    </h6>
-                                                    <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                        1233203
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        نام محصول
-                                                    </h6>
-                                                    <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                        شرت زنانه<span> مدل بیکی</span>
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        جنسیت
-                                                    </h6>
-                                                    <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                        زنانه
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        رنگ
-                                                    </h6>
-                                                    <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                        زرد
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        سایز
-                                                    </h6>
-                                                    <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                        128000
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        تعداد
-                                                    </h6>
-                                                    <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                        <span>2</span> عدد
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        قیمت واحد
-                                                    </h6>
-                                                    <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                        128000
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        تاریخ
-                                                    </h6>
-                                                    <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                        99/06/03
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        کد تراکنش بانکی
-                                                    </h6>
-                                                    <span class="g-pa-5--lg">
-                                                                        <i class="icon-credit-card g-mr-3 g-bg-primary g-color-white g-py-2 g-px-5"></i> 589885466acssD5663
-                                                                    </span>
-                                                </div>
-                                                <div
-                                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                        تحویل
-                                                    </h6>
-                                                    <span class="g-pa-5--lg"
-                                                          data-toggle="tooltip"
-                                                          data-placement="top"
-                                                          data-original-title="تحویل داده شد">
-                                                                          <i class="fa fa-check g-font-size-18 g-color-primary"></i>
-                                                                    </span>
-                                                </div>
-                                            </div>
-                                            <span
-                                                class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-my-20 text-center force-col-12">مبلغ کل فاکتور: <span>256</span><span
-                                                    class="g-font-size-12 g-font-weight-300 g-mr-5">هزار تومان</span></span>
-                                        </div>
-                                        <!-- End Demo modal window -->
+                                        class="d-block g-color-black g-font-weight-700 {{(is_null($orderHowDay[$key]) ? 'g-font-size-40':'g-font-size-30')}} g-line-height-1">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
+                                        {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][3].' '.$persianDate[$key][0] }}
                                     </div>
                                 </div>
-                            </div>
-                            <!-- End Actions -->
-                        </article>
-                    </div>
+                                <!-- End Date -->
+
+                                <!-- Article Image -->
+                                <a class="d-md-table-cell align-middle g-width-130" href="#">
+                                    <img class="d-block info-v5-2__image g-ml-minus-1"
+                                         src="{{ $row->PicPath.'pic1.jpg' }}"
+                                         alt="Image Description">
+                                </a>
+                                <!-- End Article Image -->
+
+                                <!-- Article Content -->
+                                <div
+                                    class="d-flex justify-content-between d-lg-table-cell align-middle g-py-15 g-pr-20 g-px-20--lg table-cell-responsive">
+                                    <div>
+                                        <h3 class="h6 g-font-weight-700 ">
+                                            <span class="g-color-gray-dark-v2">شماره فاکتور</span>
+                                        </h3>
+                                        <em class="g-color-gray-dark-v5 g-font-style-normal">{{ $row->orderID.'/'.$row->orderDetailID }}</em>
+                                    </div>
+
+                                    <a href="{{ '#modal16'.$key }}"
+                                       onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
+                                       data-modal-target="{{ '#modal16'.$key }}"
+                                       data-modal-effect="slidetogether"
+                                       class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pt-0 smallDevice">
+                                        <i class="icon-eye g-font-size-20 g-color-gray-dark-v2 g-color-primary--hover"></i>
+                                    </a>
+                                </div>
+                                <!-- End Article Content -->
+
+                                <!-- Price -->
+                                <div class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
+                                    <span
+                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-25">{{ number_format($row->FinalPrice) }}</span>
+                                    <span
+                                        class="g-color-gray-dark-v5 g-font-size-11 ">تومان</span>
+                                </div>
+                                <!-- End Price -->
+
+                                <!-- Actions -->
+                                <div class="d-md-table-cell align-middle text-md-right g-py-30 g-px-0 g-pa-20--lg">
+                                    <div class="g-mt-minus-10 g-mx-minus-5">
+                                        <div class="text-left g-mt-15 g-mt-0--lg">
+                                            <a href="{{ '#modal16'.$key }}"
+                                               onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
+                                               data-modal-target="{{ '#modal16'.$key }}"
+                                               data-modal-effect="slidetogether"
+                                               class="d-lg-flex justify-content-end g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pt-10 bigDevice">
+                                                <i class="icon-eye g-font-size-20 g-color-gray-dark-v2 g-color-primary--hover"></i>
+                                            </a>
+                                            <!-- Demo modal window -->
+                                            <div id="{{ 'modal16'.$key }}"
+                                                 class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20"
+                                                 style="display: none; overflow-y: auto">
+                                                <button style="outline: none" type="button"
+                                                        class="g-py-15 close float-left"
+                                                        onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
+                                                    <i class="hs-icon hs-icon-close"></i>
+                                                </button>
+                                                <h6 class="g-py-15 text-right m-0">فاکتور فروش به شماره: {{ $row->orderID.'/'.$row->orderDetailID }}</h6>
+                                                <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
+
+                                                <div style="direction: rtl"
+                                                     class="d-lg-flex col-12 g-pa-15 g-pt-20 g-brd-around g-brd-gray-light-v4">
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            کد محصول
+                                                        </h6>
+                                                        <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            {{ $row->ProductDetailID }}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            نام محصول
+                                                        </h6>
+                                                        <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            {{ $row->Name }}<span> مدل {{ $row->Model }}</span>
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            رنگ
+                                                        </h6>
+                                                        <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            {{ $row->Color }}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            سایز
+                                                        </h6>
+                                                        <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            {{ $row->Size }}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            تعداد
+                                                        </h6>
+                                                        <span class="g-pa-5--lg color-primary-smallDevice">
+                                                             <span>{{ $row->Qty }}</span> عدد
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            قیمت واحد
+                                                        </h6>
+                                                        <span class="g-pa-5--lg color-primary-smallDevice">
+                                                             {{ number_format($row->UnitPrice) }}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            با {{ $row->Discount }}% تخفیف
+                                                        </h6>
+                                                        <span class="g-pa-5--lg color-primary-smallDevice">
+                                                              {{ number_format($row->FinalPrice) }}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            تاریخ
+                                                        </h6>
+                                                        <span class="g-pa-5--lg color-primary-smallDevice">
+                                                              {{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                        <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                            تحویل
+                                                        </h6>
+                                                        <span class="g-pa-5--lg"
+                                                              data-toggle="tooltip"
+                                                              data-placement="top"
+                                                              data-original-title="تحویل داده شد">
+                                                            @if($row->DeliveryStatus === 3)
+                                                                <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                                            @else
+                                                                <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
+                                                            @endif
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <span
+                                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-my-20 text-center force-col-12">مبلغ کل فاکتور: <span>{{ number_format($row->FinalPrice * $row->Qty) }}</span><span
+                                                        class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span></span>
+                                            </div>
+                                            <!-- End Demo modal window -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Actions -->
+                            </article>
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- در انتظار تحویل -->

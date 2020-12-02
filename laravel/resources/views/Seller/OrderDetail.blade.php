@@ -28,7 +28,7 @@
                            tabindex="1"
                            placeholder=""
                            disabled
-                           value="{{ $data->orderID.'/'.$data->ProductDetailID }}">
+                           value="{{ $data->orderID.'/'.$data->orderDetailID }}">
                 </div>
                 {{--                Date--}}
                 <div class="input-group col-lg-6 g-mb-10">

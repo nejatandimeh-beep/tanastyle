@@ -701,7 +701,7 @@
                                 <td class="align-middle text-center">{{ $rec->Qty }}</td>
                                 <td class="align-middle text-center">{{ number_format($rec->FinalPrice * $rec->Qty) }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}</td>
-                                <td class="align-middle text-center">{{ $rec->ID.'/'.$rec->ProductDetailID }}</td>
+                                <td class="align-middle text-center">{{ $rec->orderID.'/'.$rec->orderDetailID }}</td>
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"

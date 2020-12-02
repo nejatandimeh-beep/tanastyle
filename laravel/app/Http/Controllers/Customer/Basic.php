@@ -27,8 +27,9 @@ class Basic extends Controller
             ->get();
 
         $order=DB::table('product_order as po')
-            ->select('*')
+            ->select('po.*','pod.*','p.*','pod.ID as orderDetailID','po.ID as orderID')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID','=','po.ID')
+            ->leftJoin('product as p', 'p.ID','=','pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
             ->get();
 
@@ -36,7 +37,45 @@ class Basic extends Controller
         $persianDate = array();
         foreach ($order as $key => $rec) {
             $d = $rec->Date;
-            $PersianDate[$key] = $this->convertDateToPersian($d);
+            $persianDate[$key] = $this->convertDateToPersian($d);
+            switch ($persianDate[$key][1]) {
+                case 1:
+                    $persianDate[$key][3]='فروردین';
+                    break;
+                case 2:
+                    $persianDate[$key][3]='اردیبهشت';
+                    break;
+                case 3:
+                    $persianDate[$key][3]='خرداد';
+                    break;
+                case 4:
+                    $persianDate[$key][3]='تیر';
+                    break;
+                case 5:
+                    $persianDate[$key][3]='مرداد';
+                    break;
+                case 6:
+                    $persianDate[$key][3]='شهریور';
+                    break;
+                case 7:
+                    $persianDate[$key][3]='مهر';
+                    break;
+                case 8:
+                    $persianDate[$key][3]='آبان';
+                    break;
+                case 9:
+                    $persianDate[$key][3]='آذر';
+                    break;
+                case 10:
+                    $persianDate[$key][3]='دی';
+                    break;
+                case 11:
+                    $persianDate[$key][3]='بهمن';
+                    break;
+                case 12:
+                    $persianDate[$key][3]='اسفند';
+                    break;
+            }
             $orderMinuets[$key] = $this->dateLenToNow($rec->Date, $rec->Time);
             $orderHowDay[$key] = null;
             if ($orderMinuets[$key] < 11520) {
@@ -44,7 +83,7 @@ class Basic extends Controller
             }
         }
 
-        return view('Customer.Profile', compact('id', 'customer', 'address','persianDate','orderHowDay'));
+        return view('Customer.Profile', compact('id', 'customer', 'address','order','persianDate','orderHowDay'));
     }
 
     public function profileUpdate(Request $request)
