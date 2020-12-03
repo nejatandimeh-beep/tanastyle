@@ -126,9 +126,7 @@
                                         <a style="cursor: pointer"
                                            id="filter-user-delivery"
                                            class="nav-link g-color-main g-color-primary--hover p-0"
-                                           onclick="click_progressBar(); showPanel('delivery');">در
-                                            انتظار
-                                            تحویل
+                                           onclick="showPanel('delivery');">در انتظار تحویل
                                             <i class="icon-hotel-restaurant-186 u-line-icon-pro float-left g-font-size-20 g-pb-5 g-pl-5 g-line-height-0_7"></i>
                                         </a>
                                     </h5>
@@ -1479,25 +1477,26 @@
                         </div>
                         <hr style="z-index: 100 !important" class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
                     </div>
-                    @foreach($order as $key => $row)
-                        <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                    <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                        @foreach($order as $key => $row)
                             <article class="d-md-table w-100 g-bg-white g-mb-1">
                                 <!-- Date -->
                                 <div
                                     class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-py-10 g-px-20">
                                     <div class="g-mb-15 g-mb-0--lg">
                                     <span
-                                        class="d-block g-color-black g-font-weight-700 {{(is_null($orderHowDay[$key]) ? 'g-font-size-40':'g-font-size-30')}} g-line-height-1">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
+                                        class="d-block g-color-black g-font-weight-700 {{(is_null($orderHowDay[$key]) ? 'g-font-size-30':'g-font-size-20')}} g-line-height-1">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
                                         {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][3].' '.$persianDate[$key][0] }}
                                     </div>
                                 </div>
                                 <!-- End Date -->
 
                                 <!-- Article Image -->
-                                <a class="d-md-table-cell align-middle g-width-130" href="#">
-                                    <img class="d-block info-v5-2__image g-ml-minus-1"
-                                         src="{{ $row->PicPath.'pic1.jpg' }}"
-                                         alt="Image Description">
+                                <a class="js-fancybox d-md-table-cell align-middle g-width-130"
+                                   data-fancybox-gallery="lightbox-gallery--10"
+                                   href="{{ $row->PicPath.'pic1.jpg' }}"
+                                   title="کد محصول {{ $row->ProductDetailID }}">
+                                    <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}" alt="Image Description">
                                 </a>
                                 <!-- End Article Image -->
 
@@ -1550,7 +1549,8 @@
                                                         onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
                                                     <i class="hs-icon hs-icon-close"></i>
                                                 </button>
-                                                <h6 class="g-py-15 text-right m-0">فاکتور فروش به شماره: {{ $row->orderID.'/'.$row->orderDetailID }}</h6>
+                                                <h6 class="g-py-15 text-right m-0">فاکتور فروش به
+                                                    شماره: {{ $row->orderID.'/'.$row->orderDetailID }}</h6>
                                                 <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
 
                                                 <div style="direction: rtl"
@@ -1636,7 +1636,7 @@
                                                               data-toggle="tooltip"
                                                               data-placement="top"
                                                               data-original-title="تحویل داده شد">
-                                                            @if($row->DeliveryStatus === 3)
+                                                            @if($row->DeliveryStatus === '3')
                                                                 <i class="fa fa-check g-font-size-18 g-color-primary"></i>
                                                             @else
                                                                 <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
@@ -1654,8 +1654,8 @@
                                 </div>
                                 <!-- End Actions -->
                             </article>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
 
                 <!-- در انتظار تحویل -->
@@ -1672,72 +1672,97 @@
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
-                        <article class="d-md-table w-100 g-bg-white g-mb-1">
-                            <!-- Date -->
-                            <div
-                                class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-py-10 g-px-20">
-                                <div class="g-mb-15 g-mb-0--lg">
-                                    تحویل به
-                                    <span
-                                        class="d-block g-color-yellow g-font-weight-700 g-font-size-40 g-line-height-1">پُست</span>
-                                </div>
-                            </div>
-                            <!-- End Date -->
-
-                            <!-- Article Image -->
-                            <a class="d-md-table-cell align-middle g-width-130" href="#">
-                                <img class="d-block info-v5-2__image g-ml-minus-1"
-                                     src="{{ asset('img/products/2-2020.11.04-19.58.38/pic1.jpg')}}"
-                                     alt="Image Description">
-                            </a>
-                            <!-- End Article Image -->
-
-                            <!-- Article Content -->
-                            <div class="d-md-table-cell align-middle g-py-15 g-px-20 g-width-250">
-                                <h3 class="h6 g-font-weight-700 ">
-                                    <a class="g-color-gray-dark-v2" href="#">شرت زنانه</a>
-                                </h3>
-                                <em class="g-color-gray-dark-v5 g-font-style-normal">مدل بیکینی</em>
-                            </div>
-                            <!-- End Article Content -->
-
-                            <!-- Price -->
-                            <div class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
-                                <span
-                                    class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-25">120</span>
-                                <span
-                                    class="g-color-gray-dark-v5 g-font-size-11 ">هزار تومان</span>
-                            </div>
-                            <!-- End Price -->
-
-                            <!-- Actions -->
-                            <div class="d-md-table-cell align-middle g-pa-20 g-pl-10 progress-auto-width g-mt-20">
-                                <div style="direction: ltr" class="g-mt-minus-10 g-mx-minus-5 d-flex">
-                                    <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
+                        @foreach($order as $key => $row)
+                            @if($row->DeliveryStatus !== '3')
+                                <article class="d-md-table w-100 g-bg-white g-mb-1">
+                                    <!-- deliveryStatus -->
                                     <div
-                                        class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
-                                        data-toggle="tooltip"
-                                        {{--                                        data-original-title="{{ 'زمان مانده '.(int)(24-($deliveryStatus[$key]/60)).' ساعت' }}"--}}
-                                        data-placement="top">
-                                        <div
-                                            class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
-                                            role="progressbar"
-                                            style="width: 20%"
-                                            aria-valuenow="20"
-                                            aria-valuemin="0"
-                                            aria-valuemax="100">
+                                        class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-py-10 g-px-20">
+                                        <div class="g-mb-15 g-mb-0--lg">
+                                            {{ $delivery[$key]['text'] }}
+                                            <span
+                                                class="d-block g-font-weight-700 g-line-height-1
+                                                @switch($delivery[$key]['location'])
+                                                        @case('بسته بندی')
+                                                            g-font-size-20
+                                                            g-color-brown
+                                                        @break
+                                                        @case('ارســال')
+                                                            g-font-size-20
+                                                            g-color-blue
+                                                        @break
+                                                        @case('پست')
+                                                            g-font-size-30
+                                                            g-color-yellow
+                                                        @break
+                                                 @endswitch">{{ $delivery[$key]['location'] }}</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Article Image -->
+                                    <a class="js-fancybox d-md-table-cell align-middle g-width-130"
+                                       data-fancybox-gallery="lightbox-gallery--11"
+                                       href="{{ $row->PicPath.'pic1.jpg' }}"
+                                       title="کد محصول {{ $row->ProductDetailID }}">
+                                        <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}" alt="Image Description">
+                                    </a>
+                                    <!-- End Article Image -->
+
+                                    <!-- Article Content -->
+                                    <div class="d-md-table-cell align-middle g-py-15 g-px-20 g-width-150">
+                                        <h3 class="h6 g-font-weight-700 ">
+                                            <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
+                                        </h3>
+                                        <em class="g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
+                                    </div>
+                                    <!-- End Article Content -->
+
+                                    <!-- Size Color -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
+                                        <span
+                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
+                                        <span
+                                            class="g-color-gray-dark-v5 g-font-size-11 ">{{ $row->Color }}</span>
+                                    </div>
+
+                                    <!-- Date -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
+                                        <span
+                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $persianDate[$key][2].' '.$persianDate[$key][3].' '.$persianDate[$key][0] }}</span>
+                                    </div>
+
+                                    <!-- Actions -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-pa-20 g-pt-25 g-pl-10 progress-auto-width g-mt-20">
+                                        <div style="direction: ltr" class="g-mt-minus-10 g-mx-minus-5 d-flex">
+                                            <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
                                             <div
-                                                style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
-                                                class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white g-bg-primary g-pt-3">
-                                                <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                                class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
+                                                data-toggle="tooltip"
+                                                data-original-title="{{ 'تاکنون '.$deliveryTime[$key].'%'.' مسیر طی شده است'  }}"
+                                                data-placement="top">
+                                                <div id="progressBar"
+                                                    class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
+                                                    role="progressbar"
+                                                    style="width: {{$deliveryTime[$key]}}%"
+                                                    aria-valuenow="{{ $deliveryTime[$key] }}"
+                                                    aria-valuemin="0"
+                                                    aria-valuemax="100">
+                                                    <div
+                                                        style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
+                                                        class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white g-bg-primary g-pt-3">
+                                                        <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-
                                     </div>
-                                </div>
-                            </div>
-                            <!-- End Actions -->
-                        </article>
+                                    <!-- End Actions -->
+                                </article>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
 

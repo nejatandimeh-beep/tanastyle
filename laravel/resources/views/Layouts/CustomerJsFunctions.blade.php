@@ -544,15 +544,6 @@
             }, 500);
         }
 
-        function click_progressBar() {
-            setTimeout(function () { // important in this case
-                let horizontalProgressBars = $.HSCore.components.HSProgressBar.init('.js-hr-progress-bar', {
-                    direction: 'horizontal',
-                    indicatorSelector: '.js-hr-progress-bar-indicator'
-                });
-            }, 1);
-        }
-
         function closeSideBar() {
             $('#filterDiv').css('display', 'none');
             $('#smallFilterDiv').css('display', 'block');
@@ -644,7 +635,6 @@
                     $('#user-bought').css('display', 'none');
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
-                    $.HSCore.components.HSChartPie.init('.js-pie');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-basket').removeClass('g-color-main').addClass('g-color-primary');
@@ -681,7 +671,6 @@
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
                     $('#user-basket').css('display', 'none');
-                    $.HSCore.components.HSChartPie.init('.js-pie');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-like').removeClass('g-color-main').addClass('g-color-primary');

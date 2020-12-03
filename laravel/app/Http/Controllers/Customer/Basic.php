@@ -20,19 +20,26 @@ class Basic extends Controller
             ->where('id', Auth::user()->id)
             ->first();
 
+        // address
         $address = DB::table('customer_address')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
             ->orderBy('Status', 'DESC')
             ->get();
 
-        $order=DB::table('product_order as po')
-            ->select('po.*','pod.*','p.*','pod.ID as orderDetailID','po.ID as orderID')
-            ->leftJoin('product_order_detail as pod', 'pod.OrderID','=','po.ID')
-            ->leftJoin('product as p', 'p.ID','=','pod.ProductID')
+        // order
+        $order = DB::table('product_order as po')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID')
+            ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
+            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
             ->get();
 
+        $delivery[] = array([
+            'text' => '',
+            'location' => ''
+        ]);
+        $deliveryTime = array();
         $orderHowDay = array();
         $persianDate = array();
         foreach ($order as $key => $rec) {
@@ -40,40 +47,40 @@ class Basic extends Controller
             $persianDate[$key] = $this->convertDateToPersian($d);
             switch ($persianDate[$key][1]) {
                 case 1:
-                    $persianDate[$key][3]='فروردین';
+                    $persianDate[$key][3] = 'فروردین';
                     break;
                 case 2:
-                    $persianDate[$key][3]='اردیبهشت';
+                    $persianDate[$key][3] = 'اردیبهشت';
                     break;
                 case 3:
-                    $persianDate[$key][3]='خرداد';
+                    $persianDate[$key][3] = 'خرداد';
                     break;
                 case 4:
-                    $persianDate[$key][3]='تیر';
+                    $persianDate[$key][3] = 'تیر';
                     break;
                 case 5:
-                    $persianDate[$key][3]='مرداد';
+                    $persianDate[$key][3] = 'مرداد';
                     break;
                 case 6:
-                    $persianDate[$key][3]='شهریور';
+                    $persianDate[$key][3] = 'شهریور';
                     break;
                 case 7:
-                    $persianDate[$key][3]='مهر';
+                    $persianDate[$key][3] = 'مهر';
                     break;
                 case 8:
-                    $persianDate[$key][3]='آبان';
+                    $persianDate[$key][3] = 'آبان';
                     break;
                 case 9:
-                    $persianDate[$key][3]='آذر';
+                    $persianDate[$key][3] = 'آذر';
                     break;
                 case 10:
-                    $persianDate[$key][3]='دی';
+                    $persianDate[$key][3] = 'دی';
                     break;
                 case 11:
-                    $persianDate[$key][3]='بهمن';
+                    $persianDate[$key][3] = 'بهمن';
                     break;
                 case 12:
-                    $persianDate[$key][3]='اسفند';
+                    $persianDate[$key][3] = 'اسفند';
                     break;
             }
             $orderMinuets[$key] = $this->dateLenToNow($rec->Date, $rec->Time);
@@ -81,9 +88,30 @@ class Basic extends Controller
             if ($orderMinuets[$key] < 11520) {
                 $orderHowDay[$key] = $this->howDays($orderMinuets[$key]);
             }
+
+            //delivery
+            // محاسبه نوار زمانی تحویل محصول به درصد و منهای اندازه آیکون ماشین
+            if ($rec->DeliveryStatus !== '3')
+                    $deliveryTime[$key] = round( $this->dateLenToNow($rec->Date, $rec->Time) / 7200 * 100);
+            switch (true) {
+                case ($deliveryTime[$key]<=20):
+                    $delivery[$key]['text'] = 'در صف';
+                    $delivery[$key]['location'] = 'بسته بندی';
+                    break;
+                case ($deliveryTime[$key]>20) && ($deliveryTime[$key]<=40):
+                    $delivery[$key]['text'] = 'در صف';
+                    $delivery[$key]['location'] = 'ارســال';
+                    break;
+                case ($deliveryTime[$key]>40):
+                    $delivery[$key]['text'] = 'تحویل به';
+                    $delivery[$key]['location'] = 'پست';
+                    break;
+                default:
+                    break;
+            }
         }
 
-        return view('Customer.Profile', compact('id', 'customer', 'address','order','persianDate','orderHowDay'));
+        return view('Customer.Profile', compact('id', 'customer', 'address', 'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryTime'));
     }
 
     public function profileUpdate(Request $request)
@@ -204,7 +232,7 @@ class Basic extends Controller
 
         if ($productID === 'empty')
             return redirect()->route('userProfile', 'addressStatus');
-        else{
+        else {
             return redirect()->route('productDetail', $productID);
         }
     }
@@ -346,9 +374,9 @@ class Basic extends Controller
             ->where('c.id', Auth::user()->id)
             ->first();
 
-        $date = date('Y-m-d');
         date_default_timezone_set('Asia/Tehran');
-        $time = date('h:i:s');
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
         DB::table('product_order')->insert([
             'CustomerID' => Auth::user()->id,
             'AddressID' => $customerInfo->ID,
@@ -376,7 +404,7 @@ class Basic extends Controller
             'Qty' => $qty,
             'Size' => $productInfo->Size,
             'Color' => $productInfo->Color,
-            'OrderCode' => '3#$ddf3e3continue3',
+            'OrderBankCode' => '3#$ddf3e3continue3',
         ]);
 
         DB::table('product_detail')
@@ -453,9 +481,9 @@ class Basic extends Controller
 
     public function productNewComment($id, $val)
     {
-        $date = date('Y-m-d');
         date_default_timezone_set('Asia/Tehran');
-        $time = date('h:i:s');
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
         DB::table('customer_comment')->insert([
             [
                 'CustomerID' => Auth::user()->id,
