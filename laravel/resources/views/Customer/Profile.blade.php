@@ -1476,14 +1476,15 @@
                             </div>
                         </div>
                         <hr style="z-index: 100 !important" class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
+                        <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
                         @foreach($order as $key => $row)
                             <article class="d-md-table w-100 g-bg-white g-mb-1">
                                 <!-- Date -->
-                                <div
-                                    class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-py-10 g-px-20">
-                                    <div class="g-mb-15 g-mb-0--lg">
+                                <div style="padding: 0 !important;"
+                                     class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5">
+                                    <div>
                                     <span
                                         class="d-block g-color-black g-font-weight-700 {{(is_null($orderHowDay[$key]) ? 'g-font-size-30':'g-font-size-20')}} g-line-height-1">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
                                         {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][3].' '.$persianDate[$key][0] }}
@@ -1492,7 +1493,7 @@
                                 <!-- End Date -->
 
                                 <!-- Article Image -->
-                                <a class="js-fancybox d-md-table-cell align-middle g-width-130"
+                                <a class="js-fancybox d-md-table-cell align-middle g-width-110"
                                    data-fancybox-gallery="lightbox-gallery--10"
                                    href="{{ $row->PicPath.'pic1.jpg' }}"
                                    title="کد محصول {{ $row->ProductDetailID }}">
@@ -1504,10 +1505,10 @@
                                 <div
                                     class="d-flex justify-content-between d-lg-table-cell align-middle g-py-15 g-pr-20 g-px-20--lg table-cell-responsive">
                                     <div>
-                                        <h3 class="h6 g-font-weight-700 ">
+                                        <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
                                             <span class="g-color-gray-dark-v2">شماره فاکتور</span>
                                         </h3>
-                                        <em class="g-color-gray-dark-v5 g-font-style-normal">{{ $row->orderID.'/'.$row->orderDetailID }}</em>
+                                        <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal">{{ $row->orderID.'/'.$row->orderDetailID }}</em>
                                     </div>
 
                                     <a href="{{ '#modal16'.$key }}"
@@ -1523,14 +1524,14 @@
                                 <!-- Price -->
                                 <div class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
                                     <span
-                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-25">{{ number_format($row->FinalPrice) }}</span>
+                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-25">{{ number_format($row->FinalPrice * $row->Qty) }}</span>
                                     <span
                                         class="g-color-gray-dark-v5 g-font-size-11 ">تومان</span>
                                 </div>
                                 <!-- End Price -->
 
                                 <!-- Actions -->
-                                <div class="d-md-table-cell align-middle text-md-right g-py-30 g-px-0 g-pa-20--lg">
+                                <div class="d-md-table-cell align-middle text-md-right g-px-0 g-pa-20--lg">
                                     <div class="g-mt-minus-10 g-mx-minus-5">
                                         <div class="text-left g-mt-15 g-mt-0--lg">
                                             <a href="{{ '#modal16'.$key }}"
@@ -1542,8 +1543,8 @@
                                             </a>
                                             <!-- Demo modal window -->
                                             <div id="{{ 'modal16'.$key }}"
-                                                 class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20"
-                                                 style="display: none; overflow-y: auto">
+                                                 class="g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20"
+                                                 style="display: none; overflow-y: auto; height: 500px !important;">
                                                 <button style="outline: none" type="button"
                                                         class="g-py-15 close float-left"
                                                         onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
@@ -1636,7 +1637,7 @@
                                                               data-toggle="tooltip"
                                                               data-placement="top"
                                                               data-original-title="تحویل داده شد">
-                                                            @if($row->DeliveryStatus === '3')
+                                                            @if($row->DeliveryStatus === '5')
                                                                 <i class="fa fa-check g-font-size-18 g-color-primary"></i>
                                                             @else
                                                                 <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
@@ -1644,9 +1645,49 @@
                                                         </span>
                                                     </div>
                                                 </div>
-                                                <span
-                                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-my-20 text-center force-col-12">مبلغ کل فاکتور: <span>{{ number_format($row->FinalPrice * $row->Qty) }}</span><span
-                                                        class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span></span>
+                                                <div class="d-lg-flex justify-content-between">
+                                                    <div>
+                                                    <span
+                                                        class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-my-20 text-center force-col-12">مبلغ کل فاکتور: <span>{{ number_format($row->FinalPrice * $row->Qty) }}</span><span
+                                                            class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span></span>
+                                                    </div>
+                                                    @if($row->DeliveryStatus !== '-1')
+                                                        @if($deliveryTime[$key] >= 100)
+                                                            <div style="direction: rtl" class="g-my-20">
+                                                                <div
+                                                                    class="alert alert-warning alert-dismissible fade show"
+                                                                    role="alert">
+                                                                    <strong>توجه! </strong>اگر محصول در هر شرایطی به
+                                                                    دستتان
+                                                                    نرسیده در عرض یک هفته آنرا به ما گزارش دهید.
+                                                                </div>
+                                                                <div
+                                                                    class="alert alert-warning alert-dismissible fade show"
+                                                                    role="alert">
+                                                                    <strong>توجه! </strong>عدم گزارش فوق به منزله دریافت محصول است.
+                                                                </div>
+                                                                <div
+                                                                    class="alert alert-warning alert-dismissible fade show"
+                                                                    role="alert">
+                                                                    <strong>مهم! </strong>در صورتی که محصول به دستتان رسیده باشد و درخواست پیگیری نمایید امتیازات کسب شده توسط شما در تانا استایل صفر خواهد گشت.
+                                                                </div>
+                                                                <button type="button"
+                                                                        class="btn btn-md u-btn-outline-primary rounded-0 force-col-12 g-mb-15"
+                                                                        onclick="unsuccessfulDelivery({{$row->orderID}})">
+                                                                    در خواست پیگیری
+                                                                </button>
+                                                            </div>
+                                                        @endif
+                                                    @else
+                                                        <div style="direction: rtl" class="g-my-20">
+                                                            <div class="alert alert-danger alert-dismissible fade show"
+                                                                 role="alert">
+                                                                <strong>عدم تحویل! </strong>برای این فاکتور گزارش عدم
+                                                                تحویل محصول ثبت شده و تیم ما در حال بررسی موضوع است.
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
                                             <!-- End Demo modal window -->
                                         </div>
@@ -1654,6 +1695,7 @@
                                 </div>
                                 <!-- End Actions -->
                             </article>
+                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
                         @endforeach
                     </div>
                 </div>
@@ -1672,95 +1714,110 @@
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                        {{--0: در دست فروشنده 1: تحویل پیک(1) 2: تحویل باجه پستی 3: تحویل پیک(2) 4: تحویل پست 5: تحویل داده شد.--}}
+                        {{--گزینه 1 از طریق فروشنده در تبلت پیک(1) ثبت می شود--}}
+                        {{--گزینه 2 از طریق پیک در تبلت باجه پستی ثبت می شود--}}
+                        {{--گزینه 3 از طریق باجه پستی در تبلت پیک(2) ثبت می شود--}}
                         @foreach($order as $key => $row)
-                            @if($row->DeliveryStatus !== '3')
+                            @if($row->DeliveryStatus !== '5')
                                 <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- deliveryStatus -->
-                                    <div
-                                        class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-py-10 g-px-20">
-                                        <div class="g-mb-15 g-mb-0--lg">
+                                    <div style="padding: 0 !important;"
+                                         class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-px-20">
+                                        <div>
                                             {{ $delivery[$key]['text'] }}
                                             <span
                                                 class="d-block g-font-weight-700 g-line-height-1
                                                 @switch($delivery[$key]['location'])
-                                                        @case('بسته بندی')
-                                                            g-font-size-20
-                                                            g-color-brown
-                                                        @break
-                                                        @case('ارســال')
-                                                            g-font-size-20
-                                                            g-color-blue
-                                                        @break
-                                                        @case('پست')
-                                                            g-font-size-30
-                                                            g-color-yellow
-                                                        @break
-                                                 @endswitch">{{ $delivery[$key]['location'] }}</span>
+                                                @case('بسته بندی')
+                                                    g-font-size-20
+                                                    g-color-brown
+@break
+                                                @case('ارســال')
+                                                    g-font-size-20
+                                                    g-color-blue
+@break
+                                                @case('پست')
+                                                    g-font-size-30
+                                                    g-color-yellow
+@break
+                                                @case('تحویل ناموفق')
+                                                    g-font-size-17
+                                                    g-color-red
+@break
+                                                @endswitch">{{ $delivery[$key]['location'] }}</span>
                                         </div>
                                     </div>
 
                                     <!-- Article Image -->
-                                    <a class="js-fancybox d-md-table-cell align-middle g-width-130"
+                                    <a class="js-fancybox d-md-table-cell align-middle g-width-110"
                                        data-fancybox-gallery="lightbox-gallery--11"
                                        href="{{ $row->PicPath.'pic1.jpg' }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}" alt="Image Description">
+                                        <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}"
+                                             alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
 
                                     <!-- Article Content -->
-                                    <div class="d-md-table-cell align-middle g-py-15 g-px-20 g-width-150">
-                                        <h3 class="h6 g-font-weight-700 ">
+                                    <div class="d-md-table-cell align-middle g-px-20">
+                                        <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
                                             <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                         </h3>
-                                        <em class="g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
+                                        <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
                                     </div>
                                     <!-- End Article Content -->
 
                                     <!-- Size Color -->
                                     <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
                                         <span
                                             class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
                                         <span
-                                            class="g-color-gray-dark-v5 g-font-size-11 ">{{ $row->Color }}</span>
+                                            class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
                                     </div>
 
                                     <!-- Date -->
                                     <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
                                         <span
-                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $persianDate[$key][2].' '.$persianDate[$key][3].' '.$persianDate[$key][0] }}</span>
+                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $persianDate[$key][2].' '.$persianDate[$key][3].' '.$persianDate[$key][0] }}</span>
                                     </div>
 
                                     <!-- Actions -->
                                     <div
-                                        class="d-md-table-cell align-middle g-pa-20 g-pt-25 g-pl-10 progress-auto-width g-mt-20">
+                                        class="d-md-table-cell align-middle g-pa-20 g-pt-25 g-pl-0 progress-auto-width">
                                         <div style="direction: ltr" class="g-mt-minus-10 g-mx-minus-5 d-flex">
-                                            <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
-                                            <div
-                                                class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
-                                                data-toggle="tooltip"
-                                                data-original-title="{{ 'تاکنون '.$deliveryTime[$key].'%'.' مسیر طی شده است'  }}"
-                                                data-placement="top">
-                                                <div id="progressBar"
-                                                    class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
-                                                    role="progressbar"
-                                                    style="width: {{$deliveryTime[$key]}}%"
-                                                    aria-valuenow="{{ $deliveryTime[$key] }}"
-                                                    aria-valuemin="0"
-                                                    aria-valuemax="100">
-                                                    <div
-                                                        style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
-                                                        class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white g-bg-primary g-pt-3">
-                                                        <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                            @if($row->DeliveryStatus !== '-1')
+                                                <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
+                                                <div
+                                                    class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
+                                                    data-toggle="tooltip"
+                                                    data-original-title="{{ 'تاکنون '.$deliveryTime[$key].'%'.' مسیر طی شده است'  }}"
+                                                    data-placement="top">
+                                                    <div id="progressBar"
+                                                         class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
+                                                         role="progressbar"
+                                                         style="width: {{$deliveryTime[$key]}}%"
+                                                         aria-valuenow="{{ $deliveryTime[$key] }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100">
+                                                        <div
+                                                            style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
+                                                            class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white g-bg-primary g-pt-3">
+                                                            <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            @else
+                                                <i class="fa fa-exclamation-triangle m-0 g-font-size-16 g-color-red"></i>
+                                                <span class="g-ml-10">..درحال پیگیری</span>
+                                            @endif
                                         </div>
                                     </div>
                                     <!-- End Actions -->
                                 </article>
+                                <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
                             @endif
                         @endforeach
                     </div>
@@ -1781,43 +1838,8 @@
                     </div>
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
                         <article class="d-md-table w-100 g-bg-white g-mb-30 g-mb-15--lg">
-                            <!-- Date -->
-                            <div
-                                class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-py-10 g-px-20 bigDevice">
-                                <div class="align-self-center g-width-70 mx-auto">
-                                    <!-- Chart Pie -->
-                                    <div class="js-pie g-color-black" data-circles-value="4"
-                                         data-circles-max-value="100" data-circles-bg-color="#dedede"
-                                         data-circles-fg-color="#72c02c" data-circles-radius="35"
-                                         data-circles-stroke-width="4" data-circles-font-size="12"
-                                         data-circles-font-weight="500" data-circles-additional-text=" تا موجود"
-                                         data-circles-duration="2000" data-circles-scroll-animate="true" id="hs-pie-1">
-                                        <div class="circles-wrp" style="position: relative; display: inline-block;">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70">
-                                                <path fill="transparent" stroke="#dedede" stroke-width="4"
-                                                      d="M 34.99327878427806 2.0000006844657747 A 33 33 0 1 1 34.95416366204364 2.000031832892283 Z"
-                                                      class="circles-maxValueStroke"></path>
-                                                <path fill="transparent" stroke="#72c02c" stroke-width="4"
-                                                      d="M 34.99327878427806 2.0000006844657747 A 33 33 0 0 1 43.18978990452831 3.0324016960972457 "
-                                                      class="circles-valueStroke"></path>
-                                            </svg>
-                                            <div class="circles-text"
-                                                 style="position: absolute; top: 0px; left: 0px; text-align: center; width: 100%; font-size: 12px; height: 70px; line-height: 70px; font-weight: 500;">
-                                                4 تا موجود
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Chart Pie -->
-                                </div>
-                                <a href="#"
-                                   class="btn btn-sm u-btn-outline-lightred g-color-primary g-color-white--hover u-btn-hover-v2-1 g-brd-none rounded-0">
-                                    موجود شد خبرم کن
-                                </a>
-                            </div>
-                            <!-- End Date -->
-
                             <!-- Article Image -->
-                            <a class="d-md-table-cell align-middle g-width-130" href="#">
+                            <a class="d-md-table-cell align-middle g-width-110" href="#">
                                 <img class="d-block info-v5-2__image g-ml-minus-1"
                                      src="{{ asset('img/products/2-2020.11.04-19.58.38/pic1.jpg')}}"
                                      alt="Image Description">
@@ -1825,7 +1847,7 @@
                             <!-- End Article Image -->
 
                             <!-- Article Content -->
-                            <div class="d-md-table-cell align-middle g-py-15 g-pr-20 g-px-20--lg table-cell-responsive">
+                            <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg">
                                 <div class="d-flex justify-content-between">
                                     <div>
                                         <h3 class="h6 g-font-weight-700">
@@ -1834,84 +1856,86 @@
                                         <em class="g-color-gray-dark-v5 g-font-style-normal">مدل بیکینی</em>
                                     </div>
                                     <div class="smallDevice g-ml-minus-5 g-mt-minus-10">
+                                         <span style="cursor: pointer"
+                                               class="u-icon-v1 g-color-gray-dark-v5 g-color-primary--hover rounded-circle"
+                                               data-toggle="tooltip"
+                                               data-placement="top"
+                                               data-original-title="جزئیات محصول">
+                                            <i class="icon-eye g-line-height-0_8"></i></span>
                                         <span style="cursor: pointer"
                                               class="u-icon-v1 g-color-gray-dark-v5 g-color-primary--hover rounded-circle"
                                               data-toggle="tooltip"
                                               data-placement="top"
-                                              data-original-title="{{ 'افزودن به سبد خرید' }}">
+                                              data-original-title="افزودن به سبد خرید">
                                             <i class="icon-basket g-line-height-0_8"></i></span>
                                         <span style="cursor: pointer"
                                               class="u-icon-v1 g-color-gray-dark-v5 g-color-primary--hover rounded-circle"
                                               data-toggle="tooltip"
                                               data-placement="top"
-                                              data-original-title="{{ 'خرید مستقیم' }}">
+                                              data-original-title="خرید مستقیم">
                                             <i class="icon-finance-164 u-line-icon-pro g-line-height-0"></i></span>
                                         <span style="cursor: pointer"
                                               class="u-icon-v1 u-icon-effect-v1-1--hover rounded-circle g-color-red g-color-white--hover g-mt-minus-2"
                                               data-toggle="tooltip"
                                               data-placement="top"
-                                              data-original-title="{{ 'فراموش کن' }}"><i class="fa fa-heart"></i></span>
+                                              data-original-title="فراموش کن"><i class="fa fa-heart"></i></span>
                                     </div>
                                 </div>
                             </div>
                             <!-- End Article Content -->
 
+                            <!-- Size Color -->
+                            <div
+                                class="d-md-table-cell align-middle g-pt-5 g-px-20 text-right">
+                                        <span
+                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">M</span>
+                                <span
+                                    class="g-color-gray-dark-v5 g-font-size-11">سفید</span>
+                            </div>
+
+                            <!-- Qty -->
+                            <div
+                                class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
+                                        <span
+                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">4</span>
+                                <span
+                                    class="g-color-gray-dark-v5 g-font-size-11">عدد موجود</span>
+                            </div>
+
                             <!-- Price -->
                             <div class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
-                                <div class="d-flex justify-content-between">
-                                    <div
-                                        class="smallDevice">
-                                        <div class="align-self-center g-width-70 mx-auto">
-                                            <!-- Chart Pie -->
-                                            <div class="js-pie g-color-black" data-circles-value="4"
-                                                 data-circles-max-value="100" data-circles-bg-color="#dedede"
-                                                 data-circles-fg-color="#72c02c" data-circles-radius="35"
-                                                 data-circles-stroke-width="4" data-circles-font-size="12"
-                                                 data-circles-font-weight="500" data-circles-additional-text=" تا موجود"
-                                                 data-circles-duration="2000" data-circles-scroll-animate="true"
-                                                 id="hs-pie-1">
-                                                <div class="circles-wrp"
-                                                     style="position: relative; display: inline-block;">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70">
-                                                        <path fill="transparent" stroke="#dedede" stroke-width="4"
-                                                              d="M 34.99327878427806 2.0000006844657747 A 33 33 0 1 1 34.95416366204364 2.000031832892283 Z"
-                                                              class="circles-maxValueStroke"></path>
-                                                        <path fill="transparent" stroke="#72c02c" stroke-width="4"
-                                                              d="M 34.99327878427806 2.0000006844657747 A 33 33 0 0 1 43.18978990452831 3.0324016960972457 "
-                                                              class="circles-valueStroke"></path>
-                                                    </svg>
-                                                    <div class="circles-text"
-                                                         style="position: absolute; top: 0px; left: 0px; text-align: center; width: 100%; font-size: 12px; height: 70px; line-height: 70px; font-weight: 500;">
-                                                        4 تا موجود
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End Chart Pie -->
-                                        </div>
-                                        <a href="#"
-                                           class="btn btn-sm u-btn-outline-lightred g-color-primary g-color-white--hover u-btn-hover-v2-1 g-brd-none rounded-0">
-                                            موجود شد خبرم کن
-                                        </a>
-                                    </div>
-                                    <span class="align-content-end">
+                                <div>
+                                    <span class="g-color-red amountLine g-ml-10">
                                         <span
-                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-25 text-right">120</span>
+                                            class="g-font-weight-700 g-line-height-0_7 g-font-size-15 text-right">180</span>
                                         <span
-                                            class="g-color-gray-dark-v5 g-font-size-11">هزار تومان</span>
+                                            class="g-font-size-10">تومان</span>
+                                    </span>
+                                    <span class="g-color-primary">
+                                        <span
+                                            class="g-font-weight-700 g-line-height-0_7 g-font-size-22 text-right">120</span>
+                                        <span
+                                            class="g-font-size-11">تومان</span>
                                     </span>
                                 </div>
                             </div>
                             <!-- End Price -->
 
                             <div class="d-md-table-cell align-middle text-md-right g-pa-20 g-pl-0 bigDevice">
+                                 <span style="cursor: pointer"
+                                       class="u-icon-v1 g-color-primary--hover rounded-circle g-ml-5"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       data-original-title="جزئیات محصول"><i
+                                         class="icon-eye g-line-height-1_1"></i></span>
                                 <span style="cursor: pointer"
-                                      class="u-icon-v1 u-icon-effect-v1-2--hover rounded-circle g-ml-5"
+                                      class="u-icon-v1 g-color-primary--hover rounded-circle g-ml-5"
                                       data-toggle="tooltip"
                                       data-placement="top"
                                       data-original-title="{{ 'افزودن به سبد خرید' }}"><i
                                         class="icon-basket g-line-height-1_1"></i></span>
                                 <span style="cursor: pointer"
-                                      class="u-icon-v1 u-icon-effect-v1-2--hover rounded-circle g-ml-10"
+                                      class="u-icon-v1 g-color-primary--hover rounded-circle g-ml-10"
                                       data-toggle="tooltip"
                                       data-placement="top"
                                       data-original-title="{{ 'خرید مستقیم' }}"><i
@@ -1924,11 +1948,11 @@
                                         class="fa fa-heart g-line-height-1_3"></i></span>
                             </div>
                         </article>
+                        <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
                     </div>
                 </div>
             </div>
             <!-- End Content -->
         </div>
     </div>
-
 @endsection

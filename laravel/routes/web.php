@@ -170,6 +170,8 @@ Route::post('/User-Address-Update', 'Customer\Basic@addressUpdate')->name('addre
 
 Route::get('/User-Address-Delete/{id}', 'Customer\Basic@addressDelete');
 
+Route::get('/User-Product-unsuccessfulDelivery/{id}', 'Customer\Basic@unsuccessfulDelivery');
+
 
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');

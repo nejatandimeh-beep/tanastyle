@@ -433,6 +433,20 @@
         });
 
         // ---------------------------------------------------My Function-----------------------------------------------
+        function unsuccessfulDelivery(orderID) {
+            $.confirm({
+                title: 'بروز رسانی مشخصات فردی',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        window.location = '/User-Product-unsuccessfulDelivery/' + orderID;
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+
         function modalTrigger() {
             switch ($('#pageLocation').text().replace(/\d+/g, '')) {
                 case 'addAddress':

@@ -144,7 +144,7 @@
                 <div class="g-mb-30--lg g-mb-0 text-lg-right text-left">
                     <fieldset class="d-inline-block g-ml-60--lg col-12 col-lg-5 p-0">
                         <div class="d-inline-block amountLine">
-                        <span id="productUnitPrice"
+                            <span id="productUnitPrice"
                               class="d-inline-block align-middle g-color-red g-font-size-20">{{ number_format($data->UnitPrice) }}</span>
                             <span class="g-font-size-12 g-color-red g-mr-minus-5">تومان</span>
                         </div>
@@ -208,8 +208,8 @@
                                            class="u-icon__elem-regular g-font-size-14 g-font-style-normal g-color-gray-dark-v5">موجودی محصول</i>
                                         <i style="width: 8rem; height: 2.5rem; top: 40%;"
                                            class="u-icon__elem-hover g-font-size-14 g-color-primary">
-                                            <i id="colorQtyContainer" class="g-font-style-normal"><span id="colorQty"
-                                                                                                        class="g-ml-5"></span>عدد</i>
+                                            <i id="colorQtyContainer" class="g-font-style-normal">
+                                                <span id="colorQty" class="g-ml-5"></span>عدد</i>
                                              <i id="waitingIconQty" style="display: none"
                                                 class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
                                         </i>

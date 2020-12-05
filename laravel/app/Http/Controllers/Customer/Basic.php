@@ -91,20 +91,35 @@ class Basic extends Controller
 
             //delivery
             // محاسبه نوار زمانی تحویل محصول به درصد و منهای اندازه آیکون ماشین
-            if ($rec->DeliveryStatus !== '3')
-                    $deliveryTime[$key] = round( $this->dateLenToNow($rec->Date, $rec->Time) / 7200 * 100);
+            $deliveryTime[$key] = round($this->dateLenToNow($rec->Date, $rec->Time) / 7200 * 100);
+
             switch (true) {
-                case ($deliveryTime[$key]<=20):
+                case ($deliveryTime[$key] <= 20):
                     $delivery[$key]['text'] = 'در صف';
                     $delivery[$key]['location'] = 'بسته بندی';
                     break;
-                case ($deliveryTime[$key]>20) && ($deliveryTime[$key]<=40):
+                case ($deliveryTime[$key] > 20) && ($deliveryTime[$key] <= 40):
                     $delivery[$key]['text'] = 'در صف';
                     $delivery[$key]['location'] = 'ارســال';
                     break;
-                case ($deliveryTime[$key]>40):
+                case ($deliveryTime[$key] > 40) && ($deliveryTime[$key] <= 99):
                     $delivery[$key]['text'] = 'تحویل به';
                     $delivery[$key]['location'] = 'پست';
+                    break;
+                case ($deliveryTime[$key] >= 100):
+                    if ($rec->DeliveryStatus === '0') {
+                        $delivery[$key]['text'] = 'تحویل با';
+                        $delivery[$key]['location'] = 'موفقیت';
+                        DB::table('product_order')
+                            ->where('ID', $rec->orderID)
+                            ->update([
+                                'DeliveryStatus' => '5'
+                            ]);
+                    }
+                    if ($rec->DeliveryStatus === '-1') {
+                        $delivery[$key]['text'] = '';
+                        $delivery[$key]['location'] = 'تحویل ناموفق';
+                    }
                     break;
                 default:
                     break;
@@ -382,8 +397,6 @@ class Basic extends Controller
             'AddressID' => $customerInfo->ID,
             'Date' => $date,
             'Time' => $time,
-            'DeliveryStatus' => 0,
-            'DeliveryStatusDetail' => '--',
         ]);
 
         $orderID = DB::table('product_order')
@@ -410,6 +423,26 @@ class Basic extends Controller
         DB::table('product_detail')
             ->where('ID', $id)
             ->decrement('Qty', $qty);
+
+        return redirect()->route('userProfile', 'deliveryStatus');
+    }
+
+    public function unsuccessfulDelivery($orderID)
+    {
+        DB::table('product_order')
+            ->where('ID', $orderID)
+            ->update([
+                'DeliveryStatus' => '-1'
+            ]);
+
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
+        DB::table('product_order_unsuccessful_delivery')
+            ->insert([
+                 'OrderID'=>$orderID,
+                 'Date'=>$date,
+                 'Time'=>$time,
+            ]);
 
         return redirect()->route('userProfile', 'deliveryStatus');
     }
