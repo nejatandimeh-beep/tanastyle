@@ -595,7 +595,7 @@
                         <div id="accordion-13" class="u-accordion" role="tablist"
                              aria-multiselectable="true">
                             @if(!isset($address[0]->ID))
-                                <div class="alert alert-danger g-px-15--lg g-px-5 text-lg-right text-center"
+                                <div class="d-inline-block alert alert-danger g-px-15--lg g-px-5 text-lg-right text-center"
                                      role="alert">
                                     <strong>اخطار!</strong> لیست آدرس های شما خالی است.
                                 </div>
@@ -1481,7 +1481,7 @@
                     </div>
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
                         @if(!isset($order[0]->ID))
-                            <div class="alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
+                            <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
                                  role="alert">
                                 <strong>خالی: </strong> لیست خرید های شما خالی است.
                             </div>
@@ -1898,7 +1898,7 @@
                         @endforeach
 
                         @if($deliveryCounter===0)
-                            <div class="alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
+                            <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
                                  role="alert">
                                 <strong>خالی: </strong> فاکتور خرید جدیدی برای شما صادر نشده و محصولی در انتظار تحویل
                                 ندارید.
@@ -1921,127 +1921,125 @@
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
-                        @if(!isset($like[0]->ID))
-                            <div class="alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
-                                 role="alert">
-                                <strong>خالی: </strong> لیست علاقه مندی های شما خالی است.
-                            </div>
-                        @else
-                            @foreach($like as $key => $row)
-                                <article id="{{ 'likeRow'.$key }}"
-                                         class="d-md-table w-100 g-bg-white g-mb-30 g-mb-15--lg">
-                                    <!-- Article Image -->
-                                    <a class="js-fancybox d-md-table-cell align-middle g-width-110"
-                                       data-fancybox-gallery="{{ 'lightbox-gallery3--'.$key }}"
-                                       href="{{ $row->PicPath.'pic1.jpg' }}"
-                                       title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}"
-                                             alt="Image Description">
-                                    </a>
-                                    <!-- End Article Image -->
+                        <div id="productLikeEmpty"
+                             class="{{ (isset($like[0]->ID)) ? 'd-none':'d-inline-block' }} alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
+                             role="alert">
+                            <strong>خالی: </strong> لیست علاقه مندی های شما خالی است.
+                        </div>
+                        @foreach($like as $key => $row)
+                            <article id="{{ 'likeRow'.$key }}"
+                                     class="d-md-table w-100 g-bg-white g-mb-30 g-mb-15--lg">
+                                <!-- Article Image -->
+                                <a class="js-fancybox d-md-table-cell align-middle g-width-110"
+                                   data-fancybox-gallery="{{ 'lightbox-gallery3--'.$key }}"
+                                   href="{{ $row->PicPath.'pic1.jpg' }}"
+                                   title="کد محصول {{ $row->ProductDetailID }}">
+                                    <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}"
+                                         alt="Image Description">
+                                </a>
+                                <!-- End Article Image -->
 
-                                    <!-- Article Content -->
-                                    <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg">
-                                        <div class="d-flex justify-content-between">
-                                            <div>
-                                                <h3 class="h6 g-font-weight-700">
-                                                    <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
-                                                </h3>
-                                                <em class="g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
-                                            </div>
-                                            <div class="smallDevice g-ml-minus-5 g-mt-minus-10">
-                                                <a style="cursor: pointer"
-                                                   class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                                   data-toggle="tooltip"
-                                                   data-placement="top"
-                                                   href="{{ route('productDetail',[$row->ProductID]) }}"
-                                                   data-original-title="جزئیات محصول"><i
-                                                        class="icon-eye g-line-height-0_7"></i></a>
-                                                <a style="cursor: pointer"
-                                                   class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                                   data-toggle="tooltip"
-                                                   data-placement="top"
-                                                   data-original-title="افزودن به سبد خرید"><i
-                                                        class="icon-basket g-line-height-0_8"></i></a>
-                                                <a style="cursor: pointer"
-                                                   class="u-icon-v1 g-color-red g-color-gray-dark-v5--hover rounded-circle g-ml-5"
-                                                   data-toggle="tooltip"
-                                                   data-placement="top"
-                                                   data-original-title="فراموش کن"><i class="fa fa-heart"></i></a>
-                                            </div>
+                                <!-- Article Content -->
+                                <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h3 class="h6 g-font-weight-700">
+                                                <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
+                                            </h3>
+                                            <em class="g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
+                                        </div>
+                                        <div class="smallDevice g-ml-minus-5 g-mt-minus-10">
+                                            <a style="cursor: pointer"
+                                               class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                                               data-toggle="tooltip"
+                                               data-placement="top"
+                                               href="{{ route('productDetail',[$row->ProductID]) }}"
+                                               data-original-title="جزئیات محصول"><i
+                                                    class="icon-eye g-line-height-0_7"></i></a>
+                                            <a style="cursor: pointer"
+                                               class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                                               data-toggle="tooltip"
+                                               data-placement="top"
+                                               data-original-title="افزودن به سبد خرید"><i
+                                                    class="icon-basket g-line-height-0_8"></i></a>
+                                            <a style="cursor: pointer"
+                                               class="u-icon-v1 g-color-red g-color-gray-dark-v5--hover rounded-circle g-ml-5"
+                                               data-toggle="tooltip"
+                                               data-placement="top"
+                                               data-original-title="فراموش کن"><i class="fa fa-heart"></i></a>
                                         </div>
                                     </div>
-                                    <!-- End Article Content -->
+                                </div>
+                                <!-- End Article Content -->
 
-                                    <!-- Size Color -->
-                                    <div
-                                        class="d-md-table-cell align-middle g-pt-5 g-px-20 text-right">
+                                <!-- Size Color -->
+                                <div
+                                    class="d-md-table-cell align-middle g-pt-5 g-px-20 text-right">
                                         <span
                                             class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
-                                        <span
-                                            class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
-                                    </div>
+                                    <span
+                                        class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
+                                </div>
 
-                                    <!-- Qty -->
-                                    <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
+                                <!-- Qty -->
+                                <div
+                                    class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
                                         <span
                                             class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Qty }}</span>
-                                        <span
-                                            class="g-color-gray-dark-v5 g-font-size-11">عدد موجود</span>
-                                    </div>
+                                    <span
+                                        class="g-color-gray-dark-v5 g-font-size-11">عدد موجود</span>
+                                </div>
 
-                                    <!-- Price -->
-                                    <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
-                                        <div>
+                                <!-- Price -->
+                                <div
+                                    class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
+                                    <div>
                                     <span class="g-color-red amountLine g-ml-10">
                                         <span
                                             class="g-font-weight-700 g-line-height-0_7 g-font-size-15 text-right">{{ $row->UnitPrice }}</span>
                                         <span
                                             class="g-font-size-10">تومان</span>
                                     </span>
-                                            <span class="g-color-primary">
+                                        <span class="g-color-primary">
                                         <span
                                             class="g-font-weight-700 g-line-height-0_7 g-font-size-22 text-right">{{ $row->FinalPrice }}</span>
                                         <span
                                             class="g-font-size-11">تومان</span>
                                     </span>
-                                        </div>
                                     </div>
-                                    <!-- End Price -->
+                                </div>
+                                <!-- End Price -->
 
-                                    <div class="d-md-table-cell align-middle text-md-right g-pa-20 g-pl-0 bigDevice">
-                                        <a style="cursor: pointer"
-                                           class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                           data-toggle="tooltip"
-                                           data-placement="top"
-                                           href="{{ route('productDetail',[$row->ProductID]) }}"
-                                           data-original-title="جزئیات محصول"><i
-                                                class="icon-eye g-line-height-0_7"></i></a>
-                                        <a style="cursor: pointer"
-                                           class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                           data-toggle="tooltip"
-                                           data-placement="top"
-                                           data-original-title="افزودن به سبد خرید"><i
-                                                class="icon-basket g-line-height-0_8"></i></a>
-                                        <i id="{{'waitingLikeDelete'.$key}}"
-                                           style="display: none"
-                                           class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-                                        <a style="cursor: pointer"
-                                           onclick="deleteProductLike({{ $row->ProductDetailID }},$(this).attr('id'))"
-                                           id="{{ 'deleteLikeBtn'.$key }}"
-                                           class="u-icon-v1 g-color-red g-color-gray-dark-v5--hover rounded-circle g-ml-5"
-                                           data-toggle="tooltip"
-                                           data-placement="top"
-                                           data-original-title="فراموش کن">
-                                            <i class="fa fa-heart"></i>
-                                        </a>
-                                    </div>
-                                    <hr class="{{ ($key === count($like)-1) ? 'd-none': ''}} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
-                                </article>
-                            @endforeach
-                        @endif
+                                <div class="d-md-table-cell align-middle text-md-right g-pa-20 g-pl-0 bigDevice">
+                                    <a style="cursor: pointer"
+                                       class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       href="{{ route('productDetail',[$row->ProductID]) }}"
+                                       data-original-title="جزئیات محصول"><i
+                                            class="icon-eye g-line-height-0_7"></i></a>
+                                    <a style="cursor: pointer"
+                                       class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       data-original-title="افزودن به سبد خرید"><i
+                                            class="icon-basket g-line-height-0_8"></i></a>
+                                    <i id="{{'waitingLikeDelete'.$key}}"
+                                       style="display: none"
+                                       class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                    <a style="cursor: pointer"
+                                       onclick="deleteProductLike({{ $row->ProductDetailID }},$(this).attr('id'))"
+                                       id="{{ 'deleteLikeBtn'.$key }}"
+                                       class="u-icon-v1 g-color-red g-color-gray-dark-v5--hover rounded-circle g-ml-5"
+                                       data-toggle="tooltip"
+                                       data-placement="top"
+                                       data-original-title="فراموش کن">
+                                        <i class="fa fa-heart"></i>
+                                    </a>
+                                </div>
+                                <hr class="{{ ($key === count($like)-1) ? 'd-none': ''}} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
+                            </article>
+                        @endforeach
                     </div>
                 </div>
             </div>

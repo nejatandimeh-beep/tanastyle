@@ -448,6 +448,8 @@
                             url: "/Female-Product-LikeProduct/" + pdID + '/' + 'false',
                             success: function () {
                                 $('#likeRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
+                                if(idBtn.replace(/[^0-9]/gi, '') === '0')
+                                    $('#productLikeEmpty').removeClass('d-none').addClass('d-inline-block');
                             },
                         });
                     },
