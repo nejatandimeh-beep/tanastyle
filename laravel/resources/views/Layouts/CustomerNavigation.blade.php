@@ -1,4 +1,5 @@
 @section('CustomerNavigation')
+    <div id="load"></div>
     <body>
     <header id="js-header2" class="u-header u-header--static">
         <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-10">
@@ -2094,5 +2095,4 @@
             </nav>
         </div>
     </header>
-    <div id="load"></div>
 @endsection

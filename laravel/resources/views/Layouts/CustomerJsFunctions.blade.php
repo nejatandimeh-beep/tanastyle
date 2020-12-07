@@ -1,6 +1,8 @@
 @section('CustomerJsFunction')
     <script>
         $(document).ready(function () {
+            addToBasket();
+
             if ($('#checkLike').text() === 'like')
                 $('#customerLike').removeClass('d-none');
             else {
@@ -72,7 +74,7 @@
         document.onreadystatechange = function () {
             let state = document.readyState;
             if (state === 'complete') {
-                document.getElementById('load').style.display = "none";
+                document.getElementById('load').remove();
             }
         }
 
@@ -433,6 +435,27 @@
         });
 
         // ---------------------------------------------------My Function-----------------------------------------------
+        function deleteProductLike(pdID, idBtn) {
+            $.confirm({
+                title: 'حذف علاقه مندی',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#' + idBtn).hide();
+                        $('#waitingLikeDelete' + idBtn.replace(/[^0-9]/gi, '')).show();
+                        $.ajax({
+                            type: 'GET',
+                            url: "/Female-Product-LikeProduct/" + pdID + '/' + 'false',
+                            success: function () {
+                                $('#likeRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
+                            },
+                        });
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
         function unsuccessfulDelivery(orderID) {
             $.confirm({
                 title: 'بروز رسانی مشخصات فردی',
@@ -501,7 +524,7 @@
                 case 'likeProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-LikeProduct/" + parseInt($('#productID').text()) + '/' + val,
+                        url: "/Female-Product-LikeProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
                         success: function (data) {
                             $('#voteID').text(data);
                         }
@@ -511,7 +534,7 @@
                 case 'ratingProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-RatingProduct/" + parseInt($('#productID').text()) + '/' + val,
+                        url: "/Female-Product-RatingProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
                         success: function (data) {
                             $('#voteID').text(data);
                         }
@@ -809,7 +832,7 @@
                         $.ajax({
                             type: 'GET',
                             url: "/User-Address-Delete/" + id,
-                            success: function (data) {
+                            success: function () {
                                 $('#addressRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
                             },
                             error: function () {
@@ -827,6 +850,12 @@
 
         function activeAddress(id) {
             window.location = "/User-Address-Active/" + id;
+        }
+
+        function addToBasket() {
+            let num = parseInt($('#basketNum').text());
+            num++;
+            $('#basketNum').text(num);
         }
 
         // -------------------------------------------------State And City----------------------------------------------

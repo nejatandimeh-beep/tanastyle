@@ -574,5 +574,9 @@ input[type=number] {
     height:100%;
     position:fixed;
     z-index:9999;
-    background:url("/../img/Other/pageLoader.gif") no-repeat center center rgb(255, 255, 255)
+    background:url("/../img/Other/loader.gif") no-repeat center center rgb(255, 255, 255)
+}
+
+body a{
+    user-select: none !important;
 }

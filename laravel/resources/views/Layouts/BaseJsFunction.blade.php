@@ -2,12 +2,6 @@
 
     {{--    Unify Functions--}}
     <script>
-        function addToBasket(){
-            let num = parseInt($('#basketNum').text());
-            num++;
-            $('#basketNum').text(num);
-        }
-
         // Hide Tooltip After 2s
         // setInterval($(function () {
         //     $(document).on('shown.bs.tooltip', function (e) {

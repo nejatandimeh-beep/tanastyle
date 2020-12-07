@@ -33,6 +33,7 @@ class Basic extends Controller
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
+            ->orderBy('Date', 'DESC')
             ->get();
 
         $delivery[] = array([
@@ -83,7 +84,7 @@ class Basic extends Controller
                     $persianDate[$key][3] = 'اسفند';
                     break;
             }
-            $orderMinuets[$key] = $this->dateLenToNow($rec->Date, $rec->Time);
+            $orderMinuets[$key] = $this->dateLenToNow($rec->Date, '00:00:00');
             $orderHowDay[$key] = null;
             if ($orderMinuets[$key] < 11520) {
                 $orderHowDay[$key] = $this->howDays($orderMinuets[$key]);
@@ -126,7 +127,15 @@ class Basic extends Controller
             }
         }
 
-        return view('Customer.Profile', compact('id', 'customer', 'address', 'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryTime'));
+        $like = DB::table('customer_vote as cv')
+            ->select('*','p.ID as ProductID')
+            ->leftJoin('product_detail as pd', 'pd.ID','cv.ProductDetailID')
+            ->leftJoin('product as p', 'p.ID','pd.ProductID')
+            ->where('cv.CustomerID',Auth::user()->id)
+            ->where('cv.Like','<>',0)
+            ->get();
+
+        return view('Customer.Profile', compact('id', 'customer', 'address', 'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryTime', 'like'));
     }
 
     public function profileUpdate(Request $request)
@@ -308,13 +317,14 @@ class Basic extends Controller
         $rating_tbl = DB::table('customer_vote as cv')
             ->select('cv.*', 'c.name', 'c.Family')
             ->leftJoin('customers as c', 'cv.CustomerID', '=', 'c.ID')
-            ->where('ProductID', $id)
+            ->leftJoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
+            ->where('pd.ProductID', $id)
             ->get();
 
         // rating & comment
         $rating = 0;
-        foreach ($rating_tbl as $key => $info) {
-            $rating += $info->Rating;
+        foreach ($rating_tbl as $key => $row) {
+            $rating += $row->Rating;
         }
         if ($rating !== 0)
             $rating = round($rating / count($rating_tbl));
@@ -338,8 +348,9 @@ class Basic extends Controller
             $voteID = DB::table('customer_vote as cv')
                 ->select('cv.ID', 'cv.CustomerID', 'c.id')
                 ->leftJoin('customers as c', 'cv.CustomerID', '=', 'c.id')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
                 ->where('cv.CustomerID', Auth::user()->id)
-                ->where('cv.ProductID', $id)
+                ->where('pd.ProductID', $id)
                 ->first();
 
             $sendAddress = $this->checkAddress();
@@ -361,10 +372,11 @@ class Basic extends Controller
 
         if (isset(Auth::user()->id)) {
             // گرفتن اطلاعات مربوط به کاربر جاری در جدول کاستومر کامنت
-            $rating_tbl2 = DB::table('customer_vote')
+            $rating_tbl2 = DB::table('customer_vote as cv')
                 ->select('*')
-                ->where('ProductID', $id)
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
                 ->where('CustomerID', Auth::user()->id)
+                ->where('pd.ProductID', $id)
                 ->first();
 
             // بررسی اینکه کاربر جاری نمره داده است یا نه؟
@@ -451,14 +463,14 @@ class Basic extends Controller
     {
         $data = DB::table('customer_vote')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ProductID', $id)
+            ->where('ProductDetailID', $id)
             ->first();
 
         $val = ($val === 'true') ? 1 : 0;
         if (isset($data)) {
             DB::table('customer_vote')
                 ->where('CustomerID', Auth::user()->id)
-                ->where('ProductID', $id)
+                ->where('ProductDetailID', $id)
                 ->update([
                     'Like' => $val
                 ]);
@@ -466,7 +478,7 @@ class Basic extends Controller
             DB::table('customer_vote')->insert([
                 [
                     'CustomerID' => Auth::user()->id,
-                    'ProductID' => $id,
+                    'ProductDetailID' => $id,
                     'Like' => $val,
                     'Rating' => 0,
                 ],
@@ -475,7 +487,7 @@ class Basic extends Controller
         $voteID = DB::table('customer_vote')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ProductID', $id)
+            ->where('ProductDetailID', $id)
             ->first();
         return $voteID->ID;
     }
@@ -484,13 +496,13 @@ class Basic extends Controller
     {
         $data = DB::table('customer_vote')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ProductID', $id)
+            ->where('ProductDetailID', $id)
             ->first();
 
         if (isset($data)) {
             DB::table('customer_vote')
                 ->where('CustomerID', Auth::user()->id)
-                ->where('ProductID', $id)
+                ->where('ProductDetailID', $id)
                 ->update([
                     'Rating' => $val
                 ]);
@@ -498,7 +510,7 @@ class Basic extends Controller
             DB::table('customer_vote')->insert([
                 [
                     'CustomerID' => Auth::user()->id,
-                    'ProductID' => $id,
+                    'ProductDetailID' => $id,
                     'Like' => 0,
                     'Rating' => $val,
                 ],
@@ -507,7 +519,7 @@ class Basic extends Controller
         $voteID = DB::table('customer_vote')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ProductID', $id)
+            ->where('ProductDetailID', $id)
             ->first();
         return $voteID->ID;
     }
@@ -779,7 +791,7 @@ class Basic extends Controller
                 return 'شش روز پیش';
                 break;
             case  (($day > 10080) && ($day < 11520)):
-                return 'یک هفته قبل';
+                return 'یک هفته پیش';
                 break;
             default :
                 break;
