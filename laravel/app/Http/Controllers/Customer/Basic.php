@@ -33,7 +33,7 @@ class Basic extends Controller
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('Date', 'DESC')
+            ->orderBy('po.Date', 'DESC')
             ->get();
 
         $delivery[] = array([
@@ -108,7 +108,10 @@ class Basic extends Controller
                     $delivery[$key]['location'] = 'پست';
                     break;
                 case ($deliveryTime[$key] >= 100):
-                    if ($rec->DeliveryStatus === '0') {
+                    if ($rec->DeliveryStatus === '-1') {
+                        $delivery[$key]['text'] = '';
+                        $delivery[$key]['location'] = 'تحویل ناموفق';
+                    } else {
                         $delivery[$key]['text'] = 'تحویل با';
                         $delivery[$key]['location'] = 'موفقیت';
                         DB::table('product_order')
@@ -117,10 +120,6 @@ class Basic extends Controller
                                 'DeliveryStatus' => '5'
                             ]);
                     }
-                    if ($rec->DeliveryStatus === '-1') {
-                        $delivery[$key]['text'] = '';
-                        $delivery[$key]['location'] = 'تحویل ناموفق';
-                    }
                     break;
                 default:
                     break;
@@ -128,14 +127,113 @@ class Basic extends Controller
         }
 
         $like = DB::table('customer_vote as cv')
-            ->select('*','p.ID as ProductID')
-            ->leftJoin('product_detail as pd', 'pd.ID','cv.ProductDetailID')
-            ->leftJoin('product as p', 'p.ID','pd.ProductID')
-            ->where('cv.CustomerID',Auth::user()->id)
-            ->where('cv.Like','<>',0)
+            ->select('*', 'p.ID as ProductID')
+            ->leftJoin('product_detail as pd', 'pd.ID', 'cv.ProductDetailID')
+            ->leftJoin('product as p', 'p.ID', 'pd.ProductID')
+            ->where('cv.CustomerID', Auth::user()->id)
+            ->where('cv.Like', '<>', 0)
             ->get();
 
-        return view('Customer.Profile', compact('id', 'customer', 'address', 'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryTime', 'like'));
+        // return
+        $return = DB::table('product_return as pr')
+            ->select('*','pr.Date as returnDate','pr.Time as returnTime')
+            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->where('po.CustomerID', Auth::user()->id)
+            ->orderBy('pr.Date', 'DESC')
+            ->get();
+
+        $returnStatus = array([
+            'text' => '',
+            'location' => ''
+        ]);
+        $returnTime = array();
+        $returnHowDay = array();
+        $returnPersianDate = array();
+        foreach ($return as $key => $rec) {
+            $d = $rec->returnDate;
+            $returnPersianDate[$key] = $this->convertDateToPersian($d);
+            switch ($returnPersianDate[$key][1]) {
+                case 1:
+                    $returnPersianDate[$key][3] = 'فروردین';
+                    break;
+                case 2:
+                    $returnPersianDate[$key][3] = 'اردیبهشت';
+                    break;
+                case 3:
+                    $returnPersianDate[$key][3] = 'خرداد';
+                    break;
+                case 4:
+                    $returnPersianDate[$key][3] = 'تیر';
+                    break;
+                case 5:
+                    $returnPersianDate[$key][3] = 'مرداد';
+                    break;
+                case 6:
+                    $returnPersianDate[$key][3] = 'شهریور';
+                    break;
+                case 7:
+                    $returnPersianDate[$key][3] = 'مهر';
+                    break;
+                case 8:
+                    $returnPersianDate[$key][3] = 'آبان';
+                    break;
+                case 9:
+                    $returnPersianDate[$key][3] = 'آذر';
+                    break;
+                case 10:
+                    $returnPersianDate[$key][3] = 'دی';
+                    break;
+                case 11:
+                    $returnPersianDate[$key][3] = 'بهمن';
+                    break;
+                case 12:
+                    $returnPersianDate[$key][3] = 'اسفند';
+                    break;
+            }
+            $returnMinuets[$key] = $this->dateLenToNow($rec->returnDate, '00:00:00');
+            $returnHowDay[$key] = null;
+            if ($returnMinuets[$key] < 11520) {
+                $returnHowDay[$key] = $this->howDays($returnMinuets[$key]);
+            }
+
+            // محاسبه نوار زمانی تحویل محصول به درصد و منهای اندازه آیکون ماشین
+            $returnTime[$key] = round($this->dateLenToNow($rec->returnDate, $rec->Time) / 7200 * 100);
+
+            switch (true) {
+                case ($returnTime[$key] <= 20):
+                    $returnStatus[$key]['text'] = 'در دست';
+                    $returnStatus[$key]['location'] = 'پست';
+                    break;
+                case ($returnTime[$key] > 20) && ($deliveryTime[$key] <= 40):
+                    $returnStatus[$key]['text'] = 'در صف';
+                    $returnStatus[$key]['location'] = 'بازگشت';
+                    break;
+                case ($returnTime[$key] > 40) && ($deliveryTime[$key] <= 99):
+                    $returnStatus[$key]['text'] = 'بررسی';
+                    $returnStatus[$key]['location'] = 'ایرادات';
+                    break;
+                case ($returnTime[$key] >= 100):
+                    if ($rec->DeliveryStatus === '-1') {
+                        $returnStatus[$key]['text'] = '';
+                        $returnStatus[$key]['location'] = 'بازگشت ناموفق';
+                    } else {
+                        $returnStatus[$key]['text'] = 'بازگشت با';
+                        $returnStatus[$key]['location'] = 'موفقیت';
+                        DB::table('product_status')
+                            ->where('ID', $rec->orderID)
+                            ->update([
+                                'DeliveryStatus' => '0'
+                            ]);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return view('Customer.Profile', compact('id', 'customer', 'address', 'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryTime', 'like', 'return','returnHowDay', 'returnPersianDate','returnTime','returnStatus'));
     }
 
     public function profileUpdate(Request $request)
@@ -451,12 +549,16 @@ class Basic extends Controller
         $time = date('H:i:s');
         DB::table('product_order_unsuccessful_delivery')
             ->insert([
-                 'OrderID'=>$orderID,
-                 'Date'=>$date,
-                 'Time'=>$time,
+                'OrderID' => $orderID,
+                'Date' => $date,
+                'Time' => $time,
             ]);
 
         return redirect()->route('userProfile', 'deliveryStatus');
+    }
+
+    public function returnProduct(Request $request) {
+        dd($request);
     }
 
     public function likeProduct($id, $val)

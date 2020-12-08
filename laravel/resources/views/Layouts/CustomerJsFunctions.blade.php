@@ -458,6 +458,7 @@
                 }
             });
         }
+
         function unsuccessfulDelivery(orderID) {
             $.confirm({
                 title: 'بروز رسانی مشخصات فردی',
@@ -650,6 +651,7 @@
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
                     $('#user-basket').css('display', 'none');
+                    $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-data').removeClass('g-color-main').addClass('g-color-primary');
@@ -662,6 +664,7 @@
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
                     $('#user-basket').css('display', 'none');
+                    $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-address').removeClass('g-color-main').addClass('g-color-primary');
@@ -674,6 +677,7 @@
                     $('#user-bought').css('display', 'none');
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
+                    $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-basket').removeClass('g-color-main').addClass('g-color-primary');
@@ -686,6 +690,7 @@
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
                     $('#user-basket').css('display', 'none');
+                    $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-bought').removeClass('g-color-main').addClass('g-color-primary');
@@ -698,6 +703,7 @@
                     $('#user-data').css('display', 'none');
                     $('#user-like').css('display', 'none');
                     $('#user-basket').css('display', 'none');
+                    $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-delivery').removeClass('g-color-main').addClass('g-color-primary');
@@ -710,10 +716,24 @@
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
                     $('#user-basket').css('display', 'none');
+                    $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-like').removeClass('g-color-main').addClass('g-color-primary');
                     $('html, body').animate({scrollTop: $('#user-like').offset().top}, 800);
+                    break;
+                case 'return':
+                    $('#user-return').css('display', 'block');
+                    $('#user-like').css('display', 'none');
+                    $('#user-delivery').css('display', 'none');
+                    $('#user-bought').css('display', 'none');
+                    $('#user-address').css('display', 'none');
+                    $('#user-data').css('display', 'none');
+                    $('#user-basket').css('display', 'none');
+
+                    $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
+                    $('#filter-user-return').removeClass('g-color-main').addClass('g-color-primary');
+                    $('html, body').animate({scrollTop: $('#user-return').offset().top}, 800);
                     break;
                 default:
                     break;

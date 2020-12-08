@@ -172,6 +172,8 @@ Route::get('/User-Address-Delete/{id}', 'Customer\Basic@addressDelete');
 
 Route::get('/User-Product-unsuccessfulDelivery/{id}', 'Customer\Basic@unsuccessfulDelivery');
 
+Route::get('/User-Product-Return', 'Customer\Basic@returnProduct')->name('returnProduct');
+
 
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');

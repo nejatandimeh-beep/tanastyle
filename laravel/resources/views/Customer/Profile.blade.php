@@ -132,7 +132,20 @@
                                     </h5>
                                 </div>
                             </div>
-                            <!-- پسندیده ها -->
+                            <!-- بازگشت محصول -->
+                            <div class="card g-brd-0 g-mb-5">
+                                <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
+                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
+                                        <a style="cursor: pointer;"
+                                           id="filter-user-return"
+                                           class="nav-link g-color-main g-color-primary--hover p-0"
+                                           onclick="showPanel('return');">بازگشت محصول
+                                            <i style="transform: scaleX(-1);" class="icon-hotel-restaurant-186 u-line-icon-pro float-left g-font-size-20 g-pb-5 g-pr-5 g-line-height-0_7"></i>
+                                        </a>
+                                    </h5>
+                                </div>
+                            </div>
+                            <!-- علاقه مندی ها -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
                                     <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
@@ -1904,6 +1917,245 @@
                                 ندارید.
                             </div>
                         @endif
+                    </div>
+                </div>
+
+                <!-- بازگشت محصول -->
+                <div style="display: none" id="user-return">
+                    <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
+                        <div style="padding-bottom: 3px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
+                            <i style="transform: scaleX(-1);" class="icon-hotel-restaurant-186 u-line-icon-pro g-pr-5 g-font-size-23 g-font-weight-500"></i>
+
+                            <h6 class="m-0 g-mt-7">
+                                بازگشت محصول
+                            </h6>
+                        </div>
+                        <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
+                        <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
+                    </div>
+                    <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                        {{--5: تحویل به پست 4: تحویل پیک(2) 3: تحویل باجه پستی 2: تحویل پیک(1) 1: تحویل فروشنده 0: عودت وجه--}}
+                        {{--گزینه 5 از طریق مشتری پس از تحویل به پست و گرفتن کد پیگیری ثبت می شود--}}
+                        {{--گزینه 4 از طریق پیک(2) در تبلت باجه پستی ثبت می شود--}}
+                        {{--گزینه 3 پس از مقایسه ایرادات مطرح شده و تایید آن و تحویل پیک(1) ثبت می شود--}}
+                        {{--گزینه 2 و 1 و 0 پس از  تحویل محصول از پیک(1) به فروشنده و کشیدن کارت عین مبلغ فاکتور از دستگاه همراه پیک همزمان ثبت می شود--}}
+                        <span class="d-none">{{ $returnCounter=0 }}</span>
+                        @foreach($return as $key => $row)
+                            @if($row->ReturnStatus !== '0')
+                                <hr class="{{ ($key === 0) ? 'd-none':'' }} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
+                                <article class="d-md-table w-100 g-bg-white g-mb-1">
+                                    <!-- deliveryStatus -->
+                                    <div style="padding: 0 !important;"
+                                         class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
+                                        <div>
+                                            {{ $returnStatus[$key]['text'] }}
+                                            <span
+                                                class="d-block g-font-weight-700 g-line-height-1
+                                                @switch($returnStatus[$key]['location'])
+                                                @case('پست')
+                                                    g-font-size-30
+                                                    g-color-yellow
+@break
+                                                @case('بازگشت')
+                                                    g-font-size-20
+                                                    g-color-blue
+@break
+                                                @case('ایرادات')
+                                                    g-font-size-20
+                                                    g-color-brown
+@break
+                                                @case('بازگشت ناموفق')
+                                                    g-font-size-17
+                                                    g-color-red
+@break
+                                                @endswitch">{{ $returnStatus[$key]['location'] }}</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Article Image -->
+                                    <a class="js-fancybox d-md-table-cell align-middle g-width-110"
+                                       data-fancybox-gallery="{{ 'lightbox-gallery4--'.$key }}"
+{{--                                       href="{{ $row->ReturnPicPath.'pic1.jpg' }}"--}}
+                                       href="{{ asset('img/Other/pic1.jpg') }}"
+                                       title="کد محصول {{ $row->ProductDetailID }}">
+                                        <img class="img-fluid" src="{{ asset('img/Other/pic1.jpg') }}"
+                                             alt="Image Description">
+                                    </a>
+                                    <!-- End Article Image -->
+
+                                    <!-- Article Content -->
+                                    <div class="d-md-table-cell align-middle g-px-20">
+                                        <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
+                                            <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
+                                        </h3>
+                                        <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
+                                    </div>
+                                    <!-- End Article Content -->
+
+                                    <!-- Size Color -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
+                                        <span
+                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
+                                        <span
+                                            class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
+                                    </div>
+
+                                    <!-- Date -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
+                                        <span
+                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $returnPersianDate[$key][2].' '.$returnPersianDate[$key][3].' '.$returnPersianDate[$key][0] }}</span>
+                                    </div>
+
+                                    <!-- Actions -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-pa-20 g-pt-25 g-pl-0 progress-auto-width">
+                                        <div style="direction: ltr" class="g-mt-minus-10 g-mx-minus-5 d-flex">
+                                            @if($row->DeliveryStatus !== '-1')
+                                                <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
+                                                <div style="transform: scaleX(-1)"
+                                                    class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
+                                                    data-toggle="tooltip"
+                                                    data-original-title="{{ 'تاکنون '.$returnTime[$key].'%'.' مسیر طی شده است'  }}"
+                                                    data-placement="top">
+                                                    <div id="progressBar"
+                                                         class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
+                                                         role="progressbar"
+                                                         style="width: {{$returnTime[$key]}}%"
+                                                         aria-valuenow="{{ $returnTime[$key] }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100">
+                                                        <div
+                                                            style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
+                                                            class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white g-bg-primary g-pt-3">
+                                                            <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <i class="fa fa-exclamation-triangle m-0 g-font-size-16 g-color-red"></i>
+                                                <span class="g-ml-10">..درحال پیگیری</span>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <!-- End Actions -->
+                                </article>
+                            @endif
+                            @if($returnTime[$key] <= 100) <span
+                                class="d-none">{{ $returnCounter++ }}</span>
+                            @endif
+                        @endforeach
+
+                        @if($returnCounter===0)
+                            <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
+                                 role="alert">
+                                <strong>خالی: </strong> فاکتور خرید جدیدی برای شما صادر نشده و محصولی در انتظار تحویل
+                                ندارید.
+                            </div>
+                        @endif
+                    </div>
+                    <div style="direction: rtl" class="g-mx-80--lg g-mt-40 g-mb-25 g-px-10">
+                        <div class="text-left">
+                            <a href="#modal25"
+                               id="newAddressLink"
+                               onclick="manuelFocus(); $(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
+                               data-modal-target="#modal25"
+                               data-modal-effect="slidetogether"
+                               class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15">
+                                ورود داده های محصول بازگشتی
+                            </a>
+                            <!-- Demo modal window -->
+                            <div id="modal25"
+                                 class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll modal17"
+                                 style="display: none; overflow-y: auto; height: auto !important;">
+                                <form id="addAddress" action="{{route('returnProduct')}}" method="POST">
+                                    @csrf
+                                    <input id="productIDFromBuy" name="productIDFromBuy" class="d-none" value="empty">
+                                    <button style="outline: none" type="button" class="close float-left g-pt-15 g-pl-20"
+                                            onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-address').trigger('click')}, 400); ">
+                                        <i class="hs-icon hs-icon-close"></i>
+                                    </button>
+                                    <h5 class="g-py-15 g-pr-20 m-0 text-right g-brd-bottom g-brd-gray-light-v4">بازگشت محصول</h5>
+                                    <div style="direction: rtl; overflow-y: auto"
+                                         class="container g-px-30 g-px-60--lg text-right g-py-0">
+                                        <p style="text-align: justify;" class="g-pt-20 g-pb-15 g-mb-0 g-mb-20--lg"><span
+                                                class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>
+                                            لطفا قبل از بازگشت محصول، قوانین مربوط به بازگشت یک محصول را مطالعه بفرمایید. لازم به ذکر است عودت وجه به دلیل طی شدن فرآیند مسیر بازگشتی 10 روز پس از تاریخ بازگشت می باشد.
+                                        </p>
+                                        <div style="direction: rtl" class="alert alert-warning smallDevice"
+                                             role="alert">
+                                            <strong>توجه! کشیدن صفحه به پایین</strong>
+                                            <p class="text-justify">اگر روی جعبه های ورودی عمل کشیدن را انجام دهید صفحه
+                                                به
+                                                پایین کشیده نمی شود. این یک باگ در دستگاه های کوچک است.</p>
+                                        </div>
+                                        {{--کد دریافتی از اداره پست--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label
+                                                class="col-sm-2 col-form-label align-self-center">کد دریافتی از اداره پست</label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <input
+                                                    id="return-post-code"
+                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
+                                                    name="post-code"
+                                                    maxlength="100"
+                                                    type="text"
+                                                    value=""
+                                                    placeholder="لطفا با دقت وارد کنید">
+                                            </div>
+                                        </div>
+                                        {{--علت بازگشت--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label
+                                                class="col-sm-2 col-form-label align-self-center">علت بازگشت
+                                            </label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <input
+                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    type="text"
+                                                    name="return-reason"
+                                                    maxlength="300"
+                                                    value=""
+                                                    placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید">
+                                            </div>
+                                        </div>
+                                        {{--کارت بانکی--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label class="col-sm-2 col-form-label align-self-center">کارت بانکی</label>
+                                            <div class="col-sm-10 force-col-12 d-flex">
+                                                <input
+                                                       id="return-card"
+                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                       name="return-card"
+                                                       maxlength="19"
+                                                       value=""
+                                                       placeholder="xxxx-xxxx-xxxx-xxxx">
+                                            </div>
+                                        </div>
+                                        {{--توضیح ایرادات--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label class="col-sm-2 col-form-label align-self-center">توضیح ایرادات</label>
+                                            <div class="col-sm-10 force-col-12">
+                                                   <textarea
+                                                       class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                       type="text"
+                                                       name="return-reason-detail"
+                                                       maxlength="300"
+                                                       value=""
+                                                       placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a onclick=""
+                                       id="submitReturn"
+                                       class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white w-100 g-mt-15">
+                                        بازگشت محصول
+                                    </a>
+                                </form>
+                            </div>
+                            <!-- End Demo modal window -->
+                        </div>
                     </div>
                 </div>
 
