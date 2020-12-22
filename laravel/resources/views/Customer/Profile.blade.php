@@ -1,9 +1,9 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <p id="pageLocation" class="d-none">{{ $id }}</p>
-    <div class="container-fluid">
+    <div class="breadCrumbs container-fluid">
         <div class="row">
-            <div class="col-lg-12 g-brd-top g-brd-primary">
+            <div class="col-lg-12 g-brd-top g-brd-gray-light-v4">
                 <!-- Figure -->
                 <figure class="u-block-hover g-bg-white g-rounded-4 g-py-15">
                     <div style="direction: rtl" class="d-flex justify-content-start align-items-center">
@@ -91,20 +91,6 @@
                                     </h5>
                                 </div>
                             </div>
-                            <!-- سبد خرید -->
-                            <div class="card g-brd-0 g-mb-5">
-                                <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
-                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a style="cursor: pointer"
-                                           id="filter-user-basket"
-                                           class="nav-link g-color-main g-color-primary--hover p-0"
-                                           onclick="showPanel('basket');">سبد
-                                            خرید
-                                            <i class="icon-basket float-left g-font-size-17 g-pb-5 g-pl-5"></i>
-                                        </a>
-                                    </h5>
-                                </div>
-                            </div>
                             <!-- خریداری شده -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
@@ -132,15 +118,16 @@
                                     </h5>
                                 </div>
                             </div>
-                            <!-- بازگشت محصول -->
+                            <!-- برگشت محصول -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
                                     <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
                                         <a style="cursor: pointer;"
                                            id="filter-user-return"
                                            class="nav-link g-color-main g-color-primary--hover p-0"
-                                           onclick="showPanel('return');">بازگشت محصول
-                                            <i style="transform: scaleX(-1);" class="icon-hotel-restaurant-186 u-line-icon-pro float-left g-font-size-20 g-pb-5 g-pr-5 g-line-height-0_7"></i>
+                                           onclick="showPanel('return');">برگشت محصول
+                                            <i style="transform: scaleX(-1);"
+                                               class="icon-hotel-restaurant-186 u-line-icon-pro float-left g-font-size-20 g-pb-5 g-pr-5 g-line-height-0_7"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -152,8 +139,8 @@
                                         <a style="cursor: pointer"
                                            id="filter-user-like"
                                            class="nav-link g-color-main g-color-primary--hover p-0"
-                                           onclick="showPanel('like');">علاقه مندی ها
-                                            <i class="icon-heart float-left g-font-size-17 g-pb-5 g-pl-5"></i>
+                                           onclick="showPanel('like');">محصولات ذخیره شده
+                                            <i class="fa fa-bookmark-o float-left g-font-size-17 g-pb-5 g-pl-10"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -608,8 +595,9 @@
                         <div id="accordion-13" class="u-accordion" role="tablist"
                              aria-multiselectable="true">
                             @if(!isset($address[0]->ID))
-                                <div class="d-inline-block alert alert-danger g-px-15--lg g-px-5 text-lg-right text-center"
-                                     role="alert">
+                                <div
+                                    class="d-inline-block alert alert-danger g-px-15--lg g-px-5 text-lg-right text-center"
+                                    role="alert">
                                     <strong>اخطار!</strong> لیست آدرس های شما خالی است.
                                 </div>
                             @else
@@ -1134,348 +1122,6 @@
                     </div>
                 </div>
 
-                <!-- سبد خرید -->
-                <div style="display: none" id="user-basket">
-                    <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 13px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
-                            <i class="icon-basket g-pl-5 g-font-size-20 g-font-weight-500"></i>
-
-                            <h6 class="m-0 g-mt-7">
-                                سبد خرید
-                            </h6>
-                        </div>
-                        <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
-                        <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
-                    </div>
-
-                    <div class="container g-pa-15 g-pb-30">
-                        <div class="row">
-                            <div class="col-md-6 col-lg-3 g-mb-20">
-                                <!-- Article -->
-                                <article>
-                                    <div class="masonry-grid-item u-block-hover">
-                                        <a class="js-fancybox d-block g-bg-black-opacity-0_3--after"
-                                           data-fancybox-gallery="{{ 'lightbox-gallery0--'.$key }}"
-                                           href="{{asset('img/products/2-2020.11.04-19.58.38/pic1.jpg')}}"
-                                           title="Lightbox Gallery">
-                                            <img
-                                                class="u-block-hover__main--zoom-v1 w-100"
-                                                src="{{asset('img/products/2-2020.11.04-19.58.38/pic1.jpg')}}"
-                                                alt="Image Description">
-                                        </a>
-                                    </div>
-                                    <!-- Article Image -->
-
-                                    <!-- End Article Image -->
-
-                                    <!-- Article Content -->
-                                    <div class="u-shadow-v24 g-pa-30 g-py-15">
-                                        <div class="d-flex justify-content-between">
-                                            <h3 class="h5 g-color-black g-font-weight-600 m-0">
-                                                <a class="g-color-main g-color-primary--hover g-text-underline--none--hover">شرت
-                                                    زنانه</a><br>
-                                                <em class="d-block g-font-style-normal g-font-size-11">5 روز به
-                                                    <span class="g-color-red">پایان</span> تخفیف</em>
-                                            </h3>
-                                            <div class="d-flex flex-column">
-                                                <a style="cursor: pointer" onclick=""
-                                                   class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                                   data-toggle="tooltip"
-                                                   data-placement="right"
-                                                   data-original-title="جزئیات">
-                                                    <i class="icon-eye g-font-size-16 g-color-gray-dark-v2 g-color-primary--hover"></i>
-                                                </a>
-                                                <a style="cursor: pointer" onclick=""
-                                                   class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pb-0"
-                                                   data-toggle="tooltip"
-                                                   data-placement="right"
-                                                   data-original-title="حذف از سبد">
-                                                    <i class="icon-trash g-font-size-16 g-color-gray-dark-v2 g-color-red--hover"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="d-flex justify-content-between">
-                                            <div class="align-self-center g-width-70 g-ml-10">
-                                                <!-- Chart Pie -->
-                                                <div class="js-pie g-color-black" data-circles-value="4"
-                                                     data-circles-max-value="100" data-circles-bg-color="#dedede"
-                                                     data-circles-fg-color="#72c02c" data-circles-radius="35"
-                                                     data-circles-stroke-width="4" data-circles-font-size="12"
-                                                     data-circles-font-weight="500"
-                                                     data-circles-additional-text=" تا موجود"
-                                                     data-circles-duration="2000"
-                                                     data-circles-scroll-animate="true"></div>
-                                                <!-- End Chart Pie -->
-                                            </div>
-                                            <div class="align-self-center text-center">
-                                                <div
-                                                    class="g-color-black g-font-weight-700 g-font-size-25 g-line-height-0_7">
-                                                    120
-                                                </div>
-                                                <div
-                                                    class="g-font-size-11 g-font-weight-300"><span>هزار</span><span>تومان</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <hr class="g-brd-gray-light-v4 g-my-10">
-                                        <div class="d-flex justify-content-between">
-                                            <div class="text-center">
-                                                {{--                                                <!-- Secondary Button -->--}}
-                                                <div class="d-inline-block btn-group">
-                                                    <button type="button"
-                                                            class="btn btn-secondary h6 align-middle g-brd-none g-color-gray-dark-v5 g-color-black--hover g-bg-transparent g-font-weight-600 g-font-size-12 m-0 p-0"
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                        رنگ <span class="g-mr-5">قرمز</span><span
-                                                            class="icon-arrow-down g-pr-7 g-font-size-9"></span>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right rounded-0 text-right">
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">خانواده قرمز</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">خانواده سبز</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">خانواده زرد</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">آبی</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">خانواده سفید</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">خانواده سیاه</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">خانواده خاکستری</a>
-                                                    </div>
-                                                </div>
-                                                {{--                                                <!-- End Secondary Button -->--}}
-                                            </div>
-                                            <div class="text-center">
-                                                {{--                                                <!-- Secondary Button -->--}}
-                                                <div class="d-inline-block btn-group">
-                                                    <button type="button"
-                                                            class="btn btn-secondary h6 align-middle g-brd-none g-color-gray-dark-v5 g-color-black--hover g-bg-transparent g-font-weight-600 g-font-size-12 m-0 p-0"
-                                                            data-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false">
-                                                        سایز <span
-                                                            class="icon-arrow-down g-pr-7 g-font-size-9"></span><span
-                                                            class="g-mr-5">L</span>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-left rounded-0 text-left">
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">S</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">M</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">L</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">XL</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">XXL</a>
-                                                        <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
-                                                           href="#">XXXL</a>
-                                                    </div>
-                                                </div>
-                                                {{--                                          End Secondary Button -->--}}
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </article>
-                                <!-- End Article -->
-                            </div>
-                        </div>
-                        <a href="#modal18"
-                           onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
-                           data-modal-target="#modal18"
-                           data-modal-effect="slidetogether"
-                           class="pull-left btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 g-ml-0 g-my-50 g-mt-0--lg g-ml-50--lg g-mb-70--lg force-col-12">
-                            <span class="pull-left">
-                              پرداخت امن
-                              <span class="d-block g-font-size-11">نهایی کردن خرید</span>
-                            </span>
-                            <i class="fa fa-shield float-right g-font-size-32 g-ml-25 align-self-center g-line-height-0 g-mt-20"></i>
-                        </a>
-
-                        <!-- Demo modal window -->
-                        <div id="modal18"
-                             class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20 g-pb-20"
-                             style="display: none; overflow-y: auto; height: auto !important">
-                            <button style="outline: none" type="button" class="g-py-15 close float-left"
-                                    onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
-                                <i class="hs-icon hs-icon-close"></i>
-                            </button>
-                            <h5 class="g-py-15 text-right m-0">فاکتور فروش</h5>
-                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
-
-                            <div style="direction: rtl"
-                                 class="d-lg-flex col-12 g-pa-15 g-pt-20 g-brd-around g-brd-gray-light-v4">
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        کد محصول
-                                    </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
-                                        1233203
-                                    </span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        نام محصول
-                                    </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
-                                        شرت زنانه<span> مدل بیکی</span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        رنگ
-                                    </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
-                                        زرد
-                                    </span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        سایز
-                                    </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
-                                        128000
-                                    </span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        تعداد
-                                    </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
-                                        <span>2</span> عدد
-                                    </span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        قیمت واحد
-                                    </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
-                                        128000
-                                    </span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        با تخفیف
-                                    </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg g-color-darkred">
-                                        (%10)
-                                        <span class="g-mr-5 g-color-gray-dark-v3">230000</span>
-                                    </span>
-                                </div>
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        قیمت در تعداد
-                                    </h6>
-                                    <span class="g-pt-40--lg g-px-5 g-pb-5">
-                                        243000
-                                    </span>
-                                </div>
-
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        تاریخ
-                                    </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
-                                    99/06/03
-                                    </span>
-                                </div>
-
-                                <div
-                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                        عکس
-                                    </h6>
-                                    <span class="g-pa-5--lg"
-                                          data-toggle="tooltip"
-                                          data-placement="top"
-                                          data-original-title="تحویل داده شد">
-                                          <img class="g-width-80 g-height-80"
-                                               src="{{ asset('img/products/2-2020.11.04-19.58.38/pic1.jpg') }}"
-                                               alt="Image Description">
-                                    </span>
-                                </div>
-                            </div>
-                            <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
-                                <span
-                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span>243</span>
-                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">هزار تومان</span>
-                                </span>
-
-                                <span style="direction: rtl"
-                                      class="d-block g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center force-col-12">
-                                    <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-5 bigDevice">
-                                        <i class="icon-communication-011 u-line-icon-pro g-color-white g-pt-5"></i>
-                                    </span>
-                                    <span>آدرس ارسال:</span>
-                                    <span
-                                        class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify">آ.غ مهاباد خیابان قاضی تعاونی تانکرداران مهاباد <strong>گیرنده:</strong> خبات اندیمه <strong>شماره تماس:</strong> 09144421633</span>
-                                </span>
-                            </div>
-                            <div style="direction: rtl"
-                                 class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
-                                <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
-                                    <div style="direction: rtl" class="btn-group justified-content">
-                                        {{--                                        <form class="p-0 m-0" id="selectBankName">--}}
-                                        <label class="u-check force-col-12">
-                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                   type="radio" checked="">
-                                            <span
-                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ملت</span>
-                                        </label>
-                                        <label class="u-check force-col-12">
-                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                   type="radio">
-                                            <span
-                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک پارسیان</span>
-                                        </label>
-                                        <label class="u-check force-col-12">
-                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                   type="radio">
-                                            <span
-                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ایرانیان</span>
-                                        </label>
-                                        <label class="u-check force-col-12">
-                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                   type="radio">
-                                            <span
-                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک صادرات</span>
-                                        </label>
-                                        <label class="u-check force-col-12">
-                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                   type="radio">
-                                            <span
-                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">بانک ملی</span>
-                                        </label>
-                                        {{--                                        </form>--}}
-                                    </div>
-                                </div>
-                                <a href="#"
-                                   onclick=""
-                                   class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
-                                    <span class="pull-left">درگاه بانکی
-                                        <span id="payment-door" class="d-block g-font-size-11">ورود به درگاه ملت</span>
-                                    </span>
-                                    <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- End Demo modal window -->
-                    </div>
-                </div>
-
                 <!-- خریداری شده -->
                 <div style="display: none" id="user-bought">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
@@ -1507,7 +1153,7 @@
                                         <div>
                                     <span
                                         class="d-block g-color-black g-font-weight-700 {{(is_null($orderHowDay[$key]) ? 'g-font-size-30':'g-font-size-20')}} g-line-height-1">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
-                                            {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][3].' '.$persianDate[$key][0] }}
+                                            {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][1].' '.$persianDate[$key][0] }}
                                         </div>
                                     </div>
                                     <!-- End Date -->
@@ -1566,7 +1212,7 @@
                                                 <!-- Demo modal window -->
                                                 <div id="{{ 'modal16'.$key }}"
                                                      class="g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20"
-                                                     style="display: none; overflow-y: auto; height: 100% !important;">
+                                                     style="display: none; overflow-y: auto; height: 500px !important;">
                                                     <button style="outline: none" type="button"
                                                             class="g-py-15 close float-left"
                                                             onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
@@ -1647,19 +1293,19 @@
                                                                 تاریخ
                                                             </h6>
                                                             <span class="g-pa-5--lg color-primary-smallDevice">
-                                                              {{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}
-                                                        </span>
+                                                              {{ $persianDate[$key][2].' '.$persianDate[$key][1].' '.$persianDate[$key][0] }}
+                                                            </span>
                                                         </div>
                                                         <div
                                                             class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
                                                             <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                تحویل
+                                                                {{ $delivery[$key]->DeliveryStatus === '-1' ? 'برگشت' : 'تحویل' }}
                                                             </h6>
                                                             <span class="g-pa-5--lg"
                                                                   data-toggle="tooltip"
                                                                   data-placement="top"
                                                                   data-original-title="تحویل داده شد">
-                                                            @if($row->DeliveryStatus === '5')
+                                                                @if(($delivery[$key]->DeliveryStatus === '5') || (($delivery[$key]->DeliveryStatus === '-1') && (isset($return[$key]) ? $return[$key]->ReturnStatus === '0' : 0)))
                                                                     <i class="fa fa-check g-font-size-18 g-color-primary"></i>
                                                                 @else
                                                                     <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
@@ -1674,102 +1320,107 @@
                                                                     class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span></span>
                                                         </div>
                                                         <div class="col-12 col-lg-9 g-pr-0--lg">
-                                                            @if($row->DeliveryStatus !== '-1')
-                                                                @if(($deliveryTime[$key] >= 100) && ($deliveryTime[$key] <= 200))
+                                                            @switch($delivery[$key]->DeliveryStatus)
+                                                                @case('-1')
+                                                                <div style="direction: rtl" class="g-mt-20">
+                                                                    <div
+                                                                        class="d-inline-block alert g-bg-orange-opacity-0_1 g-color-orange rounded-0"
+                                                                        role="alert">
+                                                                        <p class="m-0"><strong>برگشتی: </strong>فاکتور
+                                                                            فوق
+                                                                            برگشت داده شد.</p>
+                                                                    </div>
+                                                                </div>
+                                                                @break
+                                                                @case('0')
+                                                                @case('1')
+                                                                @case('2')
+                                                                @case('3')
+                                                                <div style="direction: rtl" class="g-mt-20">
+                                                                    <div
+                                                                        class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
+                                                                        role="alert">
+                                                                        <p class="m-0"><strong>در انتظار
+                                                                                تحویل: </strong>فاکتور فوق در
+                                                                            صف فرایند تحویل می باشد.</p>
+                                                                    </div>
+                                                                </div>
+                                                                @break
+                                                                @case('4')
+                                                                <div style="direction: rtl" class="g-mt-20">
+                                                                    <div
+                                                                        class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
+                                                                        role="alert">
+                                                                        <p class="m-0"><strong>در انتظار
+                                                                                تحویل: </strong>فاکتور فوق در
+                                                                            دست پست می باشد.</p>
+                                                                    </div>
+                                                                </div>
+                                                                @break
+                                                                @case('5')
+                                                                @if(($deliveryMin[$key] < 10200))
                                                                     <div style="direction: rtl" class="g-mt-20">
+                                                                        <div>
+                                                                            <div
+                                                                                class="d-inline-block alert g-bg-gray-light-v5 rounded-0 g-mb-5"
+                                                                                role="alert">
+                                                                                <p class="m-0"><strong>کد رهگیری
+                                                                                        پست: </strong>{{ $delivery[$key]->TrackingCode }}
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
                                                                         <div
                                                                             class="d-inline-block alert alert-warning alert-dismissible fade show g-mb-5"
                                                                             role="alert">
                                                                             <strong>توجه! </strong>اگر در هر شرایطی
                                                                             محصول به
                                                                             دستتان
-                                                                            نرسیده ابتدا به اداره پست مرکزی محل خود
+                                                                            نرسیده به اداره پست مرکزی محل خود
                                                                             مراجعه
                                                                             کنید.
                                                                         </div>
                                                                         <div
                                                                             class="d-inline-block alert alert-warning alert-dismissible fade show g-mb-5"
                                                                             role="alert">
-                                                                            <strong>توجه! </strong> اگر پس از مراجعه به
-                                                                            اداره پست موفق به تحویل گرفتن محصول نگشتید
-                                                                            از طریق کلید درخواست پیگیری آن را به ما
-                                                                            گزارش
-                                                                            دهید.
-                                                                        </div>
-                                                                        <div
-                                                                            class="d-inline-block alert alert-warning alert-dismissible fade show g-mb-5"
-                                                                            role="alert">
-                                                                            <strong>توجه! </strong>عدم گزارش فوق پس از
-                                                                            گذشت
-                                                                            یک هفته از اتمام فرآیند ارسال،
-                                                                            به منزله دریافت محصول است.
-                                                                        </div>
-                                                                        <div
-                                                                            class="d-inline-block alert alert-warning alert-dismissible fade show g-mb-5"
-                                                                            role="alert">
-                                                                            <strong>توجه! </strong>در صورتی که محصول به
-                                                                            دستتان
-                                                                            رسیده باشد و درخواست پیگیری نمایید امتیازات
-                                                                            کسب
-                                                                            شده
-                                                                            توسط شما در تانا استایل صفر خواهد گشت.
+                                                                            <strong>توجه! </strong>در صورتی که اداره
+                                                                            پست به دلیل عدم تحویل گرفتن شما محموله
+                                                                            را ارجاع دهد هزینه برگشت و ارسال مجدد
+                                                                            به عهده شما خواهد بود.
                                                                         </div>
                                                                         <div
                                                                             class="d-inline-block alert alert-warning alert-dismissible fade show"
                                                                             role="alert">
-                                                                            <strong>توجه! </strong>اگر قصد بازگشت محصول
+                                                                            <strong>توجه! </strong>اگر قصد برگشت
+                                                                            محصول
                                                                             را
                                                                             دارید با توجه به <a href="#"
                                                                                                 class="alert-link">قوانین
-                                                                                بازگشت محصول</a>، از طریق
-                                                                            کلید بازگشت محصول اقدام کنید.
+                                                                                برگشت محصول</a>، از طریق
+                                                                            کلید زیر اقدام فرمائید.
                                                                         </div>
                                                                         <div>
                                                                             <button type="button"
                                                                                     class="btn btn-md u-btn-outline-primary rounded-0 force-col-12 g-mb-10"
-                                                                                    onclick="unsuccessfulDelivery({{$row->orderID}})">
-                                                                                در خواست پیگیری
-                                                                            </button>
-                                                                            <button type="button"
-                                                                                    class="btn btn-md u-btn-outline-primary rounded-0 force-col-12 g-mb-10"
-                                                                                    onclick="">
-                                                                                بازگشت محصول
+                                                                                    onclick="setReturnProductID({{ $row->orderID }},{{ $row->orderDetailID }}); Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#returnModalBtn').trigger('click')}, 600);">
+                                                                                برگشت محصول
                                                                             </button>
                                                                         </div>
                                                                     </div>
-                                                                @elseif(($deliveryTime[$key] > 200))
+                                                                @else
                                                                     <div style="direction: rtl" class="g-mt-20">
-                                                                        <div class="d-inline-block alert alert-success"
-                                                                             role="alert">
-                                                                            <strong>بایگانی فاکتور: </strong>فاکتور فوق
+                                                                        <div
+                                                                            class="d-inline-block alert alert-success"
+                                                                            role="alert">
+                                                                            <strong>بایگانی فاکتور: </strong>فاکتور
+                                                                            فوق
                                                                             به
                                                                             دفتر بایگانی افزوده
                                                                             شد.
                                                                         </div>
                                                                     </div>
-                                                                @else
-                                                                    <div style="direction: rtl" class="g-mt-20">
-                                                                        <div class="d-inline-block alert alert-info"
-                                                                             role="alert">
-                                                                            <strong>در انتظار تحویل: </strong>فاکتور فوق
-                                                                            در
-                                                                            صف فرایند تحویل می باشد.
-                                                                        </div>
-                                                                    </div>
                                                                 @endif
-                                                            @else
-                                                                <div style="direction: rtl" class="g-mt-20">
-                                                                    <div
-                                                                        class="d-inline-block alert alert-danger alert-dismissible fade show"
-                                                                        role="alert">
-                                                                        <strong>عدم تحویل! </strong>برای این فاکتور
-                                                                        گزارش
-                                                                        عدم
-                                                                        تحویل محصول ثبت شده و تیم ما در حال بررسی موضوع
-                                                                        است.
-                                                                    </div>
-                                                                </div>
-                                                            @endif
+                                                                @break
+                                                            @endswitch
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1804,35 +1455,18 @@
                         {{--گزینه 2 از طریق پیک در تبلت باجه پستی ثبت می شود--}}
                         {{--گزینه 3 از طریق باجه پستی در تبلت پیک(2) ثبت می شود--}}
                         <span class="d-none">{{ $deliveryCounter=0 }}</span>
-                        @foreach($order as $key => $row)
-                            @if($row->DeliveryStatus !== '5')
+                        @foreach($delivery as $key => $row)
+                            @if(($row->DeliveryStatus !== '5') && ($row->DeliveryStatus !== '-1'))
                                 <hr class="{{ ($key === 0) ? 'd-none':'' }} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
                                 <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- deliveryStatus -->
                                     <div style="padding: 0 !important;"
-                                         class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
+                                         class="d-md-table-cell align-middle text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
                                         <div>
-                                            {{ $delivery[$key]['text'] }}
+                                            {{ $deliveryHint[$key]['text'] }}
                                             <span
-                                                class="d-block g-font-weight-700 g-line-height-1
-                                                @switch($delivery[$key]['location'])
-                                                @case('بسته بندی')
-                                                    g-font-size-20
-                                                    g-color-brown
-@break
-                                                @case('ارســال')
-                                                    g-font-size-20
-                                                    g-color-blue
-@break
-                                                @case('پست')
-                                                    g-font-size-30
-                                                    g-color-yellow
-@break
-                                                @case('تحویل ناموفق')
-                                                    g-font-size-17
-                                                    g-color-red
-@break
-                                                @endswitch">{{ $delivery[$key]['location'] }}</span>
+                                                class="d-block g-font-weight-700 g-line-height-1 g-font-size-20 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                                                {{ $deliveryHint[$key]['location'] }}</span>
                                         </div>
                                     </div>
 
@@ -1868,38 +1502,33 @@
                                     <div
                                         class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
                                         <span
-                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $persianDate[$key][2].' '.$persianDate[$key][3].' '.$persianDate[$key][0] }}</span>
+                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $deliveryPersianDate[$key][2].' '.$deliveryPersianDate[$key][1].' '.$deliveryPersianDate[$key][0] }}</span>
                                     </div>
 
                                     <!-- Actions -->
                                     <div
                                         class="d-md-table-cell align-middle g-pa-20 g-pt-25 g-pl-0 progress-auto-width">
                                         <div style="direction: ltr" class="g-mt-minus-10 g-mx-minus-5 d-flex">
-                                            @if($row->DeliveryStatus !== '-1')
-                                                <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
-                                                <div
-                                                    class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
-                                                    data-toggle="tooltip"
-                                                    data-original-title="{{ 'تاکنون '.$deliveryTime[$key].'%'.' مسیر طی شده است'  }}"
-                                                    data-placement="top">
-                                                    <div id="progressBar"
-                                                         class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
-                                                         role="progressbar"
-                                                         style="width: {{$deliveryTime[$key]}}%"
-                                                         aria-valuenow="{{ $deliveryTime[$key] }}"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100">
-                                                        <div
-                                                            style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
-                                                            class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white g-bg-primary g-pt-3">
-                                                            <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
-                                                        </div>
+                                            <i class="fa fa-spinner fa-spin m-0 g-font-size-16 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-primary' }}"></i>
+                                            <div
+                                                class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
+                                                data-toggle="tooltip"
+                                                data-original-title="{{ 'تاکنون '.$deliveryTime[$key].'%'.' مسیر طی شده است'  }}"
+                                                data-placement="top">
+                                                <div id="progressBar"
+                                                     class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
+                                                     role="progressbar"
+                                                     style="width: {{$deliveryTime[$key]}}%"
+                                                     aria-valuenow="{{ $deliveryTime[$key] }}"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100">
+                                                    <div
+                                                        style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
+                                                        class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->DeliveryProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
+                                                        <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
                                                     </div>
                                                 </div>
-                                            @else
-                                                <i class="fa fa-exclamation-triangle m-0 g-font-size-16 g-color-red"></i>
-                                                <span class="g-ml-10">..درحال پیگیری</span>
-                                            @endif
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- End Actions -->
@@ -1920,128 +1549,128 @@
                     </div>
                 </div>
 
-                <!-- بازگشت محصول -->
+                <!-- برگشت محصول -->
                 <div style="display: none" id="user-return">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
                         <div style="padding-bottom: 3px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
-                            <i style="transform: scaleX(-1);" class="icon-hotel-restaurant-186 u-line-icon-pro g-pr-5 g-font-size-23 g-font-weight-500"></i>
+                            <i style="transform: scaleX(-1);"
+                               class="icon-hotel-restaurant-186 u-line-icon-pro g-pr-5 g-font-size-23 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-7">
-                                بازگشت محصول
+                                برگشت محصول
                             </h6>
                         </div>
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
-                        {{--5: تحویل به پست 4: تحویل پیک(2) 3: تحویل باجه پستی 2: تحویل پیک(1) 1: تحویل فروشنده 0: عودت وجه--}}
-                        {{--گزینه 5 از طریق مشتری پس از تحویل به پست و گرفتن کد پیگیری ثبت می شود--}}
-                        {{--گزینه 4 از طریق پیک(2) در تبلت باجه پستی ثبت می شود--}}
-                        {{--گزینه 3 پس از مقایسه ایرادات مطرح شده و تایید آن و تحویل پیک(1) ثبت می شود--}}
-                        {{--گزینه 2 و 1 و 0 پس از  تحویل محصول از پیک(1) به فروشنده و کشیدن کارت عین مبلغ فاکتور از دستگاه همراه پیک همزمان ثبت می شود--}}
+                        {{-- 5: تحویل به پست 4: تحویل پیک(2) 3: تحویل باجه پستی 2: تحویل پیک(1) 1: تحویل فروشنده 0: عودت وجه--}}
+                        {{-- گزینه 5 از طریق مشتری پس از تحویل به پست و گرفتن کد پیگیری ثبت می شود--}}
+                        {{-- گزینه 4 از طریق پیک(2) در تبلت باجه پستی ثبت می شود--}}
+                        {{-- گزینه 3 پس از مقایسه ایرادات مطرح شده و تایید آن و تحویل پیک(1) ثبت می شود--}}
+                        {{--  گزینه 2 و 1 و 0 پس از تحویل محصول از پیک(1) به فروشنده و کشیدن کارت عین مبلغ فاکتور از دستگاه--}}
+                        {{-- همراه پیک همزمان ثبت می شود--}}
                         <span class="d-none">{{ $returnCounter=0 }}</span>
                         @foreach($return as $key => $row)
-                            @if($row->ReturnStatus !== '0')
-                                <hr class="{{ ($key === 0) ? 'd-none':'' }} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
-                                <article class="d-md-table w-100 g-bg-white g-mb-1">
-                                    <!-- deliveryStatus -->
-                                    <div style="padding: 0 !important;"
-                                         class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
-                                        <div>
-                                            {{ $returnStatus[$key]['text'] }}
-                                            <span
-                                                class="d-block g-font-weight-700 g-line-height-1
-                                                @switch($returnStatus[$key]['location'])
-                                                @case('پست')
-                                                    g-font-size-30
-                                                    g-color-yellow
-@break
-                                                @case('بازگشت')
-                                                    g-font-size-20
-                                                    g-color-blue
-@break
-                                                @case('ایرادات')
-                                                    g-font-size-20
-                                                    g-color-brown
-@break
-                                                @case('بازگشت ناموفق')
-                                                    g-font-size-17
-                                                    g-color-red
-@break
-                                                @endswitch">{{ $returnStatus[$key]['location'] }}</span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Article Image -->
-                                    <a class="js-fancybox d-md-table-cell align-middle g-width-110"
-                                       data-fancybox-gallery="{{ 'lightbox-gallery4--'.$key }}"
-{{--                                       href="{{ $row->ReturnPicPath.'pic1.jpg' }}"--}}
-                                       href="{{ asset('img/Other/pic1.jpg') }}"
-                                       title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ asset('img/Other/pic1.jpg') }}"
-                                             alt="Image Description">
-                                    </a>
-                                    <!-- End Article Image -->
-
-                                    <!-- Article Content -->
-                                    <div class="d-md-table-cell align-middle g-px-20">
-                                        <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
-                                            <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
-                                        </h3>
-                                        <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
-                                    </div>
-                                    <!-- End Article Content -->
-
-                                    <!-- Size Color -->
-                                    <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
+                            <hr class="{{ ($key === 0) ? 'd-none':'' }} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
+                            <article class="d-md-table w-100 g-bg-white g-mb-1">
+                                <!-- deliveryStatus -->
+                                <div style="padding: 0 !important;"
+                                     class="d-md-table-cell align-middle text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
+                                    <div>
+                                        {{ $returnHint[$key]['text'] }}
                                         <span
-                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
-                                        <span
-                                            class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
+                                            class="d-block g-font-weight-700 g-line-height-1 g-font-size-20 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                                                {{ $returnHint[$key]['location'] }}</span>
                                     </div>
+                                </div>
 
-                                    <!-- Date -->
-                                    <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
-                                        <span
-                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $returnPersianDate[$key][2].' '.$returnPersianDate[$key][3].' '.$returnPersianDate[$key][0] }}</span>
-                                    </div>
+                                <!-- Article Image -->
+                                <a class="js-fancybox d-md-table-cell align-middle g-width-110"
+                                   data-fancybox-gallery="{{ 'lightbox-gallery4--'.$key }}"
+                                   href="{{ $row->ReturnPicPath.'pic1.jpg' }}"
+                                   href="{{ asset('img/Other/pic1.jpg') }}"
+                                   title="کد محصول {{ $row->ProductDetailID }}">
+                                    <img class="img-fluid" src="{{ asset('img/Other/pic1.jpg') }}"
+                                         alt="Image Description">
+                                </a>
+                                <!-- End Article Image -->
 
-                                    <!-- Actions -->
-                                    <div
-                                        class="d-md-table-cell align-middle g-pa-20 g-pt-25 g-pl-0 progress-auto-width">
+                                <!-- Article Content -->
+                                <div class="d-md-table-cell align-middle g-px-20">
+                                    <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
+                                        <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
+                                    </h3>
+                                    <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">مدل {{ $row->Model }}</em>
+                                </div>
+                                <!-- End Article Content -->
+
+                                <!-- Size Color -->
+                                <div
+                                    class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
+                                                    <span
+                                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
+                                    <span
+                                        class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
+                                </div>
+
+                                <!-- Date -->
+                                <div
+                                    class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
+                                                    <span
+                                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-12">{{ $returnPersianDate[$key][2].' '.$returnPersianDate[$key][1].' '.$returnPersianDate[$key][0] }}</span>
+                                </div>
+
+                                <div
+                                    class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
+                                    <span
+                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-12">
+                                        @switch($row->Reason)
+                                            @case('1')
+                                            عدم شباهت محصول
+                                            @break
+                                            @case('2')
+                                            عدم سلامت محصول
+                                            @break
+                                            @case('3')
+                                            عدم تطابق برند
+                                            @break
+                                        @endswitch
+                                    </span>
+                                </div>
+
+                                <!-- Actions -->
+                                <div
+                                    class="d-md-table-cell align-middle g-pa-20 g-pl-0 {{ $row->ReturnStatus === '0' ? 'g-pt-10 ' : 'g-pt-25 progress-auto-width' }}">
+                                    @if($row->ReturnStatus === '0')
+                                        <i class="fa fa-check-square-o m-0 g-font-size-25 g-color-primary pull-left"></i>
+                                    @else
                                         <div style="direction: ltr" class="g-mt-minus-10 g-mx-minus-5 d-flex">
-                                            @if($row->DeliveryStatus !== '-1')
-                                                <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
-                                                <div style="transform: scaleX(-1)"
-                                                    class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
-                                                    data-toggle="tooltip"
-                                                    data-original-title="{{ 'تاکنون '.$returnTime[$key].'%'.' مسیر طی شده است'  }}"
-                                                    data-placement="top">
-                                                    <div id="progressBar"
-                                                         class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
-                                                         role="progressbar"
-                                                         style="width: {{$returnTime[$key]}}%"
-                                                         aria-valuenow="{{ $returnTime[$key] }}"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100">
-                                                        <div
-                                                            style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
-                                                            class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white g-bg-primary g-pt-3">
-                                                            <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
-                                                        </div>
+                                            <i class="fa fa-spinner fa-spin m-0 g-font-size-16 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-primary' }}"></i>
+                                            <div style="transform: scaleX(-1)"
+                                                 class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
+                                                 data-toggle="tooltip"
+                                                 data-original-title="{{ 'تاکنون '.$returnTime[$key].'%'.' مسیر طی شده است'  }}"
+                                                 data-placement="top">
+                                                <div id="progressBar"
+                                                     class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
+                                                     role="progressbar"
+                                                     style="width: {{$returnTime[$key]}}%"
+                                                     aria-valuenow="{{ $returnTime[$key] }}"
+                                                     aria-valuemin="0"
+                                                     aria-valuemax="100">
+                                                    <div
+                                                        style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
+                                                        class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->ReturnProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
+                                                        <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
                                                     </div>
                                                 </div>
-                                            @else
-                                                <i class="fa fa-exclamation-triangle m-0 g-font-size-16 g-color-red"></i>
-                                                <span class="g-ml-10">..درحال پیگیری</span>
-                                            @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- End Actions -->
-                                </article>
-                            @endif
+                                    @endif
+                                </div>
+                                <!-- End Actions -->
+                            </article>
                             @if($returnTime[$key] <= 100) <span
                                 class="d-none">{{ $returnCounter++ }}</span>
                             @endif
@@ -2050,38 +1679,46 @@
                         @if($returnCounter===0)
                             <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
                                  role="alert">
-                                <strong>خالی: </strong> فاکتور خرید جدیدی برای شما صادر نشده و محصولی در انتظار تحویل
-                                ندارید.
+                                <strong>خالی: </strong>لیست محصولات برگشتی شما خالی است.
                             </div>
                         @endif
                     </div>
                     <div style="direction: rtl" class="g-mx-80--lg g-mt-40 g-mb-25 g-px-10">
                         <div class="text-left">
-                            <a href="#modal25"
-                               id="newAddressLink"
+                            <a href="#returnModal"
+                               id="returnModalBtn"
                                onclick="manuelFocus(); $(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
-                               data-modal-target="#modal25"
+                               data-modal-target="#returnModal"
                                data-modal-effect="slidetogether"
-                               class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15">
-                                ورود داده های محصول بازگشتی
+                               class="d-none btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15">
+                                ورود داده های محصول برگشتی
                             </a>
                             <!-- Demo modal window -->
-                            <div id="modal25"
+                            <div id="returnModal"
                                  class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll modal17"
                                  style="display: none; overflow-y: auto; height: auto !important;">
-                                <form id="addAddress" action="{{route('returnProduct')}}" method="POST">
+                                <form id="returnProduct" action="{{route('returnProduct')}}"
+                                      enctype="multipart/form-data" method="POST">
                                     @csrf
-                                    <input id="productIDFromBuy" name="productIDFromBuy" class="d-none" value="empty">
+                                    <input id="orderDetailIDFromReturn" name="orderDetailIDFromReturn" class="d-none">
+                                    <input id="orderIDFromReturn" name="orderIDFromReturn" class="d-none">
                                     <button style="outline: none" type="button" class="close float-left g-pt-15 g-pl-20"
-                                            onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-address').trigger('click')}, 400); ">
+                                            onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-return').trigger('click')}, 400); ">
                                         <i class="hs-icon hs-icon-close"></i>
                                     </button>
-                                    <h5 class="g-py-15 g-pr-20 m-0 text-right g-brd-bottom g-brd-gray-light-v4">بازگشت محصول</h5>
+                                    <h5 class="g-py-15 g-pr-20 m-0 text-right g-brd-bottom g-brd-gray-light-v4">برگشت
+                                        محصول</h5>
+
                                     <div style="direction: rtl; overflow-y: auto"
                                          class="container g-px-30 g-px-60--lg text-right g-py-0">
                                         <p style="text-align: justify;" class="g-pt-20 g-pb-15 g-mb-0 g-mb-20--lg"><span
                                                 class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>
-                                            لطفا قبل از بازگشت محصول، قوانین مربوط به بازگشت یک محصول را مطالعه بفرمایید. لازم به ذکر است عودت وجه به دلیل طی شدن فرآیند مسیر بازگشتی 10 روز پس از تاریخ بازگشت می باشد.
+                                            لطفا قبل از برگشت محصول، <a href="#"
+                                                                        class="alert-link">قوانین برگشت محصول</a> را
+                                            مطالعه
+                                            بفرمایید. لازم به ذکر است عودت وجه به دلیل طی شدن فرآیند مسیر برگشتی 5 الی 7
+                                            روز
+                                            پس از تاریخ برگشت می باشد.
                                         </p>
                                         <div style="direction: rtl" class="alert alert-warning smallDevice"
                                              role="alert">
@@ -2093,64 +1730,109 @@
                                         {{--کد دریافتی از اداره پست--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
                                             <label
-                                                class="col-sm-2 col-form-label align-self-center">کد دریافتی از اداره پست</label>
+                                                class="col-sm-2 col-form-label align-self-center">کد دریافتی از اداره
+                                                پست</label>
                                             <div class="col-sm-10 force-col-12">
                                                 <input
-                                                    id="return-post-code"
+                                                    id="returnPostCode"
                                                     class="form-control form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
-                                                    name="post-code"
+                                                    name="returnPostCode"
                                                     maxlength="100"
                                                     type="text"
                                                     value=""
                                                     placeholder="لطفا با دقت وارد کنید">
                                             </div>
                                         </div>
-                                        {{--علت بازگشت--}}
+                                        {{--علت برگشت--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
                                             <label
-                                                class="col-sm-2 col-form-label align-self-center">علت بازگشت
+                                                class="col-sm-2 col-form-label align-self-center">علت برگشت
                                             </label>
                                             <div class="col-sm-10 force-col-12">
-                                                <input
-                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                    type="text"
-                                                    name="return-reason"
-                                                    maxlength="300"
-                                                    value=""
-                                                    placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید">
+                                                <div style="direction: ltr"
+                                                     class="input-group g-brd-primary--focus g-mb-10">
+                                                    <div
+                                                        class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                        <i style="transform: ScaleX(-1)"
+                                                           class="fa fa-question g-font-size-20"></i>
+                                                    </div>
+                                                    <select style="direction: rtl"
+                                                            class="form-control form-control-md custom-select rounded-0 g-font-size-16 text-right h-25 g-pr-30"
+                                                            id="returnReason" name="returnReason">
+                                                        <option value="1">محصول تحویلی، شباهتی با محصول درون سایت
+                                                            ندارد
+                                                        </option>
+                                                        <option value="2">محصول تحویلی، سالم نیست
+                                                        </option>
+                                                        <option value="3">برند محصول تحویلی مطابق محصول درون سایت
+                                                            نیست
+                                                        </option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
+                                        {{--توضیح ایرادات--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label class="col-sm-2 col-form-label align-self-center">توضیح
+                                                ایرادات</label>
+                                            <div class="col-sm-10 force-col-12">
+                                               <textarea
+                                                   class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                   type="text"
+                                                   name="returnReasonDetail"
+                                                   maxlength="300"
+                                                   value=""
+                                                   placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید"></textarea>
+                                            </div>
+                                        </div>
+
+                                        {{--تصویر ایراد--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label class="col-sm-2 col-form-label align-self-center" for="fileShow1"
+                                                   id="custom-file-label">تصویر ایرادات</label>
+                                            <div class="col-sm-10 force-col-12">
+                                                <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
+                                                <span style="display: none; cursor: default"
+                                                      class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
+                                                      id="Check1"></span>
+                                                    <input id="fileShow1"
+                                                           class="form-control form-control-md rounded-0 g-font-size-16"
+                                                           type="text"
+                                                           placeholder="فاقد تصویر" readonly="">
+
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="8"
+                                                                type="submit">اضافه کردن
+                                                        </button>
+                                                        <input id="pic1"
+                                                               onchange="addPathCheckMark('pic1','fileShow1','Check1')"
+                                                               onclick="$('.custombox-content #fileShow1').removeClass('g-brd-lightred')"
+                                                               type="file"
+                                                               name="returnPic"
+                                                               accept="image/jpg,image/png,image/jpeg,image/gif">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
                                         {{--کارت بانکی--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
                                             <label class="col-sm-2 col-form-label align-self-center">کارت بانکی</label>
                                             <div class="col-sm-10 force-col-12 d-flex">
                                                 <input
-                                                       id="return-card"
-                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                       name="return-card"
-                                                       maxlength="19"
-                                                       value=""
-                                                       placeholder="xxxx-xxxx-xxxx-xxxx">
-                                            </div>
-                                        </div>
-                                        {{--توضیح ایرادات--}}
-                                        <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label class="col-sm-2 col-form-label align-self-center">توضیح ایرادات</label>
-                                            <div class="col-sm-10 force-col-12">
-                                                   <textarea
-                                                       class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                       type="text"
-                                                       name="return-reason-detail"
-                                                       maxlength="300"
-                                                       value=""
-                                                       placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید"></textarea>
+                                                    id="return-card"
+                                                    class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    name="returnCard"
+                                                    maxlength="19"
+                                                    value=""
+                                                    placeholder="xxxx-xxxx-xxxx-xxxx">
                                             </div>
                                         </div>
                                     </div>
-                                    <a onclick=""
+                                    <a onclick="returnSubmit()"
                                        id="submitReturn"
                                        class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white w-100 g-mt-15">
-                                        بازگشت محصول
+                                        برگشت محصول
                                     </a>
                                 </form>
                             </div>
@@ -2163,10 +1845,10 @@
                 <div style="display: none" id="user-like">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
                         <div style="padding-bottom: 16px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
-                            <i class="fa fa-heart-o g-pl-5 g-font-size-20 g-font-weight-500"></i>
+                            <i class="fa fa-bookmark-o g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-4">
-                                علاقه مندی ها
+                                محصولات ذخیره شده
                             </h6>
                         </div>
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
@@ -2218,7 +1900,7 @@
                                                class="u-icon-v1 g-color-red g-color-gray-dark-v5--hover rounded-circle g-ml-5"
                                                data-toggle="tooltip"
                                                data-placement="top"
-                                               data-original-title="فراموش کن"><i class="fa fa-heart"></i></a>
+                                               data-original-title="فراموش کن"><i class="fa fa-bookmark"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -2249,10 +1931,8 @@
                                     <span class="g-color-red amountLine g-ml-10">
                                         <span
                                             class="g-font-weight-700 g-line-height-0_7 g-font-size-15 text-right">{{ $row->UnitPrice }}</span>
-                                        <span
-                                            class="g-font-size-10">تومان</span>
                                     </span>
-                                        <span class="g-color-primary">
+                                    <span class="g-color-gray-dark-v1">
                                         <span
                                             class="g-font-weight-700 g-line-height-0_7 g-font-size-22 text-right">{{ $row->FinalPrice }}</span>
                                         <span
@@ -2282,11 +1962,11 @@
                                     <a style="cursor: pointer"
                                        onclick="deleteProductLike({{ $row->ProductDetailID }},$(this).attr('id'))"
                                        id="{{ 'deleteLikeBtn'.$key }}"
-                                       class="u-icon-v1 g-color-red g-color-gray-dark-v5--hover rounded-circle g-ml-5"
+                                       class="u-icon-v1 g-color-primary g-color-gray-light-v1--hover rounded-circle g-ml-5"
                                        data-toggle="tooltip"
                                        data-placement="top"
                                        data-original-title="فراموش کن">
-                                        <i class="fa fa-heart"></i>
+                                        <i class="fa fa-bookmark"></i>
                                     </a>
                                 </div>
                                 <hr class="{{ ($key === count($like)-1) ? 'd-none': ''}} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">

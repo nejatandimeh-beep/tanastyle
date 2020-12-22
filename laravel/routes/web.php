@@ -170,9 +170,11 @@ Route::post('/User-Address-Update', 'Customer\Basic@addressUpdate')->name('addre
 
 Route::get('/User-Address-Delete/{id}', 'Customer\Basic@addressDelete');
 
-Route::get('/User-Product-unsuccessfulDelivery/{id}', 'Customer\Basic@unsuccessfulDelivery');
+Route::post('/User-Product-Return', 'Customer\Basic@returnProduct')->name('returnProduct');
 
-Route::get('/User-Product-Return', 'Customer\Basic@returnProduct')->name('returnProduct');
+Route::get('/User-Cart', 'Customer\Basic@cart')->name('cart');
+
+Route::get('/User-Cart-Delete/{id}', 'Customer\Basic@cartDelete')->name('cartDelete');
 
 
 Route::get('/email-test', function () {

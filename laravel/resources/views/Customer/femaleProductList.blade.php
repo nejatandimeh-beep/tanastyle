@@ -1,56 +1,36 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <section class="g-bg-size-cover g-bg-pos-center g-bg-cover g-color-white g-py-100 bigDevice"
-             style="background-image: url({{asset('img/Other/HEADER_dress_shoes_bags.jpg')}})">
-        <div style="direction: rtl" class="container g-bg-cover__inner g-mr-50--lg">
-            <header class="g-mb-20">
-                <h3 style="font-family: Yekan" class="h5 g-font-weight-300 g-color-primary g-mb-5">تانا استایل</h3>
-                <h1 style="font-family: Yekan" class="h4 g-font-weight-300">
-                    فروشگاهی معتبر با قیمت های استثنایی
-                </h1>
-            </header>
+    <section class="breadCrumbs g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0">
+        <div style="direction: rtl" class="container">
+            <div class="d-sm-flex text-right text-lg-center">
+                <div class="align-self-center bigDevice">
+                    <h2 class="h6 g-font-weight-300 w-100 g-color-black-opacity-0_3 g-mb-10 g-mb-0--md">مسیر</h2>
+                </div>
 
-            <ul class="u-list-inline p-0 g-pl-40--lg">
-                <li class="list-inline-item g-ml-7">
-                    <a class="u-link-v5 g-color-white g-color-primary--hover" href="#">صفحه نخست</a>
-                    <i class="fa fa-angle-left g-mr-7"></i>
-                </li>
-                {{--                <li class="list-inline-item g-ml-7">--}}
-                {{--                    <a class="u-link-v5 g-color-white g-color-primary--hover" href="#">Pages</a>--}}
-                {{--                    <i class="fa fa-angle-left g-mr-7"></i>--}}
-                {{--                </li>--}}
-                <li class="list-inline-item g-color-primary">
-                    <span>پوشاک زنانه</span>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <section class="g-bg-size-cover g-bg-pos-center g-bg-black g-color-white g-py-50 smallDevice">
-        <div style="direction: rtl" class="container g-bg-cover__inner">
-            <header class="g-mb-10 text-center">
-                <h3 style="font-family: Yekan" class="h3 g-color-primary g-font-weight-300 g-mb-5">تانا استایل</h3>
-                <h1 style="font-family: Yekan" class="h5 g-font-weight-300">
-                    فروشگاهی معتبر با قیمت های استثنایی
-                </h1>
-            </header>
-            <div class="g-mb-10">
-                <img class="img-fluid w-100"
-                     src="img/Other/HEADER_SD_dress_shoes_bags.jpg"
-                     alt="Image Description">
+                <div class="align-self-center g-mr-30--lg">
+                    <ul class="u-list-inline p-0 g-font-size-12">
+                        <li class="list-inline-item g-ml-5 g-my-5">
+                            <a class="u-link-v5 g-color-main" href="#">صفحه نخست</a>
+                            <i class="fa fa-angle-left g-mr-7"></i>
+                        </li>
+                        <li class="list-inline-item g-ml-5 g-my-5">
+                            <a class="u-link-v5 g-color-main" href="#">پوشاک زنانه</a>
+                            <i class="fa fa-angle-left g-mr-7"></i>
+                        </li>
+                        <li class="list-inline-item g-ml-5 g-my-5">
+                            <a class="u-link-v5 g-color-main" href="#">لباس</a>
+                            <i class="fa fa-angle-left g-mr-7"></i>
+                        </li>
+                        <li class="list-inline-item g-ml-5 g-my-5">
+                            <a class="u-link-v5 g-color-main" href="#">لباس زیر</a>
+                            <i class="fa fa-angle-left g-mr-7"></i>
+                        </li>
+                        <li class="list-inline-item g-color-primary g-my-5">
+                            <span>شرت</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <ul class="u-list-inline p-0 g-pl-40--lg">
-                <li class="list-inline-item g-ml-7">
-                    <a class="u-link-v5 g-color-white g-color-primary--hover" href="#">صفحه نخست</a>
-                    <i class="fa fa-angle-left g-mr-7"></i>
-                </li>
-                {{--                <li class="list-inline-item g-ml-7">--}}
-                {{--                    <a class="u-link-v5 g-color-white g-color-primary--hover" href="#">Pages</a>--}}
-                {{--                    <i class="fa fa-angle-left g-mr-7"></i>--}}
-                {{--                </li>--}}
-                <li class="list-inline-item g-color-primary">
-                    <span>پوشاک زنانه</span>
-                </li>
-            </ul>
         </div>
     </section>
 
@@ -61,7 +41,7 @@
             <div style="display: none" id="filterDiv" class="col-md-3 flex-md-first g-brd-left--lg g-brd-gray-light-v4">
                 <div style="z-index: 100 !important" id="stickyDiv1" class="sticky-top">
                     <div class="g-bg-white-opacity-0_9">
-                        <div class="g-pr-15--lg d-flex justify-content-between g-pb-20 g-pt-20">
+                        <div class="g-pr-15--lg d-flex justify-content-between g-pb-10 g-pt-10">
                             <h5 class="m-0 align-self-center">فیلتر ها</h5>
                             <button
                                 style=" color:rgba(0,0,0,0.4);
@@ -596,8 +576,8 @@
                 <div>
                     <!-- Filters -->
                     <div id="stickyDiv2" style="z-index: 100 !important"
-                         class="sticky-top g-bg-white-opacity-0_9 g-mb-20">
-                        <div class="d-flex g-pt-20 g-pb-20">
+                         class="sticky-top g-bg-white-opacity-0_9 g-mb-15">
+                        <div class="d-flex g-pt-10 g-pb-10">
                             <div id="filterContent" class="d-flex col-12 justify-content-between">
                                 <div style="display: block" id="smallFilterDiv"
                                      class="sideBarButton">
@@ -644,10 +624,10 @@
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
                     </div>
                     <!-- Products -->
-                    <div id="productContainer" class="row g-pt-30 g-mb-50">
+                    <div id="productContainer" class="row g-mb-50">
                         @foreach($product_table as $key => $data)
                             <div class="col-12 col-lg-3 g-mb-30">
-                                <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame">
+                                <figure style="direction: ltr;" class="g-px-10 g-py-10 productFrame u-shadow-v24">
                                     <div>
                                         <div id="carousel-08-1"
                                              class="js-carousel text-center g-mb-20"
@@ -703,101 +683,32 @@
                                                 class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                                                 <li>
                                                     <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
-                                                       href="#">زنانه</a>
+                                                       href="#">زنانه لباس زیر</a>
                                                 </li>
-                                                <li><span></span>لباس زیر</li>
                                             </ul>
-                                            <s class="d-block g-color-lightred g-font-weight-500 g-font-size-13">
-                                                {{  number_format($data->UnitPrice) }}
-                                            </s>
-                                            <span
-                                                class="d-block g-color-black g-font-size-17">{{  number_format($data->FinalPrice) }}</span>
                                         </div>
 
                                         <!-- آیکون و سایز و رنگ -->
                                         <ul class="list-inline media-body text-left p-0">
-                                            @for($i=0; $i<count($empty); $i++)
-                                                @if($data->ID === $empty[$i])
-                                                    <li class="list-inline-item align-middle mx-0">
-                                                        <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-16 rounded-circle"
-                                                           href="#" title="" data-toggle="tooltip"
-                                                           data-placement="top"
-                                                           data-original-title="موجود شد خبرم کن"
-                                                           tabindex="0">
-                                                            <i class="icon-bell"></i>
-                                                        </a>
-                                                    </li>
-                                                @endif
-                                            @endfor
                                             <li class="list-inline-item align-middle mx-0">
-                                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-16 rounded-circle"
-                                                   href="#" title="" data-toggle="tooltip" data-placement="top"
-                                                   data-original-title="افزودن به سبد خرید" tabindex="0">
-                                                    <i class="icon-basket"></i>
-                                                </a>
-                                            </li>
-                                            <li class="list-inline-item align-middle mx-0">
-                                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-16 rounded-circle"
+                                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-light-v1 g-color-primary--hover g-font-size-18 rounded-circle"
                                                    href="#" title="" data-toggle="tooltip" data-placement="top"
                                                    data-original-title="افزودن به علاقه مندیها" tabindex="0">
-                                                    <i class="icon-heart"></i>
+                                                    <i class="fa fa-bookmark"></i>
                                                 </a>
                                             </li>
-                                            {{--سایز--}}
-                                            <div style="direction: ltr" class="d-flex g-mt-15 g-mb-5 g-ml-8">
-                                                <span class="d-none">{{ $i = 0 }}</span>
-                                                <span class="d-none">{{ $j = 0 }}</span>
-                                                <span class="d-none">{{ $size = '' }}</span>
-                                                <span class="d-none">{{ $color = '' }}</span>
-                                                @foreach($product_Detail_table as $dataDetail)
-                                                    {{--                                                    این شرط بررسی میکند که آیدی محصول در جدول جزییات چند بار تکرار شده است--}}
-                                                    {{--                                                    و براساس هر تکرار آیدی سایز و رنگ را اضافه می کند.--}}
-                                                    {{--                                                    و فقط سه عدد از سایز و رنگها نمایش داده می شود.--}}
-                                                    {{--                                                    و بررسی میکند اگر سایز تکراری بود فقط یک عدد از آن سایز نوشته شود. --}}
-                                                    @if(($dataDetail->ProductID === $data->ID) && ($i <= 2) && ($dataDetail->Size !== $size ))
-                                                        <span style="overflow: hidden"
-                                                            class="u-icon-v2 u-icon-size--xs g-brd-gray-light-v2 g-mr-5 g-mb-5">
-                                                            <i class="g-font-style-normal g-color-gray-dark-v5 g-font-weight-700">{{ $dataDetail->Size }}</i>
-                                                        </span>
-                                                        <span class="d-none">{{ $i++ }}</span>
-                                                        <span class="d-none">{{ $size = $dataDetail->Size }}</span>
-                                                    @endif
-                                                    @if($dataDetail->ProductID === $data->ID)
-                                                        <span class="d-none">{{ $j++ }}</span>
-                                                    @endif
-                                                @endforeach
-                                                {{-- متغییر j وابسته به شرط بالا می باشد. --}}
-                                                @if($j > 3)
-                                                    <span
-                                                        class="u-icon-v2 u-icon-size--xs g-brd-gray-light-v2 g-mr-5 g-mb-5">
-                                                        <i class="g-font-style-normal g-color-gray-dark-v5 g-font-weight-700">+</i>
-                                                    </span>
-                                                @endif
-                                            </div>
-                                            {{--رنگ--}}
-                                            <div style="direction: ltr" class="d-flex g-ml-8">
-                                                <span class="d-none">{{ $i = 0 }}</span>
-                                                <span class="d-none">{{ $j = 0 }}</span>
-                                                <span class="d-none">{{ $temp = '' }}</span>
-                                                @foreach($product_Detail_table as $dataDetail)
-                                                    @if(($dataDetail->ProductID === $data->ID) && ($i <= 2) && ($dataDetail->Color !== $color ))
-                                                        <span
-                                                            class="u-label g-color-gray-dark-v4 g-bg-gray-light-v5 g-mr-5 g-mb-5">{{ $dataDetail->Color }}</span>
-                                                        <span class="d-none">{{ $i++ }}</span>
-                                                        <span
-                                                            class="d-none">{{ $color = $dataDetail->Color }}</span>
-                                                    @endif
-                                                    @if(($dataDetail->ProductID === $data->ID) && ($temp !== $dataDetail->Color))
-                                                        <span class="d-none">{{ $j++ }}</span>
-                                                    @endif
-                                                        <span class="d-none">{{ $temp = $dataDetail->Color }}</span>
-                                                @endforeach
-                                                @if($j > 3)
-                                                    <span
-                                                        class="u-label g-color-gray-dark-v4 g-bg-gray-light-v5 g-mr-5 g-mb-5 g-pt-5">+</span>
-                                                @endif
-                                            </div>
                                         </ul>
+                                    </div>
+                                    <div
+                                        class="d-block g-color-black g-font-size-17 g-ml-10">
+                                        <div style="direction: rtl" class="text-left">
+                                            <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                                {{  number_format($data->UnitPrice) }}
+                                            </s>
+                                            <span>{{  number_format($data->FinalPrice) }}</span>
+                                            <span
+                                                class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                        </div>
                                     </div>
                                 </figure>
                             </div>

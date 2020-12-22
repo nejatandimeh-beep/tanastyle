@@ -1,6 +1,7 @@
 @section('CustomerNavigation')
     <div id="load"></div>
     <body>
+    <span id="loginAlert" class="d-none">{{ (isset(Auth::user()->id)) ? 'login':'logout' }}</span>
     <header id="js-header2" class="u-header u-header--static">
         <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-10">
             <nav class="js-mega-menu hs-menu-initialized hs-menu-horizontal navbar navbar-toggleable-md">
@@ -1898,7 +1899,7 @@
                     <div class="d-flex justify-content-between force-col-12 g-pr-10 g-pl-10" id="otherMenu">
                         <!-- Basket -->
                         <div class="u-basket d-inline-block g-valign-middle g-mr-30 g-pt-8" id="myBasket">
-                            <a href="#" id="basket-bar-invoker"
+                            <a href="#" onclick="cart()" id="basket-bar-invoker"
                                class="u-icon-v1 g-color-main g-text-underline--none--hover g-width-20 g-height-20"
                                aria-controls="basket-bar"
                                aria-haspopup="true"
@@ -1910,7 +1911,6 @@
                                data-dropdown-hide-on-scroll="false"
                                data-dropdown-animation-in="fadeIn"
                                data-dropdown-animation-out="fadeOut"
-                               onclick="hideSearch()"
                                onmousemove="hideSearch()">
                                 <span id="basketNum"
                                       class="u-badge-v1--sm g-color-white g-bg-primary g-rounded-50x">3</span>
@@ -1952,52 +1952,13 @@
                                         </div>
                                     </div>
                                     <!-- End Product -->
-
-                                    <!-- Product -->
-                                    <div class="u-basket__product">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col-4 g-pl-20">
-                                                <a href="#" class="u-basket__product-img"><img
-                                                        src="../../../assets/img-temp/150x150/img1.jpg"
-                                                        alt="Image Description"></a>
-                                            </div>
-
-                                            <div class="col-8 text-right">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="g-pt-15 g-pb-10">
-                                                        <h6 class="g-font-weight-600 g-mb-0">
-                                                            <a href="#"
-                                                               class="g-color-main g-color-main--hover g-text-underline--none--hover">شاوار
-                                                                جین</a>
-                                                        </h6>
-                                                        <small class="g-color-gray-dark-v5 g-font-size-14">250،000
-                                                            تومان</small>
-                                                    </div>
-                                                    <div>
-                                                        <button
-                                                            style="color:#7f8c8d; background-color: transparent; border: none; font-size: 1.5rem; cursor: pointer"
-                                                            type="button">&times;
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Product -->
                                 </div>
 
                                 <div class="g-brd-top g-brd-gray-light-v4 g-pa-15 g-pb-20">
                                     <div
-                                        class="d-flex flex-row align-items-center justify-content-between g-letter-spacing-1 g-font-size-16 g-mb-15">
-                                        <strong class=" g-font-weight-600">مبلغ پرداختی</strong>
-                                        <strong class="g-color-primary g-font-weight-600">250،000 تومان</strong>
-                                    </div>
-
-                                    <div
-                                        class="d-flex flex-row align-items-center justify-content-between g-font-size-18">
-                                        <a href="#" class="btn u-btn-outline-primary rounded-0 g-width-120">نمایش
+                                        class="g-font-size-18 text-left">
+                                        <a href="#" onclick="cart()" class="btn u-btn-outline-primary rounded-0 g-width-120">نمایش
                                             سبد خرید</a>
-                                        <a href="#" class="btn u-btn-primary rounded-0 g-width-120">پرداخت</a>
                                     </div>
                                 </div>
                             </div>

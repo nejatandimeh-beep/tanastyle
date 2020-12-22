@@ -130,7 +130,7 @@ class Add extends Controller
     {
         // Upload Images
         date_default_timezone_set('Asia/Tehran');
-        $folderName = '2-' . date("Y.m.d-H.i.s");
+        $folderName = 'p-' . date("Y.m.d-H.i.s");
         $picPath = '\img\products\\' . $folderName;
             File::makeDirectory($picPath, 0777, true, true);
 

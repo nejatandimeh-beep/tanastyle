@@ -3,6 +3,11 @@
         $(document).ready(function () {
             addToBasket();
 
+            if ($('.breadCrumbs').length > 0) {
+                $('html, body').animate({scrollTop: $('.breadCrumbs').offset().top}, 1000);
+            }
+
+            document.location.href = "#breadCrumbs";
             if ($('#checkLike').text() === 'like')
                 $('#customerLike').removeClass('d-none');
             else {
@@ -378,29 +383,53 @@
                 alert('لطفا نخست داخل شوید.');
         });
 
-        // Input rating
-        $('.js-m').on('click', function () {
-            let r = $('.js-r').val();
+        // Input Product Qty
+        $('.product .js-m').on('click', function () {
+            let r = $('.product .js-r').val();
             if (r > 1) {
                 r--;
-                $('.js-r').val(r);
+                $('.product .js-r').val(r);
             } else
                 return false;
         });
 
-        $('.js-r').on('mousedown', function (e) {
+        $('.product .js-r').on('mousedown', function (e) {
             e.preventDefault();
         })
 
-        $('.js-p').on('click', function () {
-            let r = $('.js-r').val(),
+        $('.product .js-p').on('click', function () {
+            let r = $('.product .js-r').val(),
                 qty = parseInt($('#colorQty').text());
             if (r < qty) {
                 r++;
-                $('.js-r').val(r);
+                $('.product .js-r').val(r);
             } else
                 return false;
         });
+
+        function qtyMinus(id) {
+            // Input Cart Qty
+            let r = $('.cart' + id + ' .js-r').val();
+            if (r > 1) {
+                r--;
+                $('.cart' + id + ' .js-r').val(r);
+            } else
+                return false;
+        }
+
+        $("input[id^='basketQty']").on('mousedown', function (e) {
+            e.preventDefault();
+        })
+
+        function qtyPlus(id) {
+            let r = $('.cart' + id + ' .js-r').val(),
+                qty = parseInt($('#cartQty' + id).text());
+            if (r < qty) {
+                r++;
+                $('.cart' + id + ' .js-r').val(r);
+            } else
+                return false;
+        }
 
         // set state when page loading
         $("#stateSelect > option").each(function () {
@@ -435,6 +464,56 @@
         });
 
         // ---------------------------------------------------My Function-----------------------------------------------
+        function cart() {
+            if ($('#loginAlert').text() === 'login')
+                window.location = '/User-Cart';
+            else
+                alert('لطفا ابتدا وارد شوید.')
+        }
+
+        function cartOrder(row) {
+            $('#cartDate').text('( '+nowDate()+' )');
+            console.log(row,$('#basketQty'+row).val());
+            for(let i=0; i<=row; i++){
+                $('#orderQty'+i).text($('#basketQty'+i).val());
+            }
+        }
+
+        function cartDelete(id,key){
+            $('#cartWaitingDelete'+key).show();
+            $('#cartDelete'+key).hide();
+            console.log(id,key);
+            $.ajax({
+                type: 'GET',
+                url: "/User-Cart-Delete/" + id,
+                success: function () {
+                    $('#cart'+key).remove();
+                    if(!($('#cart').length > 0)){
+                        $('#cartBuyBtn').addClass('d-none');
+                        $('#cartEmptyAlert').removeClass('d-none');
+                    }
+                }
+            });
+        }
+
+        // Add FileName and Check Mark when Uploaded Image
+        function addPathCheckMark(picID, filePathID, checkMarkID) {
+            let pic = $('.custombox-content #' + picID),
+                ext = $('.custombox-content #' + picID).val().split('.').pop().toLowerCase(),
+                filePath = $('.custombox-content #' + filePathID),
+                checkMark = $(".custombox-content #" + checkMarkID);
+            if ((pic.val() !== '') && ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) !== -1)) {
+                let fileName = pic.val().split("\\").pop();
+                filePath.attr("placeholder", fileName);
+                filePath.addClass('g-color-primary');
+                checkMark.css('display', 'inline');
+            } else {
+                filePath.attr("placeholder", 'فاقد تصویر');
+                filePath.addClass('g-color-red');
+                checkMark.css('display', 'none');
+            }
+        }
+
         function deleteProductLike(pdID, idBtn) {
             $.confirm({
                 title: 'حذف علاقه مندی',
@@ -448,7 +527,7 @@
                             url: "/Female-Product-LikeProduct/" + pdID + '/' + 'false',
                             success: function () {
                                 $('#likeRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
-                                if(idBtn.replace(/[^0-9]/gi, '') === '0')
+                                if (idBtn.replace(/[^0-9]/gi, '') === '0')
                                     $('#productLikeEmpty').removeClass('d-none').addClass('d-inline-block');
                             },
                         });
@@ -459,43 +538,24 @@
             });
         }
 
-        function unsuccessfulDelivery(orderID) {
-            $.confirm({
-                title: 'بروز رسانی مشخصات فردی',
-                content: 'آیا مطمئن هستید؟',
-                buttons: {
-                    تایید: function () {
-                        window.location = '/User-Product-unsuccessfulDelivery/' + orderID;
-                    },
-                    انصراف: function () {
-                    },
-                }
-            });
-        }
-
         function modalTrigger() {
             switch ($('#pageLocation').text().replace(/\d+/g, '')) {
                 case 'addAddress':
-                    setTimeout(function () {
-                        $("#newAddressLink").trigger("click");
-                    }, 500);
+                    $("#newAddressLink").trigger("click");
                     $('#submitAddress').text('ثبت آدرس جدید و ادامه خرید');
                     $('#productIDFromBuy').val($('#pageLocation').text().replace(/[^0-9]/gi, ''));
                     break;
                 case 'deliveryStatus':
-                    setTimeout(function () {
-                        $("#filter-user-delivery").trigger("click");
-                    }, 500);
+                    $("#filter-user-delivery").trigger("click");
                     break;
                 case 'personData':
-                    setTimeout(function () {
-                        $("#filter-user-data").trigger("click");
-                    }, 500);
+                    $("#filter-user-data").trigger("click");
                     break;
                 case 'addressStatus':
-                    setTimeout(function () {
-                        $("#filter-user-address").trigger("click");
-                    }, 500);
+                    $("#filter-user-address").trigger("click");
+                    break;
+                case 'returnProduct':
+                    $("#filter-user-return").trigger("click");
                     break;
                 default:
                     break;
@@ -529,7 +589,7 @@
                         type: 'GET',
                         url: "/Female-Product-LikeProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
                         success: function (data) {
-                            $('#voteID').text(data);
+                            console.log(data);
                         }
                     });
                     break;
@@ -566,6 +626,28 @@
                     $.ajax({
                         type: 'GET',
                         url: "/Female-Product-UnlikeComment/" + parseInt($('#CommentID').text()) + '/' + val,
+                    });
+                    break;
+
+                case 'cartProductLike':
+                    $.ajax({
+                        type: 'GET',
+                        url: "/Female-Product-LikeProduct/" + val + '/' + 'true',
+                        success: function () {
+                            console.log(key);
+                            $('#cartLike'+key).removeClass('d-none');
+                            $('#cartUnlike'+key).addClass('d-none');
+                        }
+                    });
+                    break;
+                case 'cartProductUnlike':
+                    $.ajax({
+                        type: 'GET',
+                        url: "/Female-Product-LikeProduct/" + val + '/' + 'false',
+                        success: function (data) {
+                            $('#cartLike'+key).removeClass('d-none');
+                            $('#cartUnlike'+key).addClass('d-none');
+                        }
                     });
                     break;
             }
@@ -650,7 +732,6 @@
                     $('#user-bought').css('display', 'none');
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
-                    $('#user-basket').css('display', 'none');
                     $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
@@ -663,25 +744,11 @@
                     $('#user-bought').css('display', 'none');
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
-                    $('#user-basket').css('display', 'none');
                     $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-address').removeClass('g-color-main').addClass('g-color-primary');
                     $('html, body').animate({scrollTop: $('#user-address').offset().top}, 800);
-                    break;
-                case 'basket':
-                    $('#user-basket').css('display', 'block');
-                    $('#user-like').css('display', 'none');
-                    $('#user-delivery').css('display', 'none');
-                    $('#user-bought').css('display', 'none');
-                    $('#user-address').css('display', 'none');
-                    $('#user-data').css('display', 'none');
-                    $('#user-return').css('display', 'none');
-
-                    $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
-                    $('#filter-user-basket').removeClass('g-color-main').addClass('g-color-primary');
-                    $('html, body').animate({scrollTop: $('#user-basket').offset().top}, 800);
                     break;
                 case 'bought':
                     $('#user-bought').css('display', 'block');
@@ -689,7 +756,6 @@
                     $('#user-data').css('display', 'none');
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
-                    $('#user-basket').css('display', 'none');
                     $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
@@ -702,7 +768,6 @@
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
                     $('#user-like').css('display', 'none');
-                    $('#user-basket').css('display', 'none');
                     $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
@@ -715,7 +780,6 @@
                     $('#user-bought').css('display', 'none');
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
-                    $('#user-basket').css('display', 'none');
                     $('#user-return').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
@@ -729,7 +793,6 @@
                     $('#user-bought').css('display', 'none');
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
-                    $('#user-basket').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-return').removeClass('g-color-main').addClass('g-color-primary');
@@ -836,6 +899,25 @@
                 buttons: {
                     تایید: function () {
                         $('.custombox-content #addAddress').submit();
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+
+        function setReturnProductID(orderID, orderDetailID) {
+            $('#orderDetailIDFromReturn').val(orderDetailID);
+            $('#orderIDFromReturn').val(orderID);
+        }
+
+        function returnSubmit() {
+            $.confirm({
+                title: 'بازگشت محصول',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('.custombox-content #returnProduct').submit();
                     },
                     انصراف: function () {
                     },
@@ -997,7 +1079,7 @@
         // ---------------------------------------------------Now Date--------------------------------------------------
         function nowDate() {
             let week = ["يكشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه"],
-                months = ["فروردين", "ارديبهشت", "خرداد", "تير", "مرداد", "شهريور", "مهر", "آبان", "آذر", "دي", "بهمن", "اسفند"],
+                months = ["فروردين", "ارديبهشت", "خرداد", "تير", "مرداد", "شهريور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
                 today = new Date(),
                 d = today.getDay(),
                 day = today.getDate(),

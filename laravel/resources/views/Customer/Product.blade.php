@@ -1,7 +1,6 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     {{--    hidden inpu   --}}
-    <span id="loginAlert" class="d-none">{{ (isset(Auth::user()->id)) ? 'login':'logout' }}</span>
     <span id="customerID" class="d-none">{{ (isset(Auth::user()->id)) ? Auth::user()->name:'' }}</span>
     <span id="productID" class="d-none">{{ $data->ID }}</span>
     <span id="productDetailID" class="d-none"></span>
@@ -10,7 +9,7 @@
     <span id="voteID" class="d-none">{{ isset($voteID) ? $voteID->ID: 'null'}}</span>
     <span id="CommentID" class="d-none"></span>
 
-    <section class="g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0 g-mb-30">
+    <section class="breadCrumbs g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0 g-mb-30">
         <div style="direction: rtl" class="container">
             <div class="d-sm-flex text-right text-lg-center">
                 <div class="align-self-center bigDevice">
@@ -108,16 +107,17 @@
                 <hr class="g-brd-gray-light-v3 g-mt-10 g-mb-15">
 
                 {{--هدر--}}
-                <a style="cursor: pointer;" class="d-none float-left g-font-size-20 g-mr-10 fa fa-heart
-                   g-line-height-1 g-color-red g-text-underline--none--hover text-left"
+                <a style="cursor: pointer;" class="d-none float-left g-font-size-20 g-mr-10 fa fa-bookmark
+                   g-line-height-1 g-color-primary g-text-underline--none--hover text-left"
                    id="customerLike">
                 </a>
-                <a style="cursor: pointer" class="d-none float-left g-font-size-20 g-mr-10 fa fa-heart-o
-                   g-line-height-1 g-color-gray-dark-v5 g-color-red--hover g-text-underline--none--hover text-left"
+                <a style="cursor: pointer"
+                   class="d-none float-left g-font-size-20 g-mr-10 fa fa-bookmark
+                   g-line-height-1 g-color-gray-dark-v5 g-color-primary--hover g-text-underline--none--hover text-left"
                    id="customerUnlike">
                 </a>
                 <span id="likeHint"
-                      class="{{ ($like === 'like') ? 'd-none':'' }} g-font-size-10 g-pt-5 float-left bigDevice">افزودن به علاقه مندی</span>
+                      class="{{ ($like === 'like') ? 'd-none':'' }} g-font-size-10 g-pt-5 float-left bigDevice">ذخیره کن</span>
                 <div class="g-mb-30">
                     @if($customerRate !== 0)
                         <small>شما قبلا امتیاز {{ $customerRate }} را ثبت کرده اید.</small>
@@ -223,7 +223,7 @@
                         <div>
                             <div class="d-inline-block g-mr-5">
                                 <div
-                                    class="input-group u-quantity-v1 g-width-150 g-height-45 g-brd-gray-light-v4 g-brd-primary--focus">
+                                    class="input-group u-quantity-v1 g-width-150 g-height-45 g-brd-gray-light-v4 g-brd-primary--focus product">
                                     <div style="cursor: pointer; user-select: none"
                                          class="js-m input-group-addon d-flex dontSelectText  g-font-size-15 g-width-45 g-color-gray-dark-v4 g-bg-gray-light-v4 g-brd-gray-light-v4 g-rounded-0">
                                         −
@@ -515,8 +515,13 @@
                                         <div class="g-mb-15">
                                             <h5 class="h5 g-color-gray-dark-v1 mb-0">{{ $row->name.' '.$row->Family }}</h5>
                                             <span id="timeComment"
-                                                  class="g-color-gray-dark-v4 g-font-size-12">@if(isset($commentsHowDay)) {{$commentsHowDay[$key]}} @elseif(isset($PersianDate)) {{$PersianDate[$key][0].'/'.$PersianDate[$key][1].'/'.$PersianDate[$key][2]}} @else
-                                                    '' @endif</span>
+                                                  class="g-color-gray-dark-v4 g-font-size-12">
+                                                @if(isset($commentsHowDay))
+                                                    {{$commentsHowDay[$key]}}
+                                                @endif
+                                                @if(isset($PersianDate))
+                                                        {{$PersianDate[$key][0].'/'.$PersianDate[$key][1].'/'.$PersianDate[$key][2]}}
+                                                @endif</span>
                                         </div>
 
                                         <p>{{ $row->Comment }}</p>
