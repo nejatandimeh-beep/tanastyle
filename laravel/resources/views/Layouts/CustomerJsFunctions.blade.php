@@ -7,7 +7,6 @@
                 $('html, body').animate({scrollTop: $('.breadCrumbs').offset().top}, 1000);
             }
 
-            document.location.href = "#breadCrumbs";
             if ($('#checkLike').text() === 'like')
                 $('#customerLike').removeClass('d-none');
             else {

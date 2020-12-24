@@ -205,7 +205,7 @@ class Basic extends Controller
             if (($returnDate < $today) && ($hToday > '08:00'))
                 $returnMin[$key] = $this->dateLenToNow($row->returnDate, '08:00:00'); // get len past date to now by min
             else
-                    $returnMin[$key] = 0; // get len past date to now by min
+                $returnMin[$key] = 0; // get len past date to now by min
 
             $returnHowDay[$key] = null;
             if ($returnMin[$key] < 11520) {
@@ -349,7 +349,7 @@ class Basic extends Controller
     public function cartDelete($id)
     {
         DB::table('product_cart')
-            ->where('ProductDetailID',$id)
+            ->where('ProductDetailID', $id)
             ->delete();
     }
 
@@ -531,11 +531,14 @@ class Basic extends Controller
 
         // rating & comment
         $rating = 0;
+        $ratingCount = 0;
         foreach ($rating_tbl as $key => $row) {
             $rating += $row->Rating;
+            if ($row->Rating !== 0)
+                $ratingCount++;
         }
         if ($rating !== 0)
-            $rating = round($rating / count($rating_tbl));
+            $rating = round($rating / $ratingCount);
 
         $comments = DB::table('customer_comment as cc')
             ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID')
