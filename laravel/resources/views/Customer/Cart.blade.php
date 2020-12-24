@@ -155,93 +155,102 @@
 
                     <!-- Demo modal window -->
                     <div id="modal18"
-                         class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20 g-pb-20 modal18"
-                         style="display: none; overflow-y: auto; height: auto !important">
-                        <button style="outline: none" type="button" class="g-py-15 close float-left"
-                                onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
-                            <i class="hs-icon hs-icon-close"></i>
-                        </button>
-                        <h6 class="g-py-15 text-right m-0">فاکتور فروش به تاریخ <span id="cartDate"></span></h6>
-                        <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
-                        <div class="table-responsive">
-                            <table style="direction: rtl" class="table table-bordered u-table--v2">
-                                <thead>
-                                <tr>
-                                    <th class="text-center">ردیف</th>
-                                    <th class="text-center">کد محصول</th>
-                                    <th class="text-center">نام محصول</th>
-                                    <th class="text-center">رنگ</th>
-                                    <th class="text-center">سایز</th>
-                                    <th class="text-center">تعداد</th>
-                                    <th class="text-center">قیمت واحد</th>
-                                    <th class="text-center">{{ $row->Discount.'%' }}با تخفیف</th>
-                                    <th class="text-center">عکس</th>
-                                </tr>
-                                </thead>
-
-                                <tbody>
-
-                                @foreach($data as $key =>$row)
+                         class="text-left g-bg-white SubMenuScroll g-pb-20 modal18"
+                         style="display: none; overflow-y: auto; height: 100% !important; -webkit-overflow-scrolling: touch; max-height: 100% !important; width: 100%">
+                        <div class="sticky-top g-bg-white g-px-20">
+                            <div class="d-flex justify-content-between g-pt-15 g-pb-8">
+                                <button style="outline: none" type="button" class="close"
+                                        onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
+                                    <i class="hs-icon hs-icon-close"></i>
+                                </button>
+                                <h6 class="text-right m-0">فاکتور فروش به تاریخ <span id="cartDate"></span></h6>
+                            </div>
+                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
+                        </div>
+                        <div class="g-px-20">
+                            <h6 style="direction: rtl"
+                                class="card-header g-bg-orange-opacity-0_1 g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right tableHint">
+                                <i class="fa fa-hand-o-right g-font-size-18"></i>
+                                <span class="g-font-size-13 g-mr-5">جدول را به سمت چپ بکشید.</span>
+                            </h6>
+                            <div class="table-responsive">
+                                <table style="direction: rtl;" class="table table-bordered u-table--v2">
+                                    <thead>
                                     <tr>
-                                        <td class="align-middle text-nowrap text-center">
+                                        <th class="text-center">ردیف</th>
+                                        <th class="text-center">کد محصول</th>
+                                        <th class="text-center">نام محصول</th>
+                                        <th class="text-center">رنگ</th>
+                                        <th class="text-center">سایز</th>
+                                        <th class="text-center">تعداد</th>
+                                        <th class="text-center">قیمت واحد</th>
+                                        <th class="text-center">{{ $row->Discount.'%' }}با تخفیف</th>
+                                        <th class="text-center">عکس</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    @foreach($data as $key =>$row)
+                                        <tr>
+                                            <td class="align-middle text-nowrap text-center">
                                             <span class="g-pa-5">
                                                 {{ $key+1 }}
                                             </span>
-                                        </td>
-                                        <td class="align-middle text-nowrap text-center">
-                                            <span id="productDetaiID{{$key}}" class="g-pa-5">
+                                            </td>
+                                            <td class="align-middle text-nowrap text-center">
+                                            <span id="productDetailID{{$key}}" class="g-pa-5">
                                                 {{ $row->ProductDetailID }}
                                             </span>
-                                        </td>
-                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                             <span class="g-pa-5">
                                                 {{ $row->Name }}
                                             </span>
-                                        </td>
-                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                             <span class="g-pa-5">
                                                 {{ $row->Color }}
                                             </span>
-                                        </td>
-                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                             <span class="g-pa-5">
                                                 {{ $row->Size }}
                                             </span>
-                                        </td>
-                                        <td class="align-middle text-nowrap text-center">
+                                            </td>
+                                            <td class="align-middle text-nowrap text-center">
                                             <span id="orderQty{{$key}}" class="g-pa-5">
                                             </span>
-                                        </td>
-                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                             <span class="g-pa-5">
                                                 {{ number_format($row->UnitPrice) }}
                                             </span>
-                                        </td>
-                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                             <span class="g-pa-5">
                                                 {{ number_format($row->FinalPrice) }}
                                             </span>
-                                        </td>
-                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                             <span class="g-pa-5">
-                                                 <img class="g-width-80 g-height-80"
-                                                      src="{{ asset($row->PicPath.'pic1.jpg') }}"
-                                                      alt="Image Description">
+                                              <img class="g-width-80 g-height-80"
+                                                   src="{{ $row->PicPath }}pic1.jpg"
+                                                   alt="Image Description">
                                             </span>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
                                 <span
                                     class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span>243</span>
                                     <span class="g-font-size-12 g-font-weight-300 g-mr-5">هزار تومان</span>
                                 </span>
 
-                            <span style="direction: rtl"
-                                  class="d-block g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center force-col-12">
+                                <span style="direction: rtl"
+                                      class="d-block g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center force-col-12">
                                     <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-5 bigDevice">
                                         <i class="icon-communication-011 u-line-icon-pro g-color-white g-pt-5"></i>
                                     </span>
@@ -249,53 +258,54 @@
                                     <span
                                         class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify">آ.غ مهاباد خیابان قاضی تعاونی تانکرداران مهاباد <strong>گیرنده:</strong> خبات اندیمه <strong>شماره تماس:</strong> 09144421633</span>
                                 </span>
-                        </div>
-                        <div style="direction: rtl"
-                             class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
-                            <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
-                                <div style="direction: rtl" class="btn-group justified-content">
-                                    {{--                                        <form class="p-0 m-0" id="selectBankName">--}}
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               type="radio" checked="">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ملت</span>
-                                    </label>
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک پارسیان</span>
-                                    </label>
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ایرانیان</span>
-                                    </label>
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک صادرات</span>
-                                    </label>
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">بانک ملی</span>
-                                    </label>
-                                    {{--                                        </form>--}}
-                                </div>
                             </div>
-                            <a href="#"
-                               onclick=""
-                               class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
+                            <div style="direction: rtl"
+                                 class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
+                                <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
+                                    <div style="direction: rtl" class="btn-group justified-content">
+                                        {{--                                        <form class="p-0 m-0" id="selectBankName">--}}
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio" checked="">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ملت</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک پارسیان</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ایرانیان</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک صادرات</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">بانک ملی</span>
+                                        </label>
+                                        {{--                                        </form>--}}
+                                    </div>
+                                </div>
+                                <a href="#"
+                                   onclick=""
+                                   class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
                                     <span class="pull-left">درگاه بانکی
                                         <span id="payment-door" class="d-block g-font-size-11">ورود به درگاه ملت</span>
                                     </span>
-                                <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
-                            </a>
+                                    <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                     <!-- End Demo modal window -->

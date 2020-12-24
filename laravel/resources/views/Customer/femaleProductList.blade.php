@@ -627,7 +627,7 @@
                     <div id="productContainer" class="row g-mb-50">
                         @foreach($product_table as $key => $data)
                             <div class="col-12 col-lg-3 g-mb-30">
-                                <figure style="direction: ltr;" class="g-px-10 g-py-10 productFrame u-shadow-v24">
+                                <figure style="direction: ltr;" class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
                                     <div>
                                         <div id="carousel-08-1"
                                              class="js-carousel text-center g-mb-20"
@@ -687,17 +687,6 @@
                                                 </li>
                                             </ul>
                                         </div>
-
-                                        <!-- آیکون و سایز و رنگ -->
-                                        <ul class="list-inline media-body text-left p-0">
-                                            <li class="list-inline-item align-middle mx-0">
-                                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-light-v1 g-color-primary--hover g-font-size-18 rounded-circle"
-                                                   href="#" title="" data-toggle="tooltip" data-placement="top"
-                                                   data-original-title="افزودن به علاقه مندیها" tabindex="0">
-                                                    <i class="fa fa-bookmark"></i>
-                                                </a>
-                                            </li>
-                                        </ul>
                                     </div>
                                     <div
                                         class="d-block g-color-black g-font-size-17 g-ml-10">

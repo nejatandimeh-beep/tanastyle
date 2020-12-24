@@ -462,8 +462,15 @@
                 $(this).attr('selected', true);
             }
         });
-
         // ---------------------------------------------------My Function-----------------------------------------------
+        function optionHover(id){
+            $('#addressOption'+id).removeClass('g-color-gray-dark-v3');
+            $('#addressOption'+id).addClass('g-color-primary');
+        }
+        function optionUnhover(id){
+            $('#addressOption'+id).removeClass('g-color-primary');
+            $('#addressOption'+id).addClass('g-color-gray-dark-v3');
+        }
         function cart() {
             if ($('#loginAlert').text() === 'login')
                 window.location = '/User-Cart';
@@ -472,23 +479,23 @@
         }
 
         function cartOrder(row) {
-            $('#cartDate').text('( '+nowDate()+' )');
-            console.log(row,$('#basketQty'+row).val());
-            for(let i=0; i<=row; i++){
-                $('#orderQty'+i).text($('#basketQty'+i).val());
+            $('#cartDate').text('( ' + nowDate() + ' )');
+            console.log(row, $('#basketQty' + row).val());
+            for (let i = 0; i <= row; i++) {
+                $('#orderQty' + i).text($('#basketQty' + i).val());
             }
         }
 
-        function cartDelete(id,key){
-            $('#cartWaitingDelete'+key).show();
-            $('#cartDelete'+key).hide();
-            console.log(id,key);
+        function cartDelete(id, key) {
+            $('#cartWaitingDelete' + key).show();
+            $('#cartDelete' + key).hide();
+            console.log(id, key);
             $.ajax({
                 type: 'GET',
                 url: "/User-Cart-Delete/" + id,
                 success: function () {
-                    $('#cart'+key).remove();
-                    if(!($('#cart').length > 0)){
+                    $('#cart' + key).remove();
+                    if (!($('#cart').length > 0)) {
                         $('#cartBuyBtn').addClass('d-none');
                         $('#cartEmptyAlert').removeClass('d-none');
                     }
@@ -635,8 +642,8 @@
                         url: "/Female-Product-LikeProduct/" + val + '/' + 'true',
                         success: function () {
                             console.log(key);
-                            $('#cartLike'+key).removeClass('d-none');
-                            $('#cartUnlike'+key).addClass('d-none');
+                            $('#cartLike' + key).removeClass('d-none');
+                            $('#cartUnlike' + key).addClass('d-none');
                         }
                     });
                     break;
@@ -645,8 +652,8 @@
                         type: 'GET',
                         url: "/Female-Product-LikeProduct/" + val + '/' + 'false',
                         success: function (data) {
-                            $('#cartLike'+key).removeClass('d-none');
-                            $('#cartUnlike'+key).addClass('d-none');
+                            $('#cartLike' + key).removeClass('d-none');
+                            $('#cartUnlike' + key).addClass('d-none');
                         }
                     });
                     break;

@@ -145,7 +145,7 @@
                     <fieldset class="d-inline-block g-ml-60--lg col-12 col-lg-5 p-0">
                         <div class="d-inline-block amountLine">
                             <span id="productUnitPrice"
-                              class="d-inline-block align-middle g-color-red g-font-size-20">{{ number_format($data->UnitPrice) }}</span>
+                                  class="d-inline-block align-middle g-color-red g-font-size-20">{{ number_format($data->UnitPrice) }}</span>
                             <span class="g-font-size-12 g-color-red g-mr-minus-5">تومان</span>
                         </div>
                         <span
@@ -281,215 +281,221 @@
                     </a>
 
                     <div id="modal18"
-                         class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20 g-pb-20"
-                         style="display: none; overflow-y: auto; height: auto !important">
-                        <button style="outline: none" type="button" class="g-py-15 close float-left"
-                                onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
-                            <i class="hs-icon hs-icon-close"></i>
-                        </button>
-                        <h6 class="g-py-15 text-right m-0">فاکتور فروش به شماره:<span id="orderID"
+                         class="text-left g-bg-white SubMenuScroll g-pb-20"
+                         style="display: none; overflow-y: auto; height: 100% !important; -webkit-overflow-scrolling: touch; max-height: 100% !important; width: 100%">
+                        <div class="sticky-top g-bg-white g-px-20">
+                            <div class="d-flex justify-content-between g-pt-15 g-pb-8">
+                                <button style="outline: none" type="button" class="close"
+                                        onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
+                                    <i class="hs-icon hs-icon-close"></i>
+                                </button>
+                                <h6 class="text-right m-0">فاکتور فروش به شماره:<span id="orderID"
                                                                                       class=" g-mr-5"></span></h6>
-                        <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
-                        {{--جدول--}}
-                        <div style="direction: rtl"
-                             class="d-lg-flex col-12 g-pa-15 g-pt-20 g-brd-around g-brd-gray-light-v4">
-                            {{--کد محصول--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    کد محصول
-                                </h6>
-                                <span id="orderProductID"
-                                      class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
                             </div>
-                            {{--نام محصول--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    نام محصول
-                                </h6>
-                                <span id="orderProductName"
-                                      class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"><span
-                                        id="productModel"></span></span>
-                            </div>
-                            {{--رنگ--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    رنگ
-                                </h6>
-                                <span id="orderProductColor"
-                                      class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
-                            </div>
-                            {{--سایز--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    سایز
-                                </h6>
-                                <span id="orderProductSize"
-                                      class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
-                            </div>
-                            {{--تعداد--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    تعداد
-                                </h6>
-                                <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
+                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
+                        </div>
+                        <div class="g-px-20">
+                            {{--جدول--}}
+                            <div style="direction: rtl"
+                                 class="d-lg-flex col-12 g-pa-15 g-pt-20 g-brd-around g-brd-gray-light-v4">
+                                {{--کد محصول--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        کد محصول
+                                    </h6>
+                                    <span id="orderProductID"
+                                          class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
+                                </div>
+                                {{--نام محصول--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        نام محصول
+                                    </h6>
+                                    <span id="orderProductName"
+                                          class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"><span
+                                            id="productModel"></span></span>
+                                </div>
+                                {{--رنگ--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        رنگ
+                                    </h6>
+                                    <span id="orderProductColor"
+                                          class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
+                                </div>
+                                {{--سایز--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        سایز
+                                    </h6>
+                                    <span id="orderProductSize"
+                                          class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
+                                </div>
+                                {{--تعداد--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        تعداد
+                                    </h6>
+                                    <span class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice">
                                         <span id="orderProductQty"></span>
                                     </span>
-                            </div>
-                            {{--قیمت واحد--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    قیمت واحد
-                                </h6>
-                                <span id="orderProductUnitPrice"
-                                      class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
-                            </div>
-                            {{--با تخفیف--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    با<span id="orderProductDiscount" class="g-mr-5 g-color-gray-dark-v3"></span>% تخفیف
-                                </h6>
-                                <span class="g-py-5 g-px-5 g-pt-40--lg g-color-darkred">
+                                </div>
+                                {{--قیمت واحد--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        قیمت واحد
+                                    </h6>
+                                    <span id="orderProductUnitPrice"
+                                          class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
+                                </div>
+                                {{--با تخفیف--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        با<span id="orderProductDiscount" class="g-mr-5 g-color-gray-dark-v3"></span>%
+                                        تخفیف
+                                    </h6>
+                                    <span class="g-py-5 g-px-5 g-pt-40--lg g-color-darkred">
                                         <span id="orderProductFinalPrice" class="g-mr-5 g-color-gray-dark-v3"></span>
                                     </span>
-                            </div>
-                            {{--قیمت در تعداد--}}
-                            <div
-                                class="d-none flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    قیمت در تعداد
-                                </h6>
-                                <span id="orderProductQtyPrice" class="g-pt-40--lg g-px-5 g-pb-5"></span>
-                            </div>
-                            {{--تاریخ--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    تاریخ
-                                </h6>
-                                <span id="orderDate"
-                                      class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
-                            </div>
-                            {{--عکس--}}
-                            <div
-                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                    عکس
-                                </h6>
-                                <span class="g-pa-5--lg">
+                                </div>
+                                {{--قیمت در تعداد--}}
+                                <div
+                                    class="d-none flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        قیمت در تعداد
+                                    </h6>
+                                    <span id="orderProductQtyPrice" class="g-pt-40--lg g-px-5 g-pb-5"></span>
+                                </div>
+                                {{--تاریخ--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        تاریخ
+                                    </h6>
+                                    <span id="orderDate"
+                                          class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
+                                </div>
+                                {{--عکس--}}
+                                <div
+                                    class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                    <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                        عکس
+                                    </h6>
+                                    <span class="g-pa-5--lg">
                                           <img class="g-width-80 g-height-80"
                                                src="{{ $data->PicPath }}pic1.jpg"
                                                alt="Image Description">
                                     </span>
+                                </div>
                             </div>
-                        </div>
-                        {{--آدرس و مبلغ فاکتور--}}
-                        <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
-                            {{--مبلغ فاکتور--}}
-                            <span
-                                class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span
-                                    id="orderPrice"></span>
+                            {{--آدرس و مبلغ فاکتور--}}
+                            <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
+                                {{--مبلغ فاکتور--}}
+                                <span
+                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span
+                                        id="orderPrice"></span>
                                     <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                 </span>
 
-                            {{--مبلغ فاکتور--}}
-                            <div style="direction: rtl"
-                                 class="d-flex col-12 col-lg-8 g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
+                                {{--مبلغ فاکتور--}}
+                                <div style="direction: rtl"
+                                     class="d-flex col-12 col-lg-8 g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
 
                                     <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
                                         <i class="icon-communication-011 u-line-icon-pro g-color-white g-pt-5"></i>
                                     </span>
-                                @if(!isset($sendAddress))
-                                    <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', ['id'=>'addAddress'.$data->ID]) : route('login') }}"
-                                       id="addAddress"
-                                       class="g-color-darkred g-color-primary--hover align-self-center g-text-underline--none--hover">
-                                        افزودن آدرس<i class="icon-paper-clip g-mr-5 align-middle"></i>
-                                    </a>
-                                @else
-                                    <div id="addressContainer">
-                                        <div
-                                            class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify">
-                                            <h5 class="d-lg-inline-block d-block g-color-gray-dark-v2">آدرس
-                                                ارسال:</h5>
-                                            <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
-                                            <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
-                                            <span class="receiverStateCity"></span>
-                                            <span id="receiverAddress">{{ $sendAddress->Address }}</span>
-                                            <strong
-                                                class="d-lg-inline-block d-block g-color-gray-dark-v2">گیرنده:</strong>
-                                            <span
-                                                id="addressReceiverName">{{ $sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily }}</span>
-                                            <strong class="d-lg-inline-block d-block g-color-gray-dark-v2">کد
-                                                پستی:</strong>
-                                            <span id="receiverPostalCode">{{ $sendAddress->PostalCode }}</span>
-                                            <strong
-                                                class="d-lg-inline-block d-block g-color-gray-dark-v2">موبایل:</strong>
-                                            <span id="receiverMobile">{{ $sendAddress->Mobile }}</span>
+                                    @if(!isset($sendAddress))
+                                        <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', ['id'=>'addAddress'.$data->ID]) : route('login') }}"
+                                           id="addAddress"
+                                           class="g-color-darkred g-color-primary--hover align-self-center g-text-underline--none--hover">
+                                            افزودن آدرس<i class="icon-paper-clip g-mr-5 align-middle"></i>
+                                        </a>
+                                    @else
+                                        <div id="addressContainer">
+                                            <div
+                                                class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify">
+                                                <h5 class="d-lg-inline-block d-block g-color-gray-dark-v2">آدرس
+                                                    ارسال:</h5>
+                                                <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
+                                                <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
+                                                <span class="receiverStateCity"></span>
+                                                <span id="receiverAddress">{{ $sendAddress->Address }}</span>
+                                                <strong
+                                                    class="d-lg-inline-block d-block g-color-gray-dark-v2">گیرنده:</strong>
+                                                <span
+                                                    id="addressReceiverName">{{ $sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily }}</span>
+                                                <strong class="d-lg-inline-block d-block g-color-gray-dark-v2">کد
+                                                    پستی:</strong>
+                                                <span id="receiverPostalCode">{{ $sendAddress->PostalCode }}</span>
+                                                <strong
+                                                    class="d-lg-inline-block d-block g-color-gray-dark-v2">موبایل:</strong>
+                                                <span id="receiverMobile">{{ $sendAddress->Mobile }}</span>
+                                            </div>
                                         </div>
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-
-                        {{--بانکها--}}
-                        <div style="direction: rtl"
-                             class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
-                            <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
-                                <div style="direction: rtl" class="btn-group justified-content" id="bankContainer"
-                                     onchange="accBank()">
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               value="ملت"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ملت</span>
-                                    </label>
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               value="پارسیان"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک پارسیان</span>
-                                    </label>
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               value="ایرانیان"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ایرانیان</span>
-                                    </label>
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               value="صادرات"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک صادرات</span>
-                                    </label>
-                                    <label class="u-check force-col-12">
-                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                               value="ملی"
-                                               type="radio">
-                                        <span
-                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">بانک ملی</span>
-                                    </label>
+                                    @endif
                                 </div>
                             </div>
-                            {{--                                درگاه بانکی--}}
-                            <a href="#"
-                               onclick="bankingPortal($('#productDetailID').text(),$('#orderProductQty').text())"
-                               class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
+                            {{--بانکها--}}
+                            <div style="direction: rtl"
+                                 class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
+                                <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
+                                    <div style="direction: rtl" class="btn-group justified-content" id="bankContainer"
+                                         onchange="accBank()">
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   value="ملت"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ملت</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   value="پارسیان"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک پارسیان</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   value="ایرانیان"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ایرانیان</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   value="صادرات"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک صادرات</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   value="ملی"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">بانک ملی</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                {{--                                درگاه بانکی--}}
+                                <a href="#"
+                                   onclick="bankingPortal($('#productDetailID').text(),$('#orderProductQty').text())"
+                                   class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
                                     <span class="pull-left">درگاه بانکی
                                         <span id="payment-door" class="d-block g-font-size-11">ورود به درگاه <span
                                                 id="acceptingBank">ملت</span></span>
                                     </span>
-                                <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
-                            </a>
+                                    <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -520,7 +526,7 @@
                                                     {{$commentsHowDay[$key]}}
                                                 @endif
                                                 @if(isset($PersianDate))
-                                                        {{$PersianDate[$key][0].'/'.$PersianDate[$key][1].'/'.$PersianDate[$key][2]}}
+                                                    {{$PersianDate[$key][0].'/'.$PersianDate[$key][1].'/'.$PersianDate[$key][2]}}
                                                 @endif</span>
                                         </div>
 

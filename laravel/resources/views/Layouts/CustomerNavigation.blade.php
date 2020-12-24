@@ -3,7 +3,7 @@
     <body>
     <span id="loginAlert" class="d-none">{{ (isset(Auth::user()->id)) ? 'login':'logout' }}</span>
     <header id="js-header2" class="u-header u-header--static">
-        <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-py-10">
+        <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-pt-10">
             <nav class="js-mega-menu hs-menu-initialized hs-menu-horizontal navbar navbar-toggleable-md">
                 <div class="container" id="HeaderContainer">
                     <!-- Responsive Toggle Button -->

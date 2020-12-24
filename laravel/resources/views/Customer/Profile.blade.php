@@ -610,13 +610,15 @@
                                                  role="button"
                                                  data-target="#{{ 'accordion-13-body-'.$key }}" data-toggle="collapse"
                                                  data-parent="#accordion-13"
+                                                 onmousemove="optionHover({{$key}})"
+                                                 onmouseout="optionUnhover({{$key}})"
                                                  aria-expanded="false" aria-controls="{{ 'accordion-13-body-'.$key }}">
                                                 <!-- ردیف و کلیدهای فعالسازی آدرس -->
                                                 <div
                                                     class="clearfix d-md-table-cell g-valign-middle g-pa-20--lg g-width-300 justify-content-between">
                                                     <!-- Track Num -->
                                                     <div
-                                                        class="d-inline-block g-ml-20--lg g-width-20">{{($key+1).'.'}}</div>
+                                                        class="d-inline-block g-ml-20 g-width-20"><i id="addressOption{{$key}}" class="icon-options g-font-size-20 g-color-gray-dark-v3"></i></div>
                                                     <!-- End Track Num -->
                                                 @if($row->Status === 1)
                                                     <!-- Track Avatar -->
@@ -923,32 +925,28 @@
                             </a>
                             <!-- Demo modal window -->
                             <div id="modal17"
-                                 class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll modal17"
-                                 style="display: none; overflow-y: auto; height: auto !important;">
+                                 class="text-left g-bg-white SubMenuScroll"
+                                 style="display: none; overflow-y: auto; height: 100% !important; -webkit-overflow-scrolling: touch; max-height: 100% !important; width: 100%">
                                 <form id="addAddress" action="{{route('addAddress')}}" method="POST">
                                     @csrf
                                     <input id="productIDFromBuy" name="productIDFromBuy" class="d-none" value="empty">
-                                    <button style="outline: none" type="button" class="close float-left g-pt-15 g-pl-20"
-                                            onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-address').trigger('click')}, 400); ">
-                                        <i class="hs-icon hs-icon-close"></i>
-                                    </button>
-                                    <h5 class="g-py-15 g-pr-20 m-0 text-right g-brd-bottom g-brd-gray-light-v4">افزودن
-                                        آدرس
-                                        جدید</h5>
+                                    <div class="sticky-top g-bg-white g-px-20">
+                                        <div class="d-flex justify-content-between g-pt-15 g-pb-8">
+                                            <button style="outline: none" type="button" class="close"
+                                                    onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-address').trigger('click')}, 400);">
+                                                <i class="hs-icon hs-icon-close"></i>
+                                            </button>
+                                            <h6 class="text-right m-0">افزودن آدرس جدید</h6>
+                                        </div>
+                                        <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0">
+                                    </div>
                                     <div style="direction: rtl; overflow-y: auto"
-                                         class="container g-px-30 g-px-60--lg text-right g-py-0">
-                                        <p style="text-align: justify;" class="g-pt-20 g-pb-15 g-mb-0 g-mb-20--lg"><span
+                                         class="g-px-20 g-px-60--lg text-right g-py-0">
+                                        <p style="text-align: justify;" class="g-pb-15 g-mb-0 g-mb-20--lg"><span
                                                 class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>آدرس
                                             جدید بصورت خودکار فعال خواهد شد و از این پس محصولات به این آدرس ارسال
                                             می گردد. (می توانید در هر زمان از طریق منوی آدرس ها آدرس دیگری را فعال
                                             کنید). </p>
-                                        <div style="direction: rtl" class="alert alert-warning smallDevice"
-                                             role="alert">
-                                            <strong>توجه! کشیدن صفحه به پایین</strong>
-                                            <p class="text-justify">اگر روی جعبه های ورودی عمل کشیدن را انجام دهید صفحه
-                                                به
-                                                پایین کشیده نمی شود. این یک باگ در دستگاه های کوچک است.</p>
-                                        </div>
                                         {{--نام گیرنده--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
                                             <label
@@ -1112,7 +1110,7 @@
                                     </div>
                                     <a onclick="addUserAddress()"
                                        id="submitAddress"
-                                       class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white w-100 g-mt-15">
+                                       class="btn btn-md u-btn-primary rounded-0 g-color-white g-mt-15 g-mx-60--lg g-mb-20 g-mx-20">
                                         ثبت آدرس جدید
                                     </a>
                                 </form>
@@ -1211,216 +1209,229 @@
                                                 </a>
                                                 <!-- Demo modal window -->
                                                 <div id="{{ 'modal16'.$key }}"
-                                                     class="g-width-90x g-height-auto g-bg-white SubMenuScroll g-px-20"
-                                                     style="display: none; overflow-y: auto; height: 500px !important;">
-                                                    <button style="outline: none" type="button"
-                                                            class="g-py-15 close float-left"
-                                                            onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
-                                                        <i class="hs-icon hs-icon-close"></i>
-                                                    </button>
-                                                    <h6 class="g-py-15 text-right m-0">فاکتور فروش به
-                                                        شماره: {{ $row->orderID.'/'.$row->orderDetailID }}</h6>
-                                                    <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
+                                                     class="text-left g-bg-white SubMenuScroll g-pb-20"
+                                                     style="display: none; overflow-y: auto; height: 100% !important; -webkit-overflow-scrolling: touch; max-height: 100% !important; width: 100%">
+                                                    <div class="sticky-top g-bg-white g-px-20">
+                                                        <div class="d-flex justify-content-between g-pt-15 g-pb-8">
+                                                            <button style="outline: none" type="button"
+                                                                    class="close"
+                                                                    onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');  setTimeout(function () {$('#filter-user-bought').trigger('click')}, 400);">
+                                                                <i class="hs-icon hs-icon-close"></i>
+                                                            </button>
+                                                            <h6 class="text-right m-0">فاکتور فروش به
+                                                                شماره: {{ $row->orderID.'/'.$row->orderDetailID }}</h6>
+                                                        </div>
+                                                        <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
+                                                    </div>
 
-                                                    <div style="direction: rtl"
-                                                         class="d-lg-flex col-12 g-pa-15 g-pt-20 g-brd-around g-brd-gray-light-v4">
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                کد محصول
-                                                            </h6>
-                                                            <span class="g-pa-5--lg color-primary-smallDevice">
+                                                    <div class="g-px-20">
+                                                        <div style="direction: rtl"
+                                                             class="d-lg-flex col-12 g-pa-15 g-pt-20 g-brd-around g-brd-gray-light-v4">
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    کد محصول
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
                                                             {{ $row->ProductDetailID }}
                                                         </span>
-                                                        </div>
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                نام محصول
-                                                            </h6>
-                                                            <span class="g-pa-5--lg color-primary-smallDevice">
-                                                            {{ $row->Name }}<span> مدل {{ $row->Model }}</span>
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    نام محصول
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            {{ $row->Name }}<span>{{ $row->Model }}</span>
                                                         </span>
-                                                        </div>
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                رنگ
-                                                            </h6>
-                                                            <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    رنگ
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
                                                             {{ $row->Color }}
                                                         </span>
-                                                        </div>
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                سایز
-                                                            </h6>
-                                                            <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    سایز
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
                                                             {{ $row->Size }}
                                                         </span>
-                                                        </div>
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                تعداد
-                                                            </h6>
-                                                            <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    تعداد
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
                                                              <span>{{ $row->Qty }}</span> عدد
                                                         </span>
-                                                        </div>
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                قیمت واحد
-                                                            </h6>
-                                                            <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    قیمت واحد
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
                                                              {{ number_format($row->UnitPrice) }}
                                                         </span>
-                                                        </div>
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                با {{ $row->Discount }}% تخفیف
-                                                            </h6>
-                                                            <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    با {{ $row->Discount }}% تخفیف
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
                                                               {{ number_format($row->FinalPrice) }}
                                                         </span>
-                                                        </div>
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                تاریخ
-                                                            </h6>
-                                                            <span class="g-pa-5--lg color-primary-smallDevice">
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    تاریخ
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
                                                               {{ $persianDate[$key][2].' '.$persianDate[$key][1].' '.$persianDate[$key][0] }}
                                                             </span>
-                                                        </div>
-                                                        <div
-                                                            class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
-                                                            <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                {{ $delivery[$key]->DeliveryStatus === '-1' ? 'برگشت' : 'تحویل' }}
-                                                            </h6>
-                                                            <span class="g-pa-5--lg"
-                                                                  data-toggle="tooltip"
-                                                                  data-placement="top"
-                                                                  data-original-title="تحویل داده شد">
-                                                                @if(($delivery[$key]->DeliveryStatus === '5') || (($delivery[$key]->DeliveryStatus === '-1') && (isset($return[$key]) ? $return[$key]->ReturnStatus === '0' : 0)))
-                                                                    <i class="fa fa-check g-font-size-18 g-color-primary"></i>
-                                                                @else
-                                                                    <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
-                                                                @endif
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    {{ $delivery[$key]->DeliveryStatus === '-1' ? 'برگشت' : 'تحویل' }}
+                                                                </h6>
+                                                                <span class="g-pa-5--lg"
+                                                                      data-toggle="tooltip"
+                                                                      data-placement="top"
+                                                                      data-original-title="تحویل داده شد">
+                                                                    @if($delivery[$key]->DeliveryStatus === '-1')
+                                                                        <i class="icon-media-064 u-line-icon-pro g-font-weight-600 g-font-size-20 g-color-primary"></i>
+                                                                    @elseif($delivery[$key]->DeliveryStatus === '5')
+                                                                        <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                                                    @else
+                                                                        <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
+                                                                    @endif
                                                         </span>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="d-lg-flex justify-content-between">
-                                                        <div class="col-12 col-lg-3 g-pl-0--lg">
+                                                        <div class="d-lg-flex justify-content-between">
+                                                            <div class="col-12 col-lg-3 g-pl-0--lg">
                                                             <span
                                                                 class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-my-20 text-center force-col-12">مبلغ کل فاکتور: <span>{{ number_format($row->FinalPrice * $row->Qty) }}</span><span
                                                                     class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span></span>
-                                                        </div>
-                                                        <div class="col-12 col-lg-9 g-pr-0--lg">
-                                                            @switch($delivery[$key]->DeliveryStatus)
-                                                                @case('-1')
-                                                                <div style="direction: rtl" class="g-mt-20">
-                                                                    <div
-                                                                        class="d-inline-block alert g-bg-orange-opacity-0_1 g-color-orange rounded-0"
-                                                                        role="alert">
-                                                                        <p class="m-0"><strong>برگشتی: </strong>فاکتور
-                                                                            فوق
-                                                                            برگشت داده شد.</p>
+                                                            </div>
+                                                            <div class="col-12 col-lg-9 g-pr-0--lg">
+                                                                @switch($delivery[$key]->DeliveryStatus)
+                                                                    @case('-1')
+                                                                    <div style="direction: rtl"
+                                                                         class="g-mt-20 text-right">
+                                                                        <div
+                                                                            class="d-inline-block alert g-bg-orange-opacity-0_1 g-color-orange rounded-0"
+                                                                            role="alert">
+                                                                            <p class="m-0"><strong>برگشتی: </strong>فاکتور
+                                                                                فوق
+                                                                                برگشت داده شد.</p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                @break
-                                                                @case('0')
-                                                                @case('1')
-                                                                @case('2')
-                                                                @case('3')
-                                                                <div style="direction: rtl" class="g-mt-20">
-                                                                    <div
-                                                                        class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
-                                                                        role="alert">
-                                                                        <p class="m-0"><strong>در انتظار
-                                                                                تحویل: </strong>فاکتور فوق در
-                                                                            صف فرایند تحویل می باشد.</p>
+                                                                    @break
+                                                                    @case('0')
+                                                                    @case('1')
+                                                                    @case('2')
+                                                                    @case('3')
+                                                                    <div style="direction: rtl"
+                                                                         class="g-mt-20 text-right">
+                                                                        <div
+                                                                            class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
+                                                                            role="alert">
+                                                                            <p class="m-0"><strong>در انتظار
+                                                                                    تحویل: </strong>فاکتور فوق در
+                                                                                صف فرایند تحویل می باشد.</p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                @break
-                                                                @case('4')
-                                                                <div style="direction: rtl" class="g-mt-20">
-                                                                    <div
-                                                                        class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
-                                                                        role="alert">
-                                                                        <p class="m-0"><strong>در انتظار
-                                                                                تحویل: </strong>فاکتور فوق در
-                                                                            دست پست می باشد.</p>
+                                                                    @break
+                                                                    @case('4')
+                                                                    <div style="direction: rtl"
+                                                                         class="g-mt-20 text-right">
+                                                                        <div
+                                                                            class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
+                                                                            role="alert">
+                                                                            <p class="m-0"><strong>در انتظار
+                                                                                    تحویل: </strong>فاکتور فوق در
+                                                                                دست پست می باشد.</p>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                @break
-                                                                @case('5')
-                                                                @if(($deliveryMin[$key] < 10200))
-                                                                    <div style="direction: rtl" class="g-mt-20">
-                                                                        <div>
+                                                                    @break
+                                                                    @case('5')
+                                                                    @if(($deliveryMin[$key] < 10200))
+                                                                        <div style="direction: rtl"
+                                                                             class="g-mt-20 text-right">
+                                                                            <div>
+                                                                                <div
+                                                                                    class="d-inline-block alert g-bg-gray-light-v5 rounded-0 g-mb-5"
+                                                                                    role="alert">
+                                                                                    <p class="m-0"><strong>کد رهگیری
+                                                                                            پست: </strong>{{ $delivery[$key]->TrackingCode }}
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
                                                                             <div
-                                                                                class="d-inline-block alert g-bg-gray-light-v5 rounded-0 g-mb-5"
+                                                                                class="d-inline-block alert alert-warning alert-dismissible fade show g-mb-5"
                                                                                 role="alert">
-                                                                                <p class="m-0"><strong>کد رهگیری
-                                                                                        پست: </strong>{{ $delivery[$key]->TrackingCode }}
-                                                                                </p>
+                                                                                <strong>توجه! </strong>اگر در هر شرایطی
+                                                                                محصول به
+                                                                                دستتان
+                                                                                نرسیده به اداره پست مرکزی محل خود
+                                                                                مراجعه
+                                                                                کنید.
+                                                                            </div>
+                                                                            <div
+                                                                                class="d-inline-block alert alert-warning alert-dismissible fade show g-mb-5"
+                                                                                role="alert">
+                                                                                <strong>توجه! </strong>در صورتی که اداره
+                                                                                پست به دلیل عدم تحویل گرفتن شما محموله
+                                                                                را ارجاع دهد هزینه برگشت و ارسال مجدد
+                                                                                به عهده شما خواهد بود.
+                                                                            </div>
+                                                                            <div
+                                                                                class="d-inline-block alert alert-warning alert-dismissible fade show"
+                                                                                role="alert">
+                                                                                <strong>توجه! </strong>اگر قصد برگشت
+                                                                                محصول
+                                                                                را
+                                                                                دارید با توجه به <a href="#"
+                                                                                                    class="alert-link">قوانین
+                                                                                    برگشت محصول</a>، از طریق
+                                                                                کلید زیر اقدام فرمائید.
+                                                                            </div>
+                                                                            <div>
+                                                                                <button type="button"
+                                                                                        class="btn btn-md u-btn-outline-primary rounded-0 force-col-12 g-mb-10"
+                                                                                        onclick="setReturnProductID({{ $row->orderID }},{{ $row->orderDetailID }}); Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#returnModalBtn').trigger('click')}, 600);">
+                                                                                    برگشت محصول
+                                                                                </button>
                                                                             </div>
                                                                         </div>
-                                                                        <div
-                                                                            class="d-inline-block alert alert-warning alert-dismissible fade show g-mb-5"
-                                                                            role="alert">
-                                                                            <strong>توجه! </strong>اگر در هر شرایطی
-                                                                            محصول به
-                                                                            دستتان
-                                                                            نرسیده به اداره پست مرکزی محل خود
-                                                                            مراجعه
-                                                                            کنید.
+                                                                    @else
+                                                                        <div style="direction: rtl"
+                                                                             class="g-mt-20 text-right">
+                                                                            <div
+                                                                                class="d-inline-block alert alert-success"
+                                                                                role="alert">
+                                                                                <strong>بایگانی فاکتور: </strong>فاکتور
+                                                                                فوق
+                                                                                به
+                                                                                دفتر بایگانی افزوده
+                                                                                شد.
+                                                                            </div>
                                                                         </div>
-                                                                        <div
-                                                                            class="d-inline-block alert alert-warning alert-dismissible fade show g-mb-5"
-                                                                            role="alert">
-                                                                            <strong>توجه! </strong>در صورتی که اداره
-                                                                            پست به دلیل عدم تحویل گرفتن شما محموله
-                                                                            را ارجاع دهد هزینه برگشت و ارسال مجدد
-                                                                            به عهده شما خواهد بود.
-                                                                        </div>
-                                                                        <div
-                                                                            class="d-inline-block alert alert-warning alert-dismissible fade show"
-                                                                            role="alert">
-                                                                            <strong>توجه! </strong>اگر قصد برگشت
-                                                                            محصول
-                                                                            را
-                                                                            دارید با توجه به <a href="#"
-                                                                                                class="alert-link">قوانین
-                                                                                برگشت محصول</a>، از طریق
-                                                                            کلید زیر اقدام فرمائید.
-                                                                        </div>
-                                                                        <div>
-                                                                            <button type="button"
-                                                                                    class="btn btn-md u-btn-outline-primary rounded-0 force-col-12 g-mb-10"
-                                                                                    onclick="setReturnProductID({{ $row->orderID }},{{ $row->orderDetailID }}); Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#returnModalBtn').trigger('click')}, 600);">
-                                                                                برگشت محصول
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                @else
-                                                                    <div style="direction: rtl" class="g-mt-20">
-                                                                        <div
-                                                                            class="d-inline-block alert alert-success"
-                                                                            role="alert">
-                                                                            <strong>بایگانی فاکتور: </strong>فاکتور
-                                                                            فوق
-                                                                            به
-                                                                            دفتر بایگانی افزوده
-                                                                            شد.
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-                                                                @break
-                                                            @endswitch
+                                                                    @endif
+                                                                    @break
+                                                                @endswitch
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1485,7 +1496,7 @@
                                         <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
                                             <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                         </h3>
-                                        <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
+                                        <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
                                     </div>
                                     <!-- End Article Content -->
 
@@ -1601,7 +1612,7 @@
                                     <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
                                         <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                     </h3>
-                                    <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">مدل {{ $row->Model }}</em>
+                                    <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
                                 </div>
                                 <!-- End Article Content -->
 
@@ -1695,23 +1706,27 @@
                             </a>
                             <!-- Demo modal window -->
                             <div id="returnModal"
-                                 class="text-left g-width-90x g-height-auto g-bg-white SubMenuScroll modal17"
-                                 style="display: none; overflow-y: auto; height: auto !important;">
+                                 class="text-left g-bg-white SubMenuScroll g-pb-20"
+                                 style="display: none; overflow-y: auto; height: 100% !important; -webkit-overflow-scrolling: touch; max-height: 100% !important; width: 100%">
                                 <form id="returnProduct" action="{{route('returnProduct')}}"
                                       enctype="multipart/form-data" method="POST">
                                     @csrf
                                     <input id="orderDetailIDFromReturn" name="orderDetailIDFromReturn" class="d-none">
                                     <input id="orderIDFromReturn" name="orderIDFromReturn" class="d-none">
-                                    <button style="outline: none" type="button" class="close float-left g-pt-15 g-pl-20"
+                                    <div class="sticky-top g-bg-white g-px-20">
+                                        <div class="d-flex justify-content-between g-pt-15 g-pb-8">
+                                    <button style="outline: none" type="button" class="close"
                                             onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-return').trigger('click')}, 400); ">
                                         <i class="hs-icon hs-icon-close"></i>
                                     </button>
-                                    <h5 class="g-py-15 g-pr-20 m-0 text-right g-brd-bottom g-brd-gray-light-v4">برگشت
-                                        محصول</h5>
-
+                                    <h6 class="m-0 text-right">برگشت محصول</h6>
+                                        </div>
+                                        <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0">
+                                    </div>
+                                    <div class="g-px-20">
                                     <div style="direction: rtl; overflow-y: auto"
                                          class="container g-px-30 g-px-60--lg text-right g-py-0">
-                                        <p style="text-align: justify;" class="g-pt-20 g-pb-15 g-mb-0 g-mb-20--lg"><span
+                                        <p style="text-align: justify;" class="g-pb-15 g-mb-0 g-mb-20--lg"><span
                                                 class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>
                                             لطفا قبل از برگشت محصول، <a href="#"
                                                                         class="alert-link">قوانین برگشت محصول</a> را
@@ -1720,13 +1735,6 @@
                                             روز
                                             پس از تاریخ برگشت می باشد.
                                         </p>
-                                        <div style="direction: rtl" class="alert alert-warning smallDevice"
-                                             role="alert">
-                                            <strong>توجه! کشیدن صفحه به پایین</strong>
-                                            <p class="text-justify">اگر روی جعبه های ورودی عمل کشیدن را انجام دهید صفحه
-                                                به
-                                                پایین کشیده نمی شود. این یک باگ در دستگاه های کوچک است.</p>
-                                        </div>
                                         {{--کد دریافتی از اداره پست--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
                                             <label
@@ -1781,6 +1789,7 @@
                                                    type="text"
                                                    name="returnReasonDetail"
                                                    maxlength="300"
+                                                   rows="4"
                                                    value=""
                                                    placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید"></textarea>
                                             </div>
@@ -1828,12 +1837,15 @@
                                                     placeholder="xxxx-xxxx-xxxx-xxxx">
                                             </div>
                                         </div>
+
+                                        <a onclick="returnSubmit()"
+                                           id="submitReturn"
+                                           class="pull-left btn btn-md u-btn-primary rounded-0 g-color-white g-mt-15">
+                                            برگشت محصول
+                                        </a>
                                     </div>
-                                    <a onclick="returnSubmit()"
-                                       id="submitReturn"
-                                       class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white w-100 g-mt-15">
-                                        برگشت محصول
-                                    </a>
+
+                                    </div>
                                 </form>
                             </div>
                             <!-- End Demo modal window -->
@@ -1877,10 +1889,10 @@
                                 <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg">
                                     <div class="d-flex justify-content-between">
                                         <div>
-                                            <h3 class="h6 g-font-weight-700">
+                                            <h3 class="d-inline-block h6 g-font-weight-700">
                                                 <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                             </h3>
-                                            <em class="g-color-gray-dark-v5 g-font-style-normal">مدل {{ $row->Model }}</em>
+                                            <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-size-12 g-font-style-normal">{{ $row->Model }}</em>
                                         </div>
                                         <div class="smallDevice g-ml-minus-5 g-mt-minus-10">
                                             <a style="cursor: pointer"
@@ -1932,7 +1944,7 @@
                                         <span
                                             class="g-font-weight-700 g-line-height-0_7 g-font-size-15 text-right">{{ $row->UnitPrice }}</span>
                                     </span>
-                                    <span class="g-color-gray-dark-v1">
+                                        <span class="g-color-gray-dark-v1">
                                         <span
                                             class="g-font-weight-700 g-line-height-0_7 g-font-size-22 text-right">{{ $row->FinalPrice }}</span>
                                         <span
