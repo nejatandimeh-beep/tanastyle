@@ -43,48 +43,6 @@
         </div>
     </section>
 
-    {{--گالری--}}
-    <div class="col-lg-5 g-mb-30 smallDevice">
-        <!-- Carousel Images -->
-        <div id="js-carousel-11" class="js-carousel g-mb-5" data-infinite="1" data-fade="1"
-             data-arrows-classes="u-arrow-square g-font-size-50 g-pos-abs g-top-50x g-color-white"
-             data-arrow-left-classes="fa fa-angle-left g-left-30 g-mt-minus-30"
-             data-arrow-right-classes="fa fa-angle-right g-right-30 g-mt-minus-30"
-             data-nav-for="#js-carousel-11-nav">
-            <div class="js-slide">
-                <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
-            </div>
-            <div class="js-slide">
-                <img class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
-            </div>
-            <div class="js-slide">
-                <img class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
-            </div>
-            <div class="js-slide">
-                <img class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
-            </div>
-        </div>
-        <!-- End Carousel Images -->
-
-        <!-- Carousel Nav -->
-        <div id="js-carousel-11-nav" class="js-carousel u-carousel-v11" data-infinite="1" data-center-mode="1"
-             data-slides-show="3" data-is-thumbs="1" data-nav-for="#js-carousel-11">
-            <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
-                <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
-            </div>
-            <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
-                <img class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
-            </div>
-            <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
-                <img class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
-            </div>
-            <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
-                <img class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
-            </div>
-        </div>
-        <!-- End Carousel Nav -->
-    </div>
-
     <div class="container g-mb-50--lg">
         <!-- Article -->
         <article class="row justify-content-between g-color-gray-dark-v5">
@@ -92,9 +50,9 @@
             <div style="direction: rtl" class="col-lg-6 g-mb-30">
                 <header class="d-flex justify-content-between">
                     <!-- Article Icons -->
-                    <div>
-                        <h2 id="productName"
-                            class="d-inline-block h2 g-color-black mb-0 align-middle">{{ $data->Name }}</h2>
+                    <div class=" align-self-center">
+                        <h1 id="productName"
+                            class="d-inline-block h4 g-color-black mb-0">{{ $data->Name }}</h1>
                         مدل:
                         <span id="productModel" class="align-middle">{{ $data->Model }}</span>
                     </div>
@@ -612,7 +570,7 @@
             </div>
 
             {{--گالری--}}
-            <div class="col-lg-5 g-mb-30 bigDevice">
+            <div id="productGallery" class="col-lg-5 g-mb-30">
                 <!-- Carousel Images -->
                 <div id="js-carousel-11" class="js-carousel g-mb-5" data-infinite="1" data-fade="1"
                      data-arrows-classes="u-arrow-square g-font-size-50 g-pos-abs g-top-50x g-color-white"

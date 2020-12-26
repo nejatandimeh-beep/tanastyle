@@ -1,6 +1,18 @@
 @section('CustomerJsFunction')
     <script>
         $(document).ready(function () {
+            if($('#cartCount').text() === 0) {
+                $('#cartBuyBtn').hide();
+            }
+
+            if($('#productGallery').length > 0) {
+                magnify("img1", 3);
+                magnify("img2", 3);
+                magnify("img3", 3);
+                // نمایش رنگ برای اولین سایز بعد از لود شدن صفحه
+                addColor($('input[id ^="inputSize"]').first().val(), parseInt($('#productID').text()));
+            }
+
             addToBasket();
 
             if ($('.breadCrumbs').length > 0) {
@@ -13,9 +25,6 @@
                 $('#customerUnlike').removeClass('d-none');
                 $('#likeHint').removeClass('d-none');
             }
-
-            // نمایش رنگ برای اولین سایز بعد از لود شدن صفحه
-            addColor($('input[id ^="inputSize"]').first().val(), parseInt($('#productID').text()));
 
             // رفتار صفحه بعد از لود شدن صفحه در پروفایل کاربر
             modalTrigger();
@@ -269,61 +278,6 @@
             $(this).select();
         })
 
-        // تابع و دستورات مربوط به افزودن رنگ و تعداد محصول از طریق آژاکس
-        // --------------------------------------------------------------
-        function addColor(val, id) {
-            $('#colorContainer').empty();
-            $('#waitingIconColor').show();
-            $('#waitingIconQty').show();
-            $('#colorQtyContainer').hide();
-            $.ajax({
-                type: 'GET',
-                url: "/Female-Product-SizeInfo/" + id + '/' + val,
-                success: function (data) {
-                    $('#waitingIconColor').hide();
-                    $('#waitingIconQty').hide();
-                    $('#colorQtyContainer').show();
-                    let temp = '';
-                    for (let i = 0; i < data.length; i++) {
-                        if (data[i]['Color'] !== temp) {
-                            $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
-                            $('#sizeInfo' + i + ' input').attr('id', 'color-' + data[i]["ID"]);
-                            $('#sizeInfo' + i + ' input').attr('onclick', 'addQty(' + data[i]["ID"] + ',' + data[i]["Qty"] + ')');
-                            $('#sizeInfo' + i + ' input').val(data[i]['Color']);
-                            $('#sizeInfo' + i + ' label').attr('for', 'color-' + data[i]["ID"]);
-                            $('#sizeInfo' + i + ' label').text(data[i]['Color']);
-                        }
-                        temp = data[i]['Color'];
-                    }
-                    $('#sizeInfo0 input').prop('checked', 'checked');
-                    addQty(data[0]["ID"], data[0]['Qty']);
-                }
-            });
-        }
-
-        function addQty(id, qty) {
-            let callStatus = callCustomer(id, qty);
-            $('#productDetailID').text(id);
-            $('.js-r').val(1);
-            $('#colorQty').text(qty);
-            if (qty > 0) {
-                $('#callMeExist').hide();
-                $('#customerCalled').hide();
-                $('#actionFormBtn').show();
-                $('#boughtQty').show();
-            } else {
-                $('#boughtQty').hide();
-                $('#actionFormBtn').hide();
-                if (callStatus === 'called') {
-                    $('#callMeExist').hide();
-                    $('#customerCalled').show();
-                } else {
-                    $('#customerCalled').hide();
-                    $('#callMeExist').show();
-                }
-            }
-        }
-
         // تابع در صورت موجودی بهم اطلاع بده
         function callCustomer(id, qty) {
             let callStatus;
@@ -462,14 +416,17 @@
             }
         });
         // ---------------------------------------------------My Function-----------------------------------------------
+        // هایلت آپشن آدرس در هنگام قرار گرفتن ماوس بروی هر سط آدرس
         function optionHover(id){
             $('#addressOption'+id).removeClass('g-color-gray-dark-v3');
             $('#addressOption'+id).addClass('g-color-primary');
         }
-        function optionUnhover(id){
+
+        function optionUnHover(id){
             $('#addressOption'+id).removeClass('g-color-primary');
             $('#addressOption'+id).addClass('g-color-gray-dark-v3');
         }
+
         function cart() {
             if ($('#loginAlert').text() === 'login')
                 window.location = '/User-Cart';
@@ -478,28 +435,91 @@
         }
 
         function cartOrder(row) {
+            let price=[], allPrice = 0, tempPrice=[];
             $('#cartDate').text('( ' + nowDate() + ' )');
-            console.log(row, $('#basketQty' + row).val());
-            for (let i = 0; i <= row; i++) {
-                $('#orderQty' + i).text($('#basketQty' + i).val());
+            if (row !==0 ) {
+                for (let i = 0; i <= row-1; i++) {
+                    $('#orderQty' + i).text($('#basketQty' + i).val());
+                    tempPrice[i] = $('#productFinalPrice'+i).text().replace(/,/g, '');
+                    price[i] = parseInt($('#basketQty' + i).val()) * parseInt(tempPrice[i]);
+                    allPrice = allPrice + price[i];
+                }
+                $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
         }
 
         function cartDelete(id, key) {
             $('#cartWaitingDelete' + key).show();
             $('#cartDelete' + key).hide();
-            console.log(id, key);
             $.ajax({
                 type: 'GET',
                 url: "/User-Cart-Delete/" + id,
-                success: function () {
+                success: function (data) {
+                    $('#cartCount').text(parseInt($('#cartCount').text())-1);
+                    $('#orderRow'+key).remove();
                     $('#cart' + key).remove();
-                    if (!($('#cart').length > 0)) {
+                    console.log(data);
+                    if (data === '0') {
                         $('#cartBuyBtn').addClass('d-none');
                         $('#cartEmptyAlert').removeClass('d-none');
                     }
                 }
             });
+        }
+
+        // تابع و دستورات مربوط به افزودن رنگ و تعداد محصول از طریق آژاکس
+        // --------------------------------------------------------------
+        function addColor(val, id) {
+            $('#colorContainer').empty();
+            $('#waitingIconColor').show();
+            $('#waitingIconQty').show();
+            $('#colorQtyContainer').hide();
+            $.ajax({
+                type: 'GET',
+                url: "/Female-Product-SizeInfo/" + id + '/' + val,
+                success: function (data) {
+                    $('#waitingIconColor').hide();
+                    $('#waitingIconQty').hide();
+                    $('#colorQtyContainer').show();
+                    let temp = '';
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i]['Color'] !== temp) {
+                            $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
+                            $('#sizeInfo' + i + ' input').attr('id', 'color-' + data[i]["ID"]);
+                            $('#sizeInfo' + i + ' input').attr('onclick', 'addQty(' + data[i]["ID"] + ',' + data[i]["Qty"] + ')');
+                            $('#sizeInfo' + i + ' input').val(data[i]['Color']);
+                            $('#sizeInfo' + i + ' label').attr('for', 'color-' + data[i]["ID"]);
+                            $('#sizeInfo' + i + ' label').text(data[i]['Color']);
+                        }
+                        temp = data[i]['Color'];
+                    }
+                    $('#sizeInfo0 input').prop('checked', 'checked');
+                    addQty(data[0]["ID"], data[0]['Qty']);
+                }
+            });
+        }
+
+        function addQty(id, qty) {
+            let callStatus = callCustomer(id, qty);
+            $('#productDetailID').text(id);
+            $('.js-r').val(1);
+            $('#colorQty').text(qty);
+            if (qty > 0) {
+                $('#callMeExist').hide();
+                $('#customerCalled').hide();
+                $('#actionFormBtn').show();
+                $('#boughtQty').show();
+            } else {
+                $('#boughtQty').hide();
+                $('#actionFormBtn').hide();
+                if (callStatus === 'called') {
+                    $('#callMeExist').hide();
+                    $('#customerCalled').show();
+                } else {
+                    $('#customerCalled').hide();
+                    $('#callMeExist').show();
+                }
+            }
         }
 
         // Add FileName and Check Mark when Uploaded Image
@@ -1294,8 +1314,5 @@
             }
         }
 
-        magnify("img1", 3);
-        magnify("img2", 3);
-        magnify("img3", 3);
     </script>
 @endsection

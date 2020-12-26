@@ -340,7 +340,8 @@ class Basic extends Controller
             ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID')
             ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pc.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-            ->orderBy('Size')
+            ->orderBy('Date')
+            ->orderBy('Time')
             ->get();
         $sendAddress = $this->checkAddress();
         return view('Customer.Cart', compact('sendAddress', 'data'));
@@ -351,6 +352,9 @@ class Basic extends Controller
         DB::table('product_cart')
             ->where('ProductDetailID', $id)
             ->delete();
+        $cartCount = DB::table('product_cart')
+            ->get();
+        return count($cartCount);
     }
 
     public function profileUpdate(Request $request)

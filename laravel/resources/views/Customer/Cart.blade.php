@@ -18,6 +18,7 @@
 
             <div class="g-py-15 g-pb-30">
                 <div class="row">
+                    <span id="cartCount" class="d-none">{{ (isset($data)) ?  count($data) : 0 }}</span>
                     @foreach($data as $key =>$row)
                         {{--    hidden input   --}}
                         <div id="cart{{$key}}" class="col-12 col-lg-3 g-mb-30">
@@ -138,14 +139,13 @@
                         </div>
                     @endforeach
                 </div>
-
                 <div class="{{ isset($data[0]) ? '':'d-none' }} text-left">
                     <a href="#modal18"
-                       onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally'); cartOrder({{ $key }})"
+                       onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally'); cartOrder($('#cartCount').text())"
                        id="cartBuyBtn"
                        data-modal-target="#modal18"
                        data-modal-effect="slidetogether"
-                       class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 g-ml-0 g-mb-30 g-mt-0 g-mt-20--lg g-ml-50--lg g-mb-35--lg force-col-12">
+                       class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 g-ml-0 g-mt-0 g-mt-20--lg force-col-12">
                             <span class="pull-left">
                               پرداخت امن
                               <span class="d-block g-font-size-11">نهایی کردن خرید</span>
@@ -184,14 +184,14 @@
                                         <th class="text-center">سایز</th>
                                         <th class="text-center">تعداد</th>
                                         <th class="text-center">قیمت واحد</th>
-                                        <th class="text-center">{{ $row->Discount.'%' }}با تخفیف</th>
+                                        <th class="text-center">{{ isset($data[0]) ? $row->Discount.'%' : '' }}با تخفیف</th>
                                         <th class="text-center">عکس</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
                                     @foreach($data as $key =>$row)
-                                        <tr>
+                                        <tr id="orderRow{{$key}}">
                                             <td class="align-middle text-nowrap text-center">
                                             <span class="g-pa-5">
                                                 {{ $key+1 }}
@@ -227,7 +227,7 @@
                                             </span>
                                             </td>
                                             <td class="align-middle text-center">
-                                            <span class="g-pa-5">
+                                            <span id="productFinalPrice{{$key}}" class="g-pa-5">
                                                 {{ number_format($row->FinalPrice) }}
                                             </span>
                                             </td>
@@ -245,8 +245,8 @@
                             </div>
                             <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
                                 <span
-                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span>243</span>
-                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">هزار تومان</span>
+                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span id="orderPrice"></span>
+                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                 </span>
 
                                 <span style="direction: rtl"

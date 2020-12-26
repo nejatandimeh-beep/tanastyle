@@ -611,7 +611,7 @@
                                                  data-target="#{{ 'accordion-13-body-'.$key }}" data-toggle="collapse"
                                                  data-parent="#accordion-13"
                                                  onmousemove="optionHover({{$key}})"
-                                                 onmouseout="optionUnhover({{$key}})"
+                                                 onmouseout="optionUnHover({{$key}})"
                                                  aria-expanded="false" aria-controls="{{ 'accordion-13-body-'.$key }}">
                                                 <!-- ردیف و کلیدهای فعالسازی آدرس -->
                                                 <div
@@ -1758,7 +1758,7 @@
                                             </label>
                                             <div class="col-sm-10 force-col-12">
                                                 <div style="direction: ltr"
-                                                     class="input-group g-brd-primary--focus g-mb-10">
+                                                     class="input-group g-brd-primary--focus">
                                                     <div
                                                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                                                         <i style="transform: ScaleX(-1)"
