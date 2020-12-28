@@ -357,6 +357,17 @@ class Basic extends Controller
         return count($cartCount);
     }
 
+    public function cartSubmit(Request $request) {
+        $row = $request->get('row');
+        $productDetailID=[];
+        $qty=[];
+        for($i=0; $i<=$row-1; $i++) {
+            $productDetailID[$i] = $request->get('productDetailID'.$i);
+            $qty[$i] = $request->get('qty'.$i);
+        }
+        dd($productDetailID, $qty);
+    }
+
     public function profileUpdate(Request $request)
     {
         $name = $request->get('name');

@@ -162,7 +162,7 @@ Route::get('/Female-Product-removeCallCustomer/{id}', 'Customer\Basic@removeCall
 
 Route::post('/User-Profile-Update', 'Customer\Basic@profileUpdate')->name('profileUpdate');
 
-Route::get('/User-Address-Active/{id}', 'Customer\Basic@addressActive')->name('addressActive');
+Route::get('/User-Address-Active/{id}', 'Customer\Basic@addressActive');
 
 Route::post('/User-Address-Add', 'Customer\Basic@addAddress')->name('addAddress');
 
@@ -174,8 +174,9 @@ Route::post('/User-Product-Return', 'Customer\Basic@returnProduct')->name('retur
 
 Route::get('/User-Cart', 'Customer\Basic@cart')->name('cart');
 
-Route::get('/User-Cart-Delete/{id}', 'Customer\Basic@cartDelete')->name('cartDelete');
+Route::get('/User-Cart-Delete/{id}', 'Customer\Basic@cartDelete');
 
+Route::post('/User-Cart-Submit', 'Customer\Basic@cartSubmit')->name('cartSubmit');
 
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');

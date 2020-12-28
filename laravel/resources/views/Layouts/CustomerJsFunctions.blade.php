@@ -362,10 +362,10 @@
 
         function qtyMinus(id) {
             // Input Cart Qty
-            let r = $('.cart' + id + ' .js-r').val();
+            let r = $('#containerSelect' + id + ' .js-r').val();
             if (r > 1) {
                 r--;
-                $('.cart' + id + ' .js-r').val(r);
+                $('#containerSelect' + id + ' .js-r').val(r);
             } else
                 return false;
         }
@@ -375,11 +375,11 @@
         })
 
         function qtyPlus(id) {
-            let r = $('.cart' + id + ' .js-r').val(),
+            let r = $('#containerSelect' + id + ' .js-r').val(),
                 qty = parseInt($('#cartQty' + id).text());
             if (r < qty) {
                 r++;
-                $('.cart' + id + ' .js-r').val(r);
+                $('#containerSelect' + id + ' .js-r').val(r);
             } else
                 return false;
         }
@@ -435,17 +435,82 @@
         }
 
         function cartOrder(row) {
-            let price=[], allPrice = 0, tempPrice=[];
+            let price=[],
+                allPrice = 0,
+                tempPrice=[],
+                val=[],
+                qty=[];
+            $("#cartOrderForm").empty();
             $('#cartDate').text('( ' + nowDate() + ' )');
             if (row !==0 ) {
                 for (let i = 0; i <= row-1; i++) {
-                    $('#orderQty' + i).text($('#basketQty' + i).val());
+                    qty[i] = $('#basketQty' + i).val();
+                    val[i] = $('#productDetailID' + i).text();
+                    $('#orderQty' + i).text(qty[i]);
                     tempPrice[i] = $('#productFinalPrice'+i).text().replace(/,/g, '');
-                    price[i] = parseInt($('#basketQty' + i).val()) * parseInt(tempPrice[i]);
+                    price[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
                     allPrice = allPrice + price[i];
+                    $('#rowNumber'+i).text(i);
+                    $('#cartOrderForm').append("<input name='productDetailID"+i+"' value="+val[i]+">");
+                    $('#cartOrderForm').append("<input name='qty"+i+"' value="+qty[i]+">");
                 }
+                $('#cartOrderForm').append("<input name='row' value="+row+">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
+        }
+
+        function cartReset() {
+            $('[id^="cartContainer"]').each(function(index) {
+                $(this).attr('id','cartContainer'+index);
+            });
+
+            $('[id^="basketQty"]').each(function(index) {
+                $(this).attr('id','basketQty'+index);
+            });
+
+            $('[id^="containerSelect"]').each(function(index) {
+                $(this).attr('id','containerSelect'+index);
+            });
+
+            $('[id^="cartQty"]').each(function(index) {
+                $(this).attr('id','cartQty'+index);
+            });
+
+            $('[id^="productFinalPrice"]').each(function(index) {
+                $(this).attr('id','productFinalPrice'+index);
+            });
+
+            $('[id^="qtyM"]').each(function(index) {
+                $(this).attr('id','qtyM'+index);
+            });
+
+            $('[id^="qtyP"]').each(function(index) {
+                $(this).attr('id','qtyP'+index);
+            });
+
+            $('[id^="cartContainer"]').each(function(index) {
+                $(this).attr('id','cartContainer'+index);
+            });
+
+            $('[id^="rowNumber"]').each(function(index) {
+                $(this).attr('id','rowNumber'+index);
+            });
+
+            $('[id^="cartDelete"]').each(function(index) {
+                $(this).attr('id','cartDelete'+index);
+            });
+
+            $('[id^="cartWaitingDelete"]').each(function(index) {
+                $(this).attr('id','cartWaitingDelete'+index);
+            });
+
+            $('[id^="orderQty"]').each(function(index) {
+                $(this).attr('id','orderQty'+index);
+            });
+
+            $('[id^="productDetailID"]').each(function(index) {
+                $(this).attr('id','productDetailID'+index);
+            });
         }
 
         function cartDelete(id, key) {
@@ -457,14 +522,17 @@
                 success: function (data) {
                     $('#cartCount').text(parseInt($('#cartCount').text())-1);
                     $('#orderRow'+key).remove();
-                    $('#cart' + key).remove();
-                    console.log(data);
+                    $('#cartContainer' + key).remove();
                     if (data === '0') {
                         $('#cartBuyBtn').addClass('d-none');
                         $('#cartEmptyAlert').removeClass('d-none');
-                    }
+                    } else cartReset();
                 }
             });
+        }
+
+        function orderSubmit() {
+            $('#finalCartOrderForm').submit();
         }
 
         // تابع و دستورات مربوط به افزودن رنگ و تعداد محصول از طریق آژاکس

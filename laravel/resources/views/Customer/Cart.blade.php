@@ -21,7 +21,7 @@
                     <span id="cartCount" class="d-none">{{ (isset($data)) ?  count($data) : 0 }}</span>
                     @foreach($data as $key =>$row)
                         {{--    hidden input   --}}
-                        <div id="cart{{$key}}" class="col-12 col-lg-3 g-mb-30">
+                        <div id="cartContainer{{$key}}" class="col-12 col-lg-3 g-mb-30">
                             <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24">
                                 <div>
                                     <div id="carousel-08-1"
@@ -95,7 +95,7 @@
                                                href="#"
                                                id="cartDelete{{$key}}"
                                                data-toggle="tooltip"
-                                               onclick="cartDelete({{ $row->ProductDetailID }}, {{$key}})"
+                                               onclick="cartDelete({{ $row->ProductDetailID }}, $(this).attr('id').replace(/[^0-9]/gi, ''))"
                                                data-placement="top"
                                                data-original-title="حذف از سبد"
                                                tabindex="0">
@@ -117,10 +117,11 @@
                                 </div>
                                 <hr class="g-brd-gray-light-v4 g-my-10">
                                 <div style="direction: rtl" id="boughtQty" class="d-block text-center g-mb-10">
-                                    <div
-                                        class="input-group u-quantity-v1 w-100 g-height-45 g-brd-gray-light-v4 g-brd-primary--focus cart{{$key}}">
+                                    <div id="containerSelect{{$key}}"
+                                         class="input-group u-quantity-v1 w-100 g-height-45 g-brd-gray-light-v4 g-brd-primary--focus">
                                         <div style="cursor: pointer; user-select: none"
-                                             onclick="qtyMinus({{$key}})"
+                                             id="qtyM{{$key}}"
+                                             onclick="qtyMinus($(this).attr('id').replace(/[^0-9]/gi, ''))"
                                              class="js-m input-group-addon d-flex dontSelectText  g-font-size-15 g-width-45 g-color-gray-dark-v4 g-bg-gray-light-v4 g-brd-gray-light-v4 g-rounded-0">
                                             −
                                         </div>
@@ -129,7 +130,8 @@
                                                class="js-r form-control text-center g-brd-gray-light-v4 g-color-gray-dark-v4 g-rounded-0 g-pa-15"
                                                type="number" value="1" readonly="">
                                         <div style="cursor: pointer; user-select: none"
-                                             onclick="qtyPlus({{$key}})"
+                                             id="qtyP{{$key}}"
+                                             onclick="qtyPlus($(this).attr('id').replace(/[^0-9]/gi, ''))"
                                              class="js-p input-group-addon d-flex dontSelectText g-font-size-15 g-width-45 g-color-gray-dark-v4 g-bg-gray-light-v4 g-brd-gray-light-v4 g-rounded-0">
                                             +
                                         </div>
@@ -139,13 +141,16 @@
                         </div>
                     @endforeach
                 </div>
+
+                <form id="finalCartOrderForm" action="{{route('cartSubmit')}}" method="POST" class="d-none">@csrf <div id="cartOrderForm"></div></form>
+
                 <div class="{{ isset($data[0]) ? '':'d-none' }} text-left">
                     <a href="#modal18"
                        onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally'); cartOrder($('#cartCount').text())"
                        id="cartBuyBtn"
                        data-modal-target="#modal18"
                        data-modal-effect="slidetogether"
-                       class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 g-ml-0 g-mt-0 g-mt-20--lg force-col-12">
+                       class="btn btn-xl btn-primary g-color-white g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 g-ml-0 g-mt-0 g-mt-20--lg force-col-12">
                             <span class="pull-left">
                               پرداخت امن
                               <span class="d-block g-font-size-11">نهایی کردن خرید</span>
@@ -184,7 +189,8 @@
                                         <th class="text-center">سایز</th>
                                         <th class="text-center">تعداد</th>
                                         <th class="text-center">قیمت واحد</th>
-                                        <th class="text-center">{{ isset($data[0]) ? $row->Discount.'%' : '' }}با تخفیف</th>
+                                        <th class="text-center">با
+                                            تخفیف {{ isset($data[0]) ? $row->Discount.'%' : '' }}</th>
                                         <th class="text-center">عکس</th>
                                     </tr>
                                     </thead>
@@ -193,8 +199,7 @@
                                     @foreach($data as $key =>$row)
                                         <tr id="orderRow{{$key}}">
                                             <td class="align-middle text-nowrap text-center">
-                                            <span class="g-pa-5">
-                                                {{ $key+1 }}
+                                            <span id="rowNumber{{$key}}" class="g-pa-5">
                                             </span>
                                             </td>
                                             <td class="align-middle text-nowrap text-center">
@@ -245,7 +250,8 @@
                             </div>
                             <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
                                 <span
-                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span id="orderPrice"></span>
+                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span
+                                        id="orderPrice"></span>
                                     <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                 </span>
 
@@ -297,9 +303,9 @@
                                         {{--                                        </form>--}}
                                     </div>
                                 </div>
-                                <a href="#"
-                                   onclick=""
-                                   class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
+                                <a
+                                    onclick="orderSubmit()"
+                                    class="btn btn-xl btn-primary g-color-white g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
                                     <span class="pull-left">درگاه بانکی
                                         <span id="payment-door" class="d-block g-font-size-11">ورود به درگاه ملت</span>
                                     </span>
