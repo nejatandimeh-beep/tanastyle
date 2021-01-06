@@ -33,7 +33,7 @@ class Basic extends Controller
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('po.Date', 'DESC')
+            ->orderBy('po.ID', 'DESC')
             ->get();
 
         $orderHowDay = array();
@@ -69,9 +69,8 @@ class Basic extends Controller
             $deliveryPersianDate[$key] = $this->convertDateToPersian($d); //get persian date
             $deliveryPersianDate[$key][1] = $this->month($deliveryPersianDate[$key][1]); // get month name
             $rowDate = strtotime($row->Date . ' ' . $row->Time);
-            $h = date('H:i', $rowDate);
             $orderDate = date('Y-m-d', $rowDate);
-            if (($orderDate < $today) && ($h > '08:00'))
+            if (($orderDate < $today))
                 $deliveryMin[$key] = $this->dateLenToNow($today, '08:00:00'); // get len past date to now by min
             else
                 $deliveryMin[$key] = 0; // get len past date to now by min
@@ -91,6 +90,12 @@ class Basic extends Controller
                             ->where('OrderID', $row->OrderID)
                             ->update([
                                 'DeliveryProblem' => 1
+                            ]);
+                    } else {
+                        DB::table('product_delivery')
+                            ->where('OrderID', $row->OrderID)
+                            ->update([
+                                'DeliveryProblem' => 0
                             ]);
                     }
                     break;
@@ -200,9 +205,8 @@ class Basic extends Controller
             $returnPersianDate[$key][1] = $this->month($returnPersianDate[$key][1]); // get month name
             $rowDate = strtotime($row->returnDate);
             date_default_timezone_set('Asia/Tehran');
-            $hToday = date('H:i', strtotime(date('Y-m-d H:i:s')));
             $returnDate = date('Y-m-d', $rowDate);
-            if (($returnDate < $today) && ($hToday > '08:00'))
+            if (($returnDate < $today))
                 $returnMin[$key] = $this->dateLenToNow($row->returnDate, '08:00:00'); // get len past date to now by min
             else
                 $returnMin[$key] = 0; // get len past date to now by min
@@ -308,7 +312,7 @@ class Basic extends Controller
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('po.Date', 'DESC')
+            ->orderBy('po.ID', 'DESC')
             ->get();
         $delivery = DB::table('product_delivery as delivery')
             ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID')
@@ -340,9 +344,11 @@ class Basic extends Controller
             ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID')
             ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pc.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
+            ->where('pc.CustomerID', Auth::user()->id)
             ->orderBy('Date')
             ->orderBy('Time')
             ->get();
+
         $sendAddress = $this->checkAddress();
         return view('Customer.Cart', compact('sendAddress', 'data'));
     }
@@ -357,15 +363,18 @@ class Basic extends Controller
         return count($cartCount);
     }
 
-    public function cartSubmit(Request $request) {
+    public function cartSubmit(Request $request)
+    {
         $row = $request->get('row');
-        $productDetailID=[];
-        $qty=[];
-        for($i=0; $i<=$row-1; $i++) {
-            $productDetailID[$i] = $request->get('productDetailID'.$i);
-            $qty[$i] = $request->get('qty'.$i);
+        $productDetailID = [];
+        $qty = [];
+        for ($i = 0; $i <= $row - 1; $i++) {
+            $productDetailID[$i] = $request->get('productDetailID' . $i);
+            $qty[$i] = $request->get('qty' . $i);
+            $new = $this->newOrder($productDetailID[$i], $qty[$i]);
         }
-        dd($productDetailID, $qty);
+
+        return redirect()->route('userProfile', 'deliveryStatus');
     }
 
     public function profileUpdate(Request $request)
@@ -524,7 +533,7 @@ class Basic extends Controller
             ->orderBy('Size')
             ->get();
 
-        // سازمندهی کردن جزییات مربوط به محصول(سایز، رنگ، تعداد)
+        // سازمندهی کردن جزییات مربوط به محصول(سایز)
         $size = array();
         $temp = '';
         $i = 0;
@@ -536,12 +545,11 @@ class Basic extends Controller
             }
             $temp = $info->Size;
         }
+
         // سازمندهی کردن جزییات مربوط به محصول(rating، comment)
         $rating_tbl = DB::table('customer_vote as cv')
-            ->select('cv.*', 'c.name', 'c.Family')
-            ->leftJoin('customers as c', 'cv.CustomerID', '=', 'c.ID')
-            ->leftJoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
-            ->where('pd.ProductID', $id)
+            ->select('*')
+            ->where('ProductDetailID', $detail[0]->detailID)
             ->get();
 
         // rating & comment
@@ -564,6 +572,7 @@ class Basic extends Controller
         $commentVote = null;
         $voteID = null;
         $sendAddress = null;
+
         if (isset(Auth::user()->id)) {
             $commentVote = DB::table('customer_comment_like as ccl')
                 ->select('ccl.*', 'cc.ID')
@@ -621,50 +630,7 @@ class Basic extends Controller
 
     public function bankingPortal($id, $qty)
     {
-        $customerInfo = DB::table('customers as c')
-            ->select('ca.*')
-            ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
-            ->where('c.id', Auth::user()->id)
-            ->first();
-
-        date_default_timezone_set('Asia/Tehran');
-        $date = date('Y-m-d');
-        $time = date('H:i:s');
-        DB::table('product_order')->insert([
-            'CustomerID' => Auth::user()->id,
-            'AddressID' => $customerInfo->ID,
-            'Date' => $date,
-            'Time' => $time,
-        ]);
-
-        $orderID = DB::table('product_order')
-            ->select('ID')
-            ->max('ID');
-
-        $productInfo = DB::table('product_detail as pd')
-            ->select('pd.*', 'p.SellerID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-            ->where('pd.ID', $id)
-            ->first();
-
-        DB::table('product_order_detail')->insert([
-            'SellerID' => $productInfo->SellerID,
-            'ProductID' => $productInfo->ProductID,
-            'ProductDetailID' => $id,
-            'OrderID' => $orderID,
-            'Qty' => $qty,
-            'Size' => $productInfo->Size,
-            'Color' => $productInfo->Color,
-            'OrderBankCode' => '3#$ddf3e3continue3',
-        ]);
-
-        DB::table('product_delivery')->insert([
-            'OrderID' => $orderID,
-        ]);
-
-        DB::table('product_detail')
-            ->where('ID', $id)
-            ->decrement('Qty', $qty);
+        $new = $this->newOrder($id, $qty);
 
         return redirect()->route('userProfile', 'deliveryStatus');
     }
@@ -752,7 +718,6 @@ class Basic extends Controller
             ->where('CustomerID', Auth::user()->id)
             ->where('ProductDetailID', $id)
             ->first();
-
         if (isset($data)) {
             DB::table('customer_vote')
                 ->where('CustomerID', Auth::user()->id)
@@ -770,11 +735,13 @@ class Basic extends Controller
                 ],
             ]);
         }
+
         $voteID = DB::table('customer_vote')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
             ->where('ProductDetailID', $id)
             ->first();
+
         return $voteID->ID;
     }
 
@@ -944,7 +911,69 @@ class Basic extends Controller
             ->first();
     }
 
+    public function cartCheck($id)
+    {
+        $exist = DB::table('product_cart')
+            ->where('ProductDetailID', $id)
+            ->where('CustomerID', Auth::user()->id)
+            ->first();
+        if ($exist === null)
+            return 'empty';
+        else
+            return 'exist';
+    }
+
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
+    public function newOrder($id, $qty)
+    {
+        $customerInfo = DB::table('customers as c')
+            ->select('ca.*')
+            ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
+            ->where('c.id', Auth::user()->id)
+            ->first();
+
+        date_default_timezone_set('Asia/Tehran');
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
+        DB::table('product_order')->insert([
+            'CustomerID' => Auth::user()->id,
+            'AddressID' => $customerInfo->ID,
+            'Date' => $date,
+            'Time' => $time,
+        ]);
+
+        $orderID = DB::table('product_order')
+            ->select('ID')
+            ->max('ID');
+
+        $productInfo = DB::table('product_detail as pd')
+            ->select('pd.*', 'p.SellerID')
+            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
+            ->where('pd.ID', $id)
+            ->first();
+
+        DB::table('product_order_detail')->insert([
+            'SellerID' => $productInfo->SellerID,
+            'ProductID' => $productInfo->ProductID,
+            'ProductDetailID' => $id,
+            'OrderID' => $orderID,
+            'Qty' => $qty,
+            'Size' => $productInfo->Size,
+            'Color' => $productInfo->Color,
+            'OrderBankCode' => '3#$ddf3e3continue3',
+        ]);
+
+        DB::table('product_delivery')->insert([
+            'OrderID' => $orderID,
+        ]);
+
+        DB::table('product_detail')
+            ->where('ID', $id)
+            ->decrement('Qty', $qty);
+
+        return true;
+    }
+
     //  Convert Date to Iranian Calender
     public function convertDateToPersian($d)
     {

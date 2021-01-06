@@ -219,13 +219,16 @@
                 </div>
                 {{-- Modal پیش فاکتور--}}
                 <div style="display: none" id="actionFormBtn" class="col-12 text-left g-pl-0 g-mt-0--lg g-mt-65">
+                    <i id="waitingCheckCart"
+                       class="d-none fa fa-spinner g-color-primary fa-spin m-0 g-mt-10 g-font-size-20 align-middle"></i>
                     <button type="button"
+                            id="addToBasketBtn"
                             class="btn btn-lg u-btn-outline-primary g-font-weight-600 rounded-0 g-mt-10 g-font-size-16 g-px-25"
-                            onclick="if ($('#loginAlert').text() === 'login') { $(this).hide(); $('#attachToBasket').removeClass('d-none'); addToBasket() } else { alert('لطفا نخست وارد شوید.'); }">
+                            onclick="if ($('#loginAlert').text() === 'login') { $(this).hide(); addToBasket() } else { alert('لطفا نخست وارد شوید.'); }">
                         افزودن به سبد
                     </button>
                     <span id="attachToBasket"
-                          class="d-none u-label align-middle g-mt-10 g-color-gray-dark-v4 g-px-15"><i
+                          class="u-label align-middle g-mt-10 g-color-gray-dark-v4 g-px-15"><i
                             class="icon-basket-loaded g-mr-3 g-color-primary g-font-size-15"></i>به سبد افزوده شد.</span>
                     <a href="#modal18"
                        onclick="$(document.body).addClass('me-position-fix');

@@ -1,19 +1,17 @@
 @section('CustomerJsFunction')
     <script>
         $(document).ready(function () {
-            if($('#cartCount').text() === 0) {
+            if ($('#cartCount').text() === 0) {
                 $('#cartBuyBtn').hide();
             }
 
-            if($('#productGallery').length > 0) {
+            if ($('#productGallery').length > 0) {
                 magnify("img1", 3);
                 magnify("img2", 3);
                 magnify("img3", 3);
                 // نمایش رنگ برای اولین سایز بعد از لود شدن صفحه
                 addColor($('input[id ^="inputSize"]').first().val(), parseInt($('#productID').text()));
             }
-
-            addToBasket();
 
             if ($('.breadCrumbs').length > 0) {
                 $('html, body').animate({scrollTop: $('.breadCrumbs').offset().top}, 1000);
@@ -417,14 +415,14 @@
         });
         // ---------------------------------------------------My Function-----------------------------------------------
         // هایلت آپشن آدرس در هنگام قرار گرفتن ماوس بروی هر سط آدرس
-        function optionHover(id){
-            $('#addressOption'+id).removeClass('g-color-gray-dark-v3');
-            $('#addressOption'+id).addClass('g-color-primary');
+        function optionHover(id) {
+            $('#addressOption' + id).removeClass('g-color-gray-dark-v3');
+            $('#addressOption' + id).addClass('g-color-primary');
         }
 
-        function optionUnHover(id){
-            $('#addressOption'+id).removeClass('g-color-primary');
-            $('#addressOption'+id).addClass('g-color-gray-dark-v3');
+        function optionUnHover(id) {
+            $('#addressOption' + id).removeClass('g-color-primary');
+            $('#addressOption' + id).addClass('g-color-gray-dark-v3');
         }
 
         function cart() {
@@ -435,81 +433,81 @@
         }
 
         function cartOrder(row) {
-            let price=[],
+            let price = [],
                 allPrice = 0,
-                tempPrice=[],
-                val=[],
-                qty=[];
+                tempPrice = [],
+                val = [],
+                qty = [];
             $("#cartOrderForm").empty();
             $('#cartDate').text('( ' + nowDate() + ' )');
-            if (row !==0 ) {
-                for (let i = 0; i <= row-1; i++) {
+            if (row !== 0) {
+                for (let i = 0; i <= row - 1; i++) {
                     qty[i] = $('#basketQty' + i).val();
                     val[i] = $('#productDetailID' + i).text();
                     $('#orderQty' + i).text(qty[i]);
-                    tempPrice[i] = $('#productFinalPrice'+i).text().replace(/,/g, '');
+                    tempPrice[i] = $('#productFinalPrice' + i).text().replace(/,/g, '');
                     price[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
                     allPrice = allPrice + price[i];
-                    $('#rowNumber'+i).text(i);
-                    $('#cartOrderForm').append("<input name='productDetailID"+i+"' value="+val[i]+">");
-                    $('#cartOrderForm').append("<input name='qty"+i+"' value="+qty[i]+">");
+                    $('#rowNumber' + i).text(i);
+                    $('#cartOrderForm').append("<input name='productDetailID" + i + "' value=" + val[i] + ">");
+                    $('#cartOrderForm').append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
-                $('#cartOrderForm').append("<input name='row' value="+row+">");
+                $('#cartOrderForm').append("<input name='row' value=" + row + ">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
         }
 
         function cartReset() {
-            $('[id^="cartContainer"]').each(function(index) {
-                $(this).attr('id','cartContainer'+index);
+            $('[id^="cartContainer"]').each(function (index) {
+                $(this).attr('id', 'cartContainer' + index);
             });
 
-            $('[id^="basketQty"]').each(function(index) {
-                $(this).attr('id','basketQty'+index);
+            $('[id^="basketQty"]').each(function (index) {
+                $(this).attr('id', 'basketQty' + index);
             });
 
-            $('[id^="containerSelect"]').each(function(index) {
-                $(this).attr('id','containerSelect'+index);
+            $('[id^="containerSelect"]').each(function (index) {
+                $(this).attr('id', 'containerSelect' + index);
             });
 
-            $('[id^="cartQty"]').each(function(index) {
-                $(this).attr('id','cartQty'+index);
+            $('[id^="cartQty"]').each(function (index) {
+                $(this).attr('id', 'cartQty' + index);
             });
 
-            $('[id^="productFinalPrice"]').each(function(index) {
-                $(this).attr('id','productFinalPrice'+index);
+            $('[id^="productFinalPrice"]').each(function (index) {
+                $(this).attr('id', 'productFinalPrice' + index);
             });
 
-            $('[id^="qtyM"]').each(function(index) {
-                $(this).attr('id','qtyM'+index);
+            $('[id^="qtyM"]').each(function (index) {
+                $(this).attr('id', 'qtyM' + index);
             });
 
-            $('[id^="qtyP"]').each(function(index) {
-                $(this).attr('id','qtyP'+index);
+            $('[id^="qtyP"]').each(function (index) {
+                $(this).attr('id', 'qtyP' + index);
             });
 
-            $('[id^="cartContainer"]').each(function(index) {
-                $(this).attr('id','cartContainer'+index);
+            $('[id^="cartContainer"]').each(function (index) {
+                $(this).attr('id', 'cartContainer' + index);
             });
 
-            $('[id^="rowNumber"]').each(function(index) {
-                $(this).attr('id','rowNumber'+index);
+            $('[id^="rowNumber"]').each(function (index) {
+                $(this).attr('id', 'rowNumber' + index);
             });
 
-            $('[id^="cartDelete"]').each(function(index) {
-                $(this).attr('id','cartDelete'+index);
+            $('[id^="cartDelete"]').each(function (index) {
+                $(this).attr('id', 'cartDelete' + index);
             });
 
-            $('[id^="cartWaitingDelete"]').each(function(index) {
-                $(this).attr('id','cartWaitingDelete'+index);
+            $('[id^="cartWaitingDelete"]').each(function (index) {
+                $(this).attr('id', 'cartWaitingDelete' + index);
             });
 
-            $('[id^="orderQty"]').each(function(index) {
-                $(this).attr('id','orderQty'+index);
+            $('[id^="orderQty"]').each(function (index) {
+                $(this).attr('id', 'orderQty' + index);
             });
 
-            $('[id^="productDetailID"]').each(function(index) {
-                $(this).attr('id','productDetailID'+index);
+            $('[id^="productDetailID"]').each(function (index) {
+                $(this).attr('id', 'productDetailID' + index);
             });
         }
 
@@ -520,8 +518,8 @@
                 type: 'GET',
                 url: "/User-Cart-Delete/" + id,
                 success: function (data) {
-                    $('#cartCount').text(parseInt($('#cartCount').text())-1);
-                    $('#orderRow'+key).remove();
+                    $('#cartCount').text(parseInt($('#cartCount').text()) - 1);
+                    $('#orderRow' + key).remove();
                     $('#cartContainer' + key).remove();
                     if (data === '0') {
                         $('#cartBuyBtn').addClass('d-none');
@@ -542,6 +540,9 @@
             $('#waitingIconColor').show();
             $('#waitingIconQty').show();
             $('#colorQtyContainer').hide();
+            $('#waitingCheckCart').removeClass('d-none');
+            $('#addToBasketBtn').addClass('d-none');
+            $('#attachToBasket').addClass('d-none');
             $.ajax({
                 type: 'GET',
                 url: "/Female-Product-SizeInfo/" + id + '/' + val,
@@ -555,6 +556,7 @@
                             $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
                             $('#sizeInfo' + i + ' input').attr('id', 'color-' + data[i]["ID"]);
                             $('#sizeInfo' + i + ' input').attr('onclick', 'addQty(' + data[i]["ID"] + ',' + data[i]["Qty"] + ')');
+                            $('#sizeInfo' + i + ' input').attr('onclick', 'checkCart(' + data[i]["ID"] + ')');
                             $('#sizeInfo' + i + ' input').val(data[i]['Color']);
                             $('#sizeInfo' + i + ' label').attr('for', 'color-' + data[i]["ID"]);
                             $('#sizeInfo' + i + ' label').text(data[i]['Color']);
@@ -563,8 +565,28 @@
                     }
                     $('#sizeInfo0 input').prop('checked', 'checked');
                     addQty(data[0]["ID"], data[0]['Qty']);
+                    checkCart(data[0]["ID"]);
                 }
             });
+        }
+
+        function checkCart(id) {
+            if ($('#loginAlert').text() === 'login')
+            $.ajax({
+                type: 'GET',
+                url: "/User-Cart-Check/" + id,
+                success: function (data) {
+                    if (data === 'empty'){
+                        $('#addToBasketBtn').removeClass('d-none');
+                    }
+                    else {
+                        $('#attachToBasket').removeClass('d-none');
+                    }
+                    $('#waitingCheckCart').addClass('d-none');
+                }
+            });
+            else
+                $('#addToBasketBtn').removeClass('d-none');
         }
 
         function addQty(id, qty) {
@@ -677,6 +699,7 @@
 
         // تابع اضافه کردن نظرات
         function addVote(val, voteType) {
+            console.log(parseInt($('#productDetailID').text()), val, voteType);
             switch (voteType) {
                 case 'likeProduct':
                     $.ajax({

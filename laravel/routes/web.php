@@ -178,6 +178,8 @@ Route::get('/User-Cart-Delete/{id}', 'Customer\Basic@cartDelete');
 
 Route::post('/User-Cart-Submit', 'Customer\Basic@cartSubmit')->name('cartSubmit');
 
+Route::get('/User-Cart-Check/{id}', 'Customer\Basic@cartCheck');
+
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');
 });
