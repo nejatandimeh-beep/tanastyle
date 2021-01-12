@@ -1913,7 +1913,7 @@
                                data-dropdown-animation-out="fadeOut"
                                onmousemove="hideSearch()">
                                 <span id="basketNum"
-                                      class="u-badge-v1--sm g-color-white g-bg-primary g-rounded-50x">3</span>
+                                      class="u-badge-v1--sm g-color-white g-bg-primary g-rounded-50x">0</span>
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
 

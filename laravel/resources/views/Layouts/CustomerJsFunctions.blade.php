@@ -13,9 +13,10 @@
                 addColor($('input[id ^="inputSize"]').first().val(), parseInt($('#productID').text()));
             }
 
-            if ($('.breadCrumbs').length > 0) {
-                $('html, body').animate({scrollTop: $('.breadCrumbs').offset().top}, 1000);
-            }
+            // اسکرول صفحه به مسیر صفحه
+            // if ($('.breadCrumbs').length > 0) {
+            //     $('html, body').animate({scrollTop: $('.breadCrumbs').offset().top}, 1000);
+            // }
 
             if ($('#checkLike').text() === 'like')
                 $('#customerLike').removeClass('d-none');
@@ -511,6 +512,23 @@
             });
         }
 
+        function addToCart(id) {
+            $('#waitingCheckCart').removeClass('d-none');
+            $.ajax({
+                type: 'GET',
+                url: "/User-Cart-Add/" + id,
+                success: function () {
+                    $('#addToBasketBtn').addClass('d-none');
+                    $('#waitingCheckCart').addClass('d-none');
+                    $('#attachToBasket').removeClass('d-none');
+
+                    let num = parseInt($('#basketNum').text());
+                    num++;
+                    $('#basketNum').text(num);
+                }
+            });
+        }
+
         function cartDelete(id, key) {
             $('#cartWaitingDelete' + key).show();
             $('#cartDelete' + key).hide();
@@ -521,12 +539,32 @@
                     $('#cartCount').text(parseInt($('#cartCount').text()) - 1);
                     $('#orderRow' + key).remove();
                     $('#cartContainer' + key).remove();
+                    $('#basketNum').text(parseInt($('#basketNum').text())-1);
                     if (data === '0') {
                         $('#cartBuyBtn').addClass('d-none');
                         $('#cartEmptyAlert').removeClass('d-none');
                     } else cartReset();
                 }
             });
+        }
+
+        function checkCart(id) {
+            if ($('#loginAlert').text() === 'login')
+                $.ajax({
+                    type: 'GET',
+                    url: "/User-Cart-Check/" + id,
+                    success: function (data) {
+                        if (data === 'empty'){
+                            $('#addToBasketBtn').removeClass('d-none');
+                        }
+                        else {
+                            $('#attachToBasket').removeClass('d-none');
+                        }
+                        $('#waitingCheckCart').addClass('d-none');
+                    }
+                });
+            else
+                $('#addToBasketBtn').removeClass('d-none');
         }
 
         function orderSubmit() {
@@ -536,11 +574,13 @@
         // تابع و دستورات مربوط به افزودن رنگ و تعداد محصول از طریق آژاکس
         // --------------------------------------------------------------
         function addColor(val, id) {
+            if ($('#loginAlert').text() === 'login')
+                $('#waitingCheckCart').removeClass('d-none');
+
             $('#colorContainer').empty();
             $('#waitingIconColor').show();
             $('#waitingIconQty').show();
             $('#colorQtyContainer').hide();
-            $('#waitingCheckCart').removeClass('d-none');
             $('#addToBasketBtn').addClass('d-none');
             $('#attachToBasket').addClass('d-none');
             $.ajax({
@@ -568,25 +608,6 @@
                     checkCart(data[0]["ID"]);
                 }
             });
-        }
-
-        function checkCart(id) {
-            if ($('#loginAlert').text() === 'login')
-            $.ajax({
-                type: 'GET',
-                url: "/User-Cart-Check/" + id,
-                success: function (data) {
-                    if (data === 'empty'){
-                        $('#addToBasketBtn').removeClass('d-none');
-                    }
-                    else {
-                        $('#attachToBasket').removeClass('d-none');
-                    }
-                    $('#waitingCheckCart').addClass('d-none');
-                }
-            });
-            else
-                $('#addToBasketBtn').removeClass('d-none');
         }
 
         function addQty(id, qty) {
@@ -1071,12 +1092,6 @@
 
         function activeAddress(id) {
             window.location = "/User-Address-Active/" + id;
-        }
-
-        function addToBasket() {
-            let num = parseInt($('#basketNum').text());
-            num++;
-            $('#basketNum').text(num);
         }
 
         // -------------------------------------------------State And City----------------------------------------------

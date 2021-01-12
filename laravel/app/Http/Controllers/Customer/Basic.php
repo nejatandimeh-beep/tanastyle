@@ -377,6 +377,24 @@ class Basic extends Controller
         return redirect()->route('userProfile', 'deliveryStatus');
     }
 
+    public function cartAdd($id)
+    {
+        DB::table('product_cart')->insert([
+            'CustomerID' => Auth::user()->id,
+            'ProductDetailID' => $id,
+            'Date' => date('Y-m-d'),
+            'Time' => date('H:i:s')
+        ]);
+    }
+
+    public function checkCartNumber()
+    {
+        $data=DB::table('product_cart')
+            ->where('CustomerID',Auth::user()->id)
+            ->get();
+        return array($data->count(), $data);
+    }
+
     public function profileUpdate(Request $request)
     {
         $name = $request->get('name');

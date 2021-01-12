@@ -53,7 +53,6 @@
                     <div class=" align-self-center">
                         <h1 id="productName"
                             class="d-inline-block h4 g-color-black mb-0">{{ $data->Name }}</h1>
-                        مدل:
                         <span id="productModel" class="align-middle">{{ $data->Model }}</span>
                     </div>
                     <div
@@ -217,6 +216,7 @@
                         </button>
                     </fieldset>
                 </div>
+
                 {{-- Modal پیش فاکتور--}}
                 <div style="display: none" id="actionFormBtn" class="col-12 text-left g-pl-0 g-mt-0--lg g-mt-65">
                     <i id="waitingCheckCart"
@@ -224,7 +224,7 @@
                     <button type="button"
                             id="addToBasketBtn"
                             class="btn btn-lg u-btn-outline-primary g-font-weight-600 rounded-0 g-mt-10 g-font-size-16 g-px-25"
-                            onclick="if ($('#loginAlert').text() === 'login') { $(this).hide(); addToBasket() } else { alert('لطفا نخست وارد شوید.'); }">
+                            onclick="if ($('#loginAlert').text() === 'login') { $(this).hide(); addToCart($('#productDetailID').text()) } else { alert('لطفا نخست وارد شوید.'); }">
                         افزودن به سبد
                     </button>
                     <span id="attachToBasket"

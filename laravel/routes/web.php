@@ -180,6 +180,10 @@ Route::post('/User-Cart-Submit', 'Customer\Basic@cartSubmit')->name('cartSubmit'
 
 Route::get('/User-Cart-Check/{id}', 'Customer\Basic@cartCheck');
 
+Route::get('/User-Cart-Add/{id}', 'Customer\Basic@cartAdd');
+
+Route::get('/User-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
+
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');
 });
