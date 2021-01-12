@@ -70,15 +70,12 @@ class Basic extends Controller
             $deliveryPersianDate[$key][1] = $this->month($deliveryPersianDate[$key][1]); // get month name
             $rowDate = strtotime($row->Date . ' ' . $row->Time);
             $orderDate = date('Y-m-d', $rowDate);
+            $reservation=date('Y-m-d', strtotime($row->Date. ' + 1 days'));
+
             if (($orderDate < $today))
-                $deliveryMin[$key] = $this->dateLenToNow($today, '08:00:00'); // get len past date to now by min
+                $deliveryMin[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
             else
                 $deliveryMin[$key] = 0; // get len past date to now by min
-
-            $deliveryHowDay[$key] = null;
-            if ($deliveryMin[$key] < 11520) {
-                $deliveryHowDay[$key] = $this->howDays($deliveryMin[$key]);
-            }
 
             switch ($row->DeliveryStatus) {
                 case '0':
@@ -181,6 +178,11 @@ class Basic extends Controller
                     $deliveryHint[$key]['location'] = 'بازگشتی';
                     break;
                 default:
+            }
+
+            $deliveryHowDay[$key] = null;
+            if ($deliveryMin[$key] < 11520) {
+                $deliveryHowDay[$key] = $this->howDays($deliveryMin[$key]);
             }
         }
 
