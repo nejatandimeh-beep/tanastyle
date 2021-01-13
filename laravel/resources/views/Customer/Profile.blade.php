@@ -1136,6 +1136,7 @@
                         <hr style="z-index: 100 !important" class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
+                    
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
                         @if(!isset($order[0]->ID))
                             <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
