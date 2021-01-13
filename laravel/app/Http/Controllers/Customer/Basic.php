@@ -70,7 +70,7 @@ class Basic extends Controller
             $deliveryPersianDate[$key][1] = $this->month($deliveryPersianDate[$key][1]); // get month name
             $rowDate = strtotime($row->Date . ' ' . $row->Time);
             $orderDate = date('Y-m-d', $rowDate);
-            $reservation=date('Y-m-d', strtotime($row->Date. ' + 1 days'));
+            $reservation = date('Y-m-d', strtotime($row->Date . ' + 1 days'));
 
             if (($orderDate < $today))
                 $deliveryMin[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
@@ -373,7 +373,7 @@ class Basic extends Controller
         for ($i = 0; $i <= $row - 1; $i++) {
             $productDetailID[$i] = $request->get('productDetailID' . $i);
             $qty[$i] = $request->get('qty' . $i);
-            $new = $this->newOrder($productDetailID[$i], $qty[$i]);
+            $new = $this->newOrder($productDetailID[$i], $qty[$i], $i);
         }
 
         return redirect()->route('userProfile', 'deliveryStatus');
@@ -391,8 +391,8 @@ class Basic extends Controller
 
     public function checkCartNumber()
     {
-        $data=DB::table('product_cart')
-            ->where('CustomerID',Auth::user()->id)
+        $data = DB::table('product_cart')
+            ->where('CustomerID', Auth::user()->id)
             ->get();
         return array($data->count(), $data);
     }
@@ -650,7 +650,7 @@ class Basic extends Controller
 
     public function bankingPortal($id, $qty)
     {
-        $new = $this->newOrder($id, $qty);
+        $new = $this->newOrder($id, $qty, 0);
 
         return redirect()->route('userProfile', 'deliveryStatus');
     }
@@ -944,7 +944,7 @@ class Basic extends Controller
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
-    public function newOrder($id, $qty)
+    public function newOrder($id, $qty, $i)
     {
         $customerInfo = DB::table('customers as c')
             ->select('ca.*')
@@ -955,13 +955,23 @@ class Basic extends Controller
         date_default_timezone_set('Asia/Tehran');
         $date = date('Y-m-d');
         $time = date('H:i:s');
-        DB::table('product_order')->insert([
-            'CustomerID' => Auth::user()->id,
-            'AddressID' => $customerInfo->ID,
-            'Date' => $date,
-            'Time' => $time,
-        ]);
+        if ($i === 0) {
+            DB::table('product_order')->insert([
+                'CustomerID' => Auth::user()->id,
+                'AddressID' => $customerInfo->ID,
+                'Date' => $date,
+                'Time' => $time,
+            ]);
 
+            $orderID = DB::table('product_order')
+                ->select('ID')
+                ->max('ID');
+
+            DB::table('product_delivery')->insert([
+                'OrderID' => $orderID,
+            ]);
+        }
+        
         $orderID = DB::table('product_order')
             ->select('ID')
             ->max('ID');
@@ -981,10 +991,6 @@ class Basic extends Controller
             'Size' => $productInfo->Size,
             'Color' => $productInfo->Color,
             'OrderBankCode' => '3#$ddf3e3continue3',
-        ]);
-
-        DB::table('product_delivery')->insert([
-            'OrderID' => $orderID,
         ]);
 
         DB::table('product_detail')
