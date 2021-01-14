@@ -127,7 +127,7 @@
                                            class="nav-link g-color-main g-color-primary--hover p-0"
                                            onclick="showPanel('return');">برگشت محصول
                                             <i style="transform: scaleX(-1);"
-                                               class="icon-hotel-restaurant-186 u-line-icon-pro float-left g-font-size-20 g-pb-5 g-pr-5 g-line-height-0_7"></i>
+                                               class="icon-hotel-restaurant-186 u-line-icon-pro float-left g-font-size-20 g-pb-5 g-line-height-0_7"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -140,7 +140,7 @@
                                            id="filter-user-like"
                                            class="nav-link g-color-main g-color-primary--hover p-0"
                                            onclick="showPanel('like');">محصولات ذخیره شده
-                                            <i class="fa fa-bookmark-o float-left g-font-size-17 g-pb-5 g-pl-10"></i>
+                                            <i class="fa fa-bookmark-o float-left g-font-size-17 g-pb-5 g-pl-5"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -153,8 +153,7 @@
                                         <a style="cursor: pointer"
                                            class="nav-link g-color-main g-color-lightred--hover p-0"
                                            onclick="confirmLogout()">خروج
-
-                                            <i class="icon-logout float-left g-font-size-17 g-pb-5 g-pl-5"></i>
+                                            <i class="icon-logout float-left g-font-size-17 g-pb-5"></i>
                                         </a>
                                         <form id="logout-customer-form" action="{{route('logout')}}" method="POST"
                                               style="display: none;">
@@ -1136,7 +1135,7 @@
                         <hr style="z-index: 100 !important" class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
-                    
+
                     <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
                         @if(!isset($order[0]->ID))
                             <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
@@ -1887,7 +1886,7 @@
                                 <!-- End Article Image -->
 
                                 <!-- Article Content -->
-                                <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg">
+                                <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg g-width-150">
                                     <div class="d-flex justify-content-between">
                                         <div>
                                             <h3 class="d-inline-block h6 g-font-weight-700">
@@ -1903,12 +1902,6 @@
                                                href="{{ route('productDetail',[$row->ProductID]) }}"
                                                data-original-title="جزئیات محصول"><i
                                                     class="icon-eye g-line-height-0_7"></i></a>
-                                            <a style="cursor: pointer"
-                                               class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                               data-toggle="tooltip"
-                                               data-placement="top"
-                                               data-original-title="افزودن به سبد خرید"><i
-                                                    class="icon-basket g-line-height-0_8"></i></a>
                                             <a style="cursor: pointer"
                                                class="u-icon-v1 g-color-red g-color-gray-dark-v5--hover rounded-circle g-ml-5"
                                                data-toggle="tooltip"
@@ -1955,7 +1948,7 @@
                                 </div>
                                 <!-- End Price -->
 
-                                <div class="d-md-table-cell align-middle text-md-right g-pa-20 g-pl-0 bigDevice">
+                                <div class="d-md-table-cell align-middle text-md-left g-pa-20 g-pl-0 bigDevice">
                                     <a style="cursor: pointer"
                                        class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
                                        data-toggle="tooltip"
@@ -1963,15 +1956,6 @@
                                        href="{{ route('productDetail',[$row->ProductID]) }}"
                                        data-original-title="جزئیات محصول"><i
                                             class="icon-eye g-line-height-0_7"></i></a>
-                                    <a style="cursor: pointer"
-                                       class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
-                                       data-original-title="افزودن به سبد خرید"><i
-                                            class="icon-basket g-line-height-0_8"></i></a>
-                                    <i id="{{'waitingLikeDelete'.$key}}"
-                                       style="display: none"
-                                       class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
                                     <a style="cursor: pointer"
                                        onclick="deleteProductLike({{ $row->ProductDetailID }},$(this).attr('id'))"
                                        id="{{ 'deleteLikeBtn'.$key }}"
@@ -1981,6 +1965,9 @@
                                        data-original-title="فراموش کن">
                                         <i class="fa fa-bookmark"></i>
                                     </a>
+                                    <i id="{{'waitingLikeDelete'.$key}}"
+                                       style="display: none"
+                                       class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
                                 </div>
                                 <hr class="{{ ($key === count($like)-1) ? 'd-none': ''}} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
                             </article>

@@ -518,7 +518,6 @@
                 type: 'GET',
                 url: "/User-Cart-Add/" + id,
                 success: function () {
-                    $('#addToBasketBtn').addClass('d-none');
                     $('#waitingCheckCart').addClass('d-none');
                     $('#attachToBasket').removeClass('d-none');
 
