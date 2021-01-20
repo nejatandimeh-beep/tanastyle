@@ -224,7 +224,7 @@
                     <button type="button"
                             id="addToBasketBtn"
                             class="btn btn-lg u-btn-outline-primary g-font-weight-600 rounded-0 g-mt-10 g-font-size-16 g-px-25"
-                            onclick="if ($('#loginAlert').text() === 'login') { $(this).hide(); addToCart($('#productDetailID').text()) } else { alert('لطفا نخست وارد شوید.'); }">
+                            onclick="if ($('#loginAlert').text() === 'login') { $(this).addClass('d-none'); addToCart($('#productDetailID').text()) } else { alert('لطفا نخست وارد شوید.'); }">
                         افزودن به سبد
                     </button>
                     <span id="attachToBasket"

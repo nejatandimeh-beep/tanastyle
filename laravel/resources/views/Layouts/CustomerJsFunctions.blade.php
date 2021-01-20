@@ -548,23 +548,21 @@
         }
 
         function checkCart(id) {
-            if ($('#loginAlert').text() === 'login')
+            if ($('#loginAlert').text() === 'login') {
                 $.ajax({
                     type: 'GET',
                     url: "/User-Cart-Check/" + id,
                     success: function (data) {
-                        console.log(id, data);
                         if (data === 'empty') {
-                            console.log('empty');
+                            console.log('najol');
                             $('#addToBasketBtn').removeClass('d-none');
-                        }
-                        else {
-                            console.log('full');
+                        } else {
                             $('#attachToBasket').removeClass('d-none');
                         }
                         $('#waitingCheckCart').addClass('d-none');
                     }
                 });
+            }
             else
                 $('#addToBasketBtn').removeClass('d-none');
         }
@@ -584,6 +582,7 @@
             $('#waitingIconQty').show();
             $('#colorQtyContainer').hide();
             $('#addToBasketBtn').addClass('d-none');
+            $('#attachToBasket').addClass('d-none');
             $.ajax({
                 type: 'GET',
                 url: "/Female-Product-SizeInfo/" + id + '/' + val,
