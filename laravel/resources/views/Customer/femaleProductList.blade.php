@@ -44,7 +44,7 @@
                         <div class="g-pr-15--lg d-flex justify-content-between g-pb-10 g-pt-10">
                             <h5 class="m-0 align-self-center">فیلتر ها</h5>
                             <button
-                                style=" color:rgba(0,0,0,0.4);
+                                style="color:rgba(0,0,0,0.4);
                                 line-height: 0.65;
                                 background-color: transparent;
                                 cursor: pointer;
@@ -392,14 +392,16 @@
                                         <div class="d-flex justify-content-between g-mt-5">
                                             <div style="direction: ltr" class="form-group m-0 col-6">
                                                 <div class="u-input-group-v2">
-                                                    <input id="fullName2" class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
+                                                    <input id="fullName2"
+                                                           class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
                                                            name="full-name" type="text">
                                                     <label style="left: 75% !important;" for="fullName2">از</label>
                                                 </div>
                                             </div>
                                             <div style="direction: ltr" class="form-group m-0 col-6">
                                                 <div class="u-input-group-v2">
-                                                    <input id="fullName2" class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
+                                                    <input id="fullName2"
+                                                           class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
                                                            name="full-name" type="text">
                                                     <label style="left: 75% !important;" for="fullName2">تا</label>
                                                 </div>
@@ -427,7 +429,8 @@
                                      role="tabpanel"
                                      aria-labelledby="accordion-100-heading-04">
                                     <div class="card-block g-px-0">
-                                        <label class="form-check-inline u-check w-100 g-pa-10 g-brd-around g-brd-gray-light-v4 g-color-primary--hover">
+                                        <label
+                                            class="form-check-inline u-check w-100 g-pa-10 g-brd-around g-brd-gray-light-v4 g-color-primary--hover">
                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
                                             <div class="col-12 d-flex justify-content-between">
                                                 <div class="col-11 text-center">
@@ -435,18 +438,20 @@
                                                 </div>
                                                 <div class="col-1 p-0">
                                                     <div class="u-check-icon-checkbox-v6">
-                                                        <i style="width: 20px; height: 20px;" class="fa" data-check-icon=""></i>
+                                                        <i style="width: 20px; height: 20px;" class="fa"
+                                                           data-check-icon=""></i>
                                                     </div>
                                                 </div>
                                             </div>
                                             <hr class="g-brd-gray-light-v4 g-my-10 g-mx-minus-10">
-                                             <div class="g-brd-around g-brd-gray-light-v4">
-                                                 <img class="img-fluid w-100 g-opacity-0_7"
-                                                      src="{{ asset('img/Other/whiteColor.png') }}"
-                                                      alt="Image Description">
-                                             </div>
+                                            <div class="g-brd-around g-brd-gray-light-v4">
+                                                <img class="img-fluid w-100 g-opacity-0_7"
+                                                     src="{{ asset('img/Other/whiteColor.png') }}"
+                                                     alt="Image Description">
+                                            </div>
                                         </label>
-                                        <label class="form-check-inline u-check w-100 g-pa-10 g-brd-around g-brd-gray-light-v4 g-color-primary--hover">
+                                        <label
+                                            class="form-check-inline u-check w-100 g-pa-10 g-brd-around g-brd-gray-light-v4 g-color-primary--hover">
                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
                                             <div class="col-12 d-flex justify-content-between">
                                                 <div class="col-11 text-center">
@@ -454,7 +459,8 @@
                                                 </div>
                                                 <div class="col-1 p-0">
                                                     <div class="u-check-icon-checkbox-v6">
-                                                        <i style="width: 20px; height: 20px;" class="fa" data-check-icon=""></i>
+                                                        <i style="width: 20px; height: 20px;" class="fa"
+                                                           data-check-icon=""></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -575,30 +581,30 @@
                                     <div style="direction: rtl" class="media">
                                         <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
                                         <div class="d-flex justify-content-between col-12 p-0">
-                                        <div class="d-flex flex-column">
-                                            <h4 class="h6 g-color-black my-1">
+                                            <div class="d-flex flex-column">
+                                                <h4 class="h6 g-color-black my-1">
                                             <span class="u-link-v5 g-color-black"
                                                   tabindex="0">
                                                 {{ $data->Name }} <span
                                                     class="g-font-size-12 g-font-weight-300">{{ $data->Model }}</span>
                                             </span>
-                                            </h4>
-                                            <ul style="padding: 0"
-                                                class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
-                                                <li>
-                                                    <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
-                                                       href="#">زنانه لباس زیر</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <a style="cursor: pointer"
-                                           class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                           data-toggle="tooltip"
-                                           data-placement="top"
-                                           href="{{ route('productDetail',['id'=>$data->ID]) }}"
-                                           data-original-title="جزئیات محصول">
-                                            <i class="icon-eye g-line-height-0_7"></i>
-                                        </a>
+                                                </h4>
+                                                <ul style="padding: 0"
+                                                    class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
+                                                    <li>
+                                                        <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
+                                                           href="#">زنانه لباس زیر</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <a style="cursor: pointer"
+                                               class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                                               data-toggle="tooltip"
+                                               data-placement="top"
+                                               href="{{ route('productDetail',['id'=>$data->ID]) }}"
+                                               data-original-title="جزئیات محصول">
+                                                <i class="icon-eye g-line-height-0_7"></i>
+                                            </a>
                                         </div>
                                     </div>
                                     <div
