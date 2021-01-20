@@ -33,7 +33,7 @@ class Basic extends Controller
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('po.ID', 'DESC')
+            ->orderBy('pod.ID', 'DESC')
             ->get();
 
         $orderHowDay = array();
@@ -51,11 +51,11 @@ class Basic extends Controller
 
         $delivery = DB::table('product_delivery as delivery')
             ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'delivery.OrderID')
-            ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'delivery.OrderID')
+            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'delivery.OrderDetailID')
+            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('po.Date', 'DESC')
+            ->orderBy('pod.ID', 'DESC')
             ->get();
 
         $today = date('Y-m-d');
@@ -84,13 +84,13 @@ class Basic extends Controller
                     $deliveryTime[$key] = 0;
                     if ($deliveryMin[$key] > 540) {
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryProblem' => 1
                             ]);
                     } else {
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryProblem' => 0
                             ]);
@@ -102,13 +102,13 @@ class Basic extends Controller
                     $deliveryTime[$key] = 25;
                     if ($deliveryMin[$key] > 600) {
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryProblem' => 1
                             ]);
                     } else {
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryProblem' => 0
                             ]);
@@ -120,13 +120,13 @@ class Basic extends Controller
                     $deliveryTime[$key] = 50;
                     if ($deliveryMin[$key] > 1560) {
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryProblem' => 1
                             ]);
                     } else {
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryProblem' => 0
                             ]);
@@ -138,13 +138,13 @@ class Basic extends Controller
                     $deliveryTime[$key] = 75;
                     if ($deliveryMin[$key] > 1800) {
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryProblem' => 1
                             ]);
                     } else {
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryProblem' => 0
                             ]);
@@ -152,7 +152,7 @@ class Basic extends Controller
                     break;
                 case '4':
                     DB::table('product_delivery')
-                        ->where('OrderID', $row->OrderID)
+                        ->where('OrderDetailID', $row->orderDetailID)
                         ->update([
                             'DeliveryProblem' => 0
                         ]);
@@ -163,7 +163,7 @@ class Basic extends Controller
                         $deliveryHint[$key]['text'] = 'تحویل با';
                         $deliveryHint[$key]['location'] = 'موفقیت';
                         DB::table('product_delivery')
-                            ->where('OrderID', $row->OrderID)
+                            ->where('OrderDetailID', $row->orderDetailID)
                             ->update([
                                 'DeliveryStatus' => '5',
                             ]);
@@ -314,15 +314,15 @@ class Basic extends Controller
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('po.ID', 'DESC')
+            ->orderBy('pod.ID', 'DESC')
             ->get();
         $delivery = DB::table('product_delivery as delivery')
             ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'delivery.OrderID')
-            ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'delivery.OrderID')
+            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'delivery.OrderDetailID')
+            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('po.Date', 'DESC')
+            ->orderBy('pod.ID', 'DESC')
             ->get();
         $return = DB::table('product_return as pr')
             ->select('*', 'pr.Date as returnDate')
@@ -691,7 +691,7 @@ class Basic extends Controller
         ]);
 
         DB::table('product_delivery')
-            ->where('OrderID', $poID)
+            ->where('OrderDetailID', $podID)
             ->update([
                 'DeliveryStatus' => '-1',
             ]);
@@ -962,16 +962,8 @@ class Basic extends Controller
                 'Date' => $date,
                 'Time' => $time,
             ]);
-
-            $orderID = DB::table('product_order')
-                ->select('ID')
-                ->max('ID');
-
-            DB::table('product_delivery')->insert([
-                'OrderID' => $orderID,
-            ]);
         }
-        
+
         $orderID = DB::table('product_order')
             ->select('ID')
             ->max('ID');
@@ -991,6 +983,14 @@ class Basic extends Controller
             'Size' => $productInfo->Size,
             'Color' => $productInfo->Color,
             'OrderBankCode' => '3#$ddf3e3continue3',
+        ]);
+
+        $orderDetailID = DB::table('product_order_detail')
+            ->select('ID')
+            ->max('ID');
+
+        DB::table('product_delivery')->insert([
+            'OrderDetailID' => $orderDetailID,
         ]);
 
         DB::table('product_detail')

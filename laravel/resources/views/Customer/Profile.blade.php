@@ -1215,7 +1215,7 @@
                                                         <div class="d-flex justify-content-between g-pt-15 g-pb-8">
                                                             <button style="outline: none" type="button"
                                                                     class="close"
-                                                                    onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');  setTimeout(function () {$('#filter-user-bought').trigger('click')}, 400);">
+                                                                    onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
                                                                 <i class="hs-icon hs-icon-close"></i>
                                                             </button>
                                                             <h6 class="text-right m-0">فاکتور فروش به

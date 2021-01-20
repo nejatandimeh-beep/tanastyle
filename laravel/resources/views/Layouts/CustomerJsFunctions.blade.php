@@ -554,7 +554,6 @@
                     url: "/User-Cart-Check/" + id,
                     success: function (data) {
                         if (data === 'empty') {
-                            console.log('najol');
                             $('#addToBasketBtn').removeClass('d-none');
                         } else {
                             $('#attachToBasket').removeClass('d-none');
