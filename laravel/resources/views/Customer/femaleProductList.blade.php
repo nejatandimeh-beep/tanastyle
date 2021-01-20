@@ -39,8 +39,8 @@
 
             <!-- Filters -->
             <div style="display: none" id="filterDiv" class="col-md-3 flex-md-first g-brd-left--lg g-brd-gray-light-v4">
-                <div style="z-index: 100 !important" id="stickyDiv1" class="sticky-top">
-                    <div class="g-bg-white-opacity-0_9">
+                <div style="z-index: 100 !important" id="stickyDiv1">
+                    <div class="g-bg-white-opacity-0_9 sticky-top g-z-index-3">
                         <div class="g-pr-15--lg d-flex justify-content-between g-pb-10 g-pt-10">
                             <h5 class="m-0 align-self-center">فیلتر ها</h5>
                             <button
@@ -60,17 +60,18 @@
                     </div>
 
                     <div class="g-pr-15 g-pl-15 g-pl-0--lg g-pt-20">
-
                         <div style="direction: rtl" role="tablist" aria-multiselectable="true">
                             <!-- فیلتر جمسیت -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
-                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
+                                    <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
                                         <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
                                            href="#accordion-100-body-01"
                                            data-toggle="collapse"
                                            aria-expanded="false"
-                                           aria-controls="accordion-100-body-01">جنسیت</a>
+                                           aria-controls="accordion-100-body-01">جنسیت
+                                            <i class="icon-user float-left g-font-size-16 g-pb-5 g-pl-5"></i>
+                                        </a>
                                     </h5>
                                 </div>
                                 <div id="accordion-100-body-01"
@@ -85,7 +86,7 @@
                                                         <span>همه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="gender" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -99,7 +100,7 @@
                                                         <span>زنانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="gender" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -113,7 +114,7 @@
                                                         <span>مردانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="gender" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -127,7 +128,7 @@
                                                         <span>بچگانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="gender" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -136,7 +137,6 @@
                                                 </div>
                                             </li>
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
@@ -144,12 +144,14 @@
                             <!-- فیلتر طبقه بندی -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-02" class="card-header g-pa-0" role="tab">
-                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
+                                    <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
                                         <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
                                            href="#accordion-100-body-02"
                                            data-toggle="collapse"
                                            aria-expanded="false"
-                                           aria-controls="accordion-100-body-02">طبقه بندی</a>
+                                           aria-controls="accordion-100-body-02">طبقه بندی
+                                            <i class="icon-clothes-034 u-line-icon-pro float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                        </a>
                                     </h5>
                                 </div>
                                 <div id="accordion-100-body-02"
@@ -164,7 +166,7 @@
                                                         <span>همه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -178,7 +180,7 @@
                                                         <span>لباس زیر</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -192,7 +194,7 @@
                                                         <span>پایین تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -206,7 +208,7 @@
                                                         <span>بالا تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -220,213 +222,13 @@
                                                         <span>تمام تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" checked="">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- فیلتر قیمت -->
-                            <div class="card g-brd-0 g-mb-5">
-                                <div id="accordion-100-heading-03" class="card-header g-pa-0" role="tab">
-                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
-                                           href="#accordion-100-body-03"
-                                           data-toggle="collapse"
-                                           aria-expanded="false"
-                                           aria-controls="accordion-100-body-03">قیمت</a>
-                                    </h5>
-                                </div>
-                                <div id="accordion-100-body-03"
-                                     class="collapse"
-                                     role="tabpanel"
-                                     aria-labelledby="accordion-100-heading-03">
-                                    <div class="card-block g-px-0">
-                                        <ul class="list-unstyled">
-                                            <li class="my-2">
-                                                <label
-                                                    class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0"
-                                                           type="checkbox">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
-                                                        <i class="fa" data-check-icon=""></i>
-                                                    </div>
-                                                    Mango <span class="float-right g-font-size-13">24</span>
-                                                </label>
-                                            </li>
-                                            <li class="my-2">
-                                                <label
-                                                    class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0"
-                                                           type="checkbox"
-                                                           checked="">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
-                                                        <i class="fa" data-check-icon=""></i>
-                                                    </div>
-                                                    Gucci <span class="float-right g-font-size-13">334</span>
-                                                </label>
-                                            </li>
-                                            <li class="my-2">
-                                                <label
-                                                    class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0"
-                                                           type="checkbox">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
-                                                        <i class="fa" data-check-icon=""></i>
-                                                    </div>
-                                                    Adidas <span class="float-right g-font-size-13">18</span>
-                                                </label>
-                                            </li>
-                                            <li class="my-2">
-                                                <label
-                                                    class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0"
-                                                           type="checkbox"
-                                                           checked="">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
-                                                        <i class="fa" data-check-icon=""></i>
-                                                    </div>
-                                                    Nike <span class="float-right g-font-size-13">6</span>
-                                                </label>
-                                            </li>
-                                            <li class="my-2">
-                                                <label
-                                                    class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0"
-                                                           type="checkbox">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
-                                                        <i class="fa" data-check-icon=""></i>
-                                                    </div>
-                                                    Puma <span class="float-right g-font-size-13">71</span>
-                                                </label>
-                                            </li>
-                                            <li class="my-2">
-                                                <label
-                                                    class="form-check-inline u-check d-block u-link-v5 g-color-gray-dark-v4 g-color-primary--hover g-pl-30">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0"
-                                                           type="checkbox">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-absolute-centered--y g-left-0">
-                                                        <i class="fa" data-check-icon=""></i>
-                                                    </div>
-                                                    Zara <span class="float-right g-font-size-13">9</span>
-                                                </label>
-                                            </li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- فیلتر رنگ -->
-                            <div class="card g-brd-0 g-mb-5">
-                                <div id="accordion-100-heading-04" class="card-header g-pa-0" role="tab">
-                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
-                                           href="#accordion-100-body-04"
-                                           data-toggle="collapse"
-                                           aria-expanded="false"
-                                           aria-controls="accordion-100-body-04">رنگ</a>
-                                    </h5>
-                                </div>
-                                <div id="accordion-100-body-04"
-                                     class="collapse"
-                                     role="tabpanel"
-                                     aria-labelledby="accordion-100-heading-04">
-                                    <div class="card-block g-px-0">
-                                        <ul class="list-inline mb-0 p-0">
-                                            <li class="list-inline-item g-ml-10">
-                                                <label class="form-check-inline u-check">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                           name="radInline1_1" type="radio">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-brd-transparent g-brd-gray-dark-v4--checked rounded-circle g-absolute-centered--y g-right-0 g-mt-3">
-                                                        <i class="d-block g-absolute-centered g-width-16 g-height-16 g-bg-primary rounded-circle"></i>
-                                                    </div>
-                                                </label>
-                                            </li>
-                                            <li class="list-inline-item g-mx-10">
-                                                <label class="form-check-inline u-check">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                           name="radInline1_1" type="radio">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-brd-transparent g-brd-gray-dark-v4--checked rounded-circle g-absolute-centered--y g-right-0 g-mt-3">
-                                                        <i class="d-block g-absolute-centered g-width-16 g-height-16 g-bg-beige rounded-circle"></i>
-                                                    </div>
-                                                </label>
-                                            </li>
-                                            <li class="list-inline-item g-mx-10">
-                                                <label class="form-check-inline u-check">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                           name="radInline1_1" type="radio">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-brd-transparent g-brd-gray-dark-v4--checked rounded-circle g-absolute-centered--y g-right-0 g-mt-3">
-                                                        <i class="d-block g-absolute-centered g-width-16 g-height-16 g-bg-black rounded-circle"></i>
-                                                    </div>
-                                                </label>
-                                            </li>
-                                            <li class="list-inline-item g-mx-10">
-                                                <label class="form-check-inline u-check">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                           name="radInline1_1" type="radio">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-brd-transparent g-brd-gray-dark-v4--checked rounded-circle g-absolute-centered--y g-right-0 g-mt-3">
-                                                        <i class="d-block g-absolute-centered g-width-16 g-height-16 g-bg-yellow rounded-circle"></i>
-                                                    </div>
-                                                </label>
-                                            </li>
-                                            <li class="list-inline-item g-mx-10">
-                                                <label class="form-check-inline u-check">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                           name="radInline1_1" type="radio">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-brd-transparent g-brd-gray-dark-v4--checked rounded-circle g-absolute-centered--y g-right-0 g-mt-3">
-                                                        <i class="d-block g-absolute-centered g-width-16 g-height-16 g-bg-blue rounded-circle"></i>
-                                                    </div>
-                                                </label>
-                                            </li>
-                                            <li class="list-inline-item g-mx-10">
-                                                <label class="form-check-inline u-check">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                           name="radInline1_1" type="radio">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-brd-transparent g-brd-gray-dark-v4--checked rounded-circle g-absolute-centered--y g-right-0 g-mt-3">
-                                                        <i class="d-block g-absolute-centered g-width-16 g-height-16 g-bg-purple rounded-circle"></i>
-                                                    </div>
-                                                </label>
-                                            </li>
-                                            <li class="list-inline-item g-mx-10">
-                                                <label class="form-check-inline u-check">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                           name="radInline1_1" type="radio">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-brd-transparent g-brd-gray-dark-v4--checked rounded-circle g-absolute-centered--y g-right-0 g-mt-3">
-                                                        <i class="d-block g-absolute-centered g-width-16 g-height-16 g-bg-brown rounded-circle"></i>
-                                                    </div>
-                                                </label>
-                                            </li>
-                                            <li class="list-inline-item g-mr-10">
-                                                <label class="form-check-inline u-check">
-                                                    <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                           name="radInline1_1" type="radio">
-                                                    <div
-                                                        class="u-check-icon-checkbox-v4 g-brd-transparent g-brd-gray-dark-v4--checked rounded-circle g-absolute-centered--y g-right-0 g-mt-3">
-                                                        <i class="d-block g-absolute-centered g-width-16 g-height-16 g-bg-gray-dark-v4 rounded-circle"></i>
-                                                    </div>
-                                                </label>
                                             </li>
                                         </ul>
                                     </div>
@@ -436,12 +238,14 @@
                             <!-- فیلتر سایز -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-05" class="card-header g-pa-0" role="tab">
-                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
+                                    <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
                                         <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
                                            href="#accordion-100-body-05"
                                            data-toggle="collapse"
                                            aria-expanded="false"
-                                           aria-controls="accordion-100-body-05">سایز</a>
+                                           aria-controls="accordion-100-body-05">سایز
+                                            <i class="icon-education-068 u-line-icon-pro float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                        </a>
                                     </h5>
                                 </div>
                                 <div id="accordion-100-body-05"
@@ -566,6 +370,104 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <!-- فیلتر قیمت -->
+                            <div class="card g-brd-0 g-mb-5">
+                                <div id="accordion-100-heading-03" class="card-header g-pa-0" role="tab">
+                                    <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
+                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
+                                           href="#accordion-100-body-03"
+                                           data-toggle="collapse"
+                                           aria-expanded="false"
+                                           aria-controls="accordion-100-body-03">قیمت
+                                            <i class="icon-finance-008 u-line-icon-pro float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="accordion-100-body-03"
+                                     class="collapse"
+                                     role="tabpanel"
+                                     aria-labelledby="accordion-100-heading-03">
+                                    <div class="card-block g-px-0">
+                                        <div class="d-flex justify-content-between g-mt-5">
+                                            <div style="direction: ltr" class="form-group m-0 col-6">
+                                                <div class="u-input-group-v2">
+                                                    <input id="fullName2" class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
+                                                           name="full-name" type="text">
+                                                    <label style="left: 75% !important;" for="fullName2">از</label>
+                                                </div>
+                                            </div>
+                                            <div style="direction: ltr" class="form-group m-0 col-6">
+                                                <div class="u-input-group-v2">
+                                                    <input id="fullName2" class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
+                                                           name="full-name" type="text">
+                                                    <label style="left: 75% !important;" for="fullName2">تا</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- فیلتر رنگ -->
+                            <div class="card g-brd-0 g-mb-5">
+                                <div id="accordion-100-heading-04" class="card-header g-pa-0" role="tab">
+                                    <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
+                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
+                                           href="#accordion-100-body-04"
+                                           data-toggle="collapse"
+                                           aria-expanded="false"
+                                           aria-controls="accordion-100-body-04">رنگ
+                                            <i class="icon-education-004 u-line-icon-pro float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                        </a>
+                                    </h5>
+                                </div>
+                                <div id="accordion-100-body-04"
+                                     class="collapse"
+                                     role="tabpanel"
+                                     aria-labelledby="accordion-100-heading-04">
+                                    <div class="card-block g-px-0">
+                                        <label class="form-check-inline u-check w-100 g-pa-10 g-brd-around g-brd-gray-light-v4 g-color-primary--hover">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="col-11 text-center">
+                                                    <span>خانواده رنگ روشن</span>
+                                                </div>
+                                                <div class="col-1 p-0">
+                                                    <div class="u-check-icon-checkbox-v6">
+                                                        <i style="width: 20px; height: 20px;" class="fa" data-check-icon=""></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="g-brd-gray-light-v4 g-my-10 g-mx-minus-10">
+                                             <div class="g-brd-around g-brd-gray-light-v4">
+                                                 <img class="img-fluid w-100 g-opacity-0_7"
+                                                      src="{{ asset('img/Other/whiteColor.png') }}"
+                                                      alt="Image Description">
+                                             </div>
+                                        </label>
+                                        <label class="form-check-inline u-check w-100 g-pa-10 g-brd-around g-brd-gray-light-v4 g-color-primary--hover">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
+                                            <div class="col-12 d-flex justify-content-between">
+                                                <div class="col-11 text-center">
+                                                    <span>خانواده رنگ سبز</span>
+                                                </div>
+                                                <div class="col-1 p-0">
+                                                    <div class="u-check-icon-checkbox-v6">
+                                                        <i style="width: 20px; height: 20px;" class="fa" data-check-icon=""></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr class="g-brd-gray-light-v4 g-my-10 g-mx-minus-10">
+                                            <div class="g-brd-around g-brd-gray-light-v4">
+                                                <img class="img-fluid w-100 g-opacity-0_7"
+                                                     src="{{ asset('img/Other/whiteColor.png') }}"
+                                                     alt="Image Description">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -627,7 +529,8 @@
                     <div id="productContainer" class="row g-mb-50">
                         @foreach($product_table as $key => $data)
                             <div class="col-12 col-lg-3 g-mb-30">
-                                <figure style="direction: ltr;" class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
+                                <figure style="direction: ltr; border-bottom: 5px solid #bfbfbf"
+                                        class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
                                     <div>
                                         <div id="carousel-08-1"
                                              class="js-carousel text-center g-mb-20"
@@ -671,6 +574,7 @@
                                     <!-- مشخصات محصول -->
                                     <div style="direction: rtl" class="media">
                                         <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                                        <div class="d-flex justify-content-between col-12 p-0">
                                         <div class="d-flex flex-column">
                                             <h4 class="h6 g-color-black my-1">
                                             <span class="u-link-v5 g-color-black"
@@ -686,6 +590,15 @@
                                                        href="#">زنانه لباس زیر</a>
                                                 </li>
                                             </ul>
+                                        </div>
+                                        <a style="cursor: pointer"
+                                           class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                                           data-toggle="tooltip"
+                                           data-placement="top"
+                                           href="{{ route('productDetail',['id'=>$data->ID]) }}"
+                                           data-original-title="جزئیات محصول">
+                                            <i class="icon-eye g-line-height-0_7"></i>
+                                        </a>
                                         </div>
                                     </div>
                                     <div

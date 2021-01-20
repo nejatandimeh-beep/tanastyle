@@ -553,10 +553,13 @@
                     type: 'GET',
                     url: "/User-Cart-Check/" + id,
                     success: function (data) {
-                        if (data === 'empty'){
+                        console.log(id, data);
+                        if (data === 'empty') {
+                            console.log('empty');
                             $('#addToBasketBtn').removeClass('d-none');
                         }
                         else {
+                            console.log('full');
                             $('#attachToBasket').removeClass('d-none');
                         }
                         $('#waitingCheckCart').addClass('d-none');
@@ -581,7 +584,6 @@
             $('#waitingIconQty').show();
             $('#colorQtyContainer').hide();
             $('#addToBasketBtn').addClass('d-none');
-            $('#attachToBasket').addClass('d-none');
             $.ajax({
                 type: 'GET',
                 url: "/Female-Product-SizeInfo/" + id + '/' + val,
