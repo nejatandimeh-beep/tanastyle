@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
-
 class Basic extends Controller
 {
     public function __construct()
@@ -239,7 +238,7 @@ class Basic extends Controller
 
         // Get Product Data
         $data = DB::table('product_order_detail as pod')
-            ->select('pod.*','pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct')
+            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -306,14 +305,21 @@ class Basic extends Controller
     {
         $sellerID = Auth::guard('seller')->user()->id;
 
-        $data = DB::table('product_order_detail as pod')
-            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath')
+//        $data = DB::table('product_order_detail as pod')
+//            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath')
+//            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+//            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+//            ->where('pod.SellerID', $sellerID)
+//            ->where('po.DeliveryStatus', 0)
+//            ->get();
+        $data = DB::table('product_delivery as pd')
+            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*')
+            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->where('pod.SellerID', $sellerID)
-            ->where('po.DeliveryStatus', 0)
+            ->where('p.SellerID', $sellerID)
+            ->where('pd.DeliveryStatus', 0)
             ->get();
-
         // Convert Date
         $persianDate = array();
         $deliveryStatus = array();
@@ -1132,11 +1138,11 @@ class Basic extends Controller
 
             $data = DB::table('customer_vote as cv')
                 ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.name', 'c.Family')
-                ->leftjoin('product as p', 'p.ID', '=', 'cv.ProductID')
+                ->leftjoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
+                ->leftjoin('product as p', 'p.ID', '=', 'pd.ProductID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'cv.CustomerID')
                 ->where('p.SellerID', $sellerID)
                 ->get();
-
             $generalInfo = array(
                 'totalComment' => 0,
                 'totalLike' => 0,
@@ -1178,8 +1184,9 @@ class Basic extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('customer_vote as cv')
-                ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.name as Name', 'c.Family')
-                ->leftjoin('product as p', 'p.ID', '=', 'cv.ProductID')
+                ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.name', 'c.Family')
+                ->leftjoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
+                ->leftjoin('product as p', 'p.ID', '=', 'pd.ProductID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'cv.CustomerID')
                 ->where('p.SellerID', $sellerID)
                 ->paginate(10);
@@ -1188,11 +1195,11 @@ class Basic extends Controller
         }
 
         if ($where2 === '') {
-
             if ($val === 'بدون') {
                 $data = DB::table('customer_vote as cv')
-                    ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.Name', 'c.Family')
-                    ->leftjoin('product as p', 'p.ID', '=', 'cv.ProductID')
+                    ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.name', 'c.Family')
+                    ->leftjoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
+                    ->leftjoin('product as p', 'p.ID', '=', 'pd.ProductID')
                     ->leftjoin('customers as c', 'c.ID', '=', 'cv.CustomerID')
                     ->whereNull($where)
                     ->where('p.SellerID', $sellerID)
@@ -1201,7 +1208,8 @@ class Basic extends Controller
             } else {
                 $data = DB::table('customer_vote as cv')
                     ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.Name', 'c.Family')
-                    ->leftjoin('product as p', 'p.ID', '=', 'cv.ProductID')
+                    ->leftjoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
+                    ->leftjoin('product as p', 'p.ID', '=', 'pd.ProductID')
                     ->leftjoin('customers as c', 'c.ID', '=', 'cv.CustomerID')
                     ->where($where, $val)
                     ->where('p.SellerID', $sellerID)

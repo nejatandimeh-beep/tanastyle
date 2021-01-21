@@ -44,6 +44,11 @@ class Add extends Controller
             case '0002':
             case '0003':
             case '0004':
+            case '1000':
+            case '1001':
+            case '1002':
+            case '1003':
+            case '1004':
                 $size = [
                     'S',
                     'M',

@@ -264,7 +264,7 @@
                         <tbody>
                         @foreach($data as $key => $rec)
                             <tr>
-                                <td class="align-middle text-center text-nowrap">{{ $rec->Name.' '.$rec->Family }}</td>
+                                <td class="align-middle text-center text-nowrap">{{ $rec->name.' '.$rec->Family }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->productName }}</td>
                                 <td class="align-middle">
                                     <div class="media">

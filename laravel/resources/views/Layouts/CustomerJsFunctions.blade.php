@@ -573,15 +573,10 @@
         // تابع و دستورات مربوط به افزودن رنگ و تعداد محصول از طریق آژاکس
         // --------------------------------------------------------------
         function addColor(val, id) {
-            if ($('#loginAlert').text() === 'login')
-                $('#waitingCheckCart').removeClass('d-none');
-
             $('#colorContainer').empty();
             $('#waitingIconColor').show();
             $('#waitingIconQty').show();
             $('#colorQtyContainer').hide();
-            $('#addToBasketBtn').addClass('d-none');
-            $('#attachToBasket').addClass('d-none');
             $.ajax({
                 type: 'GET',
                 url: "/Customer-Product-SizeInfo/" + id + '/' + val,
@@ -595,7 +590,6 @@
                             $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
                             $('#sizeInfo' + i + ' input').attr('id', 'color-' + data[i]["ID"]);
                             $('#sizeInfo' + i + ' input').attr('onclick', 'addQty(' + data[i]["ID"] + ',' + data[i]["Qty"] + ')');
-                            $('#sizeInfo' + i + ' input').attr('onclick', 'checkCart(' + data[i]["ID"] + ')');
                             $('#sizeInfo' + i + ' input').val(data[i]['Color']);
                             $('#sizeInfo' + i + ' label').attr('for', 'color-' + data[i]["ID"]);
                             $('#sizeInfo' + i + ' label').text(data[i]['Color']);
@@ -604,12 +598,16 @@
                     }
                     $('#sizeInfo0 input').prop('checked', 'checked');
                     addQty(data[0]["ID"], data[0]['Qty']);
-                    checkCart(data[0]["ID"]);
                 }
             });
         }
 
         function addQty(id, qty) {
+            $('#addToBasketBtn').addClass('d-none');
+            if ($('#loginAlert').text() === 'login')
+                $('#waitingCheckCart').removeClass('d-none');
+            $('#attachToBasket').addClass('d-none');
+            checkCart(id);
             let callStatus = callCustomer(id, qty);
             $('#productDetailID').text(id);
             $('.js-r').val(1);

@@ -93,7 +93,7 @@
                                     </td>
                                     <td class="align-middle text-center text-nowrap g-color-cyan"><i class="fa fa-spinner fa-spin g-ml-5"></i>در انتظار تحویل</td>
                                 @endif
-                                <td class="align-middle text-center text-nowrap">{{ $rec->DeliveryStatusDetail }}</td>
+                                <td class="align-middle text-center text-nowrap">{{ $rec->DeliveryProblem }}</td>
                             </tr>
                         @endforeach
                         </tbody>
