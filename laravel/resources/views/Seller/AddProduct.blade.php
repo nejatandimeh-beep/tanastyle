@@ -40,6 +40,7 @@
                         انبارتان اضافه گردد.</b>
                 </div>
                 <div style="direction: rtl">
+                    <input name="hintCat" class="d-none" value="{{ $hintCat }}">
                     <small class="text-muted g-font-size-12">این محصول در دسته بندی <span
                             class="g-font-weight-600 g-ml-1 g-mr-1">{{$hintCat}}</span> قرار می گیرد.</small>
                 </div>

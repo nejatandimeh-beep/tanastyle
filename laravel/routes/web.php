@@ -128,7 +128,7 @@ Route::get('/', function () {
 })->name('Master');
 
 // Female Product List
-Route::get('/Customer-Product-List', 'Customer\Basic@productList')->name('productList');
+Route::get('/Customer-Product-List/{filter}', 'Customer\Basic@productList')->name('productList');
 
 // Female Product Detail
 Route::get('/Customer-Product-Detail/{id}', 'Customer\Basic@productDetail')->name('productDetail');

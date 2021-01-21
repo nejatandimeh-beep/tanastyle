@@ -20,7 +20,10 @@ class Add extends Controller
     // Ask Qty of Sizes
     public function AskSize($cat)
     {
-        $data = DB::table('product_hint')->where('Cat', $cat)->first();
+        $data = DB::table('product_hint')
+            ->where('Cat', $cat)
+            ->first();
+
         return view('Seller.AskSize')
             ->with('gender', $data->Gender)
             ->with('cat', $cat)
@@ -153,6 +156,7 @@ class Add extends Controller
         $sellerId =Auth::guard('seller')->user()->id;
         $gender = $request->get('gender');
         $cat = $request->get('cat');
+        $hintCat = $request->get('hintCat');
         $name = $request->get('name');
         $model = $request->get('model');
         $brand = $request->get('brand');
@@ -165,12 +169,24 @@ class Add extends Controller
         $temp = $unitPrice - ($unitPrice * $discount) / 100;
         $finalPrice = $temp;
 
+        switch ($gender) {
+            case '0':
+                $gender = 'زنانه';
+                break;
+            case '1':
+                $gender = 'مردانه';
+                break;
+            case '2':
+                $gender = 'بچگانه';
+                break;
+        }
         // Insert Data to Product DB
         DB::table('product')->insert([
             [
                 'SellerID' => $sellerId,
                 'Gender' => $gender,
                 'Cat' => $cat,
+                'HintCat' => $hintCat,
                 'Name' => $name,
                 'Model' => $model,
                 'Brand' => $brand,

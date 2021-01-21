@@ -214,7 +214,7 @@
                         <span class="d-block g-color-black">مجموعه لباس</span>
                         <h2 class="h1 mb-0">زنانه</h2>
                     </div>
-                    <a class="u-link-v2" href="{{ route('productList') }}"></a>
+                    <a class="u-link-v2" href="{{ route('productList',['filter'=>'gender-0']) }}"></a>
                 </article>
             </div>
 
@@ -227,7 +227,7 @@
                         <span class="d-block g-color-black">مجموعه لباس</span>
                         <h2 class="h1 mb-0">مردانه</h2>
                     </div>
-                    <a class="u-link-v2" href="#"></a>
+                    <a class="u-link-v2" href="{{ route('productList',['filter'=>'gender-1']) }}"></a>
                 </article>
             </div>
 
@@ -240,7 +240,7 @@
                         <span class="d-block g-color-black">مجموعه لباس</span>
                         <h2 class="h1 mb-0">بچگانه</h2>
                     </div>
-                    <a class="u-link-v2" href="#"></a>
+                    <a class="u-link-v2" href="{{ route('productList',['filter'=>'gender-2']) }}"></a>
                 </article>
             </div>
         </div>

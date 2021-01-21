@@ -528,12 +528,9 @@ class Basic extends Controller
             ->delete();
     }
 
-    public function productList()
+    public function productList($filter)
     {
-        $product_table = DB::table('product')
-            ->select('*')
-            ->get();
-
+        $product_table = $this->productListFilter($filter);
         return view('Customer.femaleProductList', compact('product_table'));
     }
 
@@ -1016,22 +1013,6 @@ class Basic extends Controller
         return Verta::getJalali($year, $mon, $day);
     }
 
-    //  Convert Date to Gregorian Calender
-    public function convertDateToGregorian($d)
-    {
-        return Verta::getGregorian($d->y, $d->m, $d->d);
-    }
-
-    // Add Zero Number to Day and Month of Converted Dates
-    public function addZero($d)
-    {
-        for ($i = 0; $i < 3; $i++)
-            if (strlen($d[$i]) < 2)
-                $d[$i] = '0' . $d[$i];
-
-        return $d[0] . '-' . $d[1] . '-' . $d[2];
-    }
-
     //  Minutes Passed of Spacial Time
     public function dateLenToNow($date, $time)
     {
@@ -1119,5 +1100,27 @@ class Basic extends Controller
                 return false;
         }
 
+    }
+
+    public function productListFilter($filter)
+    {
+        switch ($filter) {
+            case 'gender-0':
+                return DB::table('product')
+                    ->select('*')
+                    ->where('Gender', 'زنانه')
+                    ->get();
+            case 'gender-1':
+                return DB::table('product')
+                    ->select('*')
+                    ->where('Gender', 'مردانه')
+                    ->get();
+            case 'gender-2':
+                return DB::table('product')
+                    ->select('*')
+                    ->where('Gender', 'بچگانه')
+                    ->get();
+            default:
+        }
     }
 }

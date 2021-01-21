@@ -593,7 +593,7 @@
                                                     class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                                                     <li>
                                                         <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
-                                                           href="#">زنانه لباس زیر</a>
+                                                           href="#">{{ $data->Gender.' '.$data->HintCat }}</a>
                                                     </li>
                                                 </ul>
                                             </div>
