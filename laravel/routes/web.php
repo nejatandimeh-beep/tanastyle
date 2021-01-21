@@ -128,61 +128,61 @@ Route::get('/', function () {
 })->name('Master');
 
 // Female Product List
-Route::get('/Female-Product-List', 'Customer\Basic@productList')->name('productList');
+Route::get('/Customer-Product-List', 'Customer\Basic@productList')->name('productList');
 
 // Female Product Detail
-Route::get('/Female-Product-Detail/{id}', 'Customer\Basic@productDetail')->name('productDetail');
+Route::get('/Customer-Product-Detail/{id}', 'Customer\Basic@productDetail')->name('productDetail');
 
 // Female Product Detail
 Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal');
 
 // Profile
-Route::get('/User-Profile/{id}', 'Customer\Basic@userProfile')->name('userProfile');
+Route::get('/Customer-Profile/{id}', 'Customer\Basic@userProfile')->name('userProfile');
 
 Auth::routes();
 
 // -------------------[ Ajax ]-----------------------
-Route::get('/Female-Product-LikeProduct/{id}/{val}', 'Customer\Basic@likeProduct');
+Route::get('/Customer-Product-LikeProduct/{id}/{val}', 'Customer\Basic@likeProduct');
 
-Route::get('/Female-Product-RatingProduct/{id}/{val}', 'Customer\Basic@ratingProduct');
+Route::get('/Customer-Product-RatingProduct/{id}/{val}', 'Customer\Basic@ratingProduct');
 
-Route::get('/Female-Product-NewComment/{id}/{val}', 'Customer\Basic@productNewComment');
+Route::get('/Customer-Product-NewComment/{id}/{val}', 'Customer\Basic@productNewComment');
 
-Route::get('/Female-Product-LikeComment/{id}/{val}', 'Customer\Basic@LikeComment');
+Route::get('/Customer-Product-LikeComment/{id}/{val}', 'Customer\Basic@LikeComment');
 
-Route::get('/Female-Product-UnlikeComment/{id}/{val}', 'Customer\Basic@unlikeComment');
+Route::get('/Customer-Product-UnlikeComment/{id}/{val}', 'Customer\Basic@unlikeComment');
 
-Route::get('/Female-Product-SizeInfo/{id}/{val}', 'Customer\Basic@sizeInfo');
+Route::get('/Customer-Product-SizeInfo/{id}/{val}', 'Customer\Basic@sizeInfo');
 
-Route::get('/Female-Product-CallMe/{id}', 'Customer\Basic@productCallMeExist');
+Route::get('/Customer-Product-CallMe/{id}', 'Customer\Basic@productCallMeExist');
 
-Route::get('/Female-Product-CheckCallCustomer/{id}', 'Customer\Basic@checkCallCustomer');
+Route::get('/Customer-Product-CheckCallCustomer/{id}', 'Customer\Basic@checkCallCustomer');
 
-Route::get('/Female-Product-removeCallCustomer/{id}', 'Customer\Basic@removeCallCustomer');
+Route::get('/Customer-Product-removeCallCustomer/{id}', 'Customer\Basic@removeCallCustomer');
 
-Route::post('/User-Profile-Update', 'Customer\Basic@profileUpdate')->name('profileUpdate');
+Route::post('/Customer-Profile-Update', 'Customer\Basic@profileUpdate')->name('profileUpdate');
 
-Route::get('/User-Address-Active/{id}', 'Customer\Basic@addressActive');
+Route::get('/Customer-Address-Active/{id}', 'Customer\Basic@addressActive');
 
-Route::post('/User-Address-Add', 'Customer\Basic@addAddress')->name('addAddress');
+Route::post('/Customer-Address-Add', 'Customer\Basic@addAddress')->name('addAddress');
 
-Route::post('/User-Address-Update', 'Customer\Basic@addressUpdate')->name('addressUpdate');
+Route::post('/Customer-Address-Update', 'Customer\Basic@addressUpdate')->name('addressUpdate');
 
-Route::get('/User-Address-Delete/{id}', 'Customer\Basic@addressDelete');
+Route::get('/Customer-Address-Delete/{id}', 'Customer\Basic@addressDelete');
 
-Route::post('/User-Product-Return', 'Customer\Basic@returnProduct')->name('returnProduct');
+Route::post('/Customer-Product-Return', 'Customer\Basic@returnProduct')->name('returnProduct');
 
-Route::get('/User-Cart', 'Customer\Basic@cart')->name('cart');
+Route::get('/Customer-Cart', 'Customer\Basic@cart')->name('cart');
 
-Route::get('/User-Cart-Delete/{id}', 'Customer\Basic@cartDelete');
+Route::get('/Customer-Cart-Delete/{id}', 'Customer\Basic@cartDelete');
 
-Route::post('/User-Cart-Submit', 'Customer\Basic@cartSubmit')->name('cartSubmit');
+Route::post('/Customer-Cart-Submit', 'Customer\Basic@cartSubmit')->name('cartSubmit');
 
-Route::get('/User-Cart-Check/{id}', 'Customer\Basic@cartCheck');
+Route::get('/Customer-Cart-Check/{id}', 'Customer\Basic@cartCheck');
 
-Route::get('/User-Cart-Add/{id}', 'Customer\Basic@cartAdd');
+Route::get('/Customer-Cart-Add/{id}', 'Customer\Basic@cartAdd');
 
-Route::get('/User-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
+Route::get('/Customer-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
 
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');

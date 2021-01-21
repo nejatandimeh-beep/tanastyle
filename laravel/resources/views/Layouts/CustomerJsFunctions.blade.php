@@ -284,7 +284,7 @@
                 if (qty === 0) {
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-CheckCallCustomer/" + id,
+                        url: "/Customer-Product-CheckCallCustomer/" + id,
                         async: false,
                         success: function (data) {
                             callStatus = data
@@ -313,7 +313,7 @@
             if ($('#loginAlert').text() === 'login') {
                 $.ajax({
                     type: 'GET',
-                    url: "/Female-Product-CallMe/" + productDetailID
+                    url: "/Customer-Product-CallMe/" + productDetailID
                 });
                 $('#callMeExist').hide();
                 $('#customerCalled').show();
@@ -327,7 +327,7 @@
             if ($('#loginAlert').text() === 'login') {
                 $.ajax({
                     type: 'GET',
-                    url: "/Female-Product-removeCallCustomer/" + productDetailID
+                    url: "/Customer-Product-removeCallCustomer/" + productDetailID
                 });
                 $('#customerCalled').hide();
                 $('#callMeExist').show();
@@ -428,7 +428,7 @@
 
         function cart() {
             if ($('#loginAlert').text() === 'login')
-                window.location = '/User-Cart';
+                window.location = '/Customer-Cart';
             else
                 alert('لطفا ابتدا وارد شوید.')
         }
@@ -516,7 +516,7 @@
             $('#waitingCheckCart').removeClass('d-none');
             $.ajax({
                 type: 'GET',
-                url: "/User-Cart-Add/" + id,
+                url: "/Customer-Cart-Add/" + id,
                 success: function () {
                     $('#waitingCheckCart').addClass('d-none');
                     $('#attachToBasket').removeClass('d-none');
@@ -533,7 +533,7 @@
             $('#cartDelete' + key).hide();
             $.ajax({
                 type: 'GET',
-                url: "/User-Cart-Delete/" + id,
+                url: "/Customer-Cart-Delete/" + id,
                 success: function (data) {
                     $('#cartCount').text(parseInt($('#cartCount').text()) - 1);
                     $('#orderRow' + key).remove();
@@ -551,7 +551,7 @@
             if ($('#loginAlert').text() === 'login') {
                 $.ajax({
                     type: 'GET',
-                    url: "/User-Cart-Check/" + id,
+                    url: "/Customer-Cart-Check/" + id,
                     success: function (data) {
                         if (data === 'empty') {
                             $('#addToBasketBtn').removeClass('d-none');
@@ -584,7 +584,7 @@
             $('#attachToBasket').addClass('d-none');
             $.ajax({
                 type: 'GET',
-                url: "/Female-Product-SizeInfo/" + id + '/' + val,
+                url: "/Customer-Product-SizeInfo/" + id + '/' + val,
                 success: function (data) {
                     $('#waitingIconColor').hide();
                     $('#waitingIconQty').hide();
@@ -660,7 +660,7 @@
                         $('#waitingLikeDelete' + idBtn.replace(/[^0-9]/gi, '')).show();
                         $.ajax({
                             type: 'GET',
-                            url: "/Female-Product-LikeProduct/" + pdID + '/' + 'false',
+                            url: "/Customer-Product-LikeProduct/" + pdID + '/' + 'false',
                             success: function () {
                                 $('#likeRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
                                 if (idBtn.replace(/[^0-9]/gi, '') === '0')
@@ -724,7 +724,7 @@
                 case 'likeProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-LikeProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
+                        url: "/Customer-Product-LikeProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
                         success: function (data) {
                             console.log(data);
                         }
@@ -734,7 +734,7 @@
                 case 'ratingProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-RatingProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
+                        url: "/Customer-Product-RatingProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
                         success: function (data) {
                             $('#voteID').text(data);
                         }
@@ -744,7 +744,7 @@
                 case 'comment':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-NewComment/" + parseInt($('#productID').text()) + '/' + val,
+                        url: "/Customer-Product-NewComment/" + parseInt($('#productID').text()) + '/' + val,
                         success: function (data) {
                             console.log(data);
                             $('#voteID').text(data);
@@ -755,21 +755,21 @@
                 case 'likeComment':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-LikeComment/" + parseInt($('#CommentID').text()) + '/' + val,
+                        url: "/Customer-Product-LikeComment/" + parseInt($('#CommentID').text()) + '/' + val,
                     });
                     break;
 
                 case 'unLikeComment':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-UnlikeComment/" + parseInt($('#CommentID').text()) + '/' + val,
+                        url: "/Customer-Product-UnlikeComment/" + parseInt($('#CommentID').text()) + '/' + val,
                     });
                     break;
 
                 case 'cartProductLike':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-LikeProduct/" + val + '/' + 'true',
+                        url: "/Customer-Product-LikeProduct/" + val + '/' + 'true',
                         success: function () {
                             console.log(key);
                             $('#cartLike' + key).removeClass('d-none');
@@ -780,7 +780,7 @@
                 case 'cartProductUnlike':
                     $.ajax({
                         type: 'GET',
-                        url: "/Female-Product-LikeProduct/" + val + '/' + 'false',
+                        url: "/Customer-Product-LikeProduct/" + val + '/' + 'false',
                         success: function (data) {
                             $('#cartLike' + key).removeClass('d-none');
                             $('#cartUnlike' + key).addClass('d-none');
@@ -1072,7 +1072,7 @@
                         $('#waitingAddressDelete' + idBtn.replace(/[^0-9]/gi, '')).show();
                         $.ajax({
                             type: 'GET',
-                            url: "/User-Address-Delete/" + id,
+                            url: "/Customer-Address-Delete/" + id,
                             success: function () {
                                 $('#addressRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
                             },
@@ -1090,7 +1090,7 @@
         }
 
         function activeAddress(id) {
-            window.location = "/User-Address-Active/" + id;
+            window.location = "/Customer-Address-Active/" + id;
         }
 
         // -------------------------------------------------State And City----------------------------------------------
