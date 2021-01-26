@@ -60,7 +60,7 @@
                     </div>
 
                     <div class="g-pr-15 g-pl-15 g-pl-0--lg g-pt-20">
-                        <div style="direction: rtl" role="tablist" aria-multiselectable="true">
+                        <div style="direction: rtl" id="filterContainer" role="tablist" aria-multiselectable="true">
                             <!-- فیلتر جمسیت -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
@@ -86,7 +86,7 @@
                                                         <span>همه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="gender" type="checkbox" checked="">
+                                                                   name="gender" id="all" type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -100,7 +100,7 @@
                                                         <span>زنانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="gender" type="checkbox" checked="">
+                                                                   name="gender" id="female" type="checkbox" {{ ($filterType === 'gender-0' || $filterType === '0000') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -114,7 +114,7 @@
                                                         <span>مردانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="gender" type="checkbox" checked="">
+                                                                   name="gender" id="male" type="checkbox" {{ ($filterType === 'gender-1') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -128,7 +128,7 @@
                                                         <span>بچگانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="gender" type="checkbox" checked="">
+                                                                   name="gender" id="kids" type="checkbox" {{ ($filterType === 'gender-2') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -166,7 +166,7 @@
                                                         <span>همه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" checked="">
+                                                                   name="category" type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -180,7 +180,7 @@
                                                         <span>لباس زیر</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" {{ ($filterType[3] === '0') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -194,7 +194,7 @@
                                                         <span>پایین تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" {{ ($filterType[3] === '1') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -208,7 +208,7 @@
                                                         <span>بالا تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" {{ ($filterType[3] === '2') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -222,7 +222,7 @@
                                                         <span>تمام تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" checked="">
+                                                                   name="category" type="checkbox" {{ ($filterType[3] === '3') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -535,7 +535,7 @@
                     <div id="productContainer" class="row g-mb-50">
                         @foreach($product_table as $key => $data)
                             <div class="col-12 col-lg-3 g-mb-30">
-                                <figure style="direction: ltr; border-bottom: 5px solid #bfbfbf"
+                                <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
                                     <div>
                                         <div id="carousel-08-1"

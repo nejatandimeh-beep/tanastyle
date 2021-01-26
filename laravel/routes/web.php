@@ -127,13 +127,13 @@ Route::get('/', function () {
     return view('Customer.Master');
 })->name('Master');
 
-// Female Product List
+// Customer Product List
 Route::get('/Customer-Product-List/{filter}', 'Customer\Basic@productList')->name('productList');
 
-// Female Product Detail
+// Customer Product Detail
 Route::get('/Customer-Product-Detail/{id}', 'Customer\Basic@productDetail')->name('productDetail');
 
-// Female Product Detail
+// Customer Product Detail
 Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal');
 
 // Profile
@@ -183,6 +183,9 @@ Route::get('/Customer-Cart-Check/{id}', 'Customer\Basic@cartCheck');
 Route::get('/Customer-Cart-Add/{id}', 'Customer\Basic@cartAdd');
 
 Route::get('/Customer-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
+
+// -------------------[ Products Filter ]-----------------------
+Route::get('/Customer-Product-Gender-Filter/{gender}', 'Customer\Basic@genderFilter');
 
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');

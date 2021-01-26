@@ -415,6 +415,53 @@
             }
         });
         // ---------------------------------------------------My Function-----------------------------------------------
+        // فیلترینگ صفحه محصولات
+        $('#filterContainer').on('change', function () {
+            let  filters = {
+                gender: $('input[name="gender"]').val(),
+                lastName: "Doe",
+                age: 50,
+                eyeColor: "blue"
+            };
+            switch (gender) {
+                case 'all':
+                    $.ajax({
+                        type:'GET',
+                        url:'/Customer-Product-Gender-Filter/'+ gender,
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+                    break;
+                case 'male':
+                    $.ajax({
+                        type:'GET',
+                        url:'/Customer-Product-Gender-Filter/'+ gender,
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+                    break;
+                case 'female':
+                    $.ajax({
+                        type:'GET',
+                        url:'/Customer-Product-Gender-Filter/'+ gender,
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+                    break;
+                case 'kids':
+                    $.ajax({
+                        type:'GET',
+                        url:'/Customer-Product-Gender-Filter/'+ gender,
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+                    break;
+            }
+        });
         // هایلت آپشن آدرس در هنگام قرار گرفتن ماوس بروی هر سط آدرس
         function optionHover(id) {
             $('#addressOption' + id).removeClass('g-color-gray-dark-v3');

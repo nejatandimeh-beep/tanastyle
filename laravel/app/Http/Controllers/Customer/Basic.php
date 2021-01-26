@@ -530,8 +530,9 @@ class Basic extends Controller
 
     public function productList($filter)
     {
-        $product_table = $this->productListFilter($filter);
-        return view('Customer.femaleProductList', compact('product_table'));
+        $product_table = $this->productListFilter($filter)[0];
+        $filterType = $this->productListFilter($filter)[1];
+        return view('Customer.femaleProductList', compact('product_table','filterType'));
     }
 
     public function productDetail($id)
@@ -940,6 +941,25 @@ class Basic extends Controller
             return 'exist';
     }
 
+// ------------------------------------------[ Products Filter ]--------------------------------------------------------
+    public function genderFilter($gender) {
+        switch ($gender) {
+            case 'female':
+
+                return DB::table('customers as c');
+                break;
+            case 'male':
+                return 'male';
+                break;
+            case 'kids':
+                return 'kids';
+                break;
+            default:
+                return 'all';
+                break;
+        }
+    }
+
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($id, $qty, $i)
     {
@@ -1106,21 +1126,31 @@ class Basic extends Controller
     {
         switch ($filter) {
             case 'gender-0':
-                return DB::table('product')
+                return array(DB::table('product')
                     ->select('*')
                     ->where('Gender', 'زنانه')
-                    ->get();
+                    ->get(),'gender-0');
             case 'gender-1':
-                return DB::table('product')
+                return array(DB::table('product')
                     ->select('*')
                     ->where('Gender', 'مردانه')
-                    ->get();
+                    ->get(), 'gender-1');
             case 'gender-2':
-                return DB::table('product')
+                return array(DB::table('product')
                     ->select('*')
                     ->where('Gender', 'بچگانه')
-                    ->get();
-            default:
+                    ->get(),'gender-2');
+            case '0000':
+                return array(DB::table('product')
+                    ->select('*')
+                    ->where('Cat', $filter)
+                    ->get(),'0000');
+
+            default:case '0001':
+            return array(DB::table('product')
+                ->select('*')
+                ->where('Cat', $filter)
+                ->get(),'0001');
         }
     }
 }
