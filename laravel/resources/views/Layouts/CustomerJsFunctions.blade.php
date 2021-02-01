@@ -414,54 +414,124 @@
                 $(this).attr('selected', true);
             }
         });
-        // ---------------------------------------------------My Function-----------------------------------------------
-        // فیلترینگ صفحه محصولات
+
+        // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
         $('#filterContainer').on('change', function () {
-            let  filters = {
-                gender: $('input[name="gender"]').val(),
-                lastName: "Doe",
-                age: 50,
-                eyeColor: "blue"
+            let gender, category, size, priceMin=$('#price-max').val(),priceMax=$('#price-min').val(), color,
+                f = '1', m = '1', k = '1',
+                under='1',bottom='1',up='1',complete='1',
+                xs='1',s='1',mm='1',l='1',xl='1',xxl='1',xxxl='1',
+                whites='1';
+
+            if ($('#gender-all:checked').length > 0)
+                gender = f + m + k;
+            else {
+                if (!($('#female:checked').length > 0))
+                    f = '0';
+                if (!($('#male:checked').length > 0))
+                    m = '0';
+                if (!($('#kids:checked').length > 0))
+                    k = '0';
+
+                gender = f+m+k;
+            }
+
+            if ($('#gender-all:checked').length > 0)
+                category = under + bottom + up + complete;
+            else {
+                if (!($('#cat-under:checked').length > 0))
+                    under = '0';
+                if (!($('#cat-bottom:checked').length > 0))
+                    bottom = '0';
+                if (!($('#cat-up:checked').length > 0))
+                    up = '0';
+                if (!($('#cat-complete:checked').length > 0))
+                    complete = '0';
+
+                category = under + bottom + up + complete;
+            }
+
+            if ($('#size-all:checked').length > 0)
+                size = xs + s + mm + l + xl + xxl+ xxxl;
+            else {
+                if (!($('#size-xs:checked').length > 0))
+                    xs = '0';
+                if (!($('#size-s:checked').length > 0))
+                    s = '0';
+                if (!($('#size-m:checked').length > 0))
+                    mm = '0';
+                if (!($('#size-l:checked').length > 0))
+                    l = '0';
+                if (!($('#size-xl:checked').length > 0))
+                    xl = '0';
+                if (!($('#size-xxl:checked').length > 0))
+                    xxl = '0';
+                if (!($('#size-xxxl:checked').length > 0))
+                    xxxl = '0';
+
+                size = xs + s + mm + l + xl + xxl+ xxxl;
+            }
+
+            if ($('#color-all:checked').length > 0)
+                color = whites;
+            else {
+                if (!($('#color-whites:checked').length > 0))
+                    whites = '0';
+
+                color = whites;
+            }
+
+            let filters = {
+                gender: gender,
+                category: category,
+                size: size,
+                priceMin: priceMin,
+                priceMax: priceMax,
+                color: color,
             };
-            switch (gender) {
-                case 'all':
-                    $.ajax({
-                        type:'GET',
-                        url:'/Customer-Product-Gender-Filter/'+ gender,
-                        success: function (data) {
-                            console.log(data);
-                        }
-                    });
+            $.ajax({
+                type: 'GET',
+                url: '/Customer-Product-Custom-Filter/' + JSON.stringify(filters),
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        });
+
+        // ---------------------------------------------------My Function-----------------------------------------------
+        function allSwitchBtn(btn) {
+            switch (btn) {
+                case 'gender-all':
+                    if ($('#' + btn + ':checked').length > 0) {
+                        $('input[name="gender"]').prop('checked', true);
+                    } else {
+                        $('input[name="gender"]').prop('checked', false);
+                    }
                     break;
-                case 'male':
-                    $.ajax({
-                        type:'GET',
-                        url:'/Customer-Product-Gender-Filter/'+ gender,
-                        success: function (data) {
-                            console.log(data);
-                        }
-                    });
+                case 'cat-all':
+                    if ($('#' + btn + ':checked').length > 0) {
+                        $('input[name="category"]').prop('checked', true);
+                    } else {
+                        $('input[name="category"]').prop('checked', false);
+                    }
                     break;
-                case 'female':
-                    $.ajax({
-                        type:'GET',
-                        url:'/Customer-Product-Gender-Filter/'+ gender,
-                        success: function (data) {
-                            console.log(data);
-                        }
-                    });
+                case 'size-all':
+                    if ($('#' + btn + ':checked').length > 0) {
+                        $('input[name="size"]').prop('checked', true);
+                    } else {
+                        $('input[name="size"]').prop('checked', false);
+                    }
                     break;
-                case 'kids':
-                    $.ajax({
-                        type:'GET',
-                        url:'/Customer-Product-Gender-Filter/'+ gender,
-                        success: function (data) {
-                            console.log(data);
-                        }
-                    });
+                case 'color-all':
+                    if ($('#' + btn + ':checked').length > 0) {
+                        $('input[name="color"]').prop('checked', true);
+                    } else {
+                        $('input[name="color"]').prop('checked', false);
+                    }
                     break;
             }
-        });
+        }
+
         // هایلت آپشن آدرس در هنگام قرار گرفتن ماوس بروی هر سط آدرس
         function optionHover(id) {
             $('#addressOption' + id).removeClass('g-color-gray-dark-v3');
@@ -585,7 +655,7 @@
                     $('#cartCount').text(parseInt($('#cartCount').text()) - 1);
                     $('#orderRow' + key).remove();
                     $('#cartContainer' + key).remove();
-                    $('#basketNum').text(parseInt($('#basketNum').text())-1);
+                    $('#basketNum').text(parseInt($('#basketNum').text()) - 1);
                     if (data === '0') {
                         $('#cartBuyBtn').addClass('d-none');
                         $('#cartEmptyAlert').removeClass('d-none');
@@ -608,8 +678,7 @@
                         $('#waitingCheckCart').addClass('d-none');
                     }
                 });
-            }
-            else
+            } else
                 $('#addToBasketBtn').removeClass('d-none');
         }
 
@@ -849,6 +918,7 @@
         }
 
         function closeSideBar() {
+            $('.collapse').collapse('hide');
             $('#filterDiv').css('display', 'none');
             $('#smallFilterDiv').css('display', 'block');
             $('#contentDiv').removeClass('col-md-9');

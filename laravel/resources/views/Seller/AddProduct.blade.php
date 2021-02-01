@@ -172,35 +172,20 @@
                         <div class="form-group g-mb-10 text-right col-lg-4">
                             <label class="g-mb-10">سایز</label>
                             <div class="input-group g-brd-primary--focus g-mb-10">
-                                @if ($size === 1)
-                                    <div class="input-group g-brd-primary--focus g-mb-10">
-                                        <div
-                                            class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                                            <i class="icon-info"></i>
-                                        </div>
-                                        <input
-                                            class="form-control form-control-md rounded-0 pl-0 text-right g-bg-gray-light-v5 g-font-size-16"
-                                            type="text"
-                                            name="size1" value="بدون سایز" readonly="">
-                                        <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">سایزبندی
-                                            برای این محصول وجود ندارد.</b>
-                                    </div>
-                                @else
-                                    <div
-                                        class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                                        <i class="fa fa-ellipsis-v"></i>
-                                    </div>
-                                    <select
-                                        class="form-control form-control-md custom-select rounded-0 text-right h-25 g-font-size-16"
-                                        id="size{{$i}}"
-                                        tabindex="5+{{ $i }}"
-                                        name="size{{$i}}">
-                                        @foreach($size as $s)
-                                            <option style="direction: rtl"
+                                <div
+                                    class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                    <i class="fa fa-ellipsis-v"></i>
+                                </div>
+                                <select
+                                    class="form-control form-control-md custom-select rounded-0 text-right h-25 g-font-size-16"
+                                    id="size{{$i}}"
+                                    tabindex="5+{{ $i }}"
+                                    name="size{{$i}}">
+                                    @foreach($size as $s)
+                                        <option style="direction: rtl"
                                                 value="{{$s}}">{{$s}}</option>
-                                        @endforeach
-                                    </select>
-                                @endif
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="form-group g-mb-20 text-right col-lg-4">
@@ -418,8 +403,10 @@
                 <br><br><br>
                 <div class="text-left">
                     <!-- Danger Alert -->
-                    <div style="direction: rtl" id="errorMsg" class="d-none alert alert-danger g-mt-20 text-right" role="alert">
-                        <strong>اشتباهی رخ داده است!</strong> لطفا فرم فوق را بررسی و اشتباهات موجود در فرم را اصلاح نمایید.
+                    <div style="direction: rtl" id="errorMsg" class="d-none alert alert-danger g-mt-20 text-right"
+                         role="alert">
+                        <strong>اشتباهی رخ داده است!</strong> لطفا فرم فوق را بررسی و اشتباهات موجود در فرم را اصلاح
+                        نمایید.
                     </div>
                     <!-- End Danger Alert -->
                     <button id="addProductBtn" type="submit" class="btn btn-md u-btn-primary rounded-0 g-pa-20--lg"

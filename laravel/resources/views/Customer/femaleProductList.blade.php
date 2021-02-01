@@ -39,8 +39,8 @@
 
             <!-- Filters -->
             <div style="display: none" id="filterDiv" class="col-md-3 flex-md-first g-brd-left--lg g-brd-gray-light-v4">
-                <div style="z-index: 100 !important" id="stickyDiv1">
-                    <div class="g-bg-white-opacity-0_9 sticky-top g-z-index-3">
+                <div style="z-index: 100 !important" id="stickyDiv1" class="sticky-top g-z-index-1">
+                    <div class="">
                         <div class="g-pr-15--lg d-flex justify-content-between g-pb-10 g-pt-10">
                             <h5 class="m-0 align-self-center">فیلتر ها</h5>
                             <button
@@ -86,7 +86,10 @@
                                                         <span>همه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="gender" id="all" type="checkbox">
+                                                                   name="gender"
+                                                                   id="gender-all"
+                                                                   onclick="allSwitchBtn($(this).attr('id'))"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -100,7 +103,10 @@
                                                         <span>زنانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="gender" id="female" type="checkbox" {{ ($filterType === 'gender-0' || $filterType === '0000') ? 'checked=""' : '' }}>
+                                                                   name="gender"
+                                                                   id="female"
+                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($filterType === 'gender-0' || $filterType === '0000') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -114,7 +120,10 @@
                                                         <span>مردانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="gender" id="male" type="checkbox" {{ ($filterType === 'gender-1') ? 'checked=""' : '' }}>
+                                                                   name="gender"
+                                                                   id="male"
+                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($filterType === 'gender-1') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -128,7 +137,10 @@
                                                         <span>بچگانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="gender" id="kids" type="checkbox" {{ ($filterType === 'gender-2') ? 'checked=""' : '' }}>
+                                                                   name="gender"
+                                                                   id="kids"
+                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($filterType === 'gender-2') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -166,7 +178,10 @@
                                                         <span>همه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox">
+                                                                   name="category"
+                                                                   id="cat-all"
+                                                                   onclick="allSwitchBtn($(this).attr('id'))"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -180,7 +195,10 @@
                                                         <span>لباس زیر</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" {{ ($filterType[3] === '0') ? 'checked=""' : '' }}>
+                                                                   name="category"
+                                                                   id="cat-under"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($filterType[3] === '0') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -194,7 +212,10 @@
                                                         <span>پایین تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" {{ ($filterType[3] === '1') ? 'checked=""' : '' }}>
+                                                                   name="category"
+                                                                   id="cat-bottom"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($filterType[3] === '1') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -208,7 +229,10 @@
                                                         <span>بالا تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" {{ ($filterType[3] === '2') ? 'checked=""' : '' }}>
+                                                                   name="category"
+                                                                   id="cat-up"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($filterType[3] === '2') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -222,7 +246,10 @@
                                                         <span>تمام تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category" type="checkbox" {{ ($filterType[3] === '3') ? 'checked=""' : '' }}>
+                                                                   name="category"
+                                                                   id="cat-complete"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($filterType[3] === '3') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -260,7 +287,27 @@
                                                         <span>همه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="size"
+                                                                   id="size-all"
+                                                                   onclick="allSwitchBtn($(this).attr('id'))"
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>XS</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="size"
+                                                                   id="size-xs"
+                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -274,7 +321,10 @@
                                                         <span>S</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="size"
+                                                                   id="size-s"
+                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -288,7 +338,10 @@
                                                         <span>M</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="size"
+                                                                   id="size-m"
+                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -302,7 +355,10 @@
                                                         <span>L</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="size"
+                                                                   id="size-l"
+                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -316,7 +372,10 @@
                                                         <span>xL</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="size"
+                                                                   id="size-xl"
+                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -330,7 +389,10 @@
                                                         <span>xxL</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="size"
+                                                                   id="size-xxl"
+                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -344,21 +406,10 @@
                                                         <span>xxxL</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
-                                                            <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
-                                                            </div>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="my-2">
-                                                <div class="form-group">
-                                                    <label class="d-flex align-items-center justify-content-between">
-                                                        <span>تک سایز</span>
-                                                        <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="radGroup3_1" type="checkbox" checked="">
+                                                                   name="size"
+                                                                   id="size-xxxl"
+                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -389,20 +440,24 @@
                                      role="tabpanel"
                                      aria-labelledby="accordion-100-heading-03">
                                     <div class="card-block g-px-0">
-                                        <div class="d-flex justify-content-between g-mt-5">
+                                        <div class="d-flex justify-content-between g-mt-10">
                                             <div style="direction: ltr" class="form-group m-0 col-6">
                                                 <div class="u-input-group-v2">
-                                                    <input id="fullName2"
+                                                    <input id="price-min"
                                                            class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
-                                                           name="full-name" type="text">
+                                                           value="0"
+                                                           name="price-min"
+                                                           type="text">
                                                     <label style="left: 75% !important;" for="fullName2">از</label>
                                                 </div>
                                             </div>
                                             <div style="direction: ltr" class="form-group m-0 col-6">
                                                 <div class="u-input-group-v2">
-                                                    <input id="fullName2"
+                                                    <input id="price-max"
                                                            class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
-                                                           name="full-name" type="text">
+                                                           name="price-max"
+                                                           value="0"
+                                                           type="text">
                                                     <label style="left: 75% !important;" for="fullName2">تا</label>
                                                 </div>
                                             </div>
@@ -428,49 +483,53 @@
                                      class="collapse"
                                      role="tabpanel"
                                      aria-labelledby="accordion-100-heading-04">
-                                    <div class="card-block g-px-0">
-                                        <label
-                                            class="form-check-inline u-check w-100 g-pa-10 g-brd-around g-brd-gray-light-v4 g-color-primary--hover">
-                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
-                                            <div class="col-12 d-flex justify-content-between">
-                                                <div class="col-11 text-center">
-                                                    <span>خانواده رنگ روشن</span>
+                                    <div class="card-block g-pa-5">
+                                        <ul class="list-unstyled p-0 g-pt-15">
+                                            <li class="g-mt-2 g-mb-15">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>همه</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="color-all"
+                                                                   onclick="allSwitchBtn($(this).attr('id'))"
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
                                                 </div>
-                                                <div class="col-1 p-0">
-                                                    <div class="u-check-icon-checkbox-v6">
-                                                        <i style="width: 20px; height: 20px;" class="fa"
-                                                           data-check-icon=""></i>
-                                                    </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/whiteColor.png') }}"
+                                                         alt="Image Description">
                                                 </div>
-                                            </div>
-                                            <hr class="g-brd-gray-light-v4 g-my-10 g-mx-minus-10">
-                                            <div class="g-brd-around g-brd-gray-light-v4">
-                                                <img class="img-fluid w-100 g-opacity-0_7"
-                                                     src="{{ asset('img/Other/whiteColor.png') }}"
-                                                     alt="Image Description">
-                                            </div>
-                                        </label>
-                                        <label
-                                            class="form-check-inline u-check w-100 g-pa-10 g-brd-around g-brd-gray-light-v4 g-color-primary--hover">
-                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" type="checkbox">
-                                            <div class="col-12 d-flex justify-content-between">
-                                                <div class="col-11 text-center">
-                                                    <span>خانواده رنگ سبز</span>
+                                            </li>
+                                            <li class="g-my-2 g-mb-15">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای روشن</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="color-whites"
+                                                                   type="checkbox"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
                                                 </div>
-                                                <div class="col-1 p-0">
-                                                    <div class="u-check-icon-checkbox-v6">
-                                                        <i style="width: 20px; height: 20px;" class="fa"
-                                                           data-check-icon=""></i>
-                                                    </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/whiteColor.png') }}"
+                                                         alt="Image Description">
                                                 </div>
-                                            </div>
-                                            <hr class="g-brd-gray-light-v4 g-my-10 g-mx-minus-10">
-                                            <div class="g-brd-around g-brd-gray-light-v4">
-                                                <img class="img-fluid w-100 g-opacity-0_7"
-                                                     src="{{ asset('img/Other/whiteColor.png') }}"
-                                                     alt="Image Description">
-                                            </div>
-                                        </label>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>

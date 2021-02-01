@@ -213,7 +213,7 @@ class Add extends Controller
             $colors[$i] = $request->get('color' . $temp);
             $sizeQty[$i] = $request->get('sizeQty' . $temp);
         }
-        // Get The Last insterted Product ID
+        // Get The Last inserted Product ID
         $temp = DB::table('product')->select('id')->latest('id')->first();
         $productId = $temp->id;
 
