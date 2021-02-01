@@ -39,7 +39,7 @@
 
             <!-- Filters -->
             <div style="display: none" id="filterDiv" class="col-md-3 flex-md-first g-brd-left--lg g-brd-gray-light-v4">
-                <div style="z-index: 100 !important" id="stickyDiv1" class="sticky-top g-z-index-1">
+                <div id="stickyDiv1" class="sticky-top g-z-index-1">
                     <div class="">
                         <div class="g-pr-15--lg d-flex justify-content-between g-pb-10 g-pt-10">
                             <h5 class="m-0 align-self-center">فیلتر ها</h5>
