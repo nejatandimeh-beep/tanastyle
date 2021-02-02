@@ -106,7 +106,7 @@
                                                                    name="gender"
                                                                    id="female"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filterType === 'gender-0' || $filterType === '0000') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($filter === 'gender-0') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -123,7 +123,7 @@
                                                                    name="gender"
                                                                    id="male"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filterType === 'gender-1') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($filter === 'gender-1') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -140,7 +140,7 @@
                                                                    name="gender"
                                                                    id="kids"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filterType === 'gender-2') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($filter === 'gender-2') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -198,7 +198,7 @@
                                                                    name="category"
                                                                    id="cat-under"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filterType[3] === '0') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($filter[3] === '0') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -215,7 +215,7 @@
                                                                    name="category"
                                                                    id="cat-bottom"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filterType[3] === '1') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($filter[3] === '1') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -232,7 +232,7 @@
                                                                    name="category"
                                                                    id="cat-up"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filterType[3] === '2') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($filter[3] === '2') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -249,7 +249,7 @@
                                                                    name="category"
                                                                    id="cat-complete"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filterType[3] === '3') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($filter[3] === '3') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -592,7 +592,7 @@
                     </div>
                     <!-- Products -->
                     <div id="productContainer" class="row g-mb-50">
-                        @foreach($product_table as $key => $data)
+                        @foreach($data as $key => $data)
                             <div class="col-12 col-lg-3 g-mb-30">
                                 <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">

@@ -528,13 +528,6 @@ class Basic extends Controller
             ->delete();
     }
 
-    public function productList($filters)
-    {
-        $product_table = $this->productListFilter($filters)[0];
-        $filterType = $this->productListFilter($filters)[1];
-        return view('Customer.femaleProductList', compact('product_table', 'filterType'));
-    }
-
     public function productDetail($id)
     {
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
@@ -985,12 +978,51 @@ class Basic extends Controller
         }
 
         return array(DB::table('product')
-            ->where('Gender',$gender[0])
+            ->where('Gender', $gender[0])
             ->orWhere('Gender', $gender[1])
             ->orWhere('Gender', $gender[2])
             ->get());
     }
+// ---------------------------------------------[Product List]----------------------------------------------------------
+    public function productFemaleList()
+    {
+        $data = DB::table('product')
+            ->select('*')
+            ->where('Gender', 'زنانه')
+            ->get();
+        $filter = 'gender-0';
+        return view('Customer.ProductList', compact('data', 'filter'));
+    }
 
+    public function productMaleList()
+    {
+        $data = DB::table('product')
+            ->select('*')
+            ->where('Gender', 'مردانه')
+            ->get();
+        $filter = 'gender-1';
+        return view('Customer.ProductList', compact('data', 'filter'));
+    }
+
+    public function productKidsList()
+    {
+        $data = DB::table('product')
+            ->select('*')
+            ->where('Gender', 'بچگانه')
+            ->get();
+        $filter = 'gender-2';
+        return view('Customer.ProductList', compact('data', 'filter'));
+    }
+
+    public function product0000()
+    {
+        $data = DB::table('product')
+            ->select('*')
+            ->where('Cat', '0000')
+            ->get();
+        $filter = 'gender-0';
+        return view('Customer.ProductList', compact('data', 'filter'));
+    }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($id, $qty, $i)
     {
@@ -1151,37 +1183,5 @@ class Basic extends Controller
                 return false;
         }
 
-    }
-
-    public function productListFilter($filters)
-    {
-        switch ($filters) {
-            case 'gender-0':
-                return array(DB::table('product')
-                    ->select('*')
-                    ->where('Gender', 'زنانه')
-                    ->get(), 'gender-0');
-            case 'gender-1':
-                return array(DB::table('product')
-                    ->select('*')
-                    ->where('Gender', 'مردانه')
-                    ->get(), 'gender-1');
-            case 'gender-2':
-                return array(DB::table('product')
-                    ->select('*')
-                    ->where('Gender', 'بچگانه')
-                    ->get(), 'gender-2');
-            case '0000':
-                return array(DB::table('product')
-                    ->select('*')
-                    ->where('Cat', $filters)
-                    ->get(), '0000');
-            case '0001':
-                return array(DB::table('product')
-                    ->select('*')
-                    ->where('Cat', $filters)
-                    ->get(), '0001');
-            default:
-        }
     }
 }

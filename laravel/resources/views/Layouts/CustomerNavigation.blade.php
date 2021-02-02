@@ -75,7 +75,7 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="{{ route('productList',['filter'=>'0000']) }}">شورت</a>
+                                                                                      href="{{ route('product0000') }}">شورت</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">سوتین</a>

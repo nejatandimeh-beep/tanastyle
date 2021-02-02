@@ -127,8 +127,14 @@ Route::get('/', function () {
     return view('Customer.Master');
 })->name('Master');
 
-// Customer Product List
-Route::get('/Customer-Product-List/{filter}', 'Customer\Basic@productList')->name('productList');
+//-------------------[ Customer Product List ]-----------------------
+Route::get('/Customer-Product-Female-List', 'Customer\Basic@productFemaleList')->name('productFemaleList');
+
+Route::get('/Customer-Product-Male-List', 'Customer\Basic@productMaleList')->name('productMaleList');
+
+Route::get('/Customer-Product-Kids-List', 'Customer\Basic@productKidsList')->name('productKidsList');
+
+Route::get('/Customer-Product-0000', 'Customer\Basic@product0000')->name('product0000');
 
 // Customer Product Detail
 Route::get('/Customer-Product-Detail/{id}', 'Customer\Basic@productDetail')->name('productDetail');
