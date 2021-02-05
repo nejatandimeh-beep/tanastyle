@@ -106,7 +106,7 @@
                                                                    name="gender"
                                                                    id="female"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filter === 'gender-0') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '0') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -123,7 +123,7 @@
                                                                    name="gender"
                                                                    id="male"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filter === 'gender-1') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '1') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -140,7 +140,7 @@
                                                                    name="gender"
                                                                    id="kids"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filter === 'gender-2') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '2') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -181,6 +181,7 @@
                                                                    name="category"
                                                                    id="cat-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
+                                                                   {{ ($cat === 'all') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -198,7 +199,8 @@
                                                                    name="category"
                                                                    id="cat-under"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filter[3] === '0') ? 'checked=""' : '' }}>
+                                                                   {{ ($cat === 'all' || $cat === '00') ? 'checked' : ''}}
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -209,13 +211,14 @@
                                             <li class="my-2">
                                                 <div class="form-group">
                                                     <label class="d-flex align-items-center justify-content-between">
-                                                        <span>پایین تنه</span>
+                                                        <span>لباس پایین تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="cat-bottom"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filter[3] === '1') ? 'checked=""' : '' }}>
+                                                                   {{ ($cat === 'all' || $cat === '01') ? 'checked' : ''}}
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -226,13 +229,14 @@
                                             <li class="my-2">
                                                 <div class="form-group">
                                                     <label class="d-flex align-items-center justify-content-between">
-                                                        <span>بالا تنه</span>
+                                                        <span>لباس بالا تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="cat-up"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filter[3] === '2') ? 'checked=""' : '' }}>
+                                                                   {{ ($cat === 'all' || $cat === '02') ? 'checked' : ''}}
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -243,13 +247,248 @@
                                             <li class="my-2">
                                                 <div class="form-group">
                                                     <label class="d-flex align-items-center justify-content-between">
-                                                        <span>تمام تنه</span>
+                                                        <span>لباس تمام تنه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="cat-complete"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($filter[3] === '3') ? 'checked=""' : '' }}>
+                                                                   {{ ($cat === 'all' || $cat === '03') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>کیف</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-bag"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '04') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>کفش</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-shoe"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '1') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>کفش</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-shoe"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '2') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>لباس زیر ورزشی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-under-sport"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '30') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>لباس پایین تنه ورزشی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-bottom-sport"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '31') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>لباس بالا تنه ورزشی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-up-sport"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '32') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>کیف ورزشی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-bag-sport"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '33') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>کفش ورزشی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-shoe-sport"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '33') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>اکسسوری ورزشی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-accessory-sport"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '34') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>بدلیجات</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-accessory-rhinestones"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '40') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>اکسسوری مو</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-accessory-hair"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '41') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>سرپوش</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-accessory-hat"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '42') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>سایر</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="cat-accessory-others"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($cat === 'all' || $cat === '43') ? 'checked' : ''}}
+                                                                   type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -290,7 +529,8 @@
                                                                    name="size"
                                                                    id="size-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -307,7 +547,8 @@
                                                                    name="size"
                                                                    id="size-xs"
                                                                    onchange="$('#size-all').prop('checked',false)"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -324,7 +565,8 @@
                                                                    name="size"
                                                                    id="size-s"
                                                                    onchange="$('#size-all').prop('checked',false)"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -341,7 +583,8 @@
                                                                    name="size"
                                                                    id="size-m"
                                                                    onchange="$('#size-all').prop('checked',false)"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -358,7 +601,8 @@
                                                                    name="size"
                                                                    id="size-l"
                                                                    onchange="$('#size-all').prop('checked',false)"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -375,7 +619,8 @@
                                                                    name="size"
                                                                    id="size-xl"
                                                                    onchange="$('#size-all').prop('checked',false)"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -392,7 +637,8 @@
                                                                    name="size"
                                                                    id="size-xxl"
                                                                    onchange="$('#size-all').prop('checked',false)"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -409,7 +655,8 @@
                                                                    name="size"
                                                                    id="size-xxxl"
                                                                    onchange="$('#size-all').prop('checked',false)"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -440,28 +687,54 @@
                                      role="tabpanel"
                                      aria-labelledby="accordion-100-heading-03">
                                     <div class="card-block g-px-0">
+                                        <ul class="d-none list-unstyled p-0 g-mb-30">
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>همه</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="priceAll"
+                                                                   id="price-all"
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        </ul>
                                         <div class="d-flex justify-content-between g-mt-10">
-                                            <div style="direction: ltr" class="form-group m-0 col-6">
-                                                <div class="u-input-group-v2">
-                                                    <input id="price-min"
-                                                           class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
-                                                           value="0"
-                                                           name="price-min"
-                                                           type="text">
-                                                    <label style="left: 75% !important;" for="fullName2">از</label>
+                                            <div style="direction: ltr" class="m-0 col-6">
+                                                <div class="form-group">
+                                                    <div class="u-input-group-v2">
+                                                        <input id="price-min"
+                                                               class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
+                                                               oninput="minPriceAllOff($(this))"
+                                                               name="price-min"
+                                                               type="text">
+                                                        <label style="left: 24% !important; cursor: text" for="price-min">از ده هزار</label>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div style="direction: ltr" class="form-group m-0 col-6">
-                                                <div class="u-input-group-v2">
-                                                    <input id="price-max"
-                                                           class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
-                                                           name="price-max"
-                                                           value="0"
-                                                           type="text">
-                                                    <label style="left: 75% !important;" for="fullName2">تا</label>
+                                            <div style="direction: ltr" class="m-0 col-6">
+                                                <div class="form-group">
+                                                    <div class="u-input-group-v2">
+                                                        <input id="price-max"
+                                                               class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
+                                                               name="price-max"
+                                                               oninput="maxPriceAllOff($(this))"
+                                                               type="text">
+                                                        <label style="left: 17% !important; cursor: text" for="price-max">تا صد میلیون</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="text-left g-px-15">
+                                        <button id="priceFilterSubmit"
+                                           class="btn u-btn-outline-primary g-rounded-50 g-mr-10 g-mb-15" disabled>اعمال</button>
                                     </div>
                                 </div>
                             </div>
@@ -494,7 +767,8 @@
                                                                    name="color"
                                                                    id="color-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
-                                                                   type="checkbox">
+                                                                   type="checkbox"
+                                                                   checked="checked">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -516,6 +790,7 @@
                                                                    name="color"
                                                                    id="color-whites"
                                                                    type="checkbox"
+                                                                   checked="checked"
                                                                    onchange="$('#color-all').prop('checked',false)">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>

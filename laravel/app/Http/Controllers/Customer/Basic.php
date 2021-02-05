@@ -990,8 +990,9 @@ class Basic extends Controller
             ->select('*')
             ->where('Gender', 'زنانه')
             ->get();
-        $filter = 'gender-0';
-        return view('Customer.ProductList', compact('data', 'filter'));
+        $gender = '0';
+        $cat='all';
+        return view('Customer.ProductList', compact('data', 'gender','cat'));
     }
 
     public function productMaleList()
@@ -1000,8 +1001,9 @@ class Basic extends Controller
             ->select('*')
             ->where('Gender', 'مردانه')
             ->get();
-        $filter = 'gender-1';
-        return view('Customer.ProductList', compact('data', 'filter'));
+        $gender = '1';
+        $cat='all';
+        return view('Customer.ProductList', compact('data', 'gender','cat'));
     }
 
     public function productKidsList()
@@ -1010,8 +1012,9 @@ class Basic extends Controller
             ->select('*')
             ->where('Gender', 'بچگانه')
             ->get();
-        $filter = 'gender-2';
-        return view('Customer.ProductList', compact('data', 'filter'));
+        $gender = '2';
+        $cat='all';
+        return view('Customer.ProductList', compact('data', 'gender','cat'));
     }
 
     public function product0000()
@@ -1020,8 +1023,9 @@ class Basic extends Controller
             ->select('*')
             ->where('Cat', '0000')
             ->get();
-        $filter = 'gender-0';
-        return view('Customer.ProductList', compact('data', 'filter'));
+        $gender = '0';
+        $cat = '0';
+        return view('Customer.ProductList', compact('data', 'gender', 'cat'));
     }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($id, $qty, $i)

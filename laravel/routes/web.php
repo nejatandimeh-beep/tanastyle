@@ -190,7 +190,7 @@ Route::get('/Customer-Cart-Add/{id}', 'Customer\Basic@cartAdd');
 
 Route::get('/Customer-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
 
-// -------------------[ Products Filter ]-----------------------
+// -------------------[ Products Filter [ Ajax ] ]-----------------------
 Route::get('/Customer-Product-Custom-Filter/{filters}', 'Customer\Basic@productFilter');
 
 Route::get('/email-test', function () {

@@ -951,8 +951,8 @@
             }
             let x = $(this).val();
             let temp1;
-            $(this).val(x.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            temp1 = x.replace(new RegExp(',', 'g'), "");
+            $(this).val(x.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // add coma
+            temp1 = x.replace(new RegExp(',', 'g'), ""); // remove coma
             temp1 = parseInt(temp1);
             $("#tempPrice").val(temp1);
 

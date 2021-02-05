@@ -417,11 +417,11 @@
 
         // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
         $('#filterContainer').on('change', function () {
-            let gender, category, size, priceMin=$('#price-max').val(),priceMax=$('#price-min').val(), color,
+            let gender, category, size, priceMin = $('#price-max').val(), priceMax = $('#price-min').val(), color,
                 f = '1', m = '1', k = '1',
-                under='1',bottom='1',up='1',complete='1',
-                xs='1',s='1',mm='1',l='1',xl='1',xxl='1',xxxl='1',
-                whites='1';
+                under = '1', bottom = '1', up = '1', complete = '1',
+                xs = '1', s = '1', mm = '1', l = '1', xl = '1', xxl = '1', xxxl = '1',
+                whites = '1';
 
             if ($('#gender-all:checked').length > 0)
                 gender = f + m + k;
@@ -433,7 +433,7 @@
                 if (!($('#kids:checked').length > 0))
                     k = '0';
 
-                gender = f+m+k;
+                gender = f + m + k;
             }
 
             if ($('#gender-all:checked').length > 0)
@@ -452,7 +452,7 @@
             }
 
             if ($('#size-all:checked').length > 0)
-                size = xs + s + mm + l + xl + xxl+ xxxl;
+                size = xs + s + mm + l + xl + xxl + xxxl;
             else {
                 if (!($('#size-xs:checked').length > 0))
                     xs = '0';
@@ -469,7 +469,7 @@
                 if (!($('#size-xxxl:checked').length > 0))
                     xxxl = '0';
 
-                size = xs + s + mm + l + xl + xxl+ xxxl;
+                size = xs + s + mm + l + xl + xxl + xxxl;
             }
 
             if ($('#color-all:checked').length > 0)
@@ -499,6 +499,27 @@
         });
 
         // ---------------------------------------------------My Function-----------------------------------------------
+        function minPriceAllOff(ele) {
+            if ((parseInt(ele.val().replace(new RegExp(',', 'g'), "")) > 9999)
+                && (parseInt($('#price-max').val().replace(new RegExp(',', 'g'), "")) < 100000000)
+                && (parseInt($('#price-max').val().replace(new RegExp(',', 'g'), "")) > parseInt(ele.val().replace(new RegExp(',', 'g'), "")))) // برای برداشتن کوما از مبلغ
+                $('#priceFilterSubmit').attr('disabled', false);
+            else
+                $('#priceFilterSubmit').attr('disabled', true);
+            ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // برای افزودن کوما به مبلغ
+        }
+
+        function maxPriceAllOff(ele) {
+            if ((parseInt(ele.val().replace(new RegExp(',', 'g'), "")) < 100000000)
+                && (parseInt($('#price-min').val().replace(new RegExp(',', 'g'), "")) > 9999)
+                && (parseInt($('#price-min').val().replace(new RegExp(',', 'g'), "")) < parseInt(ele.val().replace(new RegExp(',', 'g'), "")))) // برای برداشتن کوما از مبلغ
+                $('#priceFilterSubmit').attr('disabled', false);
+            else
+                $('#priceFilterSubmit').attr('disabled', true);
+
+            ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        }
+
         function allSwitchBtn(btn) {
             switch (btn) {
                 case 'gender-all':
