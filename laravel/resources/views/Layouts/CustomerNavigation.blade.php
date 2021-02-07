@@ -1886,9 +1886,9 @@
                                 <!-- End Mega Menu -->
                             </li>
                             {{--برندها--}}
-                            <li class="nav-item g-mx-20--lg">
-                                <a href="#" class="nav-link g-px-0 g-color-primary--hover">برندها</a>
-                            </li>
+{{--                            <li class="nav-item g-mx-20--lg">--}}
+{{--                                <a href="#" class="nav-link g-px-0 g-color-primary--hover">برندها</a>--}}
+{{--                            </li>--}}
                         </ul>
                     </div>
                     <!-- End Navigation -->

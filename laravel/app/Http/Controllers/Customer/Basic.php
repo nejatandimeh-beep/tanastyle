@@ -1024,7 +1024,7 @@ class Basic extends Controller
             ->where('Cat', '0000')
             ->get();
         $gender = '0';
-        $cat = '0';
+        $cat = '00';
         return view('Customer.ProductList', compact('data', 'gender', 'cat'));
     }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
