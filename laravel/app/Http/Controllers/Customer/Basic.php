@@ -977,11 +977,97 @@ class Basic extends Controller
                 break;
         }
 
-        return array(DB::table('product')
+        $data = DB::table('product')
             ->where('Gender', $gender[0])
             ->orWhere('Gender', $gender[1])
             ->orWhere('Gender', $gender[2])
-            ->get());
+            ->get();
+        $products = '';
+        foreach($data as $key => $row) {
+            $products = $products.'<div class="col-12 col-lg-4 g-mb-30">
+    <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
+                    class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
+        <div>
+            <div id="carousel-08-1"
+             class="js-carousel text-center g-mb-20"
+             data-infinite="1"
+             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
+             data-nav-for="#carousel-08-2">
+
+             <div class="js-slide">
+                <a
+                    href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'">
+                    <img class="img-fluid w-100" src="'.$row->PicPath.'pic1.jpg" alt="Image Description">
+                </a>
+             </div>
+
+             <div class="js-slide">
+                <a
+                    href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'">
+                    <img class="img-fluid w-100" src="'.$row->PicPath.'pic2.jpg" alt="Image Description">
+                </a>
+            </div>
+
+             <div class="js-slide">
+                <a
+                    href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'">
+                    <img class="img-fluid w-100" src="'.$row->PicPath.'pic3.jpg" alt="Image Description">
+                </a>
+            </div>
+
+             <div class="js-slide">
+                <a
+                    href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'">
+                    <img class="img-fluid w-100" src="'.$row->PicPath.'pic4.jpg" alt="Image Description">
+                </a>
+            </div>
+        </div>
+        </div>
+         <div style="direction: rtl" class="media">
+             <div class="d-flex justify-content-between col-12 p-0">
+                <div class="d-flex flex-column">
+                    <h4 class="h6 g-color-black my-1">
+                        <span class="u-link-v5 g-color-black" tabindex="0">'.$row->Name.'
+                            <span class="g-font-size-12 g-font-weight-300">'.$row->Model.'</span>
+                        </span>
+                    </h4>
+                    <ul style="padding: 0"
+                        class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
+                        <li>
+                            <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
+                               href="#">'.$row->Gender.' '.$row->HintCat.'</a>
+                        </li>
+                    </ul>
+                </div>
+                <a style="cursor: pointer"
+                   class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                   data-toggle="tooltip"
+                   data-placement="top"
+                   href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'"
+                   data-original-title="جزئیات محصول">
+                   <i class="icon-eye g-line-height-0_7"></i>
+                </a>
+            </div>
+         </div>
+
+          <div
+            class="d-block g-color-black g-font-size-17 g-ml-10">
+                <div style="direction: rtl" class="text-left">
+                    <s class="g-color-lightred g-font-weight-500 g-font-size-13">'.
+                number_format($row->UnitPrice).'
+                    </s>
+                    <span>'.number_format($row->FinalPrice).'</span>
+                    <span
+                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                </div>
+          </div>
+    </figure>
+</div>
+
+';
+        }
+
+        return $products;
     }
 // ---------------------------------------------[Product List]----------------------------------------------------------
     public function productFemaleList()

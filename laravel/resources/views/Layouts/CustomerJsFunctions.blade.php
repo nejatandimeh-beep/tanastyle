@@ -417,6 +417,8 @@
 
         // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
         $('#filterContainer').on('change', function () {
+            $('#productContainer').empty();
+            $('#loadProduct').removeClass('d-none');
             let gender, category, size, priceMin = $('#price-max').val(), priceMax = $('#price-min').val(), color,
                 f = '1', m = '1', k = '1',
                 under = '1', bottom = '1', up = '1', complete = '1',
@@ -493,12 +495,13 @@
                 type: 'GET',
                 url: '/Customer-Product-Custom-Filter/' + JSON.stringify(filters),
                 success: function (data) {
-                    console.log(data);
+                    $('#loadProduct').addClass('d-none');
+                    $('#productContainer').html(data);
+                    $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
                 }
             });
         });
 
-        // ---------------------------------------------------My Function-----------------------------------------------
         function minPriceAllOff(ele) {
             if ((parseInt(ele.val().replace(new RegExp(',', 'g'), "")) > 9999)
                 && (parseInt($('#price-max').val().replace(new RegExp(',', 'g'), "")) < 100000000)
@@ -552,7 +555,7 @@
                     break;
             }
         }
-
+        // ---------------------------------------------------My Function-----------------------------------------------
         // هایلت آپشن آدرس در هنگام قرار گرفتن ماوس بروی هر سط آدرس
         function optionHover(id) {
             $('#addressOption' + id).removeClass('g-color-gray-dark-v3');

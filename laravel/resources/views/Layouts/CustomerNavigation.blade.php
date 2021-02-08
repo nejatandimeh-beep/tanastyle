@@ -1,5 +1,5 @@
 @section('CustomerNavigation')
-    <div id="load"></div>
+    <div id="load" class="load"></div>
     <body>
     <span id="loginAlert" class="d-none">{{ (isset(Auth::user()->id)) ? 'login':'logout' }}</span>
     <header id="js-header2" class="u-header u-header--static">

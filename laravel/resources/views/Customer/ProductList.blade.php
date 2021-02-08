@@ -758,7 +758,7 @@
                                      aria-labelledby="accordion-100-heading-04">
                                     <div class="card-block g-pa-5">
                                         <ul class="list-unstyled p-0 g-pt-15">
-                                            <li class="g-mt-2 g-mb-15">
+                                            <li class="g-mt-2 g-mb-20">
                                                 <div class="form-group m-0">
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>همه</span>
@@ -781,7 +781,7 @@
                                                          alt="Image Description">
                                                 </div>
                                             </li>
-                                            <li class="g-my-2 g-mb-15">
+                                            <li class="g-my-2 g-mb-20">
                                                 <div class="form-group m-0">
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای روشن</span>
@@ -865,6 +865,9 @@
                         <!-- End Filters -->
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
                     </div>
+
+                    <!-- ajax loader-->
+                    <div id="loadProduct" class="d-none loadProduct"></div>
                     <!-- Products -->
                     <div id="productContainer" class="row g-mb-50">
                         @foreach($data as $key => $data)
@@ -877,6 +880,7 @@
                                              data-infinite="1"
                                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                                              data-nav-for="#carousel-08-2">
+
                                             <div class="js-slide">
                                                 <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
                                                     <img class="img-fluid w-100"
@@ -917,11 +921,11 @@
                                         <div class="d-flex justify-content-between col-12 p-0">
                                             <div class="d-flex flex-column">
                                                 <h4 class="h6 g-color-black my-1">
-                                            <span class="u-link-v5 g-color-black"
-                                                  tabindex="0">
-                                                {{ $data->Name }} <span
-                                                    class="g-font-size-12 g-font-weight-300">{{ $data->Model }}</span>
-                                            </span>
+                                                    <span class="u-link-v5 g-color-black"
+                                                          tabindex="0">
+                                                        {{ $data->Name }}
+                                                        <span class="g-font-size-12 g-font-weight-300">{{ $data->Model }}</span>
+                                                    </span>
                                                 </h4>
                                                 <ul style="padding: 0"
                                                     class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
