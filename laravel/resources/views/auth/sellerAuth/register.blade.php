@@ -103,8 +103,8 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row g-mb-60--lg g-mt-30">
-                                <div class="col-md-8 offset-md-4 text-right">
+                            <div class="form-group row g-mb-60--lg g-mt-20">
+                                <div class="col-md-10 text-left">
                                     <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16">
                                         ثبت نام
                                     </button>

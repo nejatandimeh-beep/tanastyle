@@ -26,4 +26,6 @@ class Customer extends Authenticatable
     {
         return $this->password;
     }
+
+
 }

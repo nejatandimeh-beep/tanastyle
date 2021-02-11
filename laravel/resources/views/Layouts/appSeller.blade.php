@@ -52,7 +52,7 @@
 
                     @if (Route::has('register'))
                         <li class="nav-item">
-                            <a class="nav-link g-color-primary--hover" href="#">درخواست همکاری</a>
+                            <a class="nav-link g-color-primary--hover" href="{{ route('sellerRegister') }}">درخواست همکاری</a>
                         </li>
                     @endif
                     @auth('seller')

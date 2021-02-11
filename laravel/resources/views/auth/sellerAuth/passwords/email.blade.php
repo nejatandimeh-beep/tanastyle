@@ -5,18 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <h5 class="card-header text-right">تنظیم مجدد رمز</h5>
-                <div class="card-header"> قروشنده </div>
+                <h5 class="card-header text-right">تنظیم مجدد رمز (فروشنده)</h5>
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
                     <form method="POST" action="{{route('sellers.sendResetLink')}}" style="direction: rtl" novalidate>
                         @csrf
-
 
                         <div class="form-group row">
                             <label for="email"
@@ -39,13 +31,18 @@
                         </div>
 
                         <div class="form-group row g-mb-60--lg g-mt-30">
-                            <div class="col-md-8 offset-md-4 text-right">
+                            <div class="col-md-10 text-left">
                                 <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16">
                                     ارسال لینک تنظیم مجدد
                                 </button>
                             </div>
                         </div>
                     </form>
+                    @if (session('status'))
+                        <div style="direction: rtl" class="alert alert-success text-center" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
