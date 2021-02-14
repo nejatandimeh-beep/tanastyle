@@ -175,8 +175,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-//        Convert date jalali Verta
+        //        Convert date jalali Verta
         Hekmatinasser\Verta\VertaServiceProvider::class,
+        //        sms.ir
+        Ipecompany\Smsirlaravel\SmsirlaravelServiceProvider::class,
     ],
 
     /*
@@ -232,6 +234,8 @@ return [
         //        Convert date jalali Verta
         'Verta' => Hekmatinasser\Verta\Verta::class,
 
+        // sms.ir
+        'Smsirlaravel' => Ipecompany\Smsirlaravel\SmsirlaravelFacade::class,
     ],
 
 ];

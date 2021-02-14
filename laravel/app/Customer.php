@@ -4,8 +4,9 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class Customer extends Authenticatable
+class Customer extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
@@ -13,7 +14,7 @@ class Customer extends Authenticatable
 
 
     protected $fillable = [
-        'name','email', 'password',
+        'name', 'Family' , 'email', 'password',
     ];
 
 

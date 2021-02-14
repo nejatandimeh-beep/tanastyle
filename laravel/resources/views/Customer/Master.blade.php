@@ -1,5 +1,10 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
+    @if(isset(Auth::user()->id))
+        @if(Auth::user()->email_verified_at === null)
+            <span class="g-color-red">Please Verify your Email before proceeding</span>
+        @endif
+    @endif
     <div id="rev_slider_495_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
          data-alias="search-form-hero42" data-source="gallery"
          style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
@@ -262,7 +267,8 @@
 
                         <!-- Ribbon -->
                         <figcaption>
-                            <span class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-primary g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">New</span>
+                            <span
+                                class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-primary g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">New</span>
                         </figcaption>
                         <!-- End Ribbon -->
                     </div>
@@ -283,14 +289,16 @@
                         <!-- Products Icons -->
                         <ul class="list-inline media-body text-right">
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Cart"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Cart"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-finance-100 u-line-icon-pro"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Wishlist"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Wishlist"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-medical-022 u-line-icon-pro"></i>
@@ -327,14 +335,16 @@
                         <!-- Products Icons -->
                         <ul class="list-inline media-body text-right">
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Cart"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Cart"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-finance-100 u-line-icon-pro"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Wishlist"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Wishlist"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-medical-022 u-line-icon-pro"></i>
@@ -355,7 +365,8 @@
 
                         <!-- Ribbon -->
                         <figcaption>
-                            <span class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-lightred g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">Sold</span>
+                            <span
+                                class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-lightred g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">Sold</span>
                         </figcaption>
                         <!-- End Ribbon -->
                     </div>
@@ -376,14 +387,16 @@
                         <!-- Products Icons -->
                         <ul class="list-inline media-body text-right">
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Cart"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Cart"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-finance-100 u-line-icon-pro"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Wishlist"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Wishlist"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-medical-022 u-line-icon-pro"></i>
@@ -419,14 +432,16 @@
                         <!-- Products Icons -->
                         <ul class="list-inline media-body text-right">
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Cart"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Cart"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-finance-100 u-line-icon-pro"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Wishlist"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Wishlist"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-medical-022 u-line-icon-pro"></i>
@@ -447,7 +462,8 @@
 
                         <!-- Ribbon -->
                         <figcaption>
-                            <span class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-lightred g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">Sold</span>
+                            <span
+                                class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-lightred g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">Sold</span>
                         </figcaption>
                         <!-- End Ribbon -->
                     </div>
@@ -469,14 +485,16 @@
                         <!-- Products Icons -->
                         <ul class="list-inline media-body text-right">
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Cart"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Cart"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-finance-100 u-line-icon-pro"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Wishlist"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Wishlist"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-medical-022 u-line-icon-pro"></i>
@@ -512,14 +530,16 @@
                         <!-- Products Icons -->
                         <ul class="list-inline media-body text-right">
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Cart"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Cart"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-finance-100 u-line-icon-pro"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Wishlist"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Wishlist"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-medical-022 u-line-icon-pro"></i>
@@ -540,7 +560,8 @@
 
                         <!-- Ribbon -->
                         <figcaption>
-                            <span class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-primary g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">New</span>
+                            <span
+                                class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-primary g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">New</span>
                         </figcaption>
                         <!-- End Ribbon -->
                     </div>
@@ -561,14 +582,16 @@
                         <!-- Products Icons -->
                         <ul class="list-inline media-body text-right">
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Cart"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Cart"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-finance-100 u-line-icon-pro"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Wishlist"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Wishlist"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-medical-022 u-line-icon-pro"></i>
@@ -604,14 +627,16 @@
                         <!-- Products Icons -->
                         <ul class="list-inline media-body text-right">
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Cart"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Cart"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-finance-100 u-line-icon-pro"></i>
                                 </a>
                             </li>
                             <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle" href="#" title="Add to Wishlist"
+                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
+                                   href="#" title="Add to Wishlist"
                                    data-toggle="tooltip"
                                    data-placement="top">
                                     <i class="icon-medical-022 u-line-icon-pro"></i>

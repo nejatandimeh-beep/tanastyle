@@ -32,7 +32,7 @@
                                 <ul class="list-inline text-center g-flex-middle-item">
                                     <li class="list-inline-item align-middle g-mx-7">
                                         <a class="u-icon-v1 u-icon-size--md g-color-gray-dark-v5 g-color-primary--hover"
-                                           href="#">
+                                           href="{{ route('changePass') }}">
                                             <i class="icon-lock-open"></i>
                                         </a>
                                         تغییر رمز ورود به سایت

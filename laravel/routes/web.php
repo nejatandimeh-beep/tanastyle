@@ -8,9 +8,13 @@ Route::get('/test', function () {
 });
 
 // ******************************************** ( Seller Routes ) ******************************************************
+// Customer Login Links
+Auth::routes(['verify' => true]);
 
-// Login Links
-Auth::routes();
+// Customer Change Password Links
+Route::get('change-password', 'Auth\ChangePasswordController@index')->name('changePass');
+Route::post('change-password', 'Auth\ChangePasswordController@store')->name('change.password');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 // Seller Auth
@@ -19,6 +23,10 @@ Route::post('/logout/seller', 'AuthSeller\LoginController@sellerLogout')->name('
 Route::get('/register/seller', 'AuthSeller\RegisterController@showSellerRegisterForm')->name('sellerRegister');
 Route::post('/login/seller', 'AuthSeller\LoginController@sellerLogin')->name('sellerLogin');
 Route::post('/register/seller', 'AuthSeller\RegisterController@createSeller')->name('sellerSave');
+
+// Seller Change Password Links
+Route::get('change-seller-password', 'AuthSeller\ChangePasswordController@index')->name('changeSellerPass');
+Route::post('change-seller-password', 'AuthSeller\ChangePasswordController@store')->name('changeSellerPassword');
 
 
 // Add Seller reset password routes
@@ -139,13 +147,11 @@ Route::get('/Customer-Product-0000', 'Customer\Basic@product0000')->name('produc
 // Customer Product Detail
 Route::get('/Customer-Product-Detail/{id}', 'Customer\Basic@productDetail')->name('productDetail');
 
-// Customer Product Detail
-Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal');
+// Banking portal
+Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal')->middleware('verified');
 
 // Profile
 Route::get('/Customer-Profile/{id}', 'Customer\Basic@userProfile')->name('userProfile');
-
-Auth::routes();
 
 // -------------------[ Ajax ]-----------------------
 Route::get('/Customer-Product-LikeProduct/{id}/{val}', 'Customer\Basic@likeProduct');

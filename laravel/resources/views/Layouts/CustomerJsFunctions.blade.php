@@ -831,6 +831,9 @@
                 case 'returnProduct':
                     $("#filter-user-return").trigger("click");
                     break;
+                case 'changePass':
+                    alert('رمز عبور شما با موفقیت تغییر یافت.')
+                    break;
                 default:
                     break;
             }

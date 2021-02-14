@@ -51,6 +51,12 @@
                     data-tabs-mobile-type="slide-up-down"
                     data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-darkgray">
                     <li class="nav-item">
+                        <a class="nav-link g-pa-15"
+                           href="{{ route('changeSellerPass') }}">
+                            <strong class="text-uppercase u-nav-v8__title">تغییر رمز عبور</strong>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link g-pa-15" data-toggle="tab" href="#nav-8-1-dark-hor-right--3"
                            role="tab">
                             <strong class="text-uppercase u-nav-v8__title">آدرس</strong>

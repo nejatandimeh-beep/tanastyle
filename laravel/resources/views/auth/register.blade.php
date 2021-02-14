@@ -49,8 +49,8 @@
                                 <div class="col-md-6">
                                     <input id="family"
                                            type="text"
-                                           class="form-control @error('Family') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md"
-                                           name="name"
+                                           class="form-control @error('family') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md"
+                                           name="family"
                                            placeholder="الزاما فارسی"
 {{--                                           lang="fa"--}}
                                            onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
@@ -59,13 +59,13 @@
                                                         $(this).val(str);
                                                         $(this).attr('autocomplete', 'off');
                                                     } else
-                                                        $(this).attr('autocomplete', 'name');"
+                                                        $(this).attr('autocomplete', 'family');"
 
-                                           value="{{ old('Family') }}"
+                                           value="{{ old('family') }}"
                                            required
                                            autocomplete="off">
 
-                                    @error('Family')
+                                    @error('family')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
