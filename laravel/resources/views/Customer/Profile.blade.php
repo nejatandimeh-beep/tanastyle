@@ -19,10 +19,17 @@
                                 <div class="g-mb-5">
                                     <h4 class="h5 g-mb-0">{{ Auth::user()->name.' '.Auth::user()->Family }}
                                         @if(Auth::user()->email_verified_at === null)
-                                            <label class="g-color-red g-font-size-16">
-                                                <span>اکانت شما فعالسازی نشده است</span>
-                                                <i class="fa fa-exclamation g-font-size-16"></i>
-                                            </label>
+                                            @if (session('resent'))
+                                                <label class="g-color-primary g-font-size-16 g-mr-10">
+                                                    <i class="fa fa-envelope g-font-size-16"></i>
+                                                    <span class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد لطفا ایمیل خود را چک کنید.</span>
+                                                </label>
+                                            @else
+                                                <label class="g-color-red g-font-size-16">
+                                                    <span>اکانت شما فعالسازی نشده است</span>
+                                                    <i class="fa fa-exclamation g-font-size-16"></i>
+                                                </label>
+                                            @endif
                                         @endif
                                     </h4>
                                 </div>
@@ -36,27 +43,46 @@
                             <div
                                 class="u-block-hover__additional--fade u-block-hover__additional--fade-down g-flex-middle">
                                 @if(Auth::user()->email_verified_at === null)
-                                    <ul class="list-inline text-center g-flex-middle-item">
-                                        <li class="list-inline-item justify-content-center g-mx-7">
+                                        <ul class="list-inline text-center g-flex-middle-item">
+                                            @if (!session('resent'))
+                                            <li id="emailActivation"
+                                                class="list-inline-item justify-content-center g-mx-7">
                                             <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
                                                 <i class="fa fa-check"></i>
                                             </span>
-                                            <a class="customLink" href="{{ route('customerVerify') }}">فعال سازی حساب کاربری</a>
-                                        </li>
-                                    </ul>
-                                @else
-                                    <ul class="list-inline text-center g-flex-middle-item">
-                                        <li class="list-inline-item justify-content-center g-mx-7">
+                                                <form class="d-inline text-left" method="POST"
+                                                      action="{{ route('verification.resend') }}">
+                                                    @csrf
+                                                    <button type="submit"
+                                                            class="btn customLink g-bg-transparent p-0 m-0 align-baseline">
+                                                        فعال سازی حساب کاربری
+                                                    </button>
+                                                </form>
+                                            </li>
+                                            @endif
+                                            @if (session('resent'))
+                                                <li style="direction: rtl" id="sendVerifyHint"
+                                                    class="list-inline-item justify-content-center">
+                                                <span class="g-color-primary g-font-size-20 g-ml-5"><i
+                                                        class="fa fa-envelope"></i></span>
+                                                    <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا ایمیل خودر را چک کنید.</span>
+                                                </li>
+                                            @endif
+                                        </ul>
+                                    @else
+                                        <ul class="list-inline text-center g-flex-middle-item">
+                                            <li class="list-inline-item justify-content-center g-mx-7">
                                             <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
                                                 <i class="icon-lock-open"></i>
                                             </span>
-                                            <a class="customLink" href="{{ route('changePass') }}">تغییر رمز عبور</a>
-                                        </li>
-                                    </ul>
+                                                <a class="customLink" href="{{ route('changePass') }}">تغییر رمز
+                                                    عبور</a>
+                                            </li>
+                                        </ul>
                                 @endif
                                 <!-- Figure Social Icons -->
 
-                                <!-- End Figure Social Icons -->
+                                    <!-- End Figure Social Icons -->
                             </div>
                         </figcaption>
                         <!-- End Figure Caption -->
@@ -635,7 +661,10 @@
                                                     class="clearfix d-md-table-cell g-valign-middle g-pa-20--lg g-width-300 justify-content-between">
                                                     <!-- Track Num -->
                                                     <div
-                                                        class="d-inline-block g-ml-20 g-width-20"><i id="addressOption{{$key}}" class="icon-options g-font-size-20 g-color-gray-dark-v3"></i></div>
+                                                        class="d-inline-block g-ml-20 g-width-20"><i
+                                                            id="addressOption{{$key}}"
+                                                            class="icon-options g-font-size-20 g-color-gray-dark-v3"></i>
+                                                    </div>
                                                     <!-- End Track Num -->
                                                 @if($row->Status === 1)
                                                     <!-- Track Avatar -->
@@ -1733,75 +1762,77 @@
                                     <input id="orderIDFromReturn" name="orderIDFromReturn" class="d-none">
                                     <div class="sticky-top g-bg-white g-px-20">
                                         <div class="d-flex justify-content-between g-pt-15 g-pb-8">
-                                    <button style="outline: none" type="button" class="close"
-                                            onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-return').trigger('click')}, 400); ">
-                                        <i class="hs-icon hs-icon-close"></i>
-                                    </button>
-                                    <h6 class="m-0 text-right">برگشت محصول</h6>
+                                            <button style="outline: none" type="button" class="close"
+                                                    onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-return').trigger('click')}, 400); ">
+                                                <i class="hs-icon hs-icon-close"></i>
+                                            </button>
+                                            <h6 class="m-0 text-right">برگشت محصول</h6>
                                         </div>
                                         <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0">
                                     </div>
                                     <div class="g-px-20">
-                                    <div style="direction: rtl; overflow-y: auto"
-                                         class="container g-px-30 g-px-60--lg text-right g-py-0">
-                                        <p style="text-align: justify;" class="g-pb-15 g-mb-0 g-mb-20--lg"><span
-                                                class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>
-                                            لطفا قبل از برگشت محصول، <a href="#"
-                                                                        class="alert-link">قوانین برگشت محصول</a> را
-                                            مطالعه
-                                            بفرمایید. لازم به ذکر است عودت وجه به دلیل طی شدن فرآیند مسیر برگشتی 5 الی 7
-                                            روز
-                                            پس از تاریخ برگشت می باشد.
-                                        </p>
-                                        {{--کد دریافتی از اداره پست--}}
-                                        <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label
-                                                class="col-sm-2 col-form-label align-self-center">کد دریافتی از اداره
-                                                پست</label>
-                                            <div class="col-sm-10 force-col-12">
-                                                <input
-                                                    id="returnPostCode"
-                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
-                                                    name="returnPostCode"
-                                                    maxlength="100"
-                                                    type="text"
-                                                    value=""
-                                                    placeholder="لطفا با دقت وارد کنید">
-                                            </div>
-                                        </div>
-                                        {{--علت برگشت--}}
-                                        <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label
-                                                class="col-sm-2 col-form-label align-self-center">علت برگشت
-                                            </label>
-                                            <div class="col-sm-10 force-col-12">
-                                                <div style="direction: ltr"
-                                                     class="input-group g-brd-primary--focus">
-                                                    <div
-                                                        class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                                                        <i style="transform: ScaleX(-1)"
-                                                           class="fa fa-question g-font-size-20"></i>
-                                                    </div>
-                                                    <select style="direction: rtl"
-                                                            class="form-control form-control-md custom-select rounded-0 g-font-size-16 text-right h-25 g-pr-30"
-                                                            id="returnReason" name="returnReason">
-                                                        <option value="1">محصول تحویلی، شباهتی با محصول درون سایت
-                                                            ندارد
-                                                        </option>
-                                                        <option value="2">محصول تحویلی، سالم نیست
-                                                        </option>
-                                                        <option value="3">برند محصول تحویلی مطابق محصول درون سایت
-                                                            نیست
-                                                        </option>
-                                                    </select>
+                                        <div style="direction: rtl; overflow-y: auto"
+                                             class="container g-px-30 g-px-60--lg text-right g-py-0">
+                                            <p style="text-align: justify;" class="g-pb-15 g-mb-0 g-mb-20--lg"><span
+                                                    class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>
+                                                لطفا قبل از برگشت محصول، <a href="#"
+                                                                            class="alert-link">قوانین برگشت محصول</a> را
+                                                مطالعه
+                                                بفرمایید. لازم به ذکر است عودت وجه به دلیل طی شدن فرآیند مسیر برگشتی 5
+                                                الی 7
+                                                روز
+                                                پس از تاریخ برگشت می باشد.
+                                            </p>
+                                            {{--کد دریافتی از اداره پست--}}
+                                            <div class="form-group row g-mb-30 g-mb-15--lg">
+                                                <label
+                                                    class="col-sm-2 col-form-label align-self-center">کد دریافتی از
+                                                    اداره
+                                                    پست</label>
+                                                <div class="col-sm-10 force-col-12">
+                                                    <input
+                                                        id="returnPostCode"
+                                                        class="form-control form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
+                                                        name="returnPostCode"
+                                                        maxlength="100"
+                                                        type="text"
+                                                        value=""
+                                                        placeholder="لطفا با دقت وارد کنید">
                                                 </div>
                                             </div>
-                                        </div>
-                                        {{--توضیح ایرادات--}}
-                                        <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label class="col-sm-2 col-form-label align-self-center">توضیح
-                                                ایرادات</label>
-                                            <div class="col-sm-10 force-col-12">
+                                            {{--علت برگشت--}}
+                                            <div class="form-group row g-mb-30 g-mb-15--lg">
+                                                <label
+                                                    class="col-sm-2 col-form-label align-self-center">علت برگشت
+                                                </label>
+                                                <div class="col-sm-10 force-col-12">
+                                                    <div style="direction: ltr"
+                                                         class="input-group g-brd-primary--focus">
+                                                        <div
+                                                            class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                            <i style="transform: ScaleX(-1)"
+                                                               class="fa fa-question g-font-size-20"></i>
+                                                        </div>
+                                                        <select style="direction: rtl"
+                                                                class="form-control form-control-md custom-select rounded-0 g-font-size-16 text-right h-25 g-pr-30"
+                                                                id="returnReason" name="returnReason">
+                                                            <option value="1">محصول تحویلی، شباهتی با محصول درون سایت
+                                                                ندارد
+                                                            </option>
+                                                            <option value="2">محصول تحویلی، سالم نیست
+                                                            </option>
+                                                            <option value="3">برند محصول تحویلی مطابق محصول درون سایت
+                                                                نیست
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{--توضیح ایرادات--}}
+                                            <div class="form-group row g-mb-30 g-mb-15--lg">
+                                                <label class="col-sm-2 col-form-label align-self-center">توضیح
+                                                    ایرادات</label>
+                                                <div class="col-sm-10 force-col-12">
                                                <textarea
                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
                                                    type="text"
@@ -1810,58 +1841,60 @@
                                                    rows="4"
                                                    value=""
                                                    placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید"></textarea>
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        {{--تصویر ایراد--}}
-                                        <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label class="col-sm-2 col-form-label align-self-center" for="fileShow1"
-                                                   id="custom-file-label">تصویر ایرادات</label>
-                                            <div class="col-sm-10 force-col-12">
-                                                <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
+                                            {{--تصویر ایراد--}}
+                                            <div class="form-group row g-mb-30 g-mb-15--lg">
+                                                <label class="col-sm-2 col-form-label align-self-center" for="fileShow1"
+                                                       id="custom-file-label">تصویر ایرادات</label>
+                                                <div class="col-sm-10 force-col-12">
+                                                    <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
                                                 <span style="display: none; cursor: default"
                                                       class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
                                                       id="Check1"></span>
-                                                    <input id="fileShow1"
-                                                           class="form-control form-control-md rounded-0 g-font-size-16"
-                                                           type="text"
-                                                           placeholder="فاقد تصویر" readonly="">
+                                                        <input id="fileShow1"
+                                                               class="form-control form-control-md rounded-0 g-font-size-16"
+                                                               type="text"
+                                                               placeholder="فاقد تصویر" readonly="">
 
-                                                    <div class="input-group-btn">
-                                                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="8"
-                                                                type="submit">اضافه کردن
-                                                        </button>
-                                                        <input id="pic1"
-                                                               onchange="addPathCheckMark('pic1','fileShow1','Check1')"
-                                                               onclick="$('.custombox-content #fileShow1').removeClass('g-brd-lightred')"
-                                                               type="file"
-                                                               name="returnPic"
-                                                               accept="image/jpg,image/png,image/jpeg,image/gif">
+                                                        <div class="input-group-btn">
+                                                            <button class="btn btn-md u-btn-primary rounded-0"
+                                                                    tabindex="8"
+                                                                    type="submit">اضافه کردن
+                                                            </button>
+                                                            <input id="pic1"
+                                                                   onchange="addPathCheckMark('pic1','fileShow1','Check1')"
+                                                                   onclick="$('.custombox-content #fileShow1').removeClass('g-brd-lightred')"
+                                                                   type="file"
+                                                                   name="returnPic"
+                                                                   accept="image/jpg,image/png,image/jpeg,image/gif">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        {{--کارت بانکی--}}
-                                        <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label class="col-sm-2 col-form-label align-self-center">کارت بانکی</label>
-                                            <div class="col-sm-10 force-col-12 d-flex">
-                                                <input
-                                                    id="return-card"
-                                                    class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                    name="returnCard"
-                                                    maxlength="19"
-                                                    value=""
-                                                    placeholder="xxxx-xxxx-xxxx-xxxx">
+                                            {{--کارت بانکی--}}
+                                            <div class="form-group row g-mb-30 g-mb-15--lg">
+                                                <label class="col-sm-2 col-form-label align-self-center">کارت
+                                                    بانکی</label>
+                                                <div class="col-sm-10 force-col-12 d-flex">
+                                                    <input
+                                                        id="return-card"
+                                                        class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                        name="returnCard"
+                                                        maxlength="19"
+                                                        value=""
+                                                        placeholder="xxxx-xxxx-xxxx-xxxx">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <a onclick="returnSubmit()"
-                                           id="submitReturn"
-                                           class="pull-left btn btn-md u-btn-primary rounded-0 g-color-white g-mt-15">
-                                            برگشت محصول
-                                        </a>
-                                    </div>
+                                            <a onclick="returnSubmit()"
+                                               id="submitReturn"
+                                               class="pull-left btn btn-md u-btn-primary rounded-0 g-color-white g-mt-15">
+                                                برگشت محصول
+                                            </a>
+                                        </div>
 
                                     </div>
                                 </form>
