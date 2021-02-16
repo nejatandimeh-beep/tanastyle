@@ -587,3 +587,12 @@ input[type=number] {
 body a{
     user-select: none !important;
 }
+
+.customLink {
+    color: #2a2a2a !important;
+    text-decoration: none !important;
+}
+
+.customLink:hover {
+    color: #72c02c !important;
+}

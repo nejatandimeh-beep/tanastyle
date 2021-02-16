@@ -1,15 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
+    @if(Auth::user()->email_verified_at === null)
 
-        <!--Basic Table-->
-        <div id="najol">
-            @for($i=0;$i<3;$i++)
-            <p id="najol-p">salam</p>
-            <button onclick="$('#najol-p').text('bye')">click</button>
-            <button onclick="$('#najol').load(location.href + ' #najol')">reload</button>
-            @endfor
-        </div>
-        <!--End Basic Table-->
-
+    @endif
 @endsection
 

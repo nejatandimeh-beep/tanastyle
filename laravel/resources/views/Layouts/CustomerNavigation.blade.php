@@ -1984,7 +1984,7 @@
                                 @else
                                     @if(Auth::user()->email_verified_at === null)
                                         <div class="g-pt-10 g-mr-15 g-mr-25--lg">
-                                            <a href="{{route('customerVerify')}}" id="login"
+                                            <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
                                                class="d-flex nav-link g-color-red h6 g-text-underline--none--hover p-0 g-color-primary--hover"
                                                data-toggle="tooltip"
                                                data-placement="bottom"

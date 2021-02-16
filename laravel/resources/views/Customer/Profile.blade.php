@@ -7,7 +7,7 @@
                 <!-- Figure -->
                 <figure class="u-block-hover g-bg-white g-rounded-4 g-py-15">
                     <div style="direction: rtl" class="d-flex justify-content-start align-items-center">
-                        <div class="col-md-3 d-flex g-pr-15--lg g-pr-0">
+                        <div class="col-md-9 d-flex g-pr-15--lg g-pr-0">
                             <!-- Figure Image -->
                             <img class="g-width-80 g-height-80 rounded-circle g-ml-15"
                                  src="{{ asset('img/Other/a.png') }}"
@@ -17,7 +17,14 @@
                             <!-- Figure Info -->
                             <div class="d-flex flex-column justify-content-center">
                                 <div class="g-mb-5">
-                                    <h4 class="h5 g-mb-0">{{ Auth::user()->name.' '.Auth::user()->Family }}</h4>
+                                    <h4 class="h5 g-mb-0">{{ Auth::user()->name.' '.Auth::user()->Family }}
+                                        @if(Auth::user()->email_verified_at === null)
+                                            <label class="g-color-red g-font-size-16">
+                                                <span>اکانت شما فعالسازی نشده است</span>
+                                                <i class="fa fa-exclamation g-font-size-16"></i>
+                                            </label>
+                                        @endif
+                                    </h4>
                                 </div>
                                 <em class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">{{ Auth::user()->email }}</em>
                             </div>
@@ -28,16 +35,27 @@
                         <figcaption class="u-block-hover__additional--fade g-bg-white-opacity-0_9 g-pa-30">
                             <div
                                 class="u-block-hover__additional--fade u-block-hover__additional--fade-down g-flex-middle">
+                                @if(Auth::user()->email_verified_at === null)
+                                    <ul class="list-inline text-center g-flex-middle-item">
+                                        <li class="list-inline-item justify-content-center g-mx-7">
+                                            <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
+                                                <i class="fa fa-check"></i>
+                                            </span>
+                                            <a class="customLink" href="{{ route('customerVerify') }}">فعال سازی حساب کاربری</a>
+                                        </li>
+                                    </ul>
+                                @else
+                                    <ul class="list-inline text-center g-flex-middle-item">
+                                        <li class="list-inline-item justify-content-center g-mx-7">
+                                            <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
+                                                <i class="icon-lock-open"></i>
+                                            </span>
+                                            <a class="customLink" href="{{ route('changePass') }}">تغییر رمز عبور</a>
+                                        </li>
+                                    </ul>
+                                @endif
                                 <!-- Figure Social Icons -->
-                                <ul class="list-inline text-center g-flex-middle-item">
-                                    <li class="list-inline-item align-middle g-mx-7">
-                                        <a class="u-icon-v1 u-icon-size--md g-color-gray-dark-v5 g-color-primary--hover"
-                                           href="{{ route('changePass') }}">
-                                            <i class="icon-lock-open"></i>
-                                        </a>
-                                        تغییر رمز ورود به سایت
-                                    </li>
-                                </ul>
+
                                 <!-- End Figure Social Icons -->
                             </div>
                         </figcaption>
