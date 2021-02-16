@@ -22,7 +22,7 @@
                                             @if (session('resent'))
                                                 <label class="g-color-primary g-font-size-16 g-mr-10">
                                                     <i class="fa fa-envelope g-font-size-16"></i>
-                                                    <span class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد لطفا ایمیل خود را چک کنید.</span>
+                                                    <span class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد.</span>
                                                 </label>
                                             @else
                                                 <label class="g-color-red g-font-size-16">
@@ -65,7 +65,7 @@
                                                     class="list-inline-item justify-content-center">
                                                 <span class="g-color-primary g-font-size-20 g-ml-5"><i
                                                         class="fa fa-envelope"></i></span>
-                                                    <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا ایمیل خودر را چک کنید.</span>
+                                                    <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا آخرین ایمیل از طرف Tanastyle.ir را چک کنید.</span>
                                                 </li>
                                             @endif
                                         </ul>
