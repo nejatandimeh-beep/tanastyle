@@ -1886,9 +1886,9 @@
                                 <!-- End Mega Menu -->
                             </li>
                             {{--برندها--}}
-{{--                            <li class="nav-item g-mx-20--lg">--}}
-{{--                                <a href="#" class="nav-link g-px-0 g-color-primary--hover">برندها</a>--}}
-{{--                            </li>--}}
+                            {{--                            <li class="nav-item g-mx-20--lg">--}}
+                            {{--                                <a href="#" class="nav-link g-px-0 g-color-primary--hover">برندها</a>--}}
+                            {{--                            </li>--}}
                         </ul>
                     </div>
                     <!-- End Navigation -->
@@ -1957,7 +1957,8 @@
                                 <div class="g-brd-top g-brd-gray-light-v4 g-pa-15 g-pb-20">
                                     <div
                                         class="g-font-size-18 text-left">
-                                        <a href="#" onclick="cart()" class="btn u-btn-outline-primary rounded-0 g-width-120">نمایش
+                                        <a href="#" onclick="cart()"
+                                           class="btn u-btn-outline-primary rounded-0 g-width-120">نمایش
                                             سبد خرید</a>
                                     </div>
                                 </div>
@@ -1981,40 +1982,33 @@
                                         </a>
                                     </div>
                                 @else
-                                    <div class="g-pt-10 g-mr-15 g-mr-25--lg">
-                                        <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
-                                           class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover"
-                                           data-toggle="tooltip"
-                                           data-placement="bottom"
-                                           title="اطلاعات کاربری"
-                                        >
-                                            {{ Auth::user()->name }}
+                                    @if(Auth::user()->email_verified_at === null)
+                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">
+                                            <a href="{{route('customerVerify')}}" id="login"
+                                               class="d-flex nav-link g-color-red h6 g-text-underline--none--hover p-0 g-color-primary--hover"
+                                               data-toggle="tooltip"
+                                               data-placement="bottom"
+                                               title="شما هنوز اقدام به فعال سازی ایمیلتان نکرده اید"
+                                            >
+                                                <i class="fa fa-exclamation g-font-size-16 g-mr-5"></i>
 
-                                            <i class="icon-settings g-font-size-16 g-ml-5"></i>
-                                        </a>
-                                    </div>
-                                    {{--منوبندی کاربر--}}
-                                    {{--                                    <div class="g-pt-10 text-center g-mr-25 d-flex">--}}
-                                    {{--                                        <div class="d-inline-block btn-group">--}}
-                                    {{--                                            <button style="direction: rtl;" type="button"--}}
-                                    {{--                                                    class="btn btn-secondary g-font-weight-400 g-color-gray-dark-v2 g-brd-none g-color-primary--hover g-bg-transparent g-font-size-14 p-0 m-0"--}}
-                                    {{--                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-                                    {{--                                                {{ Auth::user()->name }}--}}
-                                    {{--                                                <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-mr-3"></i>--}}
-                                    {{--                                            </button>--}}
-                                    {{--                                            <div class="dropdown-menu dropdown-menu-right rounded-0 text-right">--}}
-                                    {{--                                                <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300 g-pa-10 g-py-5--lg"--}}
-                                    {{--                                                   href="{{route('userProfile')}}">اطلاعات کاربری--}}
+                                                {{ Auth::user()->name }}
+                                            </a>
+                                        </div>
+                                    @else
+                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">
+                                            <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
+                                               class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover"
+                                               data-toggle="tooltip"
+                                               data-placement="bottom"
+                                               title="اطلاعات کاربری"
+                                            >
+                                                {{ Auth::user()->name }}
 
-                                    {{--                                                    <i class="icon-user float-left g-font-size-16 g-pt-3 g-pl-3"></i>--}}
-                                    {{--                                                </a>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                            <form id="logout-form" action="{{route('logout')}}" method="POST"--}}
-                                    {{--                                                  style="display: none;">--}}
-                                    {{--                                                @csrf--}}
-                                    {{--                                            </form>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
+                                                <i class="icon-settings g-font-size-16 g-ml-5"></i>
+                                            </a>
+                                        </div>
+                                    @endif
                                 @endguest
                             </div>
                             <!-- End Login -->

@@ -934,6 +934,10 @@ class Basic extends Controller
             return 'exist';
     }
 
+    public function customerVerify(){
+        return redirect()->route('Master');
+    }
+
 // ------------------------------------------[ Products Filter ]--------------------------------------------------------
     public function productFilter($filters)
     {

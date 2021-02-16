@@ -1,10 +1,5 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    @if(isset(Auth::user()->id))
-        @if(Auth::user()->email_verified_at === null)
-            <span class="g-color-red">Please Verify your Email before proceeding</span>
-        @endif
-    @endif
     <div id="rev_slider_495_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
          data-alias="search-form-hero42" data-source="gallery"
          style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">

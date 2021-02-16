@@ -150,6 +150,8 @@ Route::get('/Customer-Product-Detail/{id}', 'Customer\Basic@productDetail')->nam
 // Banking portal
 Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal')->middleware('verified');
 
+Route::get('/Customer-Verify', 'Customer\Basic@customerVerify')->name('customerVerify')->middleware('verified');
+
 // Profile
 Route::get('/Customer-Profile/{id}', 'Customer\Basic@userProfile')->name('userProfile');
 

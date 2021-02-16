@@ -5,20 +5,23 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+                <div class="card-header text-right">
+                    <span>تایید صحت ایمیل شما</span>
+                </div>
 
-                <div class="card-body">
+                <div style="direction: rtl" class="card-body text-right">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
+                            لینک فعالسازی به آدرس ایمیلتان ارسال شد. برای اتمام فرآیند لطفا ایمیل خود را چک کرده و روی لینک ارسال شده در قالب ایمیل از طرف <span class="g-font-weight-500">Tanastyle.ir</span> کلیک کنید.
                         </div>
                     @endif
 
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    <p>کاربر گرامی شما هنوز تاییده ایمیلتان را ارسال نکرده اید.</p>
+                    <p>برای تاییده ایمیلتان از طزیق لینک زیر اقدام فرمایید.</p>
+                    <p>مراحل تاییده ایمیل تنها یکبار برای همیشه انجام می گردد.</p>
+                    <form class="text-left" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">لینک فعال سازی ایمیل شما</button>
                     </form>
                 </div>
             </div>
