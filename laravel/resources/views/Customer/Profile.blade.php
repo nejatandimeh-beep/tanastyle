@@ -135,6 +135,19 @@
                                     </h5>
                                 </div>
                             </div>
+                            <!-- آدرس ها -->
+                            <div class="card g-brd-0 g-mb-5">
+                                <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
+                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
+                                        <a id="filter-user-cart"
+                                           href="{{route('cart')}}"
+                                           class="nav-link g-color-main g-color-primary--hover p-0">
+                                            سبد خرید
+                                            <i class="icon-basket float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                        </a>
+                                    </h5>
+                                </div>
+                            </div>
                             <!-- خریداری شده -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
