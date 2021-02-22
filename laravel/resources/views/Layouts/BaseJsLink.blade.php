@@ -6,6 +6,9 @@
         <i class="hs-icon hs-icon-arrow-top"></i>
     </a>
     <!---------------------------------------Java Script Links--------------------------------------->
+    <!-- Cropper img -->
+    <script src="/path/to/cropper.js"></script>
+
     <!-- JS Global Compulsory -->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>

@@ -47,6 +47,11 @@
                         <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{ url('/') }}">صفحه
                             نخست</a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="{{ (isset(Auth::user()->id)) ? '':'d-none' }} nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{route('userProfile', ['id' => 'navigation'])}}">حساب کاربری</a>
+                    </li>
+
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">

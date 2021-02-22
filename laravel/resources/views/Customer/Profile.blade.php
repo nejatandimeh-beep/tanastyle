@@ -609,6 +609,35 @@
                                     </div>
                                 </div>
                             </div>
+                            {{--افزودن عکس--}}
+                            <div class="form-group row g-mb-30 g-mb-15--lg">
+                                <label class="col-sm-2 col-form-label align-self-center" for="fileShow5"
+                                       id="custom-file-label">افزودن عکس پروفایل</label>
+                                <div style="direction: ltr" class="col-sm-10 force-col-12">
+                                    <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
+                                                <span style="display: none; cursor: default"
+                                                      class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
+                                                      id="Check5"></span>
+                                        <input id="fileShow5"
+                                               class="form-control form-control-md rounded-0 g-font-size-16"
+                                               type="text"
+                                               placeholder="فاقد تصویر" readonly="">
+
+                                        <div class="input-group-btn">
+                                            <button class="btn btn-md u-btn-primary rounded-0"
+                                                    tabindex="8"
+                                                    type="submit">اضافه کردن
+                                            </button>
+                                            <input id="pic5"
+                                                   onchange="addPathCheckMark('pic5','fileShow5','Check5')"
+                                                   onclick="$('.custombox-content #fileShow1').removeClass('g-brd-lightred')"
+                                                   type="file"
+                                                   name="pic"
+                                                   accept="image/jpg,image/png,image/jpeg,image/gif">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </form>
                     <div class="alert alert-success alert-dismissible fade show g-mx-15 g-mx-60--lg g-mt-40 g-mt-0--lg"
@@ -1861,7 +1890,7 @@
                                             <div class="form-group row g-mb-30 g-mb-15--lg">
                                                 <label class="col-sm-2 col-form-label align-self-center" for="fileShow1"
                                                        id="custom-file-label">تصویر ایرادات</label>
-                                                <div class="col-sm-10 force-col-12">
+                                                <div style="direction: ltr" class="col-sm-10 force-col-12">
                                                     <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
                                                 <span style="display: none; cursor: default"
                                                       class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"

@@ -5,8 +5,12 @@
         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
 
         <div class="breadCrumbs">
-            <div class="g-bg-white-opacity-0_9 g-mt-0--lg">
+            <div class="g-mt-0--lg">
                 <div class="g-pr-5 d-flex g-py-15 g-color-primary">
+                    <a href="{{route('userProfile', ['id' => 'navigation'])}}" class="nav-link align-self-center g-color-main g-text-underline--none--hover p-0 g-color-primary--hover g-ml-15" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="برگشت">
+                        <i class="fa fa-arrow-right g-font-size-16 g-ml-5"></i>
+                    </a>
+
                     <i class="icon-basket g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                     <h6 class="m-0 g-mt-7">
@@ -15,7 +19,6 @@
                 </div>
                 <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
             </div>
-
             <div class="g-py-15 g-pb-30">
                 <div class="row">
                     <span id="cartCount" class="d-none">{{ (isset($data)) ?  count($data) : 0 }}</span>

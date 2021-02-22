@@ -772,10 +772,18 @@
 
         // Add FileName and Check Mark when Uploaded Image
         function addPathCheckMark(picID, filePathID, checkMarkID) {
-            let pic = $('.custombox-content #' + picID),
-                ext = $('.custombox-content #' + picID).val().split('.').pop().toLowerCase(),
-                filePath = $('.custombox-content #' + filePathID),
-                checkMark = $(".custombox-content #" + checkMarkID);
+            let locationElement='';
+            if (picID === 'pic5')
+                locationElement = '#';
+            else
+                locationElement = '.custombox-content #';
+
+            console.log(locationElement + picID);
+            let pic = $(locationElement + picID),
+                ext = $(locationElement + picID).val().split('.').pop().toLowerCase(),
+                filePath = $(locationElement + filePathID),
+                checkMark = $(locationElement + checkMarkID);
+
             if ((pic.val() !== '') && ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) !== -1)) {
                 let fileName = pic.val().split("\\").pop();
                 filePath.attr("placeholder", fileName);

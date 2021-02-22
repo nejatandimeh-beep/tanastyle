@@ -411,7 +411,8 @@ class Basic extends Controller
         $mobile = $request->get('mobile');
         $state = $request->get('state');
         $city = $request->get('city');
-
+        $pic = $request->get('pic');
+dd($pic);
         DB::table('customers')
             ->where('id', Auth::user()->id)
             ->update([
