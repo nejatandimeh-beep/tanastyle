@@ -596,3 +596,9 @@ body a{
 .customLink:hover {
     color: #72c02c !important;
 }
+img {
+    display: block;
+
+    /* This rule is very important, please don't ignore this */
+    max-width: 100%;
+}

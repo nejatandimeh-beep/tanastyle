@@ -629,6 +629,7 @@
                                                     type="submit">اضافه کردن
                                             </button>
                                             <input id="pic5"
+                                                   class="imgCropper"
                                                    onchange="addPathCheckMark('pic5','fileShow5','Check5')"
                                                    onclick="$('.custombox-content #fileShow1').removeClass('g-brd-lightred')"
                                                    type="file"

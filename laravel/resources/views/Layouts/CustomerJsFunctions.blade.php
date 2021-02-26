@@ -1,5 +1,25 @@
 @section('CustomerJsFunction')
     <script>
+        if ($('#image').length > 0) {
+            const image = document.getElementById('image');
+            const cropper = new Cropper(image, {
+                viewMode: 1,
+                aspectRatio: 1,
+                preview: '.preview',
+                zoomable: false,
+                minCropBoxWidth: 800,
+                minCropBoxHeight: 800,
+                crop(event) {
+                    console.log(event.detail.x);
+                    console.log(event.detail.y);
+                    console.log(event.detail.width);
+                    console.log(event.detail.height);
+                    console.log(event.detail.rotate);
+                    console.log(event.detail.scaleX);
+                    console.log(event.detail.scaleY);
+                },
+            });
+        }
         $(document).ready(function () {
             if ($('#cartCount').text() === 0) {
                 $('#cartBuyBtn').hide();
@@ -555,6 +575,7 @@
                     break;
             }
         }
+
         // ---------------------------------------------------My Function-----------------------------------------------
         // هایلت آپشن آدرس در هنگام قرار گرفتن ماوس بروی هر سط آدرس
         function optionHover(id) {
@@ -772,7 +793,7 @@
 
         // Add FileName and Check Mark when Uploaded Image
         function addPathCheckMark(picID, filePathID, checkMarkID) {
-            let locationElement='';
+            let locationElement = '';
             if (picID === 'pic5')
                 locationElement = '#';
             else

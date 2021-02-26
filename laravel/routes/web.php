@@ -201,6 +201,12 @@ Route::get('/Customer-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
 // -------------------[ Products Filter [ Ajax ] ]-----------------------
 Route::get('/Customer-Product-Custom-Filter/{filters}', 'Customer\Basic@productFilter');
 
+
+// -------------------[ Cropper.js ]-----------------------
+Route::get('image-cropper','ImageCropperController@index')->name('cropper');
+
+Route::post('image-cropper/upload','ImageCropperController@upload')->name('cropper-post');
+
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');
 });

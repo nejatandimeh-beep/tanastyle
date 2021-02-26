@@ -56,7 +56,7 @@
     <link rel="stylesheet" href="{{ asset('css/jquery-confirm.min.css') }}">
 
     <!-- Cropper img -->
-    <link  href="/path/to/cropper.css" rel="stylesheet">
+    <link  href="{{ asset('css/cropper.css') }}" rel="stylesheet">
 </head>
 <!--End Unify Style-->
 @endsection

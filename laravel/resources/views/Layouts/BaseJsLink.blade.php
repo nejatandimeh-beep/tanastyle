@@ -7,7 +7,7 @@
     </a>
     <!---------------------------------------Java Script Links--------------------------------------->
     <!-- Cropper img -->
-    <script src="/path/to/cropper.js"></script>
+    <script src="{{ asset('assets/js/cropper.js') }}"></script>
 
     <!-- JS Global Compulsory -->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>

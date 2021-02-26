@@ -876,9 +876,9 @@
                                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
                                     <div>
                                         <div id="carousel-08-1"
-                                             class="js-carousel text-center g-mb-20"
+                                             class="js-carousel text-center g-mb-40"
                                              data-infinite="1"
-                                             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
+                                             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
                                              data-nav-for="#carousel-08-2">
 
                                             <div class="js-slide">
