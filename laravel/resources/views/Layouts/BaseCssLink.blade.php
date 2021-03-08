@@ -57,6 +57,10 @@
 
     <!-- Cropper img -->
     <link  href="{{ asset('css/cropper.css') }}" rel="stylesheet">
+
+    <!-- dropzone -->
+    <link  href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
+
 </head>
 <!--End Unify Style-->
 @endsection

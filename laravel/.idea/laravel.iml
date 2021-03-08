@@ -122,5 +122,6 @@
     <orderEntry type="library" name="twitter-bootstrap" level="application" />
     <orderEntry type="library" name="croppie" level="application" />
     <orderEntry type="library" name="cropperjs" level="application" />
+    <orderEntry type="library" name="dropzone" level="application" />
   </component>
 </module>

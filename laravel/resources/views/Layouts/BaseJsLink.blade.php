@@ -9,6 +9,9 @@
     <!-- Cropper img -->
     <script src="{{ asset('assets/js/cropper.js') }}"></script>
 
+    <!-- dropzone -->
+    <script src="{{ asset('assets/js/dropzone.js') }}"></script>
+
     <!-- JS Global Compulsory -->
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>

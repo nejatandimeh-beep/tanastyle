@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
-    <file url="PROJECT" libraries="{cropperjs, croppie, jquery, jquery-cropper, jquery.validate, twitter-bootstrap}" />
+    <file url="PROJECT" libraries="{cropperjs, croppie, dropzone, jquery, jquery-cropper, jquery.validate, twitter-bootstrap}" />
   </component>
 </project>

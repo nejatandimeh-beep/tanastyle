@@ -596,9 +596,18 @@ body a{
 .customLink:hover {
     color: #72c02c !important;
 }
-img {
-    display: block;
 
-    /* This rule is very important, please don't ignore this */
-    max-width: 100%;
+.preview {
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+}
+
+.cropper-crop-box, .cropper-view-box {
+    border-radius: 50%;
+}
+
+.cropper-view-box {
+    box-shadow: 0 0 0 1px #39f;
+    outline: 0;
 }

@@ -1,26 +1,50 @@
 @section('CustomerJsFunction')
     <script>
-        if ($('#image').length > 0) {
-            const image = document.getElementById('image');
-            const cropper = new Cropper(image, {
-                viewMode: 1,
-                aspectRatio: 1,
-                preview: '.preview',
-                zoomable: false,
-                minCropBoxWidth: 800,
-                minCropBoxHeight: 800,
-                crop(event) {
-                    console.log(event.detail.x);
-                    console.log(event.detail.y);
-                    console.log(event.detail.width);
-                    console.log(event.detail.height);
-                    console.log(event.detail.rotate);
-                    console.log(event.detail.scaleX);
-                    console.log(event.detail.scaleY);
-                },
-            });
-        }
         $(document).ready(function () {
+            let $modal = $('#modal'),
+                image = document.getElementById('sample_image'),
+                cropper;
+            $('#upload_image').on('change', function (event) {
+                let files = event.target.files,
+                    done = function (url) {
+                        image.src = url;
+                        $modal.modal('show');
+                    };
+
+                if (files && files.length > 0) {
+                    let reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            });
+
+            $modal.on('shown.bs.modal', function() {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    zoomable: false,
+                    background: false,
+                    minCropBoxWidth: 400,
+                    minCropBoxHeight: 400,
+                    dragCrop:true,
+                    multiple:true,
+                    movable:true
+                    // preview: '.preview'
+                });
+
+                $(document.body).addClass('me-position-fix');
+                $(document.body).removeClass('me-position-normally');
+            });
+
+            $modal.on('hidden.bs.modal', function() {
+                cropper.destroy();
+                cropper = null;
+                $(document.body).addClass('me-position-normally');
+                $(document.body).removeClass('me-position-fix');
+            })
+
             if ($('#cartCount').text() === 0) {
                 $('#cartBuyBtn').hide();
             }
