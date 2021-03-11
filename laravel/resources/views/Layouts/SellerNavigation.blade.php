@@ -79,24 +79,24 @@
                                                             زیر</a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0000']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['00']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شورت</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0001']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['01']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سوتین</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0002']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['02']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست
                                                                     لباس زیر</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0003']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['03']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">زیر پوش</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0004']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['04']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">گن</a>
                                                             </li>
                                                         </ul>
@@ -110,28 +110,28 @@
                                                             تنه</a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0010']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['10']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شلوارک</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0011']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['11']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شلوار</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0012']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['12']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شلوار
                                                                     راحتی</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0013']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['13']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">دامن</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0014']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['14']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">لگ</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0015']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['15']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">جوراب</a>
                                                             </li>
                                                         </ul>
@@ -145,70 +145,70 @@
                                                             تنه</a>
                                                         <ul class="list-unstyled hs-sub-menu SubMenuScroll">
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0020']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['20']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">تیشرت</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0021']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['21']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پولوشرت</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0022']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['22']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">تاپ</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0023']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['23']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">تونیک</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0024']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['24']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پیراهن</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0025']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['25']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شومیز</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0025']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['25']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بلوز</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0026']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['26']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پلیور</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0027']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['27']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ژاکت</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0028']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['28']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">جلیقه</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0029']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['29']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">هودی</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['00210']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['210']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سویشرت</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['00211']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['211']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کت
                                                                     تک</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['00212']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['212']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کت
                                                                     پاییزه</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['00213']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['213']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کت
                                                                     زمستانه</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['00214']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['214']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کاپشن</a>
                                                             </li>
                                                         </ul>
@@ -222,40 +222,40 @@
                                                             تنه</a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0030']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['30']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">لباس
                                                                     خواب</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0031']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['31']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">مانتو</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0032']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['32']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پانچو</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0033']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['33']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">رویه</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0034']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['34']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کت و شلوار</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0035']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['35']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست لباس مجلسی</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0036']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['36']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست لباس اداری</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0037']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['37']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پالتو</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0038']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['38']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سرهمی</a>
                                                             </li>
                                                         </ul>

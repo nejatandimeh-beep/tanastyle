@@ -20,7 +20,8 @@ class Add extends Controller
     // Ask Qty of Sizes
     public function AskSize($cat)
     {
-        $data = DB::table('product_hint')
+
+        $data = DB::table('product_hint_female')
             ->where('Cat', $cat)
             ->first();
 
@@ -43,15 +44,10 @@ class Add extends Controller
             $qty = $_GET['qty'];
 
         switch ($cat) {
-            case '0000':
-            case '0002':
-            case '0003':
-            case '0004':
-            case '1000':
-            case '1001':
-            case '1002':
-            case '1003':
-            case '1004':
+            case '00':
+            case '02':
+            case '03':
+            case '04':
                 $size = [
                     'S',
                     'M',
@@ -59,70 +55,6 @@ class Add extends Controller
                     'XL',
                     'XXL',
                     'XXXL'
-                ];
-                break;
-            case '0001':
-                $size = [
-                    '60',
-                    '65',
-                    '70',
-                    '75',
-                    '80',
-                    '85',
-                    '90'
-                ];
-                break;
-            case '0010':
-                $size = [
-                    '32',
-                    '33',
-                    '34',
-                    '35',
-                    '36',
-                    '37',
-                    '38',
-                    '39',
-                    '40',
-                    '41',
-                    '42',
-                    '43',
-                    '44',
-                    '45',
-                    '46',
-                    '47',
-                    '48',
-                    '49',
-                    '50',
-                    '51',
-                    '52',
-                    '53',
-                    '54',
-                    '55',
-                    '56',
-                    '57',
-                    '58',
-                    '59',
-                    '60',
-                    '61'
-                ];
-                break;
-            case '0015':
-                $size = [
-                    '19 تا 21 سانت',
-                    '22 تا 24 سانت',
-                    '25 تا 27 سانت',
-                    '28 تا 30 سانت',
-                    '30 تا 32 سانت',
-                    '32 تا 34 سانت',
-                    '36 تا 38 سانت',
-                    '38 تا 40 سانت',
-                    '40 تا 42 سانت',
-                    '42 تا 46 سانت',
-                    '46 تا 50 سانت',
-                    '50 تا 56 سانت',
-                    '56 تا 62 سانت',
-                    '62 تا 78 سانت',
-                    '78 تا 85 سانت',
                 ];
                 break;
             default:
@@ -140,7 +72,7 @@ class Add extends Controller
         date_default_timezone_set('Asia/Tehran');
         $folderName = 'p-' . date("Y.m.d-H.i.s");
         $picPath = '\img\products\\' . $folderName;
-            File::makeDirectory($picPath, 0777, true, true);
+        File::makeDirectory($picPath, 0777, true, true);
 
             for ($i = 1; $i <= 4; $i++) {
                 $temp = (string)$i;
@@ -151,7 +83,6 @@ class Add extends Controller
 
         // Compilation Pic Path
         $picPath = $picPath . '\\';
-
         // Get Data From Form
         $sellerId =Auth::guard('seller')->user()->id;
         $gender = $request->get('gender');

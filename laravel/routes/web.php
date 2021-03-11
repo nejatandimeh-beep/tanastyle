@@ -203,9 +203,7 @@ Route::get('/Customer-Product-Custom-Filter/{filters}', 'Customer\Basic@productF
 
 
 // -------------------[ Cropper.js ]-----------------------
-Route::get('image-cropper','ImageCropperController@index')->name('cropper');
-
-Route::post('image-cropper/upload','ImageCropperController@upload')->name('cropper-post');
+Route::post('/Customer-Profile-Image', 'Customer\Basic@uploadImage')->name('uploadImage');
 
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');

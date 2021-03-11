@@ -10,7 +10,8 @@
                         <div class="col-md-9 d-flex g-pr-15--lg g-pr-0">
                             <!-- Figure Image -->
                             <img class="g-width-80 g-height-80 rounded-circle g-ml-15"
-                                 src="{{ asset('img/Other/a.png') }}"
+                                 id="userImage"
+                                 src="{{ asset($customer->PicPath.'?'.time()) }}" {{--use ? and time() for refresh image--}}
                                  alt="Image Description">
                             <!-- Figure Image -->
 
@@ -70,13 +71,28 @@
                                             @endif
                                         </ul>
                                     @else
+
                                         <ul class="list-inline text-center g-flex-middle-item">
                                             <li class="list-inline-item justify-content-center g-mx-7">
-                                            <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
-                                                <i class="icon-lock-open"></i>
-                                            </span>
+                                                <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
+                                                    <i class="icon-lock-open"></i>
+                                                </span>
                                                 <a class="customLink" href="{{ route('changePass') }}">تغییر رمز
                                                     عبور</a>
+                                            </li>
+                                            <li class="list-inline-item justify-content-center g-mx-7">
+                                                <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
+                                                    <i class="icon-user"></i>
+                                                </span>
+                                                <form class="d-inline-block" id="uploadImage" action="{{route('uploadImage')}}"
+                                                      enctype="multipart/form-data" method="POST">
+                                                    @csrf
+                                                    <label for="upload_image" style="cursor: pointer">
+                                                        <span>تنظیم تصویر حساب کاربری</span>
+                                                        <input type="file" name="image" id="upload_image" class="image" style="display: none">
+                                                        <input type="text" id="imageUrl" name="imageUrl" style="display: none">
+                                                    </label>
+                                                </form>
                                             </li>
                                         </ul>
                                 @endif
@@ -89,6 +105,37 @@
                     </div>
                 </figure>
                 <!-- End Figure -->
+            </div>
+        </div>
+        <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalCenterTitle"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <button type="button" class="close"
+                                data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="img-container">
+                            <div class="col-md-12 p-0">
+                                <img src="" id="sample_image" width="600px" height="600px">
+                            </div>
+                            {{--                        <div class="col-md-4">--}}
+                            {{--                            <div class="preview rounded-circle mx-auto g-mt-20"></div>--}}
+                            {{--                        </div>--}}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"
+                                class="btn btn-secondary" data-dismiss="modal">Close
+                        </button>
+                        <button type="button" id="crop" class="btn btn-primary">Crop</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -606,36 +653,6 @@
                                                 tabindex="4">
                                             <option value="">شهر</option>
                                         </select>
-                                    </div>
-                                </div>
-                            </div>
-                            {{--افزودن عکس--}}
-                            <div class="form-group row g-mb-30 g-mb-15--lg">
-                                <label class="col-sm-2 col-form-label align-self-center" for="fileShow5"
-                                       id="custom-file-label">افزودن عکس پروفایل</label>
-                                <div style="direction: ltr" class="col-sm-10 force-col-12">
-                                    <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
-                                                <span style="display: none; cursor: default"
-                                                      class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                                                      id="Check5"></span>
-                                        <input id="fileShow5"
-                                               class="form-control form-control-md rounded-0 g-font-size-16"
-                                               type="text"
-                                               placeholder="فاقد تصویر" readonly="">
-
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-md u-btn-primary rounded-0"
-                                                    tabindex="8"
-                                                    type="submit">اضافه کردن
-                                            </button>
-                                            <input id="pic5"
-                                                   class="imgCropper"
-                                                   onchange="addPathCheckMark('pic5','fileShow5','Check5')"
-                                                   onclick="$('.custombox-content #fileShow1').removeClass('g-brd-lightred')"
-                                                   type="file"
-                                                   name="pic"
-                                                   accept="image/jpg,image/png,image/jpeg,image/gif">
-                                        </div>
                                     </div>
                                 </div>
                             </div>

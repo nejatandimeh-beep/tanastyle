@@ -20,7 +20,7 @@
                 }
             });
 
-            $modal.on('shown.bs.modal', function() {
+            $modal.on('shown.bs.modal', function () {
                 cropper = new Cropper(image, {
                     aspectRatio: 1,
                     viewMode: 1,
@@ -28,9 +28,9 @@
                     background: false,
                     minCropBoxWidth: 400,
                     minCropBoxHeight: 400,
-                    dragCrop:true,
-                    multiple:true,
-                    movable:true
+                    dragCrop: true,
+                    multiple: true,
+                    movable: true
                     // preview: '.preview'
                 });
 
@@ -38,12 +38,31 @@
                 $(document.body).removeClass('me-position-normally');
             });
 
-            $modal.on('hidden.bs.modal', function() {
+            $modal.on('hidden.bs.modal', function () {
                 cropper.destroy();
                 cropper = null;
                 $(document.body).addClass('me-position-normally');
                 $(document.body).removeClass('me-position-fix');
-            })
+            });
+
+            $('#crop').on('click', function () {
+                let canvas = cropper.getCroppedCanvas({
+                    width: 400,
+                    height: 400
+                });
+
+
+                canvas.toBlob(function (blob) {
+                    let url = URL.createObjectURL(blob),
+                        reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function () {
+                        $('#imageUrl').val(reader.result);
+                        console.log($('#imageUrl').val());
+                        $('#uploadImage').submit();
+                    }
+                });
+            });
 
             if ($('#cartCount').text() === 0) {
                 $('#cartBuyBtn').hide();

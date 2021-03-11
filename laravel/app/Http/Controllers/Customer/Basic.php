@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\Picture;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
 use File;
@@ -411,8 +412,7 @@ class Basic extends Controller
         $mobile = $request->get('mobile');
         $state = $request->get('state');
         $city = $request->get('city');
-        $pic = $request->get('pic');
-dd($pic);
+
         DB::table('customers')
             ->where('id', Auth::user()->id)
             ->update([
@@ -935,8 +935,34 @@ dd($pic);
             return 'exist';
     }
 
-    public function customerVerify(){
+    public function customerVerify()
+    {
         return redirect()->route('Master');
+    }
+
+    public function uploadImage(Request $request)
+    {
+        $image = $request->get('imageUrl');
+        $folderPath = public_path('img\SellerProfileImage\\');
+        $image_parts = explode(";base64,", $image);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $imageName = Auth::user()->id . '.png';
+
+        $imageFullPath = $folderPath . $imageName;
+
+        file_put_contents($imageFullPath, $image_base64);
+
+        DB::table('customers')
+            ->where('id', Auth::user()->id)
+            ->update([
+                'PicPath' => 'img\SellerProfileImage\\' . $imageName,
+            ]);
+
+        return redirect()->route('userProfile', 'profileImageChange');
+
     }
 
 // ------------------------------------------[ Products Filter ]--------------------------------------------------------
@@ -988,8 +1014,8 @@ dd($pic);
             ->orWhere('Gender', $gender[2])
             ->get();
         $products = '';
-        foreach($data as $key => $row) {
-            $products = $products.'<div class="col-12 col-lg-4 g-mb-30">
+        foreach ($data as $key => $row) {
+            $products = $products . '<div class="col-12 col-lg-4 g-mb-30">
     <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                     class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
         <div>
@@ -1001,29 +1027,29 @@ dd($pic);
 
              <div class="js-slide">
                 <a
-                    href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'">
-                    <img class="img-fluid w-100" src="'.$row->PicPath.'pic1.jpg" alt="Image Description">
+                    href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '">
+                    <img class="img-fluid w-100" src="' . $row->PicPath . 'pic1.jpg" alt="Image Description">
                 </a>
              </div>
 
              <div class="js-slide">
                 <a
-                    href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'">
-                    <img class="img-fluid w-100" src="'.$row->PicPath.'pic2.jpg" alt="Image Description">
+                    href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '">
+                    <img class="img-fluid w-100" src="' . $row->PicPath . 'pic2.jpg" alt="Image Description">
                 </a>
             </div>
 
              <div class="js-slide">
                 <a
-                    href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'">
-                    <img class="img-fluid w-100" src="'.$row->PicPath.'pic3.jpg" alt="Image Description">
+                    href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '">
+                    <img class="img-fluid w-100" src="' . $row->PicPath . 'pic3.jpg" alt="Image Description">
                 </a>
             </div>
 
              <div class="js-slide">
                 <a
-                    href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'">
-                    <img class="img-fluid w-100" src="'.$row->PicPath.'pic4.jpg" alt="Image Description">
+                    href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '">
+                    <img class="img-fluid w-100" src="' . $row->PicPath . 'pic4.jpg" alt="Image Description">
                 </a>
             </div>
         </div>
@@ -1032,15 +1058,15 @@ dd($pic);
              <div class="d-flex justify-content-between col-12 p-0">
                 <div class="d-flex flex-column">
                     <h4 class="h6 g-color-black my-1">
-                        <span class="u-link-v5 g-color-black" tabindex="0">'.$row->Name.'
-                            <span class="g-font-size-12 g-font-weight-300">'.$row->Model.'</span>
+                        <span class="u-link-v5 g-color-black" tabindex="0">' . $row->Name . '
+                            <span class="g-font-size-12 g-font-weight-300">' . $row->Model . '</span>
                         </span>
                     </h4>
                     <ul style="padding: 0"
                         class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                         <li>
                             <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
-                               href="#">'.$row->Gender.' '.$row->HintCat.'</a>
+                               href="#">' . $row->Gender . ' ' . $row->HintCat . '</a>
                         </li>
                     </ul>
                 </div>
@@ -1048,7 +1074,7 @@ dd($pic);
                    class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
                    data-toggle="tooltip"
                    data-placement="top"
-                   href="http://tanastyle/Customer-Product-Detail/'.$row->ID.'"
+                   href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '"
                    data-original-title="جزئیات محصول">
                    <i class="icon-eye g-line-height-0_7"></i>
                 </a>
@@ -1058,10 +1084,10 @@ dd($pic);
           <div
             class="d-block g-color-black g-font-size-17 g-ml-10">
                 <div style="direction: rtl" class="text-left">
-                    <s class="g-color-lightred g-font-weight-500 g-font-size-13">'.
-                number_format($row->UnitPrice).'
+                    <s class="g-color-lightred g-font-weight-500 g-font-size-13">' .
+                number_format($row->UnitPrice) . '
                     </s>
-                    <span>'.number_format($row->FinalPrice).'</span>
+                    <span>' . number_format($row->FinalPrice) . '</span>
                     <span
                         class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
                 </div>
@@ -1074,6 +1100,7 @@ dd($pic);
 
         return $products;
     }
+
 // ---------------------------------------------[Product List]----------------------------------------------------------
     public function productFemaleList()
     {
@@ -1082,8 +1109,8 @@ dd($pic);
             ->where('Gender', 'زنانه')
             ->get();
         $gender = '0';
-        $cat='all';
-        return view('Customer.ProductList', compact('data', 'gender','cat'));
+        $cat = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'cat'));
     }
 
     public function productMaleList()
@@ -1093,8 +1120,8 @@ dd($pic);
             ->where('Gender', 'مردانه')
             ->get();
         $gender = '1';
-        $cat='all';
-        return view('Customer.ProductList', compact('data', 'gender','cat'));
+        $cat = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'cat'));
     }
 
     public function productKidsList()
@@ -1104,8 +1131,8 @@ dd($pic);
             ->where('Gender', 'بچگانه')
             ->get();
         $gender = '2';
-        $cat='all';
-        return view('Customer.ProductList', compact('data', 'gender','cat'));
+        $cat = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'cat'));
     }
 
     public function product0000()
@@ -1118,6 +1145,7 @@ dd($pic);
         $cat = '00';
         return view('Customer.ProductList', compact('data', 'gender', 'cat'));
     }
+
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($id, $qty, $i)
     {
