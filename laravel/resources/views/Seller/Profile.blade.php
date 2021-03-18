@@ -102,7 +102,7 @@
                                             class="g-color-white align-self-center g-color-white text-center text-lg-right custom-mt-20">
                                             <h4 class="g-mb-10">نجات اندیمه</h4>
                                             <h5 class="m-0 text-center text-lg-left">شناسه شما در سیستم<span
-                                                    class="g-mr-10 g-color-yellow">1421</span></h5>
+                                                    class="g-mr-10 g-color-yellow">{{ Auth::guard('seller')->user()->id }}</span></h5>
                                         </div>
                                     </div>
                                 </div>

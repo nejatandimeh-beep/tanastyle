@@ -8,14 +8,19 @@
                 <figure class="u-block-hover g-bg-white g-rounded-4 g-py-15">
                     <div style="direction: rtl" class="d-flex justify-content-start align-items-center">
                         <div class="col-md-9 d-flex g-pr-15--lg g-pr-0">
+                        @if($customer->PicPath !== '0')
                             <!-- Figure Image -->
-                            <img class="g-width-80 g-height-80 rounded-circle g-ml-15"
-                                 id="userImage"
-                                 src="{{ asset($customer->PicPath.'?'.time()) }}" {{--use ? and time() for refresh image--}}
-                                 alt="Image Description">
-                            <!-- Figure Image -->
-
-                            <!-- Figure Info -->
+                                <img class="g-width-80 g-height-80 rounded-circle g-ml-15"
+                                     id="userImage"
+                                     src="{{ asset($customer->PicPath.'?'.time()) }}"
+                                     {{--use ? and time() for refresh image--}}
+                                     alt="Image Description">
+                                <!-- Figure Image -->
+                            @else
+                                <img src="{{ asset('img/Other/user-add-icon.png') }}" id="uploaded_image"
+                                     class="g-width-80 g-height-80 rounded-circle g-ml-15 g-brd-around g-brd-gray-light-v2">
+                        @endif
+                        <!-- Figure Info -->
                             <div class="d-flex flex-column justify-content-center">
                                 <div class="g-mb-5">
                                     <h4 class="h5 g-mb-0">{{ Auth::user()->name.' '.Auth::user()->Family }}
@@ -23,7 +28,8 @@
                                             @if (session('resent'))
                                                 <label class="g-color-primary g-font-size-16 g-mr-10">
                                                     <i class="fa fa-envelope g-font-size-16"></i>
-                                                    <span class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد.</span>
+                                                    <span
+                                                        class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد.</span>
                                                 </label>
                                             @else
                                                 <label class="g-color-red g-font-size-16">
@@ -44,8 +50,8 @@
                             <div
                                 class="u-block-hover__additional--fade u-block-hover__additional--fade-down g-flex-middle">
                                 @if(Auth::user()->email_verified_at === null)
-                                        <ul class="list-inline text-center g-flex-middle-item">
-                                            @if (!session('resent'))
+                                    <ul class="list-inline text-center g-flex-middle-item">
+                                        @if (!session('resent'))
                                             <li id="emailActivation"
                                                 class="list-inline-item justify-content-center g-mx-7">
                                             <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
@@ -60,45 +66,50 @@
                                                     </button>
                                                 </form>
                                             </li>
-                                            @endif
-                                            @if (session('resent'))
-                                                <li style="direction: rtl" id="sendVerifyHint"
-                                                    class="list-inline-item justify-content-center">
+                                        @endif
+                                        @if (session('resent'))
+                                            <li style="direction: rtl" id="sendVerifyHint"
+                                                class="list-inline-item justify-content-center">
                                                 <span class="g-color-primary g-font-size-20 g-ml-5"><i
                                                         class="fa fa-envelope"></i></span>
-                                                    <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا آخرین ایمیل از طرف Tanastyle.ir را چک کنید.</span>
-                                                </li>
-                                            @endif
-                                        </ul>
-                                    @else
+                                                <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا آخرین ایمیل از طرف Tanastyle.ir را چک کنید.</span>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                @else
 
-                                        <ul class="list-inline text-center g-flex-middle-item">
-                                            <li class="list-inline-item justify-content-center g-mx-7">
-                                                <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
+                                    <ul class="list-inline text-center g-flex-middle-item">
+                                        <li class="list-inline-item justify-content-center g-mx-7">
+                                                <span
+                                                    class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
                                                     <i class="icon-lock-open"></i>
                                                 </span>
-                                                <a class="customLink" href="{{ route('changePass') }}">تغییر رمز
-                                                    عبور</a>
-                                            </li>
-                                            <li class="list-inline-item justify-content-center g-mx-7">
-                                                <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
+                                            <a class="customLink" href="{{ route('changePass') }}">تغییر رمز
+                                                عبور</a>
+                                        </li>
+                                        <li class="list-inline-item justify-content-center g-mx-7">
+                                                <span
+                                                    class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
                                                     <i class="icon-user"></i>
                                                 </span>
-                                                <form class="d-inline-block" id="uploadImage" action="{{route('uploadImage')}}"
-                                                      enctype="multipart/form-data" method="POST">
-                                                    @csrf
-                                                    <label for="upload_image" style="cursor: pointer">
-                                                        <span>تنظیم تصویر حساب کاربری</span>
-                                                        <input type="file" name="image" id="upload_image" class="image" style="display: none">
-                                                        <input type="text" id="imageUrl" name="imageUrl" style="display: none">
-                                                    </label>
-                                                </form>
-                                            </li>
-                                        </ul>
-                                @endif
-                                <!-- Figure Social Icons -->
+                                            <form class="d-inline-block" id="uploadImage"
+                                                  action="{{route('uploadImage')}}"
+                                                  enctype="multipart/form-data" method="POST">
+                                                @csrf
+                                                <label for="upload_image" style="cursor: pointer">
+                                                    <span class="customLink">تنظیم تصویر حساب کاربری</span>
+                                                    <input type="file" name="image" id="upload_image" class="image"
+                                                           style="display: none">
+                                                    <input type="text" id="imageUrl" name="imageUrl"
+                                                           style="display: none">
+                                                </label>
+                                            </form>
+                                        </li>
+                                    </ul>
+                            @endif
+                            <!-- Figure Social Icons -->
 
-                                    <!-- End Figure Social Icons -->
+                                <!-- End Figure Social Icons -->
                             </div>
                         </figcaption>
                         <!-- End Figure Caption -->

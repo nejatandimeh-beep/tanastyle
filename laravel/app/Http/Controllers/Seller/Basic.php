@@ -55,7 +55,7 @@ class Basic extends Controller
         // Insert Data to Credit Card
         DB::table('seller_credit_card')->insert([
             [
-                'SellerID' => 2,
+                'SellerID' => $sellerID,
                 'CardNumber' => $cardNumber,
                 'Status' => 0,
             ],
@@ -377,11 +377,11 @@ class Basic extends Controller
                 if ($rec->Replay !== 0) {
                     DB::table('seller_conversation')
                         ->where('ID', $id)
-                        ->update(['Status' => Auth::user()->id]);
+                        ->update(['Status' => 2]);
                 } else {
                     DB::table('seller_conversation')
                         ->where('ID', $id)
-                        ->update(['Status' => Auth::user()->id]);
+                        ->update(['Status' => 2]);
                 }
         }
 

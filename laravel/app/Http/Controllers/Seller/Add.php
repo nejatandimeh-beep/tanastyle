@@ -18,12 +18,42 @@ class Add extends Controller
         $this->middleware('IsSeller');
     }
     // Ask Qty of Sizes
-    public function AskSize($cat)
+    public function AskSize($cat, $gender)
     {
+        $data=null;
+        switch ($gender) {
+            case '0':
+                $data = DB::table('product_hint_female')
+                    ->where('Cat', $cat)
+                    ->first();
+                break;
+            case '1':
+                $data = DB::table('product_hint_male')
+                    ->where('Cat', $cat)
+                    ->first();
+                break;
+            case '2':
+                $data = DB::table('product_hint_girl')
+                    ->where('Cat', $cat)
+                    ->first();
+                break;
+            case '3':
+                $data = DB::table('product_hint_boy')
+                    ->where('Cat', $cat)
+                    ->first();
+                break;
+            case '4':
+                $data = DB::table('product_hint_baby_girl')
+                    ->where('Cat', $cat)
+                    ->first();
+                break;
+            case '5':
+                $data = DB::table('product_baby_hint_boy')
+                    ->where('Cat', $cat)
+                    ->first();
+                break;
+        }
 
-        $data = DB::table('product_hint_female')
-            ->where('Cat', $cat)
-            ->first();
 
         return view('Seller.AskSize')
             ->with('gender', $data->Gender)
@@ -33,7 +63,7 @@ class Add extends Controller
             ->with('productHint', $data->Pic);
     }
 
-    // Detail of Sizes and Catagory
+    // Detail of Sizes and Category
     public function AddProduct()
     {
         $gender = $_GET['gender'];

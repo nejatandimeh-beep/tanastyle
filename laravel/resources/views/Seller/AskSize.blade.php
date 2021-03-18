@@ -80,16 +80,18 @@
             </div>
 
             <h3 style="text-align: center;">
-                @if($gender == 0)
+                @if($gender == '0')
                     <span class="g-ml-1">{{ $name }}</span> زنانه
-                @elseif($gender == 1)
+                @elseif($gender == '1')
                     <span class="g-ml-1">{{ $name }}</span> مردانه
-                @elseif($gender == 2)
-                    <span class="g-ml-1">{{ $name }}</span> بچگانه - نوزادی
-                @elseif($gender == 3)
+                @elseif($gender == '2')
                     <span class="g-ml-1">{{ $name }}</span> بچگانه - دخترانه
-                @else
+                @elseif($gender == '3')
                     <span class="g-ml-1">{{ $name }}</span> بچگانه - پسرانه
+                @elseif($gender == '4')
+                    <span class="g-ml-1">{{ $name }}</span> نوزادی - دخترانه
+                @else
+                    <span class="g-ml-1">{{ $name }}</span> نوزادی - پسرانه
                 @endif
             </h3>
             <div style="text-align: center;">
@@ -113,7 +115,7 @@
                             <span class="g-color-primary">تعداد</span> سایزهای موجود را مشخص نمایید.</h2>
                         <div class="g-pr-20 g-pl-20 smallDeviceJustify">
                             <p class="g-mb-3">
-                                <spna class="g-font-weight-600">فروشنده</spna>
+                                <spna class="g-font-weight-600">{{ Auth::guard('seller')->user()->name }}</spna>
                                 عزیز در این قسمت لطفا مشخص نمایید که از محصول مورد نظر چند سایز در فروشگاهتان موجود
                                 دارید.
                             </p>

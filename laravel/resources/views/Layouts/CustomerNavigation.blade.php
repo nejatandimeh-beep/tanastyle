@@ -3,7 +3,7 @@
     <body>
     <span id="loginAlert" class="d-none">{{ (isset(Auth::user()->id)) ? 'login':'logout' }}</span>
     <header id="js-header2" class="u-header u-header--static">
-        <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-pt-10">
+        <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-pt-10 g-pb-10--lg">
             <nav class="js-mega-menu hs-menu-initialized hs-menu-horizontal navbar navbar-toggleable-md">
                 <div class="container" id="HeaderContainer">
                     <!-- Responsive Toggle Button -->
@@ -272,6 +272,35 @@
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
                                                      class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-07-heading-07"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-07-body-07" data-toggle="collapse"
+                                                               data-parent="#accordion-07" aria-expanded="false"
+                                                               aria-controls="accordion-07-body-07">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس زیر
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-07-body-07" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-07-heading-07">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">مایو</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
                                                     <div id="accordion-07-heading-08"
                                                          class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
                                                          role="tab">
@@ -296,11 +325,14 @@
                                                                                       href="#">شورت</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شلوارک</a></li>
+                                                                                      href="#">شلوارک</a>
+                                                                </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">گرمکن</a></li>
+                                                                                      href="#">اسلش</a>
+                                                                </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شلوار</a></li>
+                                                                                      href="#">شلوار</a>
+                                                                </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">دامن</a>
                                                                 </li>
@@ -409,15 +441,14 @@
                                                                                       href="#">ساده</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">کتانی
-                                                                        ورزشی</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">مخصوص
-                                                                        پیاده روی</a></li>
+                                                                    </a>
+                                                                </li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">مخصوص
                                                                         دویدن</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">سالنی</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">کوهنوردی</a></li>
+                                                                                      href="#">حرفه ای</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -446,8 +477,9 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">انواع
                                                                         کلاه</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
-                                                                        شال گردن</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">هد
+                                                                        بند</a>
+                                                                </li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">انواع
                                                                         عینک</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">بینی
@@ -543,9 +575,7 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">تاج
-                                                                        عروس</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">تاج
-                                                                        سر</a></li>
+                                                                    </a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">گیره
                                                                         مو</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">کش
@@ -554,6 +584,8 @@
                                                                                       href="#">کلیپس</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">سنجاقک</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">آرایش
+                                                                        و مراقبت مو</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -832,6 +864,8 @@
                                                                         لباس
                                                                         اداری</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">ست لباس کار</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">پالتو</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">سرهمی</a></li>
@@ -871,6 +905,35 @@
                                             <h4 class="h5 g-font-weight-600 g-mb-15">ورزشی</h4>
                                             <div id="accordion-11" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-11-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-11-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-11" aria-expanded="false"
+                                                               aria-controls="accordion-11-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس زیر
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-11-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-11-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">مایو</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div style="direction: rtl"
                                                      class="card rounded-0 g-bg-transparent g-brd-none">
                                                     <div id="accordion-11-heading-01"
@@ -1004,15 +1067,13 @@
                                                                                       href="#">ساده</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">کتانی
-                                                                        ورزشی</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">مخصوص
-                                                                        پیاده روی</a></li>
+                                                                    </a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">مخصوص
                                                                         دویدن</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">سالنی</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">کوهنوردی</a></li>
+                                                                                      href="#">حرفه ای</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1041,8 +1102,7 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">انواع
                                                                         کلاه</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
-                                                                        شال گردن</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">هد بند</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">انواع
                                                                         عینک</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">بینی
@@ -1210,183 +1270,6 @@
                                     class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-55--lg g-mt-7--lg--scrolling"
                                     aria-labelledby="mega-menu-label-6" style="display: none;">
                                     <div class="row">
-                                        {{-- نوزادی --}}
-                                        <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">نوزادی</h4>
-                                            <div id="accordion-01" class="u-accordion" role="tablist"
-                                                 aria-multiselectable="true">
-                                                <div style="direction: rtl"
-                                                     class="card rounded-0 g-bg-transparent g-brd-none">
-                                                    <div id="accordion-01-heading-01"
-                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
-                                                         role="tab">
-                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
-                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
-                                                               href="#accordion-01-body-01" data-toggle="collapse"
-                                                               data-parent="#accordion-01" aria-expanded="false"
-                                                               aria-controls="accordion-01-body-01">
-                                                        <span class="float-right u-accordion__control-icon g-ml-10">
-                                                          <i class="fa fa-angle-down"></i>
-                                                          <i class="fa fa-angle-up"></i>
-                                                        </span>
-                                                                لباس پایین تنه
-                                                            </a>
-                                                        </h5>
-                                                    </div>
-                                                    <div id="accordion-01-body-01" class="collapse" role="tabpanel"
-                                                         aria-labelledby="accordion-01-heading-01">
-                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
-                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شورت</a>
-                                                                </li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شلوارک</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شلوار</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">دامن</a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="direction: rtl"
-                                                     class="card rounded-0 g-bg-transparent g-brd-none">
-                                                    <div id="accordion-01-heading-02"
-                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
-                                                         role="tab">
-                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
-                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
-                                                               href="#accordion-01-body-02" data-toggle="collapse"
-                                                               data-parent="#accordion-01" aria-expanded="false"
-                                                               aria-controls="accordion-01-body-02">
-                                                        <span class="float-right u-accordion__control-icon g-ml-10">
-                                                          <i class="fa fa-angle-down"></i>
-                                                          <i class="fa fa-angle-up"></i>
-                                                        </span>
-                                                                لباس بالا تنه
-                                                            </a>
-                                                        </h5>
-                                                    </div>
-                                                    <div id="accordion-01-body-02" class="collapse" role="tabpanel"
-                                                         aria-labelledby="accordion-01-heading-02">
-                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
-                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">زیر
-                                                                        پوش</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تیشرت</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پولوشرت</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پیراهن</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شومیز</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">بلوز</a>
-                                                                </li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">سویشرت</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">هودی</a>
-                                                                </li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">بافتنی</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">سرهمی</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="direction: rtl"
-                                                     class="card rounded-0 g-bg-transparent g-brd-none">
-                                                    <div id="accordion-01-heading-03"
-                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
-                                                         role="tab">
-                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
-                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
-                                                               href="#accordion-01-body-03" data-toggle="collapse"
-                                                               data-parent="#accordion-01" aria-expanded="false"
-                                                               aria-controls="accordion-01-body-03">
-                                                        <span class="float-right u-accordion__control-icon g-ml-10">
-                                                          <i class="fa fa-angle-down"></i>
-                                                          <i class="fa fa-angle-up"></i>
-                                                        </span>
-                                                                کفش
-                                                            </a>
-                                                        </h5>
-                                                    </div>
-                                                    <div id="accordion-01-body-03" class="collapse" role="tabpanel"
-                                                         aria-labelledby="accordion-01-heading-03">
-                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
-                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تخت</a>
-                                                                </li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">ورزشی</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پاپوش</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="direction: rtl"
-                                                     class="card rounded-0 g-bg-transparent g-brd-none">
-                                                    <div id="accordion-01-heading-04"
-                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
-                                                         role="tab">
-                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
-                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
-                                                               href="#accordion-01-body-04" data-toggle="collapse"
-                                                               data-parent="#accordion-01" aria-expanded="false"
-                                                               aria-controls="accordion-01-body-04">
-                                                        <span class="float-right u-accordion__control-icon g-ml-10">
-                                                          <i class="fa fa-angle-down"></i>
-                                                          <i class="fa fa-angle-up"></i>
-                                                        </span>
-                                                                اکسسوری
-                                                            </a>
-                                                        </h5>
-                                                    </div>
-                                                    <div id="accordion-01-body-04" class="collapse" role="tabpanel"
-                                                         aria-labelledby="accordion-01-heading-04">
-                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
-                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">اسباب
-                                                                        بازی</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">سر
-                                                                        پوش</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">هد
-                                                                        بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">تل
-                                                                        مو</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">پیش
-                                                                        بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ناف
-                                                                        بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">دستکش</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">پا
-                                                                        بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
-                                                                        هد
-                                                                        بند و پا بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کیسه
-                                                                        خواب</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">آویز
-                                                                        لباس</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">چوب
-                                                                        لباس</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">بدلیجات</a></li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         {{-- دخترانه --}}
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">دخترانه</h4>
@@ -1511,8 +1394,75 @@
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">کاپشن</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-02-heading-08"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-02-body-08" data-toggle="collapse"
+                                                               data-parent="#accordion-02" aria-expanded="false"
+                                                               aria-controls="accordion-02-body-08">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس تمام تنه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-02-body-08" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-02-heading-08">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">لباس خواب</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">مانتو</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">ست مدرسه</a>
+                                                                </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">سرهمی</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-02-heading-09"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-02-body-09" data-toggle="collapse"
+                                                               data-parent="#accordion-02" aria-expanded="false"
+                                                               aria-controls="accordion-02-body-09">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                کیف
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-02-body-09" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-02-heading-09">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">مدرسه</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">جوانان</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">کوله جوانان</a>
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1545,15 +1495,62 @@
                                                                                       href="#">صندل</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تخت</a>
+                                                                                      href="#">ساده</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">ورزشی</a></li>
+                                                                                      href="#">کالج</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">مجلسی</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">نیم
                                                                         بوت</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">بوت</a>
                                                                 </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-02-heading-06"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-02-body-06" data-toggle="collapse"
+                                                               data-parent="#accordion-02" aria-expanded="false"
+                                                               aria-controls="accordion-02-body-06">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                ورزشی
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-02-body-06" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-02-heading-06">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">مایو</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شرت</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شلوارک</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شلوار</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">پیراهن</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">ست لباس</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">کفش</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">کفش حرفه ای</a>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1594,8 +1591,6 @@
                                                                                       href="#">کراوات</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">پاپیون</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
-                                                                        کیف</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">ساعت</a>
                                                                 </li>
@@ -1677,7 +1672,7 @@
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">شلوار</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">گرمکن</a></li>
+                                                                                      href="#">اسلش</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">جوراب</a></li>
                                                             </ul>
@@ -1729,10 +1724,74 @@
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">کاپشن</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
-                                                                        لباس</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-03-heading-09"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-03-body-09" data-toggle="collapse"
+                                                               data-parent="#accordion-03" aria-expanded="false"
+                                                               aria-controls="accordion-03-body-09">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس تمام تنه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-03-body-09" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-03-heading-09">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">سرهمی</a></li>
+                                                                                      href="#">لباس خواب</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کت و
+                                                                        شلوار</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                        مدرسه</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">سرهمی</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-03-heading-08"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-03-body-08" data-toggle="collapse"
+                                                               data-parent="#accordion-03" aria-expanded="false"
+                                                               aria-controls="accordion-03-body-08">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                کیف
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-03-body-08" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-03-heading-08">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">مدرسه</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">جوانان</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کوله
+                                                                        جوانان</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1765,15 +1824,63 @@
                                                                                       href="#">صندل</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تخت</a>
+                                                                                      href="#">ساده</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">ورزشی</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">نیم
-                                                                        بوت</a></li>
+                                                                                      href="#">کالج</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">مجلسی</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">نیم بوت</a>
+                                                                </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">بوت</a>
                                                                 </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-03-heading-07"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-03-body-07" data-toggle="collapse"
+                                                               data-parent="#accordion-03" aria-expanded="false"
+                                                               aria-controls="accordion-03-body-07">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                ورزشی
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-03-body-07" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-03-heading-07">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">مایو</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شرت</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شلوارک</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شلوار</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">پیراهن</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">ست لباس</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">کفش</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">کفش حرفه ای</a>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1812,8 +1919,6 @@
                                                                                       href="#">پاپیون</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">ساس
                                                                         بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
-                                                                        کیف</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">ساعت</a>
                                                                 </li>
@@ -1824,6 +1929,376 @@
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">چتر</a>
                                                                 </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Mega Menu -->
+                            </li>
+                            {{--نوزادی--}}
+                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
+                                data-animation-out="fadeOut" data-position="right" id="kidsCat">
+                                <a id="mega-menu-label-9" class="nav-link g-px-0" href="#" aria-haspopup="true"
+                                   aria-expanded="false">پوشاک نوزادی
+                                    <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-mr-7"></i></a>
+
+                                <!-- Mega Menu -->
+                                <div
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-55--lg g-mt-7--lg--scrolling"
+                                    aria-labelledby="mega-menu-label-9" style="display: none;">
+                                    <div class="row">
+                                        {{-- دخترانه --}}
+                                        <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">دخترانه</h4>
+                                            <div id="accordion-00" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-00-heading-01"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-00-body-01" data-toggle="collapse"
+                                                               data-parent="#accordion-00" aria-expanded="false"
+                                                               aria-controls="accordion-00-body-01">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس پایین تنه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-00-body-01" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-00-heading-01">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شورت</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شلوارک</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شلوار</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">دامن</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-00-heading-02"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-00-body-02" data-toggle="collapse"
+                                                               data-parent="#accordion-00" aria-expanded="false"
+                                                               aria-controls="accordion-00-body-02">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس بالا تنه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-00-body-02" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-00-heading-02">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">زیر
+                                                                        پوش</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">تیشرت</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">پولوشرت</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">پیراهن</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شومیز</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">بلوز</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">سویشرت</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">هودی</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">بافتنی</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">سرهمی</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-00-heading-03"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-00-body-03" data-toggle="collapse"
+                                                               data-parent="#accordion-00" aria-expanded="false"
+                                                               aria-controls="accordion-00-body-03">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                کفش
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-00-body-03" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-01-heading-03">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">تخت</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">ورزشی</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">پاپوش</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-00-heading-04"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-00-body-04" data-toggle="collapse"
+                                                               data-parent="#accordion-00" aria-expanded="false"
+                                                               aria-controls="accordion-00-body-04">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                اکسسوری
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-00-body-04" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-00-heading-04">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">اسباب
+                                                                        بازی</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">سر
+                                                                        پوش</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">هد
+                                                                        بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">تل
+                                                                        مو</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">پیش
+                                                                        بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ناف
+                                                                        بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">دستکش</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">پا
+                                                                        بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                        هد
+                                                                        بند و پا بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کیسه
+                                                                        خواب</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">آویز
+                                                                        لباس</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">چوب
+                                                                        لباس</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">بدلیجات</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- پسرانه --}}
+                                        <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">پسرانه</h4>
+                                            <div id="accordion-09" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-09-heading-01"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-09-body-01" data-toggle="collapse"
+                                                               data-parent="#accordion-09" aria-expanded="false"
+                                                               aria-controls="accordion-09-body-01">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس پایین تنه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-09-body-01" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-09-heading-01">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شورت</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شلوارک</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شلوار</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">دامن</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-09-heading-02"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-09-body-02" data-toggle="collapse"
+                                                               data-parent="#accordion-09" aria-expanded="false"
+                                                               aria-controls="accordion-09-body-02">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس بالا تنه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-09-body-02" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-09-heading-02">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">زیر
+                                                                        پوش</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">تیشرت</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">پولوشرت</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">پیراهن</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">شومیز</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">بلوز</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">سویشرت</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">هودی</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">بافتنی</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">سرهمی</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-09-heading-03"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-09-body-03" data-toggle="collapse"
+                                                               data-parent="#accordion-09" aria-expanded="false"
+                                                               aria-controls="accordion-09-body-03">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                کفش
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-09-body-03" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-09-heading-03">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">تخت</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">ورزشی</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">پاپوش</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-09-heading-04"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-09-body-04" data-toggle="collapse"
+                                                               data-parent="#accordion-09" aria-expanded="false"
+                                                               aria-controls="accordion-09-body-04">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                اکسسوری
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-09-body-04" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-09-heading-04">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">اسباب
+                                                                        بازی</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">سر
+                                                                        پوش</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">هد
+                                                                        بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">تل
+                                                                        مو</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">پیش
+                                                                        بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ناف
+                                                                        بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">دستکش</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">پا
+                                                                        بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                        هد
+                                                                        بند و پا بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کیسه
+                                                                        خواب</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">آویز
+                                                                        لباس</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">چوب
+                                                                        لباس</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">بدلیجات</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -1893,7 +2368,7 @@
                     </div>
                     <!-- End Navigation -->
 
-                    <hr class="force-col-12 g-brd-gray-light-v4 smallDevice g-mt-20 g-mb-10" id="otherMenuHr">
+                    <hr class="force-col-12 g-brd-gray-light-v5 smallDevice g-mt-20 g-mb-10" id="otherMenuHr">
 
                     <!-- Other Menu -->
                     <div class="d-flex justify-content-between force-col-12 g-pr-10 g-pl-10" id="otherMenu">
@@ -1996,7 +2471,7 @@
                                             </a>
                                         </div>
                                     @else
-                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">
+                                        <div id="settingIconDiv" class="g-pt-10 g-mr-15 g-mr-25--lg">
                                             <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
                                                class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover"
                                                data-toggle="tooltip"
@@ -2005,7 +2480,7 @@
                                             >
                                                 {{ Auth::user()->name }}
 
-                                                <i class="icon-settings g-font-size-16 g-ml-5"></i>
+                                                <i id="settingIcon" class="icon-settings g-font-size-16 g-ml-5"></i>
                                             </a>
                                         </div>
                                     @endif

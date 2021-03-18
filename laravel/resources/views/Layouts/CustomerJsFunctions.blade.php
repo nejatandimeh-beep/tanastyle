@@ -146,6 +146,15 @@
             }
         });
 
+        $('#settingIconDiv').on('mouseenter', function(){
+            let element = element.querySelector('.active'),
+                elementBefore = element.previousElementSibling;
+            $(elementBefore).addClass('circleRotate');
+            setTimeout(function () {
+                $(elementBefore).removeClass('circleRotate');
+            }, 500);
+        });
+
         document.onreadystatechange = function () {
             let state = document.readyState;
             if (state === 'complete') {

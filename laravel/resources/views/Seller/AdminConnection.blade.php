@@ -46,7 +46,7 @@
                         href="#">
                         <i class="et-icon-chat g-font-size-25"></i>
                     </a>
-                    <h3 class="h6 g-color-black mb-3">ایجاد گفتگو</h3>
+                    <h6 class="g-color-black mb-3">ایجاد گفتگو</h6>
                     <span class="u-label g-color-teal g-mb-5 g-font-size-14">با درج عنوان جدید</span>
                 </div>
             </div>

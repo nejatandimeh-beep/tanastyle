@@ -16,13 +16,18 @@
 
             <!-- Icon Blocks -->
             <div
-                class="col-12 g-pt-25 g-mb-5 g-pl-0 g-pr-0 text-center">
+                class="col-12 g-pt-25 g-mb-5 g-px-60 text-right">
                 <div class="d-inline-block">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="et-icon-chat g-font-size-25"></i>
-                    </span>
-                    <h4 class="g-color-black mb-3">عنوان گفتگو</h4>
-                    <h5 class="g-color-darkblue g-mb-5">{{ (isset($data)) ? $data[0]->Subject : $title }}</h5>
+                    <div class="d-block text-center">
+                        <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
+                            <i class="et-icon-chat g-font-size-25"></i>
+                        </span>
+                    </div>
+                    <div class="d-block text-center">
+                        <h6 class="g-color-black mb-3">عنوان گفتگو</h6>
+                    </div>
+                    <span
+                        class="u-label g-color-teal g-mb-5 g-font-size-14">{{ (isset($data)) ? $data[0]->Subject : $title }}</span>
                 </div>
             </div>
             <!-- End Icon Blocks -->

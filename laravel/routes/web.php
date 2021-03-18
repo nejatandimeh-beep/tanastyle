@@ -69,7 +69,7 @@ Route::post('/Seller-AdminConnection-NewMsg', 'Seller\Basic@adminConnectionNewMs
 
 // ---------Add Product-----------
 
-Route::get('/Add-Product/{cat}', 'Seller\Add@AskSize')->name('AddProduct_askSize');
+Route::get('/Add-Product/{cat}/{gender}', 'Seller\Add@AskSize')->name('AddProduct_askSize');
 
 Route::get('/Add-Product', 'Seller\Add@AddProduct')->name('AddProduct');
 
