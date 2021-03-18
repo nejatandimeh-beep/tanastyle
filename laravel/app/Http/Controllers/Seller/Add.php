@@ -7,6 +7,7 @@ use File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+
 //use function GuzzleHttp\default_user_agent;
 
 
@@ -17,10 +18,11 @@ class Add extends Controller
     {
         $this->middleware('IsSeller');
     }
+
     // Ask Qty of Sizes
     public function AskSize($cat, $gender)
     {
-        $data=null;
+        $data = null;
         switch ($gender) {
             case '0':
                 $data = DB::table('product_hint_female')
@@ -70,7 +72,7 @@ class Add extends Controller
         $cat = $_GET['cat'];
         $name = $_GET['name'];
         $hintCat = $_GET['hintCat'];
-        if(isset($_GET['qty']))
+        if (isset($_GET['qty']))
             $qty = $_GET['qty'];
 
         switch ($cat) {
@@ -88,33 +90,40 @@ class Add extends Controller
                 ];
                 break;
             default:
-                $size=1;
-                $qty=1;
+                $size = 1;
+                $qty = 1;
         }
 
-        return view('Seller.AddProduct', compact('gender','cat', 'name', 'hintCat', 'qty', 'size'));
+        return view('Seller.AddProduct', compact('gender', 'cat', 'name', 'hintCat', 'qty', 'size'));
     }
 
     // Insert Form Data to Database
     public function SaveProduct(Request $request)
     {
+
         // Upload Images
         date_default_timezone_set('Asia/Tehran');
         $folderName = 'p-' . date("Y.m.d-H.i.s");
-        $picPath = '\img\products\\' . $folderName;
+        $picPath = public_path().'\img\products\\' . $folderName;
         File::makeDirectory($picPath, 0777, true, true);
 
-            for ($i = 1; $i <= 4; $i++) {
-                $temp = (string)$i;
-                $request->file('pic' . $temp)->storeAs(
-                    $picPath, 'pic' . $temp . '.jpg', 'public'
-                );
-            }
+        for ($i = 1; $i <= 4; $i++) {
+            $image = $request->get('imageUrl' . $i);
+            $folderPath = public_path('\img\products\\' . $folderName.'\\');
+            $image_parts = explode(";base64,", $image);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+
+            $imageFullPath = $folderPath . 'pic' . $i.'.jpg';
+
+            file_put_contents($imageFullPath, $image_base64);
+        }
 
         // Compilation Pic Path
-        $picPath = $picPath . '\\';
+        $picPath = '\img\products\\' . $folderName . '\\';
         // Get Data From Form
-        $sellerId =Auth::guard('seller')->user()->id;
+        $sellerId = Auth::guard('seller')->user()->id;
         $gender = $request->get('gender');
         $cat = $request->get('cat');
         $hintCat = $request->get('hintCat');
@@ -141,6 +150,7 @@ class Add extends Controller
                 $gender = 'بچگانه';
                 break;
         }
+
         // Insert Data to Product DB
         DB::table('product')->insert([
             [

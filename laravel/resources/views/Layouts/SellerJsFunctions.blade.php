@@ -1038,8 +1038,71 @@
         });
 
         $(document).on('ready', function () {
+            let $modal = $('#modal'),
+                image = document.getElementById('sample_image'),
+                cropper, inputID;
+            $('input[id^="pic"]').on('change', function (event) {
+                inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
+                let files = event.target.files,
+                    done = function (url) {
+                        image.src = url;
+                        $modal.modal('show');
+                    };
 
-            // Back button clicked Forced Reload
+                if (files && files.length > 0) {
+                    let reader = new FileReader();
+                    reader.onload = function (event) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(files[0]);
+                }
+            });
+
+            $modal.on('shown.bs.modal', function () {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    zoomable: false,
+                    background: false,
+                    minCropBoxWidth: 400,
+                    minCropBoxHeight: 400,
+                    dragCrop: true,
+                    multiple: true,
+                    movable: true
+                    // preview: '.preview'
+                });
+
+                $(document.body).addClass('me-position-fix');
+                $(document.body).removeClass('me-position-normally');
+            });
+
+            $modal.on('hidden.bs.modal', function () {
+                cropper.destroy();
+                cropper = null;
+                $(document.body).addClass('me-position-normally');
+                $(document.body).removeClass('me-position-fix');
+                document.getElementById("imgContainer").scrollIntoView();
+            });
+
+            $('#crop').on('click', function () {
+                let canvas = cropper.getCroppedCanvas({
+                    width: 400,
+                    height: 400
+                });
+
+                canvas.toBlob(function (blob) {
+                    let url = URL.createObjectURL(blob),
+                        reader = new FileReader();
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function () {
+                        $('#imageUrl'+inputID).val(reader.result);
+                        $modal.modal('hide');
+                        addPathCheckMark('pic'+inputID,'fileShow'+inputID,'Check'+inputID);
+                    };
+                });
+            });
+
+            // Back button Force click Reload Page
             if (!!window.performance && window.performance.navigation.type == 2) {
                 window.location.reload();
             }

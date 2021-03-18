@@ -96,7 +96,7 @@
                                                   action="{{route('uploadImage')}}"
                                                   enctype="multipart/form-data" method="POST">
                                                 @csrf
-                                                <label for="upload_image" style="cursor: pointer">
+                                                <label class="customerCropper" for="upload_image" style="cursor: pointer">
                                                     <span class="customLink">تنظیم تصویر حساب کاربری</span>
                                                     <input type="file" name="image" id="upload_image" class="image"
                                                            style="display: none">
