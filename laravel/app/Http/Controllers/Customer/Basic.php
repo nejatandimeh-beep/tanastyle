@@ -966,52 +966,26 @@ class Basic extends Controller
     }
 
 // ------------------------------------------[ Products Filter ]--------------------------------------------------------
-    public function productFilter($filters)
+    public function productFilter($gender, $cat, $size, $priceMin, $priceMax, $color)
     {
-        $obj = json_decode($filters);
-        $gender = array();
-        switch ($obj->gender) {
-            case '100':
-                $gender[0] = 'زنانه';
-                $gender[1] = null;
-                $gender[2] = null;
-                break;
-            case '110':
-                $gender[0] = 'زنانه';
-                $gender[1] = 'مردانه';
-                $gender[2] = null;
-                break;
-            case '111':
-                $gender[0] = 'زنانه';
-                $gender[1] = 'مردانه';
-                $gender[2] = 'بچگانه';
-                break;
-            case '010':
-                $gender[0] = null;
-                $gender[1] = 'مردانه';
-                $gender[2] = null;
-                break;
-            case '011':
-                $gender[0] = null;
-                $gender[1] = 'مردانه';
-                $gender[2] = 'بچگانه';
-                break;
-            case '101':
-                $gender[0] = 'زنانه';
-                $gender[1] = null;
-                $gender[2] = 'بچگانه';
-                break;
-            case '001':
-                $gender[0] = null;
-                $gender[1] = null;
-                $gender[2] = 'بچگانه';
-                break;
-        }
-
-        $data = DB::table('product')
-            ->where('Gender', $gender[0])
-            ->orWhere('Gender', $gender[1])
-            ->orWhere('Gender', $gender[2])
+        $gender = json_decode($gender);
+        $cat = json_decode($cat);
+        $size = json_decode($size);
+        $color = json_decode($color);
+        $data = DB::table('product as p')
+            ->select('p.*', 'pd.*', 'p.ID as productID')
+            ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
+            ->whereIn('p.GenderCode', $gender)
+            ->whereIn('p.CatCode', $cat)
+            ->whereIn('pd.Size', $size)
+            ->whereIn('pd.ColorCode', $color)
+            ->whereIn('p.FinalPrice', function ($query) use ($priceMin, $priceMax) {
+                $query->select('p.FinalPrice')
+                    ->whereBetween('p.FinalPrice', [$priceMin, $priceMax]);
+            })
+            ->orderBy('p.GenderCode')
+            ->orderBy('p.CatCode')
+            ->groupBy('p.ID')
             ->get();
         $products = '';
         foreach ($data as $key => $row) {
@@ -1027,28 +1001,28 @@ class Basic extends Controller
 
              <div class="js-slide">
                 <a
-                    href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '">
+                    href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
                     <img class="img-fluid w-100" src="' . $row->PicPath . 'pic1.jpg" alt="Image Description">
                 </a>
              </div>
 
              <div class="js-slide">
                 <a
-                    href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '">
+                    href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
                     <img class="img-fluid w-100" src="' . $row->PicPath . 'pic2.jpg" alt="Image Description">
                 </a>
             </div>
 
              <div class="js-slide">
                 <a
-                    href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '">
+                    href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
                     <img class="img-fluid w-100" src="' . $row->PicPath . 'pic3.jpg" alt="Image Description">
                 </a>
             </div>
 
              <div class="js-slide">
                 <a
-                    href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '">
+                    href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
                     <img class="img-fluid w-100" src="' . $row->PicPath . 'pic4.jpg" alt="Image Description">
                 </a>
             </div>
@@ -1109,8 +1083,8 @@ class Basic extends Controller
             ->where('Gender', 'زنانه')
             ->get();
         $gender = '0';
-        $cat = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'cat'));
+        $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode'));
     }
 
     public function productMaleList()
@@ -1120,8 +1094,8 @@ class Basic extends Controller
             ->where('Gender', 'مردانه')
             ->get();
         $gender = '1';
-        $cat = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'cat'));
+        $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode'));
     }
 
     public function productKidsList()
@@ -1131,19 +1105,19 @@ class Basic extends Controller
             ->where('Gender', 'بچگانه')
             ->get();
         $gender = '2';
-        $cat = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'cat'));
+        $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode'));
     }
 
-    public function product0000()
+    public function product00()
     {
         $data = DB::table('product')
             ->select('*')
-            ->where('Cat', '0000')
+            ->where('Cat', '00')
             ->get();
         $gender = '0';
-        $cat = '00';
-        return view('Customer.ProductList', compact('data', 'gender', 'cat'));
+        $catCode = 'a';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode'));
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------

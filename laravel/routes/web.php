@@ -142,7 +142,7 @@ Route::get('/Customer-Product-Male-List', 'Customer\Basic@productMaleList')->nam
 
 Route::get('/Customer-Product-Kids-List', 'Customer\Basic@productKidsList')->name('productKidsList');
 
-Route::get('/Customer-Product-0000', 'Customer\Basic@product0000')->name('product0000');
+Route::get('/Customer-Product-0000', 'Customer\Basic@product0000')->name('product00');
 
 // Customer Product Detail
 Route::get('/Customer-Product-Detail/{id}', 'Customer\Basic@productDetail')->name('productDetail');
@@ -199,7 +199,7 @@ Route::get('/Customer-Cart-Add/{id}', 'Customer\Basic@cartAdd');
 Route::get('/Customer-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
 
 // -------------------[ Products Filter [ Ajax ] ]-----------------------
-Route::get('/Customer-Product-Custom-Filter/{filters}', 'Customer\Basic@productFilter');
+Route::get('/Customer-Product-Custom-Filter/{gender}/{cat}/{size}/{priceMin}/{priceMax}/{color}', 'Customer\Basic@productFilter');
 
 
 // -------------------[ Cropper.js ]-----------------------

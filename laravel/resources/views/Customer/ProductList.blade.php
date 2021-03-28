@@ -104,7 +104,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
-                                                                   id="female"
+                                                                   id="g-0"
                                                                    onchange="$('#gender-all').prop('checked',false)"
                                                                    type="checkbox" {{ ($gender === '0') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
@@ -121,7 +121,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
-                                                                   id="male"
+                                                                   id="g-1"
                                                                    onchange="$('#gender-all').prop('checked',false)"
                                                                    type="checkbox" {{ ($gender === '1') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
@@ -134,13 +134,64 @@
                                             <li class="my-2">
                                                 <div class="form-group">
                                                     <label class="d-flex align-items-center justify-content-between">
-                                                        <span>بچگانه</span>
+                                                        <span>دخترانه</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
-                                                                   id="kids"
+                                                                   id="g-2"
                                                                    onchange="$('#gender-all').prop('checked',false)"
                                                                    type="checkbox" {{ ($gender === '2') ? 'checked=""' : '' }}>
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>پسرانه</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="gender"
+                                                                   id="g-3"
+                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($gender === '3') ? 'checked=""' : '' }}>
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>نوزادی دخترانه</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="gender"
+                                                                   id="g-4"
+                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($gender === '4') ? 'checked=""' : '' }}>
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>نوزادی پسرانه</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="gender"
+                                                                   id="g-5"
+                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   type="checkbox" {{ ($gender === '5') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -181,7 +232,7 @@
                                                                    name="category"
                                                                    id="cat-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
-                                                                   {{ ($cat === 'all') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -197,9 +248,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-under"
+                                                                   id="a"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '00') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'a') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -215,9 +266,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-bottom"
+                                                                   id="b"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '01') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'b') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -233,9 +284,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-up"
+                                                                   id="c"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '02') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'c') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -251,9 +302,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-complete"
+                                                                   id="d"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '03') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'd')? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -269,9 +320,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-bag"
+                                                                   id="e"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '04') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'e') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -287,27 +338,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-shoe"
+                                                                   id="f"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '1') ? 'checked' : ''}}
-                                                                   type="checkbox">
-                                                            <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
-                                                            </div>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            <li class="my-2">
-                                                <div class="form-group">
-                                                    <label class="d-flex align-items-center justify-content-between">
-                                                        <span>کفش</span>
-                                                        <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
-                                                                   name="category"
-                                                                   id="cat-shoe"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '2') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'f') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -323,9 +356,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-under-sport"
+                                                                   id="g"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '30') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'g') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -341,9 +374,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-bottom-sport"
+                                                                   id="h"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '31') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'h') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -359,9 +392,27 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-up-sport"
+                                                                   id="i"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '32') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'i') ? 'checked' : ''}}
+                                                                   type="checkbox">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>لباس تمام تنه ورزشی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="category"
+                                                                   id="j"
+                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   {{ ($catCode === 'all' || $catCode === 'j') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -377,9 +428,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-bag-sport"
+                                                                   id="k"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '33') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'k') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -395,9 +446,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-shoe-sport"
+                                                                   id="l"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '33') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'l') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -413,9 +464,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-accessory-sport"
+                                                                   id="m"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '34') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'm') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -431,9 +482,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-accessory-rhinestones"
+                                                                   id="n"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '40') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'n') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -449,9 +500,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-accessory-hair"
+                                                                   id="o"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '41') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'o') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -467,9 +518,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-accessory-hat"
+                                                                   id="p"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '42') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'p') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -485,9 +536,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
-                                                                   id="cat-accessory-others"
+                                                                   id="q"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($cat === 'all' || $cat === '43') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'q') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -545,7 +596,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
-                                                                   id="size-xs"
+                                                                   id="XS"
                                                                    onchange="$('#size-all').prop('checked',false)"
                                                                    type="checkbox"
                                                                    checked="checked">
@@ -563,7 +614,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
-                                                                   id="size-s"
+                                                                   id="S"
                                                                    onchange="$('#size-all').prop('checked',false)"
                                                                    type="checkbox"
                                                                    checked="checked">
@@ -581,7 +632,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
-                                                                   id="size-m"
+                                                                   id="M"
                                                                    onchange="$('#size-all').prop('checked',false)"
                                                                    type="checkbox"
                                                                    checked="checked">
@@ -599,7 +650,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
-                                                                   id="size-l"
+                                                                   id="L"
                                                                    onchange="$('#size-all').prop('checked',false)"
                                                                    type="checkbox"
                                                                    checked="checked">
@@ -617,7 +668,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
-                                                                   id="size-xl"
+                                                                   id="XL"
                                                                    onchange="$('#size-all').prop('checked',false)"
                                                                    type="checkbox"
                                                                    checked="checked">
@@ -635,7 +686,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
-                                                                   id="size-xxl"
+                                                                   id="XXL"
                                                                    onchange="$('#size-all').prop('checked',false)"
                                                                    type="checkbox"
                                                                    checked="checked">
@@ -653,7 +704,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
-                                                                   id="size-xxxl"
+                                                                   id="XXXL"
                                                                    onchange="$('#size-all').prop('checked',false)"
                                                                    type="checkbox"
                                                                    checked="checked">
@@ -777,18 +828,18 @@
                                                 </div>
                                                 <div class="g-brd-around g-brd-gray-light-v4">
                                                     <img class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/whiteColor.png') }}"
+                                                         src="{{ asset('img/Other/allColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
                                                 <div class="form-group m-0">
                                                     <label class="d-flex align-items-center justify-content-between">
-                                                        <span>خانواده رنگهای روشن</span>
+                                                        <span>خانواده رنگهای سفید</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="color"
-                                                                   id="color-whites"
+                                                                   id="c-0"
                                                                    type="checkbox"
                                                                    checked="checked"
                                                                    onchange="$('#color-all').prop('checked',false)">
@@ -801,6 +852,213 @@
                                                 <div class="g-brd-around g-brd-gray-light-v4">
                                                     <img class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/whiteColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای قرمز</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-1"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/redColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای صورتی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-2"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/pinkColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای نارنجی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-3"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/orangeColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای زرد</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-4"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/yellowColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای سبز</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-5"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/greenColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای آبی</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-6"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/blueColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای بنفش</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-7"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/magentaColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای قهوه ای</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-8"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/brownColor.png') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>خانواده رنگهای سیاه</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-9"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div class="g-brd-around g-brd-gray-light-v4">
+                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/blackColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -817,7 +1075,7 @@
             <div id="contentDiv" class="col-md-12 flex-md-unordered">
                 <div>
                     <!-- Filters -->
-                    <div id="stickyDiv2" style="z-index: 100 !important"
+                    <div id="stickyDiv2" style="z-index: 100 !important;"
                          class="sticky-top g-bg-white-opacity-0_9 g-mb-15">
                         <div class="d-flex g-pt-10 g-pb-10">
                             <div id="filterContent" class="d-flex col-12 justify-content-between">
@@ -829,8 +1087,7 @@
                                         </a>
                                     </li>
                                 </div>
-
-                                <div class="g-pt-5 text-center g-mr-12 g-mr-50--lg">
+                                <div style="visibility: hidden" class="g-pt-5 text-center g-mr-12 g-mr-50--lg">
                                     <h2 class="h6 align-middle d-inline-block g-font-weight-400 g-pos-rel g-top-1 mb-0 bigDevice">
                                         مرتب سازی</h2>
 

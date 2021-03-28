@@ -11,92 +11,44 @@
     <div style="direction: rtl" class="container p-lg-5 g-mb-30">
 
         <div class="g-mb-30">
-            <div class="masonry-grid g-mb-20">
-                <div class="masonry-grid-sizer g-width-25x--sm"></div>
+                <div class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll g-mb-30" data-options="{
+    settings_mode_oneelement_max_offset: '150'
+   }">
+                    <!-- Parallax Image -->
+                    <div class="divimage dzsparallaxer--target w-100"
+                         style="height: 140%; background-image: url('../../assets/img-temp/1920x1080/img11.jpg'); transform: translate3d(0px, 0px, 0px);"></div>
 
-                <div class="masonry-grid-item g-width-50x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img14.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid w-100" src="../../assets/img-temp/400x270/img14.jpg"
-                             alt="Image Description">
-                    </a>
+                    <section
+                        class="g-flex-centered g-height-500 g-color-white u-bg-overlay g-bg-black-opacity-0_6--after g-py-20">
+                        <div class="container u-bg-overlay__inner">
+                            <div class="row">
+                                <div class="col-md-6 align-self-center g-py-20">
+                                    <h2>
+                                        @if($gender == '0')
+                                            <span class="g-ml-1">{{ $name }}</span> زنانه
+                                        @elseif($gender == '1')
+                                            <span class="g-ml-1">{{ $name }}</span> مردانه
+                                        @elseif($gender == '2')
+                                            <span class="g-ml-1">{{ $name }}</span> بچگانه - دخترانه
+                                        @elseif($gender == '3')
+                                            <span class="g-ml-1">{{ $name }}</span> بچگانه - پسرانه
+                                        @elseif($gender == '4')
+                                            <span class="g-ml-1">{{ $name }}</span> نوزادی - دخترانه
+                                        @else
+                                            <span class="g-ml-1">{{ $name }}</span> نوزادی - پسرانه
+                                        @endif
+                                    </h2>
+                                    <p class="lead mb-0 g-line-height-2">توضیحاتی در مورد محصول</p>
+                                </div>
+
+                                <div class="col-md-6 align-self-center g-py-20">
+                                    <img class="w-100" src="../../assets/img-temp/400x270/img21.jpg"
+                                         alt="Iamge Description">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-
-                <div class="masonry-grid-item g-width-25x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img6.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid" src="../../assets/img-temp/400x270/img6.jpg" alt="Image Description">
-                    </a>
-                </div>
-
-                <div class="masonry-grid-item g-width-25x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img8.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid" src="../../assets/img-temp/400x270/img8.jpg" alt="Image Description">
-                    </a>
-                </div>
-
-                <div class="masonry-grid-item g-width-25x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img18.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid" src="../../assets/img-temp/400x270/img18.jpg" alt="Image Description">
-                    </a>
-                </div>
-
-                <div class="masonry-grid-item g-width-25x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img16.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid" src="../../assets/img-temp/400x270/img16.jpg" alt="Image Description">
-                    </a>
-                </div>
-
-                <div class="masonry-grid-item g-width-25x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img15.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid" src="../../assets/img-temp/400x270/img15.jpg" alt="Image Description">
-                    </a>
-                </div>
-
-                <div class="masonry-grid-item g-width-25x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img11.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid" src="../../assets/img-temp/400x270/img11.jpg" alt="Image Description">
-                    </a>
-                </div>
-
-                <div class="masonry-grid-item g-width-25x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img12.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid" src="../../assets/img-temp/400x270/img12.jpg" alt="Image Description">
-                    </a>
-                </div>
-
-                <div class="masonry-grid-item g-width-25x--sm">
-                    <a class="js-fancybox" data-fancybox-gallery="lightbox-gallery--masonry-col4"
-                       href="../../assets/img-temp/400x270/img13.jpg" title="Lightbox Gallery">
-                        <img class="img-fluid" src="../../assets/img-temp/400x270/img13.jpg" alt="Image Description">
-                    </a>
-                </div>
-            </div>
-
-            <h3 style="text-align: center;">
-                @if($gender == '0')
-                    <span class="g-ml-1">{{ $name }}</span> زنانه
-                @elseif($gender == '1')
-                    <span class="g-ml-1">{{ $name }}</span> مردانه
-                @elseif($gender == '2')
-                    <span class="g-ml-1">{{ $name }}</span> بچگانه - دخترانه
-                @elseif($gender == '3')
-                    <span class="g-ml-1">{{ $name }}</span> بچگانه - پسرانه
-                @elseif($gender == '4')
-                    <span class="g-ml-1">{{ $name }}</span> نوزادی - دخترانه
-                @else
-                    <span class="g-ml-1">{{ $name }}</span> نوزادی - پسرانه
-                @endif
-            </h3>
-            <div style="text-align: center;">
-                توضیحاتی در مورد محصول
-            </div>
         </div>
         {{-- Select Size--}}
         <section class="g-pa-15">
@@ -148,7 +100,7 @@
                                     </span>
                             @endif
                             دارید؟</label>
-
+                        <input name="catCode" type="text" value="{{ $catCode }}" class="d-none">
                         <div style="direction: ltr" class="form-group g-mb-20 text-right col-lg-3 mx-auto">
                             <div class="input-group g-brd-primary--focus g-mb-10">
                                 <div

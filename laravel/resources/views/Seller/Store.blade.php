@@ -110,18 +110,24 @@
             <!-- End Icon Blocks -->
 
             <!-- Icon Blocks -->
-            <div
+            <div style="direction: rtl"
                 class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
                     <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
                         <i class="icon-finance-160 u-line-icon-pro g-font-size-25 g-mt-5"></i>
                     </span>
                 <h3 class="h6 g-color-black mb-3">تعداد محصولات به تفکیک جنسیت</h3>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">بچگانه<span
-                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $kids }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">مردانه<span
-                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $male }}</span>عدد</span>
                 <span class="u-label g-bg-bluegray g-mb-5">زنانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $female }}</span>عدد</span>
+                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">مردانه<span
+                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $male }}</span>عدد</span>
+                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">دخترانه<span
+                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $girl }}</span>عدد</span>
+                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">پسرانه<span
+                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $boy }}</span>عدد</span>
+                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">نوزادی دخترانه<span
+                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyBoy }}</span>عدد</span>
+                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">نوزادی پسرانه<span
+                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyGirl }}</span>عدد</span>
             </div>
             <!-- End Icon Blocks -->
 
@@ -140,7 +146,7 @@
 
         {{--        Focus Div When Page Load by Filters--}}
         <div id="{{ ((isset($valName))
-             || (isset($valGender))
+             || (isset($val))
              || (isset($filterDate))
              || (isset($valPrice))
              || (isset($valStatus))) ? 'focusAfterPageLoad' : '' }}"></div>
@@ -193,12 +199,13 @@
                                                 name="brand"
                                                 id="storeGender">
                                                 <option
-                                                    value="">{{ (!isset($valGender)) ? 'همه' : $valGender }}</option>
-                                                <option value="0">زنانه</option>
-                                                <option value="1">مردانه</option>
-                                                <option value="2">نوزادی</option>
-                                                <option value="3">دخترانه</option>
-                                                <option value="4">پسرانه</option>
+                                                    value="">همه</option>
+                                                <option value="زنانه" {{ (isset($val)&& $val===('زنانه')) ? 'selected' : '' }}>زنانه</option>
+                                                <option value="مردانه" {{ (isset($val)&& $val===('مردانه')) ? 'selected' : '' }}>مردانه</option>
+                                                <option value="دخترانه" {{ (isset($val)&& $val===('دخترانه')) ? 'selected' : '' }}>دخترانه</option>
+                                                <option value="پسرانه" {{ (isset($val)&& $val===('پسرانه')) ? 'selected' : '' }}>پسرانه</option>
+                                                <option value="نوزادی دخترانه" {{ (isset($val)&& $val===('نوزادی دخترانه')) ? 'selected' : '' }}>نوزادی دخترانه</option>
+                                                <option value="نوزادی پسرانه" {{ (isset($val)&& $val===('نوزادی پسرانه')) ? 'selected' : '' }}>نوزادی پسرانه</option>
                                             </select>
                                             <div
                                                 class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0 w-50">
@@ -349,7 +356,7 @@
                 </h6>
             @endif
             <div
-                style="{{ ((!isset($valName)) && (!isset($valGender)) && (!isset($valPrice)) && (!isset($valStatus)) && (!isset($filterDate))) ? ' display : none' : '' }}"
+                style="{{ ((!isset($valName)) && (!isset($val)) && (!isset($valPrice)) && (!isset($valStatus)) && (!isset($filterDate))) ? ' display : none' : '' }}"
                 class="m-0 p-0">
                 <h6 style="direction: rtl"
                     class="card-header g-bg-green-opacity-0_1 g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right">
@@ -359,7 +366,7 @@
                     <span class="g-font-size-13 g-mr-5">فیلتر <span
                             class="g-bg-primary g-color-white g-pr-3 g-pl-3">
                             {{ (isset($valName)) ? $valName : '' }}
-                            {{ (isset($valGender)) ? $valGender : '' }}
+                            {{ (isset($val)) ? $val : '' }}
                             {{ (isset($valPrice)) ? $valPrice : '' }}
                             {{ (isset($valStatus)) ? $valStatus : '' }}
                             {{ (isset($filterDate)) ? $filterDate : '' }}</span>
@@ -406,16 +413,18 @@
                                 <td class="align-middle text-nowrap text-center">{{ $rec->pDetailID }}</td>
                                 <td class="align-middle text-nowrap text-center">{{ $rec->Name }}</td>
 
-                                @if($rec->Gender == '0')
+                                @if($rec->Gender == 'زنانه')
                                     <td class="align-middle text-center">زنانه</td>
-                                @elseif($rec->Gender == '1')
+                                @elseif($rec->Gender == 'مردانه')
                                     <td class="align-middle text-center">مردانه</td>
-                                @elseif($rec->Gender == '2')
-                                    <td class="align-middle text-center">نوزادی</td>
-                                @elseif($rec->Gender == '3')
+                                @elseif($rec->Gender == 'دخترانه')
                                     <td class="align-middle text-center">دخترانه</td>
-                                @else
+                                @elseif($rec->Gender == 'پسرانه')
                                     <td class="align-middle text-center">پسرانه</td>
+                                @elseif($rec->Gender == 'نوزادی دخترانه')
+                                    <td class="align-middle text-center">نوزادی دخترانه</td>
+                                @else
+                                    <td class="align-middle text-center">نوزادی پسرانه</td>
                                 @endif
 
                                 <td class="align-middle text-center">{{ $rec->Size }}</td>

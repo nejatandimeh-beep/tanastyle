@@ -33,7 +33,7 @@
                                                 </label>
                                             @else
                                                 <label class="g-color-red g-font-size-16">
-                                                    <span>اکانت شما فعالسازی نشده است</span>
+                                                    <span>حساب کاربری شما فعالسازی نشده است</span>
                                                     <i class="fa fa-exclamation g-font-size-16"></i>
                                                 </label>
                                             @endif

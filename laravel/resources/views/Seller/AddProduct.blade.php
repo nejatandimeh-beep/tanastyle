@@ -22,6 +22,7 @@
         @csrf
         <!-- Hidden Input-->
             <input style="display: none" type="text" name="cat" value="{{$cat}}">
+            <input style="display: none" type="text" name="catCode" value="{{$catCode}}">
             <input style="display: none" type="number" name="gender" value="{{$gender}}">
 
             <!-- Name -->
@@ -198,15 +199,16 @@
                                 <select
                                     class="form-control form-control-md custom-select rounded-0 g-font-size-16 text-right h-25"
                                     id="color{{$i}}" name="color{{$i}}">
-                                    <option value="سفید">سفید
-                                    </option>
-                                    <option value="مشکی">مشکی
-                                    </option>
-                                    <option value="قرمز">قرمز
-                                    </option>
-                                    <option value="زرد">زرد</option>
-                                    <option value="سبز">سبز</option>
-                                    <option value="آبی">آبی</option>
+                                    <option value="سفید0">سفید</option>
+                                    <option value="قرمز1">قرمز</option>
+                                    <option value="صورتی2">صورتی</option>
+                                    <option value="نارنجی3">نارنجی</option>
+                                    <option value="زرد4">زرد</option>
+                                    <option value="سبز5">سبز</option>
+                                    <option value="آبی6">آبی</option>
+                                    <option value="بنفش7">بنفش</option>
+                                    <option value="قهوه ای8">قهوه ای</option>
+                                    <option value="خاکستری9">خاکستری</option>
                                 </select>
                             </div>
                         </div>

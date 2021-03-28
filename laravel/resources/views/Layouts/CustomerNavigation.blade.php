@@ -75,7 +75,7 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="{{ route('product0000') }}">شورت</a>
+                                                                                      href="{{ route('product00') }}">شورت</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">سوتین</a>
@@ -380,6 +380,34 @@
                                                                                       href="#">سویشرت</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
                                                                                       href="#">کاپشن</a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-07-heading-30"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0  g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                               href="#accordion-07-body-30" data-toggle="collapse"
+                                                               data-parent="#accordion-07" aria-expanded="false"
+                                                               aria-controls="accordion-07-body-30">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لباس تمام تنه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-07-body-30" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-07-heading-30">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="#">ست ورزشی</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>

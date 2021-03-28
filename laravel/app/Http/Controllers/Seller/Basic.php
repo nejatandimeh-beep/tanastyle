@@ -100,7 +100,10 @@ class Basic extends Controller
         $allQty = $info['allQty'];
         $female = $info['female'];
         $male = $info['male'];
-        $kids = $info['kids'];
+        $girl = $info['girl'];
+        $boy = $info['boy'];
+        $babyGirl = $info['babyGirl'];
+        $babyBoy = $info['babyBoy'];
 
 //      Get Data From Store Table With Pagination
         $data = $this->storeTableLoad('', '', 'pagination', $sellerID);
@@ -109,7 +112,7 @@ class Basic extends Controller
             $id = $this->qtyStatus['productIdChangeQty'];
             return redirect('/Seller-Store')->with('productId', $id);
         } else {
-            return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'kids'));
+            return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl','boy','babyGirl','babyBoy'));
         }
     }
 
@@ -292,12 +295,15 @@ class Basic extends Controller
         $totalLike = $info['totalLike'];
         $female = $info['female'];
         $male = $info['male'];
-        $kids = $info['kids'];
+        $girl = $info['girl'];
+        $boy = $info['boy'];
+        $babyGirl = $info['babyGirl'];
+        $babyBoy = $info['babyBoy'];
         $avgRating = $info['avgRating'];
 
         $data = $this->commentTableLoad('', '', 'pagination', $sellerID);
 
-        return view('Seller.CustomerComment', compact('data', 'totalComment', 'totalLike', 'female', 'male', 'kids', 'avgRating'));
+        return view('Seller.CustomerComment', compact('data', 'totalComment', 'totalLike', 'female', 'male', 'girl','boy','babyGirl','babyBoy', 'avgRating'));
     }
 
 //  Product Delivery
@@ -537,7 +543,11 @@ class Basic extends Controller
             $allQty = $info['allQty'];
             $female = $info['female'];
             $male = $info['male'];
-            $kids = $info['kids'];
+            $girl = $info['girl'];
+            $boy = $info['boy'];
+            $babyGirl = $info['babyGirl'];
+            $babyBoy = $info['babyBoy'];
+            $avgRating = $info['avgRating'];
         }
 
 //      Get all data for sale Filter
@@ -566,7 +576,10 @@ class Basic extends Controller
             $totalLike = $info['totalLike'];
             $female = $info['female'];
             $male = $info['male'];
-            $kids = $info['kids'];
+            $girl = $info['girl'];
+            $boy = $info['boy'];
+            $babyGirl = $info['babyGirl'];
+            $babyBoy = $info['babyBoy'];
             $avgRating = $info['avgRating'];
         }
 
@@ -578,14 +591,12 @@ class Basic extends Controller
                 $data = $this->storeTableLoad('Name', '', $val, $sellerID);
                 $valName = $val;
 
-                return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'kids', 'valName'));
+                return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male' ,'girl','boy','babyGirl','babyBoy', 'valName'));
 
             case 'storeGender':
-
                 $data = $this->storeTableLoad('Gender', '', $val, $sellerID);
-                $valGender = $this->checkGender($val);
 
-                return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'kids', 'valGender'));
+                return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl','boy','babyGirl','babyBoy', 'val'));
 
             case 'storeInfoStatus':
 
@@ -594,14 +605,14 @@ class Basic extends Controller
                     $data = $this->storeTableLoad('', 'In', $val, $sellerID);
                     $valStatus = 'مشخصات اشتباه';
 
-                    return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'kids', 'valStatus'));
+                    return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl','boy','babyGirl','babyBoy', 'valStatus'));
 
                 } elseif ($val == 'true') {
 
                     $data = $this->storeTableLoad('', 'NotIn', $val, $sellerID);
                     $valStatus = 'مشخصات صحیح';
 
-                    return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'kids', 'valStatus'));
+                    return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl','boy','babyGirl','babyBoy', 'valStatus'));
                 }
                 break;
 
@@ -620,7 +631,6 @@ class Basic extends Controller
 
             case 'saleGender':
                 $data = $this->saleTableLoad('p.Gender', '', $val, $sellerID);
-                $valGender = $this->checkGender($val);
 
                 // Convert Date
                 foreach ($data as $key => $rec) {
@@ -628,7 +638,7 @@ class Basic extends Controller
                     $persianDate[$key] = $this->convertDateToPersian($d);
                 }
 
-                return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valGender'));
+                return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'val'));
 
             case 'saleInfoStatus':
 
@@ -677,7 +687,7 @@ class Basic extends Controller
                 $data = $this->commentTableLoad('Rating', '', $val, $sellerID);
                 $valRate = $val;
 
-                return view('Seller.CustomerComment', compact('data', 'totalComment', 'totalLike', 'female', 'male', 'kids', 'avgRating', 'valRate'));
+                return view('Seller.CustomerComment', compact('data', 'totalComment', 'totalLike', 'female', 'male',  'girl','boy','babyGirl','babyBoy', 'avgRating', 'valRate'));
 
             default:
                 break;
@@ -703,7 +713,10 @@ class Basic extends Controller
                 $allQty = $info['allQty'];
                 $female = $info['female'];
                 $male = $info['male'];
-                $kids = $info['kids'];
+                $girl = $info['girl'];
+                $boy = $info['boy'];
+                $babyGirl = $info['babyGirl'];
+                $babyBoy = $info['babyBoy'];
 
                 $data = $this->storeTableLoad($valMin, 'whereBetween', $valMax, $sellerID);
 
@@ -712,7 +725,7 @@ class Basic extends Controller
                 else
                     $valPrice = 'از ' . number_format($valMin) . ' تا ' . number_format($valMax) . ' تومان';
 
-                return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'kids', 'valPrice', 'valMin', 'valMax'));
+                return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male',   'girl','boy','babyGirl','babyBoy', 'valPrice', 'valMin', 'valMax'));
 
 //----------Sale -> Price Filter
             case 'sale':
@@ -835,13 +848,16 @@ class Basic extends Controller
     {
         $data = '';
         if ($val === 'all') {
-
             $generalInfo = array(
-                'sumFPrice' => 0,
-                'allQty' => 0,
-                'female' => 0,
-                'male' => 0,
-                'kids' => 0);
+                'sumFPrice' => '0',
+                'allQty' => '0',
+                'female' => '0',
+                'male' => '0',
+                'girl' => '0',
+                'boy' => '0',
+                'babyGirl' => '0',
+                'babyBoy' => '0',
+                'avgRating' => '0');
 
             $data = DB::table('product as p')
                 ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color')
@@ -854,12 +870,18 @@ class Basic extends Controller
             foreach ($data as $d) {
                 $generalInfo['sumFPrice'] += $d->Qty * $d->FinalPrice;
                 $generalInfo['allQty'] += $d->Qty;
-                if ($d->Gender == 0)
+                if ($d->Gender === 'زنانه')
                     $generalInfo['female'] += $d->Qty;
-                elseif ($d->Gender == 1)
+                elseif ($d->Gender === 'مردانه')
                     $generalInfo['male'] += $d->Qty;
+                elseif ($d->Gender === 'دخترانه')
+                    $generalInfo['girl'] += $d->Qty;
+                elseif ($d->Gender === 'پسرانه')
+                    $generalInfo['boy'] += $d->Qty;
+                elseif ($d->Gender === 'نوزادی پسرانه')
+                    $generalInfo['babyGirl'] += $d->Qty;
                 else
-                    $generalInfo['kids'] += $d->Qty;
+                    $generalInfo['babyBoy'] += $d->Qty;
             }
 
             return $generalInfo;
@@ -1146,10 +1168,13 @@ class Basic extends Controller
             $generalInfo = array(
                 'totalComment' => 0,
                 'totalLike' => 0,
-                'female' => 0,
-                'male' => 0,
-                'kids' => 0,
-                'avgRating' => 0);
+                'female' => '0',
+                'male' => '0',
+                'girl' => '0',
+                'boy' => '0',
+                'babyGirl' => '0',
+                'babyBoy' => '0',
+                'avgRating' => '0');
 
             $allRate = 0;
             $allRateCount = 0;
@@ -1158,14 +1183,23 @@ class Basic extends Controller
                 $generalInfo['totalComment'] += 1;
                 if ($row->Like === 1) $generalInfo['totalLike'] += 1;
                 switch ($row->Gender) {
-                    case '0':
+                    case 'زنانه':
                         $generalInfo['female'] += 1;
                         break;
-                    case '1':
+                    case 'مردانه':
                         $generalInfo['male'] += 1;
                         break;
+                    case 'دخترانه':
+                        $generalInfo['girl'] += 1;
+                        break;
+                    case 'پسرانه':
+                        $generalInfo['boy'] += 1;
+                        break;
+                    case 'نوزادی دخترانه':
+                        $generalInfo['babyGirl'] += 1;
+                        break;
                     default:
-                        $generalInfo['kids'] += 1;
+                        $generalInfo['babyBoy'] += 1;
                 }
                 if (isset($row->Rating)) {
                     $allRateCount += 1;
@@ -1222,23 +1256,6 @@ class Basic extends Controller
     }
 
 //  --------------------------------------------------Utility Functions-------------------------------------------------
-
-//  Check Product Gender
-    public function checkGender($val)
-    {
-        switch ($val) {
-            case '0':
-                return 'زنانه';
-            case '1':
-                return 'مردانه';
-            case '2':
-                return 'نوزادی';
-            case '3':
-                return 'دخترانه';
-            default:
-                return 'پسرانه';
-        }
-    }
 
 //  Convert Date to Iranian Calender
     public function convertDateToPersian($d)
