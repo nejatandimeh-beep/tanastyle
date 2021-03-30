@@ -126,9 +126,9 @@
                     type: 'GET',
                     url: '/Customer-Product-Custom-Filter/'
                         + JSON.stringify(gender) + '/'
-                        + JSON.stringify(category)
-                        + '/' + JSON.stringify(size)
-                        + '/' + priceMin + '/'
+                        + JSON.stringify(category) + '/'
+                        + JSON.stringify(size) + '/'
+                        + priceMin + '/'
                         + priceMax + '/'
                         + JSON.stringify(color),
                     success: function (data) {
