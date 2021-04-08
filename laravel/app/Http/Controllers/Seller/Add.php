@@ -119,24 +119,28 @@ class Add extends Controller
     // Insert Form Data to Database
     public function SaveProduct(Request $request)
     {
-
         // Upload Images
         date_default_timezone_set('Asia/Tehran');
         $folderName = 'p-' . date("Y.m.d-H.i.s");
         $picPath = public_path().'\img\products\\' . $folderName;
         File::makeDirectory($picPath, 0777, true, true);
+        // Get Size Qty For Loop Steps
 
-        for ($i = 1; $i <= 4; $i++) {
+        $qty = $request->get('qty');
+        $j=0;
+        for ($i = 0; $i <= $qty+1; $i++) {
             $image = $request->get('imageUrl' . $i);
-            $folderPath = public_path('\img\products\\' . $folderName.'\\');
-            $image_parts = explode(";base64,", $image);
-            $image_type_aux = explode("image/", $image_parts[0]);
-            $image_type = $image_type_aux[1];
-            $image_base64 = base64_decode($image_parts[1]);
+            if(!is_null($image)) {
+                $folderPath = public_path('\img\products\\' . $folderName . '\\');
+                $image_parts = explode(";base64,", $image);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
 
-            $imageFullPath = $folderPath . 'pic' . $i.'.jpg';
-
-            file_put_contents($imageFullPath, $image_base64);
+                $imageFullPath = $folderPath . 'pic' . ($j+1) . '.jpg';
+                $j++;
+                file_put_contents($imageFullPath, $image_base64);
+            }
         }
         // Compilation Pic Path
         $picPath = '\img\products\\' . $folderName . '\\';
@@ -153,6 +157,8 @@ class Add extends Controller
         $unitPrice = $request->get('tempPrice');
         $discount = $request->get('discount');
         $regDate = date('Y-m-d');
+        $colorCode = array();
+        $colors = array();
 
         // Calculate Final Price
         $temp = $unitPrice - ($unitPrice * $discount) / 100;
@@ -199,9 +205,6 @@ class Add extends Controller
             ],
         ]);
 
-        // Get Size Qty For Loop Steps
-        $qty = $request->get('qty');
-
         // Get Sizes Detail
         $sizes = array();
         $colors = array();
@@ -211,8 +214,7 @@ class Add extends Controller
             $temp = (string)$i;
             $sizes[$i] = $request->get('size' . $temp);
             $colors[$i] = $request->get('color' . $temp);
-            $num=preg_replace('/[^0-9]/', '', $colors[$i]);
-            $colorCode[$i]=$num;
+            $colorCode[$i]=preg_replace('/[^0-9]/', '', $colors[$i]);
             $colors[$i]=preg_replace('/\d+/u', '', $colors[$i]);
             $sizeQty[$i] = $request->get('sizeQty' . $temp);
         }

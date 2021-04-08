@@ -580,36 +580,120 @@
                      data-arrow-left-classes="fa fa-angle-left g-left-30 g-mt-minus-30"
                      data-arrow-right-classes="fa fa-angle-right g-right-30 g-mt-minus-30"
                      data-nav-for="#js-carousel-11-nav">
+
                     <div class="js-slide img-magnifier-container">
                         <img id="img1" class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
                     </div>
-                    <div class="js-slide img-magnifier-container">
-                        <img id="img2" class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
-                    </div>
-                    <div class="js-slide img-magnifier-container">
-                        <img id="img3" class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
-                    </div>
-                    <div class="js-slide img-magnifier-container">
-                        <img id="img3" class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
-                    </div>
+
+                    @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img3" class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img4" class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img5" class="w-100" src="{{ $data->PicPath }}pic5.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic6jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img6" class="w-100" src="{{ $data->PicPath }}pic6.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img7" class="w-100" src="{{ $data->PicPath }}pic7.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img8" class="w-100" src="{{ $data->PicPath }}pic8.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img9" class="w-100" src="{{ $data->PicPath }}pic9.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img10" class="w-100" src="{{ $data->PicPath }}pic10.jpg" alt="Image Description">
+                        </div>
+                    @endif
                 </div>
                 <!-- End Carousel Images -->
 
                 <!-- Carousel Nav -->
                 <div id="js-carousel-11-nav" class="js-carousel u-carousel-v11" data-infinite="1" data-center-mode="1"
                      data-slides-show="3" data-is-thumbs="1" data-nav-for="#js-carousel-11">
-                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
-                        <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
-                    </div>
-                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
-                        <img class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
-                    </div>
-                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
-                        <img class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
-                    </div>
-                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
-                        <img class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
-                    </div>
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="{{!file_exists(public_path($data->PicPath.'pic2.jpg')) ? 'd-none':''}} w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
+                        </div>
+                    @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic5.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic6.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic7.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic8.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic9.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic10.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic11.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic12.jpg" alt="Image Description">
+                        </div>
+                    @endif
                 </div>
                 <!-- End Carousel Nav -->
             </div>

@@ -987,6 +987,7 @@ class Basic extends Controller
             ->orderBy('p.CatCode')
             ->groupBy('p.ID')
             ->get();
+
         $products = '';
         foreach ($data as $key => $row) {
             $products = $products . '<div class="col-12 col-lg-4 g-mb-30">

@@ -2,7 +2,7 @@
 
 @section('Content')
     <!-- Info Panel -->
-    <div style="direction: rtl; position: -webkit-sticky; position: sticky; top: 0; z-index: 100;"
+    <div style="direction: rtl;"
          class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0">
         <h3 class="card-header h5 g-color-white-opacity-0_9">
             <i class="fa fa-list-alt g-font-size-default g-ml-5"></i>افزودن مشخصات محصول
@@ -137,6 +137,8 @@
                     <small class="text-muted g-font-size-12"> می توان جنس محصول روشهای شستشو روشهای نگهداری و ... را
                         توضیح داد.
                     </small><br>
+                    <small class="text-muted g-font-size-12">اگر محصولتان سایز بندی خاصی دارد لطفا اندازه ها را در این قسمت قید کنید.
+                    </small><br>
                     <small class="text-muted g-font-size-12">لطفا توضیحات را مرتب و در سطرهای جدا وارد نمایید.</small>
                 </div>
             </div>
@@ -151,11 +153,12 @@
                     کنید.</small><br>
                 <small class="text-muted g-font-size-12">همچنین تعیین نمایید چند عدد از سایز انتخابی را موجود
                     دارید.</small><br>
-                <small class="text-muted g-font-size-12">لطفا برای بهتر دیده شدن و فروش بهتر یکبار جدول رنگها را
-                    مطالعه فرمایید.</small><a class="g-color-primary g-font-size-12" href="#">جدول رنگها</a><br>
+                <small class="text-muted g-font-size-12">لطفا برای هر رنگ از محصول تصویر همان محصول را در سطر مربوط به خود وارد نمایید.</small><br>
             </div>
             {{--Hidden Input--}}
             <input style="display: none" type="number" name="qty" id="addProductSizeQty" value="{{ $qty }}">
+
+            {{--سایز و رنگ و موجودی و تصویر--}}
             <div id="sizeRowContainer">
                 @for ($i = 0; $i< $qty; $i++)
                     <div class="text-right rowSeller" id="{{ 'sizeRow-'.$i }}" onchange="checkRepeat('size'+{{$i}})">
@@ -170,7 +173,8 @@
                             مشخصات سایز شماره
                             <span class="h4 g-mr-5">{{$i+1}}</span>
                         </label>
-                        <div class="form-group g-mb-10 text-right col-lg-4">
+                        {{--سایز--}}
+                        <div class="form-group g-mb-10 text-right col-lg-3">
                             <label class="g-mb-10">سایز</label>
                             <div class="input-group g-brd-primary--focus g-mb-10">
                                 <div
@@ -189,30 +193,877 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group g-mb-20 text-right col-lg-4">
-                            <label class="g-mb-10">رنگ</label>
+                        {{--رنگ--}}
+                        <div class="form-group g-mb-20 text-right col-lg-3">
+                            <label id="lblColor{{$i}}" class="g-mb-10">رنگ</label>
                             <div class="input-group g-brd-primary--focus g-mb-10">
                                 <div
-                                    class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                                    <i class="fa fa-ellipsis-v"></i>
+                                    class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v5 rounded-0">
+                                    <i class="icon-education-004 u-line-icon-pro g-font-size-16 g-line-height-0_7"></i>
+                                </div>
+                                <button id="colorBtn{{$i}}" style="direction: rtl" type="button" class="form-control g-color-primary--hover form-control-md btn u-btn-white g-brd-around g-brd-gray-light-v2 rounded-0 g-font-size-16" data-toggle="modal" data-target="#colorModal{{$i}}">
+                                    انتخاب کنید
+                                </button>
+                                <div style="direction: rtl" class="modal fade" id="colorModal{{$i}}" tabindex="-1" role="dialog" aria-labelledby="colorModal{{$i}}Title" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content rounded-0">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="colorModalTitle">پالت رنگ</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                    <div id="accordion-{{$i}}" class="u-accordion u-accordion-color-primary" role="tablist" aria-multiselectable="true">
+                                                        <!-- White -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-01" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="d-block g-color-main g-text-underline--none--hover" href="#accordion-{{$i}}-body-01" data-toggle="collapse" data-parent="#accordion-{{$i}}" aria-expanded="true" aria-controls="accordion-{{$i}}-body-01">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های سفید
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-01" class="collapse show" role="tabpanel" aria-labelledby="accordion-{{$i}}-heading-01">
+                                                                <div id="0-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                                                                    <div style="background-color: white; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سفید</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFFAFA; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">صورتی محو</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F0FFF0; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">یشمی محو</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F5FFFA; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سفید نعنائی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F0FFFF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی محو</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F0F8FF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نیلی محو</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F8F8FF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سفید بنفشه</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F5F5F5; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خاکستری محو</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFF5EE; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بژ باز</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F5F5DC; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">هلی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FDF5D6; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بژ روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFFAF0; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">پوست پیازی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFFFF0; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">استخوانی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FAEBD7; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بژ تیره</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FAF0E6; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">کتانی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFF0F5; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">صورتی مات</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFE4E1; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بژ</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Red -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-02" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover" href="#accordion-{{$i}}-body-02" data-toggle="collapse" data-parent="#accordion-{{$i}}" aria-expanded="false" aria-controls="accordion-{{$i}}-body-02">
+                                                                    <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                      <i class="fa fa-plus"></i>
+                                                                      <i class="fa fa-minus"></i>
+                                                                    </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های قرمز
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-02" class="collapse" role="tabpanel" aria-labelledby="accordion-{{$i}}-heading-02">
+                                                                <div id="1-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                                                                    <div style="background-color: #CD5C5C; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">جگری</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F08080; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بژ تیره</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FA8072; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">حنایی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #E9967A; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">قهوه ای حنایی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFA07A; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">کرم نارنجی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FF0000; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">قرمز</span>
+                                                                    </div>
+                                                                    <div style="background-color: #DC143C; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">زرشکی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #B22222; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">شرابی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #8B0000; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">عنابی تند</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Pink -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-03" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover" href="#accordion-{{$i}}-body-03" data-toggle="collapse" data-parent="#accordion-{{$i}}" aria-expanded="false" aria-controls="accordion-{{$i}}-body-03">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های صورتی
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-03" class="collapse" role="tabpanel" aria-labelledby="accordion-{{$i}}-heading-03">
+                                                                <div id="2-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                                                                    <div style="background-color: #FFC0CB; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">صورتی</span>
+                                                                        <span class="d-none">{{$i}}</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFB6C1; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">صورتی پر رنگ</span>
+                                                                        <span class="d-none">{{$i}}</span>
+                                                                    </div>
+                                                                    <div style="background-color: #DB7093; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">شرابی روشن</span>
+                                                                        <span class="d-none">{{$i}}</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FF69B4; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سرخ آبی</span>
+                                                                        <span class="d-none">{{$i}}</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FF1493; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">شفقی</span>
+                                                                        <span class="d-none">{{$i}}</span>
+                                                                    </div>
+                                                                    <div style="background-color: #C71585; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">ارغوانی</span>
+                                                                        <span class="d-none">{{$i}}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Orange -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-04" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                                       href="#accordion-{{$i}}-body-04"
+                                                                       data-toggle="collapse"
+                                                                       data-parent="#accordion-{{$i}}"
+                                                                       aria-expanded="false"
+                                                                       aria-controls="accordion-{{$i}}-body-04">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های نارنجی
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-04"
+                                                                 class="collapse"
+                                                                 role="tabpanel"
+                                                                 aria-labelledby="accordion-{{$i}}-heading-04">
+                                                                <div id="3-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                                                                    <div style="background-color: #FFA07A; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">کرم نارنجی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFA500; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نارنجی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FF8C00; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نارنجی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FF7F50; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نارنجی پر رنگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FF6347; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">قرمز گوجه ای</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FF4500; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">قرمز نارنجی</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Yellow -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-05" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                                       href="#accordion-{{$i}}-body-05"
+                                                                       data-toggle="collapse"
+                                                                       data-parent="#accordion-{{$i}}"
+                                                                       aria-expanded="false"
+                                                                       aria-controls="accordion-{{$i}}-body-05">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های زرد
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-05"
+                                                                 class="collapse"
+                                                                 role="tabpanel"
+                                                                 aria-labelledby="accordion-{{$i}}-heading-05">
+                                                                <div id="4-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                                                                    <div style="background-color: #FFFFE0; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">شیری</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFFACD; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">شیری شکری</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FAFAD2; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">لیمویی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFEFD5; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">هلویی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFE4B5; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">هلویی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFDAB9; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">هلویی پر رنگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #EEE8AA; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نخودی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F0E683; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خاکی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFFF00; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">زرد</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFD700; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">طلایی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #BDB76B; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">ماشی</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Green -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-06" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                                       href="#accordion-{{$i}}-body-06"
+                                                                       data-toggle="collapse"
+                                                                       data-parent="#accordion-{{$i}}"
+                                                                       aria-expanded="false"
+                                                                       aria-controls="accordion-{{$i}}-body-06">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های سبز
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-06"
+                                                                 class="collapse"
+                                                                 role="tabpanel"
+                                                                 aria-labelledby="accordion-{{$i}}-heading-06">
+                                                                <div id="5-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                                                                    <div style="background-color: #ADFF2F; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">مغز پسته ای روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #7FFF00; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">مغز پسته ای</span>
+                                                                    </div>
+                                                                    <div style="background-color: #7CFc00; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">مغز پسته ای پر رنگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #00FF00; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز کم رنگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #98FB98; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز کدر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #90EE90; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">یشمی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #00FA9A; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">یشمی کم رنگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #9ACD32; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز لجنی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #32CD32; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز چمنی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #3CB371; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خزه ای</span>
+                                                                    </div>
+                                                                    <div style="background-color: #2E8B57; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خزه ای پر نگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #228B22; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">شویدی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #008000; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز</span>
+                                                                    </div>
+                                                                    <div style="background-color: #6B8E23; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز ارتشی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #808000; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">زیتونی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #556B2F; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">زیتونی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #006400; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز آواکادو</span>
+                                                                    </div>
+                                                                    <div style="background-color: #66CDAA; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز دریایی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #8FBC8F; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز دریایی تیره</span>
+                                                                    </div>
+                                                                    <div style="background-color: #20B2AA; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز کبریتی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #008B8B; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز کبریتی تیره</span>
+                                                                    </div>
+                                                                    <div style="background-color: #008080; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز دودی</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Blue -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-07" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                                       href="#accordion-{{$i}}-body-07"
+                                                                       data-toggle="collapse"
+                                                                       data-parent="#accordion-{{$i}}"
+                                                                       aria-expanded="false"
+                                                                       aria-controls="accordion-{{$i}}-body-07">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های آبی
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-07"
+                                                                 class="collapse"
+                                                                 role="tabpanel"
+                                                                 aria-labelledby="accordion-{{$i}}-heading-07">
+                                                                <div id="6-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                                                                    <div style="background-color: #00FFFF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">فیروزه ای</span>
+                                                                    </div>
+                                                                    <div style="background-color: #E0FFFF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی آسمانی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #AFEEEE; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">فیروزه ای کدر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #00FFFF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">فیروزه ای</span>
+                                                                    </div>
+                                                                    <div style="background-color: #7FFFD4; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">یشمی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #40E0D0; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سبز دریایی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #48D1CC; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">فیروزه ای تیره</span>
+                                                                    </div>
+                                                                    <div style="background-color: #00CED1; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">فیروزه ای سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #B0E0E6; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی کبریتی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #B0C4DE; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی مایل به بنفش</span>
+                                                                    </div>
+                                                                    <div style="background-color: #ADD8E6; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی کبریتی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #87CEFB; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی آسمانی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #87CEFA; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #00BFFF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی کم رنگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #6495ED; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی کدر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #4682B4; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نیلی متالیک</span>
+                                                                    </div>
+                                                                    <div style="background-color: #5F9EA0; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی لجنی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #7B68EE; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی متالیک روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #1E90FF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نیلی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #4169E1; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">فیروزه ای فسفری</span>
+                                                                    </div>
+                                                                    <div style="background-color: #0000FF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #0000CD; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #00008B; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سرمه ای</span>
+                                                                    </div>
+                                                                    <div style="background-color: #000080; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">لاجوردی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #191970; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی نفتی</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Magenta -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-08" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                                       href="#accordion-{{$i}}-body-08"
+                                                                       data-toggle="collapse"
+                                                                       data-parent="#accordion-{{$i}}"
+                                                                       aria-expanded="false"
+                                                                       aria-controls="accordion-{{$i}}-body-08">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های بنفش
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-08"
+                                                                 class="collapse"
+                                                                 role="tabpanel"
+                                                                 aria-labelledby="accordion-{{$i}}-heading-08">
+                                                                <div id="7-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-30">
+                                                                    <div style="background-color: #E6E6FA; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نیلی کم رنگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #D8BFD8; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بادمجانی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #DDA0DD; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بنفش کدر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #EE82EE; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بنفش روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FF00FF; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سرخابی روشن</span>
+                                                                    </div>
+                                                                    <div style="background-color: #DA70D6; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">ارکیده</span>
+                                                                    </div>
+                                                                    <div style="background-color: #BA55D3; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">ارکیده سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #9370DB; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی بنفش</span>
+                                                                    </div>
+                                                                    <div style="background-color: #6A5ACD; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی فولادی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #8A2BE2; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی بنفش سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #9400D3; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بنفش باز</span>
+                                                                    </div>
+                                                                    <div style="background-color: #9932CC; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">ارکیده بنفش</span>
+                                                                    </div>
+                                                                    <div style="background-color: #8B008B; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">مخملی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #800080; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بنفش</span>
+                                                                    </div>
+                                                                    <div style="background-color: #483D8B; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آبی دودی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #4B0082; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نیلی سیر</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Brown -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-09" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                                       href="#accordion-{{$i}}-body-09"
+                                                                       data-toggle="collapse"
+                                                                       data-parent="#accordion-{{$i}}"
+                                                                       aria-expanded="false"
+                                                                       aria-controls="accordion-{{$i}}-body-09">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های قهوه ای
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-09"
+                                                                 class="collapse"
+                                                                 role="tabpanel"
+                                                                 aria-labelledby="accordion-{{$i}}-heading-09">
+                                                                <div id="8-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-09">
+                                                                    <div style="background-color: #FFF8DC; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">کاهی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFEBCD; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">کاهگلی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFE4C4; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">کرم</span>
+                                                                    </div>
+                                                                    <div style="background-color: #FFDEAD; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">کرم سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F5DEBC; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">گندمی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #DEB887; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خاکی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #D2B48C; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">برنزه ای کدر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #BC8F8F; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بادمجانی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #F4A460; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">هلویی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #DAA520; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خردلی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #B8860B; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">ماشی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #CD853F; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">بادامی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #D2691E; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">عسلی پر رنگ</span>
+                                                                    </div>
+                                                                    <div style="background-color: #8B4513; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">کاکائویی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #A0522D; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">قهوا ای متوسط</span>
+                                                                    </div>
+                                                                    <div style="background-color: #A52A2A; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">قهوه ای</span>
+                                                                    </div>
+                                                                    <div style="background-color: #800000; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">آلوبالویی</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Black -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-10" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                                       href="#accordion-{{$i}}-body-10"
+                                                                       data-toggle="collapse"
+                                                                       data-parent="#accordion-{{$i}}"
+                                                                       aria-expanded="false"
+                                                                       aria-controls="accordion-{{$i}}-body-10">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          خانواده رنگ های سیاه
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-10"
+                                                                 class="collapse"
+                                                                 role="tabpanel"
+                                                                 aria-labelledby="accordion-{{$i}}-heading-10">
+                                                                <div id="9-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-09">
+                                                                    <div style="background-color: #DCDCDC; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خاکستری مات</span>
+                                                                    </div>
+                                                                    <div style="background-color: #D3D3D3; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">نقره ای</span>
+                                                                    </div>
+                                                                    <div style="background-color: #C0C0C0; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">توسی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #A9A9A9; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خاکستری سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #808080; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">خاکستری</span>
+                                                                    </div>
+                                                                    <div style="background-color: #696969; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">دودی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #778899; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سربی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #708090; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سربی تیره</span>
+                                                                    </div>
+                                                                    <div style="background-color: #2F4F4F; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">لجنی تیره</span>
+                                                                    </div>
+                                                                    <div style="background-color: #36454F; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">ذغالی</span>
+                                                                    </div>
+                                                                    <div style="background-color: #1E1E1E; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">ذغالی سیر</span>
+                                                                    </div>
+                                                                    <div style="background-color: #0e0e0e; cursor: pointer"
+                                                                         class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
+                                                                        <span class="toolTipText">سیاه</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <select
-                                    class="form-control form-control-md custom-select rounded-0 g-font-size-16 text-right h-25"
+                                    class="d-none form-control form-control-md custom-select rounded-0 g-font-size-16 text-right h-25"
                                     id="color{{$i}}" name="color{{$i}}">
-                                    <option value="سفید0">سفید</option>
-                                    <option value="قرمز1">قرمز</option>
-                                    <option value="صورتی2">صورتی</option>
-                                    <option value="نارنجی3">نارنجی</option>
-                                    <option value="زرد4">زرد</option>
-                                    <option value="سبز5">سبز</option>
-                                    <option value="آبی6">آبی</option>
-                                    <option value="بنفش7">بنفش</option>
-                                    <option value="قهوه ای8">قهوه ای</option>
-                                    <option value="خاکستری9">خاکستری</option>
+                                    <option value="" selected="selected"></option>
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group g-mb-0 text-right col-lg-4">
+                        {{--موجودی--}}
+                        <div class="form-group g-mb-0 text-right col-lg-3">
                             <label class="g-mb-10">تعداد موجود</label>
                             <div class="input-group g-brd-primary--focus g-mb-10">
                                 <div
@@ -231,16 +1082,50 @@
                                 </select>
                             </div>
                         </div>
+                        {{--تصویر--}}
+                        <div id="colorImgDiv{{$i}}" class="form-group g-mb-0 text-right col-lg-3">
+                            <label class="g-mb-10" for="{{ 'fileShow'.$i }}" id="{{ 'img-file-label'.$i }}">تصویر محصول
+                                <span id="{{ 'productColorImg'.$i }}"></span></label>
+                            <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
+                                <span style="display: none; cursor: default"
+                                  class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
+                                  id="{{ 'check'.$i }}"></span>
+                                <input id="{{ 'fileShow'.$i }}"
+                                       class="form-control form-control-md rounded-0 g-font-size-16 g-px-5 text-right"
+                                       type="text"
+                                       placeholder="فاقد تصویر" readonly="">
+
+                                <div class="input-group-btn">
+                                    <button class="btn btn-md u-btn-primary rounded-0" tabindex="8" type="submit">
+                                        <i class="icon-camera align-middle g-font-size-20"></i>
+                                    </button>
+                                    <input id="{{ 'pic'.$i }}"
+                                           onclick="$('#fileShow{{$i}}').removeClass('g-brd-lightred')"
+                                           type="file"
+                                           name="{{ 'pic'.$i }}"
+                                           accept="image/*">
+                                    <input type="text" id="{{ 'imageUrl'.$i }}" name="{{ 'imageUrl'.$i }}"
+                                           style="display: none">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="repeatColorMsg{{$i}}" class="d-none form-group g-mb-0 text-right col-lg-3">
+                            <label class="g-mb-10">تصویر محصول</label>
+                            <div class="input-group g-brd-primary--focus g-mb-10">
+                                <div class="form-control form-control-md rounded-0 g-font-size-16 g-px-5 text-center g-bg-primary g-color-white g-brd-none">
+                                    <span>تصویر موجود است</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
                     <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
                 @endfor
             </div>
-            <!-- End Size Group -->
 
             <!-- UnitPrice -->
             <div class="form-group g-mb-20 text-right">
-                <label id="lblUnitPrice" class="g-mb-10">قیمت پایه محصول</label>
+                <label id="lblUnitPrice" class="g-mb-10" onclick="console.log($('#imageUrl0').val(),$('#imageUrl1').val(),$('#imageUrl2').val(),$('#imageUrl3').val(),$('#imageUrl4').val())">قیمت پایه محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                         <i class="icon-info"></i>
@@ -310,80 +1195,44 @@
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
             <!-- File Input -->
             <div id="imgContainer" class="form-group  text-right">
-                <label class="g-mb-10" for="fileShow1" id="custom-file-label">تصویر شماره 1</label>
+                <label class="g-mb-10" for="{{ 'fileShow'.$qty }}" id="{{ 'img-file-label'.$qty }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
                     <span style="display: none; cursor: default"
                           class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                          id="Check1"></span>
-                    <input id="fileShow1" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
+                          id="{{ 'check'.$qty }}"></span>
+                    <input id="{{ 'fileShow'.$qty }}" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
                            placeholder="فاقد تصویر" readonly="">
 
                     <div class="input-group-btn">
-                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="8" type="submit">اضافه کردن
+                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="8" type="submit">
+                            <i class="icon-camera align-middle g-font-size-20"></i>
                         </button>
-                        <input id="pic1"
-                               onclick="$('#fileShow1').removeClass('g-brd-lightred')"
+                        <input id="{{'pic'.$qty}}"
+                               onclick="$('#fileShow{{$qty}}').removeClass('g-brd-lightred')"
                                type="file"
-                               name="pic1"
+                               name="{{'pic'.$qty}}"
                                accept="image/*">
-                        <input type="text" id="imageUrl1" name="imageUrl1" style="display: none">
+                        <input type="text" id="{{'imageUrl'.$qty}}" name="{{'imageUrl'.$qty}}" style="display: none">
                     </div>
                 </div>
-                <label class="g-mb-10" for="fileShow2" id="custom-file-label">تصویر شماره 2</label>
+                <label class="g-mb-10" for="{{ 'fileShow'.($qty+1) }}" id="{{ 'img-file-label'.($qty+1) }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
                     <span style="display: none; cursor: default"
                           class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                          id="Check2"></span>
-                    <input id="fileShow2" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
+                          id="{{ 'check'.($qty+1) }}"></span>
+                    <input id="{{ 'fileShow'.($qty+1) }}" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
                            placeholder="فاقد تصویر" readonly="">
 
                     <div class="input-group-btn">
-                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="9" type="submit">اضافه کردن
+                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="9" type="submit">
+                            <i class="icon-camera align-middle g-font-size-20"></i>
                         </button>
-                        <input id="pic2"
-                               onclick="$('#fileShow2').removeClass('g-brd-lightred')"
+                        <input id="{{ 'pic'.($qty+1) }}"
+                               onclick="$('#fileShow{{$qty+1}}').removeClass('g-brd-lightred')"
                                type="file"
-                               name="pic2"
+                               name="{{ 'pic'.($qty+1) }}"
                                accept="image/*">
-                        <input type="text" id="imageUrl2" name="imageUrl2" style="display: none">
-                    </div>
-                </div>
-                <label class="g-mb-10" for="fileShow3" id="custom-file-label">تصویر شماره 3</label>
-                <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
-                    <span style="display: none; cursor: default"
-                          class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                          id="Check3"></span>
-                    <input id="fileShow3" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
-                           placeholder="فاقد تصویر" readonly="">
-
-                    <div class="input-group-btn">
-                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="10" type="submit">اضافه کردن
-                        </button>
-                        <input id="pic3"
-                               type="file"
-                               onclick="$('#fileShow3').removeClass('g-brd-lightred')"
-                               name="pic3"
-                               accept="image/*">
-                        <input type="text" id="imageUrl3" name="imageUrl3" style="display: none">
-                    </div>
-                </div>
-                <label class="g-mb-10" for="fileShow4" id="custom-file-label">تصویر شماره 4</label>
-                <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
-                    <span style="display: none; cursor: default"
-                          class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                          id="Check4"></span>
-                    <input id="fileShow4" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
-                           placeholder="فاقد تصویر" readonly="">
-
-                    <div class="input-group-btn">
-                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="11" type="submit">اضافه کردن
-                        </button>
-                        <input id="pic4"
-                               type="file"
-                               onclick="$('#fileShow4').removeClass('g-brd-lightred')"
-                               name="pic4"
-                               accept="image/*">
-                        <input type="text" id="imageUrl4" name="imageUrl4" style="display: none">
+                        <input type="text" id="{{ 'imageUrl'.($qty+1) }}" name="{{ 'imageUrl'.($qty+1) }}" style="display: none">
                     </div>
                 </div>
                 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog"
@@ -419,14 +1268,10 @@
                 </div>
 
                 <div style="direction: rtl">
-                    <small class="text-muted g-font-size-12">افزودن چهار تصویر الزامی می باشد.</small><br>
+                    <small class="text-muted g-font-size-12">اگر مایل هستید از نماهای دیگر محصول تصویر اضافه کنید از این قسمت بهره ببرید.</small><br>
                     <small class="text-muted g-font-size-12">لطفا تصاویر را بر اساس قوانین تانا استایل اضافه نمایید تا
                         محصولتان بهتر دیده شود.<a class="g-color-primary g-font-size-13"
                                                   href="#">قوانین</a></small><br>
-                    <small class="text-muted g-font-size-12 g-font-weight-600">اگر رنگهای متفاوتی از یک محصول
-                        دارید:</small><br>
-                    <small class="text-muted g-font-size-12">برای بهتر دیده شدن و فروش بهتر محصول، همه ی رنگها را کنار
-                        هم چیده و در یکی از تصاویر جا دهید.</small><br>
                 </div>
 
                 <br><br><br>

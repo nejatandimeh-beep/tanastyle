@@ -2,8 +2,39 @@
 
     {{--    Seller Functions--}}
     <script>
+        $('.customTooltip').on('click', function () {
+            let color = $(this).find(">:first").text() + $(this).parent().closest('div').attr('id')[0],
+                colorText = color.replace(/\d+/g, ''),
+                id = $(this).parent().closest('div').attr('id').substring(2);
+            $('#colorBtn' + id).text(colorText);
+            $('#color' + id + ' option').val(color);
+            $('#colorModal' + id).modal('toggle');
+            $('#lblColor' + id).removeClass('g-color-red');
+            $('[name^="color"]').each(function (i, obj) {
+                if (colorText === $('#color' + i + ' option').val().replace(/\d+/g, '')) {
+                    if (i.toString() !== id) {
+                        if ($('#repeatColorMsg' + i).hasClass('d-none')) {
+                            $('#colorImgDiv' + i).addClass('d-none');
+                            $('#img-file-label' + i).addClass('d-none');
+                            $('#repeatColorMsg' + i).removeClass('d-none');
+                            $('#pic' + i).attr('id', 'repeat' + i);
+                        }
+                    }
+                } else {
+                    $('#colorImgDiv' + id).removeClass('d-none');
+                    $('#img-file-label' + id).removeClass('d-none');
+                    $('#repeatColorMsg' + id).addClass('d-none');
+                    $('#repeat' + id).attr('id', 'pic' + id);
+                }
+            });
+
+            checkRepeat(id);
+        });
+
         function checkRepeat(ele) {
-            let qty = $('#addProductSizeQty').val(), temp = [], duplicates = {}, dupes = {};
+            let qty = $('#addProductSizeQty').val(), temp = [], duplicates = {}, dupes = {},
+                elementNum = ele.replace(/[^0-9]/gi, '');
+            $('#productColorImg' + elementNum).text($('#color' + elementNum + ' option:selected').val().replace(/\d+/g, ''));
             for (let i = 0; i < qty; i++) {
                 if ($('#' + ele !== $('#size' + i).id)) {
                     temp [i] = $('#size' + i).val() + $('#color' + i).val();
@@ -31,7 +62,7 @@
         }
 
         $('#addProductBtn').on('click', function (event) {
-            let r = checkRepeat('size0'), err = '';
+            let r = checkRepeat('size0'), err = '', qty = $('#addProductSizeQty').val();
             if (typeof r !== "undefined") err = 'size';
             if ($('#addProductModel').val() === '') {
                 err = 'model';
@@ -53,21 +84,16 @@
                 err = 'discount';
                 $('#lblDiscount').addClass('g-color-red');
             }
-            if ($('#pic1').val() === '') {
-                err = 'img';
-                $('#fileShow1').addClass('g-brd-lightred');
-            }
-            if ($('#pic2').val() === '') {
-                err = 'img';
-                $('#fileShow2').addClass('g-brd-lightred');
-            }
-            if ($('#pic3').val() === '') {
-                err = 'img';
-                $('#fileShow3').addClass('g-brd-lightred');
-            }
-            if ($('#pic4').val() === '') {
-                err = 'img';
-                $('#fileShow4').addClass('g-brd-lightred');
+            // قرمز کردن بوردر عکسها هنگام وقوع خطا
+            for (let i = 0; i < qty; i++) {
+                if ($('#pic' + i).val() === '') {
+                    err = 'img';
+                    $('#img-file-label' + i).addClass('g-color-red');
+                }
+                if ($('#color' + i + ' option').val() === '') {
+                    $('#lblColor' + i).addClass('g-color-red');
+                    err = 'color';
+                }
             }
             if (err !== '') {
                 $('#errorMsg').removeClass('d-none');
@@ -1082,7 +1108,7 @@
                 cropper = null;
                 $(document.body).addClass('me-position-normally');
                 $(document.body).removeClass('me-position-fix');
-                document.getElementById("imgContainer").scrollIntoView();
+                document.getElementById("img-file-label" + inputID).scrollIntoView();
             });
 
             $('#crop').on('click', function () {
@@ -1096,9 +1122,10 @@
                         reader = new FileReader();
                     reader.readAsDataURL(blob);
                     reader.onloadend = function () {
-                        $('#imageUrl'+inputID).val(reader.result);
+                        $('#imageUrl' + inputID).val(reader.result);
                         $modal.modal('hide');
-                        addPathCheckMark('pic'+inputID,'fileShow'+inputID,'Check'+inputID);
+                        addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
+                        $('#img-file-label' + inputID).removeClass('g-color-red');
                     };
                 });
             });
@@ -1136,12 +1163,14 @@
             @endif
 
             // Set Focus Table Right to left
-            $('.table-responsive').animate({scrollLeft: $('.rtlPosition').position().left}, 1);
+            if ($('.rtlPosition').length > 0)
+                $('.table-responsive').animate({scrollLeft: $('.rtlPosition').position().left}, 1);
 
             // this code block for focus element after page load
-            $('html, body').animate({
-                scrollTop: $('#focusAfterPageLoad').offset().top
-            }, 1);
+            if ($('#focusAfterPageLoad').length > 0)
+                $('html, body').animate({
+                    scrollTop: $('#focusAfterPageLoad').offset().top
+                }, 1);
         });
     </script>
     </html>

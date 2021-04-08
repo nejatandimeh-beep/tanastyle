@@ -147,20 +147,82 @@
                          alt="Image Description">
                 </div>
 
-                <div class="col-sm-3 g-mb-10">
-                    <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic2.jpg"
-                         alt="Image Description">
-                </div>
+                @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic2.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
 
-                <div class="col-sm-3 g-mb-10">
-                    <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic3.jpg"
-                         alt="Image Description">
-                </div>
+                @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic3.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
 
-                <div class="col-sm-3 g-mb-10">
-                    <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic4.jpg"
-                         alt="Image Description">
-                </div>
+                @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic4.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
+
+                @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic5.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
+
+                @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic6.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
+
+                @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic7.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
+
+                @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic8.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
+
+                @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic9.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
+
+                @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic10.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
+
+                @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic11.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
+
+                @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic12.jpg"
+                             alt="Image Description">
+                    </div>
+                @endif
             </div>
 
             {{--        False Product Button--}}
@@ -169,7 +231,8 @@
                     <div class="col-md-12">
                         <!-- Danger Alert -->
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <h4 class="h5"><i class="fa fa-exclamation-circle  g-ml-5"></i>اگر مشخصات فوق صحیح نیست:</h4>
+                            <h4 class="h5"><i class="fa fa-exclamation-circle  g-ml-5"></i>اگر مشخصات فوق صحیح نیست:
+                            </h4>
                             با توجه به اینکه محصول فروخته شده است گزارش مشخصات اشتباه را
                             سریعا از طریق دکمه پایین ثبت کنید.
                         </div>
@@ -231,9 +294,9 @@
                                     <div style="direction: ltr" class="form-group row g-mb-25">
                                         <div class="input-group justify-content-center">
                                             <span style="cursor: pointer"
-                                                id="qtyPlus"
-                                                onclick="decQty()"
-                                                class="input-group-addon g-pa-15 col-3 g-brd-gray-dark-v5">
+                                                  id="qtyPlus"
+                                                  onclick="decQty()"
+                                                  class="input-group-addon g-pa-15 col-3 g-brd-gray-dark-v5">
                                                 <i class="ti ti-minus"></i>
                                             </span>
                                             <input
@@ -252,7 +315,8 @@
                                     </div>
 
                                 </div>
-                                <a onclick="applyAddQty({{$dataDetail->ID}})" class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white">
+                                <a onclick="applyAddQty({{$dataDetail->ID}})"
+                                   class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white">
                                     ثبت موجودی جدید
                                 </a>
                             </div>

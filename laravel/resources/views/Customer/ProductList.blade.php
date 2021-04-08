@@ -765,7 +765,8 @@
                                                                oninput="minPriceAllOff($(this))"
                                                                name="price-min"
                                                                type="text">
-                                                        <label style="left: 24% !important; cursor: text" for="price-min">از ده هزار</label>
+                                                        <label style="left: 24% !important; cursor: text"
+                                                               for="price-min">از ده هزار</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -777,7 +778,8 @@
                                                                name="price-max"
                                                                oninput="maxPriceAllOff($(this))"
                                                                type="text">
-                                                        <label style="left: 17% !important; cursor: text" for="price-max">تا صد میلیون</label>
+                                                        <label style="left: 17% !important; cursor: text"
+                                                               for="price-max">تا صد میلیون</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -785,7 +787,9 @@
                                     </div>
                                     <div class="text-left g-px-15">
                                         <button id="priceFilterSubmit"
-                                           class="btn u-btn-outline-primary g-rounded-50 g-mr-10 g-mb-15" disabled>اعمال</button>
+                                                class="btn u-btn-outline-primary g-rounded-50 g-mr-10 g-mb-15" disabled>
+                                            اعمال
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -1137,7 +1141,6 @@
                                              data-infinite="1"
                                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
                                              data-nav-for="#carousel-08-2">
-
                                             <div class="js-slide">
                                                 <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
                                                     <img class="img-fluid w-100"
@@ -1145,30 +1148,115 @@
                                                          alt="Image Description">
                                                 </a>
                                             </div>
+                                            @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic2.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
 
-                                            <div class="js-slide">
-                                                <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
-                                                    <img class="img-fluid w-100"
-                                                         src="{{ $data->PicPath }}pic2.jpg"
-                                                         alt="Image Description">
-                                                </a>
-                                            </div>
+                                            @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic3.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
 
-                                            <div class="js-slide">
-                                                <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
-                                                    <img class="img-fluid w-100"
-                                                         src="{{ $data->PicPath }}pic3.jpg"
-                                                         alt="Image Description">
-                                                </a>
-                                            </div>
+                                            @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic4.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
 
-                                            <div class="js-slide">
-                                                <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
-                                                    <img class="img-fluid w-100"
-                                                         src="{{ $data->PicPath }}pic4.jpg"
-                                                         alt="Image Description">
-                                                </a>
-                                            </div>
+                                            @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic5.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
+
+                                            @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic6.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
+
+                                            @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic7.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
+
+                                            @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic8.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
+
+                                            @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic9.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
+
+                                            @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic10.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
+
+                                            @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic11.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
+
+                                            @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',['id'=>$data->ID]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $data->PicPath }}pic12.jpg"
+                                                             alt="Image Description">
+                                                    </a>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
 
@@ -1181,7 +1269,8 @@
                                                     <span class="u-link-v5 g-color-black"
                                                           tabindex="0">
                                                         {{ $data->Name }}
-                                                        <span class="g-font-size-12 g-font-weight-300">{{ $data->Model }}</span>
+                                                        <span
+                                                            class="g-font-size-12 g-font-weight-300">{{ $data->Model }}</span>
                                                     </span>
                                                 </h4>
                                                 <ul style="padding: 0"
