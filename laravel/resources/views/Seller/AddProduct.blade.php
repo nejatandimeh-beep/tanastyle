@@ -1195,44 +1195,44 @@
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
             <!-- File Input -->
             <div id="imgContainer" class="form-group  text-right">
-                <label class="g-mb-10" for="{{ 'fileShow'.$qty }}" id="{{ 'img-file-label'.$qty }}">تصویر از نمایی دیگر</label>
+                <label class="g-mb-10" for="{{ 'fileShow11' }}" id="{{ 'img-file-label11' }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
                     <span style="display: none; cursor: default"
                           class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                          id="{{ 'check'.$qty }}"></span>
-                    <input id="{{ 'fileShow'.$qty }}" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
+                          id="{{ 'check11' }}"></span>
+                    <input id="{{ 'fileShow11' }}" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
                            placeholder="فاقد تصویر" readonly="">
 
                     <div class="input-group-btn">
                         <button class="btn btn-md u-btn-primary rounded-0" tabindex="8" type="submit">
                             <i class="icon-camera align-middle g-font-size-20"></i>
                         </button>
-                        <input id="{{'pic'.$qty}}"
-                               onclick="$('#fileShow{{$qty}}').removeClass('g-brd-lightred')"
+                        <input id="{{'pic11'}}"
+                               onclick="$('#fileShow11').removeClass('g-brd-lightred')"
                                type="file"
-                               name="{{'pic'.$qty}}"
+                               name="{{'pic11'}}"
                                accept="image/*">
-                        <input type="text" id="{{'imageUrl'.$qty}}" name="{{'imageUrl'.$qty}}" style="display: none">
+                        <input type="text" id="{{'imageUrl11'}}" name="{{'imageUrl11'}}" style="display: none">
                     </div>
                 </div>
-                <label class="g-mb-10" for="{{ 'fileShow'.($qty+1) }}" id="{{ 'img-file-label'.($qty+1) }}">تصویر از نمایی دیگر</label>
+                <label class="g-mb-10" for="{{ 'fileShow12' }}" id="{{ 'img-file-label12' }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
                     <span style="display: none; cursor: default"
                           class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                          id="{{ 'check'.($qty+1) }}"></span>
-                    <input id="{{ 'fileShow'.($qty+1) }}" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
+                          id="{{ 'check12' }}"></span>
+                    <input id="{{ 'fileShow12' }}" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
                            placeholder="فاقد تصویر" readonly="">
 
                     <div class="input-group-btn">
                         <button class="btn btn-md u-btn-primary rounded-0" tabindex="9" type="submit">
                             <i class="icon-camera align-middle g-font-size-20"></i>
                         </button>
-                        <input id="{{ 'pic'.($qty+1) }}"
-                               onclick="$('#fileShow{{$qty+1}}').removeClass('g-brd-lightred')"
+                        <input id="{{ 'pic12' }}"
+                               onclick="$('#fileShow12').removeClass('g-brd-lightred')"
                                type="file"
-                               name="{{ 'pic'.($qty+1) }}"
+                               name="{{ 'pic12' }}"
                                accept="image/*">
-                        <input type="text" id="{{ 'imageUrl'.($qty+1) }}" name="{{ 'imageUrl'.($qty+1) }}" style="display: none">
+                        <input type="text" id="{{ 'imageUrl12' }}" name="{{ 'imageUrl12' }}" style="display: none">
                     </div>
                 </div>
                 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog"

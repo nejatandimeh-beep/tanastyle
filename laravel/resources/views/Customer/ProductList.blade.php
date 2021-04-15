@@ -1,6 +1,6 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <section class="breadCrumbs g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0">
+    <section  id="contentTop" class="breadCrumbs g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0">
         <div style="direction: rtl" class="container">
             <div class="d-sm-flex text-right text-lg-center">
                 <div class="align-self-center bigDevice">
@@ -830,8 +830,8 @@
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/allColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -846,15 +846,25 @@
                                                                    id="c-0"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-0').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/whiteColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -869,15 +879,25 @@
                                                                    id="c-1"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-1').prop('checked',true);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/redColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -892,15 +912,25 @@
                                                                    id="c-2"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-2').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/pinkColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -915,15 +945,25 @@
                                                                    id="c-3"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-3').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/orangeColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -938,15 +978,25 @@
                                                                    id="c-4"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-4').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/yellowColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -961,15 +1011,25 @@
                                                                    id="c-5"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-5').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/greenColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -984,15 +1044,25 @@
                                                                    id="c-6"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-6').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/blueColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -1007,15 +1077,25 @@
                                                                    id="c-7"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-7').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/magentaColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -1030,15 +1110,25 @@
                                                                    id="c-8"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-8').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   $('#c-9').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/brownColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -1053,15 +1143,25 @@
                                                                    id="c-9"
                                                                    type="checkbox"
                                                                    checked="checked"
-                                                                   onchange="$('#color-all').prop('checked',false)">
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-9').prop('checked',true);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
                                                 </div>
-                                                <div class="g-brd-around g-brd-gray-light-v4">
-                                                    <img class="img-fluid w-100 g-opacity-0_7"
+                                                <div>
+                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/blackColor.png') }}"
                                                          alt="Image Description">
                                                 </div>

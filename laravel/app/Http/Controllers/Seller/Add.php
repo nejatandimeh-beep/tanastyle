@@ -113,7 +113,7 @@ class Add extends Controller
                 ];
         }
 
-        return view('Seller.AddProduct', compact('gender', 'cat', 'catCode','name', 'hintCat', 'qty', 'size'));
+        return view('Seller.AddProduct', compact('gender', 'cat', 'catCode', 'name', 'hintCat', 'qty', 'size'));
     }
 
     // Insert Form Data to Database
@@ -127,19 +127,41 @@ class Add extends Controller
         // Get Size Qty For Loop Steps
 
         $qty = $request->get('qty');
-        $j=0;
-        for ($i = 0; $i <= $qty+1; $i++) {
-            $image = $request->get('imageUrl' . $i);
-            if(!is_null($image)) {
+        $j = 0;
+        $imageColor = array([
+            'color' => '',
+            'colorCode' => '',
+            'size'=>'',
+            'sizeQty' => '',
+            'image' => '',
+            'fileName' => '',
+        ]);
+
+        for ($i = 0; $i < $qty; $i++) {
+            $temp = (string)$i;
+            $imageColor[$i]['color'] = $request->get('color' . $temp);
+            $imageColor[$i]['colorCode'] = preg_replace('/[^0-9]/', '', $imageColor[$i]['color']);
+            $imageColor[$i]['color'] = preg_replace('/\d+/u', '', $imageColor[$i]['color']);
+            $imageColor[$i]['size'] = $request->get('size' . $temp);
+            $imageColor[$i]['sizeQty'] = $request->get('sizeQty' . $temp);
+            $imageColor[$i]['image'] = $request->get('imageUrl' . $i);
+        }
+
+        $imageColor = collect($imageColor)->sortBy('color')->toArray();
+        $imageColor = array_values($imageColor);
+        for ($i = 0; $i < $qty; $i++) {
+            if (!is_null($imageColor[$i]['image'])) {
+                $j++;
                 $folderPath = public_path('\img\products\\' . $folderName . '\\');
-                $image_parts = explode(";base64,", $image);
+                $image_parts = explode(";base64,", $imageColor[$i]['image']);
                 $image_type_aux = explode("image/", $image_parts[0]);
                 $image_type = $image_type_aux[1];
                 $image_base64 = base64_decode($image_parts[1]);
-
-                $imageFullPath = $folderPath . 'pic' . ($j+1) . '.jpg';
-                $j++;
+                $imageColor[$i]['fileName'] = 'pic' . $j;
+                $imageFullPath = $folderPath . $imageColor[$i]['fileName'] . '.jpg';
                 file_put_contents($imageFullPath, $image_base64);
+            } else {
+                $imageColor[$i]['fileName'] = 'pic' . $j;
             }
         }
         // Compilation Pic Path
@@ -163,7 +185,7 @@ class Add extends Controller
         // Calculate Final Price
         $temp = $unitPrice - ($unitPrice * $discount) / 100;
         $finalPrice = $temp;
-        $genderCode=$gender;
+        $genderCode = $gender;
         switch ($gender) {
             case '0':
                 $gender = 'زنانه';
@@ -205,19 +227,6 @@ class Add extends Controller
             ],
         ]);
 
-        // Get Sizes Detail
-        $sizes = array();
-        $colors = array();
-        $colorCode = array();
-        $sizeQty = array();
-        for ($i = 0; $i < $qty; $i++) {
-            $temp = (string)$i;
-            $sizes[$i] = $request->get('size' . $temp);
-            $colors[$i] = $request->get('color' . $temp);
-            $colorCode[$i]=preg_replace('/[^0-9]/', '', $colors[$i]);
-            $colors[$i]=preg_replace('/\d+/u', '', $colors[$i]);
-            $sizeQty[$i] = $request->get('sizeQty' . $temp);
-        }
         // Get The Last inserted Product ID
         $temp = DB::table('product')->select('id')->latest('id')->first();
         $productId = $temp->id;
@@ -226,10 +235,11 @@ class Add extends Controller
             DB::table('product_detail')->insert([
                 [
                     'ProductID' => $productId,
-                    'Size' => $sizes[$i],
-                    'Color' => $colors[$i],
-                    'ColorCode' => $colorCode[$i],
-                    'Qty' => $sizeQty[$i],
+                    'Size' => $imageColor[$i]['size'],
+                    'Color' => $imageColor[$i]['color'],
+                    'ColorCode' => $imageColor[$i]['colorCode'],
+                    'Qty' => $imageColor[$i]['sizeQty'],
+                    'PicNumber' => $imageColor[$i]['fileName'],
                 ],
             ]);
         }

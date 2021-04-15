@@ -121,7 +121,6 @@
             });
 
             function filtering() {
-                console.log(gender);
                 $.ajax({
                     type: 'GET',
                     url: '/Customer-Product-Custom-Filter/'
@@ -136,6 +135,7 @@
                         $('#loadProduct').addClass('d-none');
                         $('#productContainer').html(data);
                         $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                        $('html, body').animate({scrollTop: $('#contentTop').offset().top}, 500);
                     }
                 });
             }
@@ -146,27 +146,27 @@
 
             if ($('#productGallery').length > 0) {
                 magnify("img1", 3);
-                if($('#img2').length > 0)
+                if ($('#img2').length > 0)
                     magnify("img2", 3);
-                if($('#img3').length > 0)
+                if ($('#img3').length > 0)
                     magnify("img3", 3);
-                if($('#img4').length > 0)
+                if ($('#img4').length > 0)
                     magnify("img4", 3);
-                if($('#img5').length > 0)
+                if ($('#img5').length > 0)
                     magnify("img5", 3);
-                if($('#img6').length > 0)
-                    magnify("img6",3);
-                if($('#img7').length > 0)
+                if ($('#img6').length > 0)
+                    magnify("img6", 3);
+                if ($('#img7').length > 0)
                     magnify("img7", 3);
-                if($('#img8').length > 0)
+                if ($('#img8').length > 0)
                     magnify("img8", 3);
-                if($('#img9').length > 0)
+                if ($('#img9').length > 0)
                     magnify("img9", 3);
-                if($('#img10').length > 0)
+                if ($('#img10').length > 0)
                     magnify("img10", 3);
-                if($('#img11').length > 0)
+                if ($('#img11').length > 0)
                     magnify("img11", 3);
-                if($('#img12').length > 0)
+                if ($('#img12').length > 0)
                     magnify("img12", 3);
                 // نمایش رنگ برای اولین سایز بعد از لود شدن صفحه
                 addColor($('input[id ^="inputSize"]').first().val(), parseInt($('#productID').text()));
@@ -627,6 +627,7 @@
 
             ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         }
+
         // هایلت آپشن آدرس در هنگام قرار گرفتن ماوس بروی هر سط آدرس
         function optionHover(id) {
             $('#addressOption' + id).removeClass('g-color-gray-dark-v3');

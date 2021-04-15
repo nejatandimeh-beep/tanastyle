@@ -2,32 +2,47 @@
 
     {{--    Seller Functions--}}
     <script>
+
+        Array.prototype.getDuplicates = function () {
+            let duplicates = [];
+            for (let i = 0; i < this.length; i++) {
+                if (this[i] !== '')
+                    if (duplicates.hasOwnProperty(this[i])) {
+                        duplicates[this[i]].push(i);
+                        $('#colorImgDiv' + i).addClass('d-none');
+                        $('#img-file-label' + i).addClass('d-none');
+                        $('#repeatColorMsg' + i).removeClass('d-none');
+                        $('#pic' + i).attr('id', 'repeat' + i);
+                    } else if (this.lastIndexOf(this[i]) !== i) {
+                        duplicates[this[i]] = [i];
+                        $('#colorImgDiv' + i).removeClass('d-none');
+                        $('#img-file-label' + i).removeClass('d-none');
+                        $('#repeatColorMsg' + i).addClass('d-none');
+                        $('#repeat' + i).attr('id', 'pic' + i);
+                    } else {
+                        $('#colorImgDiv' + i).removeClass('d-none');
+                        $('#img-file-label' + i).removeClass('d-none');
+                        $('#repeatColorMsg' + i).addClass('d-none');
+                        $('#repeat' + i).attr('id', 'pic' + i);
+                    }
+            }
+        }
+
         $('.customTooltip').on('click', function () {
             let color = $(this).find(">:first").text() + $(this).parent().closest('div').attr('id')[0],
+                otherColors = [],
                 colorText = color.replace(/\d+/g, ''),
-                id = $(this).parent().closest('div').attr('id').substring(2);
+                id = $(this).parent().closest('div').attr('id').substring(2),
+                qty = $('[name="qty"]').val(), dupes = [], unic = [];
             $('#colorBtn' + id).text(colorText);
             $('#color' + id + ' option').val(color);
             $('#colorModal' + id).modal('toggle');
             $('#lblColor' + id).removeClass('g-color-red');
-            $('[name^="color"]').each(function (i, obj) {
-                if (colorText === $('#color' + i + ' option').val().replace(/\d+/g, '')) {
-                    if (i.toString() !== id) {
-                        if ($('#repeatColorMsg' + i).hasClass('d-none')) {
-                            $('#colorImgDiv' + i).addClass('d-none');
-                            $('#img-file-label' + i).addClass('d-none');
-                            $('#repeatColorMsg' + i).removeClass('d-none');
-                            $('#pic' + i).attr('id', 'repeat' + i);
-                        }
-                    }
-                } else {
-                    $('#colorImgDiv' + id).removeClass('d-none');
-                    $('#img-file-label' + id).removeClass('d-none');
-                    $('#repeatColorMsg' + id).addClass('d-none');
-                    $('#repeat' + id).attr('id', 'pic' + id);
-                }
-            });
 
+            $('[name^="color"]').each(function (i, obj) {
+                otherColors[i] = $('#color' + i + ' option').val().replace(/\d+/g, '');
+            });
+            otherColors.getDuplicates();
             checkRepeat(id);
         });
 
@@ -1069,6 +1084,7 @@
                 cropper, inputID;
             $('input[id^="pic"]').on('change', function (event) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
+                $('#fileShow' + inputID).removeClass('g-color-red');
                 let files = event.target.files,
                     done = function (url) {
                         image.src = url;

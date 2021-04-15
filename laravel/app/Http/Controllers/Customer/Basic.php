@@ -1000,34 +1000,13 @@ class Basic extends Controller
              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
              data-nav-for="#carousel-08-2">
 
-             <div class="js-slide">
-                <a
-                    href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                    <img class="img-fluid w-100" src="' . $row->PicPath . 'pic1.jpg" alt="Image Description">
-                </a>
-             </div>
-
-             <div class="js-slide">
-                <a
-                    href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                    <img class="img-fluid w-100" src="' . $row->PicPath . 'pic2.jpg" alt="Image Description">
-                </a>
+                 <div class="js-slide">
+                    <a
+                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
+                        <img class="img-fluid w-100" src="' . $row->PicPath .$row->PicNumber.'.jpg" alt="Image Description">
+                    </a>
+                 </div>
             </div>
-
-             <div class="js-slide">
-                <a
-                    href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                    <img class="img-fluid w-100" src="' . $row->PicPath . 'pic3.jpg" alt="Image Description">
-                </a>
-            </div>
-
-             <div class="js-slide">
-                <a
-                    href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                    <img class="img-fluid w-100" src="' . $row->PicPath . 'pic4.jpg" alt="Image Description">
-                </a>
-            </div>
-        </div>
         </div>
          <div style="direction: rtl" class="media">
              <div class="d-flex justify-content-between col-12 p-0">
