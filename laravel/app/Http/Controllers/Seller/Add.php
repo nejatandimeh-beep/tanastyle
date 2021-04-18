@@ -144,6 +144,7 @@ class Add extends Controller
             $imageColor[$i]['color'] = preg_replace('/\d+/u', '', $imageColor[$i]['color']);
             $imageColor[$i]['size'] = $request->get('size' . $temp);
             $imageColor[$i]['sizeQty'] = $request->get('sizeQty' . $temp);
+            $imageColor[$i]['hexCode'] = $request->get('hexCode' . $temp);
             $imageColor[$i]['image'] = $request->get('imageUrl' . $i);
         }
 
@@ -238,6 +239,7 @@ class Add extends Controller
                     'Size' => $imageColor[$i]['size'],
                     'Color' => $imageColor[$i]['color'],
                     'ColorCode' => $imageColor[$i]['colorCode'],
+                    'HexCode' => $imageColor[$i]['hexCode'],
                     'Qty' => $imageColor[$i]['sizeQty'],
                     'PicNumber' => $imageColor[$i]['fileName'],
                 ],

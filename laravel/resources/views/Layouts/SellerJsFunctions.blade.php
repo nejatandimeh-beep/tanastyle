@@ -30,21 +30,32 @@
 
         $('.customTooltip').on('click', function () {
             let color = $(this).find(">:first").text() + $(this).parent().closest('div').attr('id')[0],
-                otherColors = [],
+                colorList = [],
                 colorText = color.replace(/\d+/g, ''),
-                id = $(this).parent().closest('div').attr('id').substring(2),
-                qty = $('[name="qty"]').val(), dupes = [], unic = [];
+                id = $(this).parent().closest('div').attr('id').substring(2);
             $('#colorBtn' + id).text(colorText);
+            $('#hexCode' + id).attr('value', hexc($(this).css('backgroundColor')));
+            console.log(hexc($(this).css('backgroundColor')));
             $('#color' + id + ' option').val(color);
             $('#colorModal' + id).modal('toggle');
             $('#lblColor' + id).removeClass('g-color-red');
 
             $('[name^="color"]').each(function (i, obj) {
-                otherColors[i] = $('#color' + i + ' option').val().replace(/\d+/g, '');
+                colorList[i] = $('#color' + i + ' option').val().replace(/\d+/g, '');
             });
-            otherColors.getDuplicates();
+            colorList.getDuplicates();
             checkRepeat(id);
         });
+
+        function hexc(colorval) {
+            var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+            delete(parts[0]);
+            for (var i = 1; i <= 3; ++i) {
+                parts[i] = parseInt(parts[i]).toString(16);
+                if (parts[i].length == 1) parts[i] = '0' + parts[i];
+            }
+            return '#' + parts.join('');
+        }
 
         function checkRepeat(ele) {
             let qty = $('#addProductSizeQty').val(), temp = [], duplicates = {}, dupes = {},

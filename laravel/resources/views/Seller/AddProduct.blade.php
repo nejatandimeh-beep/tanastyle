@@ -1060,6 +1060,7 @@
                                     id="color{{$i}}" name="color{{$i}}">
                                     <option value="" selected="selected"></option>
                                 </select>
+                                <input class="d-none" type="text" value="" id="hexCode{{$i}}" name="hexCode{{$i}}">
                             </div>
                         </div>
                         {{--موجودی--}}

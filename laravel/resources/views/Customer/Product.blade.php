@@ -135,11 +135,12 @@
                         </div>
                     </fieldset>
                     <!-- End Article Size -->
-                    <div class="d-none" id="sizeInfo">
+                    <div class="d-none g-mb-5" id="sizeInfo">
+                        <span class="g-px-5 g-py-7 g-brd-around g-brd-gray-light-v3 g-ml-3"></span>
                         <input type="radio" id="color" name="color" value=""
                                class="u-checkbox-v1--checked-brd-primary">
                         <label for="color"
-                               class="d-inline-block text-center g-brd-gray g-brd-around g-brd-2 g-bg-secondary g-font-size-15 g-py-5 g-px-15 g-transition-0_3 g-mr-5 g-mb-5">
+                               class="d-inline-block text-center g-brd-gray g-brd-around g-brd-2 g-bg-secondary g-font-size-15 g-py-5 g-px-15 g-transition-0_3 g-ml-10 g-mb-5">
                         </label>
                     </div>
                     <!-- Article Color -->
@@ -158,7 +159,7 @@
                     <fieldset class="g-ml-60-lg--minus-10 col-lg-5 p-0 g-mb-60--lg g-mb-30">
                         <legend class="h6 g-color-main g-mb-15 d-lg-none">موجودی محصول</legend>
                         <div class="align-self-center g-width-70 g-pt-30--lg g-pt-0">
-                                <span class="u-icon-v4 u-icon-v4-rounded-0 u-icon-slide-down--hover">
+                            <span class="u-icon-v4 u-icon-v4-rounded-0 u-icon-slide-down--hover">
                                     <span style="width: 8rem; height: 2.5rem; cursor: default"
                                           class="u-icon-v4-inner g-font-style-normal">
                                         <i style="width: 8rem; height: 2.5rem; top: 40%;"

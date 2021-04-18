@@ -805,6 +805,7 @@
                             $('#sizeInfo' + i + ' input').val(data[i]['Color']);
                             $('#sizeInfo' + i + ' label').attr('for', 'color-' + data[i]["ID"]);
                             $('#sizeInfo' + i + ' label').text(data[i]['Color']);
+                            $('#sizeInfo' + i + ' span').css("cssText", "background-color: "+data[i]['HexCode']+" !important;");
                         }
                         temp = data[i]['Color'];
                     }
