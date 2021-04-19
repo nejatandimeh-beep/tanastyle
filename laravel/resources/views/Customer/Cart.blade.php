@@ -29,7 +29,7 @@
                                          data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                                          data-nav-for="#carousel-08-2">
                                         <div class="js-slide">
-                                            <a href="{{ route('productDetail',['id'=>$row->ProductID]) }}">
+                                            <a href="{{ route('productDetail',['id'=>$row->ProductID, 'pdID'=>$row->Size]) }}">
                                                 <img class="img-fluid w-100"
                                                      src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                                      alt="Image Description">

@@ -10,6 +10,7 @@ use File;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use mysql_xdevapi\Table;
 
 class Basic extends Controller
 {
@@ -310,11 +311,10 @@ class Basic extends Controller
 
         // Get data after Database update
         $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID','pd.PicNumber')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.PicNumber')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', function($join)
-            {
+            ->leftJoin('product_detail as pd', function ($join) {
                 $join->on('pd.ID', '=', 'pod.ProductDetailID');
             })
             ->where('po.CustomerID', Auth::user()->id)
@@ -322,12 +322,11 @@ class Basic extends Controller
             ->get();
 
         $delivery = DB::table('product_delivery as delivery')
-            ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID','pd.PicNumber')
+            ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'pd.PicNumber')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'delivery.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', function($join)
-            {
+            ->leftJoin('product_detail as pd', function ($join) {
                 $join->on('pd.ID', '=', 'pod.ProductDetailID');
             })
             ->where('po.CustomerID', Auth::user()->id)
@@ -338,8 +337,7 @@ class Basic extends Controller
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', function($join)
-            {
+            ->leftJoin('product_detail as pd', function ($join) {
                 $join->on('pd.ID', '=', 'pod.ProductDetailID');
             })
             ->where('po.CustomerID', Auth::user()->id)
@@ -373,8 +371,7 @@ class Basic extends Controller
         DB::table('product_cart')
             ->where('ProductDetailID', $id)
             ->delete();
-        $cartCount = DB::table('product_cart')
-            ->get();
+        $cartCount = DB::table('product_cart')->get();
         return count($cartCount);
     }
 
@@ -408,6 +405,28 @@ class Basic extends Controller
             ->where('CustomerID', Auth::user()->id)
             ->get();
         return array($data->count(), $data);
+    }
+
+    public function cartCheck($id)
+    {
+        $exist = DB::table('product_cart')
+            ->where('ProductDetailID', $id)
+            ->where('CustomerID', Auth::user()->id)
+            ->first();
+        if ($exist === null)
+            return 'empty';
+        else
+            return 'exist';
+    }
+
+    public function cartQtyCheck($pdID)
+    {
+        $pdID=json_decode($pdID);
+        // گرفتن تمامی جزییات مربوط به محصول کلیک شده
+        return DB::table('product_detail')
+            ->select('ID','Qty')
+            ->whereIn('ID',$pdID)
+            ->get();
     }
 
     public function profileUpdate(Request $request)
@@ -541,7 +560,7 @@ class Basic extends Controller
             ->delete();
     }
 
-    public function productDetail($id)
+    public function productDetail($id, $pdID)
     {
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product')
@@ -588,7 +607,7 @@ class Basic extends Controller
             $rating = round($rating / $ratingCount);
 
         $comments = DB::table('customer_comment as cc')
-            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID','c.PicPath')
+            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID', 'c.PicPath')
             ->leftJoin('customers as c', 'cc.CustomerID', '=', 'c.id')
             ->where('cc.ProductID', $id)
             ->get();
@@ -649,7 +668,7 @@ class Basic extends Controller
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
 
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate'));
+        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'pdID'));
     }
 
     public function bankingPortal($id, $qty)
@@ -935,18 +954,6 @@ class Basic extends Controller
             ->first();
     }
 
-    public function cartCheck($id)
-    {
-        $exist = DB::table('product_cart')
-            ->where('ProductDetailID', $id)
-            ->where('CustomerID', Auth::user()->id)
-            ->first();
-        if ($exist === null)
-            return 'empty';
-        else
-            return 'exist';
-    }
-
     public function customerVerify()
     {
         return redirect()->route('Master');
@@ -1015,81 +1022,81 @@ class Basic extends Controller
                  <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .$row->PicNumber.'.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . $row->PicNumber . '.jpg" alt="Image Description">
                     </a>
                  </div>
-                 '.((file_exists(public_path($row->PicPath."pic1.jpg")) && $row->PicNumber !== 'pic1') ? ' <div class="js-slide">
+                 ' . ((file_exists(public_path($row->PicPath . "pic1.jpg")) && $row->PicNumber !== 'pic1') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic1.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic1.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                  '.((file_exists(public_path($row->PicPath."pic2.jpg")) && $row->PicNumber !== 'pic2') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                  ' . ((file_exists(public_path($row->PicPath . "pic2.jpg")) && $row->PicNumber !== 'pic2') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic2.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic2.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                   '.((file_exists(public_path($row->PicPath."pic3.jpg")) && $row->PicNumber !== 'pic3') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                   ' . ((file_exists(public_path($row->PicPath . "pic3.jpg")) && $row->PicNumber !== 'pic3') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic3.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic3.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                     '.((file_exists(public_path($row->PicPath."pic4.jpg")) && $row->PicNumber !== 'pic4') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                     ' . ((file_exists(public_path($row->PicPath . "pic4.jpg")) && $row->PicNumber !== 'pic4') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic4.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic4.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                       '.((file_exists(public_path($row->PicPath."pic5.jpg")) && $row->PicNumber !== 'pic5') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                       ' . ((file_exists(public_path($row->PicPath . "pic5.jpg")) && $row->PicNumber !== 'pic5') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic5.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic5.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                         '.((file_exists(public_path($row->PicPath."pic6.jpg")) && $row->PicNumber !== 'pic6') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                         ' . ((file_exists(public_path($row->PicPath . "pic6.jpg")) && $row->PicNumber !== 'pic6') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic6.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic6.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                           '.((file_exists(public_path($row->PicPath."pic7.jpg")) && $row->PicNumber !== 'pic7') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                           ' . ((file_exists(public_path($row->PicPath . "pic7.jpg")) && $row->PicNumber !== 'pic7') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic7.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic7.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                             '.((file_exists(public_path($row->PicPath."pic8.jpg")) && $row->PicNumber !== 'pic8') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                             ' . ((file_exists(public_path($row->PicPath . "pic8.jpg")) && $row->PicNumber !== 'pic8') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic8.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic8.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                               '.((file_exists(public_path($row->PicPath."pic9.jpg")) && $row->PicNumber !== 'pic9') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                               ' . ((file_exists(public_path($row->PicPath . "pic9.jpg")) && $row->PicNumber !== 'pic9') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic9.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic9.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                                 '.((file_exists(public_path($row->PicPath."pic10.jpg")) && $row->PicNumber !== 'pic10') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                                 ' . ((file_exists(public_path($row->PicPath . "pic10.jpg")) && $row->PicNumber !== 'pic10') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic10.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic10.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                                   '.((file_exists(public_path($row->PicPath."pic11.jpg")) && $row->PicNumber !== 'pic11') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                                   ' . ((file_exists(public_path($row->PicPath . "pic11.jpg")) && $row->PicNumber !== 'pic11') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic11.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic11.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
-                                     '.((file_exists(public_path($row->PicPath."pic12.jpg")) && $row->PicNumber !== 'pic12') ? ' <div class="js-slide">
+                 </div>' : "") . '
+                                     ' . ((file_exists(public_path($row->PicPath . "pic12.jpg")) && $row->PicNumber !== 'pic12') ? ' <div class="js-slide">
                     <a
                         href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath .'pic12.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic12.jpg" alt="Image Description">
                     </a>
-                 </div>' :"").'
+                 </div>' : "") . '
 
             </div>
         </div>
@@ -1147,9 +1154,17 @@ class Basic extends Controller
             ->select('*')
             ->where('Gender', 'زنانه')
             ->get();
+
+        $size= DB::table('product as p')
+            ->select('pd.Size','p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID','=','p.ID')
+            ->where('Gender', 'زنانه')
+            ->groupBy('p.ID')
+            ->get();
+
         $gender = '0';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode','size'));
     }
 
     public function productMaleList()
@@ -1238,6 +1253,10 @@ class Basic extends Controller
         DB::table('product_detail')
             ->where('ID', $id)
             ->decrement('Qty', $qty);
+
+        DB::table('product_cart')
+            ->where('ProductDetailID', $id)
+            ->delete();
 
         return true;
     }

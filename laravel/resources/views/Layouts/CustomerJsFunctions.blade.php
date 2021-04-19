@@ -168,8 +168,9 @@
                     magnify("img11", 3);
                 if ($('#img12').length > 0)
                     magnify("img12", 3);
+
                 // نمایش رنگ برای اولین سایز بعد از لود شدن صفحه
-                addColor($('input[id ^="inputSize"]').first().val(), parseInt($('#productID').text()));
+                addColor($('#firstPdId').text(), parseInt($('#productID').text()));
             }
 
             // اسکرول صفحه به مسیر صفحه
@@ -461,7 +462,26 @@
         // Bank Portal
         function bankingPortal(id, qty) {
             if ($('#loginAlert').text() === 'login') {
-                window.location = '/Banking-Portal/' + id + '/' + qty;
+                let pdID = [], error = 0, msg = 'عملیات متوقف شد. محصولات با شماره ی [';
+                pdID[0] = id;
+                $.ajax({
+                    type: 'GET',
+                    url: "/Customer-Cart-Qty-Check/" + JSON.stringify(pdID),
+                    success: function (data) {
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i]['Qty'] === 0) {
+                                msg = msg + data[i]['ID'] + '] ';
+                                error = 1;
+                            }
+                        }
+                        if (error === 0)
+                            window.location = '/Banking-Portal/' + id + '/' + qty;
+                        else {
+                            msg = msg + ' موجودیشان تمام شده است.';
+                            alert(msg);
+                        }
+                    }
+                });
             }
         }
 
@@ -779,7 +799,28 @@
         }
 
         function orderSubmit() {
-            $('#finalCartOrderForm').submit();
+            let pdID = [], error = 0, msg = 'عملیات متوقف شد. محصولات با شماره ی [';
+            $('[id^="productDetailID"]').each(function (index) {
+                pdID[index] = $(this).text().replace(/[^0-9]/gi, '');
+            });
+            $.ajax({
+                type: 'GET',
+                url: "/Customer-Cart-Qty-Check/" + JSON.stringify(pdID),
+                success: function (data) {
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i]['Qty'] === 0) {
+                            msg = msg + data[i]['ID'] + '] ';
+                            error = 1;
+                        }
+                    }
+                    if (error === 0)
+                        $('#finalCartOrderForm').submit();
+                    else {
+                        msg = msg + ' موجودیشان تمام شده است.';
+                        alert(msg);
+                    }
+                }
+            });
         }
 
         // تابع و دستورات مربوط به افزودن رنگ و تعداد محصول از طریق آژاکس
@@ -810,12 +851,12 @@
                         temp = data[i]['Color'];
                     }
                     $('#sizeInfo0 input').prop('checked', 'checked');
-                    addQty(data[0]["ID"], data[0]['Qty'],data[0]['PicNumber']);
+                    addQty(data[0]["ID"], data[0]['Qty'], data[0]['PicNumber']);
                 }
             });
         }
 
-        function addQty(id, qty,picNumber) {
+        function addQty(id, qty, picNumber) {
             $('#addToBasketBtn').addClass('d-none');
             if ($('#loginAlert').text() === 'login')
                 $('#waitingCheckCart').removeClass('d-none');
@@ -841,7 +882,8 @@
                     $('#callMeExist').show();
                 }
             }
-            $('#'+picNumber).trigger('click');
+            $('#orderProductImg').attr('src', $('#picPath').text() + '/' + picNumber + '.jpg');
+            $('#' + picNumber).trigger('click');
         }
 
         // Add FileName and Check Mark when Uploaded Image

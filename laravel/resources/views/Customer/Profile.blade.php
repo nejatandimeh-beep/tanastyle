@@ -1276,7 +1276,7 @@
 
                                     <!-- Article Image -->
                                     <a class="d-md-table-cell align-middle g-width-110"
-                                       href="{{ route('productDetail',[$row->ProductID]) }}"
+                                       href="{{ route('productDetail',['id'=>$row->ProductID, 'pdID'=>$row->Size]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
                                         <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                              alt="Image Description">
@@ -1600,7 +1600,7 @@
 
                                     <!-- Article Image -->
                                     <a class="d-md-table-cell align-middle g-width-110"
-                                       href="{{ route('productDetail',[$row->ProductID]) }}"
+                                       href="{{ route('productDetail',['id'=>$row->ProductID, 'pdID'=>$row->Size]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
                                         <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                              alt="Image Description">
@@ -1714,7 +1714,7 @@
 
                                 <!-- Article Image -->
                                 <a class="d-md-table-cell align-middle g-width-110"
-                                   href="{{ route('productDetail',[$row->ProductID]) }}"
+                                   href="{{ route('productDetail',['id'=>$row->ProductID, 'pdID'=>$row->Size]) }}"
                                    title="کد محصول {{ $row->ProductDetailID }}">
                                     <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                          alt="Image Description">
@@ -1995,7 +1995,7 @@
                                      class="d-md-table w-100 g-bg-white g-mb-30 g-mb-15--lg">
                                 <!-- Article Image -->
                                 <a class="d-md-table-cell align-middle g-width-110"
-                                   href="{{ route('productDetail',[$row->ProductID]) }}"
+                                   href="{{ route('productDetail',['id'=>$row->ProductID, 'pdID'=>$row->Size]) }}"
                                    title="کد محصول {{ $row->ProductDetailID }}">
                                     <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                          alt="Image Description">
@@ -2016,7 +2016,7 @@
                                                class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
                                                data-toggle="tooltip"
                                                data-placement="top"
-                                               href="{{ route('productDetail',[$row->ProductID]) }}"
+                                               href="{{ route('productDetail',['id'=>$row->ProductID, 'pdID'=>$row->Size]) }}"
                                                data-original-title="جزئیات محصول"><i
                                                     class="icon-eye g-line-height-0_7"></i></a>
                                             <a style="cursor: pointer"
@@ -2070,7 +2070,7 @@
                                        class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
                                        data-toggle="tooltip"
                                        data-placement="top"
-                                       href="{{ route('productDetail',[$row->ProductID]) }}"
+                                       href="{{ route('productDetail',['id'=>$row->ProductID, 'pdID'=>$row->Size]) }}"
                                        data-original-title="جزئیات محصول"><i
                                             class="icon-eye g-line-height-0_7"></i></a>
                                     <a style="cursor: pointer"

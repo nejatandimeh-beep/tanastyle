@@ -145,7 +145,7 @@ Route::get('/Customer-Product-Kids-List', 'Customer\Basic@productKidsList')->nam
 Route::get('/Customer-Product-0000', 'Customer\Basic@product0000')->name('product00');
 
 // Customer Product Detail
-Route::get('/Customer-Product-Detail/{id}', 'Customer\Basic@productDetail')->name('productDetail');
+Route::get('/Customer-Product-Detail/{id}/{pdID}', 'Customer\Basic@productDetail')->name('productDetail');
 
 // Banking portal
 Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal')->middleware('verified');
@@ -197,6 +197,8 @@ Route::get('/Customer-Cart-Check/{id}', 'Customer\Basic@cartCheck');
 Route::get('/Customer-Cart-Add/{id}', 'Customer\Basic@cartAdd');
 
 Route::get('/Customer-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
+
+Route::get('/Customer-Cart-Qty-Check/{pdID}', 'Customer\Basic@cartQtyCheck');
 
 // -------------------[ Products Filter [ Ajax ] ]-----------------------
 Route::get('/Customer-Product-Custom-Filter/{gender}/{cat}/{size}/{priceMin}/{priceMax}/{color}', 'Customer\Basic@productFilter');
