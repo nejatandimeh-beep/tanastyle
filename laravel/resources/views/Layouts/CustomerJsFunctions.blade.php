@@ -801,21 +801,21 @@
                         if (data[i]['Color'] !== temp) {
                             $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
                             $('#sizeInfo' + i + ' input').attr('id', 'color-' + data[i]["ID"]);
-                            $('#sizeInfo' + i + ' input').attr('onclick', 'addQty(' + data[i]["ID"] + ',' + data[i]["Qty"] + ')');
+                            $('#sizeInfo' + i + ' input').attr('onclick', 'addQty(' + data[i]["ID"] + ',' + data[i]["Qty"] + ',"' + data[i]["PicNumber"] + '")');
                             $('#sizeInfo' + i + ' input').val(data[i]['Color']);
                             $('#sizeInfo' + i + ' label').attr('for', 'color-' + data[i]["ID"]);
                             $('#sizeInfo' + i + ' label').text(data[i]['Color']);
-                            $('#sizeInfo' + i + ' span').css("cssText", "background-color: "+data[i]['HexCode']+" !important;");
+                            // $('#sizeInfo' + i + ' span').css("cssText", "background-color: "+data[i]['HexCode']+" !important;");
                         }
                         temp = data[i]['Color'];
                     }
                     $('#sizeInfo0 input').prop('checked', 'checked');
-                    addQty(data[0]["ID"], data[0]['Qty']);
+                    addQty(data[0]["ID"], data[0]['Qty'],data[0]['PicNumber']);
                 }
             });
         }
 
-        function addQty(id, qty) {
+        function addQty(id, qty,picNumber) {
             $('#addToBasketBtn').addClass('d-none');
             if ($('#loginAlert').text() === 'login')
                 $('#waitingCheckCart').removeClass('d-none');
@@ -841,6 +841,7 @@
                     $('#callMeExist').show();
                 }
             }
+            $('#'+picNumber).trigger('click');
         }
 
         // Add FileName and Check Mark when Uploaded Image

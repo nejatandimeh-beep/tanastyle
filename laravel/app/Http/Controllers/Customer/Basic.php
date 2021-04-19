@@ -36,7 +36,6 @@ class Basic extends Controller
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
-
         $orderHowDay = array();
         $persianDate = array();
         foreach ($order as $key => $row) {
@@ -311,17 +310,26 @@ class Basic extends Controller
 
         // Get data after Database update
         $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID','pd.PicNumber')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->leftJoin('product_detail as pd', function($join)
+            {
+                $join->on('pd.ID', '=', 'pod.ProductDetailID');
+            })
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
+
         $delivery = DB::table('product_delivery as delivery')
-            ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID')
+            ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID','pd.PicNumber')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'delivery.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->leftJoin('product_detail as pd', function($join)
+            {
+                $join->on('pd.ID', '=', 'pod.ProductDetailID');
+            })
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
@@ -330,6 +338,10 @@ class Basic extends Controller
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->leftJoin('product_detail as pd', function($join)
+            {
+                $join->on('pd.ID', '=', 'pod.ProductDetailID');
+            })
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pr.Date', 'DESC')
             ->get();
@@ -576,7 +588,7 @@ class Basic extends Controller
             $rating = round($rating / $ratingCount);
 
         $comments = DB::table('customer_comment as cc')
-            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID')
+            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID','c.PicPath')
             ->leftJoin('customers as c', 'cc.CustomerID', '=', 'c.id')
             ->where('cc.ProductID', $id)
             ->get();
@@ -875,7 +887,7 @@ class Basic extends Controller
     public function sizeInfo($id, $size)
     {
         return DB::table('product_detail')
-            ->select('ID', 'Color', 'Qty', 'HexCode')
+            ->select('ID', 'Color', 'Qty', 'HexCode', 'PicNumber')
             ->where('ProductID', $id)
             ->where('Size', $size)
             ->get();

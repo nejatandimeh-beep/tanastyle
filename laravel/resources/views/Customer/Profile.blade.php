@@ -1275,11 +1275,10 @@
                                     <!-- End Date -->
 
                                     <!-- Article Image -->
-                                    <a class="js-fancybox d-md-table-cell align-middle g-width-110"
-                                       data-fancybox-gallery="{{ 'lightbox-gallery1--'.$key }}"
-                                       href="{{ $row->PicPath.'pic1.jpg' }}"
+                                    <a class="d-md-table-cell align-middle g-width-110"
+                                       href="{{ route('productDetail',[$row->ProductID]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}"
+                                        <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
@@ -1600,11 +1599,10 @@
                                     </div>
 
                                     <!-- Article Image -->
-                                    <a class="js-fancybox d-md-table-cell align-middle g-width-110"
-                                       data-fancybox-gallery="{{ 'lightbox-gallery2--'.$key }}"
-                                       href="{{ $row->PicPath.'pic1.jpg' }}"
+                                    <a class="d-md-table-cell align-middle g-width-110"
+                                       href="{{ route('productDetail',[$row->ProductID]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}"
+                                        <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
@@ -1715,12 +1713,10 @@
                                 </div>
 
                                 <!-- Article Image -->
-                                <a class="js-fancybox d-md-table-cell align-middle g-width-110"
-                                   data-fancybox-gallery="{{ 'lightbox-gallery4--'.$key }}"
-                                   href="{{ $row->ReturnPicPath.'pic1.jpg' }}"
-                                   href="{{ asset('img/Other/pic1.jpg') }}"
+                                <a class="d-md-table-cell align-middle g-width-110"
+                                   href="{{ route('productDetail',[$row->ProductID]) }}"
                                    title="کد محصول {{ $row->ProductDetailID }}">
-                                    <img class="img-fluid" src="{{ asset('img/Other/pic1.jpg') }}"
+                                    <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                          alt="Image Description">
                                 </a>
                                 <!-- End Article Image -->
@@ -1998,11 +1994,10 @@
                             <article id="{{ 'likeRow'.$key }}"
                                      class="d-md-table w-100 g-bg-white g-mb-30 g-mb-15--lg">
                                 <!-- Article Image -->
-                                <a class="js-fancybox d-md-table-cell align-middle g-width-110"
-                                   data-fancybox-gallery="{{ 'lightbox-gallery3--'.$key }}"
-                                   href="{{ $row->PicPath.'pic1.jpg' }}"
+                                <a class="d-md-table-cell align-middle g-width-110"
+                                   href="{{ route('productDetail',[$row->ProductID]) }}"
                                    title="کد محصول {{ $row->ProductDetailID }}">
-                                    <img class="img-fluid" src="{{ $row->PicPath.'pic1.jpg' }}"
+                                    <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                          alt="Image Description">
                                 </a>
                                 <!-- End Article Image -->

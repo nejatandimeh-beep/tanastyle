@@ -7,10 +7,6 @@
         <div class="breadCrumbs">
             <div class="g-mt-0--lg">
                 <div class="g-pr-5 d-flex g-py-15 g-color-primary">
-                    <a href="{{route('userProfile', ['id' => 'navigation'])}}" class="nav-link align-self-center g-color-main g-text-underline--none--hover p-0 g-color-primary--hover g-ml-15" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="برگشت">
-                        <i class="fa fa-arrow-right g-font-size-16 g-ml-5"></i>
-                    </a>
-
                     <i class="icon-basket g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                     <h6 class="m-0 g-mt-7">
@@ -35,31 +31,7 @@
                                         <div class="js-slide">
                                             <a href="{{ route('productDetail',['id'=>$row->ProductID]) }}">
                                                 <img class="img-fluid w-100"
-                                                     src="{{ $row->PicPath.'pic1.jpg' }}"
-                                                     alt="Image Description">
-                                            </a>
-                                        </div>
-
-                                        <div class="js-slide">
-                                            <a href="{{ route('productDetail',['id'=>$row->ProductID]) }}">
-                                                <img class="img-fluid w-100"
-                                                     src="{{ $row->PicPath.'pic2.jpg' }}"
-                                                     alt="Image Description">
-                                            </a>
-                                        </div>
-
-                                        <div class="js-slide">
-                                            <a href="{{ route('productDetail',['id'=>$row->ProductID]) }}">
-                                                <img class="img-fluid w-100"
-                                                     src="{{ $row->PicPath.'pic3.jpg' }}"
-                                                     alt="Image Description">
-                                            </a>
-                                        </div>
-
-                                        <div class="js-slide">
-                                            <a href="{{ route('productDetail',['id'=>$row->ProductID]) }}">
-                                                <img class="img-fluid w-100"
-                                                     src="{{ $row->PicPath.'pic4.jpg' }}"
+                                                     src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
                                                      alt="Image Description">
                                             </a>
                                         </div>
@@ -242,7 +214,7 @@
                                             <td class="align-middle text-center">
                                             <span class="g-pa-5">
                                               <img class="g-width-80 g-height-80"
-                                                   src="{{ $row->PicPath }}pic1.jpg"
+                                                   src="{{ $row->PicPath.$row->PicNumber }}.jpg"
                                                    alt="Image Description">
                                             </span>
                                             </td>
