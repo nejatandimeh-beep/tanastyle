@@ -170,7 +170,12 @@
                     magnify("img12", 3);
 
                 // نمایش رنگ برای اولین سایز بعد از لود شدن صفحه
-                addColor($('#firstPdId').text(), parseInt($('#productID').text()));
+                // addColor($('#firstSizeInfo').text(), parseInt($('#productID').text()));
+                $('[id^="inputSize"]').each(function (index) {
+                    if ($(this).val() === $('#firstSizeInfo').text()) {
+                        $(this).trigger('click');
+                    }
+                });
             }
 
             // اسکرول صفحه به مسیر صفحه
@@ -837,7 +842,7 @@
                     $('#waitingIconColor').hide();
                     $('#waitingIconQty').hide();
                     $('#colorQtyContainer').show();
-                    let temp = '';
+                    let temp = '', firstColorSelect=false;
                     for (let i = 0; i < data.length; i++) {
                         if (data[i]['Color'] !== temp) {
                             $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
@@ -850,8 +855,14 @@
                         }
                         temp = data[i]['Color'];
                     }
-                    $('#sizeInfo0 input').prop('checked', 'checked');
-                    addQty(data[0]["ID"], data[0]['Qty'], data[0]['PicNumber']);
+                    for (let i = 0; i < data.length; i++) {
+                        if ($('#color-'+data[i]["ID"]).val() === $('#firstColorInfo').text()) {
+                            $('#sizeInfo' + i + ' input').trigger('click');
+                            firstColorSelect=true;
+                        }
+                    }
+                    if(firstColorSelect===false)
+                        $('#sizeInfo' + 0 + ' input').trigger('click');
                 }
             });
         }

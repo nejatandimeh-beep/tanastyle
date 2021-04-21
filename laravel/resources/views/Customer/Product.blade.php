@@ -8,7 +8,8 @@
     <span id="checkLike" class="d-none">{{ $like }}</span>
     <span id="voteID" class="d-none">{{ isset($voteID) ? $voteID->ID: 'null'}}</span>
     <span id="CommentID" class="d-none"></span>
-    <span id="firstPdId" class="d-none">{{ $pdID }}</span>
+    <span id="firstSizeInfo" class="d-none">{{ $sizeInfo }}</span>
+    <span id="firstColorInfo" class="d-none">{{ $colorInfo }}</span>
     <span id="picPath" class="d-none">{{ $data->PicPath }}</span>
 
     <section class="breadCrumbs g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0 g-mb-30">

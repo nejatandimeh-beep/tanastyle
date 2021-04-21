@@ -560,7 +560,7 @@ class Basic extends Controller
             ->delete();
     }
 
-    public function productDetail($id, $pdID)
+    public function productDetail($id, $sizeInfo, $colorInfo)
     {
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product')
@@ -668,7 +668,7 @@ class Basic extends Controller
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
 
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'pdID'));
+        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo','colorInfo'));
     }
 
     public function bankingPortal($id, $qty)
@@ -1156,7 +1156,7 @@ class Basic extends Controller
             ->get();
 
         $size= DB::table('product as p')
-            ->select('pd.Size','p.ID')
+            ->select('pd.Size','pd.Color','p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID','=','p.ID')
             ->where('Gender', 'زنانه')
             ->groupBy('p.ID')
