@@ -156,9 +156,9 @@ Route::get('/Customer-Verify', 'Customer\Basic@customerVerify')->name('customerV
 Route::get('/Customer-Profile/{id}', 'Customer\Basic@userProfile')->name('userProfile');
 
 // -------------------[ Ajax ]-----------------------
-Route::get('/Customer-Product-LikeProduct/{id}/{val}', 'Customer\Basic@likeProduct');
+Route::get('/Customer-Product-LikeProduct/{id}/{idDetail}/{val}', 'Customer\Basic@likeProduct');
 
-Route::get('/Customer-Product-RatingProduct/{id}/{val}', 'Customer\Basic@ratingProduct');
+Route::get('/Customer-Product-RatingProduct/{id}/{idDetail}/{val}', 'Customer\Basic@ratingProduct');
 
 Route::get('/Customer-Product-NewComment/{id}/{val}', 'Customer\Basic@productNewComment');
 

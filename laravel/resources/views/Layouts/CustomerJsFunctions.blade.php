@@ -1000,7 +1000,7 @@
                 case 'likeProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Customer-Product-LikeProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
+                        url: "/Customer-Product-LikeProduct/" + parseInt($('#productID').text()) + '/'+ parseInt($('#productDetailID').text()) + '/' + val,
                         success: function (data) {
                             console.log(data);
                         }
@@ -1010,7 +1010,7 @@
                 case 'ratingProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Customer-Product-RatingProduct/" + parseInt($('#productDetailID').text()) + '/' + val,
+                        url: "/Customer-Product-RatingProduct/" + parseInt($('#productID').text())+ parseInt($('#productDetailID').text()) + '/' + '/' + val,
                         success: function (data) {
                             $('#voteID').text(data);
                         }

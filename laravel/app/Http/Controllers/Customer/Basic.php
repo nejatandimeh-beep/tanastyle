@@ -332,6 +332,7 @@ class Basic extends Controller
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
+
         $return = DB::table('product_return as pr')
             ->select('*', 'pr.Date as returnDate')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
@@ -592,7 +593,7 @@ class Basic extends Controller
         // سازمندهی کردن جزییات مربوط به محصول(rating، comment)
         $rating_tbl = DB::table('customer_vote as cv')
             ->select('*')
-            ->where('ProductDetailID', $detail[0]->detailID)
+            ->where('ProductID', $id)
             ->get();
 
         // rating & comment
@@ -626,7 +627,7 @@ class Basic extends Controller
             $voteID = DB::table('customer_vote as cv')
                 ->select('cv.ID', 'cv.CustomerID', 'c.id')
                 ->leftJoin('customers as c', 'cv.CustomerID', '=', 'c.id')
-                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
+                ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'cv.ProductID')
                 ->where('cv.CustomerID', Auth::user()->id)
                 ->where('pd.ProductID', $id)
                 ->first();
@@ -652,7 +653,7 @@ class Basic extends Controller
             // گرفتن اطلاعات مربوط به کاربر جاری در جدول کاستومر کامنت
             $rating_tbl2 = DB::table('customer_vote as cv')
                 ->select('*')
-                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
+                ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'cv.ProductID')
                 ->where('CustomerID', Auth::user()->id)
                 ->where('pd.ProductID', $id)
                 ->first();
@@ -667,7 +668,6 @@ class Basic extends Controller
 
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
-
         return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo','colorInfo'));
     }
 
@@ -722,18 +722,18 @@ class Basic extends Controller
         return redirect()->route('userProfile', 'returnProduct');
     }
 
-    public function likeProduct($id, $val)
+    public function likeProduct($id,$idDetail, $val)
     {
         $data = DB::table('customer_vote')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ProductDetailID', $id)
+            ->where('ProductID', $id)
             ->first();
 
         $val = ($val === 'true') ? 1 : 0;
         if (isset($data)) {
             DB::table('customer_vote')
                 ->where('CustomerID', Auth::user()->id)
-                ->where('ProductDetailID', $id)
+                ->where('ProductID', $id)
                 ->update([
                     'Like' => $val
                 ]);
@@ -741,7 +741,8 @@ class Basic extends Controller
             DB::table('customer_vote')->insert([
                 [
                     'CustomerID' => Auth::user()->id,
-                    'ProductDetailID' => $id,
+                    'ProductID' => $id,
+                    'ProductDetailID' => $idDetail,
                     'Like' => $val,
                     'Rating' => 0,
                 ],
@@ -750,21 +751,23 @@ class Basic extends Controller
         $voteID = DB::table('customer_vote')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ProductDetailID', $id)
+            ->where('ProductID', $id)
             ->first();
         return $voteID->ID;
     }
 
-    public function ratingProduct($id, $val)
+    public function ratingProduct($id, $val,$idDetail)
     {
         $data = DB::table('customer_vote')
+            ->select('CustomerID','ProductID')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ProductDetailID', $id)
+            ->where('ProductID', $id)
             ->first();
+
         if (isset($data)) {
             DB::table('customer_vote')
                 ->where('CustomerID', Auth::user()->id)
-                ->where('ProductDetailID', $id)
+                ->where('ProductID', $id)
                 ->update([
                     'Rating' => $val
                 ]);
@@ -772,7 +775,8 @@ class Basic extends Controller
             DB::table('customer_vote')->insert([
                 [
                     'CustomerID' => Auth::user()->id,
-                    'ProductDetailID' => $id,
+                    'ProductID' => $id,
+                    'ProductDetailID' => $idDetail,
                     'Like' => 0,
                     'Rating' => $val,
                 ],
@@ -782,7 +786,7 @@ class Basic extends Controller
         $voteID = DB::table('customer_vote')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
-            ->where('ProductDetailID', $id)
+            ->where('ProductID', $id)
             ->first();
 
         return $voteID->ID;
