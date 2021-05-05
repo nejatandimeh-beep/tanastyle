@@ -10,10 +10,29 @@ use File;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Table;
 
 class Basic extends Controller
 {
+    public function Master()
+    {
+//        $data=DB::table('product as p')
+//            ->select('*')
+//            ->leftJoin('product_detail as pd','pd.ProductID','=','p.ID')
+//            ->leftJoin('product_order_detail as pod','pod.ProductDetailID','=','pd.ID')
+//            ->orderBy('pod.SellCount')
+//            ->take(10)
+//            ->get();
+
+        $data = DB::table('product as p')
+            ->select('*')
+            ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->orderBy('pd.VisitCounter','DESC')
+            ->take(10)
+            ->get();
+
+        return view('customer.Master', compact('data'));
+    }
+
     public function userProfile($id)
     {
         // user data
@@ -422,11 +441,11 @@ class Basic extends Controller
 
     public function cartQtyCheck($pdID)
     {
-        $pdID=json_decode($pdID);
+        $pdID = json_decode($pdID);
         // گرفتن تمامی جزییات مربوط به محصول کلیک شده
         return DB::table('product_detail')
-            ->select('ID','Qty')
-            ->whereIn('ID',$pdID)
+            ->select('ID', 'Qty')
+            ->whereIn('ID', $pdID)
             ->get();
     }
 
@@ -668,7 +687,17 @@ class Basic extends Controller
 
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo','colorInfo'));
+        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo', 'colorInfo'));
+    }
+
+    public function productVisit($id)
+    {
+        DB::table('product_detail')
+            ->where('ID',$id)
+            ->update([
+                'visitCounter' => DB::raw('visitCounter + 1'),
+            ]);
+        return 'Visit: Success';
     }
 
     public function bankingPortal($id, $qty)
@@ -722,7 +751,7 @@ class Basic extends Controller
         return redirect()->route('userProfile', 'returnProduct');
     }
 
-    public function likeProduct($id,$idDetail, $val)
+    public function likeProduct($id, $idDetail, $val)
     {
         $data = DB::table('customer_vote')
             ->where('CustomerID', Auth::user()->id)
@@ -735,7 +764,8 @@ class Basic extends Controller
                 ->where('CustomerID', Auth::user()->id)
                 ->where('ProductID', $id)
                 ->update([
-                    'Like' => $val
+                    'Like' => $val,
+                    'ProductDetailID' => $idDetail
                 ]);
         } else {
             DB::table('customer_vote')->insert([
@@ -756,10 +786,10 @@ class Basic extends Controller
         return $voteID->ID;
     }
 
-    public function ratingProduct($id, $val,$idDetail)
+    public function ratingProduct($id, $val, $idDetail)
     {
         $data = DB::table('customer_vote')
-            ->select('CustomerID','ProductID')
+            ->select('CustomerID', 'ProductID')
             ->where('CustomerID', Auth::user()->id)
             ->where('ProductID', $id)
             ->first();
@@ -769,7 +799,8 @@ class Basic extends Controller
                 ->where('CustomerID', Auth::user()->id)
                 ->where('ProductID', $id)
                 ->update([
-                    'Rating' => $val
+                    'Rating' => $val,
+                    'ProductDetailID' => $idDetail
                 ]);
         } else {
             DB::table('customer_vote')->insert([
@@ -996,7 +1027,7 @@ class Basic extends Controller
         $size = json_decode($size);
         $color = json_decode($color);
         $data = DB::table('product as p')
-            ->select('p.*', 'pd.*', 'p.ID as productID')
+            ->select('p.*', 'pd.*')
             ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
             ->whereIn('p.GenderCode', $gender)
             ->whereIn('p.CatCode', $cat)
@@ -1008,7 +1039,7 @@ class Basic extends Controller
             })
             ->orderBy('p.GenderCode')
             ->orderBy('p.CatCode')
-            ->groupBy('p.ID')
+//            ->groupBy('p.ID')
             ->get();
 
         $products = '';
@@ -1016,7 +1047,7 @@ class Basic extends Controller
             $products = $products . '<div class="col-12 col-lg-4 g-mb-30">
     <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                     class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
-        <div>
+        <div class="g-pt-10">
             <div id="carousel-08-1"
              class="js-carousel text-center g-mb-20"
              data-infinite="1"
@@ -1025,86 +1056,13 @@ class Basic extends Controller
 
                  <div class="js-slide">
                     <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
+                        href="http://tanastyle/Customer-Product-Detail/' . $row->ProductID . '/' . $row->Size . '/' . $row->Color . '">
                         <img class="img-fluid w-100" src="' . $row->PicPath . $row->PicNumber . '.jpg" alt="Image Description">
                     </a>
                  </div>
-                 ' . ((file_exists(public_path($row->PicPath . "pic1.jpg")) && $row->PicNumber !== 'pic1') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic1.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                  ' . ((file_exists(public_path($row->PicPath . "pic2.jpg")) && $row->PicNumber !== 'pic2') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic2.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                   ' . ((file_exists(public_path($row->PicPath . "pic3.jpg")) && $row->PicNumber !== 'pic3') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic3.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                     ' . ((file_exists(public_path($row->PicPath . "pic4.jpg")) && $row->PicNumber !== 'pic4') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic4.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                       ' . ((file_exists(public_path($row->PicPath . "pic5.jpg")) && $row->PicNumber !== 'pic5') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic5.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                         ' . ((file_exists(public_path($row->PicPath . "pic6.jpg")) && $row->PicNumber !== 'pic6') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic6.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                           ' . ((file_exists(public_path($row->PicPath . "pic7.jpg")) && $row->PicNumber !== 'pic7') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic7.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                             ' . ((file_exists(public_path($row->PicPath . "pic8.jpg")) && $row->PicNumber !== 'pic8') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic8.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                               ' . ((file_exists(public_path($row->PicPath . "pic9.jpg")) && $row->PicNumber !== 'pic9') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic9.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                                 ' . ((file_exists(public_path($row->PicPath . "pic10.jpg")) && $row->PicNumber !== 'pic10') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic10.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                                   ' . ((file_exists(public_path($row->PicPath . "pic11.jpg")) && $row->PicNumber !== 'pic11') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic11.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-                                     ' . ((file_exists(public_path($row->PicPath . "pic12.jpg")) && $row->PicNumber !== 'pic12') ? ' <div class="js-slide">
-                    <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->productID . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . 'pic12.jpg" alt="Image Description">
-                    </a>
-                 </div>' : "") . '
-
             </div>
         </div>
-         <div style="direction: rtl" class="media">
+         <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
              <div class="d-flex justify-content-between col-12 p-0">
                 <div class="d-flex flex-column">
                     <h4 class="h6 g-color-black my-1">
@@ -1114,6 +1072,9 @@ class Basic extends Controller
                     </h4>
                     <ul style="padding: 0"
                         class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
+                        <li>
+                            <span class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600 g-mb-5" href="#">' . $row->Size . '</span>
+                        </li>
                         <li>
                             <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
                                href="#">' . $row->Gender . ' ' . $row->HintCat . '</a>
@@ -1156,41 +1117,179 @@ class Basic extends Controller
     {
         $data = DB::table('product')
             ->select('*')
-            ->where('Gender', 'زنانه')
+            ->where('GenderCode', '0')
             ->get();
 
-        $size= DB::table('product as p')
-            ->select('pd.Size','pd.Color','p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID','=','p.ID')
-            ->where('Gender', 'زنانه')
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '0')
             ->groupBy('p.ID')
             ->get();
 
         $gender = '0';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode','size'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
     public function productMaleList()
     {
         $data = DB::table('product')
             ->select('*')
-            ->where('Gender', 'مردانه')
+            ->where('GenderCode', '1')
             ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '1')
+            ->groupBy('p.ID')
+            ->get();
+
         $gender = '1';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
-    public function productKidsList()
+    public function productGirlList()
     {
         $data = DB::table('product')
             ->select('*')
-            ->where('Gender', 'بچگانه')
+            ->where('GenderCode', '2')
+            ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '2')
+            ->groupBy('p.ID')
             ->get();
         $gender = '2';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productBoyList()
+    {
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '3')
+            ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '3')
+            ->groupBy('p.ID')
+            ->get();
+        $gender = '3';
+        $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productBabyGirlList()
+    {
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '4')
+            ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '4')
+            ->groupBy('p.ID')
+            ->get();
+        $gender = '4';
+        $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productBabyBoyList()
+    {
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '5')
+            ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '5')
+            ->groupBy('p.ID')
+            ->get();
+        $gender = '5';
+        $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productSearch($val)
+    {
+        $output='';
+        $data=DB::table('product')
+            ->select('Name')
+            ->where('Name', 'like', $val . '%')
+            ->groupBy('Name')
+            ->take(15)
+            ->get();
+
+        foreach ($data as $key => $row){
+            $output .= '<li style="border-radius: 0 !important;"
+                        class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
+                            <a  href="'.route('productSearchList',[$row->Name]).'"
+                                style="text-decoration: none"
+                                class="col-12 p-0 text-right g-color-gray-dark-v3 g-color-primary--hover">
+                             '. $row->Name .'
+                            </a>
+                        </li>';
+        }
+
+        return $output;
+    }
+
+    public function productSearchList($val)
+    {
+        $data = DB::table('product')
+            ->select('*')
+            ->where('Name', 'like', $val . '%')
+            ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('Name', 'like', $val . '%')
+            ->groupBy('p.ID')
+            ->get();
+
+        $gender = 'all';
+        $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function spacialSelling($minDiscount,$maxDiscount)
+    {
+
+        $data = DB::table('product')
+            ->select('*')
+            ->whereIn('Discount', function ($query) use ($minDiscount, $maxDiscount) {
+                $query->select('Discount')
+                    ->whereBetween('Discount', [$minDiscount, $maxDiscount]);
+            })
+            ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID','p.Discount')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->whereIn('Discount', function ($query) use ($minDiscount, $maxDiscount) {
+                $query->select('Discount')
+                    ->whereBetween('Discount', [$minDiscount, $maxDiscount]);
+            })
+            ->groupBy('p.ID')
+            ->get();
+
+        $gender = 'all';
+        $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
     public function product00()

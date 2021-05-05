@@ -434,7 +434,7 @@
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ $rec->PicPath }}pic1.jpg" alt="Image Description">
+                                             src="{{ $rec->PicPath.$rec->PicNumber }}.jpg" alt="Image Description">
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">

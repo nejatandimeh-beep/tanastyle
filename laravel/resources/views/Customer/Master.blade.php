@@ -144,10 +144,11 @@
                          data-paddingleft="[0,0,0,0]">
 
                         <form style="direction: rtl" class="revtp-searchform">
-                            <input
-                                style="direction:rtl; outline: none; font-family: Vazir, serif; opacity: 0.95; font-size: 16px;"
-                                type="text" placeholder="بین 4596 محصول">
-                            <input style="outline: none; cursor: pointer; opacity: 0.95;" type="submit" value="بگرد">
+                            <input oninput="productSearch('productSearch',$(this).attr('value'))"
+                                   onclick="$('#productSearch').removeClass('d-none')"
+                                   style="direction:rtl; outline: none; font-family: Vazir, serif; opacity: 0.95; font-size: 16px;"
+                                   type="text" placeholder="تایپ کن و بگرد..">
+                            <ul id="productSearch" class="ajaxDropDown p-0 outSideClick"></ul>
                         </form>
                     </div>
                 </li>
@@ -202,7 +203,7 @@
             </div>
         </div>
     </div>
-    <div class="container g-pt-40 g-pt-70--lg g-pb-70">
+    <div class="container g-pt-40 g-pb-70">
         <div class="row g-mx-minus-10">
             <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
                 <article class="u-block-hover">
@@ -212,7 +213,7 @@
 
                     <div class="g-pos-abs g-bottom-30 g-left-30">
                         <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h2 class="h1 mb-0">زنانه</h2>
+                        <h1 class="h3 mb-0">زنانه</h1>
                     </div>
                     <a class="u-link-v2" href="{{ route('productFemaleList') }}"></a>
                 </article>
@@ -225,7 +226,7 @@
                          alt="Image Description">
                     <div class="g-pos-abs g-bottom-30 g-left-30">
                         <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h2 class="h1 mb-0">مردانه</h2>
+                        <h1 class="h3 mb-0">مردانه</h1>
                     </div>
                     <a class="u-link-v2" href="{{ route('productMaleList') }}"></a>
                 </article>
@@ -234,13 +235,53 @@
             <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
                 <article class="u-block-hover">
                     <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                         src="img/Other/cat-kids.jpg"
+                         src="img/Other/cat-girl.jpg"
                          alt="Image Description">
                     <div class="g-pos-abs g-bottom-30 g-left-30">
                         <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h2 class="h1 mb-0">بچگانه</h2>
+                        <h1 class="h3 mb-0">دخترانه</h1>
                     </div>
-                    <a class="u-link-v2" href="{{ route('productKidsList') }}"></a>
+                    <a class="u-link-v2" href="{{ route('productGirlList') }}"></a>
+                </article>
+            </div>
+
+            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
+                <article class="u-block-hover">
+                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
+                         src="img/Other/cat-boy.jpg"
+                         alt="Image Description">
+
+                    <div class="g-pos-abs g-bottom-30 g-left-30">
+                        <span class="d-block g-color-black">مجموعه لباس</span>
+                        <h1 class="h3 mb-0">پسرانه</h1>
+                    </div>
+                    <a class="u-link-v2" href="{{ route('productBoyList') }}"></a>
+                </article>
+            </div>
+
+            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
+                <article class="u-block-hover">
+                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
+                         src="img/Other/cat-babyGirl.jpg"
+                         alt="Image Description">
+                    <div class="g-pos-abs g-bottom-30 g-left-30">
+                        <span class="d-block g-color-black">مجموعه لباس</span>
+                        <h1 class="h3 mb-0">نوزادی دخترانه</h1>
+                    </div>
+                    <a class="u-link-v2" href="{{ route('productBabyGirlList') }}"></a>
+                </article>
+            </div>
+
+            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
+                <article class="u-block-hover">
+                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
+                         src="img/Other/cat-babyBoy.jpg"
+                         alt="Image Description">
+                    <div class="g-pos-abs g-bottom-30 g-left-30">
+                        <span class="d-block g-color-black">مجموعه لباس</span>
+                        <h1 class="h3 mb-0">نوزادی پسرانه</h1>
+                    </div>
+                    <a class="u-link-v2" href="{{ route('productBabyBoyList') }}"></a>
                 </article>
             </div>
         </div>
@@ -250,399 +291,70 @@
         <div id="carouselCus1" class="js-carousel g-pb-100 g-mx-minus-10"
              data-infinite="true"
              data-slides-show="4"
+             data-autoplay="1"
+             data-speed="5000"
              data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
              data-arrow-left-classes="fa fa-angle-left g-left-10 rounded-0"
              data-arrow-right-classes="fa fa-angle-right g-right-10 rounded-0"
              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">
-            <div class="js-slide">
-                <!-- Product -->
-                <figure class="g-px-10">
-                    <div class="g-pos-rel g-mb-20">
-                        <img class="img-fluid" src="assets/img-temp/480x700/img1.jpg" alt="Image Description">
-
-                        <!-- Ribbon -->
-                        <figcaption>
-                            <span
-                                class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-primary g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">New</span>
-                        </figcaption>
-                        <!-- End Ribbon -->
-                    </div>
-
-                    <div class="media">
-                        <!-- Product Info -->
-                        <div class="d-flex flex-column">
-                            <h4 class="h6 g-color-black mb-1">
-                                <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
-                                    Summer shorts
-                                </a>
-                            </h4>
-                            <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">Man</a>
-                            <span class="d-block g-color-black g-font-size-17">$52.00</span>
+            @foreach($data as $key =>$row)
+                <div class="js-slide g-mx-10">
+                    <!-- Product -->
+                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-30">
+                        <div class="g-pt-10">
+                            <div id="carousel-08-1"
+                                 class="js-carousel text-center g-mb-20"
+                                 data-infinite="1"
+                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
+                                 data-nav-for="#carousel-08-2">
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                             alt="Image Description">
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <!-- End Product Info -->
 
-                        <!-- Products Icons -->
-                        <ul class="list-inline media-body text-right">
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Cart"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-finance-100 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Wishlist"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-medical-022 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End Products Icons -->
-                    </div>
-                </figure>
-                <!-- End Product -->
-            </div>
-
-            <div class="js-slide">
-                <!-- Product -->
-                <figure class="g-px-10">
-                    <div class="g-pos-rel g-mb-20">
-                        <img class="img-fluid" src="assets/img-temp/480x700/img2.jpg" alt="Image Description">
-                    </div>
-
-                    <div class="media">
-                        <!-- Product Info -->
-                        <div class="d-flex flex-column">
-                            <h4 class="h6 g-color-black mb-1">
-                                <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
-                                    Stylish shirt
-                                </a>
-                            </h4>
-                            <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">Woman</a>
-                            <s class="d-block g-color-lightred g-font-weight-500 g-font-size-13">$101.00</s>
-                            <span class="d-block g-color-black g-font-size-17">$99.00</span>
+                        <!-- مشخصات محصول -->
+                        <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
+                            <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                            <div class="d-flex flex-column">
+                                <h4 class="h6 g-color-black my-1">
+                                            <span class="u-link-v5 g-color-black"
+                                                  tabindex="0">
+                                                {{ $row->Name }}
+                                                <span
+                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
+                                                <span
+                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
+                                            </span>
+                                </h4>
+                                <div>
+                                            <span class="g-ml-5">سایز <span
+                                                    class="g-color-primary">{{ $row->Size }}</span></span>
+                                    <span>رنگ <span class="g-color-primary">{{ $row->Color }}</span></span>
+                                </div>
+                                <span>موجودی <span id="{{ 'cartQty'.$key }}"
+                                                   class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                            </div>
                         </div>
-                        <!-- End Product Info -->
-
-                        <!-- Products Icons -->
-                        <ul class="list-inline media-body text-right">
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Cart"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-finance-100 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Wishlist"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-medical-022 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End Products Icons -->
-                    </div>
-                </figure>
-                <!-- End Product -->
-            </div>
-
-            <div class="js-slide">
-                <!-- Product -->
-                <figure class="g-px-10">
-                    <div class="g-pos-rel g-mb-20">
-                        <img class="img-fluid" src="assets/img-temp/480x700/img3.jpg" alt="Image Description">
-
-                        <!-- Ribbon -->
-                        <figcaption>
-                            <span
-                                class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-lightred g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">Sold</span>
-                        </figcaption>
-                        <!-- End Ribbon -->
-                    </div>
-
-                    <div class="media">
-                        <!-- Product Info -->
-                        <div class="d-flex flex-column">
-                            <h4 class="h6 g-color-black mb-1">
-                                <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
-                                    Classic jacket
-                                </a>
-                            </h4>
-                            <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">Man</a>
-                            <span class="d-block g-color-black g-font-size-17">$49.99</span>
+                        <div
+                            class="d-block g-color-black g-font-size-17 g-ml-10">
+                            <div style="direction: rtl" class="text-left">
+                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                    {{  number_format($row->UnitPrice) }}
+                                </s>
+                                <span>{{  number_format($row->FinalPrice) }}</span>
+                                <span
+                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                            </div>
                         </div>
-                        <!-- End Product Info -->
-
-                        <!-- Products Icons -->
-                        <ul class="list-inline media-body text-right">
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Cart"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-finance-100 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Wishlist"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-medical-022 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End Products Icons -->
-                    </div>
-                </figure>
-                <!-- End Product -->
-            </div>
-
-            <div class="js-slide">
-                <!-- Product -->
-                <figure class="g-px-10">
-                    <div class="g-pos-rel g-mb-20">
-                        <img class="img-fluid" src="assets/img-temp/480x700/img4.jpg" alt="Image Description">
-                    </div>
-
-                    <div class="media">
-                        <!-- Product Info -->
-                        <div class="d-flex flex-column">
-                            <h4 class="h6 g-color-black mb-1">
-                                <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
-                                    Wool lined parka
-                                </a>
-                            </h4>
-                            <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">Woman</a>
-                            <span class="d-block g-color-black g-font-size-17">$82.37</span>
-                        </div>
-                        <!-- End Product Info -->
-
-                        <!-- Products Icons -->
-                        <ul class="list-inline media-body text-right">
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Cart"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-finance-100 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Wishlist"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-medical-022 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End Products Icons -->
-                    </div>
-                </figure>
-                <!-- End Product -->
-            </div>
-
-            <div class="js-slide">
-                <!-- Product -->
-                <figure class="g-px-10">
-                    <div class="g-pos-rel g-mb-20">
-                        <img class="img-fluid" src="assets/img-temp/480x700/img5.jpg" alt="Image Description">
-
-                        <!-- Ribbon -->
-                        <figcaption>
-                            <span
-                                class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-lightred g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">Sold</span>
-                        </figcaption>
-                        <!-- End Ribbon -->
-                    </div>
-
-                    <div class="media">
-                        <!-- Product Info -->
-                        <div class="d-flex flex-column">
-                            <h4 class="h6 g-color-black mb-1">
-                                <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
-                                    Hooded jeans
-                                </a>
-                            </h4>
-                            <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">Man</a>
-                            <s class="d-block g-color-lightred g-font-weight-500 g-font-size-13">$55.00</s>
-                            <span class="d-block g-color-black g-font-size-17">$35.99</span>
-                        </div>
-                        <!-- End Product Info -->
-
-                        <!-- Products Icons -->
-                        <ul class="list-inline media-body text-right">
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Cart"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-finance-100 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Wishlist"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-medical-022 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End Products Icons -->
-                    </div>
-                </figure>
-                <!-- End Product -->
-            </div>
-
-            <div class="js-slide">
-                <!-- Product -->
-                <figure class="g-px-10">
-                    <div class="g-pos-rel g-mb-20">
-                        <img class="img-fluid" src="assets/img-temp/480x700/img6.jpg" alt="Image Description">
-                    </div>
-
-                    <div class="media">
-                        <!-- Product Info -->
-                        <div class="d-flex flex-column">
-                            <h4 class="h6 g-color-black mb-1">
-                                <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
-                                    Waterproof jacket
-                                </a>
-                            </h4>
-                            <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">Woman</a>
-                            <span class="d-block g-color-black g-font-size-17">$105.99</span>
-                        </div>
-                        <!-- End Product Info -->
-
-                        <!-- Products Icons -->
-                        <ul class="list-inline media-body text-right">
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Cart"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-finance-100 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Wishlist"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-medical-022 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End Products Icons -->
-                    </div>
-                </figure>
-                <!-- End Product -->
-            </div>
-
-            <div class="js-slide">
-                <!-- Product -->
-                <figure class="g-px-10">
-                    <div class="g-pos-rel g-mb-20">
-                        <img class="img-fluid" src="assets/img-temp/480x700/img7.jpg" alt="Image Description">
-
-                        <!-- Ribbon -->
-                        <figcaption>
-                            <span
-                                class="u-ribbon-v1 g-width-40 g-height-40 g-color-white g-bg-primary g-font-size-11 text-center text-uppercase g-rounded-50x g-top-10 g-left-10 g-px-2 g-py-12">New</span>
-                        </figcaption>
-                        <!-- End Ribbon -->
-                    </div>
-
-                    <div class="media">
-                        <!-- Product Info -->
-                        <div class="d-flex flex-column">
-                            <h4 class="h6 g-color-black mb-1">
-                                <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
-                                    Classic T-shirt
-                                </a>
-                            </h4>
-                            <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">Man</a>
-                            <span class="d-block g-color-black g-font-size-17">$11.00</span>
-                        </div>
-                        <!-- End Product Info -->
-
-                        <!-- Products Icons -->
-                        <ul class="list-inline media-body text-right">
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Cart"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-finance-100 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Wishlist"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-medical-022 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End Products Icons -->
-                    </div>
-                </figure>
-                <!-- End Product -->
-            </div>
-
-            <div class="js-slide">
-                <!-- Product -->
-                <figure class="g-px-10">
-                    <div class="g-pos-rel g-mb-20">
-                        <img class="img-fluid" src="assets/img-temp/480x700/img8.jpg" alt="Image Description">
-                    </div>
-
-                    <div class="media">
-                        <!-- Product Info -->
-                        <div class="d-flex flex-column">
-                            <h4 class="h6 g-color-black mb-1">
-                                <a class="u-link-v5 g-color-black g-color-primary--hover" href="#">
-                                    Blue skirt
-                                </a>
-                            </h4>
-                            <a class="d-inline-block g-color-gray-dark-v5 g-font-size-13" href="#">Woman</a>
-                            <span class="d-block g-color-black g-font-size-17">$34.00</span>
-                        </div>
-                        <!-- End Product Info -->
-
-                        <!-- Products Icons -->
-                        <ul class="list-inline media-body text-right">
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Cart"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-finance-100 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                            <li class="list-inline-item align-middle mx-0">
-                                <a class="u-icon-v1 u-icon-size--sm g-color-gray-dark-v5 g-color-primary--hover g-font-size-15 rounded-circle"
-                                   href="#" title="Add to Wishlist"
-                                   data-toggle="tooltip"
-                                   data-placement="top">
-                                    <i class="icon-medical-022 u-line-icon-pro"></i>
-                                </a>
-                            </li>
-                        </ul>
-                        <!-- End Products Icons -->
-                    </div>
-                </figure>
-                <!-- End Product -->
-            </div>
+                    </figure>
+                    <!-- End Product -->
+                </div>
+            @endforeach
         </div>
     </div>
     <!-- End Products -->

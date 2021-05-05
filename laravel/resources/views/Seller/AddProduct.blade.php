@@ -1126,7 +1126,7 @@
 
             <!-- UnitPrice -->
             <div class="form-group g-mb-20 text-right">
-                <label id="lblUnitPrice" class="g-mb-10" onclick="console.log($('#imageUrl0').val(),$('#imageUrl1').val(),$('#imageUrl2').val(),$('#imageUrl3').val(),$('#imageUrl4').val())">قیمت پایه محصول</label>
+                <label id="lblUnitPrice" class="g-mb-10">قیمت پایه محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                         <i class="icon-info"></i>

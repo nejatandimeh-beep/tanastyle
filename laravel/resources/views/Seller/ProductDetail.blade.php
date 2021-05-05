@@ -143,86 +143,9 @@
             <label for="example-text-input" class="col-sm-2 col-form-label p-0 g-mb-5">تصاویر</label>
             <div class="row g-mb-20">
                 <div class="col-sm-3 g-mb-10">
-                    <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic1.jpg"
+                    <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath.$dataDetail->PicNumber }}.jpg"
                          alt="Image Description">
                 </div>
-
-                @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic2.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic3.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic4.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic5.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic6.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic7.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic8.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic9.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic10.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic11.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
-
-                @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
-                    <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath }}pic12.jpg"
-                             alt="Image Description">
-                    </div>
-                @endif
             </div>
 
             {{--        False Product Button--}}

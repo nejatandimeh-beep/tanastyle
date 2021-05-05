@@ -1235,7 +1235,7 @@
                             <div class="col-12 col-lg-3 g-mb-30">
                                 <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
-                                    <div>
+                                    <div class="g-pt-10">
                                         <div id="carousel-08-1"
                                              class="js-carousel text-center g-mb-40"
                                              data-infinite="1"
@@ -1361,7 +1361,7 @@
                                     </div>
 
                                     <!-- مشخصات محصول -->
-                                    <div style="direction: rtl" class="media">
+                                    <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
                                         <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
                                         <div class="d-flex justify-content-between col-12 p-0">
                                             <div class="d-flex flex-column">

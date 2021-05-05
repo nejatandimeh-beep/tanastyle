@@ -121,10 +121,6 @@
                 adaptiveHeight: true
             });
 
-            $.HSCore.components.HSCarousel.init('.js-carousel', {
-                autoplay: false
-            });
-
             $('#js-carousel-1, #js-carousel-7, #js-carousel-8').slick('setOption', 'responsive', [{
                 breakpoint: 992,
                 settings: {

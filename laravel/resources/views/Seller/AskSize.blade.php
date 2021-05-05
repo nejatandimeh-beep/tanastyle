@@ -16,7 +16,7 @@
    }">
                     <!-- Parallax Image -->
                     <div class="divimage dzsparallaxer--target w-100"
-                         style="height: 140%; background-image: url('../../assets/img-temp/1920x1080/img11.jpg'); transform: translate3d(0px, 0px, 0px);"></div>
+                         style="height: 140%; background-image: url({{asset('assets/img-temp/1920x1080/img11.jpg')}}); transform: translate3d(0px, 0px, 0px);"></div>
 
                     <section
                         class="g-flex-centered g-height-500 g-color-white u-bg-overlay g-bg-black-opacity-0_6--after g-py-20">
@@ -25,17 +25,17 @@
                                 <div class="col-md-6 align-self-center g-py-20">
                                     <h2>
                                         @if($gender == '0')
-                                            <span class="g-ml-1">{{ $name }}</span> زنانه
+                                            <span class="g-ml-1">{{ $name.' ' }}</span> زنانه
                                         @elseif($gender == '1')
-                                            <span class="g-ml-1">{{ $name }}</span> مردانه
+                                            <span class="g-ml-1">{{ $name.' ' }}</span> مردانه
                                         @elseif($gender == '2')
-                                            <span class="g-ml-1">{{ $name }}</span> بچگانه - دخترانه
+                                            <span class="g-ml-1">{{ $name.' ' }}</span> دخترانه
                                         @elseif($gender == '3')
-                                            <span class="g-ml-1">{{ $name }}</span> بچگانه - پسرانه
+                                            <span class="g-ml-1">{{ $name.' ' }}</span> پسرانه
                                         @elseif($gender == '4')
-                                            <span class="g-ml-1">{{ $name }}</span> نوزادی - دخترانه
+                                            <span class="g-ml-1">{{ $name.' ' }}</span> نوزادی دخترانه
                                         @else
-                                            <span class="g-ml-1">{{ $name }}</span> نوزادی - پسرانه
+                                            <span class="g-ml-1">{{ $name.' ' }}</span> نوزادی پسرانه
                                         @endif
                                     </h2>
                                     <p class="lead mb-0 g-line-height-2">توضیحاتی در مورد محصول</p>
@@ -78,28 +78,11 @@
                     </div>
                     <div class="col-md-12 text-center g-mb-30">
                         <label for="qty" class="g-font-weight-600">چند سایز برای محصول
-                            @if($gender == '0')
-                                <span>
-                                        <span class="g-ml-1">{{ $name }}</span> زنانه
-                                    </span>
-                            @elseif($gender == '1')
-                                <span>
-                                        <span class="g-ml-1">{{ $name }}</span> مردانه
-                                    </span>
-                            @elseif($gender == '2')
-                                <span>
-                                        <span class="g-ml-1">{{ $name }}</span> بچگانه - نوزادی
-                                    </span>
-                            @elseif($gender == '3')
-                                <span>
-                                        <span class="g-ml-1">{{ $name }}</span> بچگانه - دخترانه
-                                    </span>
-                            @else
-                                <span>
-                                        <span class="g-ml-1">{{ $name }}</span> بچگانه - پسرانه
-                                    </span>
-                            @endif
-                            دارید؟</label>
+                            <span>
+                                    {{ $hintCat.' ' }}{{ $name.' ' }}
+                            </span>
+                            دارید؟
+                        </label>
                         <input name="catCode" type="text" value="{{ $catCode }}" class="d-none">
                         <div style="direction: ltr" class="form-group g-mb-20 text-right col-lg-3 mx-auto">
                             <div class="input-group g-brd-primary--focus g-mb-10">

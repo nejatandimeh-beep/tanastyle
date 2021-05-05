@@ -1007,7 +1007,8 @@
             temp1 = x.replace(new RegExp(',', 'g'), ""); // remove coma
             temp1 = parseInt(temp1);
             $("#tempPrice").val(temp1);
-
+            $("#discount").val('');
+            $("#BsalePrice").text('...');
         });
 
         // -------------------Calculate UintPrice Discount And Show in salePrice-----------------

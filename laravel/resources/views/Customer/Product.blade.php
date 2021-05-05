@@ -4,6 +4,7 @@
     <span id="customerID" class="d-none">{{ (isset(Auth::user()->id)) ? Auth::user()->name:'' }}</span>
     <span id="productID" class="d-none">{{ $data->ID }}</span>
     <span id="productDetailID" class="d-none"></span>
+    <span id="productPage" class="d-none"></span>
     <span id="productDiscount" class="d-none">{{ $data->Discount }}</span>
     <span id="checkLike" class="d-none">{{ $like }}</span>
     <span id="voteID" class="d-none">{{ isset($voteID) ? $voteID->ID: 'null'}}</span>
@@ -139,7 +140,7 @@
                     </fieldset>
                     <!-- End Article Size -->
                     <div class="d-none g-mb-5" id="sizeInfo">
-{{--                        <span class="g-px-5 g-py-7 g-brd-around g-brd-gray-light-v3 g-ml-3"></span>--}}
+                        {{--                        <span class="g-px-5 g-py-7 g-brd-around g-brd-gray-light-v3 g-ml-3"></span>--}}
                         <input type="radio" id="color" name="color" value=""
                                class="u-checkbox-v1--checked-brd-primary">
                         <label for="color"
@@ -581,8 +582,6 @@
                 <!-- Carousel Images -->
                 <div id="js-carousel-11" class="js-carousel g-mb-5" data-infinite="1" data-fade="1"
                      data-arrows-classes="u-arrow-square g-font-size-50 g-pos-abs g-top-50x g-color-white"
-                     data-arrow-left-classes="fa fa-angle-left g-left-30 g-mt-minus-30"
-                     data-arrow-right-classes="fa fa-angle-right g-right-30 g-mt-minus-30"
                      data-nav-for="#js-carousel-11-nav">
 
                     <div class="js-slide img-magnifier-container">
@@ -593,15 +592,27 @@
                         <div class="js-slide img-magnifier-container">
                             <img id="img2" class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
                         </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide img-magnifier-container">
+                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
+                        </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
                         <div class="js-slide img-magnifier-container">
                             <img id="img3" class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
                         </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide img-magnifier-container">
+                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
+                        </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
                         <div class="js-slide img-magnifier-container">
                             <img id="img4" class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide img-magnifier-container">
+                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
@@ -640,22 +651,35 @@
                 <!-- Carousel Nav -->
                 <div id="js-carousel-11-nav" class="js-carousel u-carousel-v11" data-infinite="1" data-center-mode="1"
                      data-slides-show="3" data-is-thumbs="1" data-nav-for="#js-carousel-11">
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
-                            <img class="{{!file_exists(public_path($data->PicPath.'pic2.jpg')) ? 'd-none':''}} w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
-                        </div>
+                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
+                        <img class="{{!file_exists(public_path($data->PicPath.'pic2.jpg')) ? 'd-none':''}} w-100"
+                             src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
+                    </div>
                     @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
                         <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
                             <img class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                            <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
                         <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic3">
                             <img class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
                         </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                            <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
+                        </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
                         <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic4">
                             <img class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                            <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic5.jpg')))

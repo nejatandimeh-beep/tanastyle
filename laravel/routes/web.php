@@ -131,21 +131,29 @@ Route::get('/Seller-Search-Product-Date/{id}/{startDate}/{endDate}', 'Seller\Bas
 
 // *********************************************** ( Customer Routes ) *************************************************
 // Master Page
-Route::get('/', function () {
-    return view('Customer.Master');
-})->name('Master');
+Route::get('/', 'Customer\Basic@Master')->name('Master');
 
 //-------------------[ Customer Product List ]-----------------------
 Route::get('/Customer-Product-Female-List', 'Customer\Basic@productFemaleList')->name('productFemaleList');
 
 Route::get('/Customer-Product-Male-List', 'Customer\Basic@productMaleList')->name('productMaleList');
 
-Route::get('/Customer-Product-Kids-List', 'Customer\Basic@productKidsList')->name('productKidsList');
+Route::get('/Customer-Product-Girl-List', 'Customer\Basic@productGirlList')->name('productGirlList');
 
-Route::get('/Customer-Product-0000', 'Customer\Basic@product0000')->name('product00');
+Route::get('/Customer-Product-Boy-List', 'Customer\Basic@productBoyList')->name('productBoyList');
+
+Route::get('/Customer-Product-BabyGirl-List', 'Customer\Basic@productBabyGirlList')->name('productBabyGirlList');
+
+Route::get('/Customer-Product-BabyBoy-List', 'Customer\Basic@productBabyBoyList')->name('productBabyBoyList');
+
+Route::get('/Customer-Product-Search-List/{val}', 'Customer\Basic@productSearchList')->name('productSearchList');
+
+Route::get('/Customer-Product-00', 'Customer\Basic@product00')->name('product00');
 
 // Customer Product Detail
 Route::get('/Customer-Product-Detail/{id}/{size}/{color}', 'Customer\Basic@productDetail')->name('productDetail');
+
+Route::get('/Customer-Product-Visit/{id}', 'Customer\Basic@productVisit')->name('productVisit');
 
 // Banking portal
 Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal')->middleware('verified');
@@ -155,7 +163,11 @@ Route::get('/Customer-Verify', 'Customer\Basic@customerVerify')->name('customerV
 // Profile
 Route::get('/Customer-Profile/{id}', 'Customer\Basic@userProfile')->name('userProfile');
 
+Route::get('/Customer-Product-spacialSelling-List/{min}/{max}', 'Customer\Basic@spacialSelling')->name('spacialSelling');
+
 // -------------------[ Ajax ]-----------------------
+Route::get('/Customer-Product-Search/{val}', 'Customer\Basic@productSearch');
+
 Route::get('/Customer-Product-LikeProduct/{id}/{idDetail}/{val}', 'Customer\Basic@likeProduct');
 
 Route::get('/Customer-Product-RatingProduct/{id}/{idDetail}/{val}', 'Customer\Basic@ratingProduct');
@@ -210,3 +222,8 @@ Route::post('/Customer-Profile-Image', 'Customer\Basic@uploadImage')->name('uplo
 Route::get('/email-test', function () {
     return view('vendor.mail.html.test');
 });
+
+// *********************************************** ( Delivery Routes ) *************************************************
+Route::get('/Delivery-Panel', 'Delivery\Basic@deliveryPanel')->name('deliveryPanel');
+Route::get('/Delivery-Panel-CourierDelivery/{orderDetailID}', 'Delivery\Basic@courierDelivery');
+Route::get('/Delivery-Panel-sellerCheckPass/{pass}/{sellerID}', 'Delivery\Basic@sellerCheckPass');

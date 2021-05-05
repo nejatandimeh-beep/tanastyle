@@ -95,7 +95,7 @@
                                         <div class="text-center">
                                             <img
                                                 class="align-self-center g-brd-around g-brd-4 g-brd-primary g-width-150 g-height-150 rounded-circle"
-                                                src="img/Other/a.png"
+                                                src="{{ Auth::guard('seller')->user()->PicPath }}"
                                                 alt="Image Description">
                                         </div>
                                         <div

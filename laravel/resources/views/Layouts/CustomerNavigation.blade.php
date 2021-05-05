@@ -1130,7 +1130,8 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">انواع
                                                                         کلاه</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">هد بند</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="#">هد
+                                                                        بند</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">انواع
                                                                         عینک</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">بینی
@@ -2357,7 +2358,7 @@
                                                     <h2 class="h5 mb-0 g-color-black">تخفیف های برنز</h2>
                                                     <span class="d-block g-color-black">15 تا 25 درصد</span>
                                                 </div>
-                                                <a class="u-link-v2" href="#"></a>
+                                                <a class="u-link-v2" href="{{route('spacialSelling',[15, 25])}}"></a>
                                             </article>
                                         </div>
 
@@ -2369,7 +2370,7 @@
                                                     <h2 class="h5 mb-0 g-color-black">تخفیف های نقره ای</h2>
                                                     <span class="d-block g-color-black">25 تا 35 درصد</span>
                                                 </div>
-                                                <a class="u-link-v2" href="#"></a>
+                                                <a class="u-link-v2" href="{{route('spacialSelling',[25, 35])}}"></a>
                                             </article>
                                         </div>
 
@@ -2381,7 +2382,7 @@
                                                     <h2 class="h5 mb-0 g-color-black">تخفیف های طلایی</h2>
                                                     <span class="d-block g-color-black">35 درصد به بالا</span>
                                                 </div>
-                                                <a class="u-link-v2" href="#"></a>
+                                                <a class="u-link-v2" href="{{route('spacialSelling',[35, 99])}}"></a>
                                             </article>
                                         </div>
                                     </div>
@@ -2414,7 +2415,7 @@
                                data-dropdown-hide-on-scroll="false"
                                data-dropdown-animation-in="fadeIn"
                                data-dropdown-animation-out="fadeOut"
-                               onmousemove="hideSearch()">
+                               onmousemove="$('#searchForm').addClass('d-none')">
                                 <span id="basketNum"
                                       class="u-badge-v1--sm g-color-white g-bg-primary g-rounded-50x">0</span>
                                 <i class="fa fa-shopping-cart"></i>
@@ -2499,13 +2500,10 @@
                                             </a>
                                         </div>
                                     @else
-                                        <div id="settingIconDiv" class="g-pt-10 g-mr-15 g-mr-25--lg">
+                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">
                                             <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
-                                               class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover"
-                                               data-toggle="tooltip"
-                                               data-placement="bottom"
                                                title="اطلاعات کاربری"
-                                            >
+                                               class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover">
                                                 {{ Auth::user()->name }}
 
                                                 <i id="settingIcon" class="icon-settings g-font-size-16 g-ml-5"></i>
@@ -2527,20 +2525,16 @@
                                 </a>
 
                                 <!-- Search Form -->
-                                <form style="display: none; border-top: 2px solid #72c02c" id="searchForm"
-                                      class="u-searchform-v1 u-dropdown--hidden g-bg-white g-pa-10 g-mt-17 g-mt-10--lg--scrolling">
-                                    <div style="direction: rtl"
-                                         class="input-group g-brd-primary--focus g-state-focus">
+                                <form style="border-top: 2px solid #72c02c" id="searchForm"
+                                      class="d-none outSideClick u-searchform-v1 u-dropdown--hidden g-bg-white g-pa-10 g-mt-17 g-mt-10--lg--scrolling">
+                                    <div style="direction: rtl">
                                         <input style="direction:rtl;font-family: Yekan; font-size: 16px !important;"
                                                class="form-control rounded-0 u-form-control" type="search"
+                                               oninput="productSearch('menuProductSearch',$(this).attr('value'))"
+                                               onclick="$('#menuProductSearch').removeClass('d-none')"
                                                id="searchInput"
-                                               placeholder="خودتان بگردید..">
-
-                                        <div class="input-group-addon p-0 align-middle">
-                                            <button class="btn rounded-0 btn-primary btn-md g-font-size-14 g-px-18"
-                                                    type="submit">بگرد
-                                            </button>
-                                        </div>
+                                               placeholder="تایپ کن و بگرد..">
+                                        <ul id="menuProductSearch" class="ajaxDropDown p-0 outSideClick g-mt-5"></ul>
                                     </div>
 
                                 </form>

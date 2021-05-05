@@ -62,6 +62,17 @@
                 });
             });
 
+            if($('#productPage').length > 0)
+                setTimeout(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Customer-Product-Visit/'+$('#productDetailID').text(),
+                    success: function (data) {
+                        console.log(data);
+                    }
+                });
+            }, 1000);
+
             // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
             let gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [];
             $('input[name="gender"]:checked').each(function () {
@@ -131,11 +142,10 @@
                         + priceMax + '/'
                         + JSON.stringify(color),
                     success: function (data) {
-                        console.log(data);
                         $('#loadProduct').addClass('d-none');
                         $('#productContainer').html(data);
-                        $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
-                        $('html, body').animate({scrollTop: $('#contentTop').offset().top}, 500);
+                        if($('#contentTop').length>0)
+                            $('html, body').animate({scrollTop: $('#contentTop').offset().top}, 500);
                     }
                 });
             }
@@ -248,13 +258,15 @@
             }
         });
 
-        $('#settingIconDiv').on('mouseenter', function () {
-            let element = element.querySelector('.active'),
-                elementBefore = element.previousElementSibling;
-            $(elementBefore).addClass('circleRotate');
-            setTimeout(function () {
-                $(elementBefore).removeClass('circleRotate');
-            }, 500);
+        $(document).mouseup(function(e)
+        {
+            let container = $(".outSideClick");
+
+            // if click on out side container
+            if (!container.is(e.target) && container.has(e.target).length === 0)
+            {
+                $('.outSideClick').addClass('d-none');
+            }
         });
 
         document.onreadystatechange = function () {
@@ -264,26 +276,9 @@
             }
         }
 
-        $(document).on('click', function () {
-            if (!$('#searchForm').is(":hidden"))
-                $('#searchForm').hide();
-        });
-
-        // بستن سبد خرید به هنگام حرکت ماوس بر روی هر کجا از صفحه
-        $(document).mouseup(function (e) {
-            let container = $("#myBasket");
-
-            // if the target of the click isn't the container nor a descendant of the container
-            if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $("#basket-bar").addClass('u-dropdown--hidden');
-                $("#basket-bar").removeClass('fadeIn');
-                $('#basket-bar-invoker').attr('aria-expanded', 'false');
-            }
-        });
-
         // نمایش فیلد جستجو در ناویگیشن
         $('#searchIcon').on('click', function () {
-            $('#searchForm').slideToggle(0);
+            $('#searchForm').removeClass('d-none');
             $('#searchInput').focus();
         });
 
@@ -632,6 +627,17 @@
         }
 
         // ---------------------------------------------------My Function-----------------------------------------------
+        function productSearch(id,val){
+            $.ajax({
+                type: 'GET',
+                url: "/Customer-Product-Search/" + val,
+                success: function(data){
+                    console.log(data);
+                    $('#'+id).removeClass('d-none');
+                    $('#'+id).html(data);
+                }
+            });
+        }
         function minPriceAllOff(ele) {
             if ((parseInt(ele.val().replace(new RegExp(',', 'g'), "")) > 9999)
                 && (parseInt($('#price-max').val().replace(new RegExp(',', 'g'), "")) < 100000000)
@@ -1114,11 +1120,6 @@
                 $('#otherMenu').attr("style", "display: none !important;");
             } else
                 $('#otherMenu').removeAttr('style');
-        }
-
-        function hideSearch() {
-            if (!($("#searchForm").is(":hidden")))
-                $('#searchForm').slideUp(0);
         }
 
         function confirmLogout() {
