@@ -225,5 +225,9 @@ Route::get('/email-test', function () {
 
 // *********************************************** ( Delivery Routes ) *************************************************
 Route::get('/Delivery-Panel', 'Delivery\Basic@deliveryPanel')->name('deliveryPanel');
-Route::get('/Delivery-Panel-CourierDelivery/{orderDetailID}', 'Delivery\Basic@courierDelivery');
+
+Route::get('/Delivery-Panel-DeliveryCourier/{orderDetailID}', 'Delivery\Basic@deliveryCourier');
+
+Route::get('/Delivery-Panel-ReturnCourier/{orderDetailID}', 'Delivery\Basic@returnCourier');
+
 Route::get('/Delivery-Panel-sellerCheckPass/{pass}/{sellerID}', 'Delivery\Basic@sellerCheckPass');

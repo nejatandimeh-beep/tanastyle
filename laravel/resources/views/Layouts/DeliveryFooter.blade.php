@@ -1,7 +1,7 @@
 @section('DeliveryFooter')
 
 
-    <div class="shortcode-html">
+    <div>
         <!-- Footer -->
 {{--        <div class="g-pos-rel">--}}
 {{--            <!-- Google Map -->--}}
@@ -16,7 +16,7 @@
         <!-- Footer -->
 
         <!-- Copyright -->
-        <footer class="text-center g-pt-40 g-pb-30">
+        <footer class="text-center g-pt-100 g-pb-30">
             <div class="container">
                 <a class="d-block g-mb-30" href="index.html">
                     <img class="img-fluid" src="{{ asset('img/Logo/logo.png') }}" width="150" alt="Logo">
