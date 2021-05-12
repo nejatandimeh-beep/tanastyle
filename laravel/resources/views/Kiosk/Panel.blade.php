@@ -190,7 +190,7 @@
 {{--                                                    @endif--}}
 {{--                                                    @if($row->DeliveryStatus === '2')--}}
 {{--                                                        <span class="g-font-size-16 g-color-yellow">--}}
-{{--                                                         باجه پستی شرکت--}}
+{{--                                                         کیوسک--}}
 {{--                                                    </span>--}}
 {{--                                                    @endif--}}
                                                 </td>

@@ -148,10 +148,10 @@
                                         <th class="g-brd-white-opacity-0_1">رنگ</th>
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
-                                        <th class="g-brd-white-opacity-0_1">آدرس دقیق</th>
+                                        <th class="g-brd-white-opacity-0_1">مبداً</th>
                                         <th class="g-brd-white-opacity-0_1">اولویت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
-                                        <th class="g-brd-white-opacity-0_1">تصویر فرد</th>
+                                        <th class="g-brd-white-opacity-0_1">تصویر تحویل دهنده</th>
                                         <th class="g-brd-white-opacity-0_1">تاییدیه</th>
                                     </tr>
                                     </thead>
@@ -191,7 +191,7 @@
                                                     @endif
                                                     @if($row->DeliveryStatus === '2')
                                                         <span class="g-font-size-16 g-color-yellow">
-                                                         باجه پستی شرکت
+                                                         کیوسک
                                                     </span>
                                                     @endif
                                                 </td>
@@ -215,19 +215,13 @@
                                                 </td>
                                                 <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
                                                     <div id="signatureDiv{{$key}}" class="col-9 d-inline-block">
-                                                        <div class="input-group">
-                                                      <span class="input-group-btn">
-                                                        <button class="btn u-btn-primary rounded-0"
-                                                                onclick="deliveryCourier({{$row->OrderDetailID}}, {{$key}})"
-                                                                type="button"><i
-                                                                class="fa fa-check align-middle g-font-size-16"></i></button>
-                                                      </span>
-                                                            <input id="pass{{$key}}" type="password"
-                                                                   onclick="this.select();"
-                                                                   class="form-control form-control-md rounded-0"
-                                                                   placeholder="رمز امضاء">
-                                                            <span id="sellerID{{$key}}"
-                                                                  class="d-none">{{$row->SellerID}}</span>
+                                                        <div class="input-group justify-content-center">
+                                                          <div class="input-group-btn">
+                                                            <button class="btn u-btn-primary rounded-0"
+                                                                    onclick="deliveryCourier({{$row->OrderDetailID}}, {{$key}})"
+                                                                    type="button"><i
+                                                                    class="fa fa-check align-middle g-font-size-16"></i></button>
+                                                          </div>
                                                         </div>
                                                     </div>
 
@@ -280,10 +274,9 @@
                                         <th class="g-brd-white-opacity-0_1">رنگ</th>
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
-                                        <th class="g-brd-white-opacity-0_1">آدرس دقیق</th>
+                                        <th class="g-brd-white-opacity-0_1">مبداً</th>
                                         <th class="g-brd-white-opacity-0_1">اولویت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
-                                        <th class="g-brd-white-opacity-0_1">تصویر فرد</th>
                                         <th class="g-brd-white-opacity-0_1">تاییدیه</th>
                                     </tr>
                                     </thead>
@@ -323,7 +316,7 @@
                                                     @endif
                                                     @if($row->ReturnStatus === '2')
                                                         <span class="g-font-size-16 g-color-yellow">
-                                                            باجه پستی شرکت
+                                                            کیوسک
                                                         </span>
                                                     @endif
                                                 </td>
@@ -336,19 +329,9 @@
                                                         src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
-                                                <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    @if($row->ReturnStatus === '4')
-                                                        <img class="d-flex g-width-35 g-my-10 g-height-35 mx-auto"
-                                                             src="{{ asset('img/Other/postLogo.png') }}"
-                                                             alt="Image Description">
-                                                    @endif
-                                                    @if($row->ReturnStatus === '2')
-                                                        <i class="icon-home g-font-size-20 g-color-primary"></i>
-                                                    @endif
-                                                </td>
                                                 <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
                                                     <div id="returnSignatureDiv{{$key}}" class="col-9 d-inline-block">
-                                                        <div class="input-group">
+                                                        <div class="input-group justify-content-center">
                                                           <span class="input-group-btn">
                                                             <button class="btn u-btn-primary rounded-0"
                                                                     onclick="returnCourier({{$row->OrderDetailID}}, {{$key}})"
@@ -405,16 +388,15 @@
                                         <th class="g-brd-white-opacity-0_1">رنگ</th>
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
-                                        <th class="g-brd-white-opacity-0_1">آدرس دقیق</th>
+                                        <th class="g-brd-white-opacity-0_1">مقصد</th>
                                         <th class="g-brd-white-opacity-0_1">اولویت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
-                                        <th class="g-brd-white-opacity-0_1">تصویر فرد</th>
-                                        <th class="g-brd-white-opacity-0_1">تاییدیه</th>
                                     </tr>
                                     </thead>
 
                                     <tbody id="returnTBody"
                                            class="g-font-size-12 g-color-white-opacity-0_5 g-font-weight-600">
+                                    <span class="d-none">{{ $counter=0 }}</span>
                                     @if($deliveryManBasket!==null)
                                         @foreach($deliveryManBasket as $key => $row)
                                             <tr id="returnRow{{$key}}">
@@ -442,24 +424,14 @@
                                                         class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    @if($row->deliveryStatus === '1')
+                                                    @if($row->DeliveryStatus === '1')
                                                         <span class="g-font-size-16 g-color-yellow">
-                                                             باجه پستی شرکت
+                                                             کیوسک
                                                         </span>
                                                     @endif
-                                                    @if($row->deliveryStatus === '3')
+                                                    @if($row->DeliveryStatus === '3')
                                                         <span class="g-font-size-16 g-color-yellow">
                                                             اداره پست مرکزی
-                                                        </span>
-                                                    @endif
-                                                    @if($row->deliveryStatus === '-3')
-                                                        <span class="g-font-size-16 g-color-yellow">
-                                                            باجه پستی شرکت
-                                                        </span>
-                                                    @endif
-                                                    @if($row->deliveryStatus === '-1')
-                                                        <span class="g-font-size-16 g-color-yellow">
-                                                            {{$row->Address.' پلاک '.$row->ShopNumber}}
                                                         </span>
                                                     @endif
                                                 </td>
@@ -472,54 +444,15 @@
                                                         src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
-                                                <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    @if($row->deliveryStatus === '1')
-                                                        <i class="icon-home g-font-size-20 g-color-primary"></i>
-                                                    @endif
-                                                    @if($row->deliveryStatus === '3')
-                                                        <img class="d-flex g-width-35 g-my-10 g-height-35 mx-auto"
-                                                             src="{{ asset('img/Other/postLogo.png') }}"
-                                                             alt="Image Description">
-                                                    @endif
-                                                    @if($row->deliveryStatus === '-3')
-                                                        <i class="icon-home g-font-size-20 g-color-primary"></i>
-                                                    @endif
-                                                    @if($row->deliveryStatus === '-1')
-                                                        <img class="d-flex g-width-60 g-my-10 g-height-60 mx-auto"
-                                                             src="{{ $row->sellerPic }}" alt="Image Description">
-                                                    @endif
-                                                </td>
-                                                <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
-                                                    <div id="returnSignatureDiv{{$key}}" class="col-9 d-inline-block">
-                                                        <div class="input-group">
-                                                          <span class="input-group-btn">
-                                                            <button class="btn u-btn-primary rounded-0"
-                                                                    onclick="returnCourier({{$row->OrderDetailID}}, {{$key}})"
-                                                                    type="button"><i
-                                                                    class="fa fa-check align-middle g-font-size-16"></i></button>
-                                                          </span>
-                                                        </div>
-                                                    </div>
-
-                                                    <i id="returnWaitingIconTd{{$key}}"
-                                                       class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-
-                                                    <svg id="returnCheckMark{{$key}}" class="d-none checkmark"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                                                fill="none"/>
-                                                        <path class="checkmark__check" fill="none"
-                                                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                                                    </svg>
-                                                </td>
                                             </tr>
+                                            <span class="d-none">{{ $counter=$key+1 }}</span>
                                         @endforeach
                                     @endif
                                     @if($returnManBasket!==null)
                                         @foreach($returnManBasket as $key => $row)
                                             <tr id="returnRow{{$key}}">
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    <span class="g-color-white">{{$key+1}}</span>
+                                                    <span class="g-color-white">{{++$counter}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span class="g-color-white">{{$row->Name}}</span>
@@ -544,12 +477,12 @@
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->ReturnStatus === '1')
                                                         <span class="g-font-size-16 g-color-yellow">
-                                                             باجه پستی شرکت
+                                                             فروشنده
                                                         </span>
                                                     @endif
                                                     @if($row->ReturnStatus === '3')
                                                         <span class="g-font-size-16 g-color-yellow">
-                                                            اداره پست مرکزی
+                                                            کیوسک
                                                         </span>
                                                     @endif
                                                 </td>
@@ -561,39 +494,6 @@
                                                         class="d-flex g-width-60 g-height-60 g-my-10 mx-auto g-bg-white"
                                                         src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
-                                                </td>
-                                                <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    @if($row->deliveryStatus === '1')
-                                                        <i class="icon-home g-font-size-20 g-color-primary"></i>
-                                                    @endif
-                                                    @if($row->deliveryStatus === '3')
-                                                        <img class="d-flex g-width-35 g-my-10 g-height-35 mx-auto"
-                                                             src="{{ asset('img/Other/postLogo.png') }}"
-                                                             alt="Image Description">
-                                                    @endif
-                                                </td>
-                                                <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
-                                                    <div id="returnSignatureDiv{{$key}}" class="col-9 d-inline-block">
-                                                        <div class="input-group">
-                                                          <span class="input-group-btn">
-                                                            <button class="btn u-btn-primary rounded-0"
-                                                                    onclick="returnCourier({{$row->OrderDetailID}}, {{$key}})"
-                                                                    type="button"><i
-                                                                    class="fa fa-check align-middle g-font-size-16"></i></button>
-                                                          </span>
-                                                        </div>
-                                                    </div>
-
-                                                    <i id="returnWaitingIconTd{{$key}}"
-                                                       class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-
-                                                    <svg id="returnCheckMark{{$key}}" class="d-none checkmark"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                                                fill="none"/>
-                                                        <path class="checkmark__check" fill="none"
-                                                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                                                    </svg>
                                                 </td>
                                             </tr>
                                         @endforeach

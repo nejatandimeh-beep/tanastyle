@@ -26,7 +26,7 @@ class Basic extends Controller
         $data = DB::table('product as p')
             ->select('*')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->orderBy('pd.VisitCounter','DESC')
+            ->orderBy('pd.VisitCounter', 'DESC')
             ->take(10)
             ->get();
 
@@ -693,7 +693,7 @@ class Basic extends Controller
     public function productVisit($id)
     {
         DB::table('product_detail')
-            ->where('ID',$id)
+            ->where('ID', $id)
             ->update([
                 'visitCounter' => DB::raw('visitCounter + 1'),
             ]);
@@ -1225,21 +1225,21 @@ class Basic extends Controller
 
     public function productSearch($val)
     {
-        $output='';
-        $data=DB::table('product')
+        $output = '';
+        $data = DB::table('product')
             ->select('Name')
             ->where('Name', 'like', $val . '%')
             ->groupBy('Name')
             ->take(15)
             ->get();
 
-        foreach ($data as $key => $row){
+        foreach ($data as $key => $row) {
             $output .= '<li style="border-radius: 0 !important;"
                         class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
-                            <a  href="'.route('productSearchList',[$row->Name]).'"
+                            <a  href="' . route('productSearchList', [$row->Name]) . '"
                                 style="text-decoration: none"
                                 class="col-12 p-0 text-right g-color-gray-dark-v3 g-color-primary--hover">
-                             '. $row->Name .'
+                             ' . $row->Name . '
                             </a>
                         </li>';
         }
@@ -1266,7 +1266,7 @@ class Basic extends Controller
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
-    public function spacialSelling($minDiscount,$maxDiscount)
+    public function spacialSelling($minDiscount, $maxDiscount)
     {
 
         $data = DB::table('product')
@@ -1278,7 +1278,7 @@ class Basic extends Controller
             ->get();
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID','p.Discount')
+            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->whereIn('Discount', function ($query) use ($minDiscount, $maxDiscount) {
                 $query->select('Discount')
@@ -1349,9 +1349,47 @@ class Basic extends Controller
             ->select('ID')
             ->max('ID');
 
-        DB::table('product_delivery')->insert([
-            'OrderDetailID' => $orderDetailID,
-        ]);
+        $deliveryMan=DB::table('delivery_men')
+            ->select('*')
+            ->get();
+
+        $data = DB::table('product_delivery')
+            ->select('DeliveryManID')
+            ->get();
+
+        if($data->isEmpty() || $data->count()<2){
+            DB::table('product_delivery')->insert([
+                'OrderDetailID' => $orderDetailID,
+                'DeliveryManID' => $deliveryMan[0]->ID,
+            ]);
+        } else {
+            $data = DB::table('product_delivery')
+                ->select('DeliveryManID')
+                ->orderBy('id', 'desc')
+                ->take($deliveryMan->count()-1)
+                ->get();
+
+            $DeliveryManIDArr=array();
+            foreach ($data as $key =>$row){
+                $DeliveryManIDArr[$key]=$row->DeliveryManID;
+            }
+
+            $deliveryManTurn='';
+            foreach ($deliveryMan as $key =>$row){
+                if(in_array($row->ID, $DeliveryManIDArr,true))
+                    continue;
+                else{
+                    $deliveryManTurn=$row->ID;
+                    break;
+                }
+            }
+
+            DB::table('product_delivery')->insert([
+                'OrderDetailID' => $orderDetailID,
+                'DeliveryManID' => (int)$deliveryManTurn,
+            ]);
+        }
+
 
         DB::table('product_detail')
             ->where('ID', $id)
