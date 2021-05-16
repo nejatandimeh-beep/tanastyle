@@ -122,7 +122,7 @@
 
         <div style="direction: rtl">
             <div id="accordion-01" role="tablist" aria-multiselectable="true">
-                <!-- Card -->
+                <!-- محصولات در صف انتظار -->
                 <div class="card g-mb-5 rounded-0">
                     <div id="accordion-01-heading-01" class="card-header" role="tab">
                         <h5 class="mb-0">
@@ -149,7 +149,7 @@
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
                                         <th class="g-brd-white-opacity-0_1">مبداً</th>
-                                        <th class="g-brd-white-opacity-0_1">اولویت رسیدگی</th>
+                                        <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر تحویل دهنده</th>
                                         <th class="g-brd-white-opacity-0_1">تاییدیه</th>
@@ -196,7 +196,19 @@
                                                     @endif
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    <span class="g-color-white">{{$key}}</span>
+                                                    @if($row->DeliveryProblem === 0)
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <a class="btn-floating btn-primary rounded-circle">
+                                                                <div style="width: 15px; height: 15px"></div>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <a class="btn-floating g-bg-red pulse rounded-circle">
+                                                                <div style="width: 20px; height: 20px"></div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <img
@@ -248,7 +260,7 @@
                 </div>
                 <!-- End Card -->
 
-                <!-- Card -->
+                <!-- برگشتی -->
                 <div class="card g-mb-5 rounded-0">
                     <div id="accordion-01-heading-02" class="card-header" role="tab">
                         <h5 class="mb-0">
@@ -321,7 +333,19 @@
                                                     @endif
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    <span class="g-color-white">{{$key}}</span>
+                                                    @if($row->ReturnProblem === 0)
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <a class="btn-floating btn-primary rounded-circle">
+                                                                <div style="width: 15px; height: 15px"></div>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <a class="btn-floating g-bg-red pulse rounded-circle">
+                                                                <div style="width: 20px; height: 20px"></div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <img
@@ -364,7 +388,7 @@
                 </div>
                 <!-- End Card -->
 
-                <!-- Card -->
+                <!-- سبد من -->
                 <div class="card g-mb-5 rounded-0">
                     <div id="accordion-01-heading-03" class="card-header" role="tab">
                         <h5 class="mb-0">
@@ -389,8 +413,9 @@
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
                                         <th class="g-brd-white-opacity-0_1">مقصد</th>
-                                        <th class="g-brd-white-opacity-0_1">اولویت رسیدگی</th>
+                                        <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
+                                        <th class="g-brd-white-opacity-0_1">تاییده</th>
                                     </tr>
                                     </thead>
 
@@ -399,9 +424,9 @@
                                     <span class="d-none">{{ $counter=0 }}</span>
                                     @if($deliveryManBasket!==null)
                                         @foreach($deliveryManBasket as $key => $row)
-                                            <tr id="returnRow{{$key}}">
+                                            <tr id="basketRow{{$counter}}">
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    <span class="g-color-white">{{$key+1}}</span>
+                                                    <span class="g-color-white">{{$counter+1}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span class="g-color-white">{{$row->Name}}</span>
@@ -436,7 +461,19 @@
                                                     @endif
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    <span class="g-color-white">{{$key}}</span>
+                                                    @if($row->DeliveryProblem === 0)
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <a class="btn-floating btn-primary rounded-circle">
+                                                                <div style="width: 15px; height: 15px"></div>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <a class="btn-floating g-bg-red pulse rounded-circle">
+                                                                <div style="width: 20px; height: 20px"></div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <img
@@ -444,15 +481,43 @@
                                                         src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
+                                                <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
+                                                    <div id="kioskSignatureDiv{{$counter}}" class="col-9 d-inline-block">
+                                                        <div class="input-group">
+                                                            <div class="input-group-btn">
+                                                                <button class="btn u-btn-primary rounded-0"
+                                                                        onclick="deliveryKiosk({{$row->OrderDetailID}}, {{$counter}},'delivery')"
+                                                                        type="button"><i
+                                                                        class="fa fa-check align-middle g-font-size-16"></i></button>
+                                                            </div>
+                                                            <input
+                                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                type="password"
+                                                                id="pass{{$counter}}"
+                                                                placeholder="رمز امضا">
+                                                        </div>
+                                                    </div>
+
+                                                    <i id="kioskWaitingIconTd{{$counter}}"
+                                                       class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+
+                                                    <svg id="kioskCheckMark{{$counter}}" class="d-none checkmark"
+                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
+                                                                fill="none"/>
+                                                        <path class="checkmark__check" fill="none"
+                                                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                                    </svg>
+                                                </td>
                                             </tr>
-                                            <span class="d-none">{{ $counter=$key+1 }}</span>
+                                            <span class="d-none">{{ $counter=$counter+1 }}</span>
                                         @endforeach
                                     @endif
                                     @if($returnManBasket!==null)
                                         @foreach($returnManBasket as $key => $row)
-                                            <tr id="returnRow{{$key}}">
+                                            <tr id="basketRow{{$counter}}">
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    <span class="g-color-white">{{++$counter}}</span>
+                                                    <span class="g-color-white">{{$counter}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span class="g-color-white">{{$row->Name}}</span>
@@ -487,7 +552,19 @@
                                                     @endif
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
-                                                    <span class="g-color-white">{{$key}}</span>
+                                                    @if($row->ReturnProblem === 0)
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <a class="btn-floating btn-primary rounded-circle">
+                                                                <div style="width: 15px; height: 15px"></div>
+                                                            </a>
+                                                        </div>
+                                                    @else
+                                                        <div class="d-flex justify-content-around align-items-center">
+                                                            <a class="btn-floating g-bg-red pulse rounded-circle">
+                                                                <div style="width: 20px; height: 20px"></div>
+                                                            </a>
+                                                        </div>
+                                                    @endif
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <img
@@ -495,7 +572,34 @@
                                                         src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
+                                                <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
+                                                    <div id="kioskSignatureDiv{{$counter}}" class="col-9 d-inline-block">
+                                                        <div class="input-group">
+                                                            <div class="input-group-btn">
+                                                                <button class="btn u-btn-primary rounded-0"
+                                                                        onclick="deliveryKiosk({{$row->OrderDetailID}}, {{$counter}},'return')"
+                                                                        type="button"><i
+                                                                        class="fa fa-check align-middle g-font-size-16"></i></button>
+                                                            </div>
+                                                            <input
+                                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                id="pass{{$counter}}"
+                                                                type="password"
+                                                                placeholder="رمز امضا">
+                                                        </div>
+                                                    </div>
+                                                    <i id="kioskWaitingIconTd{{$counter}}"
+                                                       class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                                    <svg id="kioskCheckMark{{$counter}}" class="d-none checkmark"
+                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
+                                                                fill="none"/>
+                                                        <path class="checkmark__check" fill="none"
+                                                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                                    </svg>
+                                                </td>
                                             </tr>
+                                            <span class="d-none">{{ $counter=$counter+1 }}</span>
                                         @endforeach
                                     @endif
                                     </tbody>

@@ -135,6 +135,7 @@ class Basic extends Controller
                     }
                     break;
                 case '2':
+                case '22':
                     $deliveryHint[$key]['text'] = 'در دست';
                     $deliveryHint[$key]['location'] = 'بسته بندی';
                     $deliveryTime[$key] = 50;
@@ -271,6 +272,7 @@ class Basic extends Controller
                     }
                     break;
                 case '2':
+                case '22':
                     $returnHint[$key]['text'] = 'در دست';
                     $returnHint[$key]['location'] = 'بررسی ایرادات';
                     $returnTime[$key] = 50;

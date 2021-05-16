@@ -232,3 +232,7 @@ Route::get('/Delivery-Panel-ReturnCourier/{orderDetailID}', 'Delivery\Basic@retu
 
 // *********************************************** ( Kiosk Routes ) *************************************************
 Route::get('/Kiosk-Panel', 'Delivery\Basic@kioskPanel')->name('kioskPanel');
+
+Route::get('/Kiosk-Check-Signature/{pass}', 'Delivery\Basic@kioskCheckPass');
+
+Route::get('/Kiosk-Add-Product/{orderDetailID}/{table}', 'Delivery\Basic@kioskAddProduct');

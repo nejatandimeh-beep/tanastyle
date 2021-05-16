@@ -48,5 +48,42 @@
             $('#returnSignatureDiv' + key).remove();
             $('#returnWaitingIconTd' + key).removeClass('d-none');
         }
+
+        function deliveryKiosk(orderDetailID, key,table) {
+            let pass=$('#pass' + key), signatureDiv=$('#kioskSignatureDiv' + key), waitingIcon=$('#kioskWaitingIconTd' + key);
+            if (pass.val() !== '') {
+                signatureDiv.removeClass('d-inline-block');
+                signatureDiv.addClass('d-none');
+                waitingIcon.removeClass('d-none');
+                $.ajax({
+                    type: 'GET',
+                    url: "/Kiosk-Check-Signature/" + pass.val(),
+                    async: false,
+                    success: function (data) {
+                        if(data ==='passTrue'){
+                            $.ajax({
+                                type: 'GET',
+                                url: "/Kiosk-Add-Product/" + orderDetailID + '/'+table,
+                                async: false,
+                                success: function (data) {
+                                    waitingIcon.remove();
+                                    $('#kioskCheckMark'+key).removeClass('d-none');
+                                    setTimeout(function () {
+                                        $('#basketRow'+key).remove();
+                                    }, 2000);
+                                }
+                            });
+                            signatureDiv.remove();
+                            signatureDiv.removeClass('d-none');
+                        } else {
+                            alert('امضاء نامعتبر');
+                            signatureDiv.addClass('d-inline-block');
+                            signatureDiv.removeClass('d-none');
+                            waitingIcon.addClass('d-none');
+                        }
+                    }
+                });
+            }
+        }
     </script>
 @endsection
