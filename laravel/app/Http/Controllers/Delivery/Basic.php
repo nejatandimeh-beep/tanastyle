@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class Basic extends Controller
 {
-
     public function deliveryPanel()
     {
         $deliveryManID = 1;
@@ -22,18 +21,18 @@ class Basic extends Controller
             ->where('ID', $deliveryManID)
             ->first();
 
-        $data = $this->product_delivery(['0', '2'], $deliveryManActive->ID);
+        $data = $this->product_delivery(['0', '2'], $deliveryManActive->ID, 'delivery');
 
-        $deliveryManBasket = $this->product_delivery(['1', '3'], $deliveryManID);
+        $deliveryManBasket = $this->product_delivery(['1', '3'], $deliveryManID, 'delivery');
 
-        $return = $this->product_return(['4', '2'], $deliveryManID);
+        $return = $this->product_return(['4', '2'], $deliveryManID, 'delivery');
 
-        $returnManBasket = $this->product_return(['1', '3'], $deliveryManID);
+        $returnManBasket = $this->product_return(['1', '3'], $deliveryManID, 'delivery');
 
         return view('Delivery.Panel', compact('data', 'deliveryManActive', 'return', 'deliveryManBasket', 'returnManBasket'));
     }
 
-    public function deliveryCourier($orderDetailID)
+    public function deliveryCourier($orderDetailID,$destination)
     {
         $deliveryManID = 1;
         $deliveryManID = DB::table('delivery_men')
@@ -45,186 +44,12 @@ class Basic extends Controller
             ->where('OrderDetailID', $orderDetailID)
             ->update([
                 'DeliveryProblem' => 0,
-                'DeliveryStatus' => '1',
+                'DeliveryStatus' => $destination,
             ]);
-
-        return $this->deliveryManBasket($orderDetailID, $deliveryManID->ID);
+        return redirect()->route('deliveryPanel');
     }
 
-    public function deliveryManBasket($orderDetailID, $deliveryManID)
-    {
-        $deliveryManBasket = $this->product_delivery(['1', '3'], $deliveryManID);
-
-        $returnManBasket = $this->product_return(['1', '3'], $deliveryManID);
-
-        $product = '';
-        $rowNumber = 0;
-        foreach ($deliveryManBasket as $key => $row) {
-            $product = $product . '<tr id="basketRow' . $rowNumber . '">
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $rowNumber . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $row->Name . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $row->Model . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $row->Size . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $row->Color . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span
-                            class="g-color-white">' . $row->ProductID . '/' . $row->ProductDetailID . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span
-                            class="g-color-white">' . $row->OrderId . '/' . $row->OrderDetailID . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                         ' . ($row->DeliveryStatus === "1" ? "<span
-                            class=\"g-font-size-16 g-color-yellow\">کیوسک</span>" : "") . '
-                          ' . ($row->DeliveryStatus === "3" ? "<span
-                            class=\"g-font-size-16 g-color-yellow\">اداره پست مرکزی</span>" : "") . '
-
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                       ' . ($row->DeliveryProblem === 0 ? " <div class=\"d-flex justify-content-around align-items-center\">
-                        <a class=\"btn-floating btn-primary rounded-circle\">
-                            <div style=\"width: 15px; height: 15px\"></div>
-                        </a>
-                      </div>" : "") . '
-
-                         ' . ($row->DeliveryProblem === 1 ? " <div class=\"d-flex justify-content-around align-items-center\">
-                        <a class=\"btn-floating g-bg-red pulse rounded-circle\">
-                            <div style=\"width: 15px; height: 15px\"></div>
-                        </a>
-                      </div>" : "") . '
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <img
-                            class="d-flex g-width-60 g-height-60 g-my-10 mx-auto g-bg-white"
-                            src="' . $row->productPicPath . $row->PicNumber . '.jpg"
-                            title="' . $row->Color . '" alt="Image Description">
-                    </td>
-                    <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
-                        <div id="kioskSignatureDiv' . $rowNumber . '" class="col-9 d-inline-block">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn u-btn-primary rounded-0"
-                                            onclick="deliveryKiosk(' . $row->OrderDetailID . ',' . $rowNumber. ',\'delivery\'' . ')"
-                                            type="button"><i
-                                            class="fa fa-check align-middle g-font-size-16"></i></button>
-                                </div>
-                                <input
-                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                    id="pass' . $rowNumber . '"
-                                    type="password"
-                                    placeholder="رمز امضا">
-                            </div>
-                        </div>
-                        <i id="kioskWaitingIconTd' . $rowNumber . '"
-                           class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-                        <svg id="kioskCheckMark' . $rowNumber . '" class="d-none checkmark"
-                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                            <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                    fill="none"/>
-                            <path class="checkmark__check" fill="none"
-                                  d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                        </svg>
-                    </td>
-                </tr>';
-            $rowNumber = $rowNumber + 1;
-        }
-        if ($returnManBasket !== null)
-            foreach ($returnManBasket as $key => $row) {
-                $product = $product . '<tr id="basketRow' . $rowNumber . '">
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $rowNumber . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $row->Name . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $row->Model . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $row->Size . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span class="g-color-white">' . $row->Color . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span
-                            class="g-color-white">' . $row->ProductID . '/' . $row->ProductDetailID . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <span
-                            class="g-color-white">' . $row->OrderId . '/' . $row->OrderDetailID . '</span>
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                         ' . ($row->ReturnStatus === "1" ? "<span
-                            class=\"g-font-size-16 g-color-yellow\">فروشنده</span>" : "") . '
-                          ' . ($row->ReturnStatus === "3" ? "<span
-                            class=\"g-font-size-16 g-color-yellow\">کیوسک</span>" : "") . '
-
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                     ' . ($row->ReturnProblem === 0 ? " <div class=\"d-flex justify-content-around align-items-center\">
-                        <a class=\"btn-floating btn-primary rounded-circle\">
-                            <div style=\"width: 15px; height: 15px\"></div>
-                        </a>
-                      </div>" : "") . '
-
-                         ' . ($row->ReturnProblem === 1 ? " <div class=\"d-flex justify-content-around align-items-center\">
-                        <a class=\"btn-floating g-bg-red pulse rounded-circle\">
-                            <div style=\"width: 15px; height: 15px\"></div>
-                        </a>
-                      </div>" : "") . '
-                    </td>
-                    <td class="g-brd-white-opacity-0_1 align-middle">
-                        <img
-                            class="d-flex g-width-60 g-height-60 g-my-10 mx-auto g-bg-white"
-                            src="' . $row->productPicPath . $row->PicNumber . '.jpg"
-                            title="' . $row->Color . '" alt="Image Description">
-                    </td>
-                     <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
-                        <div id="kioskSignatureDiv' . $rowNumber . '" class="col-9 d-inline-block">
-                            <div class="input-group">
-                                <div class="input-group-btn">
-                                    <button class="btn u-btn-primary rounded-0"
-                                            onclick="deliveryKiosk(' . $row->OrderDetailID . ',' . $rowNumber . ',\'return\'' . ')"
-                                            type="button"><i
-                                            class="fa fa-check align-middle g-font-size-16"></i></button>
-                                </div>
-                                <input
-                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                    id="pass' . $rowNumber . '"
-                                    type="password"
-                                    placeholder="رمز امضا">
-                            </div>
-                        </div>
-                        <i id="kioskWaitingIconTd' . $rowNumber . '"
-                           class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-                        <svg id="kioskCheckMark' . $rowNumber . '" class="d-none checkmark"
-                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                            <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                    fill="none"/>
-                            <path class="checkmark__check" fill="none"
-                                  d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                        </svg>
-                    </td>
-                </tr>';
-                $rowNumber = $rowNumber + 1;
-            }
-
-        return $product;
-    }
-
-    public function returnCourier($orderDetailID)
+    public function returnCourier($orderDetailID,$destination)
     {
         $deliveryManID = 1;
         $deliveryManID = DB::table('delivery_men')
@@ -236,24 +61,36 @@ class Basic extends Controller
             ->where('OrderDetailID', $orderDetailID)
             ->update([
                 'ReturnProblem' => 0,
-                'ReturnStatus' => '3',
+                'ReturnStatus' => $destination,
             ]);
 
-        return $this->deliveryManBasket($orderDetailID, $deliveryManID->ID);
+        return redirect()->route('deliveryPanel');
     }
 
-    public function product_delivery($where, $deliveryManID)
+    public function product_delivery($where, $id, $table)
     {
-        $data = DB::table('product_delivery as pDel')
-            ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
-            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
-            ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
-            ->where('pDel.DeliveryManID', $deliveryManID)
-            ->whereIn('pDel.DeliveryStatus', $where)
-            ->get();
+        if ($table === 'kiosk')
+            $data = DB::table('product_delivery as pDel')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.KioskID', $id)
+                ->whereIn('pDel.DeliveryStatus', $where)
+                ->get();
+        else
+            $data = DB::table('product_delivery as pDel')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.DeliveryManID', $id)
+                ->whereIn('pDel.DeliveryStatus', $where)
+                ->get();
 
         $today = date('Y-m-d');
         $deliveryMin = array();
@@ -287,6 +124,7 @@ class Basic extends Controller
                     }
                     break;
                 case '2':
+                case '22':
                     if ($deliveryMin[$key] > 1560) {
                         DB::table('product_delivery')
                             ->where('OrderDetailID', $row->OrderDetailID)
@@ -307,30 +145,54 @@ class Basic extends Controller
                 default:
             }
         }
-        return $data = DB::table('product_delivery as pDel')
-            ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
-            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
-            ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
-            ->where('pDel.DeliveryManID', $deliveryManID)
-            ->whereIn('pDel.DeliveryStatus', $where)
-            ->get();
+        if ($table === 'kiosk')
+            return $data = DB::table('product_delivery as pDel')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.KioskID', $id)
+                ->whereIn('pDel.DeliveryStatus', $where)
+                ->get();
+        else
+            return $data = DB::table('product_delivery as pDel')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.DeliveryManID', $id)
+                ->whereIn('pDel.DeliveryStatus', $where)
+                ->get();
     }
 
-    public function product_return($where, $deliveryManID)
+    public function product_return($where, $id, $table)
     {
-        $return = DB::table('product_return as pr')
-            ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
-            ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
-            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
-            ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
-            ->where('pDel.DeliveryManID', $deliveryManID)
-            ->whereIn('pr.ReturnStatus', $where)
-            ->get();
+        if ($table === 'kiosk')
+            $return = DB::table('product_return as pr')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.KioskID', $id)
+                ->whereIn('pr.ReturnStatus', $where)
+                ->get();
+        else
+            $return = DB::table('product_return as pr')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.DeliveryManID', $id)
+                ->whereIn('pr.ReturnStatus', $where)
+                ->get();
 
         $today = date('Y-m-d');
         $returnMin = array();
@@ -364,6 +226,7 @@ class Basic extends Controller
                     }
                     break;
                 case '2':
+                case '22':
                     if ($returnMin[$key] > 4440) {
                         DB::table('product_return')
                             ->where('OrderDetailID', $row->OrderDetailID)
@@ -384,32 +247,59 @@ class Basic extends Controller
                 default:
             }
         }
-        return $return = DB::table('product_return as pr')
-            ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
-            ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
-            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
-            ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
-            ->where('pDel.DeliveryManID', $deliveryManID)
-            ->whereIn('pr.ReturnStatus', $where)
-            ->get();
+        if ($table === 'kiosk')
+            return $return = DB::table('product_return as pr')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.KioskID', $id)
+                ->whereIn('pr.ReturnStatus', $where)
+                ->get();
+        else
+            return $return = DB::table('product_return as pr')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.DeliveryManID', $id)
+                ->whereIn('pr.ReturnStatus', $where)
+                ->get();
+
     }
 
+    public function sellerCheckPass($pass,$id)
+    {
+        $data = DB::table('sellers')
+            ->select('ID', 'Signature')
+            ->where('ID', $id)
+            ->where('Signature', $pass)
+            ->first();
+
+        if ($data !== null)
+            return $data->ID;
+        else
+            return 'passFalse';
+    }
 //-----------------------------------------------------[ Kiosk Codes ]--------------------------------------------------
 
     public function kioskPanel()
     {
-        $kioskManID = 1;
-        $kioskManID = DB::table('delivery_kiosk')
-            ->select('ID')
-            ->where('ID', $kioskManID)
+        $kioskID = 3;
+        $kioskID = DB::table('delivery_kiosk')
+            ->select('*')
             ->first();
 
-        $data = $deliveryManBasket = $this->product_delivery(['22'], $kioskManID->ID);
+        $kioskBasket = $this->product_delivery(['22','2'], $kioskID->ID, 'kiosk');
+        $returnKioskBasket = $this->product_return(['22','2'], $kioskID->ID, 'kiosk');
 
-        return view('Kiosk.Panel');
+        return view('Kiosk.Panel', compact('kioskBasket', 'returnKioskBasket', 'kioskID'));
     }
 
     public function kioskCheckPass($pass)
@@ -420,27 +310,71 @@ class Basic extends Controller
             ->first();
 
         if ($data !== null)
-            return 'passTrue';
+            return $data->ID;
         else
             return 'passFalse';
     }
 
-    public function kioskAddProduct($orderDetailID, $table)
+    public function destinationAddProduct($orderDetailID, $table, $id,$destination)
     {
         if ($table === 'delivery')
             DB::table('product_delivery')
                 ->where('OrderDetailID', $orderDetailID)
                 ->update([
-                    'DeliveryStatus' => '22',
+                    'DeliveryStatus' => $destination,
                     'DeliveryProblem' => 0,
+                    'KioskID' => $id,
                 ]);
         else
+            DB::table('product_delivery')
+                ->where('OrderDetailID', $orderDetailID)
+                ->update([
+                    'KioskID' => $id,
+                ]);
             DB::table('product_return')
                 ->where('OrderDetailID', $orderDetailID)
                 ->update([
-                    'ReturnStatus' => '22',
+                    'ReturnStatus' => $destination,
                     'ReturnProblem' => 0,
                 ]);
+    }
+
+    public function destinationFinal($orderDetailID, $table,$destination)
+    {
+        if ($table === 'delivery')
+            DB::table('product_delivery')
+                ->where('OrderDetailID', $orderDetailID)
+                ->update([
+                    'DeliveryStatus' => $destination,
+                    'DeliveryProblem' => 0,
+                ]);
+
+        DB::table('product_return')
+            ->where('OrderDetailID', $orderDetailID)
+            ->update([
+                'ReturnStatus' => $destination,
+                'ReturnProblem' => 0,
+            ]);
+    }
+
+    public function courierRequest($orderDetailID)
+    {
+        DB::table('product_delivery')
+            ->where('OrderDetailID', $orderDetailID)
+            ->update([
+                'DeliveryProblem' => 0,
+                'DeliveryStatus' => '2',
+            ]);
+    }
+
+    public function returnCourierRequest($orderDetailID)
+    {
+        DB::table('product_return')
+            ->where('OrderDetailID', $orderDetailID)
+            ->update([
+                'ReturnProblem' => 0,
+                'ReturnStatus' => '2',
+            ]);
     }
 
 //-----------------------------------------------------[ My Function ]--------------------------------------------------

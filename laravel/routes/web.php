@@ -226,13 +226,21 @@ Route::get('/email-test', function () {
 // *********************************************** ( Delivery Routes ) *************************************************
 Route::get('/Delivery-Panel', 'Delivery\Basic@deliveryPanel')->name('deliveryPanel');
 
-Route::get('/Delivery-Panel-DeliveryCourier/{orderDetailID}', 'Delivery\Basic@deliveryCourier');
+Route::post('/Delivery-Panel-DeliveryCourier/{orderDetailID}/{destination}', 'Delivery\Basic@deliveryCourier')->name('deliveryCourier');
 
-Route::get('/Delivery-Panel-ReturnCourier/{orderDetailID}', 'Delivery\Basic@returnCourier');
+Route::post('/Delivery-Panel-ReturnCourier/{orderDetailID}/{destination}', 'Delivery\Basic@returnCourier')->name('returnCourier');
 
 // *********************************************** ( Kiosk Routes ) *************************************************
 Route::get('/Kiosk-Panel', 'Delivery\Basic@kioskPanel')->name('kioskPanel');
 
 Route::get('/Kiosk-Check-Signature/{pass}', 'Delivery\Basic@kioskCheckPass');
 
-Route::get('/Kiosk-Add-Product/{orderDetailID}/{table}', 'Delivery\Basic@kioskAddProduct');
+Route::get('/Seller-Check-Signature/{pass}/{id}', 'Delivery\Basic@sellerCheckPass');
+
+Route::get('/Destination-Add-Product/{orderDetailID}/{table}/{id}/{destination}', 'Delivery\Basic@destinationAddProduct');
+
+Route::get('/Destination-Final/{orderDetailID}/{table}/{destination}', 'Delivery\Basic@destinationFinal');
+
+Route::get('/Delivery-CourierRequest/{orderDetailID}', 'Delivery\Basic@courierRequest');
+
+Route::get('/Return-CourierRequest/{orderDetailID}', 'Delivery\Basic@returnCourierRequest');

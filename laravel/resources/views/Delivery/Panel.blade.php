@@ -119,7 +119,6 @@
                 <!-- End Figure -->
             </div>
         </div>
-
         <div style="direction: rtl">
             <div id="accordion-01" role="tablist" aria-multiselectable="true">
                 <!-- محصولات در صف انتظار -->
@@ -159,6 +158,8 @@
                                     <tbody class="g-font-size-12 g-color-white-opacity-0_5 g-font-weight-600">
                                     @if($data!==null)
                                         @foreach($data as $key => $row)
+                                            <span id="deliveryDestination{{$key}}"
+                                                  class="d-none">{{$row->DeliveryStatus==='0'?'1':'3'}}</span>
                                             <tr id="row{{$key}}">
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span class="g-color-white">{{$key+1}}</span>
@@ -228,14 +229,18 @@
                                                 <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
                                                     <div id="signatureDiv{{$key}}" class="col-9 d-inline-block">
                                                         <div class="input-group justify-content-center">
-                                                          <div class="input-group-btn">
-                                                            <button class="btn u-btn-primary rounded-0"
-                                                                    onclick="deliveryCourier({{$row->OrderDetailID}}, {{$key}})"
-                                                                    type="button"><i
-                                                                    class="fa fa-check align-middle g-font-size-16"></i></button>
-                                                          </div>
+                                                            <div class="input-group-btn">
+                                                                <button class="btn u-btn-primary rounded-0"
+                                                                        onclick="deliveryCourier({{$key}})"
+                                                                        type="button"><i
+                                                                        class="fa fa-check align-middle g-font-size-16"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
+                                                    <form id="deliveryForm{{ $key }}" method="POST" action="{{route('deliveryCourier',[$row->OrderDetailID,$row->DeliveryStatus==='0'?'1':'3'])}}">
+                                                        @csrf
+                                                    </form>
 
                                                     <i id="waitingIconTd{{$key}}"
                                                        class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
@@ -259,19 +264,20 @@
                     </div>
                 </div>
                 <!-- End Card -->
-
+            </div>
+            <div id="accordion-02" role="tablist" aria-multiselectable="true">
                 <!-- برگشتی -->
                 <div class="card g-mb-5 rounded-0">
-                    <div id="accordion-01-heading-02" class="card-header" role="tab">
+                    <div id="accordion-02-heading-02" class="card-header" role="tab">
                         <h5 class="mb-0">
-                            <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
-                               href="#accordion-01-body-02" data-toggle="collapse" data-parent="#accordion-01"
-                               aria-expanded="false" aria-controls="accordion-01-body-02">محصولات برگشتی در صف
+                            <a class="d-block u-link-v5 g-color-main g-color-primary--hover"
+                               href="#accordion-02-body-02" data-toggle="collapse" data-parent="#accordion-02"
+                               aria-expanded="true" aria-controls="accordion-02-body-02">محصولات برگشتی در صف
                                 انتظار</a>
                         </h5>
                     </div>
-                    <div id="accordion-01-body-02" class="collapse" role="tabpanel"
-                         aria-labelledby="accordion-01-heading-02">
+                    <div id="accordion-02-body-02" class="collapse show" role="tabpanel"
+                         aria-labelledby="accordion-02-heading-02">
                         <div class="card-block">
                             <!-- Table Schedule -->
                             <div class="table-responsive">
@@ -287,7 +293,7 @@
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
                                         <th class="g-brd-white-opacity-0_1">مبداً</th>
-                                        <th class="g-brd-white-opacity-0_1">اولویت رسیدگی</th>
+                                        <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
                                         <th class="g-brd-white-opacity-0_1">تاییدیه</th>
                                     </tr>
@@ -296,6 +302,8 @@
                                     <tbody class="g-font-size-12 g-color-white-opacity-0_5 g-font-weight-600">
                                     @if($return!==null)
                                         @foreach($return as $key => $row)
+                                            <span id="returnDestination{{$key}}"
+                                                  class="d-none">{{$row->ReturnStatus==='4'?'3':'1'}}</span>
                                             <tr id="returnRow{{$key}}">
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span class="g-color-white">{{$key+1}}</span>
@@ -358,12 +366,16 @@
                                                         <div class="input-group justify-content-center">
                                                           <span class="input-group-btn">
                                                             <button class="btn u-btn-primary rounded-0"
-                                                                    onclick="returnCourier({{$row->OrderDetailID}}, {{$key}})"
+                                                                    onclick="returnCourier({{$key}})"
                                                                     type="button"><i
                                                                     class="fa fa-check align-middle g-font-size-16"></i></button>
                                                           </span>
                                                         </div>
                                                     </div>
+
+                                                    <form id="returnForm{{ $key }}" method="POST" action="{{route('returnCourier',[$row->OrderDetailID,$row->ReturnStatus==='4'?'3':'1'])}}">
+                                                        @csrf
+                                                    </form>
 
                                                     <i id="returnWaitingIconTd{{$key}}"
                                                        class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
@@ -387,18 +399,19 @@
                     </div>
                 </div>
                 <!-- End Card -->
-
+            </div>
+            <div id="accordion-03" role="tablist" aria-multiselectable="true">
                 <!-- سبد من -->
                 <div class="card g-mb-5 rounded-0">
-                    <div id="accordion-01-heading-03" class="card-header" role="tab">
+                    <div id="accordion-03-heading-03" class="card-header" role="tab">
                         <h5 class="mb-0">
-                            <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
-                               href="#accordion-01-body-03" data-toggle="collapse" data-parent="#accordion-01"
-                               aria-expanded="false" aria-controls="accordion-01-body-03">سبد من</a>
+                            <a class="d-block u-link-v5 g-color-main g-color-primary--hover"
+                               href="#accordion-03-body-03" data-toggle="collapse" data-parent="#accordion-03"
+                               aria-expanded="true" aria-controls="accordion-03-body-03">سبد من</a>
                         </h5>
                     </div>
-                    <div id="accordion-01-body-03" class="collapse" role="tabpanel"
-                         aria-labelledby="accordion-01-heading-03">
+                    <div id="accordion-03-body-03" class="collapse show" role="tabpanel"
+                         aria-labelledby="accordion-03-heading-03">
                         <div class="card-block">
                             <div class="table-responsive">
                                 <table style="direction: rtl"
@@ -424,6 +437,8 @@
                                     <span class="d-none">{{ $counter=0 }}</span>
                                     @if($deliveryManBasket!==null)
                                         @foreach($deliveryManBasket as $key => $row)
+                                            <span id="destination{{$counter}}"
+                                                  class="d-none">{{$row->DeliveryStatus==='1'?'22':'4'}}</span>
                                             <tr id="basketRow{{$counter}}">
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span class="g-color-white">{{$counter+1}}</span>
@@ -481,40 +496,74 @@
                                                         src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
-                                                <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
-                                                    <div id="kioskSignatureDiv{{$counter}}" class="col-9 d-inline-block">
-                                                        <div class="input-group">
-                                                            <div class="input-group-btn">
-                                                                <button class="btn u-btn-primary rounded-0"
-                                                                        onclick="deliveryKiosk({{$row->OrderDetailID}}, {{$counter}},'delivery')"
-                                                                        type="button"><i
-                                                                        class="fa fa-check align-middle g-font-size-16"></i></button>
+                                                @if($row->DeliveryStatus==='1')
+                                                    <td style="direction: ltr"
+                                                        class="g-brd-white-opacity-0_1 align-middle">
+                                                        <div id="kioskSignatureDiv{{$counter}}"
+                                                             class="col-9 d-inline-block">
+                                                            <div class="input-group">
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn u-btn-primary rounded-0"
+                                                                            onclick="deliveryKiosk({{$row->OrderDetailID}}, {{$counter}},'delivery')"
+                                                                            type="button"><i
+                                                                            class="fa fa-check align-middle g-font-size-16"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <input
+                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    type="password"
+                                                                    id="pass{{$counter}}"
+                                                                    placeholder="رمز امضا">
                                                             </div>
-                                                            <input
-                                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                type="password"
-                                                                id="pass{{$counter}}"
-                                                                placeholder="رمز امضا">
                                                         </div>
-                                                    </div>
 
-                                                    <i id="kioskWaitingIconTd{{$counter}}"
-                                                       class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                                        <i id="kioskWaitingIconTd{{$counter}}"
+                                                           class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
 
-                                                    <svg id="kioskCheckMark{{$counter}}" class="d-none checkmark"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                                                fill="none"/>
-                                                        <path class="checkmark__check" fill="none"
-                                                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                                                    </svg>
-                                                </td>
+                                                        <svg id="kioskCheckMark{{$counter}}" class="d-none checkmark"
+                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                                            <circle class="checkmark__circle" cx="26" cy="26" r="25"
+                                                                    fill="none"/>
+                                                            <path class="checkmark__check" fill="none"
+                                                                  d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                                        </svg>
+                                                    </td>
+                                                @else
+                                                    <td style="direction: ltr"
+                                                        class="g-brd-white-opacity-0_1 align-middle">
+                                                        <div id="postSignatureDiv{{$counter}}"
+                                                             class="col-9 d-inline-block">
+                                                            <div class="input-group justify-content-center">
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn u-btn-primary rounded-0"
+                                                                            onclick="destinationFinal({{$row->OrderDetailID}}, {{$counter}},'delivery')"
+                                                                            type="button"><i
+                                                                            class="fa fa-check align-middle g-font-size-16"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <i id="postWaitingIconTd{{$counter}}"
+                                                           class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+
+                                                        <svg id="postCheckMark{{$counter}}" class="d-none checkmark"
+                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                                            <circle class="checkmark__circle" cx="26" cy="26" r="25"
+                                                                    fill="none"/>
+                                                            <path class="checkmark__check" fill="none"
+                                                                  d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                                        </svg>
+                                                    </td>
+                                                @endif
                                             </tr>
                                             <span class="d-none">{{ $counter=$counter+1 }}</span>
                                         @endforeach
                                     @endif
                                     @if($returnManBasket!==null)
                                         @foreach($returnManBasket as $key => $row)
+                                            <span id="destination{{$counter}}"
+                                                  class="d-none">{{$row->ReturnStatus==='3'?'22':'0'}}</span>
                                             <tr id="basketRow{{$counter}}">
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span class="g-color-white">{{$counter}}</span>
@@ -572,32 +621,66 @@
                                                         src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
-                                                <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
-                                                    <div id="kioskSignatureDiv{{$counter}}" class="col-9 d-inline-block">
-                                                        <div class="input-group">
-                                                            <div class="input-group-btn">
-                                                                <button class="btn u-btn-primary rounded-0"
-                                                                        onclick="deliveryKiosk({{$row->OrderDetailID}}, {{$counter}},'return')"
-                                                                        type="button"><i
-                                                                        class="fa fa-check align-middle g-font-size-16"></i></button>
+                                                @if($row->ReturnStatus==='3')
+                                                    <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
+                                                        <div id="kioskSignatureDiv{{$counter}}"
+                                                             class="col-9 d-inline-block">
+                                                            <div class="input-group">
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn u-btn-primary rounded-0"
+                                                                            onclick="deliveryKiosk({{$row->OrderDetailID}}, {{$counter}},'return')"
+                                                                            type="button"><i
+                                                                            class="fa fa-check align-middle g-font-size-16"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <input
+                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    id="pass{{$counter}}"
+                                                                    type="password"
+                                                                    placeholder="رمز امضا">
                                                             </div>
-                                                            <input
-                                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                id="pass{{$counter}}"
-                                                                type="password"
-                                                                placeholder="رمز امضا">
                                                         </div>
-                                                    </div>
-                                                    <i id="kioskWaitingIconTd{{$counter}}"
-                                                       class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-                                                    <svg id="kioskCheckMark{{$counter}}" class="d-none checkmark"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                                                fill="none"/>
-                                                        <path class="checkmark__check" fill="none"
-                                                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                                                    </svg>
-                                                </td>
+                                                        <i id="kioskWaitingIconTd{{$counter}}"
+                                                           class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                                        <svg id="kioskCheckMark{{$counter}}" class="d-none checkmark"
+                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                                            <circle class="checkmark__circle" cx="26" cy="26" r="25"
+                                                                    fill="none"/>
+                                                            <path class="checkmark__check" fill="none"
+                                                                  d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                                        </svg>
+                                                    </td>
+                                                @else
+                                                    <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
+                                                        <div id="postSignatureDiv{{$counter}}"
+                                                             class="col-9 d-inline-block">
+                                                            <div class="input-group">
+                                                                <div class="input-group-btn">
+                                                                    <button class="btn u-btn-primary rounded-0"
+                                                                            onclick="destinationFinal({{$row->OrderDetailID}}, {{$counter}},'return')"
+                                                                            type="button"><i
+                                                                            class="fa fa-check align-middle g-font-size-16"></i>
+                                                                    </button>
+                                                                </div>
+                                                                <input
+                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    id="sellerPass{{$counter}}"
+                                                                    type="password"
+                                                                    placeholder="رمز امضا">
+                                                            </div>
+                                                            <span id="sellerID{{$counter}}" class="d-none">{{$row->SellerID}}</span>
+                                                        </div>
+                                                        <i id="postWaitingIconTd{{$counter}}"
+                                                           class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                                        <svg id="postCheckMark{{$counter}}" class="d-none checkmark"
+                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                                            <circle class="checkmark__circle" cx="26" cy="26" r="25"
+                                                                    fill="none"/>
+                                                            <path class="checkmark__check" fill="none"
+                                                                  d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                                        </svg>
+                                                    </td>
+                                                @endif
                                             </tr>
                                             <span class="d-none">{{ $counter=$counter+1 }}</span>
                                         @endforeach

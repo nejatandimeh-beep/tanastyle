@@ -119,7 +119,7 @@ class Basic extends Controller
                 case '1':
                     $deliveryHint[$key]['text'] = 'در دست';
                     $deliveryHint[$key]['location'] = 'پیک';
-                    $deliveryTime[$key] = 25;
+                    $deliveryTime[$key] = 10;
                     if ($deliveryMin[$key] > 600) {
                         DB::table('product_delivery')
                             ->where('OrderDetailID', $row->orderDetailID)
@@ -138,7 +138,7 @@ class Basic extends Controller
                 case '22':
                     $deliveryHint[$key]['text'] = 'در دست';
                     $deliveryHint[$key]['location'] = 'بسته بندی';
-                    $deliveryTime[$key] = 50;
+                    $deliveryTime[$key] = 20;
                     if ($deliveryMin[$key] > 1560) {
                         DB::table('product_delivery')
                             ->where('OrderDetailID', $row->orderDetailID)
@@ -156,7 +156,7 @@ class Basic extends Controller
                 case '3':
                     $deliveryHint[$key]['text'] = 'در دست';
                     $deliveryHint[$key]['location'] = 'پیک';
-                    $deliveryTime[$key] = 75;
+                    $deliveryTime[$key] = 30;
                     if ($deliveryMin[$key] > 1800) {
                         DB::table('product_delivery')
                             ->where('OrderDetailID', $row->orderDetailID)
@@ -179,7 +179,7 @@ class Basic extends Controller
                         ]);
                     $deliveryHint[$key]['text'] = 'تحویل به';
                     $deliveryHint[$key]['location'] = 'پست';
-                    $deliveryTime[$key] = 75 + round(($deliveryMin[$key] / 7200 * 100) * 25 / 100);
+                    $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100) * 60 / 100);
                     if ($deliveryMin[$key] > 5040) {
                         $deliveryHint[$key]['text'] = 'تحویل با';
                         $deliveryHint[$key]['location'] = 'موفقیت';
@@ -242,10 +242,10 @@ class Basic extends Controller
                 case '4':
                     $returnHint[$key]['text'] = 'در دست';
                     $returnHint[$key]['location'] = 'پست';
-                    $returnTime[$key] = round(($returnMin[$key] / 3240 * 100) * 25 / 100);
+                    $returnTime[$key] = round(($returnMin[$key] / 3240 * 100) * 50 / 100);
                     // تا سه روز بعد از بازگشت و ساعت 14 روز سوم خطایی رخ نمی دهد.
                     if ($returnMin[$key] > 3240) {
-                        $returnTime[$key] = 25;
+                        $returnTime[$key] = 50;
                         DB::table('product_return')
                             ->where('OrderDetailID', $row->OrderDetailID)
                             ->update([
@@ -256,7 +256,7 @@ class Basic extends Controller
                 case '3':
                     $returnHint[$key]['text'] = 'در دست';
                     $returnHint[$key]['location'] = 'پیک';
-                    $returnTime[$key] = 25;
+                    $returnTime[$key] = 60;
                     if ($returnMin[$key] > 3420) {
                         DB::table('product_return')
                             ->where('OrderDetailID', $row->OrderDetailID)
@@ -275,7 +275,7 @@ class Basic extends Controller
                 case '22':
                     $returnHint[$key]['text'] = 'در دست';
                     $returnHint[$key]['location'] = 'بررسی ایرادات';
-                    $returnTime[$key] = 50;
+                    $returnTime[$key] = 70;
                     if ($returnMin[$key] > 4440) {
                         DB::table('product_return')
                             ->where('OrderDetailID', $row->OrderDetailID)
@@ -293,7 +293,7 @@ class Basic extends Controller
                 case '1':
                     $returnHint[$key]['text'] = 'در دست';
                     $returnHint[$key]['location'] = 'پیک';
-                    $returnTime[$key] = 75;
+                    $returnTime[$key] = 80;
                     if ($returnMin[$key] > 4860) {
                         DB::table('product_return')
                             ->where('OrderDetailID', $row->OrderDetailID)
