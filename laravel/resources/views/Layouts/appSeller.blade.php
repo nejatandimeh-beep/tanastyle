@@ -20,6 +20,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/unify_1.css') }}">
+    <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
 
 </head>
 <body>
@@ -48,38 +49,6 @@
                         <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{ url('/') }}">صفحه
                             نخست</a>
                     </li>
-                    <!-- Authentication Links -->
-
-                    @if (Route::has('register'))
-                        <li class="nav-item">
-                            <a class="nav-link g-color-primary--hover" href="{{ route('sellerRegister') }}">درخواست همکاری</a>
-                        </li>
-                    @endif
-                    @auth('seller')
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{   Auth::guard('seller')->user()->name }} <span class="caret"></span>
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('sellerLogout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                                <form id="logout-form" action="{{ route('sellerLogout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <a class="nav-link g-color-primary--hover" href="{{ route('sellerLog') }}">ورود</a>
-                        </li>
-                    @endauth
                 </ul>
             </div>
         </div>

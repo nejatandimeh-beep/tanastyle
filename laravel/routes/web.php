@@ -244,3 +244,13 @@ Route::get('/Destination-Final/{orderDetailID}/{table}/{destination}', 'Delivery
 Route::get('/Delivery-CourierRequest/{orderDetailID}', 'Delivery\Basic@courierRequest');
 
 Route::get('/Return-CourierRequest/{orderDetailID}', 'Delivery\Basic@returnCourierRequest');
+
+// *********************************************** ( Admin Routes ) *************************************************
+Route::get('/Administrator-Master', 'Administrator\Admin@administratorMaster')->name('administratorMaster');
+
+// -------------------------[seller]
+Route::post('/Seller-Register-Request', 'Administrator\Seller@sellerNew')->name('sellerNew');
+
+Route::get('/Administrator-Seller-Verify', 'Administrator\Seller@sellerVerify')->name('sellerVerify');
+
+Route::get('/Administrator-Seller-DetailVerify/{id}', 'Administrator\Seller@newSellerInfoDetail')->name('newSellerInfoDetail');

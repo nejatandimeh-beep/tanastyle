@@ -1,0 +1,3 @@
+@section('CustomerFooter')
+
+@endsection

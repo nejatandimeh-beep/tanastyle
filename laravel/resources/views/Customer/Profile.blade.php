@@ -1589,11 +1589,11 @@
                                 <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- deliveryStatus -->
                                     <div style="padding: 0 !important;"
-                                         class="d-md-table-cell align-middle text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
+                                         class="d-md-table-cell align-middle text-center g-width-160--md g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
                                         <div>
                                             {{ $deliveryHint[$key]['text'] }}
                                             <span
-                                                class="d-block g-font-weight-700 g-line-height-1 g-font-size-20 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                                                class="g-font-weight-700 g-line-height-1 g-font-size-20 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
                                                 {{ $deliveryHint[$key]['location'] }}</span>
                                         </div>
                                     </div>
@@ -1703,7 +1703,7 @@
                             <article class="d-md-table w-100 g-bg-white g-mb-1">
                                 <!-- deliveryStatus -->
                                 <div style="padding: 0 !important;"
-                                     class="d-md-table-cell align-middle text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
+                                     class="d-md-table-cell align-middle text-center g-width-160--md g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
                                     <div>
                                         {{ $returnHint[$key]['text'] }}
                                         <span

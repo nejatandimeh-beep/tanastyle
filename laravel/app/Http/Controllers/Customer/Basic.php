@@ -177,7 +177,7 @@ class Basic extends Controller
                         ->update([
                             'DeliveryProblem' => 0
                         ]);
-                    $deliveryHint[$key]['text'] = 'تحویل به';
+                    $deliveryHint[$key]['text'] = 'در دست';
                     $deliveryHint[$key]['location'] = 'پست';
                     $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100) * 60 / 100);
                     if ($deliveryMin[$key] > 5040) {
@@ -999,7 +999,7 @@ class Basic extends Controller
     public function uploadImage(Request $request)
     {
         $image = $request->get('imageUrl');
-        $folderPath = public_path('img\SellerProfileImage\\');
+        $folderPath = public_path('img\CustomerProfileImage\\');
         $image_parts = explode(";base64,", $image);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
@@ -1014,7 +1014,7 @@ class Basic extends Controller
         DB::table('customers')
             ->where('id', Auth::user()->id)
             ->update([
-                'PicPath' => 'img\SellerProfileImage\\' . $imageName,
+                'PicPath' => 'img\CustomerProfileImage\\' . $imageName,
             ]);
 
         return redirect()->route('userProfile', 'profileImageChange');

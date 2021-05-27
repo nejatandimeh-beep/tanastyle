@@ -12,9 +12,9 @@
 
                     <address class="row g-color-white-opacity-0_8 mb-0">
                         <div class="col-sm-6 col-md-3 g-brd-right--md g-brd-white-opacity-0_3 g-mb-60 g-mb-0--md">
-                            <i class="icon-line icon-map d-inline-block display-5 g-color-primary g-mb-25"></i>
-                            <h4 class="small text-uppercase g-mb-5">آدرس آغ مهاباد</h4>
-                            <strong>مجتمع تاناکورا</strong>
+                            <i class="icon-user-following d-inline-block display-5 g-color-primary g-mb-25"></i>
+                            <h4 class="small text-uppercase g-mb-5">ثبت نام فروشندگان</h4>
+                            <a href="{{ route('sellerRegister') }}"><strong>.. شروع کن</strong></a>
                         </div>
 
                         <div class="col-sm-6 col-md-3 g-brd-right--md g-brd-white-opacity-0_3 g-mb-60 g-mb-0--md">
