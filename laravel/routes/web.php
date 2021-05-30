@@ -251,6 +251,8 @@ Route::get('/Administrator-Master', 'Administrator\Admin@administratorMaster')->
 // -------------------------[seller]
 Route::post('/Seller-Register-Request', 'Administrator\Seller@sellerNew')->name('sellerNew');
 
+Route::post('/Seller-Delete-Request', 'Administrator\Seller@sellerDelete')->name('sellerDelete');
+
 Route::get('/Administrator-Seller-Verify', 'Administrator\Seller@sellerVerify')->name('sellerVerify');
 
 Route::get('/Administrator-Seller-DetailVerify/{id}', 'Administrator\Seller@newSellerInfoDetail')->name('newSellerInfoDetail');

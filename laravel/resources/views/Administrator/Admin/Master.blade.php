@@ -33,7 +33,7 @@
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->
                 <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30"
-                   href="{{route('sellerMaster')}}">
+                   href="{{route('sellerVerify')}}">
                     <span class="u-icon-v2  g-mb-25">
                     <i class="icon-user"></i>
                     </span>

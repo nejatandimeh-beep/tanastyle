@@ -492,6 +492,21 @@
                                     </div>
                                 </div>
 
+                                {{--شماره پلاک محل کار--}}
+                                <div class="form-group row g-mb-15">
+                                    <label class="col-sm-3 col-form-label align-self-center text-right">شماره پلاک محل کار</label>
+                                    <div dir="ltr" class="col-sm-9 force-col-12">
+                                        <input
+                                            class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                            id="shopNumber"
+                                            name="shopNumber"
+                                            value=""
+                                            maxlength="10"
+                                            placeholder="فقط اعداد"
+                                        >
+                                    </div>
+                                </div>
+
                                 {{--تصویر چهره--}}
                                 <div class="form-group row g-mb-15">
                                     <label class="col-sm-3 col-form-label align-self-center text-right" for="fileShow11"

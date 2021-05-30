@@ -32,7 +32,7 @@
                         <th class="g-font-weight-600 g-color-white text-center">نام</th>
                         <th class="g-font-weight-600 g-color-white g-min-width-200 text-center">نام خانوادگی</th>
                         <th class="g-font-weight-600 g-color-white text-center">کد ملی</th>
-                        <th class="g-font-weight-600 g-color-white text-center">Actions</th>
+                        <th class="g-font-weight-600 g-color-white text-center">جزئیات</th>
                     </tr>
                     </thead>
 

@@ -6,25 +6,56 @@
             setInterval('updateClock()', 1000);
         });
 
+        // set state when page loading
+        $("#stateSelect > option").each(function () {
+            if ($(this).val() === $('#state').val()) {
+                $(this).attr('selected', true);
+                changeState('stateSelect', 'citySelect');
+            }
+        });
+
+        // set city when page loading
+        $("#citySelect > option").each(function () {
+            if ($(this).val() === $('#city').val()) {
+                $(this).attr('selected', true);
+            }
+        });
+
+
+//-------------------------------------------------------My Function----------------------------------------------------
+
         function saveUserData() {
             $('#registerForm').submit();
         }
 
-        function addPathCheckMark(picID, filePathID, checkMarkID) {
-            let pic = $('#' + picID),
-                ext = $('#' + picID).val().split('.').pop().toLowerCase(),
-                filePath = $('#' + filePathID),
-                checkMark = $("#" + checkMarkID);
-            if ((pic.val() !== '') && ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) !== -1)) {
-                let fileName = pic.val().split("\\").pop();
-                filePath.attr("placeholder", fileName);
-                filePath.addClass('g-color-primary');
-                checkMark.css('display', 'inline');
-            } else {
-                filePath.attr("placeholder", 'فاقد تصویر');
-                filePath.addClass('g-color-red');
-                checkMark.css('display', 'none');
-            }
+        function confirmDelete() {
+            $.confirm({
+                title: 'رد صلاحیت فروشنده جدید',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#sellerDelete').submit();
+                    },
+                    انصراف: function () {
+                        $.alert('عملیات رد صلاحیت لغو شد!');
+                    },
+                }
+            });
+        }
+
+        function confirmAdd() {
+            $.confirm({
+                title: 'حذف محصول',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#registerForm').submit();
+                    },
+                    انصراف: function () {
+                        $.alert('عملیات افزودن فروشنده جدید لغو شد.');
+                    },
+                }
+            });
         }
 
         function changeState(state, city) {
@@ -37,7 +68,6 @@
             }
         }
 
-        // تابع انتخاب شهر به ازای هر استان
         function autoCity(state, city, type) {
             let s = [], i,
                 select = '';
@@ -140,8 +170,33 @@
             }
         }
 
+        function addPathCheckMark(picID, filePathID, checkMarkID) {
+            let pic = $('#' + picID),
+                ext = $('#' + picID).val().split('.').pop().toLowerCase(),
+                filePath = $('#' + filePathID),
+                checkMark = $("#" + checkMarkID);
+            if ((pic.val() !== '') && ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) !== -1)) {
+                let fileName = pic.val().split("\\").pop();
+                filePath.attr("placeholder", fileName);
+                filePath.addClass('g-color-primary');
+                checkMark.css('display', 'inline');
+            } else {
+                filePath.attr("placeholder", 'فاقد تصویر');
+                filePath.addClass('g-color-red');
+                checkMark.css('display', 'none');
+            }
+        }
 
-//-------------------------------------------------------My Function----------------------------------------------------
+        function changeState(state, city) {
+            if (city !== 'citySelectReceiver-new') {
+                $('#' + city).find('option').remove().end();
+                autoCity($('#' + state).val(), city, 'createOptions');
+            } else {
+                $('.custombox-content #' + city).find('option').remove().end();
+                autoCity($('.custombox-content #' + state).val(), city, 'createOptions');
+            }
+        }
+
         function nowDate() {
             let week = ["يكشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه", "شنبه"],
                 months = ["فروردين", "ارديبهشت", "خرداد", "تير", "مرداد", "شهريور", "مهر", "آبان", "آذر", "دي", "بهمن", "اسفند"],

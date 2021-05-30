@@ -15,24 +15,7 @@ class Seller extends Controller
 {
     public function sellerNew(Request $request)
     {
-        $name = $request->get('name');
-        $family = $request->get('family');
-        $email = $request->get('email');
         $nationalId = $request->get('nationalId');
-        $day = $request->get('day');
-        $mon = $request->get('mon');
-        $year = $request->get('year');
-        $gender = $request->get('gender');
-        $prePhone = $request->get('prePhone');
-        $phone = $request->get('phone');
-        $mobile = $request->get('mobile');
-        $state = $request->get('state');
-        $city = $request->get('city');
-        $homeAddress = $request->get('homeAddress');
-        $homePostalCode = $request->get('homePostalCode');
-        $workAddress = $request->get('workAddress');
-        $workPostalCode = $request->get('workPostalCode');
-        $creditCard = (string)$request->get('creditCard4').(string)$request->get('creditCard3').(string)$request->get('creditCard2').(string)$request->get('creditCard1');
 
         File::makeDirectory($nationalId, 0777, true, true);
         // Upload Images
@@ -41,33 +24,32 @@ class Seller extends Controller
             $path, 'user'. '.png', 'public'
         );
 
-        $nationalIDImage = 'img\SellerProfileImage\\';
         $request->file('pic12')->storeAs(
             $path, 'nationalityCard'. '.png', 'public'
         );
 
         DB::table('seller_new')
             ->insert([
-                'Name' => $name,
-                'Family' => $family,
-                'Email' => $email,
+                'Name' =>  $request->get('name'),
+                'Family' => $request->get('family'),
+                'Email' => $request->get('email'),
                 'NationalID' => $nationalId,
-                'BDay' => $day,
-                'BMon' => $mon,
-                'BYear' => $year,
-                'Gender' => $gender,
-                'PrePhone' => $prePhone,
-                'Phone' => $phone,
-                'Mobile' => $mobile,
-                'State' => $state,
-                'City' => $city,
-                'HomeAddress' => $homeAddress,
-                'HomePostalCode' => $homePostalCode,
-                'WorkAddress' => $workAddress,
-                'WorkPostalCode' => $workPostalCode,
-                'CreditCard' => $creditCard,
-                'SellerPicPath' => 'img\SellerProfileImage\\' . $path,
-                'NationalPicPath' => 'img\SellerCreditCardImage\\' . $nationalIDImage,
+                'BDay' => $request->get('day'),
+                'BMon' => $request->get('mon'),
+                'BYear' => $request->get('year'),
+                'Gender' => $request->get('gender'),
+                'PrePhone' => $request->get('prePhone'),
+                'Phone' => $request->get('phone'),
+                'Mobile' => $request->get('mobile'),
+                'State' => $request->get('state'),
+                'City' => $request->get('city'),
+                'HomeAddress' => $request->get('homeAddress'),
+                'HomePostalCode' => $request->get('homePostalCode'),
+                'WorkAddress' => $request->get('workAddress'),
+                'WorkPostalCode' => $request->get('workPostalCode'),
+                'ShopNumber' => $request->get('shopNumber'),
+                'CreditCard' => (string)$request->get('creditCard4').(string)$request->get('creditCard3').(string)$request->get('creditCard2').(string)$request->get('creditCard1'),
+                'PicPath' => $path,
             ]);
 
         return redirect()->route('sellerRegister')->with('msg','success');
@@ -89,6 +71,14 @@ class Seller extends Controller
             ->first();
 
         return view('Administrator.Seller.VerifyDetail',compact('data'));
+    }
+
+    public function sellerDelete(Request $request)
+    {
+        DB::table('seller_new')
+            ->where('ID',$request->get('id'))
+            ->delete();
+        return redirect()->route('sellerVerify');
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
