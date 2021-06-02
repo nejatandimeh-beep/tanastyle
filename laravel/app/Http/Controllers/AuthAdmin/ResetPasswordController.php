@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AuthSeller;
+namespace App\Http\Controllers\AuthAdmin;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
@@ -31,7 +31,7 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/Seller-Panel';
+    protected $redirectTo = '/Administrator-Master';
 
 
 
@@ -48,7 +48,7 @@ class ResetPasswordController extends Controller
             }
         }
 
-        return view('auth.sellerAuth.passwords.reset',[
+        return view('auth.adminAuth.passwords.reset',[
             'token' => $token,
             'email' => $email,
         ]);
@@ -56,11 +56,11 @@ class ResetPasswordController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('seller');
+        return Auth::guard('admin');
     }
 
     protected function broker(){
-        return Password::broker('sellers');
+        return Password::broker('admins');
     }
 
 

@@ -4,6 +4,23 @@
             // Set Seller Navigation Date
             nowDate();
             setInterval('updateClock()', 1000);
+
+            if($('#overlay').length>0){
+                $('#overlay').modal('show');
+
+                setTimeout(function () {
+                    $('#overlay').modal('hide');
+                }, 2000);
+            }
+        });
+
+        $(document).mouseup(function (e) {
+            let container = $(".outSideClick");
+
+            // if click on out side container
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                $('.outSideClick').addClass('d-none');
+            }
         });
 
         // set state when page loading
@@ -22,10 +39,43 @@
         });
 
 
-//-------------------------------------------------------My Function----------------------------------------------------
+        //-------------------------------------------------------Ajax-----------------------------------------------------------
+        function sellerSearch(id, nationalId) {
+            id='#' + id;
+            $.ajax({
+                type: 'GET',
+                url: "/Administrator-Seller-Search/" + nationalId,
+                success: function (data) {
+                    console.log(data);
+                    $(id).removeClass('d-none');
+                    $(id).html(data);
+                }
+            });
+        }
 
         function saveUserData() {
-            $('#registerForm').submit();
+            $.confirm({
+                title: 'بروز رسانی اطلاعات کاربری',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#sellerForm').submit();
+                    },
+                    انصراف: function () {
+                        $('#save').hide();
+                        $('#edit').show();
+                        $('#userData').attr('disabled','disabled');
+                    },
+                }
+            });
+        }
+
+        //-------------------------------------------------------My Function----------------------------------------------------
+        function editUserData() {
+            $('#userData').removeAttr('disabled');
+            $('#user-name').focus();
+            $('#save').show();
+            $('#edit').hide();
         }
 
         function confirmDelete() {

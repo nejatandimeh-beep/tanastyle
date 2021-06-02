@@ -1,7 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <section  id="contentTop" class="breadCrumbs g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0">
-        <div style="direction: rtl" class="container">
+        <div style="direction: rtl" class="container" id="allProductList">
             <div class="d-sm-flex text-right text-lg-center">
                 <div class="align-self-center bigDevice">
                     <h2 class="h6 g-font-weight-300 w-100 g-color-black-opacity-0_3 g-mb-10 g-mb-0--md">مسیر</h2>

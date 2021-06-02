@@ -81,11 +81,12 @@ class RegisterController extends Controller
 //            'password' => 'required|string|min:8|confirmed',
 //        ]);
 
+        $password=$this->randomPassword();
         $seller = Seller::create([
             'name' => $request['name'],
             'Family' => $request['family'],
             'NationalID' => $request['nationalId'],
-            'Birthday' => $request['BDay'].'/'. $request['BMon'].'/'. $request['BYear'],
+            'Birthday' => $request['year'].'/'. $request['mon'].'/'. $request['day'],
             'Gender' => (int)$request['gender'],
             'Phone' => $request['prePhone'].$request['phone'],
             'Mobile' => $request['mobile'],
@@ -99,26 +100,26 @@ class RegisterController extends Controller
             'PicPath' => $request['userImage'],
             'PicPathCard' => $request['nationalityCardImage'],
             'email' => $request['email'],
-            'password' =>$this->randomPassword(),
-//            'password' => Hash::make($request['password']),
+            'password' => Hash::make($password),
+            'PasswordHint' =>$password,
         ]);
-//
-//        $id=DB::table('sellers')
-//            ->select('id')
-//            ->orderBy('id','DESC')
-//            ->first();
-//
-//        DB::table('seller_credit_card')
-//            ->insert([
-//                'SellerID'=>$id->id,
-//                'CardNumber'=>$request['creditCard1'].'-'.$request['creditCard2'].'-'.$request['creditCard3'].'-'.$request['creditCard4'],
-//                'Status'=>1,
-//                'Wrong'=>0,
-//            ]);
-//
-//        DB::table('seller_new')
-//            ->where('ID',$request->get('id'))
-//            ->delete();
+
+        $id=DB::table('sellers')
+            ->select('id')
+            ->orderBy('id','DESC')
+            ->first();
+
+        DB::table('seller_credit_card')
+            ->insert([
+                'SellerID'=>$id->id,
+                'CardNumber'=>$request['creditCard1'].'-'.$request['creditCard2'].'-'.$request['creditCard3'].'-'.$request['creditCard4'],
+                'Status'=>1,
+                'Wrong'=>0,
+            ]);
+
+        DB::table('seller_new')
+            ->where('ID',$request->get('id'))
+            ->delete();
 
 //        return redirect()->intended('sellerVerify');
         return redirect()->route('sellerVerify');

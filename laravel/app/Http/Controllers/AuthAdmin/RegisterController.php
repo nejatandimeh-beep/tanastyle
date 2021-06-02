@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\AuthSeller;
+namespace App\Http\Controllers\AuthAdmin;
 
+use App\Admin;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Seller;
@@ -30,7 +31,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/Seller-Panel';
+    protected $redirectTo = '/Administrator-Master';
 
     /**
      * Create a new controller instance.
@@ -67,12 +68,12 @@ class RegisterController extends Controller
 
 
     // Superadmin Register
-    public function showSellerRegisterForm()
+    public function showAdminRegisterForm()
     {
-        return view('auth.sellerAuth.register');
+        return view('auth.adminAuth.register');
     }
 
-    protected function createSeller(Request $request)
+    protected function createAdmin(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
@@ -80,13 +81,14 @@ class RegisterController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
-
-        $seller = Seller::create([
+        $admin = Admin::create([
             'name' => $request['name'],
             'email' => $request['email'],
+            'username' => $request['username'],
+            'role' => $request['role'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect()->intended('login/seller');
+        return redirect()->intended('login/admin');
     }
 
 

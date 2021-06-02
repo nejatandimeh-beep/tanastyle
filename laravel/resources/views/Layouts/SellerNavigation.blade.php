@@ -18,19 +18,13 @@
                             aria-controls="navBar"
                             data-toggle="collapse"
                             data-target="#navBar">
-                <span class="hamburger hamburger--slider">
-                  <span class="hamburger-box">
-                    <span class="hamburger-inner"></span>
-                  </span>
-                </span>
+                                <span class="hamburger hamburger--slider">
+                                  <span class="hamburger-box">
+                                    <span class="hamburger-inner"></span>
+                                  </span>
+                                </span>
                         </button>
                         <!-- End Responsive Toggle Button -->
-
-                        <!-- Logo -->
-                        <a href="{{ url('/Seller-Panel') }}" class="navbar-brand g-mb-10--lg g-mr-0">
-                            <img src="/img/Logo/logo.png" alt="Image Description" width="150">
-                        </a>
-                        <!-- End Logo -->
 
                         <!-- Navigation -->
                         <div style="direction: rtl;"
@@ -2347,6 +2341,12 @@
                         </div>
                         <!-- End Navigation -->
 
+
+                        <!-- Logo -->
+                        <a href="{{ url('/Seller-Panel') }}" class="navbar-brand g-mt-10--lg g-mr-0">
+                            <img src="/img/Logo/logo_white.png" alt="Image Description" width="150">
+                        </a>
+                        <!-- End Logo -->
                         <!-- Time And Date -->
                         <div class="text-center hidden-lg-down">
                             <p class="mb-0" id="persianDate"></p>

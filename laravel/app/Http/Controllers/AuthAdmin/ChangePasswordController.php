@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AuthSeller;
+namespace App\Http\Controllers\AuthAdmin;
 
 use App\Http\Controllers\Controller;
 
@@ -30,7 +30,7 @@ class ChangePasswordController extends Controller
      */
     public function index()
     {
-        return view('auth.sellerAuth.passwords.change');
+        return view('auth.adminAuth.passwords.change');
     }
 
     /**
@@ -45,7 +45,7 @@ class ChangePasswordController extends Controller
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
-        Seller::find(Auth::guard('seller')->user()->id)->update(['password'=> Hash::make($request->new_password)]);
+        Seller::find(Auth::guard('admin')->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 
         return redirect()->route('profile','changePass');
     }

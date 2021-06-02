@@ -1,5 +1,6 @@
 @extends('Layouts.IndexAdmin')
 @section('Content')
+{{--    <h1 class="g-color-black">{{Auth::guard('admin')->user()->name}}</h1>--}}
     <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_8--after mode-scroll">
         <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background: url({{asset('img/Other/admin-wall.png')}}); transform: translate3d(0px, 0px, 0px);"></div>
         <div class="container g-z-index-1 g-py-100">
@@ -89,11 +90,12 @@
 
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->
-                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30" href="#">
+                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30"
+                   href="{{route('adminRegister')}}">
                     <span class="u-icon-v2  g-mb-25">
                     <i class="icon-hotel-restaurant-186 u-line-icon-pro"></i>
                     </span>
-                    <h3 class="h4 g-font-weight-600 mb-30">پنل پست</h3>
+                    <h3 class="h4 g-font-weight-600 mb-30">ثبت نام کارمندان</h3>
                 </a>
                 <!-- End Icon Blocks -->
             </div>

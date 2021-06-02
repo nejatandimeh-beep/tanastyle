@@ -13,12 +13,18 @@ use Illuminate\Support\Facades\DB;
 
 class Seller extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('IsAdmin');
+    }
+
     public function sellerNew(Request $request)
     {
         $nationalId = $request->get('nationalId');
 
         File::makeDirectory($nationalId, 0777, true, true);
         // Upload Images
+
         $path = 'img\SellerProfileImage\\'.$nationalId.'\\';
         $request->file('pic11')->storeAs(
             $path, 'user'. '.png', 'public'
@@ -60,10 +66,11 @@ class Seller extends Controller
         $data=DB::table('seller_new')
             ->select('ID','Name','Family','NationalID')
             ->get();
+
         return view('Administrator.Seller.Verify',compact('data'));
     }
 
-    public function newSellerInfoDetail($id)
+    public function sellerVerifyDetail($id)
     {
         $data=DB::table('seller_new')
             ->select('*')
@@ -81,6 +88,74 @@ class Seller extends Controller
         return redirect()->route('sellerVerify');
     }
 
+    public function sellerList()
+    {
+        $data=DB::table('sellers')
+            ->select('id','name','Family','NationalID')
+            ->get();
+
+        return view('Administrator.Seller.Seller',compact('data'));
+    }
+
+    public function controlPanel($id)
+    {
+        $data=DB::table('sellers as s')
+            ->select('*')
+            ->leftJoin('seller_credit_card as scc','scc.SellerID','=','s.id')
+            ->where('s.id',$id)
+            ->first();
+
+        return view('Administrator.Seller.ControlPanel',compact('data'));
+    }
+
+    public function updateSeller(Request $request)
+    {
+        DB::table('sellers')
+            ->update([
+                'Name' => $request->get('name'),
+                'Family' => $request->get('family'),
+                'Email' => $request->get('email'),
+                'NationalID' => $request->get('nationalId'),
+                'Birthday' => $request->get('year').'/'.$request->get('mon').'/'.$request->get('day'),
+                'Gender' => (int)$request->get('gender'),
+                'Phone' => $request->get('prePhone').$request->get('phone'),
+                'Mobile' => $request->get('mobile'),
+                'State' => $request->get('state'),
+                'City' => $request->get('city'),
+                'HomeAddress' => $request->get('homeAddress'),
+                'HomePostalCode' => $request->get('homePostalCode'),
+                'Address' => $request->get('workAddress'),
+                'WorkPostalCode' => $request->get('workPostalCode'),
+                'ShopNumber' => $request->get('shopNumber'),
+                'PicPath' => $request->get('userImage'),
+                'PicPathCard' => $request->get('nationalityCardImage'),
+            ]);
+
+        return redirect()->route('sellerControlPanel',$request->get('id'))->with('sellerUpdated','success');
+    }
+
+    public function sellerSearch($nationalId)
+    {
+        $output = '';
+        $data = DB::table('sellers')
+            ->select('NationalID','id')
+            ->where('NationalID', 'like', $nationalId . '%')
+            ->take(1)
+            ->get();
+
+        foreach ($data as $key => $row) {
+            $output .= '<li style="border-radius: 0 !important;"
+                        class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
+                            <a  href="' . route('sellerControlPanel', [$row->id]) . '"
+                                style="text-decoration: none"
+                                class="col-12 p-0 text-left g-color-gray-dark-v3 g-color-primary--hover">
+                             ' . $row->NationalID . '
+                            </a>
+                        </li>';
+        }
+
+        return $output;
+    }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     //  Convert Date to Iranian Calender
     public function convertDateToPersian($d)

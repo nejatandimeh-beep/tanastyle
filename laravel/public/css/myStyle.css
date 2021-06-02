@@ -448,7 +448,11 @@ input[type=number] {
     background-color: #ccc;
 }
 
-/* Style the accordion panel. Note: hidden by default */
+.tab-content>.active {
+    background-color: #333;
+}
+
+    /* Style the accordion panel. Note: hidden by default */
 .panel {
     padding: 0 18px;
     background-color: white;

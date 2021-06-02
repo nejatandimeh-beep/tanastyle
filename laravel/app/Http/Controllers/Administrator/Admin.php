@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\DB;
 
 class Admin extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('IsAdmin');
+    }
+
     public function administratorMaster()
     {
         return view('Administrator.Admin.Master');

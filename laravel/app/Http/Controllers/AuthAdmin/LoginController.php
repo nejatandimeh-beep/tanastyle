@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/login/seller';
+    protected $redirectTo = '/login/admin';
 
     /**
      * Create a new controller instance.
@@ -47,36 +47,36 @@ class LoginController extends Controller
 
     // Seller Authentication
 
-    public function showSellerLoginForm()
+    public function showAdminLoginForm()
     {
 
-        return view('auth.sellerAuth.login');
+        return view('auth.adminAuth.login');
     }
 
-    public function sellerLogin(Request $request)
+    public function adminLogin(Request $request)
     {
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:6'
         ]);
 
-        if (Auth::guard('seller')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+        if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/Seller-Panel');
+            return redirect()->intended('/Administrator-Master');
         }
        // return back()->withInput($request->only('email', 'remember'));
-        return Redirect::route('sellerLog')
+        return Redirect::route('adminLog')
             ->with('fails', 'رمز یا ایمیل اشتباه است');
     }
-    public function sellerLogout(Request $request)
+    public function adminLogout(Request $request)
     {
 
-        Auth::guard('seller')->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->flush();
 
         $request->session()->regenerate();
 
-        return redirect()->guest(route( 'sellerLog' ));
+        return redirect()->guest(route( 'adminLog' ));
     }
 }

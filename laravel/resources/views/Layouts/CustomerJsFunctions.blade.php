@@ -62,22 +62,23 @@
                 });
             });
 
-            if($('#productPage').length > 0)
+            if ($('#productPage').length > 0)
                 setTimeout(function () {
-                $.ajax({
-                    type: 'GET',
-                    url: '/Customer-Product-Visit/'+$('#productDetailID').text(),
-                    success: function (data) {
-                        console.log(data);
-                    }
-                });
-            }, 1000);
+                    $.ajax({
+                        type: 'GET',
+                        url: '/Customer-Product-Visit/' + $('#productDetailID').text(),
+                        success: function (data) {
+                            console.log(data);
+                        }
+                    });
+                }, 1000);
 
             // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
             let gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [];
-            $('input[name="gender"]:checked').each(function () {
-                gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
-            });
+            if ($('#allProductList').length > 0)
+                $('input[name="gender"]:checked').each(function () {
+                    gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
+                });
             $('input[name="category"]:checked').each(function () {
                 category.push($(this).attr('id'));
             });
@@ -144,7 +145,7 @@
                     success: function (data) {
                         $('#loadProduct').addClass('d-none');
                         $('#productContainer').html(data);
-                        if($('#contentTop').length>0)
+                        if ($('#contentTop').length > 0)
                             $('html, body').animate({scrollTop: $('#contentTop').offset().top}, 500);
                     }
                 });
@@ -258,13 +259,11 @@
             }
         });
 
-        $(document).mouseup(function(e)
-        {
+        $(document).mouseup(function (e) {
             let container = $(".outSideClick");
 
             // if click on out side container
-            if (!container.is(e.target) && container.has(e.target).length === 0)
-            {
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
                 $('.outSideClick').addClass('d-none');
             }
         });
@@ -627,17 +626,18 @@
         }
 
         // ---------------------------------------------------My Function-----------------------------------------------
-        function productSearch(id,val){
+        function productSearch(id, val) {
             $.ajax({
                 type: 'GET',
                 url: "/Customer-Product-Search/" + val,
-                success: function(data){
+                success: function (data) {
                     console.log(data);
-                    $('#'+id).removeClass('d-none');
-                    $('#'+id).html(data);
+                    $('#' + id).removeClass('d-none');
+                    $('#' + id).html(data);
                 }
             });
         }
+
         function minPriceAllOff(ele) {
             if ((parseInt(ele.val().replace(new RegExp(',', 'g'), "")) > 9999)
                 && (parseInt($('#price-max').val().replace(new RegExp(',', 'g'), "")) < 100000000)
@@ -848,7 +848,7 @@
                     $('#waitingIconColor').hide();
                     $('#waitingIconQty').hide();
                     $('#colorQtyContainer').show();
-                    let temp = '', firstColorSelect=false;
+                    let temp = '', firstColorSelect = false;
                     for (let i = 0; i < data.length; i++) {
                         if (data[i]['Color'] !== temp) {
                             $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
@@ -862,12 +862,12 @@
                         temp = data[i]['Color'];
                     }
                     for (let i = 0; i < data.length; i++) {
-                        if ($('#color-'+data[i]["ID"]).val() === $('#firstColorInfo').text()) {
+                        if ($('#color-' + data[i]["ID"]).val() === $('#firstColorInfo').text()) {
                             $('#sizeInfo' + i + ' input').trigger('click');
-                            firstColorSelect=true;
+                            firstColorSelect = true;
                         }
                     }
-                    if(firstColorSelect===false)
+                    if (firstColorSelect === false)
                         $('#sizeInfo' + 0 + ' input').trigger('click');
                 }
             });
@@ -1006,7 +1006,7 @@
                 case 'likeProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Customer-Product-LikeProduct/" + parseInt($('#productID').text()) + '/'+ parseInt($('#productDetailID').text()) + '/' + val,
+                        url: "/Customer-Product-LikeProduct/" + parseInt($('#productID').text()) + '/' + parseInt($('#productDetailID').text()) + '/' + val,
                         success: function (data) {
                             console.log(data);
                         }
@@ -1016,7 +1016,7 @@
                 case 'ratingProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Customer-Product-RatingProduct/" + parseInt($('#productID').text())+ parseInt($('#productDetailID').text()) + '/' + '/' + val,
+                        url: "/Customer-Product-RatingProduct/" + parseInt($('#productID').text()) + parseInt($('#productDetailID').text()) + '/' + '/' + val,
                         success: function (data) {
                             $('#voteID').text(data);
                         }

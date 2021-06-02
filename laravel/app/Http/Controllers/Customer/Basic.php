@@ -179,7 +179,7 @@ class Basic extends Controller
                         ]);
                     $deliveryHint[$key]['text'] = 'در دست';
                     $deliveryHint[$key]['location'] = 'پست';
-                    $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100) * 60 / 100);
+                    $deliveryTime[$key] = 40 + round($deliveryMin[$key] / 7200 * 100);
                     if ($deliveryMin[$key] > 5040) {
                         $deliveryHint[$key]['text'] = 'تحویل با';
                         $deliveryHint[$key]['location'] = 'موفقیت';

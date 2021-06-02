@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\AuthSeller;
+namespace App\Http\Controllers\AdminSeller;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
@@ -30,16 +30,16 @@ class ForgotPasswordController extends Controller
 
     public function showLinkRequestForm(){
 
-        return view('auth.sellerAuth.passwords.email');
+        return view('auth.adminAuth.passwords.email');
     }
 
     public function broker(){
-        return Password::broker('sellers');
+        return Password::broker('admins');
     }
 
     protected function guard()
     {
-        return Auth::guard('seller');
+        return Auth::guard('admin');
     }
 
 }

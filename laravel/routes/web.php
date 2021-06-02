@@ -56,16 +56,16 @@ Route::get('/Seller-CreditCardActive/{id}', 'Seller\Basic@CreditCardActive');
 
 // ---------Admin Connection------
 // Admin Connection
-Route::get('/Seller-AdminConnection', 'Seller\Basic@adminConnection')->name('adminConnection');
+Route::get('/Seller-AdminConnection', 'Seller\Basic@AdminConnection')->name('AdminConnection');
 
 // Admin Connection Detail
-Route::get('/Seller-AdminConnection-Detail/{id}/{status}', 'Seller\Basic@adminConnectionDetail')->name('adminConnectionDetail');
+Route::get('/Seller-AdminConnection-Detail/{id}/{status}', 'Seller\Basic@AdminConnectionDetail')->name('AdminConnectionDetail');
 
 // Admin New Connection
-Route::post('/Seller-AdminConnection-New', 'Seller\Basic@adminConnectionNew')->name('adminConnectionNew');
+Route::post('/Seller-AdminConnection-New', 'Seller\Basic@AdminConnectionNew')->name('AdminConnectionNew');
 
 // Admin New Msg Connection
-Route::post('/Seller-AdminConnection-NewMsg', 'Seller\Basic@adminConnectionNewMsg')->name('adminConnectionNewMsg');
+Route::post('/Seller-AdminConnection-NewMsg', 'Seller\Basic@AdminConnectionNewMsg')->name('AdminConnectionNewMsg');
 
 // ---------Add Product-----------
 
@@ -246,7 +246,28 @@ Route::get('/Delivery-CourierRequest/{orderDetailID}', 'Delivery\Basic@courierRe
 Route::get('/Return-CourierRequest/{orderDetailID}', 'Delivery\Basic@returnCourierRequest');
 
 // *********************************************** ( Admin Routes ) *************************************************
-Route::get('/Administrator-Master', 'Administrator\Admin@administratorMaster')->name('administratorMaster');
+// Seller Auth(login-logout-register)
+Route::get('/login/admin', 'AuthAdmin\LoginController@showAdminLoginForm')->name('adminLog');
+Route::post('/logout/admin', 'AuthAdmin\LoginController@adminLogout')->name('adminLogout');
+Route::get('/register/admin', 'AuthAdmin\RegisterController@showAdminRegisterForm')->name('adminRegister');
+Route::post('/login/admin', 'AuthAdmin\LoginController@adminLogin')->name('adminLogin');
+Route::post('/register/admin', 'AuthAdmin\RegisterController@createAdmin')->name('adminSave');
+
+// Seller Change Password Links
+Route::get('change-admin-password', 'AuthAdmin\ChangePasswordController@index')->name('changeAdminPass');
+Route::post('change-admin-password', 'AuthAdmin\ChangePasswordController@store')->name('changeAdminPassword');
+
+
+// Add Seller reset password routes
+Route::group(['prefix' => 'admins'], function() {
+    //   Route::post('/password/email','Auth\CustomerForgotPasswordController@sendResetLinkEmail')->name('customer.password.email');
+    route::get('/requestEmail', 'AuthAdmin\ForgotPasswordController@showLinkRequestForm')->name('admins.showEmailRequestForm');
+    route::post('/sendEmail', 'AuthAdmin\ForgotPasswordController@sendResetLinkEmail')->name('admins.sendResetLink');
+    route::get('/reset/{token}', 'AuthAdmin\ResetPasswordController@showResetForm')->name('admins.password.email');
+    route::post('/reset', 'AuthAdmin\ResetPasswordController@reset')->name('admins.password.update');
+});
+
+Route::get('/Administrator-Master', 'Administrator\Admin@AdministratorMaster')->name('AdministratorMaster');
 
 // -------------------------[seller]
 Route::post('/Seller-Register-Request', 'Administrator\Seller@sellerNew')->name('sellerNew');
@@ -255,4 +276,15 @@ Route::post('/Seller-Delete-Request', 'Administrator\Seller@sellerDelete')->name
 
 Route::get('/Administrator-Seller-Verify', 'Administrator\Seller@sellerVerify')->name('sellerVerify');
 
-Route::get('/Administrator-Seller-DetailVerify/{id}', 'Administrator\Seller@newSellerInfoDetail')->name('newSellerInfoDetail');
+Route::get('/Administrator-Seller-DetailVerify/{id}', 'Administrator\Seller@sellerVerifyDetail')->name('sellerVerifyDetail');
+
+Route::get('/Administrator-Seller', 'Administrator\Seller@sellerList')->name('sellerList');
+
+Route::get('/Administrator-Seller-Control/{id}', 'Administrator\Seller@controlPanel')->name('sellerControlPanel');
+
+Route::post('/Administrator-Seller-Update', 'Administrator\Seller@updateSeller')->name('updateSeller');
+
+Route::get('/Administrator-Seller-Search/{nationalId}', 'Administrator\Seller@sellerSearch')->name('sellerSearch');
+
+
+

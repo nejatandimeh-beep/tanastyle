@@ -23,48 +23,16 @@
     </div>
     <!-- End Info Panel -->
 
-    <div style="direction: rtl" class="container">
+    <div style="direction: rtl">
         <!-- Welcome Seller Block -->
-        <div class="row g-mt-30">
-
-            <!-- Seller Image Box -->
-            <div class="col-md-4 mx-auto">
-                <!-- Figure -->
-                <figure class="u-shadow-v21 u-shadow-v21--hover g-bg-white g-rounded-4 text-center g-transition-0_3">
-                    <div class="g-py-40 g-px-20">
-                        <!-- Figure Image -->
-                        <img class="g-width-130 g-height-130 rounded-circle g-mb-30"
-                             src="../../assets/img-temp/125x125/img1.jpg" alt="Image Description">
-                        <!-- Figure Image -->
-
-                        <!-- Figure Info -->
-                        <h4 class="h5 g-font-weight-700 g-mb-15">{{ Auth::guard('seller')->user()->name }}</h4>
-                        <ul class="list-unstyled p-0">
-                            <li class="d-block g-color-gray-dark-v5 g-font-size-13 mb-1">
-                                امتیاز شما در تانا استایل
-                                <mark>4.3</mark>
-                            </li>
-                            <li class="d-block g-color-gray-dark-v5 g-font-size-13">
-                                پلاک مغازه
-                                <span style="font-family: Vazir" class="h4">45</span>
-                            </li>
-                        </ul>
-                        <!-- End Figure Info -->
-                    </div>
-                </figure>
-                <!-- End Figure -->
-            </div>
-            <!-- End Seller Image Box -->
-        </div>
-        <!-- End Welcome Seller Block -->
-
+        <div class="g-mt-30">
 
         <!-- Description Divs-->
         <div class="g-mb-30 g-mt-30">
             <!-- Gray Colored Blockquotes -->
             <blockquote
                 class="blockquote blockquote-reverse g-bg-gray-light-v5 g-brd-primary g-font-size-16 g-pa-40 g-mb-30 text-right">
-                <p class="g-mb-10 p-0 g-font-weight-700">وقت بخیر <span>فروشنده</span> عزیز</p>
+                <p class="g-mb-10 p-0 g-font-weight-700">وقت بخیر <span>{{ Auth::guard('seller')->user()->name }}</span> عزیز</p>
                 <p class="m-0 p-0 g-font-size-14">امیدواریم با فروش محصولات با کیفیت و مرغوب، فروش روزانه خود را دو
                     چندان نمایید.</p>
                 <p class="m-0 p-0 g-font-size-14">شایان گفتن است که تلاش شبانه روزی تیم تانا استایل بر این است تا
