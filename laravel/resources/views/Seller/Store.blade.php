@@ -197,15 +197,16 @@
                                             <select
                                                 class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
                                                 name="brand"
+                                                tabindex="2"
                                                 id="storeGender">
                                                 <option
                                                     value="">همه</option>
-                                                <option value="زنانه" {{ (isset($val)&& $val===('زنانه')) ? 'selected' : '' }}>زنانه</option>
-                                                <option value="مردانه" {{ (isset($val)&& $val===('مردانه')) ? 'selected' : '' }}>مردانه</option>
-                                                <option value="دخترانه" {{ (isset($val)&& $val===('دخترانه')) ? 'selected' : '' }}>دخترانه</option>
-                                                <option value="پسرانه" {{ (isset($val)&& $val===('پسرانه')) ? 'selected' : '' }}>پسرانه</option>
-                                                <option value="نوزادی دخترانه" {{ (isset($val)&& $val===('نوزادی دخترانه')) ? 'selected' : '' }}>نوزادی دخترانه</option>
-                                                <option value="نوزادی پسرانه" {{ (isset($val)&& $val===('نوزادی پسرانه')) ? 'selected' : '' }}>نوزادی پسرانه</option>
+                                                <option value="0" {{ (isset($val) && $val == 0) ? 'selected' : '' }}>زنانه</option>
+                                                <option value="1" {{ (isset($val) && $val == 1) ? 'selected' : '' }}>مردانه</option>
+                                                <option value="2" {{ (isset($val) && $val == 2) ? 'selected' : '' }}>دخترانه</option>
+                                                <option value="3" {{ (isset($val) && $val == 3) ? 'selected' : '' }}>پسرانه</option>
+                                                <option value="4" {{ (isset($val) && $val == 4) ? 'selected' : '' }}>نوزادی دخترانه</option>
+                                                <option value="5" {{ (isset($val) && $val == 5) ? 'selected' : '' }}>نوزادی پسرانه</option>
                                             </select>
                                             <div
                                                 class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0 w-50">
@@ -366,7 +367,12 @@
                     <span class="g-font-size-13 g-mr-5">فیلتر <span
                             class="g-bg-primary g-color-white g-pr-3 g-pl-3">
                             {{ (isset($valName)) ? $valName : '' }}
-                            {{ (isset($val)) ? $val : '' }}
+                            {{ (isset($val) && $val == 0) ? 'زنانه' : '' }}
+                            {{ (isset($val) && $val == 1) ? 'مردانه' : '' }}
+                            {{ (isset($val) && $val == 2) ? 'دخترانه' : '' }}
+                            {{ (isset($val) && $val == 3) ? 'پسرانه' : '' }}
+                            {{ (isset($val) && $val == 4) ? 'نوزادی دخترانه' : '' }}
+                            {{ (isset($val) && $val == 5) ? 'نوزادی پسرانه' : '' }}
                             {{ (isset($valPrice)) ? $valPrice : '' }}
                             {{ (isset($valStatus)) ? $valStatus : '' }}
                             {{ (isset($filterDate)) ? $filterDate : '' }}</span>

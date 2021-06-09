@@ -1,8 +1,8 @@
 @extends('Layouts.IndexAdmin')
 @section('Content')
 {{--    <h1 class="g-color-black">{{Auth::guard('admin')->user()->name}}</h1>--}}
-    <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_8--after mode-scroll">
-        <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background: url({{asset('img/Other/admin-wall.png')}}); transform: translate3d(0px, 0px, 0px);"></div>
+    <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-black-opacity-0_8--after mode-scroll">
+        <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background: url({{asset('img/Other/adminWall3.png')}}); transform: translate3d(0px, 0px, 0px);"></div>
         <div class="container g-z-index-1 g-py-100">
             <!-- Testimonials -->
             <div class="row justify-content-center">
@@ -28,7 +28,7 @@
         </div>
     </div>
 
-    <div class="g-pa-60 g-bg-black">
+    <div class="g-pa-60 g-pt-0 g-bg-black">
     <!-- Icon Blocks -->
         <div style="direction: rtl" class="row">
             <div class="col-lg-4 g-mb-30">
@@ -91,11 +91,45 @@
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->
                 <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30"
-                   href="{{route('adminRegister')}}">
+                   href="">
                     <span class="u-icon-v2  g-mb-25">
                     <i class="icon-hotel-restaurant-186 u-line-icon-pro"></i>
                     </span>
+                    <h3 class="h4 g-font-weight-600 mb-30">پنل پست</h3>
+                </a>
+                <!-- End Icon Blocks -->
+            </div>
+
+            <div class="col-lg-4 g-mb-30">
+                <!-- Icon Blocks -->
+                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30"
+                   href="{{route('adminRegister')}}">
+                    <span class="u-icon-v2  g-mb-25">
+                    <i class="icon-user-follow"></i>
+                    </span>
                     <h3 class="h4 g-font-weight-600 mb-30">ثبت نام کارمندان</h3>
+                </a>
+                <!-- End Icon Blocks -->
+            </div>
+            <div class="col-lg-4 g-mb-30">
+                <!-- Icon Blocks -->
+                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30"
+                   href="">
+                    <span class="u-icon-v2  g-mb-25">
+                    <i class="icon-people"></i>
+                    </span>
+                    <h3 class="h4 g-font-weight-600 mb-30">لیست کارمندان</h3>
+                </a>
+                <!-- End Icon Blocks -->
+            </div>
+            <div class="col-lg-4 g-mb-30">
+                <!-- Icon Blocks -->
+                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30"
+                   href="">
+                    <span class="u-icon-v2  g-mb-25">
+                    <i class="icon-logout"></i>
+                    </span>
+                    <h3 class="h4 g-font-weight-600 mb-30">خروج</h3>
                 </a>
                 <!-- End Icon Blocks -->
             </div>

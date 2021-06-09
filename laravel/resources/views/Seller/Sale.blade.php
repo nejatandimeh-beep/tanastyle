@@ -79,10 +79,10 @@
                            class="d-block g-color-main g-text-underline--none--hover g-brd-around g-brd-gray-light-v4 g-rounded-0 g-pa-10-15 g-font-size-16 collapsed"
                            href="#accordion-12-body-01" data-toggle="collapse" data-parent="#accordion-12"
                            aria-expanded="false" aria-controls="accordion-12-body-01">
-          <span class="u-accordion__control-icon g-mr-10">
-            <i class="fa fa-angle-down"></i>
-            <i class="fa fa-angle-up"></i>
-          </span>
+                              <span class="u-accordion__control-icon g-mr-10">
+                                <i class="fa fa-angle-down"></i>
+                                <i class="fa fa-angle-up"></i>
+                              </span>
                             فیلترها<i class="fa fa-sliders g-ml-5"></i>
                         </a>
                     </h5>
@@ -119,12 +119,13 @@
                                                 tabindex="2"
                                                 id="saleGender">
                                                 <option
-                                                    value="">{{ (!isset($valGender)) ? 'همه' : $valGender }}</option>
-                                                <option value="0">زنانه</option>
-                                                <option value="1">مردانه</option>
-                                                <option value="2">نوزادی</option>
-                                                <option value="3">دخترانه</option>
-                                                <option value="4">پسرانه</option>
+                                                    value="">همه</option>
+                                                <option value="0" {{ (isset($val) && $val == 0) ? 'selected' : '' }}>زنانه</option>
+                                                <option value="1" {{ (isset($val) && $val == 1) ? 'selected' : '' }}>مردانه</option>
+                                                <option value="2" {{ (isset($val) && $val == 2) ? 'selected' : '' }}>دخترانه</option>
+                                                <option value="3" {{ (isset($val) && $val == 3) ? 'selected' : '' }}>پسرانه</option>
+                                                <option value="4" {{ (isset($val) && $val == 4) ? 'selected' : '' }}>نوزادی دخترانه</option>
+                                                <option value="5" {{ (isset($val) && $val == 5) ? 'selected' : '' }}>نوزادی پسرانه</option>
                                             </select>
                                             <div
                                                 class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0 w-50">
@@ -144,6 +145,11 @@
                                                 <option
                                                     value="{{ (!isset($a)) ? '1398' : $a->y }}">{{ (!isset($a)) ? 'سال' : $a->y }}</option>
                                                 <option value="1399">1399</option>
+                                                <option value="1400">1400</option>
+                                                <option value="1401">1401</option>
+                                                <option value="1402">1402</option>
+                                                <option value="1403">1403</option>
+                                                <option value="1404">1404</option>
                                             </select>
 
                                             <select
@@ -220,15 +226,13 @@
                                             <button type="button"
                                                     class="btn btn-md u-btn-primary rounded-0"
                                                     id="filterDateBtnBD"
-                                                    disabled
                                                     onclick="applyDateFilter('sale', 'startDayBD', 'startMonBD', 'startYearBD', 'endDayBD', 'endMonBD', 'endYearBD')">
                                                 اعمال
                                             </button>
                                             <button type="button"
                                                     class="btn btn-md u-btn-orange rounded-0"
                                                     id="ResetDateBtnBD"
-                                                    disabled
-                                                    onclick="resetDate('startDayBD', 'startMonBD', 'startYearBD', 'endDayBD', 'endMonBD', 'endYearBD', 'ResetDateBtnBD')">
+                                                    onclick="resetDate('startDayBD', 'startMonBD', 'startYearBD', 'endDayBD', 'endMonBD', 'endYearBD')">
                                                 از نو
                                             </button>
                                             <select
@@ -238,6 +242,11 @@
                                                 <option
                                                     value="{{ (!isset($b)) ? '1398' : $b->y }}">{{ (!isset($b)) ? 'سال' : $b->y }}</option>
                                                 <option value="1399">1399</option>
+                                                <option value="1400">1400</option>
+                                                <option value="1401">1401</option>
+                                                <option value="1402">1402</option>
+                                                <option value="1403">1403</option>
+                                                <option value="1404">1404</option>
                                             </select>
 
                                             <select
@@ -322,6 +331,11 @@
                                                 <option
                                                     value="{{ (!isset($a)) ? '1398' : $a->y }}">{{ (!isset($a)) ? 'سال' : $a->y }}</option>
                                                 <option value="1399">1399</option>
+                                                <option value="1400">1400</option>
+                                                <option value="1401">1401</option>
+                                                <option value="1402">1402</option>
+                                                <option value="1403">1403</option>
+                                                <option value="1404">1404</option>
                                             </select>
 
                                             <select
@@ -397,6 +411,11 @@
                                                 <option
                                                     value="{{ (!isset($b)) ? '1398' : $b->y }}">{{ (!isset($b)) ? 'سال' : $b->y }}</option>
                                                 <option value="1399">1399</option>
+                                                <option value="1400">1400</option>
+                                                <option value="1401">1401</option>
+                                                <option value="1402">1402</option>
+                                                <option value="1403">1403</option>
+                                                <option value="1404">1404</option>
                                             </select>
 
                                             <select
@@ -467,15 +486,13 @@
                                             <button type="button"
                                                     class="btn btn-md u-btn-primary rounded-0 w-50"
                                                     id="filterDateBtnSD"
-                                                    disabled
                                                     onclick="applyDateFilter('sale', 'startDaySD', 'startMonSD', 'startYearSD', 'endDaySD', 'endMonSD', 'endYearSD')">
                                                 اعمال
                                             </button>
                                             <button type="button"
                                                     class="btn btn-md u-btn-orange rounded-0 w-50"
                                                     id="ResetDateBtnSD"
-                                                    disabled
-                                                    onclick="resetDate('startDaySD', 'startMonSD', 'startYearSD', 'endDaySD', 'endMonSD', 'endYearSD', 'ResetDateBtnSD')">
+                                                    onclick="resetDate('startDaySD', 'startMonSD', 'startYearSD', 'endDaySD', 'endMonSD', 'endYearSD')">
                                                 از نو
                                             </button>
                                         </div>
@@ -640,7 +657,13 @@
                     <span class="g-font-size-13 g-mr-5">فیلتر <span
                             class="g-bg-primary g-color-white g-pr-3 g-pl-3">
                             {{ (isset($valName)) ? $valName : '' }}
-                            {{ (isset($valGender)) ? $valGender : '' }}
+                            {{ (isset($valName)) ? $valName : '' }}
+                            {{ (isset($val) && $val == 0) ? 'زنانه' : '' }}
+                            {{ (isset($val) && $val == 1) ? 'مردانه' : '' }}
+                            {{ (isset($val) && $val == 2) ? 'دخترانه' : '' }}
+                            {{ (isset($val) && $val == 3) ? 'پسرانه' : '' }}
+                            {{ (isset($val) && $val == 4) ? 'نوزادی دخترانه' : '' }}
+                            {{ (isset($val) && $val == 5) ? 'نوزادی پسرانه' : '' }}
                             {{ (isset($valPrice)) ? $valPrice : '' }}
                             {{ (isset($valStatus)) ? $valStatus : '' }}
                             {{ (isset($filterDate)) ? $filterDate : '' }}</span>

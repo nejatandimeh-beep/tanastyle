@@ -223,7 +223,6 @@ class Add extends Controller
                 'Discount' => $discount,
                 'FinalPrice' => $finalPrice,
                 'PicPath' => $picPath,
-                'VisitCounter' => 0,
                 'RegDate' => $regDate,
             ],
         ]);
@@ -242,6 +241,7 @@ class Add extends Controller
                     'HexCode' => $imageColor[$i]['hexCode'],
                     'Qty' => $imageColor[$i]['sizeQty'],
                     'PicNumber' => $imageColor[$i]['fileName'],
+                    'VisitCounter' => 0,
                 ],
             ]);
         }

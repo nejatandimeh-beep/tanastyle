@@ -82,7 +82,7 @@ class Basic extends Controller
                 'Status' => 0
             ]);
 
-        return redirect()->route('profile')->with('activeStatus', 'success');
+        return redirect()->route('profile')->with('cardActive', 'success');
     }
 
 //    ---------> Store
@@ -128,6 +128,10 @@ class Basic extends Controller
             ->where('ProductDetailID', $id)
             ->delete();
 
+        DB::table('customer_call_product_exist')
+            ->where('ProductDetailID', $id)
+            ->delete();
+
         DB::table('product_detail')
             ->where('ID', $id)
             ->delete();
@@ -143,6 +147,7 @@ class Basic extends Controller
                 ->select('PicPath')
                 ->where('ID', $deleteID->ID)
                 ->first();
+
             DB::table('product')
                 ->where('ID', $deleteID->ID)
                 ->delete();
@@ -167,15 +172,14 @@ class Basic extends Controller
 
         // Get Product Data Detail
         $dataDetail = DB::table('product_detail as pd')
-            ->select('pd.*', 'pod.ID as orderDetailID')
+            ->select('pd.*', 'pod.ID as orderDetailID','pod.OrderID')
             ->leftJoin('product_order_detail as pod', 'pod.ProductDetailID', '=', 'pd.ID')
             ->where('pd.ID', $id)
             ->first();
 
         // Get Product Data
-        $ProductID = $dataDetail->ProductID;
         $data = DB::table('product')
-            ->where('ID', $ProductID)
+            ->where('ID', $dataDetail->ProductID)
             ->first();
 
         // Get Product False State
@@ -324,6 +328,7 @@ class Basic extends Controller
 //            ->where('pod.SellerID', $sellerID)
 //            ->where('po.DeliveryStatus', 0)
 //            ->get();
+
         $data = DB::table('product_delivery as pd')
             ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
@@ -332,6 +337,7 @@ class Basic extends Controller
             ->where('p.SellerID', $sellerID)
             ->where('pd.DeliveryStatus', 0)
             ->get();
+
         // Convert Date
         $persianDate = array();
         $deliveryStatus = array();
@@ -600,7 +606,7 @@ class Basic extends Controller
                 return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male' ,'girl','boy','babyGirl','babyBoy', 'valName'));
 
             case 'storeGender':
-                $data = $this->storeTableLoad('Gender', '', $val, $sellerID);
+                $data = $this->storeTableLoad('GenderCode', '', $val, $sellerID);
 
                 return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl','boy','babyGirl','babyBoy', 'val'));
 
@@ -636,7 +642,7 @@ class Basic extends Controller
                 return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valName'));
 
             case 'saleGender':
-                $data = $this->saleTableLoad('p.Gender', '', $val, $sellerID);
+                $data = $this->saleTableLoad('p.GenderCode', '', $val, $sellerID);
 
                 // Convert Date
                 foreach ($data as $key => $rec) {

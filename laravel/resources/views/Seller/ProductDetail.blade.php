@@ -43,13 +43,16 @@
                         <input class="form-control form-control-md rounded-0" type="text" value="مردانه"
                                id="example-text-input" readonly>
                     @elseif($rec->Gender == 2)
-                        <input class="form-control form-control-md rounded-0" type="text" value="بچگانه - نوزادی"
+                        <input class="form-control form-control-md rounded-0" type="text" value="دخترانه"
                                id="example-text-input" readonly>
                     @elseif($rec->Gender == 3)
-                        <input class="form-control form-control-md rounded-0" type="text" value="بچگانه - دخترانه"
+                        <input class="form-control form-control-md rounded-0" type="text" value="پسرانه"
+                               id="example-text-input" readonly>
+                    @elseif($rec->Gender == 4)
+                        <input class="form-control form-control-md rounded-0" type="text" value="نوزادی دخترانه"
                                id="example-text-input" readonly>
                     @else
-                        <input class="form-control form-control-md rounded-0" type="text" value="بچگانه - پسرانه"
+                        <input class="form-control form-control-md rounded-0" type="text" value="نوزادی پسرانه"
                                id="example-text-input" readonly>
                     @endif
                 </div>
@@ -140,57 +143,74 @@
             <!-- End Size Group -->
 
             {{--        Product Images--}}
-            <label for="example-text-input" class="col-sm-2 col-form-label p-0 g-mb-5">تصاویر</label>
-            <div class="row g-mb-20">
-                <div class="col-sm-3 g-mb-10">
-                    <img class="img-fluid img-thumbnail g-rounded-1" src="{{ $data->PicPath.$dataDetail->PicNumber }}.jpg"
-                         alt="Image Description">
+            <div class="form-group row g-mb-25">
+                <label for="example-text-input" class="col-sm-2 col-form-label">تصاویر</label>
+                <div style="direction: ltr" class="col-sm-10 text-left p-0">
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1"
+                             src="{{ $data->PicPath.$dataDetail->PicNumber }}.jpg"
+                             alt="Image Description">
+                    </div>
                 </div>
             </div>
-
             {{--        False Product Button--}}
-            @if (is_null($falseProduct) && (isset($dataDetail->orderID)))
+            @if (!is_null($falseProduct))
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Danger Alert -->
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <h4 class="h5"><i class="fa fa-minus-circle g-ml-5"></i>محصول حاوی مشخصات اشتباه است!</h4>
+                            فروشنده گرامی قبلا برای این محصول گزارش اطلاعات اشتباه را ثبت کرده اید.
+                            با توجه به اینکه محصول فروخته شده است در سریع ترین زمان ممکن، مرکز با خریدار این محصول تماس
+                            گرفته و اقدامات لازم صورت می گیرد.
+                            در نهایت محصول فوق از انبار شما حذف می گردد.
+                            <h4 class="h6 g-mt-15">به یاد داشته باشید در این شرایط قوانین به سود مشتری و به زیان شما
+                                خواهد بود.</h4>
+                            <h4 class="h6 g-mt-20"><i class="fa fa-spinner fa-spin g-ml-5"></i>در حال پیگیری ..</h4>
+                        </div>
+                        <!-- Danger Alert -->
+                    </div>
+                </div>
+            @else
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (is_null($falseProduct) && (isset($dataDetail->OrderID)))
+
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <h4 class="h5"><i class="fa fa-exclamation-circle  g-ml-5"></i>اگر مشخصات فوق صحیح نیست:
                             </h4>
                             با توجه به اینکه محصول فروخته شده است گزارش مشخصات اشتباه را
                             سریعا از طریق دکمه پایین ثبت کنید.
                         </div>
+                        @endif
                         <!-- Danger Alert -->
-                    </div>
-                </div>
-                <div class="text-left">
-                    <button type="button" class="btn btn-md u-btn-primary rounded-0"
-                            onclick="confirmFalse({{$dataDetail->ID}})">
-                        گزارش اطلاعات اشتباه
-                    </button>
-                </div>
-            @elseif (is_null($falseProduct) && (is_null($dataDetail->orderDetailID)))
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Danger Alert -->
+                        @if (is_null($falseProduct) && (is_null($dataDetail->orderDetailID)))
+
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <h4 class="h5"><i class="fa fa-exclamation-circle g-ml-5"></i>اگر مشخصات فوق صحیح نیست:</h4>
+                            <h4 class="h5"><i class="fa fa-exclamation-circle g-ml-5"></i>اگر مشخصات فوق صحیح
+                                نیست:</h4>
                             با توجه به اینکه محصول هنوز به فروش نرفته است از طریق دکمه پایین آنرا حذف کنید.
-                            <h4 class="h6 g-mt-15">به یاد داشته باشید حذف محصول حاوی مشخصات اشتباه از متحمل شدن زیان
+                            <h4 class="h6 g-mt-15">به یاد داشته باشید حذف محصول حاوی مشخصات اشتباه از متحمل شدن
+                                زیان
                                 جلوگیری می کند.</h4>
                         </div>
+                        @endif
                         <!-- Danger Alert -->
 
                         <!-- Danger Alert -->
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <h4 class="h5"><i class="fa fa-check-circle g-ml-5"></i>اگر از صحت داده ها اطمینان دارید:
+                            <h4 class="h5"><i class="fa fa-check-circle g-ml-5"></i>اگر از صحت داده ها اطمینان
+                                دارید:
                             </h4>
                             برای اضافه کردن تعداد موجودی این محصول به انبارتان کافیست از دکمه زیر اقدام کنید.
                         </div>
                         <!-- Danger Alert -->
 
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <h4 class="h5"><i class="fa fa-exclamation-circle g-ml-5"></i>لطفا توجه فرمائید:</h4>
-                            برای افزودن تعداد موجودی به یک محصول باید تمامی مشخصات فوق با محصول در دست اضافه یکی باشد.
+                            <h4 class="h5"><i class="fa fa-exclamation-circle g-ml-5"></i>لطفا توجه فرمائید:
+                            </h4>
+                            برای افزودن تعداد موجودی به یک محصول باید تمامی مشخصات فوق با محصول در دست اضافه یکی
+                            باشد.
                             <h4 class="h6 g-mt-15">در غیر اینصورت محصول شما حاوی اطلاعات اشتباه خواهد بود.</h4>
                         </div>
 
@@ -209,9 +229,11 @@
                                     </button>
                                 </div>
                                 <div style="direction: rtl" class="modal-body mx-3">
-                                    <p style="text-align: justify;">فروشنده گرامی ضروریست مشخصات محصول موجود در انبار با
+                                    <p style="text-align: justify;">فروشنده گرامی ضروریست مشخصات محصول موجود در
+                                        انبار با
                                         مشخصات محصول در دستتان یکی باشد مانند
-                                        نام، جنسیت، مدل، برند، توضیحات، قیمت پایه، تخفیف، قیمت فروش، رنگ، سایز و عکس</p>
+                                        نام، جنسیت، مدل، برند، توضیحات، قیمت پایه، تخفیف، قیمت فروش، رنگ، سایز و
+                                        عکس</p>
                                     <p>به چه تعداد به موجودی قبل اضافه شود؟</p>
 
                                     <div style="direction: ltr" class="form-group row g-mb-25">
@@ -245,30 +267,22 @@
                             </div>
                         </div>
                     </div>
-                    <a href="" class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15" data-toggle="modal"
+                    <a href="" class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15"
+                       data-toggle="modal"
                        data-target="#modalLoginForm">افزودن موجودی محصول</a>
+                    @if (is_null($falseProduct) && (is_null($dataDetail->orderDetailID)))
+                        <button type="button" class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15"
+                                onclick="confirmDelete({{$dataDetail->ID}})">
+                            حذف محصول
+                        </button>
+                    @endif
+                    @if (is_null($falseProduct) && (isset($dataDetail->OrderID)))
+                        <button type="button" class="btn btn-md u-btn-primary rounded-0 g-mb-15"
+                                onclick="confirmFalse({{$dataDetail->ID}})">
+                            گزارش اطلاعات اشتباه
+                        </button>
+                    @endif
 
-                    <button type="button" class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15"
-                            onclick="confirmDelete({{$dataDetail->ID}})">
-                        حذف محصول
-                    </button>
-                </div>
-            @elseif (!is_null($falseProduct))
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Danger Alert -->
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <h4 class="h5"><i class="fa fa-minus-circle g-ml-5"></i>محصول حاوی مشخصات اشتباه است!</h4>
-                            فروشنده گرامی قبلا برای این محصول گزارش اطلاعات اشتباه را ثبت کرده اید.
-                            با توجه به اینکه محصول فروخته شده است در سریع ترین زمان ممکن، مرکز با خریدار این محصول تماس
-                            گرفته و اقدامات لازم صورت می گیرد.
-                            در نهایت محصول فوق از انبار شما حذف می گردد.
-                            <h4 class="h6 g-mt-15">به یاد داشته باشید در این شرایط قوانین به سود مشتری و به زیان شما
-                                خواهد بود.</h4>
-                            <h4 class="h6 g-mt-20"><i class="fa fa-spinner fa-spin g-ml-5"></i>در حال پیگیری ..</h4>
-                        </div>
-                        <!-- Danger Alert -->
-                    </div>
                 </div>
             @endif
         </form>

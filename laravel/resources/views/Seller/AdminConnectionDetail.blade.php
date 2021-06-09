@@ -52,10 +52,10 @@
                                 @endif
                             </div>
 
-                            <textarea
+                            <pre
                                 style="direction: rtl; resize: none; -webkit-text-fill-color: #2a2734; opacity: 1;"
                                 class="text-justify text-right col-12 g-brd-none g-bg-transparent g-line-height-2"
-                                disabled>{{ $rec->Question }}</textarea>
+                                disabled>{{ $rec->Question }}</pre>
                         </div>
                     </div>
                     <div class="media g-mb-30 g-mr-30--lg sdCommentPadding-20">
@@ -74,10 +74,10 @@
                                 @endif
                             </div>
 
-                            <textarea
+                            <pre
                                 style="direction: rtl; resize: none; -webkit-text-fill-color: #2a2734; opacity: 1;"
                                 class="text-justify text-right col-12 g-brd-none g-bg-transparent g-line-height-2"
-                                disabled>{{ $rec->Answer }}</textarea>
+                                disabled>{{ $rec->Answer }}</pre>
                         </div>
                     </div>
                 @else
@@ -97,10 +97,10 @@
                                 @endif
                             </div>
 
-                            <textarea
+                            <pre
                                 style="direction: rtl; resize: none; -webkit-text-fill-color: #2a2734; opacity: 1;"
                                 class="text-justify text-right col-12 g-brd-none g-bg-transparent g-line-height-2"
-                                disabled>{{ $rec->Question }}</textarea>
+                                disabled>{{ $rec->Question }}</pre>
                         </div>
                     </div>
                 @endif

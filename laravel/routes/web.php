@@ -56,16 +56,16 @@ Route::get('/Seller-CreditCardActive/{id}', 'Seller\Basic@CreditCardActive');
 
 // ---------Admin Connection------
 // Admin Connection
-Route::get('/Seller-AdminConnection', 'Seller\Basic@AdminConnection')->name('AdminConnection');
+Route::get('/Seller-AdminConnection', 'Seller\Basic@AdminConnection')->name('adminConnection');
 
 // Admin Connection Detail
-Route::get('/Seller-AdminConnection-Detail/{id}/{status}', 'Seller\Basic@AdminConnectionDetail')->name('AdminConnectionDetail');
+Route::get('/Seller-AdminConnection-Detail/{id}/{status}', 'Seller\Basic@AdminConnectionDetail')->name('adminConnectionDetail');
 
 // Admin New Connection
-Route::post('/Seller-AdminConnection-New', 'Seller\Basic@AdminConnectionNew')->name('AdminConnectionNew');
+Route::post('/Seller-AdminConnection-New', 'Seller\Basic@AdminConnectionNew')->name('adminConnectionNew');
 
 // Admin New Msg Connection
-Route::post('/Seller-AdminConnection-NewMsg', 'Seller\Basic@AdminConnectionNewMsg')->name('AdminConnectionNewMsg');
+Route::post('/Seller-AdminConnection-NewMsg', 'Seller\Basic@AdminConnectionNewMsg')->name('adminConnectionNewMsg');
 
 // ---------Add Product-----------
 
@@ -270,21 +270,42 @@ Route::group(['prefix' => 'admins'], function() {
 Route::get('/Administrator-Master', 'Administrator\Admin@AdministratorMaster')->name('AdministratorMaster');
 
 // -------------------------[seller]
-Route::post('/Seller-Register-Request', 'Administrator\Seller@sellerNew')->name('sellerNew');
+Route::post('/Seller-Register-Request', 'Administrator\Seller@new')->name('sellerNew');
 
-Route::post('/Seller-Delete-Request', 'Administrator\Seller@sellerDelete')->name('sellerDelete');
+Route::post('/Seller-Delete-Request', 'Administrator\Seller@delete')->name('sellerDelete');
 
-Route::get('/Administrator-Seller-Verify', 'Administrator\Seller@sellerVerify')->name('sellerVerify');
+Route::get('/Administrator-Seller-Verify', 'Administrator\Seller@verify')->name('sellerVerify');
 
-Route::get('/Administrator-Seller-DetailVerify/{id}', 'Administrator\Seller@sellerVerifyDetail')->name('sellerVerifyDetail');
+Route::get('/Administrator-Seller-DetailVerify/{id}', 'Administrator\Seller@verifyDetail')->name('sellerVerifyDetail');
 
-Route::get('/Administrator-Seller', 'Administrator\Seller@sellerList')->name('sellerList');
+Route::get('/Administrator-Seller', 'Administrator\Seller@list')->name('sellerList');
 
-Route::get('/Administrator-Seller-Control/{id}', 'Administrator\Seller@controlPanel')->name('sellerControlPanel');
+Route::get('/Administrator-Seller-Control/{id}/{tab}', 'Administrator\Seller@controlPanel')->name('sellerControlPanel');
 
-Route::post('/Administrator-Seller-Update', 'Administrator\Seller@updateSeller')->name('updateSeller');
+Route::post('/Administrator-Seller-Update', 'Administrator\Seller@update')->name('updateSeller');
 
-Route::get('/Administrator-Seller-Search/{nationalId}', 'Administrator\Seller@sellerSearch')->name('sellerSearch');
+Route::get('/Administrator-Seller-Search/{nationalId}', 'Administrator\Seller@nationalIdSearch')->name('sellerSearch');
 
+Route::get('/Administrator-Seller-CreditCardActive/{sellerId}/{cardID}', 'Administrator\Seller@creditCardActive')->name('creditCardActive');
+
+Route::get('/Administrator-Product-Detail/{id}', 'Administrator\Seller@productDetail')->name('adminProductDetail');
+
+Route::post('/Administrator-Product-Edit', 'Administrator\Seller@productEdit')->name('adminProductEdit');
+
+Route::get('/Administrator-Product-Delete/{id}/{sellerId}', 'Administrator\Seller@productDelete')->name('adminProductDelete');
+
+Route::get('/Administrator-Product-False/{id}/{sellerId}', 'Administrator\Seller@productFalse')->name('adminProductFalse');
+
+Route::get('/Administrator-Order-Detail/{addressId}/{id}', 'Administrator\Seller@orderDetail')->name('adminOrderDetail');
+
+Route::get('/Administrator-Connection-Detail/{id}/{status}', 'Administrator\Seller@connectionDetail')->name('connectionDetail');
+
+Route::post('/Administrator-AdminConnection-New', 'Administrator\Seller@connectionNew')->name('connectionNew');
+
+Route::post('/Administrator-Connection-NewMsg', 'Administrator\Seller@connectionNewMsg')->name('connectionNewMsg');
+
+Route::post('/Administrator-Seller-AmountPay', 'Administrator\Seller@amountPay')->name('amountPay');
+
+//-----------------------------[seller][filtering]
 
 

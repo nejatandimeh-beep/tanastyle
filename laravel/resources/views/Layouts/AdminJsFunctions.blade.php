@@ -5,13 +5,32 @@
             nowDate();
             setInterval('updateClock()', 1000);
 
-            if($('#overlay').length>0){
+            if ($('#overlay').length > 0) {
                 $('#overlay').modal('show');
 
                 setTimeout(function () {
                     $('#overlay').modal('hide');
                 }, 2000);
             }
+
+            if ($('#cardActive').length > 0)
+                $('#sellerCard').trigger('click');
+
+            if ($('#store').length > 0)
+                $('#sellerStore').trigger('click');
+
+            if ($('#sale').length > 0)
+                $('#sellerOrder').trigger('click');
+
+            if ($('#support').length > 0)
+                $('#sellerSupport').trigger('click');
+
+            if ($('#amountReceived').length > 0)
+                $('#sellerAmount').trigger('click');
+
+            if ($('#cardContainer').length > 0)
+                $('#cardContainer').css('height', $(window).height() - 100);
+
         });
 
         $(document).mouseup(function (e) {
@@ -22,6 +41,12 @@
                 $('.outSideClick').addClass('d-none');
             }
         });
+
+        //-------------------------------------------------------Seller---------------------------------------------------------
+        // to Active CreditCard
+        function cardActiveBtn(id, cardId) {
+            window.location = '/Administrator-Seller-CreditCardActive/' + id + '/' + cardId;
+        }
 
         // set state when page loading
         $("#stateSelect > option").each(function () {
@@ -38,10 +63,9 @@
             }
         });
 
-
         //-------------------------------------------------------Ajax-----------------------------------------------------------
         function sellerSearch(id, nationalId) {
-            id='#' + id;
+            id = '#' + id;
             $.ajax({
                 type: 'GET',
                 url: "/Administrator-Seller-Search/" + nationalId,
@@ -49,6 +73,42 @@
                     console.log(data);
                     $(id).removeClass('d-none');
                     $(id).html(data);
+                }
+            });
+        }
+
+        //-------------------------------------------------------My Function----------------------------------------------------
+        function addComa(ele){
+            ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        }
+
+        function editProduct() {
+            $('#productData').removeAttr('disabled');
+            $('#productName').focus();
+            $('#save').show();
+            $('#edit').hide();
+        }
+
+        function editUserData() {
+            $('#userData').removeAttr('disabled');
+            $('#user-name').focus();
+            $('#save').show();
+            $('#edit').hide();
+        }
+
+        function saveProductData() {
+            $.confirm({
+                title: 'بروز رسانی مشخصلت محصول',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#productForm').submit();
+                    },
+                    انصراف: function () {
+                        $('#save').hide();
+                        $('#edit').show();
+                        $('#productData').attr('disabled', 'disabled');
+                    },
                 }
             });
         }
@@ -64,18 +124,41 @@
                     انصراف: function () {
                         $('#save').hide();
                         $('#edit').show();
-                        $('#userData').attr('disabled','disabled');
+                        $('#userData').attr('disabled', 'disabled');
                     },
                 }
             });
         }
 
-        //-------------------------------------------------------My Function----------------------------------------------------
-        function editUserData() {
-            $('#userData').removeAttr('disabled');
-            $('#user-name').focus();
-            $('#save').show();
-            $('#edit').hide();
+        function productDelete(id, sellerId) {
+            $.confirm({
+                title: 'حذف محصول',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        location.href = '/Administrator-Product-Delete/' + id + '/' + sellerId;
+                    },
+                    انصراف: function () {
+                        $.alert('عملیات حذف محصول لغو شد!');
+                    },
+                }
+            });
+        }
+
+        function productFalse(id, sellerId) {
+            $.confirm({
+                title: ' گزارش اطلاعات نادرست برای محصول',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        location.href = '/Administrator-Product-False/' + id + '/' + sellerId;
+                    },
+                    انصراف: function () {
+                        $.alert('عملیات گزارش اطلاعات اشتباه لغو شد!');
+                    },
+
+                }
+            });
         }
 
         function confirmDelete() {
@@ -103,6 +186,22 @@
                     },
                     انصراف: function () {
                         $.alert('عملیات افزودن فروشنده جدید لغو شد.');
+                    },
+                }
+            });
+        }
+
+        function confirmPay() {
+            $.confirm({
+                title: 'ثبت واریزی برای فروشنده',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#paymentAmount').val($('#paymentAmount').val().replace(new RegExp(',', 'g'), ""));
+                        $('#formPay').submit();
+                    },
+                    انصراف: function () {
+                        $.alert('عملیات ثبت واریزی برای فروشنده لغو شد.');
                     },
                 }
             });

@@ -9,10 +9,10 @@
     </div>
     <!-- End Info Panel -->
 
-    <div class="container g-pt-20">
+    <div class="container">
         @if ($data->count()!==0)
             {{--    Warning Alert--}}
-            <div style="direction: rtl" class="row">
+            <div style="direction: rtl" class="row g-mt-20">
                 <div class="col-md-12">
                     <div class="alert alert-danger" role="alert">
                         <strong class="g-font-size-25 g-mr-10">اخطار</strong>

@@ -67,7 +67,7 @@
                         </td>
 
                         <td class="align-middle text-nowrap text-center">
-                            <a class="g-color-aqua g-text-underline--none--hover g-pa-5" href="{{route('sellerControlPanel',$row->id)}}">
+                            <a class="g-color-aqua g-text-underline--none--hover g-pa-5" href="{{route('sellerControlPanel',['id'=>$row->id,'tab'=>'user'])}}">
                                 <i class="icon-eye g-font-size-18 g-mr-7"></i>
                             </a>
                         </td>
