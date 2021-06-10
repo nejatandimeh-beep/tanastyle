@@ -40,9 +40,7 @@ Route::group(['prefix' => 'sellers'], function(){
 
 
 // Control Panel
-Route::get('/Seller-Panel', function () {
-    return view('Seller.Panel');
-})->middleware('IsSeller');
+Route::get('/Seller-Panel', 'Seller\Basic@sellerPanel')->middleware('IsSeller');
 
 // ---------------Profile---------
 // Profile
@@ -305,6 +303,8 @@ Route::post('/Administrator-AdminConnection-New', 'Administrator\Seller@connecti
 Route::post('/Administrator-Connection-NewMsg', 'Administrator\Seller@connectionNewMsg')->name('connectionNewMsg');
 
 Route::post('/Administrator-Seller-AmountPay', 'Administrator\Seller@amountPay')->name('amountPay');
+
+Route::get('/Administrator-Seller-Support', 'Administrator\Seller@support')->name('support');
 
 //-----------------------------[seller][filtering]
 

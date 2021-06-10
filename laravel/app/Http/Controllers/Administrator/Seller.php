@@ -67,7 +67,13 @@ class Seller extends Controller
             ->select('ID', 'Name', 'Family', 'NationalID')
             ->get();
 
-        return view('Administrator.Seller.Verify', compact('data'));
+        $newSupport=DB::table('seller_conversation')
+            ->select('SellerID','Status')
+            ->where('Status','1')
+            ->get()
+            ->count();
+
+        return view('Administrator.Seller.Verify', compact('data','newSupport'));
     }
 
     public function verifyDetail($id)
@@ -90,11 +96,25 @@ class Seller extends Controller
 
     public function list()
     {
-        $data = DB::table('sellers')
-            ->select('id', 'name', 'Family', 'NationalID')
+        $data = DB::table('sellers as s')
+            ->select('*')
+            ->leftJoin('product_order_detail as pod', 'pod.SellerID', '=', 's.id')
+            ->leftJoin('product_delivery as pd' , 'pd.OrderDetailID','=','pod.ID')
+            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->get();
 
-        return view('Administrator.Seller.Seller', compact('data'));
+        $newSupport=DB::table('seller_conversation')
+            ->select('SellerID','Status')
+            ->where('Status','1')
+            ->get()
+            ->count();
+
+        $deliveryStatus = array();
+        foreach ($data as $key => $rec) {
+            $deliveryStatus[$key] = $this->dateLenToNow($data[$key]->Date, $data[$key]->Time);
+        }
+
+        return view('Administrator.Seller.Seller', compact('data','deliveryStatus','newSupport'));
     }
 
     public function controlPanel($id, $tab)
@@ -145,6 +165,12 @@ class Seller extends Controller
             ->orderBy('sc.ID', 'DESC')
             ->get();
 
+        $newSupport=DB::table('seller_conversation')
+            ->select('SellerID','Status')
+            ->where('SellerID',$id)
+            ->where('Status','1')
+            ->get()
+            ->count();
 
         $persianDate = array();
         foreach ($saleTable as $key => $rec) {
@@ -163,7 +189,7 @@ class Seller extends Controller
         $supportPersianDate = array();
         foreach ($support as $key => $rec) {
             $d = $rec->Date;
-            $persianDate[$key] = $this->convertDateToPersian($d);
+            $supportPersianDate[$key] = $this->convertDateToPersian($d);
         }
 
         $amountPersianDate = array();
@@ -171,7 +197,42 @@ class Seller extends Controller
             $d = $rec->Date;
             $amountPersianDate[$key] = $this->convertDateToPersian($d);
         }
-        return view('Administrator.Seller.ControlPanel', compact('sellerInfo', 'creditCard', 'storeSum', 'storeTable', 'tab','persianDate','saleSum','saleTable','amountSum','amountTable','lastPaymentDate','delivery','deliverPersianDate','deliveryStatus','delivery','support','supportPersianDate','amountPersianDate'));
+        return view('Administrator.Seller.ControlPanel', compact('sellerInfo', 'creditCard', 'storeSum', 'storeTable',
+            'tab','persianDate','saleSum','saleTable','amountSum','amountTable','lastPaymentDate','delivery','deliverPersianDate',
+            'deliveryStatus','delivery','support','supportPersianDate','amountPersianDate','newSupport'));
+    }
+
+    public function support()
+    {
+        $support = DB::table('seller_conversation as sc')
+            ->select('sc.*',
+                'scd.QuestionDate as qDate',
+                'scd.QuestionTime as qTime',
+                'scd.AnswerDate as aDate',
+                'scd.AnswerTime as aTime',
+                'scd.Replay',
+                'scd.ConversationID',
+                'scd.ID as conversationDetailID')
+            ->leftJoin('seller_conversation_detail as scd', 'scd.ConversationID', '=', 'sc.ID')
+            ->where('Status','1')
+            ->orderBy('sc.Status')
+            ->orderBy(DB::raw('IF(sc.Status=0 || sc.Status=1, sc.Priority, false)'), 'ASC')
+            ->orderBy('sc.ID', 'DESC')
+            ->get();
+
+        $newSupport=DB::table('seller_conversation')
+            ->select('SellerID','Status')
+            ->where('Status','1')
+            ->get()
+            ->count();
+
+        $supportPersianDate = array();
+        foreach ($support as $key => $rec) {
+            $d = $rec->Date;
+            $supportPersianDate[$key] = $this->convertDateToPersian($d);
+        }
+
+        return view('Administrator.Seller.Support', compact('support','supportPersianDate','newSupport'));
     }
 
     public function storeTableLoad($val, $sellerID)

@@ -103,14 +103,14 @@
             </div>
         @else
             <div style="direction: rtl" class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12 g-mt-15">
                     <!-- Border Alert -->
                     <div class="alert fade show g-brd-around g-brd-gray-light-v3 rounded-0 g-pt-100--lg g-pb-100--lg d-flex justify-content-center" role="alert">
                         <div class="media">
                             <div class="d-flex g-ml-10">
-    <span class="u-icon-v3 u-icon-size--md g-bg-lightred g-color-white g-rounded-50x">
-      <i class="icon-envelope g-font-size-30"></i>
-    </span>
+                                <span class="u-icon-v3 u-icon-size--md g-bg-lightred g-color-white g-rounded-50x">
+                                  <i class="icon-envelope g-font-size-30"></i>
+                                </span>
                             </div>
                             <div class="media-body">
                                 <div class="d-flex justify-content-between">

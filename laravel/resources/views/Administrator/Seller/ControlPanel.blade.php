@@ -108,18 +108,30 @@
             </li>
 
             <li class="nav-item">
-                <a id="sellerSupport" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1" role="tab">پشتیبانی</a>
+                <a id="sellerSupport" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1" role="tab">
+                    <div style="width: 20px; height: 20px"
+                         class="{{$newSupport===0 ? 'd-none ': 'd-inline-block '}}text-center g-color-black g-bg-lightred g-rounded-50x g-mr-10">
+                        {{$newSupport}}
+                    </div>
+                    پشتیبانی
+                </a>
             </li>
 
             <li class="nav-item">
-                <a id="sellerDelivery" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--2"
-                   role="tab">تحویل محصول</a>
+                <a id="sellerDelivery" class="nav-link g-mb-minus-1" data-toggle="tab"
+                   href="#nav-4-1-primary-hor-fill--2"
+                   role="tab">
+                    <span id="deliveryAlarm" class="d-none g-mr-10">
+                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
+                    </span>
+                    تحویل محصول
+                </a>
             </li>
 
             <!--مبالغ دریافتی-->
             <li class="nav-item">
-                <a id="sellerAmount" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--3" role="tab">مبالغ
-                    دریافتی</a>
+                <a id="sellerAmount" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--3" role="tab">
+                    مبالغ دریافتی</a>
             </li>
 
             <!--فاکتور-->
@@ -310,7 +322,7 @@
                                                 @if ($rec->Priority === '2')
                                                     <td class="align-middle text-center text-nowrap">معمولی</td>
                                                 @elseif ($rec->Priority === '1')
-                                                    <td class="align-middle text-center text-nowrap {{ ($rec->Status == 2) ? '' : 'g-color-darkred' }}">
+                                                    <td class="align-middle text-center text-nowrap {{ ($rec->Status == 2) ? '' : 'g-color-orange' }}">
                                                         مهم
                                                     </td>
                                                 @elseif ($rec->Priority === '0')
@@ -319,7 +331,7 @@
                                                     </td>
                                                 @endif
                                                 <td class="align-middle text-center text-nowrap">
-                                                    {{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}
+                                                    {{ $supportPersianDate[$key][0].'/'.$supportPersianDate[$key][1].'/'.$supportPersianDate[$key][2] }}
                                                     <p class="g-font-size-13 g-color-primary m-0 p-0">{{ $rec->Time }}</p>
                                                 </td>
                                                 <td class="align-middle text-center text-nowrap">
@@ -336,7 +348,7 @@
                                                             class="fa fa-check g-ml-5"></i>پاسخ داده شد
                                                     </td>
                                                 @elseif ($rec->Status === '1')
-                                                    <td class="align-middle text-center text-nowrap g-color-aqua"><i
+                                                    <td class="align-middle text-center text-nowrap g-color-lightred"><i
                                                             class="fa fa-spinner fa-spin g-ml-5"></i>در انتضار پاسخ
                                                     </td>
                                                 @elseif ($rec->Status === '2')
@@ -411,10 +423,11 @@
                                                     <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
                                                        data-toggle="tooltip"
                                                        data-placement="top" data-original-title="اتمام زمان تحویل">
-                                                        <i class="fa fa-calendar-times-o g-font-size-18 g-color-red"></i>
+                                                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
                                                     </a>
                                                 </td>
-                                                <td class="align-middle text-center text-nowrap g-color-lightred">عدم
+                                                <td id="deliveryErr"
+                                                    class="align-middle text-center text-nowrap g-color-lightred">عدم
                                                     تحویل محصول
                                                 </td>
                                             @else
@@ -860,11 +873,7 @@
                                     <tbody>
                                     @foreach($amountTable as $key => $rec)
                                         <tr>
-                                            @if ($lastPaymentDate === 0)
-                                                <td class="align-middle text-nowrap text-center">--</td>
-                                            @else
-                                                <td class="align-middle text-nowrap text-center">{{ $amountPersianDate[$key][0].'/'.$amountPersianDate[$key][1].'/'.$amountPersianDate[$key][2] }}</td>
-                                            @endif
+                                            <td class="align-middle text-nowrap text-center">{{ $amountPersianDate[$key][0].'/'.$amountPersianDate[$key][1].'/'.$amountPersianDate[$key][2] }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $rec->Time }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ number_format($rec->Amount) }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $rec->CardNumber }}</td>
@@ -888,12 +897,14 @@
                                 <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
                                 <span style="border-right: 1px solid lightgrey; width: 30%"
                                       class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">مبلغ پرداختی</span>
-                                    <input id="paymentAmount" class="form-control form-control-md rounded-0 text-center" type="text" name="amount" oninput="addComa($(this))">
+                                    <input id="paymentAmount" class="form-control form-control-md rounded-0 text-center"
+                                           type="text" name="amount" oninput="addComa($(this))">
                                 </div>
                                 <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
                                 <span style="border-right: 1px solid lightgrey; width: 30%"
                                       class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">کد تراکنش</span>
-                                    <input class="form-control form-control-md rounded-0 text-center" type="text" name="transactionCode">
+                                    <input class="form-control form-control-md rounded-0 text-center" type="text"
+                                           name="transactionCode">
                                 </div>
                                 <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
                                 <span style="border-right: 1px solid lightgrey; width: 30%"

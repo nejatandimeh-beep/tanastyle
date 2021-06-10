@@ -5,6 +5,10 @@
             nowDate();
             setInterval('updateClock()', 1000);
 
+            if ($('#deliveryErr').length > 0) {
+                $('#deliveryAlarm').removeClass('d-none');
+            }
+
             if ($('#overlay').length > 0) {
                 $('#overlay').modal('show');
 

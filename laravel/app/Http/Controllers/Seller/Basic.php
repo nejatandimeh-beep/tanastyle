@@ -23,6 +23,10 @@ class Basic extends Controller
         'productIdChangeQty' => 0,
         'alarmChangeQty' => 0);
 
+    public function sellerPanel()
+    {
+        return view('Seller.Panel');
+    }
 // ---------> Profile
 //  Profile
     public function profile()
@@ -38,6 +42,7 @@ class Basic extends Controller
             if ($rec->Status === 1)
                 $activeCard = $rec->CardNumber;
         }
+
         return view('Seller.Profile', compact('data', 'activeCard'));
     }
 

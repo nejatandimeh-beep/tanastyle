@@ -136,7 +136,7 @@ class Basic extends Controller
                 case '3':
                     if ($deliveryMin[$key] > 1800) {
                         DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
+                            ->where('OrderDetailID', $row->OrderDetailID)
                             ->update([
                                 'DeliveryProblem' => 1
                             ]);
