@@ -734,26 +734,26 @@
                                                     <div
                                                         class="d-inline-block g-ml-20 g-width-20"><i
                                                             id="addressOption{{$key}}"
-                                                            class="icon-options g-font-size-20 g-color-gray-dark-v3"></i>
+                                                            class="icon-options g-font-size-20 g-color-gray-dark-v3 align-middle g-line-height-0"></i>
                                                     </div>
                                                     <!-- End Track Num -->
                                                 @if($row->Status === 1)
                                                     <!-- Track Avatar -->
                                                         <span style="cursor: default"
-                                                              class="g-ml-10 g-ml-25--lg g-bg-primary g-pt-15 g-pb-5 g-pr-15 g-pl-10 g-font-size-16">
-                                                        <i class="icon-communication-011 g-color-white"></i>
+                                                              class="g-ml-10 g-ml-25--lg g-bg-primary g-py-10 g-pr-15 g-pl-10 g-font-size-16">
+                                                        <i class="icon-communication-011 g-color-white align-middle g-line-height-0"></i>
                                                     </span>
                                                         <!-- End Track Avatar -->
                                                 @else
                                                     <!-- Track Avatar -->
-                                                        <a class="g-ml-10 g-ml-25--lg g-text-underline--none--hover g-bg-primary--hover g-bg-lightred g-pt-15 g-pb-5 g-pr-15 g-pl-10 g-font-size-16 g-width-50"
+                                                        <a class="g-ml-10 g-ml-25--lg g-text-underline--none--hover g-bg-primary--hover g-bg-lightred g-py-10 g-pr-15 g-pl-10 g-font-size-16 g-width-50"
                                                            href="#"
                                                            id="{{ $row->ID }}"
                                                            onclick="activeAddress($(this).attr('id'))"
                                                            data-toggle="tooltip"
                                                            data-placement="top"
                                                            data-original-title="فعال سازی آدرس">
-                                                            <i class="icon-communication-011 g-color-white"></i>
+                                                            <i class="icon-communication-011 g-color-white align-middle g-line-height-0"></i>
                                                         </a>
                                                 @endif
                                                 <!-- End Track Avatar -->
@@ -766,7 +766,7 @@
                                                         {{--delete button small device--}}
                                                         @if($row->Status === 1)
                                                             <span style="cursor: default"
-                                                                  class="g-color-gray-dark-v5"
+                                                                  class="g-color-gray-dark-v5 align-middle"
                                                                   data-toggle="tooltip"
                                                                   data-placement="top" data-original-title="آدرس فعال">
                                                             <i class="icon-target g-font-size-18 g-color-primary"></i>
@@ -799,7 +799,7 @@
                                                     {{--delete button big device--}}
                                                     @if($row->Status === 1)
                                                         <span style="cursor: default"
-                                                              class="g-color-gray-dark-v5 g-pa-5"
+                                                              class="g-color-gray-dark-v5 g-pa-5 align-middle"
                                                               data-toggle="tooltip"
                                                               data-placement="top" data-original-title="آدرس فعال">
                                                             <i class="icon-target g-font-size-18 g-color-primary"></i>
@@ -1031,7 +1031,7 @@
                     </div>
 
                     <div style="direction: rtl" class="g-mx-80--lg g-mt-40 g-mb-25 g-px-10">
-                        <div class="text-left">
+                        <div class="text-left g-pt-10 g-brd-top g-brd-gray-light-v3">
                             <a href="#modal17"
                                id="newAddressLink"
                                onclick="manuelFocus(); $(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"

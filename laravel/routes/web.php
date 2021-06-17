@@ -280,27 +280,21 @@ Route::get('/Administrator-Seller', 'Administrator\Seller@list')->name('sellerLi
 
 Route::get('/Administrator-Seller-Control/{id}/{tab}', 'Administrator\Seller@controlPanel')->name('sellerControlPanel');
 
+Route::get('/Administrator-Seller-ProductDetail/{id}', 'Administrator\Seller@productDetail')->name('adminSellerProductDetail');
+
 Route::post('/Administrator-Seller-Update', 'Administrator\Seller@update')->name('updateSeller');
 
-Route::get('/Administrator-Seller-Search/{nationalId}', 'Administrator\Seller@nationalIdSearch')->name('sellerSearch');
+Route::get('/Administrator-Seller-Search/{nationalId}', 'Administrator\Seller@nationalIdSearch');
 
 Route::get('/Administrator-Seller-CreditCardActive/{sellerId}/{cardID}', 'Administrator\Seller@creditCardActive')->name('creditCardActive');
 
-Route::get('/Administrator-Product-Detail/{id}', 'Administrator\Seller@productDetail')->name('adminProductDetail');
+Route::get('/Administrator-Seller-OrderDetail/{addressId}/{id}', 'Administrator\Seller@orderDetail')->name('adminOrderDetail');
 
-Route::post('/Administrator-Product-Edit', 'Administrator\Seller@productEdit')->name('adminProductEdit');
+Route::get('/Administrator-Seller-ConnectionDetail/{id}/{status}', 'Administrator\Seller@connectionDetail')->name('connectionDetail');
 
-Route::get('/Administrator-Product-Delete/{id}/{sellerId}', 'Administrator\Seller@productDelete')->name('adminProductDelete');
+Route::post('/Administrator-Seller-ConnectionNew', 'Administrator\Seller@connectionNew')->name('connectionNew');
 
-Route::get('/Administrator-Product-False/{id}/{sellerId}', 'Administrator\Seller@productFalse')->name('adminProductFalse');
-
-Route::get('/Administrator-Order-Detail/{addressId}/{id}', 'Administrator\Seller@orderDetail')->name('adminOrderDetail');
-
-Route::get('/Administrator-Connection-Detail/{id}/{status}', 'Administrator\Seller@connectionDetail')->name('connectionDetail');
-
-Route::post('/Administrator-AdminConnection-New', 'Administrator\Seller@connectionNew')->name('connectionNew');
-
-Route::post('/Administrator-Connection-NewMsg', 'Administrator\Seller@connectionNewMsg')->name('connectionNewMsg');
+Route::post('/Administrator-Seller-ConnectionNewMsg', 'Administrator\Seller@connectionNewMsg')->name('connectionNewMsg');
 
 Route::post('/Administrator-Seller-AmountPay', 'Administrator\Seller@amountPay')->name('amountPay');
 
@@ -308,4 +302,35 @@ Route::get('/Administrator-Seller-Support', 'Administrator\Seller@support')->nam
 
 //-----------------------------[seller][filtering]
 
+// -------------------------[Product]
+Route::get('/Administrator-Product-List', 'Administrator\Product@allProduct')->name('adminProductList');
+
+Route::get('/Administrator-Product-Detail/{id}', 'Administrator\Product@productDetail')->name('adminProductDetail');
+
+Route::post('/Administrator-Product-Edit', 'Administrator\Seller@productEdit')->name('adminProductEdit');
+
+Route::get('/Administrator-Product-Delete/{id}/{sellerId}', 'Administrator\Seller@productDelete')->name('adminProductDelete');
+
+Route::get('/Administrator-Product-False/{id}/{sellerId}', 'Administrator\Seller@productFalse')->name('adminProductFalse');
+
+Route::get('/Administrator-Product-OrderDetail/{addressId}/{id}', 'Administrator\Product@orderDetail')->name('adminProductOrderDetail');
+
+// -------------------------[Customer]
+Route::get('/Administrator-Customer-List', 'Administrator\Customer@customer')->name('customerList');
+
+Route::get('/Administrator-Customer-Support', 'Administrator\Customer@support')->name('customerSupport');
+
+Route::get('/Administrator-Customer-Control/{id}/{tab}', 'Administrator\Customer@controlPanel')->name('customerControlPanel');
+
+Route::post('/Administrator-Customer-Update', 'Administrator\Customer@update')->name('updateCustomer');
+
+Route::get('/Administrator-Customer-Search/{nationalId}', 'Administrator\Customer@nationalIdSearch');
+
+Route::post('/Administrator-Customer-AddressUpdate', 'Administrator\Customer@addressUpdate')->name('adminAddressUpdate');
+
+Route::post('/Administrator-Customer-AddressAdd', 'Administrator\Customer@addAddress')->name('customerAddAddress');
+
+Route::get('/Administrator-Customer-AddressDelete/{id}', 'Administrator\Customer@addressDelete');
+
+Route::get('/Administrator-Customer-OrderDetail/{addressId}/{id}', 'Administrator\Customer@orderDetail')->name('adminCustomerOrderDetail');
 

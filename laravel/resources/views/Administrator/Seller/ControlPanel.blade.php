@@ -107,6 +107,7 @@
                 <a class="nav-link" href="{{route('sellerList')}}">فروشندگان</a>
             </li>
 
+            <!--پشتیبانی-->
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1" role="tab">
                     <div style="width: 20px; height: 20px"
@@ -117,6 +118,7 @@
                 </a>
             </li>
 
+            <!--تحویل محصول-->
             <li class="nav-item">
                 <a id="sellerDelivery" class="nav-link g-mb-minus-1" data-toggle="tab"
                    href="#nav-4-1-primary-hor-fill--2"
@@ -136,8 +138,11 @@
 
             <!--فاکتور-->
             <li class="nav-item">
-                <a id="sellerOrder" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--4" role="tab">فاکتورهای
-                    فروش</a>
+                <a id="sellerOrder" class="nav-link g-mb-minus-1" data-toggle="tab" href="#nav-4-1-primary-hor-fill--4" role="tab">
+                    <span id="deliveryAlarm" class="{{$pf==='' ? 'd-none ': ''}}g-mr-10">
+                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
+                    </span>
+                    فاکتورهای فروش</a>
             </li>
 
             <!--انبار-->
@@ -1703,7 +1708,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                 <a
-                                                    href="{{ route('adminProductDetail',['id'=>$rec->pDetailID]) }}"
+                                                    href="{{ route('adminSellerProductDetail',['id'=>$rec->pDetailID]) }}"
                                                     class="g-color-gray-light-v3 g-text-underline--none--hover g-color-primary--hover g-pa-5"
                                                     data-toggle="tooltip"
                                                     data-placement="top" data-original-title="مشاهده جزئیات محصول">

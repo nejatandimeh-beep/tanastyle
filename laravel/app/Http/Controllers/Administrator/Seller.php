@@ -97,9 +97,10 @@ class Seller extends Controller
     public function list()
     {
         $data = DB::table('sellers as s')
-            ->select('*')
+            ->select('*','pf.ID as pfID')
             ->leftJoin('product_order_detail as pod', 'pod.SellerID', '=', 's.id')
             ->leftJoin('product_delivery as pd' , 'pd.OrderDetailID','=','pod.ID')
+            ->leftJoin('product_false as pf' , 'pf.ProductDetailID','=','pod.ProductDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->get();
 
@@ -173,9 +174,12 @@ class Seller extends Controller
             ->count();
 
         $persianDate = array();
+        $pf='';
         foreach ($saleTable as $key => $rec) {
             $d = $rec->Date;
             $persianDate[$key] = $this->convertDateToPersian($d);
+            if(isset($rec->fpID))
+                $pf='error';
         }
 
         $deliverPersianDate = array();
@@ -199,7 +203,7 @@ class Seller extends Controller
         }
         return view('Administrator.Seller.ControlPanel', compact('sellerInfo', 'creditCard', 'storeSum', 'storeTable',
             'tab','persianDate','saleSum','saleTable','amountSum','amountTable','lastPaymentDate','delivery','deliverPersianDate',
-            'deliveryStatus','delivery','support','supportPersianDate','amountPersianDate','newSupport'));
+            'deliveryStatus','delivery','support','supportPersianDate','amountPersianDate','newSupport','pf'));
     }
 
     public function support()
@@ -550,7 +554,7 @@ class Seller extends Controller
         foreach ($data as $key => $row) {
             $output .= '<li style="border-radius: 0 !important;"
                         class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
-                            <a  href="' . route('sellerControlPanel', [$row->id]) . '"
+                            <a  href="' . route('sellerControlPanel',['id'=>$row->id,'tab'=>'all']) . '"
                                 style="text-decoration: none"
                                 class="col-12 p-0 text-left g-color-gray-dark-v3 g-color-primary--hover">
                              ' . $row->NationalID . '

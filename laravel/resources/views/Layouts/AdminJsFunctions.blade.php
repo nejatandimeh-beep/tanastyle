@@ -32,9 +32,14 @@
             if ($('#amountReceived').length > 0)
                 $('#sellerAmount').trigger('click');
 
+            if ($('#address').length > 0)
+                $('#customerAddress').trigger('click');
+
             if ($('#cardContainer').length > 0)
                 $('#cardContainer').css('height', $(window).height() - 100);
 
+            if ($('#customerContainer').length > 0)
+                $('#customerContainer').css('height', $(window).height());
         });
 
         $(document).mouseup(function (e) {
@@ -67,16 +72,42 @@
             }
         });
 
+        $("select[id^='stateSelectReceiver-'] > option").each(function () {
+            let id = $(this).parent().attr('id').replace(/[^0-9]/gi, '');
+            if ($(this).val() === $('#stateReceiver' + id).val()) {
+                $(this).attr('selected', true);
+                changeState('stateSelectReceiver-' + id, 'citySelectReceiver-' + id);
+            }
+        });
+
+        $("select[id^='citySelectReceiver-'] > option").each(function () {
+            let id = $(this).parent().attr('id').replace(/[^0-9]/gi, '');
+            if ($(this).val() === $('#cityReceiver' + id).val()) {
+                $(this).attr('selected', true);
+            }
+        });
+
         //-------------------------------------------------------Ajax-----------------------------------------------------------
-        function sellerSearch(id, nationalId) {
-            id = '#' + id;
+        function sellerSearch(nationalId) {
             $.ajax({
                 type: 'GET',
                 url: "/Administrator-Seller-Search/" + nationalId,
                 success: function (data) {
                     console.log(data);
-                    $(id).removeClass('d-none');
-                    $(id).html(data);
+                    $('#searchContainer').removeClass('d-none');
+                    $('#searchContainer').html(data);
+                }
+            });
+        }
+
+        function customerSearch(nationalId) {
+            $.ajax({
+                type: 'GET',
+                url: "/Administrator-Customer-Search/" + nationalId,
+                success: function (data) {
+                    console.log(data);
+                    $('#customerNationalID').removeClass('d-none');
+                    $('#customerNationalID').html(data);
                 }
             });
         }
@@ -84,6 +115,95 @@
         //-------------------------------------------------------My Function----------------------------------------------------
         function addComa(ele){
             ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+        }
+
+        function manuelAutoFocus(id) {
+            $('#' + id).focus();
+            $('#' + id).on('focus', function () {
+                document.body.scrollTop = $(this).offset().top;
+            });
+        }
+
+        function editUserAddress(num) {
+            $('#editAddress' + num).hide();
+            $('#saveAddress' + num).show();
+
+            let clone = $('#accordion-13-body-' + num + ' :input');
+            clone.attr("readonly", false);
+            clone.removeClass("g-bg-gray-light-v5");
+
+            clone = $('#stateCity' + num + ' select');
+            clone.css('pointer-events', 'all');
+            clone.removeClass('g-bg-gray-light-v5');
+
+            manuelAutoFocus('receiver-name-' + num);
+        }
+
+        function saveUserAddress(num) {
+            // let row = 'addressUpdate' + num;
+            // console.log($('#'+row+' [name="receiver-state"]').val());
+            $.confirm({
+                title: 'بروز رسانی آدرس',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#addressUpdate' + num).submit();
+                    },
+                    انصراف: function () {
+                        $('#saveAddress' + num).hide();
+                        $('#editAddress' + num).show();
+
+                        let clone = $('#accordion-13-body-' + num + ' :input');
+                        clone.attr("readonly", true);
+                        clone.addClass("g-bg-gray-light-v5");
+
+                        clone = $('#stateCity' + num + ' select');
+                        clone.css('pointer-events', 'none');
+                        clone.addClass('g-bg-gray-light-v5');
+                    },
+                }
+            });
+        }
+
+        function addUserAddress() {
+            $.confirm({
+                title: 'بروز رسانی آدرس',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('.custombox-content #addAddress').submit();
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+
+        function deleteAddress(id, idBtn) {
+            $.confirm({
+                title: 'حذف آدرس',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $('#' + idBtn).hide();
+                        $('#waitingAddressDelete' + idBtn.replace(/[^0-9]/gi, '')).show();
+                        $.ajax({
+                            type: 'GET',
+                            url: "/Administrator-Customer-AddressDelete/" + id,
+                            success: function () {
+                                $('#addressRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
+                            },
+                            error: function () {
+                                $('#' + idBtn).show();
+                                $('#waitingAddressDelete' + idBtn.replace(/[^0-9]/gi, '')).hide();
+                                alert('قبلا برای این آدرس فاکتور صادر شده است و قابل حذف نیست.');
+                            }
+                        });
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
         }
 
         function editProduct() {
