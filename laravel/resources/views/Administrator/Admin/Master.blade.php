@@ -69,7 +69,8 @@
 
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->
-                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30" href="#">
+                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30"
+                   href="{{route('kioskPersonal')}}">
                     <span class="u-icon-v2  g-mb-25">
                     <i class="icon-home"></i>
                     </span>
@@ -80,7 +81,8 @@
 
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->
-                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30" href="#">
+                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30"
+                   href="{{route('deliveryPersonal')}}">
                     <span class="u-icon-v2  g-mb-25">
                     <i class="icon-transport-077 u-line-icon-pro"></i>
                     </span>
@@ -104,27 +106,16 @@
 
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->
-                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30"
+                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30"
                    href="{{route('adminRegister')}}">
                     <span class="u-icon-v2  g-mb-25">
                     <i class="icon-user-follow"></i>
                     </span>
-                    <h3 class="h4 g-font-weight-600 mb-30">ثبت نام کارمندان</h3>
+                    <h3 class="h4 g-font-weight-600 mb-30">ثبت نام پرسنل</h3>
                 </a>
                 <!-- End Icon Blocks -->
             </div>
-            <div class="col-lg-4 g-mb-30">
-                <!-- Icon Blocks -->
-                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30"
-                   href="">
-                    <span class="u-icon-v2  g-mb-25">
-                    <i class="icon-people"></i>
-                    </span>
-                    <h3 class="h4 g-font-weight-600 mb-30">لیست کارمندان</h3>
-                </a>
-                <!-- End Icon Blocks -->
-            </div>
-            <div class="col-lg-4 g-mb-30">
+            <div class="col-lg-8 g-mb-30">
                 <!-- Icon Blocks -->
                 <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30"
                    href="">

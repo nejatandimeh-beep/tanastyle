@@ -43,19 +43,61 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="username"
+                                <label for="family"
                                        class="col-md-4 col-form-label text-right text-md-left g-font-size-16">نام
-                                    کاربری</label>
+                                    خانوادگی</label>
 
                                 <div class="col-md-6">
-                                    <input id="username"
+                                    <input id="family"
                                            type="text"
-                                           class="form-control @error('username') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md"
-                                           name="username"
-                                           value="{{ old('username') }}"
+                                           class="form-control @error('family') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md"
+                                           name="family"
+                                           value="{{ old('family') }}"
                                            required>
 
-                                    @error('username')
+                                    @error('family')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="address"
+                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">آدرس</label>
+
+                                <div class="col-md-6">
+                                    <input id="address"
+                                           type="text"
+                                           class="form-control @error('address') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md"
+                                           name="address"
+                                           value="{{ old('address') }}"
+                                           required>
+
+                                    @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                            <div class="form-group row">
+                                <label for="mobile"
+                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">موبایل</label>
+
+                                <div class="col-md-6">
+                                    <input style="direction: ltr"
+                                           id="mobile"
+                                           type="number"
+                                           class="form-control @error('mobile') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md"
+                                           name="mobile"
+                                           value="{{ old('mobile') }}"
+                                           required>
+
+                                    @error('mobile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -92,7 +134,7 @@
                                 <div class="col-md-6">
                                     <input style="direction:ltr;"
                                            id="password"
-                                           type="password"
+                                           type="text"
                                            class="form-control @error('password') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
                                            name="password"
                                            placeholder="کد ملی"
@@ -109,37 +151,45 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password"
-                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">رمز</label>
+                                <label for="role"
+                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">نقش</label>
                                 <div class="col-md-6">
                                     <select style="direction: ltr"
                                             id="role"
+                                            onchange="if($(this).val()==='2') $('#signature').removeClass('d-none'); else $('#signature').addClass('d-none');"
                                             class="form-control form-control-md custom-select rounded-0 p-0 pl-3  g-font-size-16 g-bg-gray-light-v5"
                                             name="role"
                                             tabindex="4">
-                                        <option value="2">پیک</option>
-                                        <option value="3">کیوسک</option>
+                                        <option value="2">کیوسک</option>
+                                        <option value="3">پیک</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="password-confirm"
-                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">تکرار
-                                    رمز</label>
+                            <div id="signature" class="form-group row">
+                                <label for="signature"
+                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">امضاء</label>
 
                                 <div class="col-md-6">
-                                    <input id="password-confirm"
-                                           type="password"
-                                           class="form-control input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
-                                           name="password_confirmation"
-                                           placeholder="تکرار کد ملی"
-                                           required
-                                           autocomplete="new-password">
+                                    <input style="direction:ltr;"
+                                           id="signature"
+                                           type="text"
+                                           class="form-control @error('signature') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
+                                           name="signature"
+                                           placeholder="رمز امضاء"
+                                           value="{{ old('signature') }}"
+                                           required=""
+                                           autocomplete="current-signature">
+
+                                    @error('signature')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
 
-                            <div class="form-group row g-mb-60--lg g-mt-20">
+                            <div class="form-group row g-mb-30--lg g-mt-20">
                                 <div class="col-md-10 text-left">
                                     <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16">
                                         ثبت نام

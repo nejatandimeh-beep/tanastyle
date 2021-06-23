@@ -222,6 +222,8 @@ Route::get('/email-test', function () {
 });
 
 // *********************************************** ( Delivery Routes ) *************************************************
+Route::get('/Delivery-Personal', 'Delivery\Basic@deliveryPersonal')->name('deliveryPersonal');
+
 Route::get('/Delivery-Panel', 'Delivery\Basic@deliveryPanel')->name('deliveryPanel');
 
 Route::post('/Delivery-Panel-DeliveryCourier/{orderDetailID}/{destination}', 'Delivery\Basic@deliveryCourier')->name('deliveryCourier');
@@ -229,6 +231,8 @@ Route::post('/Delivery-Panel-DeliveryCourier/{orderDetailID}/{destination}', 'De
 Route::post('/Delivery-Panel-ReturnCourier/{orderDetailID}/{destination}', 'Delivery\Basic@returnCourier')->name('returnCourier');
 
 // *********************************************** ( Kiosk Routes ) *************************************************
+Route::get('/Kiosk-Personal', 'Delivery\Basic@kioskPersonal')->name('kioskPersonal');
+
 Route::get('/Kiosk-Panel', 'Delivery\Basic@kioskPanel')->name('kioskPanel');
 
 Route::get('/Kiosk-Check-Signature/{pass}', 'Delivery\Basic@kioskCheckPass');
@@ -266,6 +270,8 @@ Route::group(['prefix' => 'admins'], function() {
 });
 
 Route::get('/Administrator-Master', 'Administrator\Admin@AdministratorMaster')->name('AdministratorMaster');
+
+Route::get('/Administrator-Kiosk-SignatureEdit/{newCode}/{id}', 'Delivery\Basic@signatureEdit');
 
 // -------------------------[seller]
 Route::post('/Seller-Register-Request', 'Administrator\Seller@new')->name('sellerNew');
@@ -334,3 +340,6 @@ Route::get('/Administrator-Customer-AddressDelete/{id}', 'Administrator\Customer
 
 Route::get('/Administrator-Customer-OrderDetail/{addressId}/{id}', 'Administrator\Customer@orderDetail')->name('adminCustomerOrderDetail');
 
+Route::get('/Administrator-Delivery-Panel/{id}', 'Administrator\Admin@adminDeliveryPanel')->name('adminDeliveryPanel');
+
+Route::get('/Administrator-Kiosk-Panel/{id}', 'Administrator\Admin@adminKioskPanel')->name('adminKioskPanel');

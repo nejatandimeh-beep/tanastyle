@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -75,20 +76,48 @@ class RegisterController extends Controller
 
     protected function createAdmin(Request $request)
     {
+
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:sellers',
-            'password' => 'required|string|min:8|confirmed',
+            'password' => 'required|string|min:10',
         ]);
+
+        $role = $request['role'];
+        $pass = $request['password'];
 
         $admin = Admin::create([
             'name' => $request['name'],
             'email' => $request['email'],
-            'username' => $request['username'],
-            'role' => $request['role'],
-            'password' => Hash::make($request['password']),
+            'family' => $request['family'],
+            'role' => $role,
+            'password' => Hash::make($pass),
         ]);
-        return redirect()->intended('login/admin');
+
+        $adminId = DB::table('admins')
+            ->select('id')
+            ->orderBy('id', 'DESC')
+            ->first();
+        if ($role === '2') {
+            DB::table('delivery_kiosk')
+                ->insert([
+                    'AdminID' => (int)$adminId->id,
+                    'NationalID' => $pass,
+                    'Mobile' => $request['mobile'],
+                    'Address' => $request['address'],
+                    'Signature' => $request['signature'],
+                ]);
+        } else {
+            DB::table('delivery_men')
+                ->insert([
+                    'AdminID' => (int)$adminId->id,
+                    'NationalID' => $pass,
+                    'Mobile' => $request['mobile'],
+                    'Address' => $request['address'],
+                ]);
+        }
+
+        return redirect()->route('AdministratorMaster');
     }
 
 

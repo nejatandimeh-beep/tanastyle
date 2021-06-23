@@ -13,21 +13,25 @@ use Illuminate\Support\Facades\DB;
 
 class Basic extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('IsAdmin');
+    }
+
     public function deliveryPanel()
     {
-        $deliveryManID = 1;
-        $deliveryManActive = DB::table('delivery_men')
+        $id=6;
+        $deliveryManActive = DB::table('delivery_men as dm')
             ->select('*')
-            ->where('ID', $deliveryManID)
+            ->leftJoin('admins as admin','admin.id','=','dm.AdminID')
+            ->where('dm.ID', $id)
             ->first();
 
-        $data = $this->product_delivery(['0', '2'], $deliveryManActive->ID, 'delivery');
+        $data = $this->product_delivery(['0', '2'],$id, 'delivery');
+        $deliveryManBasket = $this->product_delivery(['1', '3'], $id, 'delivery');
 
-        $deliveryManBasket = $this->product_delivery(['1', '3'], $deliveryManID, 'delivery');
-
-        $return = $this->product_return(['4', '2'], $deliveryManID, 'delivery');
-
-        $returnManBasket = $this->product_return(['1', '3'], $deliveryManID, 'delivery');
+        $return = $this->product_return(['4', '2'], $id, 'delivery');
+        $returnManBasket = $this->product_return(['1', '3'], $id, 'delivery');
 
         return view('Delivery.Panel', compact('data', 'deliveryManActive', 'return', 'deliveryManBasket', 'returnManBasket'));
     }
@@ -287,19 +291,66 @@ class Basic extends Controller
         else
             return 'passFalse';
     }
+
+    public function deliveryPersonal(){
+        $data=Db::table('delivery_men as dm')
+            ->select('*','dm.ID as deliveryID')
+            ->leftJoin('admins as admin','admin.id','=','dm.AdminID')
+            ->leftJoin('product_delivery as pd','pd.DeliveryManID','=','dm.ID')
+            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
+            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+            ->groupBy('dm.ID')
+            ->get();
+
+        $deliveryStatus = array();
+        foreach ($data as $key => $rec) {
+            $deliveryStatus[$key] = $this->dateLenToNow($data[$key]->Date, $data[$key]->Time);
+        }
+
+        return view('Delivery.Personal',compact('data','deliveryStatus'));
+    }
+
 //-----------------------------------------------------[ Kiosk Codes ]--------------------------------------------------
+
+    public function kioskPersonal(){
+        $data=Db::table('delivery_kiosk as dk')
+            ->select('*','dk.ID as kioskID')
+            ->leftJoin('admins as admin','admin.id','=','dk.AdminID')
+            ->leftJoin('product_delivery as pd','pd.KioskID','=','dk.ID')
+            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
+            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+            ->groupBy('dk.ID')
+            ->get();
+
+        $deliveryStatus = array();
+        foreach ($data as $key => $rec) {
+            $deliveryStatus[$key] = $this->dateLenToNow($data[$key]->Date, $data[$key]->Time);
+        }
+
+        return view('Kiosk.Personal',compact('data','deliveryStatus'));
+    }
 
     public function kioskPanel()
     {
-        $kioskID = 3;
-        $kioskID = DB::table('delivery_kiosk')
+        $kiosk = DB::table('delivery_kiosk as dk')
             ->select('*')
+            ->leftJoin('admins as admin','admin.id','=','dk.AdminID')
+            ->where('dk.ID',$id)
             ->first();
 
-        $kioskBasket = $this->product_delivery(['22','2'], $kioskID->ID, 'kiosk');
-        $returnKioskBasket = $this->product_return(['22','2'], $kioskID->ID, 'kiosk');
+        $kioskBasket = $this->product_delivery(['22','2'], $kiosk->ID, 'kiosk');
+        $returnKioskBasket = $this->product_return(['22','2'], $kiosk->ID, 'kiosk');
 
-        return view('Kiosk.Panel', compact('kioskBasket', 'returnKioskBasket', 'kioskID'));
+        return view('Kiosk.Panel', compact('kioskBasket', 'returnKioskBasket', 'kiosk'));
+    }
+
+    public function signatureEdit($newCode, $id)
+    {
+        DB::table('delivery_kiosk')
+            ->where('AdminID',$id)
+            ->update([
+               'Signature'=>$newCode,
+            ]);
     }
 
     public function kioskCheckPass($pass)

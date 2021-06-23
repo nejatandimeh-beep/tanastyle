@@ -17,7 +17,7 @@
             $('#signatureDiv' + key).removeClass('d-inline-block');
             $('#checkMark' + key).removeClass('d-none');
             setTimeout(function () {
-                $('#deliveryForm'+key).submit();
+                $('#deliveryForm' + key).submit();
             }, 2000);
         }
 
@@ -26,7 +26,7 @@
             $('#returnSignatureDiv' + key).removeClass('d-inline-block');
             $('#returnCheckMark' + key).removeClass('d-none');
             setTimeout(function () {
-                $('#returnForm'+key).submit();
+                $('#returnForm' + key).submit();
             }, 2000);
         }
 
@@ -162,6 +162,20 @@
             });
             $('#returnSignatureDiv' + key).remove();
             $('#returnWaitingIconTd' + key).removeClass('d-none');
+        }
+
+        function signatureEdit(id) {
+            $('#waitingSignatureEdit').show();
+            $('#signatureEditContainer').hide();
+
+            $.ajax({
+                type: 'GET',
+                url: "/Administrator-Kiosk-SignatureEdit/" + $('#newSignature').val() + '/' + id,
+                success: function (data) {
+                    $('#waitingSignatureEdit').hide();
+                    $('#successSignatureEdit').show();
+                }
+            });
         }
     </script>
 @endsection

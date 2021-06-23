@@ -23,6 +23,36 @@ class Admin extends Controller
         return view('Administrator.Admin.Master');
     }
 
+    public function adminDeliveryPanel($id)
+    {
+        $deliveryManActive = DB::table('delivery_men as dm')
+            ->select('*')
+            ->leftJoin('admins as admin','admin.id','=','dm.AdminID')
+            ->where('dm.ID', $id)
+            ->first();
+
+        $data = $this->product_delivery(['0', '2'],$id, 'delivery');
+        $deliveryManBasket = $this->product_delivery(['1', '3'], $id, 'delivery');
+
+        $return = $this->product_return(['4', '2'], $id, 'delivery');
+        $returnManBasket = $this->product_return(['1', '3'], $id, 'delivery');
+
+        return view('Administrator.Admin.DeliveryPanel', compact('data', 'deliveryManActive', 'return', 'deliveryManBasket', 'returnManBasket'));
+    }
+
+    public function adminKioskPanel($id)
+    {
+        $kiosk = DB::table('delivery_kiosk as dk')
+            ->select('*')
+            ->leftJoin('admins as admin','admin.id','=','dk.AdminID')
+            ->where('dk.ID',$id)
+            ->first();
+
+        $kioskBasket = $this->product_delivery(['22','2'], $kiosk->ID, 'kiosk');
+        $returnKioskBasket = $this->product_return(['22','2'], $kiosk->ID, 'kiosk');
+
+        return view('Administrator.Admin.KioskPanel', compact('kioskBasket', 'returnKioskBasket', 'kiosk'));
+    }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     //  Convert Date to Iranian Calender
     public function convertDateToPersian($d)
