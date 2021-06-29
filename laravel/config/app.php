@@ -161,6 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Kavenegar\Laravel\ServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -176,9 +177,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //        Convert date jalali Verta
-        Hekmatinasser\Verta\VertaServiceProvider::class,
-        //        sms.ir
-        Ipecompany\Smsirlaravel\SmsirlaravelServiceProvider::class,
+//        Hekmatinasser\Verta\VertaServiceProvider::class,
+
     ],
 
     /*
@@ -232,10 +232,10 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         //        Convert date jalali Verta
-        'Verta' => Hekmatinasser\Verta\Verta::class,
+//        'Verta' => Hekmatinasser\Verta\Verta::class,
 
-        // sms.ir
-        'Smsirlaravel' => Ipecompany\Smsirlaravel\SmsirlaravelFacade::class,
+
+        'Kavenegar' => Kavenegar\Laravel\Facade::class,
     ],
 
 ];

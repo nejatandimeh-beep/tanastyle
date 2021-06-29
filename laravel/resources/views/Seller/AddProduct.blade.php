@@ -960,7 +960,7 @@
                                                                     </div>
                                                                     <div style="background-color: #A0522D; cursor: pointer"
                                                                          class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">
-                                                                        <span class="toolTipText">قهوا ای متوسط</span>
+                                                                        <span class="toolTipText">قهوه ای متوسط</span>
                                                                     </div>
                                                                     <div style="background-color: #A52A2A; cursor: pointer"
                                                                          class="customTooltip g-pa-15 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover">

@@ -53,6 +53,281 @@ class Admin extends Controller
 
         return view('Administrator.Admin.KioskPanel', compact('kioskBasket', 'returnKioskBasket', 'kiosk'));
     }
+
+    public function postPanel(){
+        $data = DB::table('product_delivery as pd')
+            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*')
+            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
+            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->where('TrackingCode', '<>','?')
+            ->paginate(10);
+
+        $persianDate = array();
+        foreach ($data as $key => $rec) {
+            $d = $rec->Date;
+            $persianDate[$key] = $this->convertDateToPersian($d);
+        }
+
+        return view('Administrator.Admin.Post',compact('data','persianDate'));
+    }
+
+    public function trackingCodeSearch($trackingCode)
+    {
+        $data='';
+        if($trackingCode === 'null'){
+            $data = DB::table('product_delivery as pd')
+                ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->where('TrackingCode', '<>','?')
+                ->get();
+        }else {
+            $data = DB::table('product_delivery as pd')
+                ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->where('TrackingCode', 'like', $trackingCode . '%')
+                ->get();
+        }
+        $output = '';
+
+        $persianDate = array();
+        foreach ($data as $key => $rec) {
+            $d = $rec->Date;
+            $persianDate[$key] = $this->convertDateToPersian($d);
+        }
+
+        foreach ($data as $key => $row) {
+            $output .= ' <tr>
+                            <td class="align-middle text-nowrap text-center">'.$row->Name .'</td>
+                            <td class="align-middle text-center text-nowrap">'.$persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2].'</td>
+                            <td class="align-middle text-center text-nowrap">'.$row->Time.'</td>
+                            <td class="align-middle text-center text-nowrap">'.$row->OrderId.'/'.$row->ID.'</td>
+                            <td class="align-middle text-center text-nowrap">
+                                <div class="media">
+                                    <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
+                                         src="'.$row->PicPath.'pic1.jpg" alt="">
+                                </div>
+                            </td>
+                            <td class="align-middle text-center text-nowrap">
+                                '.$row->TrackingCode.'
+                            </td>
+                            <td class="align-middle text-center text-nowrap">'.$rec->DeliveryProblem.'</td>
+                        </tr>';
+        }
+
+        return $output;
+    }
+
+    public function product_delivery($where, $id, $table)
+    {
+        if ($table === 'kiosk')
+            $data = DB::table('product_delivery as pDel')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.KioskID', $id)
+                ->whereIn('pDel.DeliveryStatus', $where)
+                ->get();
+        else
+            $data = DB::table('product_delivery as pDel')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.DeliveryManID', $id)
+                ->whereIn('pDel.DeliveryStatus', $where)
+                ->get();
+
+        $today = date('Y-m-d');
+        $deliveryMin = array();
+        foreach ($data as $key => $row) {
+            $rowDate = strtotime($row->Date . ' ' . $row->Time);
+            $orderDate = date('Y-m-d', $rowDate);
+            $reservation = date('Y-m-d', strtotime($row->Date . ' + 1 days'));
+
+            if (($orderDate < $today))
+                $deliveryMin[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
+            else
+                $deliveryMin[$key] = 0; // get len past date to now by min
+
+            switch ($row->DeliveryStatus) {
+                case '0':
+                    if ($deliveryMin[$key] > 540) {
+                        DB::table('product_delivery')
+                            ->where('OrderDetailID', $row->OrderDetailID)
+                            ->update([
+                                'DeliveryProblem' => 1
+                            ]);
+                    }
+                    break;
+                case '1':
+                    if ($deliveryMin[$key] > 600) {
+                        DB::table('product_delivery')
+                            ->where('OrderDetailID', $row->OrderDetailID)
+                            ->update([
+                                'DeliveryProblem' => 1
+                            ]);
+                    }
+                    break;
+                case '2':
+                case '22':
+                    if ($deliveryMin[$key] > 1560) {
+                        DB::table('product_delivery')
+                            ->where('OrderDetailID', $row->OrderDetailID)
+                            ->update([
+                                'DeliveryProblem' => 1
+                            ]);
+                    }
+                    break;
+                case '3':
+                    if ($deliveryMin[$key] > 1800) {
+                        DB::table('product_delivery')
+                            ->where('OrderDetailID', $row->OrderDetailID)
+                            ->update([
+                                'DeliveryProblem' => 1
+                            ]);
+                    }
+                    break;
+                default:
+            }
+        }
+        if ($table === 'kiosk')
+            return $data = DB::table('product_delivery as pDel')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.KioskID', $id)
+                ->whereIn('pDel.DeliveryStatus', $where)
+                ->get();
+        else
+            return $data = DB::table('product_delivery as pDel')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.DeliveryManID', $id)
+                ->whereIn('pDel.DeliveryStatus', $where)
+                ->get();
+    }
+
+    public function product_return($where, $id, $table)
+    {
+        if ($table === 'kiosk')
+            $return = DB::table('product_return as pr')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.KioskID', $id)
+                ->whereIn('pr.ReturnStatus', $where)
+                ->get();
+        else
+            $return = DB::table('product_return as pr')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.DeliveryManID', $id)
+                ->whereIn('pr.ReturnStatus', $where)
+                ->get();
+
+        $today = date('Y-m-d');
+        $returnMin = array();
+        foreach ($return as $key => $row) {
+            $rowDate = strtotime($row->Date . ' ' . $row->Time);
+            $orderDate = date('Y-m-d', $rowDate);
+            $reservation = date('Y-m-d', strtotime($row->Date . ' + 1 days'));
+
+            if (($orderDate < $today))
+                $returnMin[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
+            else
+                $returnMin[$key] = 0; // get len past date to now by min
+
+            switch ($row->ReturnStatus) {
+                case '4':
+                    if ($returnMin[$key] > 3240) {
+                        DB::table('product_return')
+                            ->where('OrderDetailID', $row->OrderDetailID)
+                            ->update([
+                                'ReturnProblem' => 1
+                            ]);
+                    }
+                    break;
+                case '3':
+                    if ($returnMin[$key] > 3420) {
+                        DB::table('product_return')
+                            ->where('OrderDetailID', $row->OrderDetailID)
+                            ->update([
+                                'ReturnProblem' => 1
+                            ]);
+                    }
+                    break;
+                case '2':
+                case '22':
+                    if ($returnMin[$key] > 4440) {
+                        DB::table('product_return')
+                            ->where('OrderDetailID', $row->OrderDetailID)
+                            ->update([
+                                'ReturnProblem' => 1
+                            ]);
+                    }
+                    break;
+                case '1':
+                    if ($returnMin[$key] > 4860) {
+                        DB::table('product_return')
+                            ->where('OrderDetailID', $row->OrderDetailID)
+                            ->update([
+                                'ReturnProblem' => 1
+                            ]);
+                    }
+                    break;
+                default:
+            }
+        }
+        if ($table === 'kiosk')
+            return $return = DB::table('product_return as pr')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.KioskID', $id)
+                ->whereIn('pr.ReturnStatus', $where)
+                ->get();
+        else
+            return $return = DB::table('product_return as pr')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
+                ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->where('pDel.DeliveryManID', $id)
+                ->whereIn('pr.ReturnStatus', $where)
+                ->get();
+
+    }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     //  Convert Date to Iranian Calender
     public function convertDateToPersian($d)

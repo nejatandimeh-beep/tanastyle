@@ -45,15 +45,17 @@
                                         <a class="customLink" href="">تغییر رمز
                                             عبور</a>
                                     </li>
+
                                     <li class="list-inline-item justify-content-center g-mx-7">
                                         <span
                                             class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
-                                            <i class="icon-lock-open"></i>
+                                            <i class="icon-pencil"></i>
                                         </span>
                                         <a class="customLink" href="#"
                                            onclick="$('#signature').removeClass('d-none')">تغییر رمز
                                             امضاء</a>
                                     </li>
+
                                     <li id="signature" style="direction: ltr" class="d-none list-inline-item justify-content-center g-mx-7">
                                         <div id="signatureEditContainer" class="g-width-200">
                                             <div class="input-group">
@@ -71,6 +73,20 @@
                                         <i id="successSignatureEdit"
                                            style="display: none"
                                            class="fa fa-check m-0 g-font-size-20 g-color-primary"></i>
+                                    </li>
+
+                                    <li class="list-inline-item justify-content-center g-mx-7 align-middle">
+                                        <a class="float-left g-color-gray-dark-v1 g-color-lightred--hover g-text-underline--none--hover"
+                                           href="{{ route('adminLogout') }}"
+                                           onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                                            خروج<i class="icon-logout g-font-size-20 g-color-red g-mr-10 align-middle"></i>
+                                        </a>
+
+                                        <form id="logout-form" action="{{route('adminLogout')}}" method="POST"
+                                              style="display: none;">
+                                            @csrf
+                                        </form>
                                     </li>
                                 </ul>
                             </div>

@@ -1,6 +1,6 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <p id="pageLocation" class="d-none">{{ $id }}</p>
+    <p id="pageLocation" class="d-none">{{ $location }}</p>
     <div class="breadCrumbs container-fluid">
         <div class="row">
             <div class="col-lg-12 g-brd-top g-brd-gray-light-v4">
@@ -23,24 +23,24 @@
                         <!-- Figure Info -->
                             <div class="d-flex flex-column justify-content-center">
                                 <div class="g-mb-5">
-                                    <h4 class="h5 g-mb-0">{{ Auth::user()->name.' '.Auth::user()->Family }}
-                                        @if(Auth::user()->email_verified_at === null)
-                                            @if (session('resent'))
-                                                <label class="g-color-primary g-font-size-16 g-mr-10">
-                                                    <i class="fa fa-envelope g-font-size-16"></i>
-                                                    <span
-                                                        class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد.</span>
-                                                </label>
-                                            @else
-                                                <label class="g-color-red g-font-size-16">
-                                                    <span>حساب کاربری شما فعالسازی نشده است</span>
-                                                    <i class="fa fa-exclamation g-font-size-16"></i>
-                                                </label>
-                                            @endif
-                                        @endif
+                                    <h4 class="h5 g-mb-0">@if(Auth::user()->name!=='') {{Auth::user()->name.' '.Auth::user()->Family}} @else {{Auth::user()->Mobile}} @endif
+{{--                                        @if(Auth::user()->email_verified_at === null)--}}
+{{--                                            @if (session('resent'))--}}
+{{--                                                <label class="g-color-primary g-font-size-16 g-mr-10">--}}
+{{--                                                    <i class="fa fa-envelope g-font-size-16"></i>--}}
+{{--                                                    <span--}}
+{{--                                                        class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد.</span>--}}
+{{--                                                </label>--}}
+{{--                                            @else--}}
+{{--                                                <label class="g-color-red g-font-size-16">--}}
+{{--                                                    <span>حساب کاربری شما فعالسازی نشده است</span>--}}
+{{--                                                    <i class="fa fa-exclamation g-font-size-16"></i>--}}
+{{--                                                </label>--}}
+{{--                                            @endif--}}
+{{--                                        @endif--}}
                                     </h4>
                                 </div>
-                                <em class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">{{ Auth::user()->email }}</em>
+                                <em class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">@if(Auth::user()->name!==''){{ Auth::user()->Mobile }}@endif</em>
                             </div>
                         </div>
                         <!-- End Figure Info -->
@@ -49,34 +49,34 @@
                         <figcaption class="u-block-hover__additional--fade g-bg-white-opacity-0_9 g-pa-30">
                             <div
                                 class="u-block-hover__additional--fade u-block-hover__additional--fade-down g-flex-middle">
-                                @if(Auth::user()->email_verified_at === null)
-                                    <ul class="list-inline text-center g-flex-middle-item">
-                                        @if (!session('resent'))
-                                            <li id="emailActivation"
-                                                class="list-inline-item justify-content-center g-mx-7">
-                                            <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
-                                                <i class="fa fa-check"></i>
-                                            </span>
-                                                <form class="d-inline text-left" method="POST"
-                                                      action="{{ route('verification.resend') }}">
-                                                    @csrf
-                                                    <button type="submit"
-                                                            class="btn customLink g-bg-transparent p-0 m-0 align-baseline">
-                                                        فعال سازی حساب کاربری
-                                                    </button>
-                                                </form>
-                                            </li>
-                                        @endif
-                                        @if (session('resent'))
-                                            <li style="direction: rtl" id="sendVerifyHint"
-                                                class="list-inline-item justify-content-center">
-                                                <span class="g-color-primary g-font-size-20 g-ml-5"><i
-                                                        class="fa fa-envelope"></i></span>
-                                                <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا آخرین ایمیل از طرف Tanastyle.ir را چک کنید.</span>
-                                            </li>
-                                        @endif
-                                    </ul>
-                                @else
+{{--                                @if(Auth::user()->email_verified_at === null)--}}
+{{--                                    <ul class="list-inline text-center g-flex-middle-item">--}}
+{{--                                        @if (!session('resent'))--}}
+{{--                                            <li id="emailActivation"--}}
+{{--                                                class="list-inline-item justify-content-center g-mx-7">--}}
+{{--                                            <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">--}}
+{{--                                                <i class="fa fa-check"></i>--}}
+{{--                                            </span>--}}
+{{--                                                <form class="d-inline text-left" method="POST"--}}
+{{--                                                      action="{{ route('verification.resend') }}">--}}
+{{--                                                    @csrf--}}
+{{--                                                    <button type="submit"--}}
+{{--                                                            class="btn customLink g-bg-transparent p-0 m-0 align-baseline">--}}
+{{--                                                        فعال سازی حساب کاربری--}}
+{{--                                                    </button>--}}
+{{--                                                </form>--}}
+{{--                                            </li>--}}
+{{--                                        @endif--}}
+{{--                                        @if (session('resent'))--}}
+{{--                                            <li style="direction: rtl" id="sendVerifyHint"--}}
+{{--                                                class="list-inline-item justify-content-center">--}}
+{{--                                                <span class="g-color-primary g-font-size-20 g-ml-5"><i--}}
+{{--                                                        class="fa fa-envelope"></i></span>--}}
+{{--                                                <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا آخرین ایمیل از طرف Tanastyle.ir را چک کنید.</span>--}}
+{{--                                            </li>--}}
+{{--                                        @endif--}}
+{{--                                    </ul>--}}
+{{--                                @else--}}
 
                                     <ul class="list-inline text-center g-flex-middle-item">
                                         <li class="list-inline-item justify-content-center g-mx-7">
@@ -106,7 +106,7 @@
                                             </form>
                                         </li>
                                     </ul>
-                            @endif
+{{--                            @endif--}}
                             <!-- Figure Social Icons -->
 
                                 <!-- End Figure Social Icons -->
@@ -2003,7 +2003,7 @@
                                 <!-- End Article Image -->
 
                                 <!-- Article Content -->
-                                <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg g-width-150">
+                                <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg g-width-150--lg">
                                     <div class="d-flex justify-content-between">
                                         <div>
                                             <h3 class="d-inline-block h6 g-font-weight-700">
@@ -2020,7 +2020,9 @@
                                                data-original-title="جزئیات محصول"><i
                                                     class="icon-eye g-line-height-0_7"></i></a>
                                             <a style="cursor: pointer"
-                                               class="u-icon-v1 g-color-red g-color-gray-dark-v5--hover rounded-circle g-ml-5"
+                                               onclick="deleteProductLike({{$row->ProductID}},{{ $row->ProductDetailID }},$(this).attr('id'))"
+                                               id="{{ 'smDeleteLikeBtn'.$key }}"
+                                               class="u-icon-v1 g-color-primary g-color-gray-dark-v5--hover rounded-circle g-ml-5"
                                                data-toggle="tooltip"
                                                data-placement="top"
                                                data-original-title="فراموش کن"><i class="fa fa-bookmark"></i></a>
@@ -2074,7 +2076,7 @@
                                        data-original-title="جزئیات محصول"><i
                                             class="icon-eye g-line-height-0_7"></i></a>
                                     <a style="cursor: pointer"
-                                       onclick="deleteProductLike({{ $row->ProductDetailID }},$(this).attr('id'))"
+                                       onclick="deleteProductLike({{$row->ProductID}},{{ $row->ProductDetailID }},$(this).attr('id'))"
                                        id="{{ 'deleteLikeBtn'.$key }}"
                                        class="u-icon-v1 g-color-primary g-color-gray-light-v1--hover rounded-circle g-ml-5"
                                        data-toggle="tooltip"

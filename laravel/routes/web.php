@@ -1,15 +1,26 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 // Test Pages
 Route::get('/test', function () {
     return view('Temp/test');
 });
 
-// ******************************************** ( Seller Routes ) ******************************************************
+// ******************************************** ( Customer Routes ) ******************************************************
 // Customer Login Links
 Auth::routes(['verify' => true]);
+
+//customer register links
+Route::get('/request-customer-mobile/{source}', function ($source) {
+    Session::put('source', $source);
+    return view('auth.requestMobile',compact('source'));
+});
+
+Route::get('/check-customer-mobile', 'Auth\VerifyController@getMobile')->name('checkMobile');
+
+Route::post('verify-customer-mobile', 'Auth\VerifyController@verifyPhone')->name('verifyMobile');
 
 // Customer Change Password Links
 Route::get('change-password', 'Auth\ChangePasswordController@index')->name('changePass');
@@ -17,6 +28,7 @@ Route::post('change-password', 'Auth\ChangePasswordController@store')->name('cha
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+// ******************************************** ( Seller Routes ) ******************************************************
 // Seller Auth
 Route::get('/login/seller', 'AuthSeller\LoginController@showSellerLoginForm')->name('sellerLog');
 Route::post('/logout/seller', 'AuthSeller\LoginController@sellerLogout')->name('sellerLogout');
@@ -188,6 +200,8 @@ Route::post('/Customer-Profile-Update', 'Customer\Basic@profileUpdate')->name('p
 
 Route::get('/Customer-Address-Active/{id}', 'Customer\Basic@addressActive');
 
+Route::get('/Customer-Address-Attach/{location}/{size}/{color}', 'Customer\Basic@attachAddress')->name('attachAddress');
+
 Route::post('/Customer-Address-Add', 'Customer\Basic@addAddress')->name('addAddress');
 
 Route::post('/Customer-Address-Update', 'Customer\Basic@addressUpdate')->name('addressUpdate');
@@ -241,7 +255,7 @@ Route::get('/Seller-Check-Signature/{pass}/{id}', 'Delivery\Basic@sellerCheckPas
 
 Route::get('/Destination-Add-Product/{orderDetailID}/{table}/{id}/{destination}', 'Delivery\Basic@destinationAddProduct');
 
-Route::get('/Destination-Final/{orderDetailID}/{table}/{destination}', 'Delivery\Basic@destinationFinal');
+Route::get('/Destination-Final/{orderDetailID}/{table}/{destination}/{trackingCode}', 'Delivery\Basic@destinationFinal');
 
 Route::get('/Delivery-CourierRequest/{orderDetailID}', 'Delivery\Basic@courierRequest');
 
@@ -269,7 +283,7 @@ Route::group(['prefix' => 'admins'], function() {
     route::post('/reset', 'AuthAdmin\ResetPasswordController@reset')->name('admins.password.update');
 });
 
-Route::get('/Administrator-Master', 'Administrator\Admin@AdministratorMaster')->name('AdministratorMaster');
+Route::get('/Administrator-Master', 'Administrator\Admin@AdministratorMaster')->name('administratorMaster');
 
 Route::get('/Administrator-Kiosk-SignatureEdit/{newCode}/{id}', 'Delivery\Basic@signatureEdit');
 
@@ -340,6 +354,25 @@ Route::get('/Administrator-Customer-AddressDelete/{id}', 'Administrator\Customer
 
 Route::get('/Administrator-Customer-OrderDetail/{addressId}/{id}', 'Administrator\Customer@orderDetail')->name('adminCustomerOrderDetail');
 
+
+// -------------------------[Delivery]
 Route::get('/Administrator-Delivery-Panel/{id}', 'Administrator\Admin@adminDeliveryPanel')->name('adminDeliveryPanel');
 
 Route::get('/Administrator-Kiosk-Panel/{id}', 'Administrator\Admin@adminKioskPanel')->name('adminKioskPanel');
+
+
+// -------------------------[Post]
+Route::get('/Administrator-Post-Panel', 'Administrator\Admin@postPanel')->name('postPanel');
+
+Route::get('/Administrator-TrackingCode-Search/{trackingCode}', 'Administrator\Admin@trackingCodeSearch');
+
+// -------------------------[instagram]
+Route::get('/Instagram', 'Customer\Basic@instagram')->name('instagram');
+
+Route::post('/Instagram-Request-PdId', 'Customer\Basic@requestPdId')->name('requestPdId');
+
+
+
+
+
+

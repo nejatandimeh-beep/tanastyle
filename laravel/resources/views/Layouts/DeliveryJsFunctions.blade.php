@@ -109,25 +109,30 @@
 
         function destinationFinal(orderDetailID, key, table) {
             let signatureDiv = $('#postSignatureDiv' + key),
-                waitingIcon = $('#postWaitingIconTd' + key);
+                waitingIcon = $('#postWaitingIconTd' + key),
+                trackingCode = $('#trackingCode' + key).val();
 
-            signatureDiv.removeClass('d-inline-block');
-            signatureDiv.addClass('d-none');
-            waitingIcon.removeClass('d-none');
-            $.ajax({
-                type: 'GET',
-                url: "/Destination-Final/" + orderDetailID + '/' + table + '/' + $('#destination' + key).text(),
-                async: false,
-                success: function (data) {
-                    waitingIcon.remove();
-                    $('#postCheckMark' + key).removeClass('d-none');
-                    setTimeout(function () {
-                        $('#basketRow' + key).remove();
-                    }, 2000);
-                }
-            });
-            signatureDiv.remove();
-            signatureDiv.removeClass('d-none');
+            if (trackingCode !== '') {
+                signatureDiv.removeClass('d-inline-block');
+                signatureDiv.addClass('d-none');
+                waitingIcon.removeClass('d-none');
+                $.ajax({
+                    type: 'GET',
+                    url: "/Destination-Final/" + orderDetailID + '/' + table + '/' + $('#destination' + key).text() + '/' + trackingCode,
+                    async: false,
+                    success: function (data) {
+                        waitingIcon.remove();
+                        $('#postCheckMark' + key).removeClass('d-none');
+                        setTimeout(function () {
+                            $('#basketRow' + key).remove();
+                        }, 2000);
+                    }
+                });
+                signatureDiv.remove();
+                signatureDiv.removeClass('d-none');
+            } else
+                alert('لطفا کد رهگیری را وارد نمایید.');
+
         }
 
         function courierRequest(orderDetailID, key) {

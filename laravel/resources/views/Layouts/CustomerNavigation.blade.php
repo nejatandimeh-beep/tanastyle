@@ -2486,30 +2486,30 @@
                                         </a>
                                     </div>
                                 @else
-                                    @if(Auth::user()->email_verified_at === null)
-                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">
-                                            <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
-                                               class="d-flex nav-link g-color-red h6 g-text-underline--none--hover p-0 g-color-primary--hover"
-                                               data-toggle="tooltip"
-                                               data-placement="bottom"
-                                               title="شما هنوز اقدام به فعال سازی ایمیلتان نکرده اید"
-                                            >
-                                                <i class="fa fa-exclamation g-font-size-16 g-mr-5"></i>
+{{--                                    @if(Auth::user()->email_verified_at === null)--}}
+{{--                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">--}}
+{{--                                            <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"--}}
+{{--                                               class="d-flex nav-link g-color-red h6 g-text-underline--none--hover p-0 g-color-primary--hover"--}}
+{{--                                               data-toggle="tooltip"--}}
+{{--                                               data-placement="bottom"--}}
+{{--                                               title="شما هنوز اقدام به فعال سازی ایمیلتان نکرده اید"--}}
+{{--                                            >--}}
+{{--                                                <i class="fa fa-exclamation g-font-size-16 g-mr-5"></i>--}}
 
-                                                {{ Auth::user()->name }}
-                                            </a>
-                                        </div>
-                                    @else
+{{--                                                {{ Auth::user()->name }}--}}
+{{--                                            </a>--}}
+{{--                                        </div>--}}
+{{--                                    @else--}}
                                         <div class="g-pt-10 g-mr-15 g-mr-25--lg">
                                             <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
                                                title="اطلاعات کاربری"
                                                class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover">
-                                                {{ Auth::user()->name }}
+                                                @if(Auth::user()->name!=='') {{Auth::user()->name}} @else {{Auth::user()->Mobile}} @endif
 
                                                 <i id="settingIcon" class="icon-settings g-font-size-16 g-ml-5"></i>
                                             </a>
                                         </div>
-                                    @endif
+{{--                                    @endif--}}
                                 @endguest
                             </div>
                             <!-- End Login -->

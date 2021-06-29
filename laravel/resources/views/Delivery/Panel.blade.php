@@ -17,7 +17,8 @@
                                      alt="Image Description">
                                 <!-- Figure Image -->
                             @else
-                                <img src="{{ asset('img/DeliveryImg/'.$deliveryManActive->NationalID.'.png') }}" id="uploaded_image"
+                                <img src="{{ asset('img/DeliveryImg/'.$deliveryManActive->NationalID.'.png') }}"
+                                     id="uploaded_image"
                                      class="g-width-80 g-height-80 rounded-circle g-ml-15 g-brd-around g-brd-gray-light-v2">
                         @endif
                         <!-- Figure Info -->
@@ -42,6 +43,19 @@
                                                 </span>
                                         <a class="customLink" href="">تغییر رمز
                                             عبور</a>
+                                    </li>
+                                    <li class="list-inline-item justify-content-center g-mx-7 align-middle">
+                                        <a class="float-left g-color-gray-dark-v1 g-color-lightred--hover g-text-underline--none--hover"
+                                           href="{{ route('adminLogout') }}"
+                                           onclick="event.preventDefault();
+                                           document.getElementById('logout-form').submit();">
+                                            خروج<i class="icon-logout g-font-size-20 g-color-red g-mr-10 align-middle"></i>
+                                        </a>
+
+                                        <form id="logout-form" action="{{route('adminLogout')}}" method="POST"
+                                              style="display: none;">
+                                            @csrf
+                                        </form>
                                     </li>
                                 </ul>
                             </div>
@@ -171,7 +185,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <form id="deliveryForm{{ $key }}" method="POST" action="{{route('deliveryCourier',[$row->OrderDetailID,$row->DeliveryStatus==='0'?'1':'3'])}}">
+                                                    <form id="deliveryForm{{ $key }}" method="POST"
+                                                          action="{{route('deliveryCourier',[$row->OrderDetailID,$row->DeliveryStatus==='0'?'1':'3'])}}">
                                                         @csrf
                                                     </form>
 
@@ -306,7 +321,8 @@
                                                         </div>
                                                     </div>
 
-                                                    <form id="returnForm{{ $key }}" method="POST" action="{{route('returnCourier',[$row->OrderDetailID,$row->ReturnStatus==='4'?'3':'1'])}}">
+                                                    <form id="returnForm{{ $key }}" method="POST"
+                                                          action="{{route('returnCourier',[$row->OrderDetailID,$row->ReturnStatus==='4'?'3':'1'])}}">
                                                         @csrf
                                                     </form>
 
@@ -361,7 +377,7 @@
                                         <th class="g-brd-white-opacity-0_1">مقصد</th>
                                         <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
-                                        <th class="g-brd-white-opacity-0_1">تاییده</th>
+                                        <th class="g-brd-white-opacity-0_1">تاییدیه</th>
                                     </tr>
                                     </thead>
 
@@ -474,6 +490,11 @@
                                                                             class="fa fa-check align-middle g-font-size-16"></i>
                                                                     </button>
                                                                 </div>
+                                                                <input
+                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    type="text"
+                                                                    id="trackingCode{{$counter}}"
+                                                                    placeholder="کد رهگیری">
                                                             </div>
                                                         </div>
 
@@ -555,7 +576,8 @@
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
                                                 @if($row->ReturnStatus==='3')
-                                                    <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
+                                                    <td style="direction: ltr"
+                                                        class="g-brd-white-opacity-0_1 align-middle">
                                                         <div id="kioskSignatureDiv{{$counter}}"
                                                              class="col-9 d-inline-block">
                                                             <div class="input-group">
@@ -584,7 +606,8 @@
                                                         </svg>
                                                     </td>
                                                 @else
-                                                    <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
+                                                    <td style="direction: ltr"
+                                                        class="g-brd-white-opacity-0_1 align-middle">
                                                         <div id="postSignatureDiv{{$counter}}"
                                                              class="col-9 d-inline-block">
                                                             <div class="input-group">
@@ -601,7 +624,8 @@
                                                                     type="password"
                                                                     placeholder="رمز امضا">
                                                             </div>
-                                                            <span id="sellerID{{$counter}}" class="d-none">{{$row->SellerID}}</span>
+                                                            <span id="sellerID{{$counter}}"
+                                                                  class="d-none">{{$row->SellerID}}</span>
                                                         </div>
                                                         <i id="postWaitingIconTd{{$counter}}"
                                                            class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>

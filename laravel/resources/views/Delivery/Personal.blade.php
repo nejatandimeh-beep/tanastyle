@@ -50,7 +50,7 @@
 
                             <td class="align-middle text-nowrap text-center">
                                 <a class="g-color-aqua g-text-underline--none--hover g-pa-5"
-                                   href="{{route('deliveryPanel',$row->deliveryID)}}">
+                                   href="{{route('adminDeliveryPanel',$row->deliveryID)}}">
                                     <i class="icon-eye g-font-size-18 g-mr-7"></i>
                                 </a>
                             </td>

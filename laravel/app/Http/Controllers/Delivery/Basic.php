@@ -20,18 +20,17 @@ class Basic extends Controller
 
     public function deliveryPanel()
     {
-        $id=6;
         $deliveryManActive = DB::table('delivery_men as dm')
             ->select('*')
             ->leftJoin('admins as admin','admin.id','=','dm.AdminID')
-            ->where('dm.ID', $id)
+            ->where('dm.AdminID', Auth::guard('admin')->user()->id)
             ->first();
 
-        $data = $this->product_delivery(['0', '2'],$id, 'delivery');
-        $deliveryManBasket = $this->product_delivery(['1', '3'], $id, 'delivery');
+        $data = $this->product_delivery(['0', '2'],$deliveryManActive->ID, 'delivery');
+        $deliveryManBasket = $this->product_delivery(['1', '3'], $deliveryManActive->ID, 'delivery');
 
-        $return = $this->product_return(['4', '2'], $id, 'delivery');
-        $returnManBasket = $this->product_return(['1', '3'], $id, 'delivery');
+        $return = $this->product_return(['4', '2'], $deliveryManActive->ID, 'delivery');
+        $returnManBasket = $this->product_return(['1', '3'], $deliveryManActive->ID, 'delivery');
 
         return view('Delivery.Panel', compact('data', 'deliveryManActive', 'return', 'deliveryManBasket', 'returnManBasket'));
     }
@@ -335,7 +334,7 @@ class Basic extends Controller
         $kiosk = DB::table('delivery_kiosk as dk')
             ->select('*')
             ->leftJoin('admins as admin','admin.id','=','dk.AdminID')
-            ->where('dk.ID',$id)
+            ->where('dk.AdminID',Auth::guard('admin')->user()->id)
             ->first();
 
         $kioskBasket = $this->product_delivery(['22','2'], $kiosk->ID, 'kiosk');
@@ -390,7 +389,7 @@ class Basic extends Controller
                 ]);
     }
 
-    public function destinationFinal($orderDetailID, $table,$destination)
+    public function destinationFinal($orderDetailID, $table,$destination,$trackingCode)
     {
         if ($table === 'delivery')
             DB::table('product_delivery')
@@ -398,6 +397,7 @@ class Basic extends Controller
                 ->update([
                     'DeliveryStatus' => $destination,
                     'DeliveryProblem' => 0,
+                    'TrackingCode' => $trackingCode,
                 ]);
 
         DB::table('product_return')

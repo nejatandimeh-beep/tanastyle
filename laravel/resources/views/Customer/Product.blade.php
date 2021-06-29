@@ -110,7 +110,7 @@
                             <span class="g-font-size-12 g-color-red g-mr-minus-5">تومان</span>
                         </div>
                         <span
-                            class="d-inline-block align-middle g-bg-red g-color-white g-font-size-12 g-py-3 g-px-8">4 روز مهلت تخفیف</span>
+                            class="d-inline-block align-middle g-bg-red g-color-white g-font-size-12 g-py-3 g-px-8">{{$data->Discount}} درصد</span>
                     </fieldset>
                     <fieldset class="d-inline-block col-12 col-lg-5 p-0">
                         <span id="productFinalPrice"
@@ -327,8 +327,8 @@
                                         با<span id="orderProductDiscount" class="g-mr-5 g-color-gray-dark-v3"></span>%
                                         تخفیف
                                     </h6>
-                                    <span class="g-py-5 g-px-5 g-pt-40--lg g-color-darkred">
-                                        <span id="orderProductFinalPrice" class="g-mr-5 g-color-gray-dark-v3"></span>
+                                    <span class="g-py-5 g-px-5 g-pt-40--lg g-color-primary">
+                                        <span id="orderProductFinalPrice" class="g-mr-5 g-color-primary"></span>
                                     </span>
                                 </div>
                                 {{--قیمت در تعداد--}}
@@ -370,19 +370,21 @@
                                     <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                 </span>
 
-                                {{--مبلغ فاکتور--}}
+                                {{--آدرس--}}
                                 <div style="direction: rtl"
-                                     class="d-flex col-12 col-lg-8 g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
+                                     class="d-lg-flex d-block col-12 col-lg-8 g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
 
                                     <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
                                         <i class="icon-communication-011 u-line-icon-pro g-color-white g-pt-5"></i>
                                     </span>
                                     @if(!isset($sendAddress))
-                                        <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', ['id'=>'addAddress'.$data->ID]) : route('login') }}"
-                                           id="addAddress"
-                                           class="g-color-darkred g-color-primary--hover align-self-center g-text-underline--none--hover">
-                                            افزودن آدرس<i class="icon-paper-clip g-mr-5 align-middle"></i>
-                                        </a>
+                                        <div class="align-self-center g-pt-35 g-pt-0--lg">
+                                            <a href="{{ (isset(Auth::user()->id)) ? route('attachAddress', ['location'=>'addAddress'.$data->ID, 'size'=>$sizeInfo,'color'=>$colorInfo]) : route('login') }}"
+                                               id="addAddress"
+                                               class="g-color-red g-color-primary--hover g-mt-0--lg g-mt-30 g-text-underline--none--hover">
+                                                افزودن آدرس<i class="icon-paper-clip g-mr-5 align-middle"></i>
+                                            </a>
+                                        </div>
                                     @else
                                         <div id="addressContainer">
                                             <div
@@ -578,7 +580,7 @@
             </div>
 
             {{--گالری--}}
-            <div id="productGallery" class="col-lg-5 g-mb-30">
+            <div id="productGallery" class="col-lg-5 g-mb-30 largeDevice">
                 <!-- Carousel Images -->
                 <div id="js-carousel-11" class="js-carousel g-mb-5" data-infinite="1" data-fade="1"
                      data-arrows-classes="u-arrow-square g-font-size-50 g-pos-abs g-top-50x g-color-white"
@@ -660,7 +662,8 @@
                             <img class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="Image Description">
                         </div>
                     @else
-                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3"
+                             id="pic2">
                             <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
                         </div>
                     @endif
@@ -669,7 +672,8 @@
                             <img class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="Image Description">
                         </div>
                     @else
-                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3"
+                             id="pic2">
                             <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
                         </div>
                     @endif
@@ -678,7 +682,8 @@
                             <img class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="Image Description">
                         </div>
                     @else
-                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3"
+                             id="pic2">
                             <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
                         </div>
                     @endif

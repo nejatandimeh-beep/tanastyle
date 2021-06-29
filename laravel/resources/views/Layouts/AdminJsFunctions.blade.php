@@ -112,6 +112,19 @@
             });
         }
 
+        function trackingCodeSearch(trackingCode) {
+            if (trackingCode==='')
+                trackingCode='null';
+
+            $.ajax({
+                type: 'GET',
+                url: "/Administrator-TrackingCode-Search/" + trackingCode,
+                success: function (data) {
+                    $('#tableBody').html(data);
+                }
+            });
+        }
+
         //-------------------------------------------------------My Function----------------------------------------------------
         function addComa(ele){
             ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));

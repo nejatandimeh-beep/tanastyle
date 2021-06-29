@@ -155,44 +155,18 @@
                 $('#cartBuyBtn').hide();
             }
 
-            if ($('#productGallery').length > 0) {
-                magnify("img1", 3);
-                if ($('#img2').length > 0)
-                    magnify("img2", 3);
-                if ($('#img3').length > 0)
-                    magnify("img3", 3);
-                if ($('#img4').length > 0)
-                    magnify("img4", 3);
-                if ($('#img5').length > 0)
-                    magnify("img5", 3);
-                if ($('#img6').length > 0)
-                    magnify("img6", 3);
-                if ($('#img7').length > 0)
-                    magnify("img7", 3);
-                if ($('#img8').length > 0)
-                    magnify("img8", 3);
-                if ($('#img9').length > 0)
-                    magnify("img9", 3);
-                if ($('#img10').length > 0)
-                    magnify("img10", 3);
-                if ($('#img11').length > 0)
-                    magnify("img11", 3);
-                if ($('#img12').length > 0)
-                    magnify("img12", 3);
-
-                // نمایش رنگ برای اولین سایز بعد از لود شدن صفحه
-                // addColor($('#firstSizeInfo').text(), parseInt($('#productID').text()));
-                $('[id^="inputSize"]').each(function (index) {
-                    if ($(this).val() === $('#firstSizeInfo').text()) {
-                        $(this).trigger('click');
-                    }
-                });
-            }
-
             // اسکرول صفحه به مسیر صفحه
             // if ($('.breadCrumbs').length > 0) {
             //     $('html, body').animate({scrollTop: $('.breadCrumbs').offset().top}, 1000);
             // }
+
+            // نمایش رنگ برای اولین سایز بعد از لود شدن صفحه
+            // addColor($('#firstSizeInfo').text(), parseInt($('#productID').text()));
+            $('[id^="inputSize"]').each(function (index) {
+                if ($(this).val() === $('#firstSizeInfo').text()) {
+                    $(this).trigger('click');
+                }
+            });
 
             if ($('#checkLike').text() === 'like')
                 $('#customerLike').removeClass('d-none');
@@ -218,6 +192,7 @@
             if (mq.matches) {
                 $('#bigDevice').remove();
                 $('.bigDevice').remove();
+                $('#productGallery').removeClass('largeDevice');
 
                 // تنظیم منوی فیلترها در صفحه نمایش محصولات برای نمایشگرهای کوچک و بزرگ
                 $('#stickyDiv1').removeClass('sticky-top');
@@ -257,6 +232,32 @@
                     showSideBar();
                 });
             }
+
+            if ($('#productGallery').length > 0 && $('#productGallery').hasClass('largeDevice')) {
+                magnify("img1", 3);
+                if ($('#img2').length > 0)
+                    magnify("img2", 3);
+                if ($('#img3').length > 0)
+                    magnify("img3", 3);
+                if ($('#img4').length > 0)
+                    magnify("img4", 3);
+                if ($('#img5').length > 0)
+                    magnify("img5", 3);
+                if ($('#img6').length > 0)
+                    magnify("img6", 3);
+                if ($('#img7').length > 0)
+                    magnify("img7", 3);
+                if ($('#img8').length > 0)
+                    magnify("img8", 3);
+                if ($('#img9').length > 0)
+                    magnify("img9", 3);
+                if ($('#img10').length > 0)
+                    magnify("img10", 3);
+                if ($('#img11').length > 0)
+                    magnify("img11", 3);
+                if ($('#img12').length > 0)
+                    magnify("img12", 3);
+            }
         });
 
         $(document).mouseup(function (e) {
@@ -269,6 +270,9 @@
         });
 
         document.onreadystatechange = function () {
+            $(document.body).removeClass('me-position-fix');
+            $(document.body).addClass('me-position-normally');
+
             let state = document.readyState;
             if (state === 'complete') {
                 document.getElementById('load').remove();
@@ -929,7 +933,7 @@
             }
         }
 
-        function deleteProductLike(pdID, idBtn) {
+        function deleteProductLike(productID,pdID, idBtn) {
             $.confirm({
                 title: 'حذف علاقه مندی',
                 content: 'آیا مطمئن هستید؟',
@@ -939,7 +943,7 @@
                         $('#waitingLikeDelete' + idBtn.replace(/[^0-9]/gi, '')).show();
                         $.ajax({
                             type: 'GET',
-                            url: "/Customer-Product-LikeProduct/" + pdID + '/' + 'false',
+                            url: "/Customer-Product-LikeProduct/"+productID+'/' + pdID + '/' + 'false',
                             success: function () {
                                 $('#likeRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
                                 if (idBtn.replace(/[^0-9]/gi, '') === '0')
@@ -956,7 +960,9 @@
         function modalTrigger() {
             switch ($('#pageLocation').text().replace(/\d+/g, '')) {
                 case 'addAddress':
-                    $("#newAddressLink").trigger("click");
+                    setTimeout(function () {
+                        $("#newAddressLink").trigger("click");
+                    }, 1);
                     $('#submitAddress').text('ثبت آدرس جدید و ادامه خرید');
                     $('#productIDFromBuy').val($('#pageLocation').text().replace(/[^0-9]/gi, ''));
                     break;
@@ -1016,7 +1022,7 @@
                 case 'ratingProduct':
                     $.ajax({
                         type: 'GET',
-                        url: "/Customer-Product-RatingProduct/" + parseInt($('#productID').text()) + parseInt($('#productDetailID').text()) + '/' + '/' + val,
+                        url: "/Customer-Product-RatingProduct/" + parseInt($('#productID').text()) + '/' + parseInt($('#productDetailID').text()) + '/' + val,
                         success: function (data) {
                             $('#voteID').text(data);
                         }

@@ -95,7 +95,7 @@
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->
                 <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30"
-                   href="">
+                   href="{{route('postPanel')}}">
                     <span class="u-icon-v2  g-mb-25">
                     <i class="icon-hotel-restaurant-186 u-line-icon-pro"></i>
                     </span>
@@ -118,12 +118,18 @@
             <div class="col-lg-8 g-mb-30">
                 <!-- Icon Blocks -->
                 <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30"
-                   href="">
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();"
+                   href="{{ route('adminLogout') }}">
                     <span class="u-icon-v2  g-mb-25">
                     <i class="icon-logout"></i>
                     </span>
                     <h3 class="h4 g-font-weight-600 mb-30">خروج</h3>
                 </a>
+
+                <form id="logout-form" action="{{route('adminLogout')}}" method="POST" style="display: none;">
+                    @csrf
+                </form>
                 <!-- End Icon Blocks -->
             </div>
         </div>

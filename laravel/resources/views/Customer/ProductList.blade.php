@@ -87,9 +87,9 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
-                                                                   id="gender-all"
+                                                                   id="gender-9"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
-                                                                   type="checkbox">
+                                                                   type="checkbox" {{ ($gender === 'all') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -106,7 +106,7 @@
                                                                    name="gender"
                                                                    id="g-0"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($gender === '0') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '0' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -123,7 +123,7 @@
                                                                    name="gender"
                                                                    id="g-1"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($gender === '1') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '1' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -140,7 +140,7 @@
                                                                    name="gender"
                                                                    id="g-2"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($gender === '2') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '2' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -157,7 +157,7 @@
                                                                    name="gender"
                                                                    id="g-3"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($gender === '3') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '3' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -174,7 +174,7 @@
                                                                    name="gender"
                                                                    id="g-4"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($gender === '4') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '4' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -191,7 +191,7 @@
                                                                    name="gender"
                                                                    id="g-5"
                                                                    onchange="$('#gender-all').prop('checked',false)"
-                                                                   type="checkbox" {{ ($gender === '5') ? 'checked=""' : '' }}>
+                                                                   type="checkbox" {{ ($gender === '5' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>

@@ -11,7 +11,7 @@
                         <form method="POST" action="{{ route('register') }}" style="direction: rtl" novalidate>
                             @csrf
 
-                            <div class="form-group row">
+                            <div class="d-none form-group row">
                                 <label for="name"
                                        class="col-md-4 col-form-label text-right text-md-left g-font-size-16">نام</label>
 
@@ -42,7 +42,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="d-none form-group row">
                                 <label for="family"
                                        class="col-md-4 col-form-label text-right text-md-left g-font-size-16">نام خانوادگی</label>
 
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            <div class="d-none form-group row">
                                 <label for="email"
                                        class="col-md-4 col-form-label text-right text-md-left g-font-size-16">ایمیل</label>
 
@@ -133,6 +133,8 @@
                                            autocomplete="new-password">
                                 </div>
                             </div>
+
+                            <input type="hidden" value="{{Session::get('mobile')}}" name="mobile">
 
                             <div class="form-group row g-mb-60--lg g-mt-20">
                                 <div class="col-md-10 text-left">

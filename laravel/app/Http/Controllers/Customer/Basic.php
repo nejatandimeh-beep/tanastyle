@@ -10,6 +10,7 @@ use File;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class Basic extends Controller
 {
@@ -33,7 +34,7 @@ class Basic extends Controller
         return view('customer.Master', compact('data'));
     }
 
-    public function userProfile($id)
+    public function userProfile($location)
     {
         // user data
         $customer = DB::table('customers')
@@ -96,7 +97,6 @@ class Basic extends Controller
                 $deliveryMin[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
             else
                 $deliveryMin[$key] = 0; // get len past date to now by min
-
             switch ($row->DeliveryStatus) {
                 case '0':
                     $deliveryHint[$key]['text'] = 'در دست';
@@ -179,7 +179,8 @@ class Basic extends Controller
                         ]);
                     $deliveryHint[$key]['text'] = 'در دست';
                     $deliveryHint[$key]['location'] = 'پست';
-                    $deliveryTime[$key] = 40 + round($deliveryMin[$key] / 7200 * 100);
+
+                    $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100)*(60/100));
                     if ($deliveryMin[$key] > 5040) {
                         $deliveryHint[$key]['text'] = 'تحویل با';
                         $deliveryHint[$key]['location'] = 'موفقیت';
@@ -366,7 +367,7 @@ class Basic extends Controller
             ->orderBy('pr.Date', 'DESC')
             ->get();
 
-        return view('Customer.Profile', compact('id', 'customer', 'address',
+        return view('Customer.Profile', compact('location', 'customer', 'address',
             'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryHowDay', 'deliveryPersianDate',
             'deliveryMin', 'deliveryTime', 'deliveryHint', 'return', 'returnHowDay', 'returnPersianDate',
             'returnMin', 'returnTime', 'returnHint', 'like'));
@@ -534,8 +535,18 @@ class Basic extends Controller
         return redirect()->route('userProfile', 'addressStatus');
     }
 
+    public function attachAddress($location, $size,$color){
+
+        Session::put('color',$color);
+        Session::put('size',$size);
+
+        return redirect()->route('userProfile',$location);
+    }
+
     public function addAddress(Request $request)
     {
+        $size=Session::get('size');
+        $color=Session::get('color');
         $productID = $request->get('productIDFromBuy');
         $name = $request->get('receiver-name');
         $family = $request->get('receiver-family');
@@ -570,7 +581,7 @@ class Basic extends Controller
         if ($productID === 'empty')
             return redirect()->route('userProfile', 'addressStatus');
         else {
-            return redirect()->route('productDetail', $productID);
+            return redirect()->route('productDetail',[$productID,$size,$color]);
         }
     }
 
@@ -788,7 +799,7 @@ class Basic extends Controller
         return $voteID->ID;
     }
 
-    public function ratingProduct($id, $val, $idDetail)
+    public function ratingProduct($id, $idDetail,$val)
     {
         $data = DB::table('customer_vote')
             ->select('CustomerID', 'ProductID')
@@ -1058,7 +1069,7 @@ class Basic extends Controller
 
                  <div class="js-slide">
                     <a
-                        href="http://tanastyle/Customer-Product-Detail/' . $row->ProductID . '/' . $row->Size . '/' . $row->Color . '">
+                        href="' . route('productDetail',[$row->ProductID,$row->Size,$row->Color]) . '">
                         <img class="img-fluid w-100" src="' . $row->PicPath . $row->PicNumber . '.jpg" alt="Image Description">
                     </a>
                  </div>
@@ -1300,11 +1311,36 @@ class Basic extends Controller
             ->select('*')
             ->where('Cat', '00')
             ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('Cat', '00')
+            ->groupBy('p.ID')
+            ->get();
         $gender = '0';
         $catCode = 'a';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode','size'));
     }
 
+// ----------------------------------------------[ Instagram ]----------------------------------------------------------
+    public function instagram()
+    {
+        return view('Customer.Instagram');
+    }
+
+    public function requestPdId(Request $request)
+    {
+        $data=DB::table('product_detail')
+            ->where('ID',$request->get('pdId'))
+            ->first();
+
+        if (isset($data->ID))
+        return redirect()->route('productDetail',[$data->ProductID,$data->Size,$data->Color]);
+        else
+            return redirect()->route('instagram')->with('error','find');
+
+    }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($id, $qty, $i)
     {

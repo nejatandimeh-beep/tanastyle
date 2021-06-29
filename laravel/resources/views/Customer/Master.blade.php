@@ -288,7 +288,7 @@
     </div>
     <!-- Products -->
     <div class="container g-pb-100">
-        <div id="carouselCus1" class="js-carousel g-pb-100 g-mx-minus-10"
+        <div id="js-carousel-1" class="js-carousel g-pb-100 g-mx-minus-10"
              data-infinite="true"
              data-slides-show="4"
              data-autoplay="1"
