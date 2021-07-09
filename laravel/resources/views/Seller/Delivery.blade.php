@@ -66,7 +66,7 @@
                                              src="{{ $rec->PicPath }}pic1.jpg" alt="">
                                     </div>
                                 </td>
-                                @if ($deliveryStatus[$key] > 1440)
+                                @if ($deliveryStatus[$key] > 540)
                                     <td class="align-middle text-center text-nowrap">
                                         <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
                                            data-toggle="tooltip"

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Kavenegar;
 use App\Customer;
@@ -18,10 +19,32 @@ class VerifyController extends Controller
         $customer = new Customer();
         $mobile = (string)$_GET['mobile'];
         Session::put('mobile', $mobile);
-        $this->sendToken($mobile);
+        $source = Session::get('source');
+        $customerExist = Customer::where('Mobile', $mobile)->first();
+        if ($source === 'register') {
+            if (!isset($customerExist)) {
+                try {
 
-        return view('auth.verifyMobile');
+                    $this->sendToken($mobile);
 
+                } catch (\Exception $e) {
+                    return redirect()->route('requestMobile', ['source' => 'register'])->with('message', 'شماره موبایل نامعتبر است');
+                }
+
+                return view('auth.verifyMobile');
+            } else {
+                return redirect()->route('requestMobile', ['source' => 'register'])->with('message', 'شماره موبایل قبلا ثبت نام کرده است');
+            }
+        } else {
+            try {
+
+                $this->sendToken($mobile);
+
+            } catch (\Exception $e) {
+                return redirect()->route('requestMobile', ['source' => 'forget'])->with('message', 'شماره موبایل نامعتبر است');
+            }
+            return view('auth.verifyMobile');
+        }
     }
 
     public function sendToken($mobile)
@@ -43,31 +66,30 @@ class VerifyController extends Controller
 
     }
 
-    public function verifyPhone(Request $req)
+    public function verifyMobile(Request $req)
     {
 
         $customer = new Customer();
         $verifyCode = $req->get('verifyCode');
         $source = Session::get('source');
         $mobile = Session::get('mobile');
-//        $customer = Customer::where('mobile', $mobile)->first();
 
         if ($customer->validateToken($verifyCode)) {
 //            echo "Success";
 //            $tel = Auth::user()->phone_number;
 //            echo $tel;
             if ($source === 'register')
+
                 return redirect()->route('register');
             else
-                dd($source);
+                return view('auth.passwords.resetPassword');
         } else {
 //            $this->create($mobile);
 //            $customer = Customer::where('phone_number', $mobile)->first();
 //            Auth::login($customer);
             echo "کد وارد شده اشتباه است";
         }
+
         return true;
     }
-
-
 }

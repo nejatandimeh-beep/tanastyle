@@ -2504,7 +2504,7 @@
                                             <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
                                                title="اطلاعات کاربری"
                                                class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover">
-                                                @if(Auth::user()->name!=='') {{Auth::user()->name}} @else {{Auth::user()->Mobile}} @endif
+                                                @if(Auth::user()->name===null || Auth::user()->name==='') {{Auth::user()->Mobile}} @else  {{Auth::user()->name}} @endif
 
                                                 <i id="settingIcon" class="icon-settings g-font-size-16 g-ml-5"></i>
                                             </a>

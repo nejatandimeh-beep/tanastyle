@@ -16,15 +16,17 @@ Auth::routes(['verify' => true]);
 Route::get('/request-customer-mobile/{source}', function ($source) {
     Session::put('source', $source);
     return view('auth.requestMobile',compact('source'));
-});
+})->name('requestMobile');
 
 Route::get('/check-customer-mobile', 'Auth\VerifyController@getMobile')->name('checkMobile');
 
-Route::post('verify-customer-mobile', 'Auth\VerifyController@verifyPhone')->name('verifyMobile');
+Route::post('verify-customer-mobile', 'Auth\VerifyController@verifyMobile')->name('verifyMobile');
 
-// Customer Change Password Links
-Route::get('change-password', 'Auth\ChangePasswordController@index')->name('changePass');
-Route::post('change-password', 'Auth\ChangePasswordController@store')->name('change.password');
+Route::post('reset-password', 'Auth\ResetPasswordController@resetCustomerPassword')->name('mobileResetPassword');
+
+// Customer Change Password Links with email
+//Route::get('change-password', 'Auth\ChangePasswordController@index')->name('changePass');
+//Route::post('change-password', 'Auth\ChangePasswordController@store')->name('change.password');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -166,9 +168,9 @@ Route::get('/Customer-Product-Detail/{id}/{size}/{color}', 'Customer\Basic@produ
 Route::get('/Customer-Product-Visit/{id}', 'Customer\Basic@productVisit')->name('productVisit');
 
 // Banking portal
-Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal')->middleware('verified');
+Route::get('/Banking-Portal/{id}/{qty}', 'Customer\Basic@bankingPortal')->name('bankingPortal');
 
-Route::get('/Customer-Verify', 'Customer\Basic@customerVerify')->name('customerVerify')->middleware('verified');
+Route::get('/Customer-Verify', 'Customer\Basic@customerVerify')->name('customerVerify');
 
 // Profile
 Route::get('/Customer-Profile/{id}', 'Customer\Basic@userProfile')->name('userProfile');

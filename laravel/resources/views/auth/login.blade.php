@@ -28,7 +28,7 @@
 
                                     @error('mobile')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>شماره موبایل یا رمز ورود اشتباه است</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -50,7 +50,7 @@
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>رمز ورود اشتباه است</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -58,19 +58,26 @@
 
                             <div class="form-group row g-mb-60--lg g-mt-30">
                                 <div class="col-md-10 text-left">
-                                    @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ url('/request-customer-mobile','forget') }}">
-                                            رمزتان را فراموش کرده اید؟
-                                        </a>
-                                    @endif
-
-                                    <button type="submit" class="btn u-btn-primary rounded-0 g-px-20 g-font-size-16">
-                                        ورود
-                                    </button>
-                                    <a href="{{ url('/request-customer-mobile','register') }}"
-                                       class="d-lg-none d-block g-mt-10 btn u-btn-primary rounded-0 g-font-size-16">
-                                        ثبت نام
-                                    </a>
+                                    <div style="direction: ltr" class="d-flex col-12 p-0">
+                                        <div>
+                                            <button type="submit"
+                                                    class="btn u-btn-primary rounded-0 g-px-20 g-font-size-16">
+                                                ورود
+                                            </button>
+                                        </div>
+                                        <div class="d-flex flex-column">
+                                            @if (Route::has('password.request'))
+                                                <a class="btn btn-link g-py-5--lg g-py-0"
+                                                   href="{{ url('/request-customer-mobile','forget') }}">
+                                                    رمزتان را فراموش کرده اید؟
+                                                </a>
+                                            @endif
+                                            <a class="d-lg-none btn btn-link text-right g-py-0"
+                                               href="{{ url('/request-customer-mobile','register') }}">
+                                                ثبت نام
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </form>

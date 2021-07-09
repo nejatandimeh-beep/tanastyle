@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Administrator\Customer;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -10,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class ResetPasswordController extends Controller
 {
@@ -52,5 +55,26 @@ class ResetPasswordController extends Controller
         ]);
     }
 
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+    public function resetCustomerPassword(Request $request)
+    {
+
+        $customer=DB::table('customers')
+        ->where('Mobile', Session::get('mobile'))
+            ->update(['password' => Hash::make($request->get('password'))]);
+
+        $customer=DB::table('customers')
+            ->where('Mobile', Session::get('mobile'))
+            ->first();
+
+        Auth::loginUsingId($customer->id, TRUE);
+        return redirect('/');
+    }
 
 }

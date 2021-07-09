@@ -9,8 +9,10 @@ use DateTime;
 use File;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Kavenegar;
 
 class Basic extends Controller
 {
@@ -1344,6 +1346,11 @@ class Basic extends Controller
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($id, $qty, $i)
     {
+        $customer=DB::table('customers')
+            ->select('Mobile')
+            ->where('id', Auth::user()->id)
+            ->first();
+
         $customerInfo = DB::table('customers as c')
             ->select('ca.*')
             ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
@@ -1436,6 +1443,29 @@ class Basic extends Controller
         DB::table('product_cart')
             ->where('ProductDetailID', $id)
             ->delete();
+
+        //--------------
+        try{
+            $sender = "10008663";		//This is the Sender number
+
+            $message = "فاکتور شما ثبت شد.";		//The body of SMS
+            $receptor = array("09013946105");			//Receptors numbers
+
+
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $result =$var->Send($sender,$receptor,$message);
+
+        }
+        catch(\Kavenegar\Exceptions\ApiException $e){
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
+        catch(\Kavenegar\Exceptions\HttpException $e){
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
+        //--------------
 
         return true;
     }

@@ -84,7 +84,6 @@
                                         <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر تحویل دهنده</th>
-                                        <th class="g-brd-white-opacity-0_1">تاییدیه</th>
                                     </tr>
                                     </thead>
 
@@ -158,33 +157,6 @@
                                                     @if($row->DeliveryStatus === '2')
                                                         <i class="icon-home g-font-size-20 g-color-primary"></i>
                                                     @endif
-                                                </td>
-                                                <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
-                                                    <div id="signatureDiv{{$key}}" class="col-9 d-inline-block">
-                                                        <div class="input-group justify-content-center">
-                                                            <div class="input-group-btn">
-                                                                <button class="btn u-btn-primary rounded-0"
-                                                                        onclick="deliveryCourier({{$key}})"
-                                                                        type="button"><i
-                                                                        class="fa fa-check align-middle g-font-size-16"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <form id="deliveryForm{{ $key }}" method="POST" action="{{route('deliveryCourier',[$row->OrderDetailID,$row->DeliveryStatus==='0'?'1':'3'])}}">
-                                                        @csrf
-                                                    </form>
-
-                                                    <i id="waitingIconTd{{$key}}"
-                                                       class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-
-                                                    <svg id="checkMark{{$key}}" class="d-none checkmark"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                                                fill="none"/>
-                                                        <path class="checkmark__check" fill="none"
-                                                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                                                    </svg>
                                                 </td>
                                             </tr>
                                         @endforeach

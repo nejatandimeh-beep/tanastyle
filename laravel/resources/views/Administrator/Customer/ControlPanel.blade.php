@@ -348,7 +348,6 @@
                                         <th class="align-middle text-center text-nowrap">عکس</th>
                                         <th class="align-middle text-center">وضعیت تحویل</th>
                                         <th class="align-middle text-center">پیغام سیستمی</th>
-                                        <th class="align-middle text-center">توضیحات</th>
                                     </tr>
                                     </thead>
 
@@ -365,18 +364,31 @@
                                                          src="{{ $rec->PicPath }}pic1.jpg" alt="">
                                                 </div>
                                             </td>
-                                            @if ($deliveryStatus[$key] > 1440)
-                                                <td class="align-middle text-center text-nowrap">
-                                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                                       data-toggle="tooltip"
-                                                       data-placement="top" data-original-title="اتمام زمان تحویل">
-                                                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
-                                                    </a>
-                                                </td>
-                                                <td id="deliveryErr"
-                                                    class="align-middle text-center text-nowrap g-color-lightred">عدم
-                                                    تحویل محصول
-                                                </td>
+                                            @if ($deliveryStatus[$key] > 540)
+                                                @if( $rec->DeliveryProblem===1)
+                                                    <td class="align-middle text-center text-nowrap">
+                                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                                           data-toggle="tooltip"
+                                                           data-placement="top" data-original-title="اتمام زمان تحویل">
+                                                            <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td id="deliveryErr"
+                                                        class="align-middle text-center text-nowrap g-color-lightred">
+                                                        عدم
+                                                        تحویل محصول
+                                                    </td>
+                                                @else
+                                                    <td class="align-middle text-center text-nowrap">
+                                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5">
+                                                            <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td id="deliverySuccess"
+                                                        class="align-middle text-center text-nowrap g-color-primary">
+                                                        تحویل با موفقیت
+                                                    </td>
+                                                @endif
                                             @else
                                                 <p style="display: none">{{ $range = (int)$deliveryStatus[$key] / 14.4 }}</p>
                                                 <td style="direction: ltr" class="align-middle">
@@ -396,7 +408,6 @@
                                                         class="fa fa-spinner fa-spin g-ml-5"></i>در انتظار تحویل
                                                 </td>
                                             @endif
-                                            <td class="align-middle text-center text-nowrap">{{ $rec->DeliveryProblem }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

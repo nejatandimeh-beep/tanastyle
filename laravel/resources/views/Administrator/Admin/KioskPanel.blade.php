@@ -111,7 +111,6 @@
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
                                         <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
-                                        <th class="g-brd-white-opacity-0_1">درخواست پیک</th>
                                     </tr>
                                     </thead>
 
@@ -162,33 +161,6 @@
                                                         class="d-flex g-width-60 g-height-60 g-my-10 mx-auto g-bg-white"
                                                         src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
-                                                </td>
-                                                <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
-                                                    <div id="signatureDiv{{$key}}"
-                                                         class="{{$row->DeliveryStatus === '2'?'d-none ':'d-inline-block '}}col-9">
-                                                        <div class="input-group justify-content-center">
-                                                            <div class="input-group-btn">
-                                                                <button
-                                                                    class="btn u-btn-primary rounded-0"
-                                                                    onclick="courierRequest({{$row->OrderDetailID}}, {{$key}})"
-                                                                    type="button"><i
-                                                                        class="fa fa-check align-middle g-font-size-16"></i>
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <i id="waitingIconTd{{$key}}"
-                                                       class="d-none fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-
-                                                    <svg id="checkMark{{$key}}"
-                                                         class="{{$row->DeliveryStatus === '22'?'d-none':''}} checkmark"
-                                                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                                                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                                                fill="none"/>
-                                                        <path class="checkmark__check" fill="none"
-                                                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                                                    </svg>
                                                 </td>
                                             </tr>
                                         @endforeach

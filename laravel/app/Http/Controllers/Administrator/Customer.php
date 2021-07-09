@@ -34,12 +34,37 @@ class Customer extends Controller
             ->get()
             ->count();
 
-        $deliveryStatus = array();
-        foreach ($data as $key => $rec) {
-            $deliveryStatus[$key] = $this->dateLenToNow($data[$key]->Date, $data[$key]->Time);
+        $deliveryTemp = 0;
+        $falseTemp = 0;
+        $deliveryAlarm = array();
+        $falseAlarm = array();
+
+        $i = 0;
+        $j = 0;
+        foreach ($data as $key => $row) {
+            if ($row->DeliveryProblem === 1 && $row->id !== $deliveryTemp) {
+                $deliveryAlarm[$i] = $row->id;
+                $deliveryTemp = $row->id;
+                $i++;
+            }
+            if (isset($row->pfID) && $row->id !== $falseTemp) {
+                $falseAlarm[$j] = $row->id;
+                $falseTemp = $row->id;
+                $j++;
+            }
         }
 
-        return view('Administrator.Customer.Customer',compact('data','deliveryStatus','newSupport'));
+        $data = DB::table('customers as c')
+            ->select('*','pf.ID as pfID')
+            ->leftJoin('product_order as po', 'po.CustomerID', '=', 'c.ID')
+            ->leftJoin('product_order_detail as pod', 'pod.OrderId', '=', 'po.ID')
+            ->leftJoin('product_delivery as pd' , 'pd.OrderDetailID','=','pod.ID')
+            ->leftJoin('product_false as pf' , 'pf.ProductDetailID','=','pod.ProductDetailID')
+            ->groupBy('c.id')
+            ->orderBy('pd.DeliveryProblem','DESC')
+            ->get();
+
+        return view('Administrator.Customer.Customer',compact('data','deliveryAlarm', 'falseAlarm','newSupport'));
     }
 
     public function update(Request $request)
@@ -196,12 +221,21 @@ class Customer extends Controller
                 $pf='error';
         }
 
+        $today = date('Y-m-d');
         $deliverPersianDate = array();
         $deliveryStatus = array();
-        foreach ($delivery as $key => $rec) {
-            $d = $rec->Date;
+        foreach ($delivery as $key => $row) {
+            $rowDate = strtotime($row->Date . ' ' . $row->Time);
+            $orderDate = date('Y-m-d', $rowDate);
+            $reservation = date('Y-m-d', strtotime($row->Date . ' + 1 days'));
+
+            if (($orderDate < $today))
+                $deliveryStatus[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
+            else
+                $deliveryStatus[$key] = 0; // get len past date to now by min
+
+            $d = $row->Date;
             $deliverPersianDate[$key] = $this->convertDateToPersian($d);
-            $deliveryStatus[$key] = $this->dateLenToNow($delivery[$key]->Date, $delivery[$key]->Time);
         }
 
         $supportPersianDate = array();

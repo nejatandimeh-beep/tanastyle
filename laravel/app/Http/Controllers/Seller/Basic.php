@@ -340,16 +340,25 @@ class Basic extends Controller
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('p.SellerID', $sellerID)
-            ->where('pd.DeliveryStatus', 0)
+            ->where('pd.DeliveryStatus', '0')
             ->get();
 
-        // Convert Date
+
+        $today = date('Y-m-d');
         $persianDate = array();
         $deliveryStatus = array();
-        foreach ($data as $key => $rec) {
-            $d = $rec->Date;
+        foreach ($data as $key => $row) {
+            $rowDate = strtotime($row->Date . ' ' . $row->Time);
+            $orderDate = date('Y-m-d', $rowDate);
+            $reservation = date('Y-m-d', strtotime($row->Date . ' + 1 days'));
+
+            if (($orderDate < $today))
+                $deliveryStatus[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
+            else
+                $deliveryStatus[$key] = 0; // get len past date to now by min
+
+            $d = $row->Date;
             $persianDate[$key] = $this->convertDateToPersian($d);
-            $deliveryStatus[$key] = $this->dateLenToNow($data[$key]->Date, $data[$key]->Time);
         }
 
         return view('Seller.Delivery', compact('data', 'persianDate', 'deliveryStatus'));

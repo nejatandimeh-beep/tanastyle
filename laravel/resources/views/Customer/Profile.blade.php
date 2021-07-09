@@ -23,8 +23,9 @@
                         <!-- Figure Info -->
                             <div class="d-flex flex-column justify-content-center">
                                 <div class="g-mb-5">
-                                    <h4 class="h5 g-mb-0">@if(Auth::user()->name!=='') {{Auth::user()->name.' '.Auth::user()->Family}} @else {{Auth::user()->Mobile}} @endif
-{{--                                        @if(Auth::user()->email_verified_at === null)--}}
+                                    <h4 class="h5 g-mb-0">
+                                        @if(Auth::user()->name===null || Auth::user()->name==='') {{Auth::user()->Mobile}} @else  {{Auth::user()->name.' '.Auth::user()->Family}} @endif
+                                        {{--                                        @if(Auth::user()->email_verified_at === null)--}}
 {{--                                            @if (session('resent'))--}}
 {{--                                                <label class="g-color-primary g-font-size-16 g-mr-10">--}}
 {{--                                                    <i class="fa fa-envelope g-font-size-16"></i>--}}
@@ -40,7 +41,7 @@
 {{--                                        @endif--}}
                                     </h4>
                                 </div>
-                                <em class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">@if(Auth::user()->name!==''){{ Auth::user()->Mobile }}@endif</em>
+                                <em class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">@if(Auth::user()->name===null || Auth::user()->name==='') بدون نام @else {{ Auth::user()->Mobile }} @endif</em>
                             </div>
                         </div>
                         <!-- End Figure Info -->
@@ -84,7 +85,7 @@
                                                     class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
                                                     <i class="icon-lock-open"></i>
                                                 </span>
-                                            <a class="customLink" href="{{ route('changePass') }}">تغییر رمز
+                                            <a class="customLink" href="{{ route('requestMobile',['source'=>'forget']) }}">تغییر رمز
                                                 عبور</a>
                                         </li>
                                         <li class="list-inline-item justify-content-center g-mx-7">

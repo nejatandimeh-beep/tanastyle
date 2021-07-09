@@ -82,32 +82,44 @@
                                 </a>
                             </td>
                             <td class="align-middle text-center text-nowrap">
-                                @if ($deliveryStatus[$key] > 1440 && $row->DeliveryStatus === '0')
-                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                       data-toggle="tooltip"
-                                       data-placement="top" data-original-title="اتمام زمان تحویل">
-                                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
-                                    </a>
-                                @else
-                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5">
-                                        <i class="fa fa-check g-font-size-18 g-color-primary"></i>
-                                    </a>
-                                @endif
+                                @foreach($deliveryAlarm as $sellerId)
+                                    @if ($sellerId===$row->id)
+                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                           data-toggle="tooltip"
+                                           data-placement="top" data-original-title="اتمام زمان تحویل">
+                                            <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
+                                        </a>
+                                    @else
+                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5">
+                                            <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                        </a>
+                                    @endif
+                                @endforeach
+                                <a class="{{$deliveryAlarm===[] ? '':'d-none '}}g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5">
+                                    <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                </a>
                             </td>
                             <td class="align-middle text-center">
-                                @if (isset($row->pfID))
-                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                       data-toggle="tooltip"
-                                       data-placement="top" data-original-title="حاوی اشتباه">
-                                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
-                                    </a>
-                                @else
-                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                       data-toggle="tooltip"
-                                       data-placement="top" data-original-title="صحیح">
-                                        <i class="fa fa-check g-font-size-18 g-color-primary"></i>
-                                    </a>
-                                @endif
+                                @foreach($falseAlarm as $sellerId)
+                                    @if ($sellerId===$row->id)
+                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                           data-toggle="tooltip"
+                                           data-placement="top" data-original-title="حاوی اشتباه">
+                                            <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
+                                        </a>
+                                    @else
+                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                           data-toggle="tooltip"
+                                           data-placement="top" data-original-title="صحیح">
+                                            <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                        </a>
+                                    @endif
+                                @endforeach
+                                <a class="{{$falseAlarm===[] ? '':'d-none '}}g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                   data-toggle="tooltip"
+                                   data-placement="top" data-original-title="صحیح">
+                                    <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

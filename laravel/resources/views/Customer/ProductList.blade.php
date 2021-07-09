@@ -761,8 +761,9 @@
                                                 <div class="form-group">
                                                     <div class="u-input-group-v2">
                                                         <input id="price-min"
-                                                               class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
+                                                               class="form-control rounded-0 u-form-control g-font-size-16 g-brd-gray-light-v4 g-brd-primary--focus"
                                                                oninput="minPriceAllOff($(this))"
+                                                               pattern="\d*"
                                                                name="price-min"
                                                                type="text">
                                                         <label style="left: 24% !important; cursor: text"
@@ -774,8 +775,9 @@
                                                 <div class="form-group">
                                                     <div class="u-input-group-v2">
                                                         <input id="price-max"
-                                                               class="form-control rounded-0 u-form-control g-brd-gray-light-v4 g-brd-primary--focus"
+                                                               class="form-control rounded-0 u-form-control g-font-size-16 g-brd-gray-light-v4 g-brd-primary--focus"
                                                                name="price-max"
+                                                               pattern="\d*"
                                                                oninput="maxPriceAllOff($(this))"
                                                                type="text">
                                                         <label style="left: 17% !important; cursor: text"
@@ -1399,7 +1401,7 @@
                                             </s>
                                             <span>{{  number_format($data->FinalPrice) }}</span>
                                             <span
-                                                class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                                class="d-block g-color-gray-dark-v5 g-font-size-10">تومان</span>
                                         </div>
                                     </div>
                                 </figure>

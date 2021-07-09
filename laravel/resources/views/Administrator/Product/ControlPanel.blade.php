@@ -17,7 +17,8 @@
             </li>
             <!--فاکتور-->
             <li class="nav-item">
-                <a id="sellerOrder" class="nav-link g-mb-minus-1" data-toggle="tab" href="#nav-4-1-primary-hor-fill--4" role="tab">
+                <a id="sellerOrder" class="nav-link g-mb-minus-1" data-toggle="tab" href="#nav-4-1-primary-hor-fill--4"
+                   role="tab">
                     <span id="deliveryAlarm" class="{{$pf==='' ? 'd-none ': ''}}g-mr-10">
                         <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
                     </span>
@@ -25,7 +26,8 @@
             </li>
             <!--انبار-->
             <li class="nav-item">
-                <a id="sellerStore" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--5" role="tab">انبار</a>
+                <a id="sellerStore" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--5"
+                   role="tab">انبار</a>
             </li>
         </ul>
         <!-- End Nav tabs -->
@@ -57,7 +59,6 @@
                                         <th class="align-middle text-center text-nowrap">عکس</th>
                                         <th class="align-middle text-center">وضعیت تحویل</th>
                                         <th class="align-middle text-center">پیغام سیستمی</th>
-                                        <th class="align-middle text-center">توضیحات</th>
                                     </tr>
                                     </thead>
 
@@ -67,25 +68,38 @@
                                             <td class="align-middle text-nowrap text-center">{{ $rec->Name }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $deliverPersianDate[$key][0].'/'.$deliverPersianDate[$key][1].'/'.$deliverPersianDate[$key][2] }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $rec->Time }}</td>
-                                            <td class="align-middle text-center text-nowrap">{{ $rec->OrderId.'/'.$rec->ID }}</td>
+                                            <td class="align-middle text-center text-nowrap">{{ $rec->OrderId.'/'.$rec->OrderDetailID }}</td>
                                             <td class="align-middle text-center text-nowrap">
                                                 <div class="media">
                                                     <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
                                                          src="{{ $rec->PicPath }}pic1.jpg" alt="">
                                                 </div>
                                             </td>
-                                            @if ($deliveryStatus[$key] > 1440)
-                                                <td class="align-middle text-center text-nowrap">
-                                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                                       data-toggle="tooltip"
-                                                       data-placement="top" data-original-title="اتمام زمان تحویل">
-                                                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
-                                                    </a>
-                                                </td>
-                                                <td id="deliveryErr"
-                                                    class="align-middle text-center text-nowrap g-color-lightred">عدم
-                                                    تحویل محصول
-                                                </td>
+                                            @if ($deliveryStatus[$key] > 540)
+                                                @if( $rec->DeliveryProblem===1)
+                                                    <td class="align-middle text-center text-nowrap">
+                                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                                           data-toggle="tooltip"
+                                                           data-placement="top" data-original-title="اتمام زمان تحویل">
+                                                            <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td id="deliveryErr"
+                                                        class="align-middle text-center text-nowrap g-color-lightred">
+                                                        عدم
+                                                        تحویل محصول
+                                                    </td>
+                                                @else
+                                                    <td class="align-middle text-center text-nowrap">
+                                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5">
+                                                            <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td id="deliverySuccess"
+                                                        class="align-middle text-center text-nowrap g-color-primary">
+                                                        تحویل با موفقیت
+                                                    </td>
+                                                @endif
                                             @else
                                                 <p style="display: none">{{ $range = (int)$deliveryStatus[$key] / 14.4 }}</p>
                                                 <td style="direction: ltr" class="align-middle">
@@ -105,7 +119,6 @@
                                                         class="fa fa-spinner fa-spin g-ml-5"></i>در انتظار تحویل
                                                 </td>
                                             @endif
-                                            <td class="align-middle text-center text-nowrap">{{ $rec->DeliveryProblem }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

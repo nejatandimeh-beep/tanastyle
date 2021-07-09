@@ -49,4 +49,5 @@ class ChangePasswordController extends Controller
 
         return redirect()->route('userProfile','changePass');
     }
+
 }

@@ -67,13 +67,13 @@ class Seller extends Controller
             ->select('ID', 'Name', 'Family', 'NationalID')
             ->get();
 
-        $newSupport=DB::table('seller_conversation')
-            ->select('SellerID','Status')
-            ->where('Status','1')
+        $newSupport = DB::table('seller_conversation')
+            ->select('SellerID', 'Status')
+            ->where('Status', '1')
             ->get()
             ->count();
 
-        return view('Administrator.Seller.Verify', compact('data','newSupport'));
+        return view('Administrator.Seller.Verify', compact('data', 'newSupport'));
     }
 
     public function verifyDetail($id)
@@ -97,25 +97,50 @@ class Seller extends Controller
     public function list()
     {
         $data = DB::table('sellers as s')
-            ->select('*','pf.ID as pfID')
+            ->select('*', 'pf.ID as pfID')
             ->leftJoin('product_order_detail as pod', 'pod.SellerID', '=', 's.id')
-            ->leftJoin('product_delivery as pd' , 'pd.OrderDetailID','=','pod.ID')
-            ->leftJoin('product_false as pf' , 'pf.ProductDetailID','=','pod.ProductDetailID')
+            ->leftJoin('product_delivery as pd', 'pd.OrderDetailID', '=', 'pod.ID')
+            ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->get();
 
-        $newSupport=DB::table('seller_conversation')
-            ->select('SellerID','Status')
-            ->where('Status','1')
+        $newSupport = DB::table('seller_conversation')
+            ->select('SellerID', 'Status')
+            ->where('Status', '1')
             ->get()
             ->count();
 
-        $deliveryStatus = array();
-        foreach ($data as $key => $rec) {
-            $deliveryStatus[$key] = $this->dateLenToNow($data[$key]->Date, $data[$key]->Time);
+        $deliveryTemp = 0;
+        $falseTemp = 0;
+        $deliveryAlarm = array();
+        $falseAlarm = array();
+
+        $i = 0;
+        $j = 0;
+        foreach ($data as $key => $row) {
+            if ($row->DeliveryProblem === 1 && $row->id !== $deliveryTemp) {
+                $deliveryAlarm[$i] = $row->id;
+                $deliveryTemp = $row->id;
+                $i++;
+            }
+            if (isset($row->pfID) && $row->id !== $falseTemp) {
+                $falseAlarm[$j] = $row->id;
+                $falseTemp = $row->id;
+                $j++;
+            }
         }
 
-        return view('Administrator.Seller.Seller', compact('data','deliveryStatus','newSupport'));
+        $data = DB::table('sellers as s')
+            ->select('*', 'pf.ID as pfID')
+            ->leftJoin('product_order_detail as pod', 'pod.SellerID', '=', 's.id')
+            ->leftJoin('product_delivery as pd', 'pd.OrderDetailID', '=', 'pod.ID')
+            ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
+            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->groupBy('s.id')
+            ->orderBy('pd.DeliveryProblem', 'DESC')
+            ->get();
+
+        return view('Administrator.Seller.Seller', compact('data', 'deliveryAlarm', 'falseAlarm', 'newSupport'));
     }
 
     public function controlPanel($id, $tab)
@@ -134,15 +159,15 @@ class Seller extends Controller
         $storeSum = $this->storeTableLoad('all', $id);
         $storeTable = $this->storeTableLoad('pagination', $id);
 
-        $saleSum = $this->saleTableLoad( 'all', $id);
+        $saleSum = $this->saleTableLoad('all', $id);
         $saleTable = $this->saleTableLoad('pagination', $id);
 
-        $amountSum=$this->amountTableLoad('all', $id);
-        $amountTable=$this->amountTableLoad('pagination', $id);
+        $amountSum = $this->amountTableLoad('all', $id);
+        $amountTable = $this->amountTableLoad('pagination', $id);
         $lastPaymentDate = $this->convertDateToPersian($amountSum['lastPaymentDate']);
 
         $delivery = DB::table('product_delivery as pd')
-            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*')
+            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath', 'pd.*')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
@@ -160,34 +185,43 @@ class Seller extends Controller
                 'scd.ConversationID',
                 'scd.ID as conversationDetailID')
             ->leftJoin('seller_conversation_detail as scd', 'scd.ConversationID', '=', 'sc.ID')
-            ->where('sc.SellerID',$id)
+            ->where('sc.SellerID', $id)
             ->orderBy('sc.Status')
             ->orderBy(DB::raw('IF(sc.Status=0 || sc.Status=1, sc.Priority, false)'), 'ASC')
             ->orderBy('sc.ID', 'DESC')
             ->get();
 
-        $newSupport=DB::table('seller_conversation')
-            ->select('SellerID','Status')
-            ->where('SellerID',$id)
-            ->where('Status','1')
+        $newSupport = DB::table('seller_conversation')
+            ->select('SellerID', 'Status')
+            ->where('SellerID', $id)
+            ->where('Status', '1')
             ->get()
             ->count();
 
         $persianDate = array();
-        $pf='';
+        $pf = '';
         foreach ($saleTable as $key => $rec) {
             $d = $rec->Date;
             $persianDate[$key] = $this->convertDateToPersian($d);
-            if(isset($rec->fpID))
-                $pf='error';
+            if (isset($rec->fpID))
+                $pf = 'error';
         }
 
+        $today = date('Y-m-d');
         $deliverPersianDate = array();
         $deliveryStatus = array();
-        foreach ($delivery as $key => $rec) {
-            $d = $rec->Date;
+        foreach ($delivery as $key => $row) {
+            $rowDate = strtotime($row->Date . ' ' . $row->Time);
+            $orderDate = date('Y-m-d', $rowDate);
+            $reservation = date('Y-m-d', strtotime($row->Date . ' + 1 days'));
+
+            if (($orderDate < $today))
+                $deliveryStatus[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
+            else
+                $deliveryStatus[$key] = 0; // get len past date to now by min
+
+            $d = $row->Date;
             $deliverPersianDate[$key] = $this->convertDateToPersian($d);
-            $deliveryStatus[$key] = $this->dateLenToNow($delivery[$key]->Date, $delivery[$key]->Time);
         }
 
         $supportPersianDate = array();
@@ -202,8 +236,8 @@ class Seller extends Controller
             $amountPersianDate[$key] = $this->convertDateToPersian($d);
         }
         return view('Administrator.Seller.ControlPanel', compact('sellerInfo', 'creditCard', 'storeSum', 'storeTable',
-            'tab','persianDate','saleSum','saleTable','amountSum','amountTable','lastPaymentDate','delivery','deliverPersianDate',
-            'deliveryStatus','delivery','support','supportPersianDate','amountPersianDate','newSupport','pf'));
+            'tab', 'persianDate', 'saleSum', 'saleTable', 'amountSum', 'amountTable', 'lastPaymentDate', 'delivery', 'deliverPersianDate',
+            'deliveryStatus', 'delivery', 'support', 'supportPersianDate', 'amountPersianDate', 'newSupport', 'pf'));
     }
 
     public function support()
@@ -218,15 +252,15 @@ class Seller extends Controller
                 'scd.ConversationID',
                 'scd.ID as conversationDetailID')
             ->leftJoin('seller_conversation_detail as scd', 'scd.ConversationID', '=', 'sc.ID')
-            ->where('Status','1')
+            ->where('Status', '1')
             ->orderBy('sc.Status')
             ->orderBy(DB::raw('IF(sc.Status=0 || sc.Status=1, sc.Priority, false)'), 'ASC')
             ->orderBy('sc.ID', 'DESC')
             ->get();
 
-        $newSupport=DB::table('seller_conversation')
-            ->select('SellerID','Status')
-            ->where('Status','1')
+        $newSupport = DB::table('seller_conversation')
+            ->select('SellerID', 'Status')
+            ->where('Status', '1')
             ->get()
             ->count();
 
@@ -236,7 +270,7 @@ class Seller extends Controller
             $supportPersianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Administrator.Seller.Support', compact('support','supportPersianDate','newSupport'));
+        return view('Administrator.Seller.Support', compact('support', 'supportPersianDate', 'newSupport'));
     }
 
     public function storeTableLoad($val, $sellerID)
@@ -305,7 +339,7 @@ class Seller extends Controller
                 'totalSaleAmount' => 0);
 
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.PicNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.PicNumber')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -333,7 +367,7 @@ class Seller extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.PicNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.PicNumber')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -444,10 +478,10 @@ class Seller extends Controller
                 'Qty' => $request->get('qty'),
             ]);
 
-        return redirect()->route('adminProductDetail', $idDetail)->with('update','success');
+        return redirect()->route('adminProductDetail', $idDetail)->with('update', 'success');
     }
 
-    public function productDelete($id,$sellerID)
+    public function productDelete($id, $sellerID)
     {
         DB::table('product_cart')
             ->where('ProductDetailID', $id)
@@ -487,7 +521,7 @@ class Seller extends Controller
         return redirect()->route('sellerControlPanel', ['id' => $sellerID, 'tab' => 'delete']);
     }
 
-    public function productFalse($id,$sellerID)
+    public function productFalse($id, $sellerID)
     {
         DB::table('product_false')
             ->insert(['ProductDetailID' => $id]);
@@ -554,7 +588,7 @@ class Seller extends Controller
         foreach ($data as $key => $row) {
             $output .= '<li style="border-radius: 0 !important;"
                         class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
-                            <a  href="' . route('sellerControlPanel',['id'=>$row->id,'tab'=>'all']) . '"
+                            <a  href="' . route('sellerControlPanel', ['id' => $row->id, 'tab' => 'all']) . '"
                                 style="text-decoration: none"
                                 class="col-12 p-0 text-left g-color-gray-dark-v3 g-color-primary--hover">
                              ' . $row->NationalID . '
@@ -590,7 +624,7 @@ class Seller extends Controller
         $d = $data->Date;
         $persianDate = $this->convertDateToPersian($d);
 
-        return view('Administrator.Seller.OrderDetail', compact('data', 'falseProduct', 'persianDate','dataDetail'));
+        return view('Administrator.Seller.OrderDetail', compact('data', 'falseProduct', 'persianDate', 'dataDetail'));
     }
 
     public function connectionDetail($id, $status)
@@ -681,26 +715,28 @@ class Seller extends Controller
                 'AnswerDate' => $date,
                 'AnswerTime' => $time,
                 'Replay' => 1,
-        ]);
+            ]);
 
-        return redirect()->route('connectionDetail',['id'=>$conversationID, 'status'=>'0']);
+        return redirect()->route('connectionDetail', ['id' => $conversationID, 'status' => '0']);
     }
 
-    public function amountPay(Request $request){
+    public function amountPay(Request $request)
+    {
         date_default_timezone_set('Asia/Tehran');
-        $sellerId=$request->get('sellerId');
+        $sellerId = $request->get('sellerId');
         DB::table('seller_amount_received')
             ->insert([
-                'SellerID'=>$sellerId,
-                'Amount'=>$request->get('amount'),
-                'TransactionCode'=>$request->get('transactionCode'),
-                'Date'=>date('Y-m-d'),
-                'Time'=>date('H:i:s'),
-                'Detail'=>$request->get('detail'),
+                'SellerID' => $sellerId,
+                'Amount' => $request->get('amount'),
+                'TransactionCode' => $request->get('transactionCode'),
+                'Date' => date('Y-m-d'),
+                'Time' => date('H:i:s'),
+                'Detail' => $request->get('detail'),
             ]);
 
         return redirect()->route('sellerControlPanel', ['id' => $sellerId, 'tab' => 'amountReceived']);
     }
+
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
 
     public function convertDateToPersian($d)

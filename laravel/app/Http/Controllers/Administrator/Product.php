@@ -42,12 +42,21 @@ class Product extends Controller
                 $pf='error';
         }
 
+        $today = date('Y-m-d');
         $deliverPersianDate = array();
         $deliveryStatus = array();
-        foreach ($delivery as $key => $rec) {
-            $d = $rec->Date;
+        foreach ($delivery as $key => $row) {
+            $rowDate = strtotime($row->Date . ' ' . $row->Time);
+            $orderDate = date('Y-m-d', $rowDate);
+            $reservation = date('Y-m-d', strtotime($row->Date . ' + 1 days'));
+
+            if (($orderDate < $today))
+                $deliveryStatus[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
+            else
+                $deliveryStatus[$key] = 0; // get len past date to now by min
+
+            $d = $row->Date;
             $deliverPersianDate[$key] = $this->convertDateToPersian($d);
-            $deliveryStatus[$key] = $this->dateLenToNow($delivery[$key]->Date, $delivery[$key]->Time);
         }
 
         return view('Administrator.Product.ControlPanel',compact('storeSum','storeTable','saleSum','saleTable'

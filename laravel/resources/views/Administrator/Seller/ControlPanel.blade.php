@@ -406,7 +406,6 @@
                                         <th class="align-middle text-center text-nowrap">عکس</th>
                                         <th class="align-middle text-center">وضعیت تحویل</th>
                                         <th class="align-middle text-center">پیغام سیستمی</th>
-                                        <th class="align-middle text-center">توضیحات</th>
                                     </tr>
                                     </thead>
 
@@ -423,7 +422,7 @@
                                                          src="{{ $rec->PicPath }}pic1.jpg" alt="">
                                                 </div>
                                             </td>
-                                            @if ($deliveryStatus[$key] > 1440)
+                                            @if ($deliveryStatus[$key] > 540)
                                                 <td class="align-middle text-center text-nowrap">
                                                     <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
                                                        data-toggle="tooltip"
@@ -454,7 +453,6 @@
                                                         class="fa fa-spinner fa-spin g-ml-5"></i>در انتظار تحویل
                                                 </td>
                                             @endif
-                                            <td class="align-middle text-center text-nowrap">{{ $rec->DeliveryProblem }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>
