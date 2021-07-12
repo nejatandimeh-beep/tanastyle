@@ -117,7 +117,9 @@
                     @endforeach
                 </div>
 
-                <form id="finalCartOrderForm" action="{{route('cartSubmit')}}" method="POST" class="d-none">@csrf <div id="cartOrderForm"></div></form>
+                <form id="finalCartOrderForm" action="{{route('cartSubmit')}}" method="POST" class="d-none">@csrf
+                    <div id="cartOrderForm"></div>
+                </form>
 
                 <div class="{{ isset($data[0]) ? '':'d-none' }} text-left">
                     <a href="#modal18"
@@ -174,42 +176,40 @@
                                     @foreach($data as $key =>$row)
                                         <tr id="orderRow{{$key}}">
                                             <td class="align-middle text-nowrap text-center">
-                                            <span id="rowNumber{{$key}}" class="g-pa-5">
-                                            </span>
+                                                <span id="rowNumber{{$key}}" class="g-pa-5"></span>
                                             </td>
                                             <td class="align-middle text-nowrap text-center">
-                                            <span id="productDetailID{{$key}}" class="g-pa-5">
-                                                {{ $row->ProductDetailID }}
-                                            </span>
+                                                <span id="productDetailID{{$key}}" class="g-pa-5">
+                                                    {{ $row->ProductDetailID }}
+                                                </span>
                                             </td>
                                             <td class="align-middle text-center">
-                                            <span class="g-pa-5">
-                                                {{ $row->Name }}
-                                            </span>
+                                                <span class="g-pa-5">
+                                                    {{ $row->Name }}
+                                                </span>
                                             </td>
                                             <td class="align-middle text-center">
-                                            <span class="g-pa-5">
-                                                {{ $row->Color }}
-                                            </span>
+                                                <span class="g-pa-5">
+                                                    {{ $row->Color }}
+                                                </span>
                                             </td>
                                             <td class="align-middle text-center">
-                                            <span class="g-pa-5">
-                                                {{ $row->Size }}
-                                            </span>
+                                                <span class="g-pa-5">
+                                                    {{ $row->Size }}
+                                                </span>
                                             </td>
                                             <td class="align-middle text-nowrap text-center">
-                                            <span id="orderQty{{$key}}" class="g-pa-5">
-                                            </span>
+                                               <span id="orderQty{{$key}}" class="g-pa-5"></span>
                                             </td>
                                             <td class="align-middle text-center">
-                                            <span class="g-pa-5">
-                                                {{ number_format($row->UnitPrice) }}
-                                            </span>
+                                                <span class="g-pa-5">
+                                                    {{ number_format($row->UnitPrice) }}
+                                                </span>
                                             </td>
                                             <td class="align-middle text-center">
-                                            <span id="productFinalPrice{{$key}}" class="g-pa-5">
-                                                {{ number_format($row->FinalPrice) }}
-                                            </span>
+                                                <span id="productFinalPrice{{$key}}" class="g-pa-5">
+                                                    {{ number_format($row->FinalPrice) }}
+                                                </span>
                                             </td>
                                             <td class="align-middle text-center">
                                             <span class="g-pa-5">
@@ -235,9 +235,20 @@
                                     <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-5 bigDevice">
                                         <i class="icon-communication-011 u-line-icon-pro g-color-white g-pt-5"></i>
                                     </span>
-                                    <span>آدرس ارسال:</span>
-                                    <span
-                                        class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify">آ.غ مهاباد خیابان قاضی تعاونی تانکرداران مهاباد <strong>گیرنده:</strong> خبات اندیمه <strong>شماره تماس:</strong> 09144421633</span>
+                                    @if(isset($sendAddress->ID))
+                                        <span>آدرس ارسال:</span>
+                                        <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
+                                        <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
+                                        <span class="receiverStateCity g-font-size-16 g-font-weight-300"></span>
+                                        <span id="addressID"
+                                            class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$sendAddress->Address}}<strong class="g-color-gray-dark-v2 g-mr-5">گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}} <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
+                                    @else
+                                        <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', 'navigation') : route('login') }}"
+                                           id="addAddress"
+                                           class="g-color-red g-color-primary--hover g-mt-0--lg g-mt-30 g-text-underline--none--hover">
+                                                افزودن آدرس<i class="icon-paper-clip g-mr-5 align-middle"></i>
+                                            </a>
+                                    @endif
                                 </span>
                             </div>
                             <div style="direction: rtl"

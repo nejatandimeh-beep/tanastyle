@@ -1360,7 +1360,7 @@
                                                                     نام محصول
                                                                 </h6>
                                                                 <span class="g-pa-5--lg color-primary-smallDevice">
-                                                            {{ $row->Name }}<span>{{ $row->Model }}</span>
+                                                            {{ $row->Name }}<span> {{ $row->Model }}</span>
                                                         </span>
                                                             </div>
                                                             <div

@@ -162,6 +162,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Kavenegar\Laravel\ServiceProvider::class,
+        Darryldecode\Cart\CartServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -236,6 +237,7 @@ return [
 
 
         'Kavenegar' => Kavenegar\Laravel\Facade::class,
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
     ],
 
 ];

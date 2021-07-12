@@ -178,16 +178,6 @@
             // رفتار صفحه بعد از لود شدن صفحه در پروفایل کاربر
             modalTrigger();
 
-            // تنظیم اندازه سبد خرید برای کمتر از 3 عدد و بیشتر از 3 عدد محصول
-            let c = document.getElementById("basketContainer").childElementCount;
-            if (c <= 3) {
-                $('#basketContainer').removeClass('g-height-300');
-                $('#basketContainer').addClass('g-height-auto');
-            } else {
-                $('#basketContainer').removeClass('g-height-auto');
-                $('#basketContainer').addClass('g-height-300');
-            }
-
             let mq = window.matchMedia("(max-width: 900px)");
             if (mq.matches) {
                 $('#bigDevice').remove();
@@ -704,6 +694,8 @@
                 $('#cartOrderForm').append("<input name='row' value=" + row + ">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
+            if ($('#addressID').length > 0)
+                $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }
 
         function cartReset() {
@@ -765,7 +757,8 @@
             $.ajax({
                 type: 'GET',
                 url: "/Customer-Cart-Add/" + id,
-                success: function () {
+                success: function (data) {
+                    console.log(data);
                     $('#waitingCheckCart').addClass('d-none');
                     $('#attachToBasket').removeClass('d-none');
 
@@ -829,7 +822,10 @@
                         }
                     }
                     if (error === 0)
-                        $('#finalCartOrderForm').submit();
+                        if ($('#addressID').length>0)
+                            $('#finalCartOrderForm').submit();
+                        else
+                            alert('کاربر گرامی لیست آدرسهای شما خالیست.');
                     else {
                         msg = msg + ' موجودیشان تمام شده است.';
                         alert(msg);
@@ -933,7 +929,7 @@
             }
         }
 
-        function deleteProductLike(productID,pdID, idBtn) {
+        function deleteProductLike(productID, pdID, idBtn) {
             $.confirm({
                 title: 'حذف علاقه مندی',
                 content: 'آیا مطمئن هستید؟',
@@ -943,7 +939,7 @@
                         $('#waitingLikeDelete' + idBtn.replace(/[^0-9]/gi, '')).show();
                         $.ajax({
                             type: 'GET',
-                            url: "/Customer-Product-LikeProduct/"+productID+'/' + pdID + '/' + 'false',
+                            url: "/Customer-Product-LikeProduct/" + productID + '/' + pdID + '/' + 'false',
                             success: function () {
                                 $('#likeRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
                                 if (idBtn.replace(/[^0-9]/gi, '') === '0')

@@ -107,6 +107,7 @@
       <path value="$PROJECT_DIR$/laravel/vendor/symfony/polyfill-intl-normalizer" />
       <path value="$PROJECT_DIR$/laravel/vendor/league/mime-type-detection" />
       <path value="$PROJECT_DIR$/laravel/vendor/phpspec/prophecy" />
+      <path value="$PROJECT_DIR$/laravel/vendor/darryldecode/cart" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

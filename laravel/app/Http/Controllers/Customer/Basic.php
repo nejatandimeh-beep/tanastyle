@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Picture;
+use Darryldecode\Cart\Cart;
+use Darryldecode\Cart\Exceptions\InvalidItemException;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
 use File;
@@ -182,7 +184,7 @@ class Basic extends Controller
                     $deliveryHint[$key]['text'] = 'در دست';
                     $deliveryHint[$key]['location'] = 'پست';
 
-                    $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100)*(60/100));
+                    $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100) * (60 / 100));
                     if ($deliveryMin[$key] > 5040) {
                         $deliveryHint[$key]['text'] = 'تحویل با';
                         $deliveryHint[$key]['location'] = 'موفقیت';
@@ -391,6 +393,16 @@ class Basic extends Controller
         return view('Customer.Cart', compact('sendAddress', 'data'));
     }
 
+    public function cartAdd($id)
+    {
+        DB::table('product_cart')->insert([
+            'CustomerID' => Auth::user()->id,
+            'ProductDetailID' => $id,
+            'Date' => date('Y-m-d'),
+            'Time' => date('H:i:s')
+        ]);
+    }
+
     public function cartDelete($id)
     {
         DB::table('product_cart')
@@ -412,16 +424,6 @@ class Basic extends Controller
         }
 
         return redirect()->route('userProfile', 'deliveryStatus');
-    }
-
-    public function cartAdd($id)
-    {
-        DB::table('product_cart')->insert([
-            'CustomerID' => Auth::user()->id,
-            'ProductDetailID' => $id,
-            'Date' => date('Y-m-d'),
-            'Time' => date('H:i:s')
-        ]);
     }
 
     public function checkCartNumber()
@@ -537,18 +539,19 @@ class Basic extends Controller
         return redirect()->route('userProfile', 'addressStatus');
     }
 
-    public function attachAddress($location, $size,$color){
+    public function attachAddress($location, $size, $color)
+    {
 
-        Session::put('color',$color);
-        Session::put('size',$size);
+        Session::put('color', $color);
+        Session::put('size', $size);
 
-        return redirect()->route('userProfile',$location);
+        return redirect()->route('userProfile', $location);
     }
 
     public function addAddress(Request $request)
     {
-        $size=Session::get('size');
-        $color=Session::get('color');
+        $size = Session::get('size');
+        $color = Session::get('color');
         $productID = $request->get('productIDFromBuy');
         $name = $request->get('receiver-name');
         $family = $request->get('receiver-family');
@@ -583,7 +586,7 @@ class Basic extends Controller
         if ($productID === 'empty')
             return redirect()->route('userProfile', 'addressStatus');
         else {
-            return redirect()->route('productDetail',[$productID,$size,$color]);
+            return redirect()->route('productDetail', [$productID, $size, $color]);
         }
     }
 
@@ -801,7 +804,7 @@ class Basic extends Controller
         return $voteID->ID;
     }
 
-    public function ratingProduct($id, $idDetail,$val)
+    public function ratingProduct($id, $idDetail, $val)
     {
         $data = DB::table('customer_vote')
             ->select('CustomerID', 'ProductID')
@@ -1071,7 +1074,7 @@ class Basic extends Controller
 
                  <div class="js-slide">
                     <a
-                        href="' . route('productDetail',[$row->ProductID,$row->Size,$row->Color]) . '">
+                        href="' . route('productDetail', [$row->ProductID, $row->Size, $row->Color]) . '">
                         <img class="img-fluid w-100" src="' . $row->PicPath . $row->PicNumber . '.jpg" alt="Image Description">
                     </a>
                  </div>
@@ -1322,7 +1325,7 @@ class Basic extends Controller
             ->get();
         $gender = '0';
         $catCode = 'a';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode','size'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------
@@ -1333,20 +1336,21 @@ class Basic extends Controller
 
     public function requestPdId(Request $request)
     {
-        $data=DB::table('product_detail')
-            ->where('ID',$request->get('pdId'))
+        $data = DB::table('product_detail')
+            ->where('ID', $request->get('pdId'))
             ->first();
 
         if (isset($data->ID))
-        return redirect()->route('productDetail',[$data->ProductID,$data->Size,$data->Color]);
+            return redirect()->route('productDetail', [$data->ProductID, $data->Size, $data->Color]);
         else
-            return redirect()->route('instagram')->with('error','find');
+            return redirect()->route('instagram')->with('error', 'find');
 
     }
+
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($id, $qty, $i)
     {
-        $customer=DB::table('customers')
+        $customer = DB::table('customers')
             ->select('Mobile')
             ->where('id', Auth::user()->id)
             ->first();
@@ -1394,7 +1398,7 @@ class Basic extends Controller
             ->select('ID')
             ->max('ID');
 
-        $deliveryMan=DB::table('delivery_men')
+        $deliveryMan = DB::table('delivery_men')
             ->select('*')
             ->get();
 
@@ -1402,7 +1406,7 @@ class Basic extends Controller
             ->select('DeliveryManID')
             ->get();
 
-        if($data->isEmpty() || $data->count()<2){
+        if ($data->isEmpty() || $data->count() < 2) {
             DB::table('product_delivery')->insert([
                 'OrderDetailID' => $orderDetailID,
                 'DeliveryManID' => $deliveryMan[0]->ID,
@@ -1411,20 +1415,20 @@ class Basic extends Controller
             $data = DB::table('product_delivery')
                 ->select('DeliveryManID')
                 ->orderBy('id', 'desc')
-                ->take($deliveryMan->count()-1)
+                ->take($deliveryMan->count() - 1)
                 ->get();
 
-            $DeliveryManIDArr=array();
-            foreach ($data as $key =>$row){
-                $DeliveryManIDArr[$key]=$row->DeliveryManID;
+            $DeliveryManIDArr = array();
+            foreach ($data as $key => $row) {
+                $DeliveryManIDArr[$key] = $row->DeliveryManID;
             }
 
-            $deliveryManTurn='';
-            foreach ($deliveryMan as $key =>$row){
-                if(in_array($row->ID, $DeliveryManIDArr,true))
+            $deliveryManTurn = '';
+            foreach ($deliveryMan as $key => $row) {
+                if (in_array($row->ID, $DeliveryManIDArr, true))
                     continue;
-                else{
-                    $deliveryManTurn=$row->ID;
+                else {
+                    $deliveryManTurn = $row->ID;
                     break;
                 }
             }
@@ -1445,23 +1449,21 @@ class Basic extends Controller
             ->delete();
 
         //--------------
-        try{
-            $sender = "10008663";		//This is the Sender number
+        try {
+            $sender = "10008663";        //This is the Sender number
 
-            $message = "فاکتور شما ثبت شد.";		//The body of SMS
-            $receptor = array("09013946105");			//Receptors numbers
+            $message = "فاکتور شما ثبت شد.";        //The body of SMS
+            $receptor = array("09013946105");            //Receptors numbers
 
 
             $api_key = Config::get('kavenegar.apikey');
             $var = new Kavenegar\KavenegarApi($api_key);
-            $result =$var->Send($sender,$receptor,$message);
+            $result = $var->Send($sender, $receptor, $message);
 
-        }
-        catch(\Kavenegar\Exceptions\ApiException $e){
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();
-        }
-        catch(\Kavenegar\Exceptions\HttpException $e){
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
             // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
             echo $e->errorMessage();
         }

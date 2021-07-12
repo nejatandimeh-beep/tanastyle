@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/asm89/stack-cors" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/brick/math" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/darryldecode/cart" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/doctrine/inflector" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/doctrine/instantiator" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/doctrine/lexer" />

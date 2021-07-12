@@ -2405,68 +2405,11 @@
                         <div class="u-basket d-inline-block g-valign-middle g-mr-30 g-pt-8" id="myBasket">
                             <a href="#" onclick="cart()" id="basket-bar-invoker"
                                class="u-icon-v1 g-color-main g-text-underline--none--hover g-width-20 g-height-20"
-                               aria-controls="basket-bar"
-                               aria-haspopup="true"
-                               aria-expanded="false"
-                               data-dropdown-event="hover"
-                               data-dropdown-target="#basket-bar"
-                               data-dropdown-type="css-animation"
-                               data-dropdown-duration="300"
-                               data-dropdown-hide-on-scroll="false"
-                               data-dropdown-animation-in="fadeIn"
-                               data-dropdown-animation-out="fadeOut"
-                               onmousemove="$('#searchForm').addClass('d-none')">
+                               onmousemove="$('#searchForm').addClass('d-none');">
                                 <span id="basketNum"
                                       class="u-badge-v1--sm g-color-white g-bg-primary g-rounded-50x">0</span>
                                 <i class="fa fa-shopping-cart"></i>
                             </a>
-
-                            <div style="direction: rtl" id="basket-bar"
-                                 class="u-basket__bar u-dropdown--css-animation u-dropdown--hidden g-brd-top g-brd-2 g-brd-primary g-color-main g-mt-17 g-mt-10--lg--scrolling"
-                                 aria-labelledby="basket-bar-invoker">
-                                <div id="basketContainer" class="js-scrollbar g-height-300">
-                                    <!-- Product -->
-                                    <div class="u-basket__product">
-                                        <div class="row align-items-center no-gutters">
-                                            <div class="col-4 g-pl-20">
-                                                <a href="#" class="u-basket__product-img"><img
-                                                        src="../../../assets/img-temp/150x150/img1.jpg"
-                                                        alt="Image Description"></a>
-                                            </div>
-
-                                            <div class="col-8 text-right">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="g-pt-15 g-pb-10">
-                                                        <h6 class="g-font-weight-600 g-mb-0">
-                                                            <a href="#"
-                                                               class="g-color-main g-color-main--hover g-text-underline--none--hover">شاوار
-                                                                جین</a>
-                                                        </h6>
-                                                        <small class="g-color-gray-dark-v5 g-font-size-14">250،000
-                                                            تومان</small>
-                                                    </div>
-                                                    <div>
-                                                        <button
-                                                            style="color:#7f8c8d; background-color: transparent; border: none; font-size: 1.5rem; cursor: pointer"
-                                                            type="button">&times;
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- End Product -->
-                                </div>
-
-                                <div class="g-brd-top g-brd-gray-light-v4 g-pa-15 g-pb-20">
-                                    <div
-                                        class="g-font-size-18 text-left">
-                                        <a href="#" onclick="cart()"
-                                           class="btn u-btn-outline-primary rounded-0 g-width-120">نمایش
-                                            سبد خرید</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                         <!-- End Basket -->
 
@@ -2486,30 +2429,30 @@
                                         </a>
                                     </div>
                                 @else
-{{--                                    @if(Auth::user()->email_verified_at === null)--}}
-{{--                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">--}}
-{{--                                            <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"--}}
-{{--                                               class="d-flex nav-link g-color-red h6 g-text-underline--none--hover p-0 g-color-primary--hover"--}}
-{{--                                               data-toggle="tooltip"--}}
-{{--                                               data-placement="bottom"--}}
-{{--                                               title="شما هنوز اقدام به فعال سازی ایمیلتان نکرده اید"--}}
-{{--                                            >--}}
-{{--                                                <i class="fa fa-exclamation g-font-size-16 g-mr-5"></i>--}}
+                                    {{--                                    @if(Auth::user()->email_verified_at === null)--}}
+                                    {{--                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">--}}
+                                    {{--                                            <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"--}}
+                                    {{--                                               class="d-flex nav-link g-color-red h6 g-text-underline--none--hover p-0 g-color-primary--hover"--}}
+                                    {{--                                               data-toggle="tooltip"--}}
+                                    {{--                                               data-placement="bottom"--}}
+                                    {{--                                               title="شما هنوز اقدام به فعال سازی ایمیلتان نکرده اید"--}}
+                                    {{--                                            >--}}
+                                    {{--                                                <i class="fa fa-exclamation g-font-size-16 g-mr-5"></i>--}}
 
-{{--                                                {{ Auth::user()->name }}--}}
-{{--                                            </a>--}}
-{{--                                        </div>--}}
-{{--                                    @else--}}
-                                        <div class="g-pt-10 g-mr-15 g-mr-25--lg">
-                                            <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
-                                               title="اطلاعات کاربری"
-                                               class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover">
-                                                @if(Auth::user()->name===null || Auth::user()->name==='') {{Auth::user()->Mobile}} @else  {{Auth::user()->name}} @endif
+                                    {{--                                                {{ Auth::user()->name }}--}}
+                                    {{--                                            </a>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    @else--}}
+                                    <div class="g-pt-10 g-mr-15 g-mr-25--lg">
+                                        <a href="{{route('userProfile', ['id' => 'navigation'])}}" id="login"
+                                           title="اطلاعات کاربری"
+                                           class="d-flex nav-link g-color-main h6 g-text-underline--none--hover p-0 g-color-primary--hover">
+                                            @if(Auth::user()->name===null || Auth::user()->name==='') {{Auth::user()->Mobile}} @else  {{Auth::user()->name}} @endif
 
-                                                <i id="settingIcon" class="icon-settings g-font-size-16 g-ml-5"></i>
-                                            </a>
-                                        </div>
-{{--                                    @endif--}}
+                                            <i id="settingIcon" class="icon-settings g-font-size-16 g-ml-5"></i>
+                                        </a>
+                                    </div>
+                                    {{--                                    @endif--}}
                                 @endguest
                             </div>
                             <!-- End Login -->
