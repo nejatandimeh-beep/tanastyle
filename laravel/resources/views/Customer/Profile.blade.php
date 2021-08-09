@@ -121,13 +121,13 @@
                 <!-- End Figure -->
             </div>
         </div>
-        <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog"
+        <div style="direction: rtl" class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">تنضیم اندازه تصویر</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">تنظیم اندازه تصویر</h5>
                         <button type="button" class="close"
                                 data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -135,8 +135,8 @@
                     </div>
                     <div class="modal-body">
                         <div class="img-container">
-                            <div class="col-md-12 p-0">
-                                <img src="" id="sample_image" width="600px" height="600px">
+                            <div style="min-width: 50vw; min-height: 50vh;" class="col-md-12 p-0">
+                                <img style="width: 100%;" src="" id="sample_image">
                             </div>
                             {{--                        <div class="col-md-4">--}}
                             {{--                            <div class="preview rounded-circle mx-auto g-mt-20"></div>--}}
@@ -147,7 +147,7 @@
                         <button type="button"
                                 class="btn btn-secondary" data-dismiss="modal">انصراف
                         </button>
-                        <button type="button" id="crop" class="btn btn-primary">برش</button>
+                        <button type="button" id="crop" class="btn btn-primary g-mr-5">برش</button>
                     </div>
                 </div>
             </div>

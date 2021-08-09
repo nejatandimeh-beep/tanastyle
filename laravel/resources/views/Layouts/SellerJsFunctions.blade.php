@@ -761,10 +761,10 @@
                     aspectRatio: 1,
                     viewMode: 0,
                     zoomable: true,
-                    background: false,
+                    background: true,
                     minCropBoxWidth: 400,
                     minCropBoxHeight: 400,
-                    cropBoxResizable: false,
+                    // cropBoxResizable: false,
                     dragCrop: true,
                     multiple: true,
                     movable: true
