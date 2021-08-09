@@ -109,7 +109,7 @@
 /*Sub Menu Scrolling*/
 .SubMenuScroll {
     overflow-y: scroll;
-    height: 400px !important;
+    height: 300px !important;
 }
 
 .SubMenuScroll::-webkit-scrollbar {

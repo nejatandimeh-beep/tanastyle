@@ -12,6 +12,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/FarsiType.js') }}" defer></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -21,9 +23,11 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/unify_1.css') }}">
     <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
 
 </head>
 <body>
+<div style="display: none" id="load" class="load"></div>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container text-right g-py-5">
@@ -59,5 +63,10 @@
     </main>
 </div>
 </body>
+<script>
+    jQuery(window).bind('beforeunload', function(){
+        $('#load').show();
+    });
+</script>
 </html>
 

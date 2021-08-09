@@ -56,7 +56,6 @@ class Add extends Controller
                 break;
         }
 
-
         return view('Seller.AskSize')
             ->with('gender', $data->Gender)
             ->with('cat', $cat)

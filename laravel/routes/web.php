@@ -214,6 +214,8 @@ Route::post('/Customer-Product-Return', 'Customer\Basic@returnProduct')->name('r
 
 Route::get('/Customer-Cart', 'Customer\Basic@cart')->name('cart');
 
+Route::get('//Customer-Cart-Count', 'Customer\Basic@cartCount');
+
 Route::get('/Customer-Cart-Delete/{id}', 'Customer\Basic@cartDelete');
 
 Route::post('/Customer-Cart-Submit', 'Customer\Basic@cartSubmit')->name('cartSubmit');
@@ -222,7 +224,7 @@ Route::get('/Customer-Cart-Check/{id}', 'Customer\Basic@cartCheck');
 
 Route::get('/Customer-Cart-Add/{id}', 'Customer\Basic@cartAdd');
 
-Route::get('/Customer-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
+//Route::get('/Customer-Cart-CheckNumber', 'Customer\Basic@checkCartNumber');
 
 Route::get('/Customer-Cart-Qty-Check/{pdID}', 'Customer\Basic@cartQtyCheck');
 

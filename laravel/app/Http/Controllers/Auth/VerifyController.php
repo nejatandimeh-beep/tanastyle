@@ -15,35 +15,50 @@ class VerifyController extends Controller
 {
     function getMobile()
     {
+        session_start();
+        if (!isset($_SESSION['SEND'])) {
+            $_SESSION['SEND']=time();
+            $customer = new Customer();
+            $mobile = (string)$_GET['mobile'];
+            Session::put('mobile', $mobile);
+            $customerExist = Customer::where('Mobile', $mobile)->first();
+            if (Session::get('source') === 'register') {
+                if (!isset($customerExist)) {
+                    try {
 
-        $customer = new Customer();
-        $mobile = (string)$_GET['mobile'];
-        Session::put('mobile', $mobile);
-        $source = Session::get('source');
-        $customerExist = Customer::where('Mobile', $mobile)->first();
-        if ($source === 'register') {
-            if (!isset($customerExist)) {
+                        $this->sendToken($mobile);
+
+                    } catch (\Exception $e) {
+                        unset($_SESSION['SEND']);
+                        return redirect()->route('requestMobile', ['source' => 'register'])->with('message', 'شماره موبایل نامعتبر است');
+                    }
+
+                    return view('auth.verifyMobile');
+                } else {
+                    unset($_SESSION['SEND']);
+                    return redirect()->route('requestMobile', ['source' => 'register'])->with('message', 'شماره موبایل قبلا ثبت نام کرده است');
+                }
+            } else {
                 try {
 
                     $this->sendToken($mobile);
 
                 } catch (\Exception $e) {
-                    return redirect()->route('requestMobile', ['source' => 'register'])->with('message', 'شماره موبایل نامعتبر است');
+                    unset($_SESSION['SEND']);
+                    return redirect()->route('requestMobile', ['source' => 'forget'])->with('message', 'شماره موبایل نامعتبر است');
                 }
-
                 return view('auth.verifyMobile');
-            } else {
-                return redirect()->route('requestMobile', ['source' => 'register'])->with('message', 'شماره موبایل قبلا ثبت نام کرده است');
             }
         } else {
-            try {
-
-                $this->sendToken($mobile);
-
-            } catch (\Exception $e) {
-                return redirect()->route('requestMobile', ['source' => 'forget'])->with('message', 'شماره موبایل نامعتبر است');
+            $timer = time() - $_SESSION['SEND'];
+            if($timer>=120) {
+                unset($_SESSION['SEND']);
+                $source=Session::get('source');
+                return redirect()->route('requestMobile',compact('source'));
+            } else {
+                $timer=120-$timer;
+                return view('auth.verifyMobile',compact('timer'));
             }
-            return view('auth.verifyMobile');
         }
     }
 
@@ -68,7 +83,8 @@ class VerifyController extends Controller
 
     public function verifyMobile(Request $req)
     {
-
+        session_start();
+        unset($_SESSION['SEND']);
         $customer = new Customer();
         $verifyCode = $req->get('verifyCode');
         $source = Session::get('source');

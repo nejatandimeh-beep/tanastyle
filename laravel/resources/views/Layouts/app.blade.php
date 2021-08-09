@@ -12,6 +12,8 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/FarsiType.js') }}" defer></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,6 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/unify_1.css') }}">
 
     <style>
@@ -35,13 +38,15 @@
     </style>
 </head>
 <body>
+<div id="load" class="load"></div>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container text-right g-py-5">
             <a class="navbar-brand" href="{{ url('/') }}">
                 <img src="{{ asset('img/Logo/logo.png') }}" alt="Image Description" width="120" class="">
             </a>
-            <button style="border: none !important;" class="navbar-toggler rounded-0" type="button" data-toggle="collapse"
+            <button style="border: none !important;" class="navbar-toggler rounded-0" type="button"
+                    data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                     aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
@@ -61,7 +66,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="{{ (isset(Auth::user()->id)) ? '':'d-none' }} nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{route('profile', ['id' => 'navigation'])}}">حساب کاربری</a>
+                        <a class="{{ (isset(Auth::user()->id)) ? '':'d-none' }} nav-link g-mt-20 g-mt-0--lg g-color-primary--hover"
+                           href="{{route('profile', ['id' => 'navigation'])}}">حساب کاربری</a>
                     </li>
 
                     <!-- Authentication Links -->
@@ -71,7 +77,8 @@
                         </li>
                         @if (Route::has('register'))
                             <li class="nav-item">
-                                <a class="nav-link g-color-primary--hover" href="{{ url('/request-customer-mobile','register') }}">ثبت نام</a>
+                                <a class="nav-link g-color-primary--hover"
+                                   href="{{ url('/request-customer-mobile','register') }}">ثبت نام</a>
                             </li>
                         @endif
                     @endguest
@@ -79,11 +86,34 @@
             </div>
         </div>
     </nav>
-
     <main class="py-4">
         @yield('content')
     </main>
 </div>
 </body>
+<script>
+    $(window).bind('beforeunload', function () {
+        $('#load').show();
+    });
+
+    $(".forceEnglishNumber").keypress(function(event){
+        let ew = event.which;
+        if(48 <= ew && ew <= 57)
+            return true;
+        return false;
+    });
+
+    document.onreadystatechange = function () {
+        let state = document.readyState;
+        if (state === 'complete') {
+            document.getElementById('load').remove();
+        }
+    }
+
+    function loaderShow() {
+        let loader = '<div id="load" class="load"></div>';
+        $('body').prepend(loader);
+    }
+</script>
 </html>
 

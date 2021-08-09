@@ -1,6 +1,14 @@
 @section('CustomerJsFunction')
     <script>
         $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: '/Customer-Cart-Count',
+                success: function (data) {
+                    $('#basketNum').text(data);
+                }
+            });
+
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
                 cropper;
@@ -259,6 +267,15 @@
             }
         });
 
+        $(window).bind('beforeunload', function(){
+            loaderShow();
+        });
+
+        function loaderShow(){
+            let loader='<div id="load" class="load"></div>';
+            $('body').html(loader);
+        }
+
         document.onreadystatechange = function () {
             $(document.body).removeClass('me-position-fix');
             $(document.body).addClass('me-position-normally');
@@ -454,6 +471,8 @@
 
         // Bank Portal
         function bankingPortal(id, qty) {
+            $('.custombox-content #bankingPortalBtn').hide();
+            $('.custombox-content #waitingIconSubmit').show();
             if ($('#loginAlert').text() === 'login') {
                 let pdID = [], error = 0, msg = 'عملیات متوقف شد. محصولات با شماره ی [';
                 pdID[0] = id;
@@ -468,13 +487,23 @@
                             }
                         }
                         if (error === 0)
-                            window.location = '/Banking-Portal/' + id + '/' + qty;
+                            if ($('#addressID').length>0){
+                                window.location = '/Banking-Portal/' + id + '/' + qty;
+                            }
+                            else{
+                                $('.custombox-content #bankingPortalBtn').show();
+                                $('.custombox-content #waitingIconSubmit').hide();
+                                alert('کاربر گرامی لیست آدرسهای شما خالیست.');
+                            }
                         else {
                             msg = msg + ' موجودیشان تمام شده است.';
                             alert(msg);
                         }
                     }
                 });
+            } else {
+                alert('ابتدا لطفا وارد حساب کاربری خود شوید.');
+                window.location='/login';
             }
         }
 
@@ -585,6 +614,30 @@
                 $(this).attr('selected', true);
             }
         });
+
+        var
+            persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
+            arabicNumbers  = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
+            fixNumbers = function (str)
+            {
+                if(typeof str === 'string')
+                {
+                    for(var i=0; i<10; i++)
+                    {
+                        str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
+                    }
+                }
+                return str;
+            };
+
+        function forceEnglishNumber(val, ele, nextFocus,len){
+            if(val.length>=len){
+                val=val.slice(0, len);
+                ele.val(val);
+                $(nextFocus).focus();
+            }
+            ele.val(fixNumbers(val));
+        }
 
         function allSwitchBtn(btn) {
             switch (btn) {
@@ -807,6 +860,8 @@
         }
 
         function orderSubmit() {
+            $('.custombox-content #orderSubmitBtn').hide();
+            $('.custombox-content #waitingIconSubmit').show();
             let pdID = [], error = 0, msg = 'عملیات متوقف شد. محصولات با شماره ی [';
             $('[id^="productDetailID"]').each(function (index) {
                 pdID[index] = $(this).text().replace(/[^0-9]/gi, '');
@@ -824,8 +879,11 @@
                     if (error === 0)
                         if ($('#addressID').length>0)
                             $('#finalCartOrderForm').submit();
-                        else
+                        else{
+                            $('.custombox-content #orderSubmitBtn').show();
+                            $('.custombox-content #waitingIconSubmit').hide();
                             alert('کاربر گرامی لیست آدرسهای شما خالیست.');
+                        }
                     else {
                         msg = msg + ' موجودیشان تمام شده است.';
                         alert(msg);

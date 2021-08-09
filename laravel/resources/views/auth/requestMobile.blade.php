@@ -17,10 +17,14 @@
                                     موبایل</label>
 
                                 <div class="col-md-6">
-                                    <input id="mobile"
-                                           type="text"
-                                           class="form-control @error('mobile') is-invalid @enderror @if(session()->has('message')) is-invalid @endif input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md"
+                                    <input style="direction: ltr"
+                                           id="mobile"
+                                           type="number"
+                                           class="form-control @error('mobile') is-invalid @enderror @if(session()->has('message')) is-invalid @endif input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md forceEnglishNumber"
                                            name="mobile"
+                                           placeholder="فقط اعداد انگلیسی"
+                                           pattern="\d*"
+                                           onKeyPress="if(this.value.length===11) return false;"
                                            value="{{ old('mobile') }}"
                                            required autocomplete="off"
                                            autofocus>
@@ -41,7 +45,8 @@
 
                             <div class="form-group row g-mb-60--lg g-mt-20">
                                 <div class="col-md-10 text-left">
-                                    <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16">
+                                    <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16"
+                                            onclick="loaderShow()">
                                         ارسال کد
                                     </button>
                                 </div>

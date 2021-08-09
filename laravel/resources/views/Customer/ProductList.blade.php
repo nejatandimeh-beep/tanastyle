@@ -1,40 +1,6 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <section  id="contentTop" class="breadCrumbs g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0">
-        <div style="direction: rtl" class="container" id="allProductList">
-            <div class="d-sm-flex text-right text-lg-center">
-                <div class="align-self-center bigDevice">
-                    <h2 class="h6 g-font-weight-300 w-100 g-color-black-opacity-0_3 g-mb-10 g-mb-0--md">مسیر</h2>
-                </div>
-
-                <div class="align-self-center g-mr-30--lg">
-                    <ul class="u-list-inline p-0 g-font-size-12">
-                        <li class="list-inline-item g-ml-5 g-my-5">
-                            <a class="u-link-v5 g-color-main" href="#">صفحه نخست</a>
-                            <i class="fa fa-angle-left g-mr-7"></i>
-                        </li>
-                        <li class="list-inline-item g-ml-5 g-my-5">
-                            <a class="u-link-v5 g-color-main" href="#">پوشاک زنانه</a>
-                            <i class="fa fa-angle-left g-mr-7"></i>
-                        </li>
-                        <li class="list-inline-item g-ml-5 g-my-5">
-                            <a class="u-link-v5 g-color-main" href="#">لباس</a>
-                            <i class="fa fa-angle-left g-mr-7"></i>
-                        </li>
-                        <li class="list-inline-item g-ml-5 g-my-5">
-                            <a class="u-link-v5 g-color-main" href="#">لباس زیر</a>
-                            <i class="fa fa-angle-left g-mr-7"></i>
-                        </li>
-                        <li class="list-inline-item g-color-primary g-my-5">
-                            <span>شرت</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container-fluid">
+    <div class="container-fluid g-brd-top g-brd-gray-light-v4">
         <div style="direction: rtl" class="row">
 
             <!-- Filters -->

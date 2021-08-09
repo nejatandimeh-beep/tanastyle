@@ -12,6 +12,9 @@
         // });
 
         $(document).on('ready', function () {
+            // initialization of carousel
+            $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+
             // initialization of tabs
             $.HSCore.components.HSTabs.init('[role="tablist"]');
 
@@ -80,8 +83,7 @@
             // initialization of popups
             $.HSCore.components.HSPopup.init('.js-fancybox');
 
-            // initialization of carousel
-            $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+
 
             $('#carouselCus1').slick('setOption', 'responsive', [{
                 breakpoint: 1200,

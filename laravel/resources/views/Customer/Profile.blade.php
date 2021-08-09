@@ -1,7 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <p id="pageLocation" class="d-none">{{ $location }}</p>
-    <div class="breadCrumbs container-fluid">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12 g-brd-top g-brd-gray-light-v4">
                 <!-- Figure -->
@@ -26,22 +26,23 @@
                                     <h4 class="h5 g-mb-0">
                                         @if(Auth::user()->name===null || Auth::user()->name==='') {{Auth::user()->Mobile}} @else  {{Auth::user()->name.' '.Auth::user()->Family}} @endif
                                         {{--                                        @if(Auth::user()->email_verified_at === null)--}}
-{{--                                            @if (session('resent'))--}}
-{{--                                                <label class="g-color-primary g-font-size-16 g-mr-10">--}}
-{{--                                                    <i class="fa fa-envelope g-font-size-16"></i>--}}
-{{--                                                    <span--}}
-{{--                                                        class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد.</span>--}}
-{{--                                                </label>--}}
-{{--                                            @else--}}
-{{--                                                <label class="g-color-red g-font-size-16">--}}
-{{--                                                    <span>حساب کاربری شما فعالسازی نشده است</span>--}}
-{{--                                                    <i class="fa fa-exclamation g-font-size-16"></i>--}}
-{{--                                                </label>--}}
-{{--                                            @endif--}}
-{{--                                        @endif--}}
+                                        {{--                                            @if (session('resent'))--}}
+                                        {{--                                                <label class="g-color-primary g-font-size-16 g-mr-10">--}}
+                                        {{--                                                    <i class="fa fa-envelope g-font-size-16"></i>--}}
+                                        {{--                                                    <span--}}
+                                        {{--                                                        class="g-color-main">لینک فعال سازی به ایمیل شما ارسال شد.</span>--}}
+                                        {{--                                                </label>--}}
+                                        {{--                                            @else--}}
+                                        {{--                                                <label class="g-color-red g-font-size-16">--}}
+                                        {{--                                                    <span>حساب کاربری شما فعالسازی نشده است</span>--}}
+                                        {{--                                                    <i class="fa fa-exclamation g-font-size-16"></i>--}}
+                                        {{--                                                </label>--}}
+                                        {{--                                            @endif--}}
+                                        {{--                                        @endif--}}
                                     </h4>
                                 </div>
-                                <em class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">@if(Auth::user()->name===null || Auth::user()->name==='') بدون نام @else {{ Auth::user()->Mobile }} @endif</em>
+                                <em class="d-block g-color-gray-dark-v5 g-font-style-normal g-font-size-13 g-mb-2">@if(Auth::user()->name===null || Auth::user()->name==='')
+                                        بدون نام @else {{ Auth::user()->Mobile }} @endif</em>
                             </div>
                         </div>
                         <!-- End Figure Info -->
@@ -50,64 +51,65 @@
                         <figcaption class="u-block-hover__additional--fade g-bg-white-opacity-0_9 g-pa-30">
                             <div
                                 class="u-block-hover__additional--fade u-block-hover__additional--fade-down g-flex-middle">
-{{--                                @if(Auth::user()->email_verified_at === null)--}}
-{{--                                    <ul class="list-inline text-center g-flex-middle-item">--}}
-{{--                                        @if (!session('resent'))--}}
-{{--                                            <li id="emailActivation"--}}
-{{--                                                class="list-inline-item justify-content-center g-mx-7">--}}
-{{--                                            <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">--}}
-{{--                                                <i class="fa fa-check"></i>--}}
-{{--                                            </span>--}}
-{{--                                                <form class="d-inline text-left" method="POST"--}}
-{{--                                                      action="{{ route('verification.resend') }}">--}}
-{{--                                                    @csrf--}}
-{{--                                                    <button type="submit"--}}
-{{--                                                            class="btn customLink g-bg-transparent p-0 m-0 align-baseline">--}}
-{{--                                                        فعال سازی حساب کاربری--}}
-{{--                                                    </button>--}}
-{{--                                                </form>--}}
-{{--                                            </li>--}}
-{{--                                        @endif--}}
-{{--                                        @if (session('resent'))--}}
-{{--                                            <li style="direction: rtl" id="sendVerifyHint"--}}
-{{--                                                class="list-inline-item justify-content-center">--}}
-{{--                                                <span class="g-color-primary g-font-size-20 g-ml-5"><i--}}
-{{--                                                        class="fa fa-envelope"></i></span>--}}
-{{--                                                <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا آخرین ایمیل از طرف Tanastyle.ir را چک کنید.</span>--}}
-{{--                                            </li>--}}
-{{--                                        @endif--}}
-{{--                                    </ul>--}}
-{{--                                @else--}}
+                                {{--                                @if(Auth::user()->email_verified_at === null)--}}
+                                {{--                                    <ul class="list-inline text-center g-flex-middle-item">--}}
+                                {{--                                        @if (!session('resent'))--}}
+                                {{--                                            <li id="emailActivation"--}}
+                                {{--                                                class="list-inline-item justify-content-center g-mx-7">--}}
+                                {{--                                            <span class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">--}}
+                                {{--                                                <i class="fa fa-check"></i>--}}
+                                {{--                                            </span>--}}
+                                {{--                                                <form class="d-inline text-left" method="POST"--}}
+                                {{--                                                      action="{{ route('verification.resend') }}">--}}
+                                {{--                                                    @csrf--}}
+                                {{--                                                    <button type="submit"--}}
+                                {{--                                                            class="btn customLink g-bg-transparent p-0 m-0 align-baseline">--}}
+                                {{--                                                        فعال سازی حساب کاربری--}}
+                                {{--                                                    </button>--}}
+                                {{--                                                </form>--}}
+                                {{--                                            </li>--}}
+                                {{--                                        @endif--}}
+                                {{--                                        @if (session('resent'))--}}
+                                {{--                                            <li style="direction: rtl" id="sendVerifyHint"--}}
+                                {{--                                                class="list-inline-item justify-content-center">--}}
+                                {{--                                                <span class="g-color-primary g-font-size-20 g-ml-5"><i--}}
+                                {{--                                                        class="fa fa-envelope"></i></span>--}}
+                                {{--                                                <span>لینک فعال سازی به ایمیل شما ارسال شد. لطفا آخرین ایمیل از طرف Tanastyle.ir را چک کنید.</span>--}}
+                                {{--                                            </li>--}}
+                                {{--                                        @endif--}}
+                                {{--                                    </ul>--}}
+                                {{--                                @else--}}
 
-                                    <ul class="list-inline text-center g-flex-middle-item">
-                                        <li class="list-inline-item justify-content-center g-mx-7">
+                                <ul class="list-inline text-center g-flex-middle-item">
+                                    <li class="list-inline-item justify-content-center g-mx-7">
                                                 <span
                                                     class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
                                                     <i class="icon-lock-open"></i>
                                                 </span>
-                                            <a class="customLink" href="{{ route('requestMobile',['source'=>'forget']) }}">تغییر رمز
-                                                عبور</a>
-                                        </li>
-                                        <li class="list-inline-item justify-content-center g-mx-7">
+                                        <a class="customLink" href="{{ route('requestMobile',['source'=>'forget']) }}">تغییر
+                                            رمز
+                                            عبور</a>
+                                    </li>
+                                    <li class="list-inline-item justify-content-center g-mx-7">
                                                 <span
                                                     class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
                                                     <i class="icon-user"></i>
                                                 </span>
-                                            <form class="d-inline-block" id="uploadImage"
-                                                  action="{{route('uploadImage')}}"
-                                                  enctype="multipart/form-data" method="POST">
-                                                @csrf
-                                                <label class="customerCropper" for="upload_image" style="cursor: pointer">
-                                                    <span class="customLink">تنظیم تصویر حساب کاربری</span>
-                                                    <input type="file" name="image" id="upload_image" class="image"
-                                                           style="display: none">
-                                                    <input type="text" id="imageUrl" name="imageUrl"
-                                                           style="display: none">
-                                                </label>
-                                            </form>
-                                        </li>
-                                    </ul>
-{{--                            @endif--}}
+                                        <form class="d-inline-block" id="uploadImage"
+                                              action="{{route('uploadImage')}}"
+                                              enctype="multipart/form-data" method="POST">
+                                            @csrf
+                                            <label class="customerCropper" for="upload_image" style="cursor: pointer">
+                                                <span class="customLink">تنظیم تصویر حساب کاربری</span>
+                                                <input type="file" name="image" id="upload_image" class="image"
+                                                       style="display: none">
+                                                <input type="text" id="imageUrl" name="imageUrl"
+                                                       style="display: none">
+                                            </label>
+                                        </form>
+                                    </li>
+                                </ul>
+                            {{--                            @endif--}}
                             <!-- Figure Social Icons -->
 
                                 <!-- End Figure Social Icons -->
@@ -125,7 +127,7 @@
             <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLongTitle">تنضیم اندازه تصویر</h5>
                         <button type="button" class="close"
                                 data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -143,9 +145,9 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button"
-                                class="btn btn-secondary" data-dismiss="modal">Close
+                                class="btn btn-secondary" data-dismiss="modal">انصراف
                         </button>
-                        <button type="button" id="crop" class="btn btn-primary">Crop</button>
+                        <button type="button" id="crop" class="btn btn-primary">برش</button>
                     </div>
                 </div>
             </div>
@@ -288,7 +290,7 @@
                 <!-- مشخصات فردی -->
                 <div id="user-data">
                     <div class="g-bg-white-opacity-0_9 g-mb-30 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 13px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
+                        <div style="padding-bottom: 13px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
                             <i class="icon-user g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-7">
@@ -358,8 +360,9 @@
                                         id="user-notionalId"
                                         name="nationalId"
                                         value="{{ $customer->NationalID }}"
-                                        maxlength="10"
-                                        placeholder="فقط اعداد"
+                                        oninput="forceEnglishNumber($(this).val(), $(this),'#birthday-day',10)"
+                                        pattern="\d*"
+                                        placeholder="فقط اعداد انگلیسی"
                                         readonly="">
                                 </div>
                             </div>
@@ -375,7 +378,7 @@
                                                 name="day"
                                                 tabindex="3">
                                             <option
-                                                value="{{isset($customer->BirthdayD) ? $customer->BirthdayD:'0' }}">{{isset($customer->BirthdayD) ? $customer->BirthdayD:'سال' }}</option>
+                                                value="{{isset($customer->BirthdayD) ? $customer->BirthdayD:'0' }}">{{isset($customer->BirthdayD) ? $customer->BirthdayD:'روز' }}</option>
                                             <option value="01">1</option>
                                             <option value="02">2</option>
                                             <option value="03">3</option>
@@ -414,7 +417,7 @@
                                                 name="mon"
                                                 tabindex="4">
                                             <option
-                                                value="{{isset($customer->BirthdayM) ? $customer->BirthdayM:'0' }}">{{isset($customer->BirthdayM) ? $customer->BirthdayM:'سال' }}</option>
+                                                value="{{isset($customer->BirthdayM) ? $customer->BirthdayM:'0' }}">{{isset($customer->BirthdayM) ? $customer->BirthdayM:'ماه' }}</option>
                                             <option value="01">1</option>
                                             <option value="02">2</option>
                                             <option value="03">3</option>
@@ -579,7 +582,8 @@
                                         id="phoneNumber"
                                         name="phone"
                                         type="text"
-                                        maxlength="8"
+                                        oninput="forceEnglishNumber($(this).val(), $(this),'#stateSelect',8)"
+                                        pattern="\d*"
                                         value="{{ $customer->Phone }}"
                                         placeholder="xxxxxxxx"
                                         readonly="">
@@ -588,26 +592,11 @@
                                         id="phonePreNumber"
                                         name="prePhone"
                                         class="text-left col-4 form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-right-none"
-                                        maxlength="3"
+                                        pattern="\d*"
                                         value="{{ $customer->PrePhone }}"
-                                        oninput="if($(this).val().length === 3) $('#phoneNumber').focus();"
+                                        oninput="forceEnglishNumber($(this).val(), $(this),'#phoneNumber',3)"
                                         placeholder="0xx"
                                         readonly="">
-                                </div>
-                            </div>
-                            {{--موبایل--}}
-                            <div class="form-group row g-mb-15">
-                                <label
-                                    class="col-sm-2 col-form-label align-self-center">موبایل</label>
-                                <div class="col-sm-10 force-col-12">
-                                    <input style="direction: ltr"
-                                           class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                           id="user-mobile"
-                                           name="mobile"
-                                           maxlength="11"
-                                           value="{{ $customer->Mobile }}"
-                                           placeholder="09xxxxxxxx"
-                                           readonly="">
                                 </div>
                             </div>
                             {{--آدرس سکونت--}}
@@ -695,7 +684,7 @@
                 <!-- آدرسها -->
                 <div style="display: none" id="user-address">
                     <div class="g-bg-white-opacity-0_9 g-mb-50 g-mb-30--lg g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 13px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
+                        <div style="padding-bottom: 13px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
                             <i class="icon-location-pin g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-7">
@@ -888,8 +877,9 @@
                                                                        class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
                                                                        value="{{ $row->PostalCode }}"
                                                                        name="receiver-postalCode"
-                                                                       maxlength="10"
-                                                                       placeholder="فقط اعداد"
+                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#receiverMobile'.$key }},10)"
+                                                                       pattern="\d*"
+                                                                       placeholder="فقط اعداد انگلیسی"
                                                                        readonly="">
                                                             </div>
                                                         </div>
@@ -902,16 +892,18 @@
                                                                        class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
                                                                        id="{{ 'receiverPhoneNum'.$key }}"
                                                                        name="receiver-phone"
-                                                                       maxlength="8"
+                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#receiverMobile'.$key }},8)"
+                                                                       pattern="\d*"
                                                                        value="{{ $row->Phone }}"
                                                                        placeholder="xxxxxxxx"
                                                                        readonly="">
                                                                 <input style="width: 30%; direction: ltr"
+                                                                       id="{{ 'receiverPrePhone'.$key }}"
                                                                        class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-brd-right-none g-font-size-16"
                                                                        name="receiver-prePhone"
-                                                                       maxlength="3"
                                                                        value="{{ $row->PrePhone }}"
-                                                                       oninput="if($(this).val().length === 3) $('#receiverPhoneNum'+{{ $key }}).focus();"
+                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#receiverPhoneNum'.$key }},3)"
+                                                                       pattern="\d*"
                                                                        placeholder="0xx"
                                                                        readonly="">
                                                             </div>
@@ -922,10 +914,12 @@
                                                                 class="col-sm-2 col-form-label align-self-center">موبایل</label>
                                                             <div class="col-sm-10 force-col-12">
                                                                 <input style="direction: ltr"
+                                                                       id="{{ 'receiverMobile'.$key }}"
                                                                        class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#stateSelectReceiver-'.$key }},11)"
+                                                                       pattern="\d*"
                                                                        placeholder="09xxxxxxxx"
                                                                        name="receiver-mobile"
-                                                                       maxlength="11"
                                                                        value="{{ $row->Mobile }}"
                                                                        readonly="">
                                                             </div>
@@ -1114,15 +1108,16 @@
                                         </div>
                                         {{--کد پستی گیرنده--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label class="col-sm-2 col-form-label align-self-center">کد
+                                            <label id="ok" class="col-sm-2 col-form-label align-self-center">کد
                                                 پستی</label>
                                             <div class="col-sm-10 force-col-12">
                                                 <input style="direction: ltr"
                                                        class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
                                                        name="receiver-postalCode"
-                                                       maxlength="10"
+                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiver-prePhone-new',10)"
+                                                       pattern="\d*"
                                                        value=""
-                                                       placeholder="فقط اعداد">
+                                                       placeholder="فقط اعداد انگلیسی">
                                             </div>
                                         </div>
                                         {{--تلفن ثابت گیرنده--}}
@@ -1134,15 +1129,17 @@
                                                        id="receiver-phone-new"
                                                        class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
                                                        name="receiver-phone"
-                                                       maxlength="8"
+                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiverNewMobile',8)"
+                                                       pattern="\d*"
                                                        value=""
                                                        placeholder="xxxxxxxx">
                                                 <input style="width: 30%; direction: ltr"
+                                                       id="receiver-prePhone-new"
                                                        name="receiver-prePhone"
-                                                       maxlength="3"
                                                        class="text-left form-control form-control-md rounded-0 g-bg-white g-brd-right-none g-font-size-16"
                                                        value=""
-                                                       oninput="if($(this).val().length === 3) $('.custombox-content #receiver-phone-new').focus();"
+                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiver-phone-new',3)"
+                                                       pattern="\d*"
                                                        placeholder="0xx">
                                             </div>
                                         </div>
@@ -1152,9 +1149,11 @@
                                                    class="col-sm-2 col-form-label align-self-center">موبایل</label>
                                             <div class="col-sm-10 force-col-12">
                                                 <input
+                                                    id="receiverNewMobile"
                                                     class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
                                                     name="receiver-mobile"
-                                                    maxlength="11"
+                                                    oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #stateSelectReceiver-new',11)"
+                                                    pattern="\d*"
                                                     placeholder="09xxxxxxxx"
                                                     value="">
                                             </div>
@@ -1242,7 +1241,7 @@
                 <div style="display: none" id="user-bought">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
                         <div style="padding-bottom: 13px;"
-                             class="g-pr-15 g-pt-25 g-color-primary">
+                             class="g-pr-15 g-pt-25--lg g-pt-10 g-color-primary">
                             <div class="d-flex m-0 p-0">
                                 <i class="icon-tag g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
@@ -1255,7 +1254,7 @@
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
 
-                    <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                    <div>
                         @if(!isset($order[0]->ID))
                             <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
                                  role="alert">
@@ -1263,13 +1262,14 @@
                             </div>
                         @else
                             @foreach($order as $key => $row)
-                                <article class="d-md-table w-100 g-bg-white g-mb-1">
+                                <div class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
+                                    <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- Date -->
                                     <div style="padding: 0 !important;"
-                                         class="d-md-table-cell align-middle g-width-125--md text-center g-color-gray-dark-v5 g-mb-5 g-mb-0--lg">
+                                         class="d-lg-table-cell d-none align-middle g-width-125--md text-center g-color-gray-dark-v5 g-mb-5 g-mb-0--lg">
                                         <div>
-                                    <span
-                                        class="d-block g-color-black g-font-weight-700 {{(is_null($orderHowDay[$key]) ? 'g-font-size-30':'g-font-size-20')}} g-line-height-1">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
+                                            <span
+                                                class="d-block g-color-black g-font-weight-700 g-font-size-18 g-line-height-1">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
                                             {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][1].' '.$persianDate[$key][0] }}
                                         </div>
                                     </div>
@@ -1286,7 +1286,7 @@
 
                                     <!-- Article Content -->
                                     <div
-                                        class="d-flex justify-content-between d-lg-table-cell align-middle g-py-15 g-pr-20 g-px-20--lg table-cell-responsive">
+                                        class="d-flex justify-content-between d-lg-table-cell align-middle g-pt-15 g-py-15--lg g-px-20--lg table-cell-responsive">
                                         <div>
                                             <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
                                                 <span class="g-color-gray-dark-v2">شماره فاکتور</span>
@@ -1304,9 +1304,18 @@
                                     </div>
                                     <!-- End Article Content -->
 
+                                    <div style="padding: 0 !important;"
+                                         class="d-table-cell d-lg-none align-middle g-width-125--md text-center g-color-gray-dark-v5 g-mb-5 g-mb-0--lg">
+                                        <div>
+                                            <span
+                                                class="d-block g-color-gray-dark-v3 g-font-size-14">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
+                                            {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][1].' '.$persianDate[$key][0] }}
+                                        </div>
+                                    </div>
+
                                     <!-- Price -->
                                     <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-pb-5 g-pt-40 g-py-5--lg g-px-20--lg text-left text-lg-right">
                                     <span
                                         class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-25">{{ number_format($row->FinalPrice * $row->Qty) }}</span>
                                         <span
@@ -1559,7 +1568,7 @@
                                     </div>
                                     <!-- End Actions -->
                                 </article>
-                                <hr class="{{ ($key === count($order)-1) ? 'd-none': ''}} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
+                                </div>
                             @endforeach
                         @endif
                     </div>
@@ -1568,7 +1577,7 @@
                 <!-- در انتظار تحویل -->
                 <div style="display: none" id="user-delivery">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 3px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
+                        <div style="padding-bottom: 3px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
                             <i class="icon-hotel-restaurant-186 u-line-icon-pro g-pl-5 g-font-size-23 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-7">
@@ -1578,7 +1587,7 @@
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
-                    <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                    <div>
                         {{--0: در دست فروشنده 1: تحویل پیک(1) 2: تحویل باجه پستی 3: تحویل پیک(2) 4: تحویل پست 5: تحویل داده شد.--}}
                         {{--گزینه 1 از طریق فروشنده در تبلت پیک(1) ثبت می شود--}}
                         {{--گزینه 2 از طریق پیک در تبلت باجه پستی ثبت می شود--}}
@@ -1586,15 +1595,15 @@
                         <span class="d-none">{{ $deliveryCounter=0 }}</span>
                         @foreach($delivery as $key => $row)
                             @if(($row->DeliveryStatus !== '5') && ($row->DeliveryStatus !== '-1'))
-                                <hr class="{{ ($key === 0) ? 'd-none':'' }} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
+                                <div class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
                                 <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- deliveryStatus -->
                                     <div style="padding: 0 !important;"
-                                         class="d-md-table-cell align-middle text-center g-width-160--md g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
+                                         class="d-lg-table-cell d-none align-middle text-center g-width-160--md g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
                                         <div>
                                             {{ $deliveryHint[$key]['text'] }}
                                             <span
-                                                class="g-font-weight-700 g-line-height-1 g-font-size-20 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                                                class="g-font-weight-700 g-line-height-1 g-font-size-18 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
                                                 {{ $deliveryHint[$key]['location'] }}</span>
                                         </div>
                                     </div>
@@ -1608,29 +1617,36 @@
                                     </a>
                                     <!-- End Article Image -->
 
+                                    <!-- deliveryStatus -->
+                                    <div
+                                        class="d-table-cell d-lg-none align-middle text-center g-color-gray-dark-v5  g-px-20--lg g-px-10 g-mb-5 g-mb-0--lg">
+                                        <div>
+                                            {{ $deliveryHint[$key]['text'] }}
+                                            <span
+                                                class="g-font-weight-600 g-line-height-1 g-font-size-18 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                                                {{ $deliveryHint[$key]['location'] }}</span>
+                                        </div>
+                                    </div>
+
                                     <!-- Article Content -->
-                                    <div class="d-md-table-cell align-middle g-px-20">
-                                        <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
+                                    <div class="d-md-table-cell align-middle g-px-20--lg g-px-10">
+                                        <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
                                             <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
+                                            <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-14">{{ $row->Model }}</em>
                                         </h3>
-                                        <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
+
+                                        <h3 class="h6 d-inline-block m-0 g-font-weight-700">
+                                            <a class="g-color-gray-dark-v2" href="#">{{ $row->Size }}</a>
+                                            <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-14">{{ $row->Color }}</em>
+                                        </h3>
                                     </div>
                                     <!-- End Article Content -->
 
-                                    <!-- Size Color -->
-                                    <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
-                                        <span
-                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
-                                        <span
-                                            class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
-                                    </div>
-
                                     <!-- Date -->
                                     <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-pt-30 g-pt-0--lg g-px-20 text-left text-lg-right">
                                         <span
-                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $deliveryPersianDate[$key][2].' '.$deliveryPersianDate[$key][1].' '.$deliveryPersianDate[$key][0] }}</span>
+                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-14">{{ $deliveryPersianDate[$key][2].' '.$deliveryPersianDate[$key][1].' '.$deliveryPersianDate[$key][0] }}</span>
                                     </div>
 
                                     <!-- Actions -->
@@ -1661,6 +1677,7 @@
                                     </div>
                                     <!-- End Actions -->
                                 </article>
+                                </div>
                             @endif
                             @if($deliveryTime[$key] <= 100) <span
                                 class="d-none">{{ $deliveryCounter++ }}</span>
@@ -1680,7 +1697,7 @@
                 <!-- برگشت محصول -->
                 <div style="display: none" id="user-return">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 3px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
+                        <div style="padding-bottom: 3px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
                             <i style="transform: scaleX(-1);"
                                class="icon-hotel-restaurant-186 u-line-icon-pro g-pr-5 g-font-size-23 g-font-weight-500"></i>
 
@@ -1691,7 +1708,7 @@
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
-                    <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                    <div>
                         {{-- 5: تحویل به پست 4: تحویل پیک(2) 3: تحویل باجه پستی 2: تحویل پیک(1) 1: تحویل فروشنده 0: عودت وجه--}}
                         {{-- گزینه 5 از طریق مشتری پس از تحویل به پست و گرفتن کد پیگیری ثبت می شود--}}
                         {{-- گزینه 4 از طریق پیک(2) در تبلت باجه پستی ثبت می شود--}}
@@ -1700,57 +1717,64 @@
                         {{-- همراه پیک همزمان ثبت می شود--}}
                         <span class="d-none">{{ $returnCounter=0 }}</span>
                         @foreach($return as $key => $row)
-                            <hr class="{{ ($key === 0) ? 'd-none':'' }} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
-                            <article class="d-md-table w-100 g-bg-white g-mb-1">
-                                <!-- deliveryStatus -->
-                                <div style="padding: 0 !important;"
-                                     class="d-md-table-cell align-middle text-center g-width-160--md g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
-                                    <div>
-                                        {{ $returnHint[$key]['text'] }}
-                                        <span
-                                            class="d-block g-font-weight-700 g-line-height-1 g-font-size-20 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                            <div
+                                class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
+                                <article class="d-md-table w-100 g-bg-white g-mb-1">
+                                    <!-- deliveryStatus -->
+                                    <div style="padding: 0 !important;"
+                                         class="d-lg-table-cell d-none align-middle text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
+                                        <div>
+                                            {{ $returnHint[$key]['text'] }}
+                                            <span
+                                                class="g-font-weight-700 g-line-height-1 g-font-size-18 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
                                                 {{ $returnHint[$key]['location'] }}</span>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <!-- Article Image -->
-                                <a class="d-md-table-cell align-middle g-width-110"
-                                   href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
-                                   title="کد محصول {{ $row->ProductDetailID }}">
-                                    <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
-                                         alt="Image Description">
-                                </a>
-                                <!-- End Article Image -->
+                                    <!-- Article Image -->
+                                    <a class="d-md-table-cell align-middle g-width-110"
+                                       href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
+                                       title="کد محصول {{ $row->ProductDetailID }}">
+                                        <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                             alt="Image Description">
+                                    </a>
+                                    <!-- End Article Image -->
 
-                                <!-- Article Content -->
-                                <div class="d-md-table-cell align-middle g-px-20">
-                                    <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
-                                        <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
-                                    </h3>
-                                    <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
-                                </div>
-                                <!-- End Article Content -->
+                                    <div
+                                        class="d-table-cell d-lg-none align-middle text-center g-width-160--md g-color-gray-dark-v5 g-px-20--lg g-px-10 g-mb-5 g-mb-0--lg">
+                                        <div>
+                                            {{ $returnHint[$key]['text'] }}
+                                            <span
+                                                class="g-font-weight-700 g-line-height-1 g-font-size-20 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                                                {{ $returnHint[$key]['location'] }}</span>
+                                        </div>
+                                    </div>
 
-                                <!-- Size Color -->
-                                <div
-                                    class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
+                                    <!-- Article Content -->
+                                    <div class="d-md-table-cell align-middle g-px-20--lg g-px-10">
+                                        <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
+                                            <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
+                                            <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
+                                        </h3>
+
+                                        <h3 class="h6 d-inline-block m-0 g-font-weight-700">
+                                            <a class="g-color-gray-dark-v2" href="#">{{ $row->Size }}</a>
+                                            <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Color }}</em>
+                                        </h3>
+                                    </div>
+                                    <!-- End Article Content -->
+
+                                    <!-- Date -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-pt-30 g-pt-0--lg g-px-20 text-left text-lg-right">
                                                     <span
-                                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
-                                    <span
-                                        class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
-                                </div>
+                                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-14">{{ $returnPersianDate[$key][2].' '.$returnPersianDate[$key][1].' '.$returnPersianDate[$key][0] }}</span>
+                                    </div>
 
-                                <!-- Date -->
-                                <div
-                                    class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
-                                                    <span
-                                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-12">{{ $returnPersianDate[$key][2].' '.$returnPersianDate[$key][1].' '.$returnPersianDate[$key][0] }}</span>
-                                </div>
-
-                                <div
-                                    class="d-md-table-cell align-middle g-py-5 g-px-20 text-left text-lg-right">
+                                    <div
+                                        class="d-md-table-cell align-middle g-px-20 text-left text-lg-right">
                                     <span
-                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-12">
+                                        class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-14">
                                         @switch($row->Reason)
                                             @case('1')
                                             عدم شباهت محصول
@@ -1763,40 +1787,41 @@
                                             @break
                                         @endswitch
                                     </span>
-                                </div>
+                                    </div>
 
-                                <!-- Actions -->
-                                <div
-                                    class="d-md-table-cell align-middle g-pa-20 g-pl-0 {{ $row->ReturnStatus === '0' ? 'g-pt-10 ' : 'g-pt-25 progress-auto-width' }}">
-                                    @if($row->ReturnStatus === '0')
-                                        <i class="fa fa-check-square-o m-0 g-font-size-25 g-color-primary pull-left"></i>
-                                    @else
-                                        <div style="direction: ltr" class="g-mt-minus-10 g-mx-minus-5 d-flex">
-                                            <i class="fa fa-spinner fa-spin m-0 g-font-size-16 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-primary' }}"></i>
-                                            <div style="transform: scaleX(-1)"
-                                                 class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
-                                                 data-toggle="tooltip"
-                                                 data-original-title="{{ 'تاکنون '.$returnTime[$key].'%'.' مسیر طی شده است'  }}"
-                                                 data-placement="top">
-                                                <div id="progressBar"
-                                                     class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
-                                                     role="progressbar"
-                                                     style="width: {{$returnTime[$key]}}%"
-                                                     aria-valuenow="{{ $returnTime[$key] }}"
-                                                     aria-valuemin="0"
-                                                     aria-valuemax="100">
-                                                    <div
-                                                        style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
-                                                        class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->ReturnProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
-                                                        <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                    <!-- Actions -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-pa-20 g-pl-0 {{ $row->ReturnStatus === '0' ? 'g-pt-10 ' : 'g-pt-25 progress-auto-width' }}">
+                                        @if($row->ReturnStatus === '0')
+                                            <i class="fa fa-check-square-o m-0 g-font-size-25 g-color-primary pull-left"></i>
+                                        @else
+                                            <div style="direction: ltr" class="g-mt-minus-10 g-mx-minus-5 d-flex">
+                                                <i class="fa fa-spinner fa-spin m-0 g-font-size-16 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-primary' }}"></i>
+                                                <div style="transform: scaleX(-1)"
+                                                     class="js-hr-progress-bar progress rounded-0 u-progress w-100 g-overflow-visible g-ml-10"
+                                                     data-toggle="tooltip"
+                                                     data-original-title="{{ 'تاکنون '.$returnTime[$key].'%'.' مسیر طی شده است'  }}"
+                                                     data-placement="top">
+                                                    <div id="progressBar"
+                                                         class="progress-bar js-hr-progress-bar-indicator u-progress-bar--lg g-bg-primary g-pos-rel"
+                                                         role="progressbar"
+                                                         style="width: {{$returnTime[$key]}}%"
+                                                         aria-valuenow="{{ $returnTime[$key] }}"
+                                                         aria-valuemin="0"
+                                                         aria-valuemax="100">
+                                                        <div
+                                                            style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
+                                                            class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->ReturnProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
+                                                            <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endif
-                                </div>
-                                <!-- End Actions -->
-                            </article>
+                                        @endif
+                                    </div>
+                                    <!-- End Actions -->
+                                </article>
+                            </div>
                             @if($returnTime[$key] <= 100) <span
                                 class="d-none">{{ $returnCounter++ }}</span>
                             @endif
@@ -1975,7 +2000,7 @@
                 <!-- علاقه مندیها -->
                 <div style="display: none" id="user-like">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 16px;" class="g-pr-15 d-flex g-pt-25 g-color-primary">
+                        <div style="padding-bottom: 16px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
                             <i class="fa fa-bookmark-o g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-4">
@@ -1985,112 +2010,110 @@
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
-                    <div class="container g-pa-15 g-py-30--lg g-px-60--lg">
+                    <div>
                         <div id="productLikeEmpty"
                              class="{{ (isset($like[0]->ID)) ? 'd-none':'d-inline-block' }} alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
                              role="alert">
                             <strong>خالی: </strong> لیست علاقه مندی های شما خالی است.
                         </div>
                         @foreach($like as $key => $row)
-                            <article id="{{ 'likeRow'.$key }}"
-                                     class="d-md-table w-100 g-bg-white g-mb-30 g-mb-15--lg">
-                                <!-- Article Image -->
-                                <a class="d-md-table-cell align-middle g-width-110"
-                                   href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
-                                   title="کد محصول {{ $row->ProductDetailID }}">
-                                    <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
-                                         alt="Image Description">
-                                </a>
-                                <!-- End Article Image -->
+                            <div
+                                class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
+                                <article id="{{ 'likeRow'.$key }}"
+                                         class="d-md-table w-100 g-bg-white g-mb-10 g-mb-0--lg">
+                                    <!-- Article Image -->
+                                    <a class="d-md-table-cell align-middle g-width-110"
+                                       href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
+                                       title="کد محصول {{ $row->ProductDetailID }}">
+                                        <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                             alt="Image Description">
+                                    </a>
+                                    <!-- End Article Image -->
 
-                                <!-- Article Content -->
-                                <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg g-width-150--lg">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h3 class="d-inline-block h6 g-font-weight-700">
-                                                <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
-                                            </h3>
-                                            <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-size-12 g-font-style-normal">{{ $row->Model }}</em>
-                                        </div>
-                                        <div class="smallDevice g-ml-minus-5 g-mt-minus-10">
-                                            <a style="cursor: pointer"
-                                               class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                               data-toggle="tooltip"
-                                               data-placement="top"
-                                               href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
-                                               data-original-title="جزئیات محصول"><i
-                                                    class="icon-eye g-line-height-0_7"></i></a>
-                                            <a style="cursor: pointer"
-                                               onclick="deleteProductLike({{$row->ProductID}},{{ $row->ProductDetailID }},$(this).attr('id'))"
-                                               id="{{ 'smDeleteLikeBtn'.$key }}"
-                                               class="u-icon-v1 g-color-primary g-color-gray-dark-v5--hover rounded-circle g-ml-5"
-                                               data-toggle="tooltip"
-                                               data-placement="top"
-                                               data-original-title="فراموش کن"><i class="fa fa-bookmark"></i></a>
+                                    <!-- Article Content -->
+                                    <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg g-width-150--lg">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-md-table-cell align-middle g-px-20--lg">
+                                                <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
+                                                    <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
+                                                    <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
+                                                </h3>
+
+                                                <h3 class="h6 d-inline-block m-0 g-font-weight-700">
+                                                    <a class="g-color-gray-dark-v2" href="#">{{ $row->Size }}</a>
+                                                    <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Color }}</em>
+                                                </h3>
+                                            </div>
+                                            <div class="smallDevice g-ml-minus-5 g-mt-minus-10">
+                                                <a style="cursor: pointer"
+                                                   class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle"
+                                                   data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
+                                                   data-original-title="جزئیات محصول"><i
+                                                        class="icon-eye g-line-height-0_7"></i></a>
+                                                <a style="cursor: pointer"
+                                                   onclick="deleteProductLike({{$row->ProductID}},{{ $row->ProductDetailID }},$(this).attr('id'))"
+                                                   id="{{ 'smDeleteLikeBtn'.$key }}"
+                                                   class="u-icon-v1 g-color-primary g-color-gray-dark-v5--hover rounded-circle"
+                                                   data-toggle="tooltip"
+                                                   data-placement="top"
+                                                   data-original-title="فراموش کن"><i class="fa fa-bookmark"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- End Article Content -->
+                                    <!-- End Article Content -->
 
-                                <!-- Size Color -->
-                                <div
-                                    class="d-md-table-cell align-middle g-pt-5 g-px-20 text-right">
-                                        <span
-                                            class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Size }}</span>
-                                    <span
-                                        class="g-color-gray-dark-v5 g-font-size-11">{{ $row->Color }}</span>
-                                </div>
-
-                                <!-- Qty -->
-                                <div
-                                    class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
+                                    <!-- Qty -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
                                         <span
                                             class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Qty }}</span>
-                                    <span
-                                        class="g-color-gray-dark-v5 g-font-size-11">عدد موجود</span>
-                                </div>
+                                        <span
+                                            class="g-color-gray-dark-v5 g-font-size-11">عدد موجود</span>
+                                    </div>
 
-                                <!-- Price -->
-                                <div
-                                    class="d-md-table-cell align-middle g-py-5 g-px-20--lg text-left text-lg-right">
-                                    <div>
+                                    <!-- Price -->
+                                    <div
+                                        class="d-md-table-cell align-middle g-py-5--lg g-pt-30 g-px-20--lg text-left text-lg-right">
+                                        <div>
                                     <span class="g-color-red amountLine g-ml-10">
                                         <span
                                             class="g-font-weight-700 g-line-height-0_7 g-font-size-15 text-right">{{ $row->UnitPrice }}</span>
                                     </span>
-                                        <span class="g-color-gray-dark-v1">
+                                            <span class="g-color-gray-dark-v1">
                                         <span
                                             class="g-font-weight-700 g-line-height-0_7 g-font-size-22 text-right">{{ $row->FinalPrice }}</span>
                                         <span
                                             class="g-font-size-11">تومان</span>
                                     </span>
+                                        </div>
                                     </div>
-                                </div>
-                                <!-- End Price -->
+                                    <!-- End Price -->
 
-                                <div class="d-md-table-cell align-middle text-md-left g-pa-20 g-pl-0 bigDevice">
-                                    <a style="cursor: pointer"
-                                       class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
-                                       href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
-                                       data-original-title="جزئیات محصول"><i
-                                            class="icon-eye g-line-height-0_7"></i></a>
-                                    <a style="cursor: pointer"
-                                       onclick="deleteProductLike({{$row->ProductID}},{{ $row->ProductDetailID }},$(this).attr('id'))"
-                                       id="{{ 'deleteLikeBtn'.$key }}"
-                                       class="u-icon-v1 g-color-primary g-color-gray-light-v1--hover rounded-circle g-ml-5"
-                                       data-toggle="tooltip"
-                                       data-placement="top"
-                                       data-original-title="فراموش کن">
-                                        <i class="fa fa-bookmark"></i>
-                                    </a>
-                                    <i id="{{'waitingLikeDelete'.$key}}"
-                                       style="display: none"
-                                       class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-                                </div>
-                                <hr class="{{ ($key === count($like)-1) ? 'd-none': ''}} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
-                            </article>
+                                    <div class="d-md-table-cell align-middle text-md-left g-pa-20 g-pl-0 bigDevice">
+                                        <a style="cursor: pointer"
+                                           class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                                           data-toggle="tooltip"
+                                           data-placement="top"
+                                           href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
+                                           data-original-title="جزئیات محصول"><i
+                                                class="icon-eye g-line-height-0_7"></i></a>
+                                        <a style="cursor: pointer"
+                                           onclick="deleteProductLike({{$row->ProductID}},{{ $row->ProductDetailID }},$(this).attr('id'))"
+                                           id="{{ 'deleteLikeBtn'.$key }}"
+                                           class="u-icon-v1 g-color-primary g-color-gray-light-v1--hover rounded-circle g-ml-5"
+                                           data-toggle="tooltip"
+                                           data-placement="top"
+                                           data-original-title="فراموش کن">
+                                            <i class="fa fa-bookmark"></i>
+                                        </a>
+                                        <i id="{{'waitingLikeDelete'.$key}}"
+                                           style="display: none"
+                                           class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                    </div>
+                                </article>
+                            </div>
                         @endforeach
                     </div>
                 </div>

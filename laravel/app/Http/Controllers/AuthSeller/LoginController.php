@@ -55,18 +55,25 @@ class LoginController extends Controller
 
     public function sellerLogin(Request $request)
     {
+        $messages = [
+            "email.required" => "ایمیل الزامیست",
+            "email.email" => "آدرس ایمیل صحیح نیست",
+            "password.required" => "رمز ورود الزامیست",
+        ];
+
         $this->validate($request, [
             'email'   => 'required|email',
-            'password' => 'required|min:6'
-        ]);
+            'password' => 'required|min:8'
+        ], $messages);
 
         if (Auth::guard('seller')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
             return redirect()->intended('/Seller-Panel');
         }
-       // return back()->withInput($request->only('email', 'remember'));
-        return Redirect::route('sellerLog')
-            ->with('fails', 'رمز یا ایمیل اشتباه است');
+
+        return back()->withInput($request->only('email', 'remember','password', 'remember'))->with('fails', 'رمز یا ایمیل اشتباه است!');
+//        return Redirect::route('sellerLog')
+//            ->with('fails', 'رمز یا ایمیل اشتباه است!');
     }
     public function sellerLogout(Request $request)
     {

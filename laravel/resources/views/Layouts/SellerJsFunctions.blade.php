@@ -2,6 +2,13 @@
 
     {{--    Seller Functions--}}
     <script>
+        $(window).bind('beforeunload', function(){
+            $('#load').show();
+        });
+
+        document.onreadystatechange = function () {
+            $('#load').hide();
+        }
 
         Array.prototype.getDuplicates = function () {
             let duplicates = [];

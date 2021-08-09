@@ -1,5 +1,6 @@
 @section('SellerNavigation')
     <body class="u-body--header-side-static-right">
+    <div id="load" class="load"></div>
     <!-- Sidebar Navigation -->
     <div id="js-header" class="u-header u-header--side"
          data-header-position="right"
@@ -51,8 +52,7 @@
                                     <a href="#" class="nav-link" id="nav-link-408"
                                        aria-haspopup="true"
                                        aria-expanded="false"
-                                       aria-controls="nav-megamenu-408"> افزودن پوشاک زنانه<i
-                                            class="hs-icon hs-icon-arrow-bottom g-font-size-10 g-mr-7"></i></a>
+                                       aria-controls="nav-megamenu-408"> افزودن پوشاک زنانه<i class="hs-icon hs-icon-arrow-bottom g-font-size-10 g-mr-7"></i></a>
                                     <!-- Add Female Product -->
                                     <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
                                          id="nav-megamenu-408"
@@ -154,7 +154,7 @@
                                                                 <a href="{{ route('AddProduct_askSize',['23','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">تونیک</a>
                                                             </li>
-                                                            <li>
+ 							    <li>
                                                                 <a href="{{ route('AddProduct_askSize',['24','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پیراهن</a>
                                                             </li>
@@ -165,10 +165,6 @@
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['26','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بلوز</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['27','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پلیور</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['28','0']) }}"
@@ -234,22 +230,26 @@
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['34','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کت و شلوار</a>
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شنل</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['35','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست لباس مجلسی</a>
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کت و شلوار</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['36','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست لباس اداری</a>
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست لباس مجلسی</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['37','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پالتو</a>
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست لباس اداری</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['38','0']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پالتو</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ route('AddProduct_askSize',['39','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سرهمی</a>
                                                             </li>
                                                         </ul>
@@ -277,7 +277,7 @@
                                                     </li>
                                                     <li>
                                                         <a href="{{ route('AddProduct_askSize',['43','0']) }}"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">رو دوشی</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">دوشی</a>
                                                     </li>
                                                     <li>
                                                         <a href="{{ route('AddProduct_askSize',['44','0']) }}"
@@ -293,7 +293,7 @@
                                                             پشتی</a>
                                                     </li>
                                                     <li>
-                                                        <a href="{{ route('AddProduct_askSize',['Baggage','0']) }}"
+                                                        <a href="{{ route('AddProduct_askSize',['baggae','0']) }}"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">چمدان</a>
                                                     </li>
                                                 </ul>
@@ -377,14 +377,10 @@
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['612','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">گرمکن</a>
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">اسلش</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['613','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شلوار</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['614','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">دامن</a>
                                                             </li>
                                                         </ul>
@@ -411,7 +407,7 @@
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['623','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پیراهن</a>
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بلوز</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['624','0']) }}"
@@ -454,11 +450,11 @@
                                                             ورزشی</a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['630','0']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['640','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ساک</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['631','0']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['641','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کوله
                                                                     پشتی</a>
                                                             </li>
@@ -473,25 +469,16 @@
                                                             ورزشی</a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['640','0']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['650','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ساده</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['641','0']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['651','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کتانی
                                                                     ورزشی</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['642','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">مخصوص
-                                                                    دویدن</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['643','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سالنی</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['644','0']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['652','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">حرفه ای</a>
                                                             </li>
                                                         </ul>
@@ -550,10 +537,6 @@
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['SportSocks','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">جوراب</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['SportTowel','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">حوله</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['CanteenBottle','0']) }}"
@@ -637,14 +620,6 @@
                                                                 <a href="{{ route('AddProduct_askSize',['714','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سنجاقک</a>
                                                             </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['0415','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سنجاقک</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['715','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">آرایش و مراقبت مو</a>
-                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <br>
@@ -700,31 +675,17 @@
                                                                     بند</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['734','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ساعت</a>
-                                                            </li>
-                                                            <li>
                                                                 <a href="{{ route('AddProduct_askSize',['735','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">دست
-                                                                    بند</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['736','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کمربند</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['737','0']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['736','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">چتر</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['738','0']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['737','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست
                                                                     هدیه</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['PhoneStand','0']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">نگهدارنده
-                                                                    گوشی</a>
                                                             </li>
                                                         </ul>
                                                     </li>

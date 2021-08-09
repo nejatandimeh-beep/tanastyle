@@ -27,7 +27,9 @@
                                            autofocus="">
 
                                     @if (Session::has('fails'))
-                                        {{Session::get('fails')}}
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{Session::get('fails')}}</strong>
+                                        </span>
                                     @endif
 
                                     @error('email')

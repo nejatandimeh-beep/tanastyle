@@ -393,6 +393,16 @@ class Basic extends Controller
         return view('Customer.Cart', compact('sendAddress', 'data'));
     }
 
+    public function cartCount()
+    {
+        $data=DB::table('product_cart')
+            ->select('CustomerID')
+            ->where('CustomerID',auth::user()->id)
+            ->get();
+
+        return $data->count();
+    }
+
     public function cartAdd($id)
     {
         DB::table('product_cart')->insert([
@@ -431,6 +441,7 @@ class Basic extends Controller
         $data = DB::table('product_cart')
             ->where('CustomerID', Auth::user()->id)
             ->get();
+
         return array($data->count(), $data);
     }
 
@@ -467,7 +478,6 @@ class Basic extends Controller
         $gender = $request->get('gender');
         $prePhone = $request->get('prePhone');
         $phone = $request->get('phone');
-        $mobile = $request->get('mobile');
         $state = $request->get('state');
         $city = $request->get('city');
 
@@ -483,7 +493,6 @@ class Basic extends Controller
                 'Gender' => $gender,
                 'Phone' => $phone,
                 'PrePhone' => $prePhone,
-                'Mobile' => $mobile,
                 'State' => $state,
                 'City' => $city,
             ]);

@@ -1,5 +1,8 @@
 @section('AdminJsFunction')
     <script>
+        jQuery(window).bind('beforeunload', function(){
+            $('#load').show();
+        });
         $(document).on('ready', function () {
             // Set Seller Navigation Date
             nowDate();

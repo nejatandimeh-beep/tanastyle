@@ -30,21 +30,11 @@
 
         <div class="g-mb-30">
             <div class="bigDevice">
-                <img class="w-100" src="{{asset('img/CategoryImages/woman/'.$cat.'.jpg')}}" alt="انواع شرت">
+                <img class="w-100" src="{{asset('img/CategoryImages/'.$gender.'/'.$cat.'.jpg')}}" alt="انواع شرت">
             </div>
 
             <div class="smallDevice">
-                <img class="w-100" src="{{asset('img/CategoryImages/woman/'.$cat.'-mobile.jpg')}}" alt="انواع شرت">
-            </div>
-        </div>
-
-        <div class="{{ $cat==='02' ? '':'d-none ' }}g-mb-30">
-            <div class="bigDevice">
-                <img class="w-100" src="{{asset('img/CategoryImages/woman/'.$cat.'-aux.jpg')}}" alt="انواع شرت">
-            </div>
-
-            <div class="smallDevice">
-                <img class="w-100" src="{{asset('img/CategoryImages/woman/'.$cat.'-mobile-aux.jpg')}}" alt="انواع شرت">
+                <img class="w-100" src="{{asset('img/CategoryImages/'.$gender.'/'.$cat.'-mobile.jpg')}}" alt="انواع شرت">
             </div>
         </div>
 

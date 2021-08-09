@@ -1,5 +1,5 @@
 @section('CustomerNavigation')
-    <div id="load" class="load"></div>
     <body>
+    <div style="display: none" id="load" class="load"></div>
 
 @endsection

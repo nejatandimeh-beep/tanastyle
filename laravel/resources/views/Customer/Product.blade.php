@@ -13,45 +13,11 @@
     <span id="firstColorInfo" class="d-none">{{ $colorInfo }}</span>
     <span id="picPath" class="d-none">{{ $data->PicPath }}</span>
 
-    <section class="breadCrumbs g-brd-top g-brd-bottom g-brd-gray-light-v4 g-py-15 g-mb-0 g-mb-30">
-        <div style="direction: rtl" class="container">
-            <div class="d-sm-flex text-right text-lg-center">
-                <div class="align-self-center bigDevice">
-                    <h2 class="h6 g-font-weight-300 w-100 g-color-black-opacity-0_3 g-mb-10 g-mb-0--md">مسیر</h2>
-                </div>
-
-                <div class="align-self-center g-mr-30--lg">
-                    <ul class="u-list-inline p-0 g-font-size-12">
-                        <li class="list-inline-item g-ml-5 g-my-5">
-                            <a class="u-link-v5 g-color-main" href="#">صفحه نخست</a>
-                            <i class="fa fa-angle-left g-mr-7"></i>
-                        </li>
-                        <li class="list-inline-item g-ml-5 g-my-5">
-                            <a class="u-link-v5 g-color-main" href="#">پوشاک زنانه</a>
-                            <i class="fa fa-angle-left g-mr-7"></i>
-                        </li>
-                        <li class="list-inline-item g-ml-5 g-my-5">
-                            <a class="u-link-v5 g-color-main" href="#">لباس</a>
-                            <i class="fa fa-angle-left g-mr-7"></i>
-                        </li>
-                        <li class="list-inline-item g-ml-5 g-my-5">
-                            <a class="u-link-v5 g-color-main" href="#">لباس زیر</a>
-                            <i class="fa fa-angle-left g-mr-7"></i>
-                        </li>
-                        <li class="list-inline-item g-color-primary g-my-5">
-                            <span>شرت</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="container g-mb-50--lg">
+    <div class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4">
         <!-- Article -->
         <article class="row justify-content-between g-color-gray-dark-v5">
             {{--اطلاعات محصول--}}
-            <div style="direction: rtl" class="col-lg-6 g-mb-30">
+            <div style="direction: rtl" class="col-lg-6 g-mb-30 g-pl-0--lg">
                 <header class="d-flex justify-content-between">
                     <!-- Article Icons -->
                     <div class=" align-self-center">
@@ -60,12 +26,12 @@
                         <span id="productModel" class="align-middle">{{ $data->Model }}</span>
                     </div>
                     <div
-                        class="js-rating d-inline-block g-color-primary g-font-size-18 g-mt-10 g-mr-10 align-self-center"
+                        class="js-rating d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center"
                         data-rating="{{ $rating }}"
                         data-spacing="{{ 5 - $rating }}"></div>
                 </header>
 
-                <hr class="g-brd-gray-light-v3 g-mt-10 g-mb-15">
+                <hr class="g-brd-gray-light-v4 g-mt-10 g-mb-15">
 
                 {{--هدر--}}
                 <a style="cursor: pointer;" class="d-none float-left g-font-size-20 g-mr-10 fa fa-bookmark
@@ -394,17 +360,10 @@
                                                 <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
                                                 <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
                                                 <span class="receiverStateCity"></span>
-                                                <span id="receiverAddress">{{ $sendAddress->Address }}</span>
-                                                <strong
-                                                    class="d-lg-inline-block d-block g-color-gray-dark-v2">گیرنده:</strong>
-                                                <span
-                                                    id="addressReceiverName">{{ $sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily }}</span>
-                                                <strong class="d-lg-inline-block d-block g-color-gray-dark-v2">کد
-                                                    پستی:</strong>
-                                                <span id="receiverPostalCode">{{ $sendAddress->PostalCode }}</span>
-                                                <strong
-                                                    class="d-lg-inline-block d-block g-color-gray-dark-v2">موبایل:</strong>
-                                                <span id="receiverMobile">{{ $sendAddress->Mobile }}</span>
+                                                <span id="addressID"
+                                                      class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$sendAddress->Address}}
+                                                    <strong class="g-color-gray-dark-v2 g-mr-5">گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}}
+                                                    <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
                                             </div>
                                         </div>
                                     @endif
@@ -455,6 +414,7 @@
                                 </div>
                                 {{--                                درگاه بانکی--}}
                                 <a href="#"
+                                   id="bankingPortalBtn"
                                    onclick="bankingPortal($('#productDetailID').text(),$('#orderProductQty').text())"
                                    class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
                                     <span class="pull-left">درگاه بانکی
@@ -463,6 +423,8 @@
                                     </span>
                                     <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
                                 </a>
+                                <i id="waitingIconSubmit" style="display: none"
+                                   class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
                             </div>
                         </div>
                     </div>
