@@ -148,6 +148,9 @@
                                 class="btn btn-secondary" data-dismiss="modal">انصراف
                         </button>
                         <button type="button" id="crop" class="btn btn-primary g-mr-5">برش</button>
+                        <i id="waitingCrop"
+                           style="display: none"
+                           class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
                     </div>
                 </div>
             </div>

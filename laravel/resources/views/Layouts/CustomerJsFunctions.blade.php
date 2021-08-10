@@ -55,6 +55,8 @@
             });
 
             $('#crop').on('click', function () {
+                $('#crop').hide();
+                $('#waitingCrop').show();
                 let canvas = cropper.getCroppedCanvas({
                     width: 400,
                     height: 400

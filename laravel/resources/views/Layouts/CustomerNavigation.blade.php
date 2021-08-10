@@ -2407,8 +2407,8 @@
                         <!-- Basket -->
                         <div class="u-basket d-inline-block g-valign-middle g-mr-30 g-pt-8" id="myBasket">
                             <a href="#" onclick="cart()" id="basket-bar-invoker"
-                               class="u-icon-v1 g-color-main g-text-underline--none--hover g-width-20 g-height-20"
-                               onmousemove="$('#searchForm').addClass('d-none');">
+                               title="سبد خرید"
+                               class="u-icon-v1 g-color-main g-text-underline--none--hover g-width-20 g-height-20">
                                 <span id="basketNum"
                                       class="u-badge-v1--sm g-color-white g-bg-primary g-rounded-50x">0</span>
                                 <i class="fa fa-shopping-cart"></i>
@@ -2465,6 +2465,7 @@
                                 <a href="#"
                                    class="g-font-size-18 g-color-main"
                                    aria-controls="searchform-1"
+                                   title="جستجو"
                                    id="searchIcon"
                                    data-dropdown-target="#searchform-1">
                                     <i class="fa fa-search"></i>
