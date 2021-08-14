@@ -110,6 +110,7 @@
     <script src="{{ asset('assets/js/components/hs.countdown.js') }}"></script>
     <script src="{{ asset('assets/js/components/hs.onscroll-animation.js') }}"></script>
     <script src="{{ asset('assets/js/components/hs.chart-pie.js') }}"></script>
+    <script src="{{ asset('assets/js/recorder.js') }}"></script>
 
     </body>
 @endsection

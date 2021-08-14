@@ -17,7 +17,7 @@
         <!-- Article -->
         <article class="row justify-content-between g-color-gray-dark-v5">
             {{--اطلاعات محصول--}}
-            <div style="direction: rtl" class="col-lg-6 g-mb-30 g-pl-0--lg">
+            <div style="direction: rtl" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
                 <header class="d-flex justify-content-between">
                     <!-- Article Icons -->
                     <div class=" align-self-center">
@@ -204,12 +204,13 @@
                     <a href="#modal18"
                        onclick="$(document.body).addClass('me-position-fix');
                            $(document.body).removeClass('me-position-normally'); addOrderTable();"
+                       id="buy"
                        data-modal-target="#modal18"
                        data-modal-effect="slidetogether"
                        class="btn btn-lg u-btn-primary g-font-weight-600 rounded-0 g-mt-10 g-font-size-16 g-px-30">
                         <i id="waitingBuy" style="display: none"
                            class="fa fa-spinner fa-spin m-0 g-font-size-20 align-middle"></i>
-                        <span id="buy">خرید</span>
+                        <span>خرید</span>
                     </a>
 
                     <div id="modal18"
@@ -429,15 +430,25 @@
                         </div>
                     </div>
                 </div>
-                <hr class="g-brd-gray-light-v3 g-my-15">
+                <hr class="g-brd-gray-light-v3 g-mt-15 g-mb-5">
                 {{--دسته بندی--}}
                 <footer>
-                    <div>
-                        <strong>دسته بندی</strong>
-                        <span class="g-font-size-12">???</span>
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex flex-column align-self-center align-self-lg-start">
+                            <div>
+                                <strong>دسته بندی</strong>
+                                <span class="g-font-size-12">{{$data->HintCat.' '.$data->Gender}}</span>
+                            </div>
+                            <a style="cursor: pointer" class="g-color-primary"
+                               onclick="$('.customerComment').removeClass('d-none');">نظرات <span class="g-font-weight-600">{{ (!isset($comments[0]->Comment)) ? '0' : count($comments) }}</span></a>
+                        </div>
+                        <span style="cursor: pointer"
+                              onclick="$(this).hide(); $('#addProductComment').removeClass('d-none'); $('#addCustomerComment').focus();"
+                              class="u-icon-v3 g-bg-gray-light-v5 g-brd-around g-brd-gray-light-v4 g-color-primary u-icon-slide-left--hover g-mr-15 pull-left">
+                        <i class="icon-note u-icon__elem-regular"></i>
+                        <i class="icon-bubble u-icon__elem-hover"></i>
+                    </span>
                     </div>
-                    <a style="cursor: pointer" class="g-color-gray-dark-v5 g-color-primary--hover"
-                       onclick="$('.customerComment').removeClass('d-none');">نظرات {{ (!isset($comments[0]->Comment)) ? '0' : count($comments) }}</a>
                     <div id="commentContainer">
                         @foreach($comments as $key => $row)
                             <div class="d-none text-left customerComment">
@@ -507,12 +518,6 @@
                         </div>
                     </div>
                     {{--دکمه نوشتن نظر--}}
-                    <span style="cursor: pointer"
-                          onclick="$(this).hide(); $('#addProductComment').removeClass('d-none'); $('#addCustomerComment').focus();"
-                          class="u-icon-v3 g-rounded-3 g-bg-secondary u-shadow-v22 g-color-primary u-icon-slide-left--hover g-mr-15 g-mb-15 pull-left">
-                        <i class="icon-note u-icon__elem-regular"></i>
-                        <i class="icon-bubble u-icon__elem-hover"></i>
-                    </span>
                     <div id="addProductComment" class="d-none text-left">
                         <div class="form-group g-mb-20 text-right">
                             <label class="h5 g-mb-10 g-mt-20">نظر شما</label>

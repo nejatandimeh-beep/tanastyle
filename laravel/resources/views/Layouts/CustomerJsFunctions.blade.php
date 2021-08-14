@@ -1,5 +1,6 @@
 @section('CustomerJsFunction')
     <script>
+        let productShowLen = [], lastScrollTop = 0;
         $(document).ready(function () {
             $.ajax({
                 type: 'GET',
@@ -12,6 +13,7 @@
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
                 cropper;
+
             $('#upload_image').on('change', function (event) {
                 let files = event.target.files,
                     done = function (url) {
@@ -86,6 +88,7 @@
 
             // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
             let gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [];
+
             if ($('#allProductList').length > 0)
                 $('input[name="gender"]:checked').each(function () {
                     gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
@@ -99,6 +102,7 @@
             $('input[name="color"]:checked').each(function () {
                 color.push($(this).attr('id').replace(/[^0-9]/gi, ''));
             });
+
             $('input[name="gender"]').on('change', function () {
                 gender = [];
                 $('#productContainer').empty();
@@ -106,6 +110,9 @@
                 $('input[name="gender"]:checked').each(function () {
                     gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
                 });
+                $('#productContainer').empty();
+                window.scrollTo(0,0);
+                lastScrollTop = $(window).scrollTop();
                 filtering();
             });
             $('input[name="category"]').on('change', function () {
@@ -115,6 +122,9 @@
                 $('input[name="category"]:checked').each(function () {
                     category.push($(this).attr('id'));
                 });
+                $('#productContainer').empty();
+                window.scrollTo(0,0);
+                lastScrollTop = $(window).scrollTop();
                 filtering();
             });
             $('input[name="size"]').on('change', function () {
@@ -124,6 +134,9 @@
                 $('input[name="size"]:checked').each(function () {
                     size.push($(this).attr('id'));
                 });
+                $('#productContainer').empty();
+                window.scrollTo(0,0);
+                lastScrollTop = $(window).scrollTop();
                 filtering();
             });
             $('input[name="color"]').on('change', function () {
@@ -133,13 +146,9 @@
                 $('input[name="color"]:checked').each(function () {
                     color.push($(this).attr('id').replace(/[^0-9]/gi, ''));
                 });
-                filtering();
-            });
-
-
-            $('#priceFilterSubmit').on('click', function () {
-                priceMin = $('#price-min').val().replace(new RegExp(',', 'g'), "");
-                priceMax = $('#price-max').val().replace(new RegExp(',', 'g'), "");
+                $('#productContainer').empty();
+                window.scrollTo(0,0);
+                lastScrollTop = $(window).scrollTop();
                 filtering();
             });
 
@@ -154,13 +163,22 @@
                         + priceMax + '/'
                         + JSON.stringify(color),
                     success: function (data) {
+                        productShowLen = data.split('<span class="d-none">break</span>');
                         $('#loadProduct').addClass('d-none');
-                        $('#productContainer').html(data);
+                        for (let i = 0; i < 10; i++)
+                            $('#productContainer').append(productShowLen[i]);
+
                         if ($('#contentTop').length > 0)
                             $('html, body').animate({scrollTop: $('#contentTop').offset().top}, 500);
                     }
                 });
             }
+
+            $('#priceFilterSubmit').on('click', function () {
+                priceMin = $('#price-min').val().replace(new RegExp(',', 'g'), "");
+                priceMax = $('#price-max').val().replace(new RegExp(',', 'g'), "");
+                filtering();
+            });
 
             if ($('#cartCount').text() === 0) {
                 $('#cartBuyBtn').hide();
@@ -261,6 +279,27 @@
             }
         });
 
+        $(window).scroll(function (event) {
+            let st = $(this).scrollTop();
+            if (st - lastScrollTop > 1000) {
+                productShowLen.splice(0, 10);
+                for (let i = 0; i < (productShowLen.length > 10 ? 10 : productShowLen.length); i++)
+                    $('#productContainer').append(productShowLen[i]);
+            } else {
+                return true;
+            }
+
+            if($('#filterDiv').css('display') === 'none'){
+                $('#productContainer').children().each(function () {
+                    if($(this).hasClass('col-lg-4')){
+                        $(this).removeClass('col-lg-4');
+                        $(this).addClass('col-lg-3');
+                    }
+                })
+            }
+            lastScrollTop = st;
+        });
+
         $(document).mouseup(function (e) {
             let container = $(".outSideClick");
 
@@ -270,13 +309,17 @@
             }
         });
 
-        $(window).bind('beforeunload', function(){
+        $(window).bind('beforeunload', function () {
             loaderShow();
         });
 
-        function loaderShow(){
-            let loader='<div id="load" class="load"></div>';
-            $('body').html(loader);
+        $(window).on('pageshow', function () {
+            $('#load').hide();
+        });
+
+        function loaderShow() {
+            let loader = '<div id="load" class="load"></div>';
+            $('body').prepend(loader);
         }
 
         document.onreadystatechange = function () {
@@ -490,10 +533,9 @@
                             }
                         }
                         if (error === 0)
-                            if ($('#addressID').length>0){
+                            if ($('#addressID').length > 0) {
                                 window.location = '/Banking-Portal/' + id + '/' + qty;
-                            }
-                            else{
+                            } else {
                                 $('.custombox-content #bankingPortalBtn').show();
                                 $('.custombox-content #waitingIconSubmit').hide();
                                 alert('کاربر گرامی لیست آدرسهای شما خالیست.');
@@ -506,7 +548,7 @@
                 });
             } else {
                 alert('ابتدا لطفا وارد حساب کاربری خود شوید.');
-                window.location='/login';
+                window.location = '/login';
             }
         }
 
@@ -620,22 +662,19 @@
 
         var
             persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
-            arabicNumbers  = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
-            fixNumbers = function (str)
-            {
-                if(typeof str === 'string')
-                {
-                    for(var i=0; i<10; i++)
-                    {
+            arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
+            fixNumbers = function (str) {
+                if (typeof str === 'string') {
+                    for (var i = 0; i < 10; i++) {
                         str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
                     }
                 }
                 return str;
             };
 
-        function forceEnglishNumber(val, ele, nextFocus,len){
-            if(val.length>=len){
-                val=val.slice(0, len);
+        function forceEnglishNumber(val, ele, nextFocus, len) {
+            if (val.length >= len) {
+                val = val.slice(0, len);
                 ele.val(val);
                 $(nextFocus).focus();
             }
@@ -852,8 +891,10 @@
                     success: function (data) {
                         if (data === 'empty') {
                             $('#addToBasketBtn').removeClass('d-none');
+                            $('#buy').removeClass('d-none');
                         } else {
                             $('#attachToBasket').removeClass('d-none');
+                            $('#buy').removeClass('d-none');
                         }
                         $('#waitingCheckCart').addClass('d-none');
                     }
@@ -880,9 +921,9 @@
                         }
                     }
                     if (error === 0)
-                        if ($('#addressID').length>0)
+                        if ($('#addressID').length > 0)
                             $('#finalCartOrderForm').submit();
-                        else{
+                        else {
                             $('.custombox-content #orderSubmitBtn').show();
                             $('.custombox-content #waitingIconSubmit').hide();
                             alert('کاربر گرامی لیست آدرسهای شما خالیست.');
@@ -898,6 +939,10 @@
         // تابع و دستورات مربوط به افزودن رنگ و تعداد محصول از طریق آژاکس
         // --------------------------------------------------------------
         function addColor(val, id) {
+            $('#addToBasketBtn').addClass('d-none');
+            $('#buy').addClass('d-none');
+            $('#waitingCheckCart').removeClass('d-none');
+            $('#attachToBasket').addClass('d-none');
             $('#colorContainer').empty();
             $('#waitingIconColor').show();
             $('#waitingIconQty').show();
@@ -936,6 +981,7 @@
 
         function addQty(id, qty, picNumber) {
             $('#addToBasketBtn').addClass('d-none');
+            $('#buy').addClass('d-none');
             if ($('#loginAlert').text() === 'login')
                 $('#waitingCheckCart').removeClass('d-none');
             $('#attachToBasket').addClass('d-none');

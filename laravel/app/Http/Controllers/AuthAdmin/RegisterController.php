@@ -117,7 +117,7 @@ class RegisterController extends Controller
                 ]);
         }
 
-        return redirect()->route('AdministratorMaster');
+        return redirect()->route('administratorMaster');
     }
 
 

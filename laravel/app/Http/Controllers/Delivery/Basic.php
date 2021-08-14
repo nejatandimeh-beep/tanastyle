@@ -336,7 +336,6 @@ class Basic extends Controller
             ->leftJoin('admins as admin','admin.id','=','dk.AdminID')
             ->where('dk.AdminID',Auth::guard('admin')->user()->id)
             ->first();
-
         $kioskBasket = $this->product_delivery(['22','2'], $kiosk->ID, 'kiosk');
         $returnKioskBasket = $this->product_return(['22','2'], $kiosk->ID, 'kiosk');
 

@@ -395,9 +395,9 @@ class Basic extends Controller
 
     public function cartCount()
     {
-        $data=DB::table('product_cart')
+        $data = DB::table('product_cart')
             ->select('CustomerID')
-            ->where('CustomerID',auth::user()->id)
+            ->where('CustomerID', auth::user()->id)
             ->get();
 
         return $data->count();
@@ -1133,9 +1133,10 @@ class Basic extends Controller
     </figure>
 </div>
 
+<span class="d-none">break</span>
+
 ';
         }
-
         return $products;
     }
 
@@ -1145,14 +1146,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '0')
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '0')
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
 
         $gender = '0';
         $catCode = 'all';
@@ -1164,14 +1165,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '1')
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '1')
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
 
         $gender = '1';
         $catCode = 'all';
@@ -1183,14 +1184,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '2')
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '2')
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
         $gender = '2';
         $catCode = 'all';
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
@@ -1201,14 +1202,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '3')
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '3')
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
         $gender = '3';
         $catCode = 'all';
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
@@ -1219,14 +1220,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '4')
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '4')
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
         $gender = '4';
         $catCode = 'all';
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
@@ -1237,14 +1238,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '5')
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '5')
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
         $gender = '5';
         $catCode = 'all';
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
@@ -1279,14 +1280,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('Name', 'like', $val . '%')
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('Name', 'like', $val . '%')
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
 
         $gender = 'all';
         $catCode = 'all';
@@ -1302,7 +1303,7 @@ class Basic extends Controller
                 $query->select('Discount')
                     ->whereBetween('Discount', [$minDiscount, $maxDiscount]);
             })
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
@@ -1312,7 +1313,7 @@ class Basic extends Controller
                     ->whereBetween('Discount', [$minDiscount, $maxDiscount]);
             })
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
 
         $gender = 'all';
         $catCode = 'all';
@@ -1324,14 +1325,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('Cat', '00')
-            ->get();
+            ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('Cat', '00')
             ->groupBy('p.ID')
-            ->get();
+            ->paginate(10);
         $gender = '0';
         $catCode = 'a';
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));

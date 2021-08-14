@@ -1199,7 +1199,7 @@
                     <div id="loadProduct" class="d-none loadProduct"></div>
                     <!-- Products -->
                     <div id="productContainer" class="row g-mb-50">
-                        @foreach($data as $key => $data)
+                        @foreach($data as $key => $row)
                             <div class="col-12 col-lg-3 g-mb-30">
                                 <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
@@ -1210,117 +1210,117 @@
                                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
                                              data-nav-for="#carousel-08-2">
                                             <div class="js-slide">
-                                                <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                     <img class="img-fluid w-100"
-                                                         src="{{ $data->PicPath }}pic1.jpg"
+                                                         src="{{ $row->PicPath }}pic1.jpg"
                                                          alt="Image Description">
                                                 </a>
                                             </div>
-                                            @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic2.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic2.jpg"
+                                                             src="{{ $row->PicPath }}pic2.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic3.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic3.jpg"
+                                                             src="{{ $row->PicPath }}pic3.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic4.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic4.jpg"
+                                                             src="{{ $row->PicPath }}pic4.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic5.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic5.jpg"
+                                                             src="{{ $row->PicPath }}pic5.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic6.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic6.jpg"
+                                                             src="{{ $row->PicPath }}pic6.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic7.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic7.jpg"
+                                                             src="{{ $row->PicPath }}pic7.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic8.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic8.jpg"
+                                                             src="{{ $row->PicPath }}pic8.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic9.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic9.jpg"
+                                                             src="{{ $row->PicPath }}pic9.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic10.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic10.jpg"
+                                                             src="{{ $row->PicPath }}pic10.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic11.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic11.jpg"
+                                                             src="{{ $row->PicPath }}pic11.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
                                             @endif
 
-                                            @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
+                                            @if (file_exists(public_path($row->PicPath.'pic12.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $data->PicPath }}pic12.jpg"
+                                                             src="{{ $row->PicPath }}pic12.jpg"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1336,16 +1336,16 @@
                                                 <h4 class="h6 g-color-black my-1">
                                                     <span class="u-link-v5 g-color-black"
                                                           tabindex="0">
-                                                        {{ $data->Name }}
+                                                        {{ $row->Name }}
                                                         <span
-                                                            class="g-font-size-12 g-font-weight-300">{{ $data->Model }}</span>
+                                                            class="g-font-size-12 g-font-weight-300">{{ $row->Model }}</span>
                                                     </span>
                                                 </h4>
                                                 <ul style="padding: 0"
                                                     class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                                                     <li>
                                                         <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
-                                                           href="#">{{ $data->Gender.' '.$data->HintCat }}</a>
+                                                           href="#">{{ $row->Gender.' '.$row->HintCat }}</a>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -1353,7 +1353,7 @@
                                                class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
                                                data-toggle="tooltip"
                                                data-placement="top"
-                                               href="{{ route('productDetail',[$data->ID,$size[$key]->Size,$size[$key]->Color]) }}"
+                                               href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}"
                                                data-original-title="جزئیات محصول">
                                                 <i class="icon-eye g-line-height-0_7"></i>
                                             </a>
@@ -1363,9 +1363,9 @@
                                         class="d-block g-color-black g-font-size-17 g-ml-10">
                                         <div style="direction: rtl" class="text-left">
                                             <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                                {{  number_format($data->UnitPrice) }}
+                                                {{  number_format($row->UnitPrice) }}
                                             </s>
-                                            <span>{{  number_format($data->FinalPrice) }}</span>
+                                            <span>{{  number_format($row->FinalPrice) }}</span>
                                             <span
                                                 class="d-block g-color-gray-dark-v5 g-font-size-10">تومان</span>
                                         </div>
@@ -1378,44 +1378,10 @@
 
                     <hr class="g-mb-60">
 
-                    <!-- Pagination -->
-                    <nav style="direction: ltr" class="g-mb-60" aria-label="Page Navigation">
-                        <ul class="list-inline">
-                            <li class="list-inline-item hidden-down">
-                                <a class="active u-pagination-v1__item g-width-30 g-height-30 g-brd-gray-light-v3 g-brd-primary--active g-color-white g-bg-primary--active g-font-size-12 rounded-circle g-pa-5"
-                                   href="#">1</a>
-                            </li>
-                            <li class="list-inline-item hidden-down">
-                                <a class="u-pagination-v1__item g-width-30 g-height-30 g-color-gray-dark-v5 g-color-primary--hover g-font-size-12 rounded-circle g-pa-5"
-                                   href="#">2</a>
-                            </li>
-                            <li class="list-inline-item hidden-xs-down">
-                                <a class="u-pagination-v1__item g-width-30 g-height-30 g-color-gray-dark-v5 g-color-primary--hover g-font-size-12 rounded-circle g-pa-5"
-                                   href="#">3</a>
-                            </li>
-                            <li class="list-inline-item hidden-down">
-                                <span
-                                    class="g-width-30 g-height-30 g-color-gray-dark-v5 g-font-size-12 rounded-circle g-pa-5">...</span>
-                            </li>
-                            <li class="list-inline-item hidden-xs-down">
-                                <a class="u-pagination-v1__item g-width-30 g-height-30 g-color-gray-dark-v5 g-color-primary--hover g-font-size-12 rounded-circle g-pa-5"
-                                   href="#">15</a>
-                            </li>
-                            <li class="list-inline-item">
-                                <a class="u-pagination-v1__item g-width-30 g-height-30 g-brd-gray-light-v3 g-brd-primary--hover g-color-gray-dark-v5 g-color-primary--hover g-font-size-12 rounded-circle g-pa-5 g-ml-15"
-                                   href="#" aria-label="Next">
-                      <span aria-hidden="true">
-                        <i class="fa fa-angle-right"></i>
-                      </span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                            <li class="list-inline-item float-right">
-                                <span class="u-pagination-v1__item-info g-color-gray-dark-v4 g-font-size-12 g-pa-5">صفحه 1 از 15</span>
-                            </li>
-                        </ul>
-                    </nav>
-                    <!-- End Pagination -->
+                    {{-- Pagination --}}
+                    <div style="direction: ltr">
+                        {{ $data->links('General.Pagination', ['result' => $data]) }}
+                    </div>
                 </div>
             </div>
             <!-- End Content -->

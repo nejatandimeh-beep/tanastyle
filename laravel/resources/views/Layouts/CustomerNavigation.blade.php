@@ -2407,6 +2407,8 @@
                         <!-- Basket -->
                         <div class="u-basket d-inline-block g-valign-middle g-mr-30 g-pt-8" id="myBasket">
                             <a href="#" onclick="cart()" id="basket-bar-invoker"
+                               data-toggle="tooltip"
+                               data-placement="bottom"
                                title="سبد خرید"
                                class="u-icon-v1 g-color-main g-text-underline--none--hover g-width-20 g-height-20">
                                 <span id="basketNum"
@@ -2465,6 +2467,8 @@
                                 <a href="#"
                                    class="g-font-size-18 g-color-main"
                                    aria-controls="searchform-1"
+                                   data-toggle="tooltip"
+                                   data-placement="bottom"
                                    title="جستجو"
                                    id="searchIcon"
                                    data-dropdown-target="#searchform-1">

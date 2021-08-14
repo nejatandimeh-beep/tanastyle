@@ -129,7 +129,8 @@
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLongTitle">تنظیم اندازه تصویر</h5>
                         <button type="button" class="close"
-                                data-dismiss="modal" aria-label="Close">
+                                data-dismiss="modal"
+                                aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -1257,7 +1258,7 @@
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
 
-                    <div>
+                    <div class="g-mb-40 g-mb-0--lg">
                         @if(!isset($order[0]->ID))
                             <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
                                  role="alert">
@@ -1268,7 +1269,7 @@
                                 <div class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
                                     <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- Date -->
-                                    <div style="padding: 0 !important;"
+                                    <div
                                          class="d-lg-table-cell d-none align-middle g-width-125--md text-center g-color-gray-dark-v5 g-mb-5 g-mb-0--lg">
                                         <div>
                                             <span
@@ -1289,7 +1290,7 @@
 
                                     <!-- Article Content -->
                                     <div
-                                        class="d-flex justify-content-between d-lg-table-cell align-middle g-pt-15 g-py-15--lg g-px-20--lg table-cell-responsive">
+                                        class="d-flex justify-content-between d-lg-table-cell align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4 table-cell-responsive">
                                         <div>
                                             <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
                                                 <span class="g-color-gray-dark-v2">شماره فاکتور</span>
@@ -1307,11 +1308,11 @@
                                     </div>
                                     <!-- End Article Content -->
 
-                                    <div style="padding: 0 !important;"
+                                    <div
                                          class="d-table-cell d-lg-none align-middle g-width-125--md text-center g-color-gray-dark-v5 g-mb-5 g-mb-0--lg">
                                         <div>
                                             <span
-                                                class="d-block g-color-gray-dark-v3 g-font-size-14">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
+                                                class="d-block g-color-gray-dark-v3 g-mt-minus-7 g-mt-0--lg g-font-size-14">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
                                             {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][1].' '.$persianDate[$key][0] }}
                                         </div>
                                     </div>
@@ -1590,7 +1591,7 @@
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
-                    <div>
+                    <div class="g-mb-40 g-mb-0--lg">
                         {{--0: در دست فروشنده 1: تحویل پیک(1) 2: تحویل باجه پستی 3: تحویل پیک(2) 4: تحویل پست 5: تحویل داده شد.--}}
                         {{--گزینه 1 از طریق فروشنده در تبلت پیک(1) ثبت می شود--}}
                         {{--گزینه 2 از طریق پیک در تبلت باجه پستی ثبت می شود--}}
@@ -1602,7 +1603,7 @@
                                 <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- deliveryStatus -->
                                     <div style="padding: 0 !important;"
-                                         class="d-lg-table-cell d-none align-middle text-center g-width-160--md g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
+                                         class="d-lg-table-cell d-none align-middle text-center g-color-gray-dark-v5 g-px-20 g-mb-5 g-mb-0--lg">
                                         <div>
                                             {{ $deliveryHint[$key]['text'] }}
                                             <span
@@ -1622,8 +1623,8 @@
 
                                     <!-- deliveryStatus -->
                                     <div
-                                        class="d-table-cell d-lg-none align-middle text-center g-color-gray-dark-v5  g-px-20--lg g-px-10 g-mb-5 g-mb-0--lg">
-                                        <div>
+                                        class="d-block d-lg-none align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
+                                        <div class="g-px-20--lg g-px-10">
                                             {{ $deliveryHint[$key]['text'] }}
                                             <span
                                                 class="g-font-weight-600 g-line-height-1 g-font-size-18 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
@@ -1729,7 +1730,7 @@
                                         <div>
                                             {{ $returnHint[$key]['text'] }}
                                             <span
-                                                class="g-font-weight-700 g-line-height-1 g-font-size-18 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                                                class="g-font-weight-600 g-line-height-1 g-font-size-18 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
                                                 {{ $returnHint[$key]['location'] }}</span>
                                         </div>
                                     </div>
@@ -1744,7 +1745,7 @@
                                     <!-- End Article Image -->
 
                                     <div
-                                        class="d-table-cell d-lg-none align-middle text-center g-width-160--md g-color-gray-dark-v5 g-px-20--lg g-px-10 g-mb-5 g-mb-0--lg">
+                                        class="d-block d-lg-none align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
                                         <div>
                                             {{ $returnHint[$key]['text'] }}
                                             <span
@@ -1769,7 +1770,7 @@
 
                                     <!-- Date -->
                                     <div
-                                        class="d-md-table-cell align-middle g-pt-30 g-pt-0--lg g-px-20 text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-pt-15 g-pt-0--lg g-px-20 text-left text-lg-right">
                                                     <span
                                                         class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-14">{{ $returnPersianDate[$key][2].' '.$returnPersianDate[$key][1].' '.$returnPersianDate[$key][0] }}</span>
                                     </div>
@@ -2013,7 +2014,7 @@
                         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
-                    <div>
+                    <div class="g-mb-40 g-mb-0--lg">
                         <div id="productLikeEmpty"
                              class="{{ (isset($like[0]->ID)) ? 'd-none':'d-inline-block' }} alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
                              role="alert">
@@ -2034,9 +2035,9 @@
                                     <!-- End Article Image -->
 
                                     <!-- Article Content -->
-                                    <div class="d-md-table-cell align-middle g-pr-20 g-px-20--lg g-width-150--lg">
+                                    <div class="d-md-table-cell align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
                                         <div class="d-flex justify-content-between">
-                                            <div class="d-md-table-cell align-middle g-px-20--lg">
+                                            <div class="d-md-table-cell align-middle g-px-20--lg g-px-10">
                                                 <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
                                                     <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                                     <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
@@ -2047,7 +2048,7 @@
                                                     <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Color }}</em>
                                                 </h3>
                                             </div>
-                                            <div class="smallDevice g-ml-minus-5 g-mt-minus-10">
+                                            <div class="smallDevice g-ml-minus-5 g-mt-minus-10 text-left">
                                                 <a style="cursor: pointer"
                                                    class="u-icon-v1 g-color-gray-dark-v4 g-color-primary--hover rounded-circle"
                                                    data-toggle="tooltip"
@@ -2069,7 +2070,7 @@
 
                                     <!-- Qty -->
                                     <div
-                                        class="d-md-table-cell align-middle g-py-5 g-px-20 text-right">
+                                        class="d-md-table-cell align-middle g-py-5 g-px-20--lg g-px-10 text-right">
                                         <span
                                             class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-17">{{ $row->Qty }}</span>
                                         <span
