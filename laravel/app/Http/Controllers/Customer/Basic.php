@@ -1047,8 +1047,12 @@ class Basic extends Controller
     }
 
 // ------------------------------------------[ Products Filter ]--------------------------------------------------------
-    public function productFilter($gender, $cat, $size, $priceMin, $priceMax, $color)
+    public function productFilter($gender, $cat, $size, $priceMin, $priceMax, $color, $filterChange)
     {
+        session_start();
+        if ($filterChange === 1)
+            $_SESSION['listSkip'] = 0;
+
         $gender = json_decode($gender);
         $cat = json_decode($cat);
         $size = json_decode($size);
@@ -1067,7 +1071,11 @@ class Basic extends Controller
             ->orderBy('p.GenderCode')
             ->orderBy('p.CatCode')
 //            ->groupBy('p.ID')
+            ->skip($_SESSION['listSkip'])
+            ->take(10)
             ->get();
+
+        $_SESSION['listSkip']+=10;
 
         $products = '';
         foreach ($data as $key => $row) {
@@ -1143,6 +1151,9 @@ class Basic extends Controller
 // ---------------------------------------------[Product List]----------------------------------------------------------
     public function productFemaleList()
     {
+        session_start();
+        $_SESSION['listSkip'];
+
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '0')

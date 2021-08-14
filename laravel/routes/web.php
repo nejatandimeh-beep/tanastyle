@@ -229,7 +229,7 @@ Route::get('/Customer-Cart-Add/{id}', 'Customer\Basic@cartAdd');
 Route::get('/Customer-Cart-Qty-Check/{pdID}', 'Customer\Basic@cartQtyCheck');
 
 // -------------------[ Products Filter [ Ajax ] ]-----------------------
-Route::get('/Customer-Product-Custom-Filter/{gender}/{cat}/{size}/{priceMin}/{priceMax}/{color}', 'Customer\Basic@productFilter');
+Route::get('/Customer-Product-Custom-Filter/{gender}/{cat}/{size}/{priceMin}/{priceMax}/{color}/{filterChange}', 'Customer\Basic@productFilter');
 
 
 // -------------------[ Cropper.js ]-----------------------

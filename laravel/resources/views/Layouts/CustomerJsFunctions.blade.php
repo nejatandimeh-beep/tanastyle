@@ -1,6 +1,7 @@
 @section('CustomerJsFunction')
     <script>
-        let productShowLen = [], lastScrollTop = 0;
+        let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [];
+
         $(document).ready(function () {
             $.ajax({
                 type: 'GET',
@@ -85,100 +86,6 @@
                         }
                     });
                 }, 1000);
-
-            // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
-            let gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [];
-
-            if ($('#allProductList').length > 0)
-                $('input[name="gender"]:checked').each(function () {
-                    gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
-                });
-            $('input[name="category"]:checked').each(function () {
-                category.push($(this).attr('id'));
-            });
-            $('input[name="size"]:checked').each(function () {
-                size.push($(this).attr('id'));
-            });
-            $('input[name="color"]:checked').each(function () {
-                color.push($(this).attr('id').replace(/[^0-9]/gi, ''));
-            });
-
-            $('input[name="gender"]').on('change', function () {
-                gender = [];
-                $('#productContainer').empty();
-                $('#loadProduct').removeClass('d-none');
-                $('input[name="gender"]:checked').each(function () {
-                    gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
-                });
-                $('#productContainer').empty();
-                window.scrollTo(0,0);
-                lastScrollTop = $(window).scrollTop();
-                filtering();
-            });
-            $('input[name="category"]').on('change', function () {
-                category = []
-                $('#productContainer').empty();
-                $('#loadProduct').removeClass('d-none');
-                $('input[name="category"]:checked').each(function () {
-                    category.push($(this).attr('id'));
-                });
-                $('#productContainer').empty();
-                window.scrollTo(0,0);
-                lastScrollTop = $(window).scrollTop();
-                filtering();
-            });
-            $('input[name="size"]').on('change', function () {
-                size = [];
-                $('#productContainer').empty();
-                $('#loadProduct').removeClass('d-none');
-                $('input[name="size"]:checked').each(function () {
-                    size.push($(this).attr('id'));
-                });
-                $('#productContainer').empty();
-                window.scrollTo(0,0);
-                lastScrollTop = $(window).scrollTop();
-                filtering();
-            });
-            $('input[name="color"]').on('change', function () {
-                color = [];
-                $('#productContainer').empty();
-                $('#loadProduct').removeClass('d-none');
-                $('input[name="color"]:checked').each(function () {
-                    color.push($(this).attr('id').replace(/[^0-9]/gi, ''));
-                });
-                $('#productContainer').empty();
-                window.scrollTo(0,0);
-                lastScrollTop = $(window).scrollTop();
-                filtering();
-            });
-
-            function filtering() {
-                $.ajax({
-                    type: 'GET',
-                    url: '/Customer-Product-Custom-Filter/'
-                        + JSON.stringify(gender) + '/'
-                        + JSON.stringify(category) + '/'
-                        + JSON.stringify(size) + '/'
-                        + priceMin + '/'
-                        + priceMax + '/'
-                        + JSON.stringify(color),
-                    success: function (data) {
-                        productShowLen = data.split('<span class="d-none">break</span>');
-                        $('#loadProduct').addClass('d-none');
-                        for (let i = 0; i < 10; i++)
-                            $('#productContainer').append(productShowLen[i]);
-
-                        if ($('#contentTop').length > 0)
-                            $('html, body').animate({scrollTop: $('#contentTop').offset().top}, 500);
-                    }
-                });
-            }
-
-            $('#priceFilterSubmit').on('click', function () {
-                priceMin = $('#price-min').val().replace(new RegExp(',', 'g'), "");
-                priceMax = $('#price-max').val().replace(new RegExp(',', 'g'), "");
-                filtering();
-            });
 
             if ($('#cartCount').text() === 0) {
                 $('#cartBuyBtn').hide();
@@ -279,12 +186,105 @@
             }
         });
 
+        // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
+
+        if ($('#allProductList').length > 0)
+            $('input[name="gender"]:checked').each(function () {
+                gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
+            });
+        $('input[name="category"]:checked').each(function () {
+            category.push($(this).attr('id'));
+        });
+        $('input[name="size"]:checked').each(function () {
+            size.push($(this).attr('id'));
+        });
+        $('input[name="color"]:checked').each(function () {
+            color.push($(this).attr('id').replace(/[^0-9]/gi, ''));
+        });
+
+        $('input[name="gender"]').on('change', function () {
+            gender = [];
+            $('#productContainer').empty();
+            $('#loadProduct').removeClass('d-none');
+            $('input[name="gender"]:checked').each(function () {
+                gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
+            });
+            $('#productContainer').empty();
+            window.scrollTo(0,0);
+            lastScrollTop = $(window).scrollTop();
+            filtering(1);
+        });
+        $('input[name="category"]').on('change', function () {
+            category = []
+            $('#productContainer').empty();
+            $('#loadProduct').removeClass('d-none');
+            $('input[name="category"]:checked').each(function () {
+                category.push($(this).attr('id'));
+            });
+            $('#productContainer').empty();
+            window.scrollTo(0,0);
+            lastScrollTop = $(window).scrollTop();
+            filtering(1);
+        });
+        $('input[name="size"]').on('change', function () {
+            size = [];
+            $('#productContainer').empty();
+            $('#loadProduct').removeClass('d-none');
+            $('input[name="size"]:checked').each(function () {
+                size.push($(this).attr('id'));
+            });
+            $('#productContainer').empty();
+            window.scrollTo(0,0);
+            lastScrollTop = $(window).scrollTop();
+            filtering(1);
+        });
+        $('input[name="color"]').on('change', function () {
+            color = [];
+            $('#productContainer').empty();
+            $('#loadProduct').removeClass('d-none');
+            $('input[name="color"]:checked').each(function () {
+                color.push($(this).attr('id').replace(/[^0-9]/gi, ''));
+            });
+            $('#productContainer').empty();
+            window.scrollTo(0,0);
+            lastScrollTop = $(window).scrollTop();
+            filtering(1);
+        });
+
+        function filtering(filterChange) {
+            if (filterChange===1)
+                $('#productContainer').empty();
+
+            $.ajax({
+                type: 'GET',
+                url: '/Customer-Product-Custom-Filter/'
+                    + JSON.stringify(gender) + '/'
+                    + JSON.stringify(category) + '/'
+                    + JSON.stringify(size) + '/'
+                    + priceMin + '/'
+                    + priceMax + '/'
+                    + JSON.stringify(color)
+                    + filterChange,
+                success: function (data) {
+                    $('#loadProduct').addClass('d-none');
+                    $('#productContainer').append(data);
+
+                    if ($('#contentTop').length > 0)
+                        $('html, body').animate({scrollTop: $('#contentTop').offset().top}, 500);
+                }
+            });
+        }
+
+        $('#priceFilterSubmit').on('click', function () {
+            priceMin = $('#price-min').val().replace(new RegExp(',', 'g'), "");
+            priceMax = $('#price-max').val().replace(new RegExp(',', 'g'), "");
+            filtering();
+        });
+
         $(window).scroll(function (event) {
             let st = $(this).scrollTop();
             if (st - lastScrollTop > 1000) {
-                productShowLen.splice(0, 10);
-                for (let i = 0; i < (productShowLen.length > 10 ? 10 : productShowLen.length); i++)
-                    $('#productContainer').append(productShowLen[i]);
+                filtering(0);
             } else {
                 return true;
             }
