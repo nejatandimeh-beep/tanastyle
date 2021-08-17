@@ -588,6 +588,20 @@ input[type=number] {
     background:url("/../img/Other/loader.gif") no-repeat center center rgb(255, 255, 255)
 }
 
+.emptyCart{
+    width:250px;
+    height:250px;
+    background-size: contain;
+    background:url("/../img/Other/emptyCart.gif") no-repeat center center rgb(255, 255, 255)
+}
+
+.noProduct{
+    width:350px;
+    height:250px;
+    background-size: contain;
+    background:url("/../img/Other/noProduct.gif") no-repeat center center rgb(255, 255, 255)
+}
+
 body a{
     user-select: none !important;
 }

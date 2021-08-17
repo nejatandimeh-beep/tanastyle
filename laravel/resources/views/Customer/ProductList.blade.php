@@ -53,7 +53,7 @@
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
-                                                                   id="gender-9"
+                                                                   id="gender-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
                                                                    type="checkbox" {{ ($gender === 'all') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
@@ -1373,6 +1373,10 @@
                                 </figure>
                             </div>
                         @endforeach
+                    </div>
+
+                    <div style="display: none" id="noProduct">
+                        <div class="noProduct g-mt-100--lg g-mb-100--lg mx-auto"></div>
                     </div>
                     <!-- End Products -->
 

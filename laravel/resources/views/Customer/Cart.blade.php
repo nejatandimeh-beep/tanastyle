@@ -308,11 +308,7 @@
                 </div>
 
                 <div id="cartEmptyAlert" class="{{ isset($data[0]) ? 'd-none':'' }}">
-                    <div
-                        class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center g-mb-100"
-                        role="alert">
-                        <strong>سبد خالی است: </strong>شما هیچ محصولی در سبد خرید ندارید.
-                    </div>
+                    <div id="emptyCart" class="emptyCart g-mt-100--lg g-mb-100--lg mx-auto"></div>
                 </div>
 
             </div>

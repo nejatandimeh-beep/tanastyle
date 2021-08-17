@@ -1050,13 +1050,14 @@ class Basic extends Controller
     public function productFilter($gender, $cat, $size, $priceMin, $priceMax, $color, $filterChange)
     {
         session_start();
-        if ($filterChange === 1)
+        if ($filterChange == 1)
             $_SESSION['listSkip'] = 0;
 
         $gender = json_decode($gender);
         $cat = json_decode($cat);
         $size = json_decode($size);
         $color = json_decode($color);
+
         $data = DB::table('product as p')
             ->select('p.*', 'pd.*')
             ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
@@ -1079,7 +1080,7 @@ class Basic extends Controller
 
         $products = '';
         foreach ($data as $key => $row) {
-            $products = $products . '<div class="col-12 col-lg-4 g-mb-30">
+            $products = $products . '<div class="col-12 col-lg-4 g-mb-30 filterApply">
     <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                     class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
         <div class="g-pt-10">
@@ -1108,7 +1109,7 @@ class Basic extends Controller
                     <ul style="padding: 0"
                         class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                         <li>
-                            <span class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600 g-mb-5" href="#">' . $row->Size . '</span>
+                            <span class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600 g-mb-5" href="#">' . $row->Size.' '.$row->Color . '</span>
                         </li>
                         <li>
                             <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
@@ -1141,7 +1142,7 @@ class Basic extends Controller
     </figure>
 </div>
 
-<span class="d-none">break</span>
+<span id="lineBreak" class="d-none">break</span>
 
 ';
         }
@@ -1152,7 +1153,7 @@ class Basic extends Controller
     public function productFemaleList()
     {
         session_start();
-        $_SESSION['listSkip'];
+        $_SESSION['listSkip']=0;
 
         $data = DB::table('product')
             ->select('*')
