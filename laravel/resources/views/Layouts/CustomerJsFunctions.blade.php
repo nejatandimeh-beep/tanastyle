@@ -185,9 +185,16 @@
                 if ($('#img12').length > 0)
                     magnify("img12", 3);
             }
+
+            if (!$('#productDiv').length > 0) {
+                $('#noProduct').show();
+            }
         });
 
         // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
+        if ($('#productContainer').text() === ' ') {
+            $('#noProduct').show();
+        }
         if ($('#productContainer').length > 0) {
             $('input[name="gender"]:checked').each(function () {
                 gender.push($(this).attr('id').replace(/[^0-9]/gi, ''));
@@ -215,10 +222,9 @@
             $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
-            setTimeout(function () {
-                if(!$('#lineBreak').length)
-                    $('#noProduct').show();
-            }, 500);
+
+            if (!$('#lineBreak').length)
+                $('#noProduct').show();
         });
 
         $('input[name="category"]').on('change', function () {
@@ -232,10 +238,8 @@
             $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
-            setTimeout(function () {
-                if(!$('#lineBreak').length)
-                    $('#noProduct').show();
-            }, 500);
+            if (!$('#lineBreak').length)
+                $('#noProduct').show();
         });
         $('input[name="size"]').on('change', function () {
             $('#noProduct').hide();
@@ -247,10 +251,8 @@
             $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
-            setTimeout(function () {
-                if(!$('#lineBreak').length)
-                    $('#noProduct').show();
-            }, 500);
+            if (!$('#lineBreak').length)
+                $('#noProduct').show();
         });
         $('input[name="color"]').on('change', function () {
             $('#noProduct').hide();
@@ -262,10 +264,8 @@
             $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
-            setTimeout(function () {
-                if(!$('#lineBreak').length)
-                    $('#noProduct').show();
-            }, 500);
+            if (!$('#lineBreak').length)
+                $('#noProduct').show();
         });
 
         function filtering(filterChange) {
@@ -274,6 +274,7 @@
 
             $.ajax({
                 type: 'GET',
+                async: false,
                 url: '/Customer-Product-Custom-Filter/'
                     + JSON.stringify(gender) + '/'
                     + JSON.stringify(category) + '/'
@@ -293,13 +294,12 @@
             $('#noProduct').hide();
             priceMin = $('#price-min').val().replace(new RegExp(',', 'g'), "");
             priceMax = $('#price-max').val().replace(new RegExp(',', 'g'), "");
-            $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+            if(priceMax>priceMin)
+                $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
-            setTimeout(function () {
-                if(!$('#lineBreak').length)
-                    $('#noProduct').show();
-            }, 500);
+            if (!$('#lineBreak').length)
+                $('#noProduct').show();
         });
 
         $(window).scroll(function (event) {
@@ -684,7 +684,7 @@
             }
         });
 
-        var
+        let
             persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
             arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
             fixNumbers = function (str) {
@@ -758,6 +758,7 @@
                 $('#priceFilterSubmit').attr('disabled', false);
             else
                 $('#priceFilterSubmit').attr('disabled', true);
+            
             ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // برای افزودن کوما به مبلغ
         }
 
@@ -965,12 +966,15 @@
         function addColor(val, id) {
             $('#addToBasketBtn').addClass('d-none');
             $('#buy').addClass('d-none');
-            $('#waitingCheckCart').removeClass('d-none');
             $('#attachToBasket').addClass('d-none');
             $('#colorContainer').empty();
             $('#waitingIconColor').show();
             $('#waitingIconQty').show();
             $('#colorQtyContainer').hide();
+            if ($('#loginAlert').text() === 'login') {
+                $('#waitingCheckCart').removeClass('d-none');
+            }
+
             $.ajax({
                 type: 'GET',
                 url: "/Customer-Product-SizeInfo/" + id + '/' + val,

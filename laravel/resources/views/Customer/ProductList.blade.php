@@ -799,7 +799,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/allColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -832,7 +833,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/whiteColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -865,7 +867,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/redColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -898,7 +901,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/pinkColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -931,7 +935,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/orangeColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -964,7 +969,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/yellowColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -997,7 +1003,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/greenColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -1030,7 +1037,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/blueColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -1063,7 +1071,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/magentaColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -1096,7 +1105,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/brownColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -1129,7 +1139,8 @@
                                                     </label>
                                                 </div>
                                                 <div>
-                                                    <img style="border-radius: 5px" class="img-fluid w-100 g-opacity-0_7"
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/blackColor.png') }}"
                                                          alt="Image Description">
                                                 </div>
@@ -1150,9 +1161,9 @@
                     <div id="stickyDiv2" style="z-index: 100 !important;"
                          class="sticky-top g-bg-white-opacity-0_9 g-mb-15">
                         <div class="d-flex g-pt-10 g-pb-10">
-                            <div id="filterContent" class="d-flex col-12 justify-content-between">
+                            <div id="filterContent" class="d-flex col-12 justify-content-between g-px-0">
                                 <div style="display: block" id="smallFilterDiv"
-                                     class="sideBarButton">
+                                     class="sideBarButton g-ml-10">
                                     <li class="list-inline-item">
                                         <a class="u-icon-v2 u-icon-size--xs g-brd-gray-light-v3 g-brd-black--hover g-color-gray-dark-v5 g-color-black--hover">
                                             <i style="color: #aaaaaa;" class="icon-options"></i>
@@ -1200,7 +1211,7 @@
                     <!-- Products -->
                     <div id="productContainer" class="row g-mb-50">
                         @foreach($data as $key => $row)
-                            <div class="col-12 col-lg-3 g-mb-30">
+                            <div id="productDiv" class="col-12 col-lg-3 g-mb-30">
                                 <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
                                     <div class="g-pt-10">
@@ -1329,7 +1340,8 @@
                                     </div>
 
                                     <!-- مشخصات محصول -->
-                                    <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
+                                    <div style="direction: rtl"
+                                         class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
                                         <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
                                         <div class="d-flex justify-content-between col-12 p-0">
                                             <div class="d-flex flex-column">

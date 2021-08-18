@@ -700,4 +700,78 @@
         </article>
         <!-- End Article -->
     </div>
+
+    <div class="container g-pb-100">
+        <div style="direction: rtl" class="g-brd-bottom g-brd-gray-light-v4 g-mt-30 g-mb-10">
+            <h6>محصولات مشابه</h6>
+        </div>
+        <div id="js-carousel-1" class="js-carousel g-pb-100 g-mx-minus-10"
+             data-infinite="true"
+             data-slides-show="4"
+             data-autoplay="1"
+             data-speed="5000"
+             data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
+             data-arrow-left-classes="fa fa-angle-left g-left-10 rounded-0"
+             data-arrow-right-classes="fa fa-angle-right g-right-10 rounded-0"
+             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">
+            @foreach($similarProduct as $key =>$row)
+                <div class="js-slide g-mx-10">
+                    <!-- Product -->
+                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-30">
+                        <div class="g-pt-10">
+                            <div id="carousel-08-1"
+                                 class="js-carousel text-center g-mb-20"
+                                 data-infinite="1"
+                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
+                                 data-nav-for="#carousel-08-2">
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                             alt="Image Description">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- مشخصات محصول -->
+                        <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
+                            <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                            <div class="d-flex flex-column">
+                                <h4 class="h6 g-color-black my-1">
+                                            <span class="u-link-v5 g-color-black"
+                                                  tabindex="0">
+                                                {{ $row->Name }}
+                                                <span
+                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
+                                                <span
+                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
+                                            </span>
+                                </h4>
+                                <div>
+                                            <span class="g-ml-5">سایز <span
+                                                    class="g-color-primary">{{ $row->Size }}</span></span>
+                                    <span>رنگ <span class="g-color-primary">{{ $row->Color }}</span></span>
+                                </div>
+                                <span>موجودی <span id="{{ 'cartQty'.$key }}"
+                                                   class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                            </div>
+                        </div>
+                        <div
+                            class="d-block g-color-black g-font-size-17 g-ml-10">
+                            <div style="direction: rtl" class="text-left">
+                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                    {{  number_format($row->UnitPrice) }}
+                                </s>
+                                <span>{{  number_format($row->FinalPrice) }}</span>
+                                <span
+                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                            </div>
+                        </div>
+                    </figure>
+                    <!-- End Product -->
+                </div>
+            @endforeach
+        </div>
+    </div>
 @endsection

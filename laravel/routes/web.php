@@ -160,7 +160,7 @@ Route::get('/Customer-Product-BabyBoy-List', 'Customer\Basic@productBabyBoyList'
 
 Route::get('/Customer-Product-Search-List/{val}', 'Customer\Basic@productSearchList')->name('productSearchList');
 
-Route::get('/Customer-Product-00', 'Customer\Basic@product00')->name('product00');
+Route::get('/Customer-Product-/{gender}/{cat}/{catCode}', 'Customer\Basic@product')->name('menuProduct');
 
 // Customer Product Detail
 Route::get('/Customer-Product-Detail/{id}/{size}/{color}', 'Customer\Basic@productDetail')->name('productDetail');

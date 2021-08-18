@@ -5,7 +5,7 @@
     <header id="js-header2" class="u-header u-header--static">
         <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-pt-10 g-pb-10--lg">
             <nav class="js-mega-menu hs-menu-initialized hs-menu-horizontal navbar navbar-toggleable-md">
-                <div class="container" id="HeaderContainer">
+                <div class="container g-px-0" id="HeaderContainer">
                     <!-- Responsive Toggle Button -->
                     <button onclick="closeOtherMenu()"
                             class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-right-0"
@@ -75,21 +75,24 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="{{ route('product00') }}">شورت</a>
+                                                                                      href="{{ route('menuProduct',['0','00','a']) }}">شورت</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">سوتین</a>
+                                                                                      href="{{ route('menuProduct',['0','01','a']) }}">سوتین</a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','02','a']) }}">ست
                                                                         لباس
                                                                         زیر</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">زیر
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','03','a']) }}">زیر
                                                                         پوش</a>
                                                                 </li>
                                                                 <li style="direction: rtl" class="g-mb-5"><a
-                                                                        class="g-color-main" href="#">گن</a>
-                                                                    <span
-                                                                        class="u-label g-bg-primary g-ml-10">جدید</span>
+                                                                        class="g-color-main"
+                                                                        href="{{ route('menuProduct',['0','04','a']) }}">گن</a>
+    {{--                                                                    <span--}}
+    {{--                                                                        class="u-label g-bg-primary g-ml-10">جدید</span>--}}
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -118,19 +121,19 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شلوارک</a></li>
+                                                                                      href="{{ route('menuProduct',['0','10','b']) }}">شلوارک</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شلوار</a></li>
+                                                                                      href="{{ route('menuProduct',['0','11','b']) }}">شلوار</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main" href="#">شلوار
                                                                         راحتی</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">دامن</a>
+                                                                                      href="{{ route('menuProduct',['0','12','b']) }}">دامن</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">لگ</a>
+                                                                                      href="{{ route('menuProduct',['0','13','b']) }}">لگ</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">جوراب</a></li>
+                                                                                      href="{{ route('menuProduct',['0','14','b']) }}">جوراب</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -158,38 +161,43 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تیشرت</a></li>
+                                                                                      href="{{ route('menuProduct',['0','20','c']) }}">تیشرت</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پولوشرت</a></li>
+                                                                                      href="{{ route('menuProduct',['0','21','c']) }}">پولوشرت</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تاپ</a>
+                                                                                      href="{{ route('menuProduct',['0','22','c']) }}">تاپ</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تونیک</a></li>
+                                                                                      href="{{ route('menuProduct',['0','23','c']) }}">تونیک</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پیراهن</a></li>
+                                                                                      href="{{ route('menuProduct',['0','24','c']) }}">پیراهن</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شومیز</a></li>
+                                                                                      href="{{ route('menuProduct',['0','25','c']) }}">شومیز</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">بلوز</a>
+                                                                                      href="{{ route('menuProduct',['0','26','c']) }}">بلوز</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پلیور</a></li>
+                                                                                      href="{{ route('menuProduct',['0','27','c']) }}">پلیور</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">ژاکت</a>
+                                                                                      href="{{ route('menuProduct',['0','28','c']) }}">ژاکت</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">جلیقه</a></li>
+                                                                                      href="{{ route('menuProduct',['0','29','c']) }}">جلیقه</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">سویشرت</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کت
+                                                                                      href="{{ route('menuProduct',['0','210','c']) }}">هودی</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','211','c']) }}">سویشرت</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','212','c']) }}">کت
                                                                         تک</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کت
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','213','c']) }}">کت
                                                                         پاییزه</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کت
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','214','c']) }}">کت
                                                                         زمستانه</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">کاپشن</a></li>
+                                                                                      href="{{ route('menuProduct',['0','215','c']) }}">کاپشن</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -216,24 +224,28 @@
                                                          aria-labelledby="accordion-06-heading-07">
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">لباس
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','30','d']) }}">لباس
                                                                         خواب</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">مانتو</a></li>
+                                                                                      href="{{ route('menuProduct',['0','31','d']) }}">مانتو</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پانچو</a></li>
+                                                                                      href="{{ route('menuProduct',['0','32','d']) }}">پانچو</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">رویه</a>
+                                                                                      href="{{ route('menuProduct',['0','33','d']) }}">رویه</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شنل</a>
+                                                                                      href="{{ route('menuProduct',['0','34','d']) }}">شنل</a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کت
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','35','d']) }}">کت
                                                                         شلوار</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','36','d']) }}">ست
                                                                         لباس
                                                                         مجلسی</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','37','d']) }}">ست
                                                                         لباس
                                                                         اداری</a></li>
                                                             </ul>
@@ -246,26 +258,25 @@
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5  g-font-weight-600">کفش</h4>
                                             <ul class="list-unstyled g-mb-25 p-0 g-pl-40--lg">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">دمپایی</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">صندل</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">تخت</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">پاشنه دار</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">روزمره</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">نیم بوت</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">بوت</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">مراقبت کفش</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','50','f']) }}">دمپایی</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','51','f']) }}">صندل</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','52','f']) }}">تخت</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','53','f']) }}">پاشنه دار</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','54','f']) }}">روزمره</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','55','f']) }}">نیم بوت</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','56','f']) }}">بوت</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','shoeCare','f']) }}">مراقبت کفش</a></li>
                                             </ul>
 
                                             <h4 class="h5  g-font-weight-600">کیف</h4>
                                             <ul class="list-unstyled p-0 g-pl-40--lg">
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">پول</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">کارت</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">دستی</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">رودوشی</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">اداری</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">سفری</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">کوله پشتی</a></li>
-                                                <li class="g-mb-5"><a class="g-color-main" href="#">چمدان</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','40','e']) }}">پول</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','41','e']) }}">کارت</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','42','e']) }}">دستی</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','43','e']) }}">دوشی</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','44','e']) }}">اداری</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','45','e']) }}">سفری</a></li>
+                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','46','e']) }}">کوله پشتی</a></li>
                                             </ul>
                                         </div>
                                         {{-- ورزشی --}}
@@ -296,7 +307,7 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">مایو</a>
+                                                                                      href="{{ route('menuProduct',['0','600','g']) }}">مایو</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -325,19 +336,16 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شورت</a>
+                                                                                      href="{{ route('menuProduct',['0','610','h']) }}">شورت</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شلوارک</a>
+                                                                                      href="{{ route('menuProduct',['0','611','h']) }}">شلوارک</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">اسلش</a>
+                                                                                      href="{{ route('menuProduct',['0','612','h']) }}">اسلش</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شلوار</a>
-                                                                </li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">دامن</a>
+                                                                                      href="{{ route('menuProduct',['0','613','h']) }}">دامن</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -366,23 +374,23 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تیشرت</a></li>
+                                                                                      href="{{ route('menuProduct',['0','620','i']) }}">تیشرت</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پولوشرت</a></li>
+                                                                                      href="{{ route('menuProduct',['0','621','i']) }}">پولوشرت</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">تاپ</a>
+                                                                                      href="{{ route('menuProduct',['0','622','i']) }}">تاپ</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پیراهن</a></li>
+                                                                                      href="{{ route('menuProduct',['0','623','i']) }}">پیراهن</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">جلیقه</a></li>
+                                                                                      href="{{ route('menuProduct',['0','624','i']) }}">جلیقه</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">هودی</a>
+                                                                                      href="{{ route('menuProduct',['0','625','i']) }}">هودی</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">سویشرت</a></li>
+                                                                                      href="{{ route('menuProduct',['0','626','i']) }}">سویشرت</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">کاپشن</a></li>
+                                                                                      href="{{ route('menuProduct',['0','627','i']) }}">کاپشن</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -410,7 +418,7 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">ست ورزشی</a></li>
+                                                                                      href="{{ route('menuProduct',['0','630','j']) }}">ست ورزشی</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -438,9 +446,10 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">ساک</a>
+                                                                                      href="{{ route('menuProduct',['0','640','k']) }}">ساک</a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کوله
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','641','k']) }}">کوله
                                                                         پشتی</a></li>
                                                             </ul>
                                                         </div>
@@ -469,17 +478,14 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">ساده</a>
+                                                                                      href="{{ route('menuProduct',['0','650','l']) }}">ساده</a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کتانی
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','651','l']) }}">کتانی
                                                                     </a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">مخصوص
-                                                                        دویدن</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">سالنی</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">حرفه ای</a></li>
+                                                                                      href="{{ route('menuProduct',['0','652','l']) }}">حرفه ای</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -506,31 +512,27 @@
                                                          aria-labelledby="accordion-07-heading-12">
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
-                                                                        کلاه</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">هد
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','ProSportCap','m']) }}">کلاه حرفه ای</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','SportHeadBand','m']) }}">هد
                                                                         بند</a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','SportGlasses','m']) }}">انواع
                                                                         عینک</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">بینی
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','SwimmingNoseClip','m']) }}">بینی
                                                                         بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">گوش
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','Earplugs','m']) }}">گوش
                                                                         بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">بازو
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','ArmBand','m']) }}">بازو
                                                                         بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">مچ
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','SportWristBand','m']) }}">مچ
                                                                         بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','SportGloves','m']) }}">انواع
                                                                         دستکش</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','CalfSupport','m']) }}">انواع
                                                                         ساق</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">انواع
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','SportSocks','m']) }}">انواع
                                                                         جوراب</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">حوله</a>
-                                                                </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">قم
+                                                                <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','CanteenBottle','m']) }}">قم
                                                                         قمه</a></li>
                                                             </ul>
                                                         </div>
@@ -566,18 +568,22 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">گوشواره</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">گردن
+                                                                                      href="{{ route('menuProduct',['0','700','n']) }}">گوشواره</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','701','n']) }}">گردن
                                                                         بند</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">النگو</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">دست
+                                                                                      href="{{ route('menuProduct',['0','702','n']) }}">النگو</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','703','n']) }}">دست
                                                                         بند</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">انگشتر</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">پا
+                                                                                      href="{{ route('menuProduct',['0','704','n']) }}">انگشتر</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','705','n']) }}">پا
                                                                         بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','706','n']) }}">ست
                                                                         بدلیجات</a></li>
                                                             </ul>
                                                         </div>
@@ -605,17 +611,21 @@
                                                          aria-labelledby="accordion-08-heading-14">
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">تاج
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','710','o']) }}">تاج
                                                                     </a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">گیره
-                                                                        مو</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کش
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','711','o']) }}">گیره
                                                                         مو</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">کلیپس</a></li>
+                                                                                      href="{{ route('menuProduct',['0','712','o']) }}">کش
+                                                                        مو</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">سنجاقک</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">آرایش
+                                                                                      href="{{ route('menuProduct',['0','713','o']) }}">کلیپس</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','714','o']) }}">سنجاقک</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','715','o']) }}">آرایش
                                                                         و مراقبت مو</a></li>
                                                             </ul>
                                                         </div>
@@ -643,16 +653,19 @@
                                                          aria-labelledby="accordion-08-heading-15">
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کلاه
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','720','p']) }}">کلاه
                                                                         زمستانی</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">روسری</a></li>
+                                                                                      href="{{ route('menuProduct',['0','721','p']) }}">روسری</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">شال</a>
+                                                                                      href="{{ route('menuProduct',['0','722','p']) }}">شال</a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">شال
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','723','p']) }}">شال
                                                                         گردن</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','724','p']) }}">ست
                                                                         کلاه
                                                                         و شال گردن</a></li>
                                                             </ul>
@@ -682,28 +695,27 @@
                                                         <div class="u-accordion__body g-color-gray-dark-v5 p-0">
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">عینک</a>
+                                                                                      href="{{ route('menuProduct',['0','730','q']) }}">عینک</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">کراوات</a></li>
+                                                                                      href="{{ route('menuProduct',['0','731','q']) }}">کراوات</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">پاپیون</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ساس
+                                                                                      href="{{ route('menuProduct',['0','732','q']) }}">پاپیون</a></li>
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','733','q']) }}">ساس
                                                                         بند</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">ساعت</a>
+                                                                                      href="{{ route('menuProduct',['0','734','q']) }}">ساعت</a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">دست
-                                                                        بند</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">کمر
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','735','q']) }}">کمر
                                                                         بند</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-main"
-                                                                                      href="#">چتر</a>
+                                                                                      href="{{ route('menuProduct',['0','736','q']) }}">چتر</a>
                                                                 </li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">ست
+                                                                <li class="g-mb-5"><a class="g-color-main"
+                                                                                      href="{{ route('menuProduct',['0','737','q']) }}">ست
                                                                         هدیه</a></li>
-                                                                <li class="g-mb-5"><a class="g-color-main" href="#">نگهدارنده
-                                                                        گوشی</a></li>
                                                             </ul>
                                                         </div>
                                                     </div>

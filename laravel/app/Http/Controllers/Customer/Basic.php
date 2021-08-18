@@ -712,9 +712,19 @@ class Basic extends Controller
         } else
             $customerRate = 0;
 
+        $similarProduct = DB::table('product as p')
+            ->select('*')
+            ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('p.GenderCode',$data->GenderCode)
+            ->where('p.CatCode',$data->CatCode)
+            ->where('p.ID','<>',$id)
+            ->orderBy('pd.VisitCounter', 'DESC')
+            ->take(10)
+            ->get();
+
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo', 'colorInfo'));
+        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo', 'colorInfo','similarProduct'));
     }
 
     public function productVisit($id)
@@ -1174,6 +1184,9 @@ class Basic extends Controller
 
     public function productMaleList()
     {
+        session_start();
+        $_SESSION['listSkip']=0;
+
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '1')
@@ -1193,6 +1206,9 @@ class Basic extends Controller
 
     public function productGirlList()
     {
+        session_start();
+        $_SESSION['listSkip']=0;
+
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '2')
@@ -1211,6 +1227,9 @@ class Basic extends Controller
 
     public function productBoyList()
     {
+        session_start();
+        $_SESSION['listSkip']=0;
+
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '3')
@@ -1229,6 +1248,9 @@ class Basic extends Controller
 
     public function productBabyGirlList()
     {
+        session_start();
+        $_SESSION['listSkip']=0;
+
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '4')
@@ -1247,6 +1269,9 @@ class Basic extends Controller
 
     public function productBabyBoyList()
     {
+        session_start();
+        $_SESSION['listSkip']=0;
+
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '5')
@@ -1289,6 +1314,9 @@ class Basic extends Controller
 
     public function productSearchList($val)
     {
+        session_start();
+        $_SESSION['listSkip']=0;
+
         $data = DB::table('product')
             ->select('*')
             ->where('Name', 'like', $val . '%')
@@ -1308,6 +1336,8 @@ class Basic extends Controller
 
     public function spacialSelling($minDiscount, $maxDiscount)
     {
+        session_start();
+        $_SESSION['listSkip']=0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1332,21 +1362,25 @@ class Basic extends Controller
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
-    public function product00()
+    public function product($gender,$cat,$catCode)
     {
+        session_start();
+        $_SESSION['listSkip']=0;
+
         $data = DB::table('product')
             ->select('*')
-            ->where('Cat', '00')
+            ->where('genderCode', $gender)
+            ->where('Cat', $cat)
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('Cat', '00')
+            ->where('genderCode', $gender)
+            ->where('Cat', $cat)
             ->groupBy('p.ID')
             ->paginate(10);
-        $gender = '0';
-        $catCode = 'a';
+
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
