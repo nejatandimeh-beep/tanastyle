@@ -2021,9 +2021,9 @@
                             <strong>خالی: </strong> لیست علاقه مندی های شما خالی است.
                         </div>
                         @foreach($like as $key => $row)
-                            <div
+                            <div  id="{{ 'likeRow'.$key }}"
                                 class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
-                                <article id="{{ 'likeRow'.$key }}"
+                                <article
                                          class="d-md-table w-100 g-bg-white g-mb-10 g-mb-0--lg">
                                     <!-- Article Image -->
                                     <a class="d-md-table-cell align-middle g-width-110"

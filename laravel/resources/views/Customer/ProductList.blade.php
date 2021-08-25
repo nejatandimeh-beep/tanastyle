@@ -25,6 +25,17 @@
                             class="responsiveBorder g-mx-minus-15 g-mt-0 g-mb-0 sticky-top">
                     </div>
 
+                    <h6 id="filters-on-label" class="d-none g-mt-30 g-pb-10 g-mx-15 g-mb-10 g-brd-bottom g-brd-gray-light-v4">فیلترهای اعمال شده</h6>
+                    <div id="filters-on" class="d-none p-0 my-0 g-mx-10">
+                        <div id="filters-on-gender" class="d-inline-block p-0 m-0"></div>
+                        <div id="filters-on-cat" class="d-inline-block p-0 m-0"></div>
+                        <div id="filters-on-size" class="d-inline-block p-0 m-0"></div>
+                        <div id="filters-on-price" class="d-inline-block p-0 m-0">
+                            <span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">قیمت: همه</span>
+                        </div>
+                        <div id="filters-on-color" class="d-inline-block p-0 m-0"></div>
+                    </div>
+
                     <div class="g-pr-15 g-pl-15 g-pl-0--lg g-pt-20">
                         <div style="direction: rtl" id="filterContainer" role="tablist" aria-multiselectable="true">
                             <!-- فیلتر جمسیت -->
@@ -66,7 +77,7 @@
                                             <li class="my-2">
                                                 <div class="form-group">
                                                     <label class="d-flex align-items-center justify-content-between">
-                                                        <span>زنانه</span>
+                                                        <span>زنانه </span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
@@ -704,7 +715,7 @@
                                      role="tabpanel"
                                      aria-labelledby="accordion-100-heading-03">
                                     <div class="card-block g-px-0">
-                                        <ul class="d-none list-unstyled p-0 g-mb-30">
+                                        <ul class="list-unstyled p-0 g-mb-30">
                                             <li class="my-2">
                                                 <div class="form-group">
                                                     <label class="d-flex align-items-center justify-content-between">
@@ -713,6 +724,9 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="priceAll"
                                                                    id="price-all"
+                                                                   onchange="priceAll()"
+                                                                   checked=""
+                                                                   disabled
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -755,7 +769,7 @@
                                     </div>
                                     <div class="text-left g-px-15">
                                         <button id="priceFilterSubmit"
-                                                class="btn u-btn-outline-primary g-rounded-50 g-mr-10 g-mb-15" disabled>
+                                                class="btn u-btn-primary g-rounded-50 g-mr-10 g-mb-15" disabled>
                                             اعمال
                                         </button>
                                     </div>
