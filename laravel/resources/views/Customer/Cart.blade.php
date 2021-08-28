@@ -308,7 +308,7 @@
                 </div>
 
                 <div id="cartEmptyAlert" class="{{ isset($data[0]) ? 'd-none':'' }}">
-                    <div id="emptyCart" class="emptyCart g-mt-100--lg g-mb-100--lg mx-auto"></div>
+                    <div id="emptyCart" class="emptyCart g-mt-100--lg g-mb-100--lg g-mt-30 g-mb-50 mx-auto"></div>
                 </div>
 
             </div>

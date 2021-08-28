@@ -286,8 +286,9 @@
             </div>
         </div>
     </div>
+    <p style="direction: rtl" class="container g-color-gray-drk-v3 g-pr-0--lg g-font-size-16">تخفیفات ویژه</p>
     <!-- Products -->
-    <div class="container g-pb-100">
+    <div class="container g-pb-100 g-brd-around g-brd-gray-light-v4 g-pt-15 g-mb-100">
         <div id="js-carousel-1" class="js-carousel g-pb-100 g-mx-minus-10"
              data-infinite="true"
              data-slides-show="4"

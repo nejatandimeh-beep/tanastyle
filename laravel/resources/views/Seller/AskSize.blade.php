@@ -52,14 +52,14 @@
                 <div class="row justify-content-center">
                     <div class="text-center u-heading-v2-7 g-brd-primary g-mb-30">
                         <h2 class="h4 u-heading-v4__title g-mb-10">لطفا
-                            <span class="g-color-primary">تعداد</span> سایزهای موجود را مشخص نمایید.</h2>
+                            <span class="g-color-primary">تعداد</span> سایز و رنگهای موجود را مشخص نمایید.</h2>
                         <div class="g-pr-20 g-pl-20 smallDeviceJustify">
                             <p class="g-mb-3">
                                 <spna class="g-font-weight-600">{{ Auth::guard('seller')->user()->name }}</spna>
-                                عزیز در این قسمت لطفا مشخص نمایید که از محصول مورد نظر چند سایز در فروشگاهتان موجود
+                                عزیز در این قسمت لطفا مشخص نمایید که از {{ $name }} چند سایز یا رنگ متفاوت در فروشگاهتان موجود
                                 دارید.
                             </p>
-                            <p class="g-mb-3">به عنوان مثال اگر برای محصولی 3 سایز مختلف موجود است در لیست زیر تعداد
+                            <p class="g-mb-3">به عنوان مثال اگر برای {{ $name }} 3 سایز یا سه رنگ مختلف موجود است در لیست زیر تعداد
                                 را
                                 3 ذکر کنید.</p>
                         </div>

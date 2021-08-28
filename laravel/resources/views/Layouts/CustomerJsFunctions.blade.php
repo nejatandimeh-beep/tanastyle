@@ -190,55 +190,116 @@
                 $('#noProduct').show();
             }
 
-            $('input[name="gender"]:checked').each(function () {
-                let id = $(this).attr('id'), filterDiv = $('#filters-on-gender');
-                gender.push(id.replace(/[^0-9]/gi, ''));
-                if (id === 'gender-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">جنسیت: همه</span>');
-                    return false;
-                } else {
-                    $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
-                    $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
-                }
-            });
+            if($('#productContainer').length>0) {
+                $('input[name="gender"]:checked').each(function () {
+                    let id = $(this).attr('id'), filterDiv = $('#filters-on-gender');
+                    gender.push(id.replace(/[^0-9]/gi, ''));
+                    if (id === 'gender-all') {
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">جنسیت: همه</span>');
+                        return false;
+                    } else {
+                        $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
+                        $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
+                    }
+                });
 
-            $('input[name="category"]:checked').each(function () {
-                let id = $(this).attr('id'), filterDiv = $('#filters-on-cat');
-                category.push(id);
-                if (id === 'cat-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">دسته بندی: همه</span>');
-                    return false;
-                } else {
-                    $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
-                    $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
-                }
-            });
+                $('input[name="category"]:checked').each(function () {
+                    let id = $(this).attr('id'), filterDiv = $('#filters-on-cat');
+                    category.push(id);
+                    if (id === 'cat-all') {
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">دسته بندی: همه</span>');
+                        return false;
+                    } else {
+                        $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
+                        $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
+                    }
+                });
 
-            $('input[name="size"]:checked').each(function () {
-                let id = $(this).attr('id'), filterDiv = $('#filters-on-size');
-                size.push(id);
-                if (id === 'size-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">سایز: همه</span>');
-                    return false;
-                } else {
-                    $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
-                    $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
-                }
-            });
+                $('input[name="size"]:checked').each(function () {
+                    let id = $(this).attr('id'), filterDiv = $('#filters-on-size');
+                    size.push(id);
+                    if (id === 'size-all') {
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">سایز: همه</span>');
+                        return false;
+                    } else {
+                        $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
+                        $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
+                    }
+                });
 
-            $('input[name="color"]:checked').each(function () {
-                let id = $(this).attr('id'), filterDiv = $('#filters-on-color');
-                color.push(id.replace(/[^0-9]/gi, ''));
-                if (id === 'color-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">رنگ: همه</span>');
-                    return false;
-                } else {
-                    $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
-                    $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
-                }
-            });
+                $('input[name="color"]:checked').each(function () {
+                    let id = $(this).attr('id'), filterDiv = $('#filters-on-color');
+                    color.push(id.replace(/[^0-9]/gi, ''));
+                    if (id === 'color-all') {
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">رنگ: همه</span>');
+                        return false;
+                    } else {
+                        $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
+                        $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
+                    }
+                });
+            }
         });
 
+        $(window).scroll(function (event) {
+            if ($('.filterApply').length > 0) {
+
+                let st = $(this).scrollTop();
+                if (st - lastScrollTop > 500) {
+                    filtering(0);
+                } else {
+                    return true;
+                }
+
+                if ($('#filterDiv').css('display') === 'none') {
+                    $('#productContainer').children().each(function () {
+                        if ($(this).hasClass('col-lg-4')) {
+                            $(this).removeClass('col-lg-4');
+                            $(this).addClass('col-lg-3');
+                        }
+                    })
+                }
+                lastScrollTop = st;
+            }
+        });
+
+        $(document).mouseup(function (e) {
+            let container = $(".outSideClick");
+
+            // if click on out side container
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                $('.outSideClick').addClass('d-none');
+            }
+        });
+
+        $(window).bind('beforeunload', function () {
+            loaderShow();
+        });
+
+        $(window).on('pageshow', function () {
+            $('#load').hide();
+        });
+
+        document.onreadystatechange = function () {
+            $(document.body).removeClass('me-position-fix');
+            $(document.body).addClass('me-position-normally');
+
+            let state = document.readyState;
+            if (state === 'complete') {
+                document.getElementById('load').remove();
+            }
+        }
+
+        function loaderShow() {
+            let loader = '<div id="load" class="load"></div>';
+            $('body').prepend(loader);
+        }
+
+        // نمایش فیلد جستجو در ناویگیشن
+        $('#searchIcon').on('click', function () {
+            $('#searchForm').removeClass('d-none');
+            $('#searchInput').focus();
+        });
         // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
         if ($('#productContainer').text() === ' ') {
             $('#noProduct').show();
@@ -391,6 +452,7 @@
                     + JSON.stringify(color) + '/'
                     + filterChange,
                 success: function (data) {
+                    console.log(data);
                     $('#loadProduct').addClass('d-none');
                     $('#productContainer').append(data);
                 }
@@ -429,66 +491,6 @@
             if (!$('#lineBreak').length)
                 $('#noProduct').show();
         }
-
-        $(window).scroll(function (event) {
-            if ($('.filterApply').length > 0) {
-
-                let st = $(this).scrollTop();
-                if (st - lastScrollTop > 500) {
-                    filtering(0);
-                } else {
-                    return true;
-                }
-
-                if ($('#filterDiv').css('display') === 'none') {
-                    $('#productContainer').children().each(function () {
-                        if ($(this).hasClass('col-lg-4')) {
-                            $(this).removeClass('col-lg-4');
-                            $(this).addClass('col-lg-3');
-                        }
-                    })
-                }
-                lastScrollTop = st;
-            }
-        });
-
-        $(document).mouseup(function (e) {
-            let container = $(".outSideClick");
-
-            // if click on out side container
-            if (!container.is(e.target) && container.has(e.target).length === 0) {
-                $('.outSideClick').addClass('d-none');
-            }
-        });
-
-        $(window).bind('beforeunload', function () {
-            loaderShow();
-        });
-
-        $(window).on('pageshow', function () {
-            $('#load').hide();
-        });
-
-        function loaderShow() {
-            let loader = '<div id="load" class="load"></div>';
-            $('body').prepend(loader);
-        }
-
-        document.onreadystatechange = function () {
-            $(document.body).removeClass('me-position-fix');
-            $(document.body).addClass('me-position-normally');
-
-            let state = document.readyState;
-            if (state === 'complete') {
-                document.getElementById('load').remove();
-            }
-        }
-
-        // نمایش فیلد جستجو در ناویگیشن
-        $('#searchIcon').on('click', function () {
-            $('#searchForm').removeClass('d-none');
-            $('#searchInput').focus();
-        });
 
         // سبز کردن منوهای فعال در ناویگیشن
         jQuery(function () {
@@ -1192,6 +1194,10 @@
             }
         }
 
+        function isEmpty( el ){
+            return !$.trim(el.html())
+        }
+
         function deleteProductLike(productID, pdID, idBtn) {
             $.confirm({
                 title: 'حذف علاقه مندی',
@@ -1205,7 +1211,7 @@
                             url: "/Customer-Product-LikeProduct/" + productID + '/' + pdID + '/' + 'false',
                             success: function () {
                                 $('#likeRow' + idBtn.replace(/[^0-9]/gi, '')).remove();
-                                if (idBtn.replace(/[^0-9]/gi, '') === '0')
+                                if (isEmpty($('#productLikeContainer')))
                                     $('#productLikeEmpty').removeClass('d-none').addClass('d-inline-block');
                             },
                         });

@@ -43,33 +43,15 @@
         <!-- Social Links -->
         <ul class="row no-gutters list-inline g-mb-0">
             <li class="col list-inline-item g-mr-0">
-                <a class="d-block g-bg-primary-dark-v1 g-color-white-opacity-0_8 g-bg-twitter--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
-                   href="#">
-                    <i class="fa fa-twitter"></i>
+                <a style="text-decoration: none" class="d-block g-bg-primary-dark-v2 g-color-white-opacity-0_8 g-bg-instagram--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
+                   href="https://www.instagram.com/memol_rhinestone/">
+                    <i class="fa fa-instagram"></i> Instagram
                 </a>
             </li>
             <li class="col list-inline-item g-mr-0">
-                <a class="d-block g-bg-primary-dark-v2 g-color-white-opacity-0_8 g-bg-linkedin--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
+                <a style="text-decoration: none" class="d-block g-bg-primary-dark-v2 g-color-white-opacity-0_8 g-bg-instagram--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
                    href="#">
-                    <i class="fa fa-linkedin"></i>
-                </a>
-            </li>
-            <li class="col list-inline-item g-mr-0">
-                <a class="d-block g-bg-primary-dark-v1 g-color-white-opacity-0_8 g-bg-facebook--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
-                   href="#">
-                    <i class="fa fa-facebook"></i>
-                </a>
-            </li>
-            <li class="col list-inline-item g-mr-0">
-                <a class="d-block g-bg-primary-dark-v2 g-color-white-opacity-0_8 g-bg-instagram--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
-                   href="#">
-                    <i class="fa fa-instagram"></i>
-                </a>
-            </li>
-            <li class="col list-inline-item">
-                <a class="d-block g-bg-primary-dark-v1 g-color-white-opacity-0_8 g-bg-dribbble--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
-                   href="#">
-                    <i class="fa fa-dribbble"></i>
+                    <i class="fa fa-telegram"></i> Telegram
                 </a>
             </li>
         </ul>
@@ -78,19 +60,19 @@
         <!-- Copyright and Subscribe -->
         <footer class="text-center g-pt-40 g-pb-30">
             <div class="container">
-                <form>
-                    <div class="form-group g-width-60x--md mx-auto g-mb-20">
-                        <label class="h5 text-uppercase g-mb-20">از جدیدترین ها با خبر شوید</label>
-                        <div class="input-group g-brd-gray-light-v2 g-brd-primary--focus">
-                            <input class="form-control form-control-md g-brd-right-none rounded-0 pr-0" type="text"
-                                   placeholder="ایمیل شما">
-                            <div
-                                class="input-group-addon d-flex align-items-center g-color-gray-light-v2 g-bg-white rounded-0">
-                                <i class="icon-envelope"></i>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+{{--                <form>--}}
+{{--                    <div class="form-group g-width-60x--md mx-auto g-mb-20">--}}
+{{--                        <label class="h5 text-uppercase g-mb-20">از جدیدترین ها با خبر شوید</label>--}}
+{{--                        <div class="input-group g-brd-gray-light-v2 g-brd-primary--focus">--}}
+{{--                            <input class="form-control form-control-md g-brd-right-none rounded-0 pr-0" type="text"--}}
+{{--                                   placeholder="ایمیل شما">--}}
+{{--                            <div--}}
+{{--                                class="input-group-addon d-flex align-items-center g-color-gray-light-v2 g-bg-white rounded-0">--}}
+{{--                                <i class="icon-envelope"></i>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
 
                 <small class="d-block g-font-size-default">1399 تمامی حقوق این وب سایت برای تانا استایل محفوظ است</small>
             </div>

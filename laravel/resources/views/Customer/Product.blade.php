@@ -703,7 +703,7 @@
 
     <div class="container g-pb-100">
         <div style="direction: rtl" class="g-brd-bottom g-brd-gray-light-v4 g-mt-30 g-mb-10">
-            <h6>محصولات مشابه</h6>
+            <h6>محصولات که شاید بپسندید</h6>
         </div>
         <div id="js-carousel-1" class="js-carousel g-pb-100 g-mx-minus-10"
              data-infinite="true"

@@ -27,11 +27,17 @@ class Basic extends Controller
 //            ->orderBy('pod.SellCount')
 //            ->take(10)
 //            ->get();
+        $minDiscount = 5;
+        $maxDiscount = 30;
 
         $data = DB::table('product as p')
             ->select('*')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->orderBy('pd.VisitCounter', 'DESC')
+            ->whereIn('Discount', function ($query) use ($minDiscount, $maxDiscount) {
+                $query->select('Discount')
+                    ->whereBetween('Discount', [$minDiscount, $maxDiscount]);
+            })
             ->take(10)
             ->get();
 
@@ -715,16 +721,16 @@ class Basic extends Controller
         $similarProduct = DB::table('product as p')
             ->select('*')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('p.GenderCode',$data->GenderCode)
-            ->where('p.CatCode',$data->CatCode)
-            ->where('p.ID','<>',$id)
+            ->where('p.GenderCode', $data->GenderCode)
+            ->where('p.CatCode', $data->CatCode)
+            ->where('p.ID', '<>', $id)
             ->orderBy('pd.VisitCounter', 'DESC')
             ->take(10)
             ->get();
 
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo', 'colorInfo','similarProduct'));
+        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo', 'colorInfo', 'similarProduct'));
     }
 
     public function productVisit($id)
@@ -1068,12 +1074,20 @@ class Basic extends Controller
         $size = json_decode($size);
         $color = json_decode($color);
 
+        if(!isset($size[0]))
+            $size[0]='empty';
+
         $data = DB::table('product as p')
             ->select('p.*', 'pd.*')
             ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
             ->whereIn('p.GenderCode', $gender)
             ->whereIn('p.CatCode', $cat)
-            ->whereIn('pd.Size', $size)
+//            ->whereIn('pd.Size', $size)
+            ->Where(function ($query) use($size) {
+                for ($i = 0; $i < count($size); $i++) {
+                    $query->orwhere('pd.Size', 'like',  $size[$i] . '%');
+                }
+            })
             ->whereIn('pd.ColorCode', $color)
             ->whereIn('p.FinalPrice', function ($query) use ($priceMin, $priceMax) {
                 $query->select('p.FinalPrice')
@@ -1086,7 +1100,7 @@ class Basic extends Controller
             ->take(10)
             ->get();
 
-        $_SESSION['listSkip']+=10;
+        $_SESSION['listSkip'] += 10;
 
         $products = '';
         foreach ($data as $key => $row) {
@@ -1119,7 +1133,7 @@ class Basic extends Controller
                     <ul style="padding: 0"
                         class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                         <li>
-                            <span class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600 g-mb-5" href="#">' . $row->Size.' '.$row->Color . '</span>
+                            <span class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600 g-mb-5" href="#">' . $row->Size . ' ' . $row->Color . '</span>
                         </li>
                         <li>
                             <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
@@ -1163,7 +1177,7 @@ class Basic extends Controller
     public function productFemaleList()
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1185,7 +1199,7 @@ class Basic extends Controller
     public function productMaleList()
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1207,7 +1221,7 @@ class Basic extends Controller
     public function productGirlList()
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1228,7 +1242,7 @@ class Basic extends Controller
     public function productBoyList()
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1249,7 +1263,7 @@ class Basic extends Controller
     public function productBabyGirlList()
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1270,7 +1284,7 @@ class Basic extends Controller
     public function productBabyBoyList()
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1315,7 +1329,7 @@ class Basic extends Controller
     public function productSearchList($val)
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1337,7 +1351,7 @@ class Basic extends Controller
     public function spacialSelling($minDiscount, $maxDiscount)
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')
@@ -1362,10 +1376,10 @@ class Basic extends Controller
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
-    public function product($gender,$cat,$catCode)
+    public function product($gender, $cat, $catCode)
     {
         session_start();
-        $_SESSION['listSkip']=0;
+        $_SESSION['listSkip'] = 0;
 
         $data = DB::table('product')
             ->select('*')

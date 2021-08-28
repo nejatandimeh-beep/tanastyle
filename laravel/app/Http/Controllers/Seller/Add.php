@@ -76,30 +76,101 @@ class Add extends Controller
         if (isset($_GET['qty']))
             $qty = $_GET['qty'];
 
-        switch ($cat) {
-            case '77':
-                $size = 1;
-                $qty = 1;
-                break;
-            case '66':
-                $size = [
-                    '28',
-                    '29',
-                    '30',
-                    '31',
-                    '32',
-                    '33',
-                    '34',
-                    '35',
-                    '36',
-                    '37',
-                    '38',
-                    '39',
-                    '40',
-                    '42',
-                    '43',
-                    '44',
-                ];
+        switch ($hintCat) {
+            case 'کفش':
+                switch ($gender){
+                    case '0':
+                        $size = [
+                            'XS-34',
+                            'XS-35',
+                            'S-36',
+                            'M-37',
+                            'M-38',
+                            'L-39',
+                            'L-40',
+                            'L-41',
+                            'XL-42',
+                            'XL-43',
+                            'XXL-44',
+                            'XXL-45',
+                            'XXL-46',
+                            'XXXL-47',
+                            'XXXL-48',
+                            'XXXL-49',
+                            'XXXL-50',
+                        ];
+                        break;
+                    case '1':
+                        $size = [
+                            'XS-36',
+                            'XS-37',
+                            'S-38',
+                            'S-39',
+                            'M-40',
+                            'M-41',
+                            'M-42',
+                            'L-43',
+                            'L-44',
+                            'XL-45',
+                            'XL-46',
+                            'XXL-47',
+                            'XXL-48',
+                            'XXXL-49',
+                            'XXXL-50',
+                            'XXXL-51',
+                            'XXXL-52',
+                            'XXXL-53',
+                            'XXXL-54',
+                            'XXXL-55',
+                            'XXXL-56',
+                            'XXXL-57',
+                        ];
+                        break;
+                    case '2':
+                    case '3':
+                        $size = [
+                            'XS-21',
+                            'XS-22',
+                            'XS-23',
+                            'XS-24',
+                            'XS-25',
+                            'XS-26',
+                            'XS-27',
+                            'XS-28',
+                            'S-29',
+                            'S-30',
+                            'S-31',
+                            'S-32',
+                            'S-33',
+                            'S-34',
+                            'M-35',
+                            'M-36',
+                            'M-37',
+                            'L-38',
+                            'L-39',
+                            'L-40',
+                            'XL-41',
+                            'XL-42',
+                            'XXL-43',
+                            'XXXL-44',
+                            'XXXL-45',
+                        ];
+                        break;
+                    case '4':
+                    case '5':
+                        $size = [
+                            'XS-16',
+                            'S-17',
+                            'M-18',
+                            'L-19',
+                            'XL-20',
+                            'XXL-21',
+                            'XXL-22',
+                            'XXXL-23',
+                            'XXXL-24',
+                        ];
+                        break;
+                }
                 break;
             default:
                 $size = [
@@ -121,7 +192,7 @@ class Add extends Controller
         // Upload Images
         date_default_timezone_set('Asia/Tehran');
         $folderName = 'p-' . date("Y.m.d-H.i.s");
-        $picPath = public_path().'\img\products\\' . $folderName;
+        $picPath = public_path() . '\img\products\\' . $folderName;
         File::makeDirectory($picPath, 0777, true, true);
         // Get Size Qty For Loop Steps
 
@@ -130,7 +201,7 @@ class Add extends Controller
         $imageColor = array([
             'color' => '',
             'colorCode' => '',
-            'size'=>'',
+            'size' => '',
             'sizeQty' => '',
             'image' => '',
             'fileName' => '',
@@ -179,8 +250,6 @@ class Add extends Controller
         $unitPrice = $request->get('tempPrice');
         $discount = $request->get('discount');
         $regDate = date('Y-m-d');
-        $colorCode = array();
-        $colors = array();
 
         // Calculate Final Price
         $temp = $unitPrice - ($unitPrice * $discount) / 100;

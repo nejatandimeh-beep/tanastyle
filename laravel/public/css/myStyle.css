@@ -596,7 +596,6 @@ input[type=number] {
 }
 
 .noProduct{
-    width:350px;
     height:250px;
     background-size: contain;
     background:url("/../img/Other/noProduct.gif") no-repeat center center rgb(255, 255, 255)

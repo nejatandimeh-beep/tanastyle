@@ -2020,6 +2020,7 @@
                              role="alert">
                             <strong>خالی: </strong> لیست علاقه مندی های شما خالی است.
                         </div>
+                        <div id="productLikeContainer">
                         @foreach($like as $key => $row)
                             <div  id="{{ 'likeRow'.$key }}"
                                 class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
@@ -2119,6 +2120,7 @@
                                 </article>
                             </div>
                         @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

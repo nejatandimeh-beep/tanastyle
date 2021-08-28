@@ -2,12 +2,23 @@
 
     {{--    Seller Functions--}}
     <script>
-        $(window).bind('beforeunload', function(){
-            $('#load').show();
+        $(window).bind('beforeunload', function () {
+            loaderShow();
+        });
+
+        $(window).on('pageshow', function () {
+            $('#load').hide();
         });
 
         document.onreadystatechange = function () {
-            $('#load').hide();
+            if (state === 'complete') {
+                document.getElementById('load').remove();
+            }
+        }
+
+        function loaderShow() {
+            let loader = '<div id="load" class="load"></div>';
+            $('body').prepend(loader);
         }
 
         Array.prototype.getDuplicates = function () {
@@ -766,6 +777,7 @@
                     minCropBoxHeight: 400,
                     // cropBoxResizable: false,
                     dragCrop: true,
+                    dragMode: 'move',
                     multiple: true,
                     movable: true
                     // preview: '.preview'
