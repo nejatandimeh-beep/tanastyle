@@ -29,9 +29,6 @@
                     <h2 class="h6 g-color-primary text-uppercase g-font-weight-600 g-mb-20">فرآیند فروش</h2>
                     <ul class="list-unstyled mb-0 px-0">
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">موجودی انبار</a>
-                        </li>
-                        <li class="g-mb-8">
                             <a class="g-color-white-opacity-0_8" href="#">سفارش مشتری</a>
                         </li>
                         <li class="g-mb-8">

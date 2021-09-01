@@ -726,25 +726,15 @@
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['00','1']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">مایو</a>
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شورت</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['01','1']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">شورت
-                                                                    پادار</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['02','1']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">زیر
                                                                     پوش</a>
                                                             </li>
                                                             <li>
-                                                                <a href="{{ route('AddProduct_askSize',['03','1']) }}"
-                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">زیر
-                                                                    پوش رکابی</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('AddProduct_askSize',['04','1']) }}"
+                                                                <a href="{{ route('AddProduct_askSize',['02','1']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست
                                                                     لباس زیر</a>
                                                             </li>

@@ -283,7 +283,7 @@
                                                 </td>
                                                 <td class="align-middle text-center text-nowrap">
                                                     <a style="cursor: pointer"
-                                                       href="{{ route('connectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
+                                                       href="{{ route('adminCustomerConnectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
                                                        class="g-color-gray-light-v3 g-text-underline--none--hover g-color-primary--hover g-pa-5"
                                                        data-toggle="tooltip"
                                                        data-placement="top" data-original-title="مشاهده جزئیات گفتگو">

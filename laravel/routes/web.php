@@ -177,6 +177,13 @@ Route::get('/Customer-Profile/{id}', 'Customer\Basic@userProfile')->name('userPr
 
 Route::get('/Customer-Product-spacialSelling-List/{min}/{max}', 'Customer\Basic@spacialSelling')->name('spacialSelling');
 
+Route::get('/Customer-Connection', 'Customer\Basic@connection')->name('customerConnection');
+
+Route::get('/Customer-Connection-Detail/{id}/{status}', 'Customer\Basic@connectionDetail')->name('customerConnectionDetail');
+
+Route::post('/Customer-Connection-New', 'Customer\Basic@connectionNew')->name('customerConnectionNew');
+
+Route::post('/Customer-Connection-NewMsg', 'Customer\Basic@connectionNewMsg')->name('customerConnectionNewMsg');
 // -------------------[ Ajax ]-----------------------
 Route::get('/Customer-Product-Search/{val}', 'Customer\Basic@productSearch');
 
@@ -358,7 +365,9 @@ Route::get('/Administrator-Customer-AddressDelete/{id}', 'Administrator\Customer
 
 Route::get('/Administrator-Customer-OrderDetail/{addressId}/{id}', 'Administrator\Customer@orderDetail')->name('adminCustomerOrderDetail');
 
+Route::get('/Administrator-Customer-ConnectionDetail/{id}/{status}', 'Administrator\Customer@connectionDetail')->name('adminCustomerConnectionDetail');
 
+Route::post('/Administrator-Customer-Connection-NewMsg', 'Administrator\Customer@connectionNewMsg')->name('adminCustomerConnectionNewMsg');
 // -------------------------[Delivery]
 Route::get('/Administrator-Delivery-Panel/{id}', 'Administrator\Admin@adminDeliveryPanel')->name('adminDeliveryPanel');
 

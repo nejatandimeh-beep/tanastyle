@@ -190,7 +190,7 @@
                 $('#noProduct').show();
             }
 
-            if($('#productContainer').length>0) {
+            if ($('#productContainer').length > 0) {
                 $('input[name="gender"]:checked').each(function () {
                     let id = $(this).attr('id'), filterDiv = $('#filters-on-gender');
                     gender.push(id.replace(/[^0-9]/gi, ''));
@@ -238,6 +238,16 @@
                         $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
                     }
                 });
+            }
+
+            if ($('#completeProfileHint').length > 0) {
+                if ($('#user-name').val() === '' || $('#user-family').val() === '' ||
+                    $('#user-notionalId') === '' || $('#birthday-day').val() === 'روز' ||
+                    $('#birthday-mon') === 'ماه' || $('#birthday-year').val() === 'سال' ||
+                    $('input[name="gender"]') === '' || $('#phoneNumber').val() === '' || $('#phonePreNumber').val() === '' ||
+                    $('#state') === '' || $('#city').val() === '') {
+                    $('#completeProfileHint').removeClass('d-none');
+                }
             }
         });
 
@@ -300,6 +310,25 @@
             $('#searchForm').removeClass('d-none');
             $('#searchInput').focus();
         });
+
+        function newConnection() {
+            if ($('#loginAlert').text() === 'login') {
+                window.location = '/Customer-Connection';
+            } else
+                alert('لطفا ابتدا وارد شوید.');
+        }
+
+        function submitButton(ele, waitingIcon) {
+            ele.hide();
+            $('#' + waitingIcon).show();
+            if ($('#question').val().length < 4) {
+                $('#waitingSendMsg').hide();
+                ele.show();
+                alert('پیغامتان را کامل بنویسید.');
+            } else
+                $('#customerMsgForm').submit();
+        }
+
         // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
         if ($('#productContainer').text() === ' ') {
             $('#noProduct').show();
@@ -1194,7 +1223,7 @@
             }
         }
 
-        function isEmpty( el ){
+        function isEmpty(el) {
             return !$.trim(el.html())
         }
 

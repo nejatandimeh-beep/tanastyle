@@ -60,7 +60,7 @@
                                 <div class="col-md-10 text-left">
                                     <div style="direction: ltr" class="d-flex col-12 p-0">
                                         <div>
-                                            <button type="submit"
+                                            <button type="submit" onclick="loaderShow()"
                                                     class="btn u-btn-primary rounded-0 g-px-30 g-py-7 g-font-size-16">
                                                 ورود
                                             </button>

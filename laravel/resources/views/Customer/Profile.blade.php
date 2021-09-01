@@ -663,13 +663,12 @@
                             </div>
                         </div>
                     </form>
-                    <div class="alert alert-success alert-dismissible fade show g-mx-15 g-mx-60--lg g-mt-40 g-mt-0--lg"
+                    <div id="completeProfileHint" class="d-none alert alert-success alert-dismissible fade show g-mx-15 g-mx-60--lg g-mt-40 g-mt-0--lg"
                          role="alert">
-                        <h4 class="h5"><i class="icon-present g-ml-5"></i>دریافت هدیه با تکمیل اطلاعات کاربری
+                        <h4 class="h5"><i class="icon-present g-ml-5"></i>تکمیل اطلاعات کاربری
                         </h4>
-                        <span class="g-font-weight-600">{{ Auth::user()->name }}</span> عزیز با تکمیل مشخصات فردی، برای
-                        خرید
-                        بعدیتان تخفیف 20 درصدی هدیه بگیرید.
+                        <span class="g-font-weight-600">{{ Auth::user()->name }}</span> عزیز با تکمیل مشخصات فردی، از
+                      تمامی امکانات سامانه همچون هدیه، تخفیفات ویژه، پاسخگویی سریع و ... بهره ببرید.
                     </div>
                     <div style="direction: ltr" class="g-mx-60--lg g-mt-60--lg g-mb-30--lg g-my-30 g-mx-15">
                         <button id="edit" type="button"

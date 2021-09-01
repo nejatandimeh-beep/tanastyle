@@ -28,7 +28,7 @@
         <div class="g-mt-30">
 
         <!-- Description Divs-->
-        <div class="g-mb-30 g-mt-30">
+        <div class="g-mb-30 g-mt-30 g-pa-10">
             <!-- Gray Colored Blockquotes -->
             <blockquote
                 class="blockquote blockquote-reverse g-bg-gray-light-v5 g-brd-primary g-font-size-16 g-pa-40 g-mb-30 text-right">
@@ -43,9 +43,9 @@
         <!-- Description Divs -->
 
         <!-- MasterSlider Main -->
-        <div class="ms-staff-carousel">
+        <div class="ms-staff-carousel g-pa-10">
 
-            <div class="u-heading-v4-1 g-mb-30 text-right">
+            <div class="g-mb-30 text-center">
                 <h2 class="h3 u-heading-v4__title g-mb-10">تازه ترین های مد و پوشاک</h2>
                 <p class="g-mb-6">فروش محصولات خود را با جدیدترین های مد و پوشاک همگام کنید.</p>
                 <p class="g-mb-3 g-font-weight-700">چند مدل کلاه که ترند بهار امسال است.</p>

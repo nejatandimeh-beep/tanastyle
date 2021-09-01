@@ -4,7 +4,7 @@
         <ul class="nav nav-fill u-nav-v4-1 u-nav-light" role="tablist" data-target="nav-4-1-primary-hor-fill"
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('sellerList')}}">فروشندگان</a>
+                <a class="nav-link" href="{{route('customerList')}}">فروشندگان</a>
             </li>
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1"
@@ -106,7 +106,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     {{-- Table --}}
                     <div class="g-pb-15">
@@ -186,7 +185,7 @@
                                                 </td>
                                                 <td class="align-middle text-center text-nowrap">
                                                     <a style="cursor: pointer"
-                                                       href="{{ route('connectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
+                                                       href="{{ route('adminCustomerConnectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
                                                        class="g-color-gray-light-v3 g-text-underline--none--hover g-color-primary--hover g-pa-5"
                                                        data-toggle="tooltip"
                                                        data-placement="top" data-original-title="مشاهده جزئیات گفتگو">

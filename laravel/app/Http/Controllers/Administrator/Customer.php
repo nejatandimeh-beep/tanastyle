@@ -352,6 +352,136 @@ class Customer extends Controller
         return $output;
     }
 
+    public function support()
+    {
+        $support = DB::table('customer_conversation as sc')
+            ->select('sc.*',
+                'scd.QuestionDate as qDate',
+                'scd.QuestionTime as qTime',
+                'scd.AnswerDate as aDate',
+                'scd.AnswerTime as aTime',
+                'scd.Replay',
+                'scd.ConversationID',
+                'scd.ID as conversationDetailID')
+            ->leftJoin('customer_conversation_detail as scd', 'scd.ConversationID', '=', 'sc.ID')
+            ->where('Status', '1')
+            ->orderBy('sc.Status')
+            ->orderBy(DB::raw('IF(sc.Status=0 || sc.Status=1, sc.Priority, false)'), 'ASC')
+            ->orderBy('sc.ID', 'DESC')
+            ->get();
+
+        $newSupport = DB::table('customer_conversation')
+            ->select('CustomerID', 'Status')
+            ->where('Status', '1')
+            ->get()
+            ->count();
+
+        $supportPersianDate = array();
+        foreach ($support as $key => $rec) {
+            $d = $rec->Date;
+            $supportPersianDate[$key] = $this->convertDateToPersian($d);
+        }
+
+        return view('Administrator.Customer.Support', compact('support', 'supportPersianDate', 'newSupport'));
+    }
+
+    public function connectionDetail($id, $status)
+    {
+        $data = DB::table('customer_conversation_detail as ccd')
+            ->select('ccd.*', 'cc.Subject', 'cc.Status', 'cc.ID as ConversationID', 'cc.CustomerID', 'c.Name', 'c.Family')
+            ->leftJoin('customer_conversation as cc', 'cc.ID', '=', 'ccd.ConversationID')
+            ->leftJoin('customers as c', 'c.ID', '=', 'cc.CustomerID')
+            ->where('ccd.ConversationID', $id)
+            ->paginate(10);
+
+        if ($status === '0') {
+            foreach ($data as $key => $rec)
+                if ($rec->Replay !== 0) {
+                    DB::table('customer_conversation')
+                        ->where('ID', $id)
+                        ->update(['Status' => 2]);
+                } else {
+                    DB::table('customer_conversation')
+                        ->where('ID', $id)
+                        ->update(['Status' => 2]);
+                }
+        }
+
+        $questionMinuets = array();
+        $answerMinuets = array();
+        $questionHowDay = array();
+        $answerHowDay = array();
+        foreach ($data as $key => $rec) {
+            $d = $rec->QuestionDate;
+            $qPersianDate[$key] = $this->convertDateToPersian($d);
+            $d = $rec->AnswerDate;
+            $aPersianDate[$key] = $this->convertDateToPersian($d);
+            $questionMinuets[$key] = $this->dateLenToNow($rec->QuestionDate, $rec->QuestionTime);
+            $answerMinuets[$key] = $this->dateLenToNow($rec->AnswerDate, $rec->AnswerTime);
+            $questionHowDay[$key] = null;
+            $answerHowDay[$key] = null;
+            if (($questionMinuets[$key] < 11520) || ($answerMinuets[$key] < 11520)) {
+                $questionHowDay[$key] = $this->howDays($questionMinuets[$key]);
+                $answerHowDay[$key] = $this->howDays($answerMinuets[$key]);
+            }
+        }
+
+        return view('Administrator.Customer.ConnectionDetail', compact('data', 'answerHowDay', 'questionHowDay', 'qPersianDate', 'aPersianDate'));
+    }
+
+    public function connectionNewMsg(Request $request)
+    {
+
+        date_default_timezone_set('Asia/Tehran');
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
+        $customerID = $request->get('customerId');
+        $answer = $request->get('answer');
+        $title = $request->get('title');
+        $detailId = $request->get('detailId');
+
+        if (isset($title)) {
+            $priority = $request->get('priority');
+            $section = $request->get('section');
+            // Insert Data to Conversation
+            DB::table('customer_conversation')->insert([
+                [
+                    'CustomerID' => $customerID,
+                    'Subject' => $title,
+                    'Section' => $section,
+                    'priority' => $priority,
+                    'Status' => 1,
+                    'Date' => $date,
+                    'Time' => $time,
+                ],
+            ]);
+
+            $conversationID = DB::table('customer_conversation')
+                ->select('ID')
+                ->latest('ID')
+                ->first();
+
+            $conversationID = $conversationID->ID;
+        } else {
+            $conversationID = $request->get('conversationID');
+        }
+        DB::table('customer_conversation')
+            ->where('ID', $conversationID)
+            ->update(['Status' => 0]);
+
+        // Insert Data to Conversation_detail
+        DB::table('customer_conversation_detail')
+            ->where('ID', $detailId)
+            ->update([
+                'Answer' => $answer,
+                'AnswerDate' => $date,
+                'AnswerTime' => $time,
+                'Replay' => 1,
+            ]);
+
+        return redirect()->route('adminCustomerConnectionDetail', ['id' => $conversationID, 'status' => '0']);
+    }
+
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
 
     public function convertDateToPersian($d)

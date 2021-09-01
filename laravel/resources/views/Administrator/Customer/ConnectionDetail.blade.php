@@ -5,7 +5,7 @@
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{route('sellerControlPanel',['id'=>$data[0]->SellerID,'tab'=>'support'])}}">پشتیبانی</a>
+                   href="{{route('customerControlPanel',['id'=>$data[0]->CustomerID,'tab'=>'support'])}}">پشتیبانی</a>
             </li>
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1"
@@ -111,7 +111,7 @@
                                 @endif
                             @endforeach
                             <div class="g-mt-100 p-0">
-                                <form action="{{ route('connectionNewMsg')}}" method="post"
+                                <form action="{{ route('adminCustomerConnectionNewMsg')}}" method="post"
                                       enctype='multipart/form-data'>
                                     @csrf
                                     {{--                Hidden Input--}}
@@ -137,7 +137,7 @@
                                                       maxlength="300"></textarea>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="sellerId" value="{{ isset($data) ? $data[0]->SellerID: '' }}">
+                                    <input type="hidden" name="زعسفخئثقId" value="{{ isset($data) ? $data[0]->CustomerID: '' }}">
                                     <input type="hidden" name="detailId" value="{{ isset($data) ? $data[$key]->ID: '' }}">
                                     <button type="submit"
                                             class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-25">
