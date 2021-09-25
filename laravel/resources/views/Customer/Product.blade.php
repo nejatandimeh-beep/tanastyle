@@ -228,6 +228,9 @@
                             <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
                         </div>
                         <div class="g-px-20">
+                            <div style="direction: rtl" class="alert alert-warning text-right g-mr-5" role="alert">
+                                <strong class="g-ml-5">توجه!</strong>لطفا قبل از ادامه خرید، فاکتور فروش را به دقت بررسی نمایید.
+                            </div>
                             {{--جدول--}}
                             <div style="direction: rtl"
                                  class="d-lg-flex col-12 g-pa-15 g-pt-20 g-brd-around g-brd-gray-light-v4">
@@ -550,7 +553,6 @@
             <div id="productGallery" class="col-lg-5 g-mb-30 largeDevice">
                 <!-- Carousel Images -->
                 <div id="js-carousel-11" class="js-carousel g-mb-5" data-infinite="1" data-fade="1"
-                     data-arrows-classes="u-arrow-square g-font-size-50 g-pos-abs g-top-50x g-color-white"
                      data-nav-for="#js-carousel-11-nav">
 
                     <div class="js-slide img-magnifier-container">
@@ -614,6 +616,16 @@
                             <img id="img10" class="w-100" src="{{ $data->PicPath }}pic10.jpg" alt="Image Description">
                         </div>
                     @endif
+                    @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img10" class="w-100" src="{{ $data->PicPath }}pic11.jpg" alt="Image Description">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
+                        <div class="js-slide img-magnifier-container">
+                            <img id="img10" class="w-100" src="{{ $data->PicPath }}pic12.jpg" alt="Image Description">
+                        </div>
+                    @endif
                 </div>
                 <!-- End Carousel Images -->
 
@@ -621,7 +633,7 @@
                 <div id="js-carousel-11-nav" class="js-carousel u-carousel-v11" data-infinite="1" data-center-mode="1"
                      data-slides-show="3" data-is-thumbs="1" data-nav-for="#js-carousel-11">
                     <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
-                        <img class="{{!file_exists(public_path($data->PicPath.'pic2.jpg')) ? 'd-none':''}} w-100"
+                        <img class="w-100"
                              src="{{ $data->PicPath }}pic1.jpg" alt="Image Description">
                     </div>
                     @if (file_exists(public_path($data->PicPath.'pic2.jpg')))

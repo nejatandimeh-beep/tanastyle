@@ -1395,6 +1395,7 @@
             $('#productContainer > div').addClass('col-lg-3');
             $('#filterContent').removeClass('justify-content-end');
             $('#filterContent').addClass('justify-content-between');
+            $('#productTitle').hide();
         }
 
         function showSideBar() {
@@ -1413,6 +1414,7 @@
             $('#productContainer > div').addClass('col-lg-4');
             $('#filterContent').removeClass('justify-content-between');
             $('#filterContent').addClass('justify-content-end');
+            $('#productTitle').show();
         }
 
         function closeOtherMenu() {

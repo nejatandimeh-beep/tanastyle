@@ -17,7 +17,7 @@
                                 border: none !important;
                                 outline:none !important;"
                                 onclick="closeSideBar()"
-                                class="font-smooth g-ml-minus-15 g-ml-0--lg g-pt-5 g-font-size-35"
+                                class="font-smooth g-pt-5 g-font-size-35"
                                 type="button">&times;
                             </button>
                         </div>
@@ -1175,7 +1175,8 @@
                     <div id="stickyDiv2" style="z-index: 100 !important;"
                          class="sticky-top g-bg-white-opacity-0_9 g-mb-15">
                         <div class="d-flex g-pt-10 g-pb-10">
-                            <div id="filterContent" class="d-flex col-12 justify-content-between g-px-0">
+                            <h1 style="display: none" id="productTitle" class="h5 align-self-center m-0 col-2 pr-0">{{isset($data[0])? $data[0]->Name.' '.$data[0]->Gender:''}}</h1>
+                            <div id="filterContent" class="d-flex col-10 justify-content-between g-px-0">
                                 <div style="display: block" id="smallFilterDiv"
                                      class="sideBarButton g-ml-10">
                                     <li class="list-inline-item">

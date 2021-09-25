@@ -476,11 +476,11 @@
                                             <i class="icon-trash g-font-size-18 g-color-lightred g-color-red--hover"></i>
                                         </a>
                                     @else
-                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5" href="#"
+                                        <span class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
                                            data-toggle="tooltip"
                                            data-placement="top" data-original-title="فروخته شد">
-                                            <i class="icon-finance-202 u-line-icon-pro g-font-size-22 g-color-gray-dark-v3 g-color-primary--hover"></i>
-                                        </a>
+                                            <i class="icon-finance-202 u-line-icon-pro g-font-size-22 g-color-gray-dark-v3"></i>
+                                        </span>
                                     @endif
                                 </td>
                             </tr>

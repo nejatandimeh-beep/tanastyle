@@ -76,84 +76,63 @@ class Add extends Controller
         if (isset($_GET['qty']))
             $qty = $_GET['qty'];
 
-        switch ($hintCat) {
-            case 'کفش':
-                switch ($gender){
+        switch ($catCode) {
+            case 'f':
+                switch ($gender) {
                     case '0':
                         $size = [
-                            'XS-34',
                             'XS-35',
-                            'S-36',
-                            'M-37',
+                            'XS-36',
+                            'S-37',
                             'M-38',
-                            'L-39',
+                            'M-39',
                             'L-40',
                             'L-41',
-                            'XL-42',
+                            'L-42',
                             'XL-43',
                             'XXL-44',
                             'XXL-45',
-                            'XXL-46',
+                            'XXXL-46',
                             'XXXL-47',
-                            'XXXL-48',
-                            'XXXL-49',
-                            'XXXL-50',
                         ];
                         break;
                     case '1':
                         $size = [
-                            'XS-36',
                             'XS-37',
-                            'S-38',
+                            'XS-38',
                             'S-39',
-                            'M-40',
+                            'S-40',
                             'M-41',
                             'M-42',
                             'L-43',
-                            'L-44',
+                            'XL-44',
                             'XL-45',
-                            'XL-46',
+                            'XXL-46',
                             'XXL-47',
-                            'XXL-48',
+                            'XXXL-48',
                             'XXXL-49',
                             'XXXL-50',
                             'XXXL-51',
                             'XXXL-52',
-                            'XXXL-53',
-                            'XXXL-54',
-                            'XXXL-55',
-                            'XXXL-56',
-                            'XXXL-57',
                         ];
                         break;
                     case '2':
                     case '3':
                         $size = [
-                            'XS-21',
-                            'XS-22',
-                            'XS-23',
                             'XS-24',
                             'XS-25',
-                            'XS-26',
-                            'XS-27',
-                            'XS-28',
-                            'S-29',
-                            'S-30',
-                            'S-31',
-                            'S-32',
-                            'S-33',
-                            'S-34',
-                            'M-35',
-                            'M-36',
-                            'M-37',
-                            'L-38',
-                            'L-39',
-                            'L-40',
-                            'XL-41',
-                            'XL-42',
-                            'XXL-43',
-                            'XXXL-44',
-                            'XXXL-45',
+                            'S-26',
+                            'S-27',
+                            'M-28',
+                            'M-29',
+                            'L-30',
+                            'L-31',
+                            'XL-32',
+                            'XL-33',
+                            'XXL-34',
+                            'XXL-35',
+                            'XXXL-36',
+                            'XXXL-37',
                         ];
                         break;
                     case '4':
@@ -167,20 +146,40 @@ class Add extends Controller
                             'XXL-21',
                             'XXL-22',
                             'XXXL-23',
-                            'XXXL-24',
                         ];
                         break;
                 }
                 break;
+            case 'e':
+            case 'n':
+            case 'o':
+            case 'p':
+            case 'q':
+                $size = ['آزاد'];
+                break;
             default:
-                $size = [
-                    'S',
-                    'M',
-                    'L',
-                    'XL',
-                    'XXL',
-                    'XXXL'
-                ];
+                switch ($gender) {
+                    case '4':
+                    case '5':
+                        $size = [
+                            'XS',
+                            'S',
+                            'M',
+                            'L',
+                            'XL',
+                        ];
+                        break;
+                    default:
+                        $size = [
+                            'XS',
+                            'S',
+                            'M',
+                            'L',
+                            'XL',
+                            'XXL',
+                            'XXXL'
+                        ];
+                }
         }
 
         return view('Seller.AddProduct', compact('gender', 'cat', 'catCode', 'name', 'hintCat', 'qty', 'size'));
@@ -220,6 +219,7 @@ class Add extends Controller
 
         $imageColor = collect($imageColor)->sortBy('color')->toArray();
         $imageColor = array_values($imageColor);
+        $folderPath = '';
         for ($i = 0; $i < $qty; $i++) {
             if (!is_null($imageColor[$i]['image'])) {
                 $j++;
@@ -233,6 +233,18 @@ class Add extends Controller
                 file_put_contents($imageFullPath, $image_base64);
             } else {
                 $imageColor[$i]['fileName'] = 'pic' . $j;
+            }
+        }
+        for ($i = 1; $i <= 2; $i++) {
+            if (!is_null($request->get('imageUrl1' . $i))) {
+                $image = $request->get('imageUrl1' . $i);
+                $image_parts = explode(";base64,", $image);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_base64 = base64_decode($image_parts[1]);
+
+                $imageFullPath = $folderPath . 'pic1' . $i . '.jpg';
+
+                file_put_contents($imageFullPath, $image_base64);
             }
         }
         // Compilation Pic Path
