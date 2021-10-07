@@ -7,9 +7,13 @@ use App\Providers\RouteServiceProvider;
 use App\Seller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use File;
+use Kavenegar;
 
 class RegisterController extends Controller
 {
@@ -73,6 +77,49 @@ class RegisterController extends Controller
         return view('auth.sellerAuth.register');
     }
 
+    public function new(Request $request)
+    {
+        $nationalId = $request->get('nationalId');
+
+        File::makeDirectory($nationalId, 0777, true, true);
+        // Upload Images
+
+        $path = 'img\SellerProfileImage\\' . $nationalId . '\\';
+        $request->file('pic11')->storeAs(
+            $path, 'user' . '.png', 'public'
+        );
+
+        $request->file('pic12')->storeAs(
+            $path, 'nationalityCard' . '.png', 'public'
+        );
+
+        DB::table('seller_new')
+            ->insert([
+                'Name' => $request->get('name'),
+                'Family' => $request->get('family'),
+                'Email' => $request->get('email'),
+                'NationalID' => $nationalId,
+                'BDay' => $request->get('day'),
+                'BMon' => $request->get('mon'),
+                'BYear' => $request->get('year'),
+                'Gender' => $request->get('gender'),
+                'PrePhone' => $request->get('prePhone'),
+                'Phone' => $request->get('phone'),
+                'Mobile' => $request->get('mobile'),
+                'State' => $request->get('state'),
+                'City' => $request->get('city'),
+                'HomeAddress' => $request->get('homeAddress'),
+                'HomePostalCode' => $request->get('homePostalCode'),
+                'WorkAddress' => $request->get('workAddress'),
+                'WorkPostalCode' => $request->get('workPostalCode'),
+                'ShopNumber' => $request->get('shopNumber'),
+                'CreditCard' => (string)$request->get('creditCard4') . (string)$request->get('creditCard3') . (string)$request->get('creditCard2') . (string)$request->get('creditCard1'),
+                'PicPath' => $path,
+            ]);
+
+        return redirect()->route('sellerRegister')->with('msg', 'success');
+    }
+
     protected function createSeller(Request $request)
     {
 //        $this->validate($request, [
@@ -81,15 +128,18 @@ class RegisterController extends Controller
 //            'password' => 'required|string|min:8|confirmed',
 //        ]);
 
+        $name=$request['name'];
+        $family=$request['family'];
+        $mobile=$request['mobile'];
         $password=$this->randomPassword();
         $seller = Seller::create([
-            'name' => $request['name'],
-            'Family' => $request['family'],
+            'name' => $name,
+            'Family' => $family,
             'NationalID' => $request['nationalId'],
             'Birthday' => $request['year'].'/'. $request['mon'].'/'. $request['day'],
             'Gender' => (int)$request['gender'],
             'Phone' => $request['prePhone'].$request['phone'],
-            'Mobile' => $request['mobile'],
+            'Mobile' => $mobile,
             'State' => $request['state'],
             'City' => $request['city'],
             'Address' => $request['workAddress'],
@@ -120,6 +170,30 @@ class RegisterController extends Controller
         DB::table('seller_new')
             ->where('ID',$request->get('id'))
             ->delete();
+
+        //--------------
+        try {
+            $token =$name;
+            $token2 = $family;
+            $token3 = $password;
+            Session::put('token', $token);
+            Session::put('token2', $token2);
+            Session::put('token3', $token3);
+
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "registerSeller";
+            $type = "sms";
+
+            $result = $var->VerifyLookup($mobile, $token, $token2, $token3, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
+        //--------------
 
 //        return redirect()->intended('sellerVerify');
         return redirect()->route('sellerVerify');

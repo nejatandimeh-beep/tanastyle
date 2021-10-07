@@ -299,7 +299,7 @@ Route::get('/Administrator-Master', 'Administrator\Admin@AdministratorMaster')->
 Route::get('/Administrator-Kiosk-SignatureEdit/{newCode}/{id}', 'Delivery\Basic@signatureEdit');
 
 // -------------------------[seller]
-Route::post('/Seller-Register-Request', 'Administrator\Seller@new')->name('sellerNew');
+Route::post('/Seller-Register-Request', 'AuthSeller\RegisterController@new')->name('sellerNew');
 
 Route::post('/Seller-Delete-Request', 'Administrator\Seller@delete')->name('sellerDelete');
 

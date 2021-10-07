@@ -243,7 +243,7 @@ class Basic extends Controller
             $persianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate'));
+        return view('Seller.Sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate'));
     }
 
 //  Order Detail

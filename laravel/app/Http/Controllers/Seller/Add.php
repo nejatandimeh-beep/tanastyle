@@ -151,6 +151,7 @@ class Add extends Controller
                 }
                 break;
             case 'e':
+            case 'm':
             case 'n':
             case 'o':
             case 'p':

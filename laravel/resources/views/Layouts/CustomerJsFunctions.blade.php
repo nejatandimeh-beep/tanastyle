@@ -1784,6 +1784,784 @@
                         break;
                     } else
                         return 'آذربایجان غربی ' + s[city];
+
+                case '3':
+                    s[0] = "اردبیل";
+                    s[1] = "پارس آباد";
+                    s[2] = "مشگین شهر";
+                    s[3] = "خلخال";
+                    s[4] = "گرمی";
+                    s[5] = "نمین";
+                    s[6] = "بیله‌سوار";
+                    s[7] = "اصلاندوز";
+                    s[8] = "کوثر";
+                    s[9] = "نیر";
+                    s[10] = "سرعین";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 10; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'اردبیل ' + s[city];
+
+                case '4':
+                    s[0] = "اصفهان";
+                    s[1] = "کاشان";
+                    s[2] = "خمینی‌شهر";
+                    s[3] = "نجف‌آباد";
+                    s[4] = "لنجان";
+                    s[5] = "فلاورجان";
+                    s[6] = "شاهین‌شهر و میمه";
+                    s[7] = "شهرضا";
+                    s[8] = "مبارکه";
+                    s[9] = "برخوار";
+                    s[10] = "آران و بیدگل";
+                    s[11] = "گلپایگان";
+                    s[12] = "سمیرم";
+                    s[13] = "تیران و کرون";
+                    s[14] = "فریدن";
+                    s[15] = "نطنز";
+                    s[16] = "اردستان";
+                    s[17] = "نائین";
+                    s[18] = "فریدون‌شهر";
+                    s[19] = "دهاقان";
+                    s[20] = "خوانسار";
+                    s[21] = "چادگان";
+                    s[22] = "بوئین و میاندشت";
+                    s[23] = "خور و بیابانک";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 23; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'اصفهان ' + s[city];
+
+                case '5':
+                    s[0] = "کرج";
+                    s[1] = "فردیس";
+                    s[2] = "ساوجبلاغ";
+                    s[3] = "نظرآباد";
+                    s[4] = "اشتهارد";
+                    s[5] = "طالقان";
+                    s[6] = "ایلام";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 6; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'البرز ' + s[city];
+
+                case '6':
+                    s[0] = "ایلام";
+                    s[1] = "دهلران";
+                    s[2] = "چرداول";
+                    s[3] = "ایوان";
+                    s[4] = "آبدانان";
+                    s[5] = "دره‌شهر";
+                    s[6] = "مهران";
+                    s[7] = "ملکشاهی";
+                    s[8] = "بدره";
+                    s[9] = "سیروان";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 9; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'ایلام ' + s[city];
+
+                case '7':
+                    s[0] = "بوشهر";
+                    s[1] = "دشتستان";
+                    s[2] = "کنگان";
+                    s[3] = "گناوه";
+                    s[4] = "دشتی";
+                    s[5] = "تنگستان";
+                    s[6] = "عسلویه";
+                    s[7] = "جم";
+                    s[8] = "دیر";
+                    s[9] = "دیلم";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 9; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'بوشهر ' + s[city];
+
+                case '8':
+                    s[0] = "تهران";
+                    s[1] = "شهریار";
+                    s[2] = "اسلامشهر";
+                    s[3] = "بهارستان";
+                    s[4] = "ملارد";
+                    s[5] = "پاکدشت";
+                    s[6] = "ری";
+                    s[7] = "قدس";
+                    s[8] = "مبارکه";
+                    s[9] = "رباط‌کریم";
+                    s[10] = "ورامین";
+                    s[11] = "قرچک";
+                    s[12] = "پردیس";
+                    s[13] = "دماوند";
+                    s[14] = "پیشوا";
+                    s[15] = "شمیرانات";
+                    s[16] = "فیروزکوه";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 16; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'تهران ' + s[city];
+
+                case '9':
+                    s[0] = "شهرکرد";
+                    s[1] = "لردگان";
+                    s[2] = "بروجن";
+                    s[3] = "فارسان";
+                    s[4] = "کیار";
+                    s[5] = "اردل";
+                    s[6] = "کوهرنگ";
+                    s[7] = "سامان";
+                    s[8] = "بن";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 8; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'چهارمحال و بختیاری ' + s[city];
+
+                case '10':
+                    s[0] = "بیرجند";
+                    s[1] = "قائنات";
+                    s[2] = "طبس";
+                    s[3] = "درمیان";
+                    s[4] = "نهبندان";
+                    s[5] = "فردوس";
+                    s[6] = "سربیشه";
+                    s[7] = "زیرکوه";
+                    s[8] = "سرایان";
+                    s[9] = "خوسف";
+                    s[10] = "بشرویه";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 10; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'خراسان جنوبی ' + s[city];
+
+                case '11':
+                    s[0] = "مشهد";
+                    s[1] = "نیشابور";
+                    s[2] = "سبزوار";
+                    s[3] = "تربت جام";
+                    s[4] = "تربت حیدریه";
+                    s[5] = "قوچان";
+                    s[6] = "کاشمر";
+                    s[7] = "شهرضا";
+                    s[8] = "چناران";
+                    s[9] = "خواف";
+                    s[10] = "تایباد";
+                    s[11] = "فریمان";
+                    s[12] = "سرخس";
+                    s[13] = "گناباد";
+                    s[14] = "بردسکن";
+                    s[15] = "درگز";
+                    s[16] = "بینالود";
+                    s[17] = "زاوه";
+                    s[18] = "رشتخوار";
+                    s[19] = "باخرز";
+                    s[20] = "جوین";
+                    s[21] = "خلیل‌آباد";
+                    s[22] = "مه‌ولات";
+                    s[23] = "جغتای";
+                    s[24] = "فیروزه";
+                    s[25] = "خوشاب";
+                    s[26] = "کلات";
+                    s[27] = "بجستان";
+                    s[28] = "داورزن";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 28; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'خراسان رضوی ' + s[city];
+
+                case '12':
+                    s[0] = "بجنورد";
+                    s[1] = "شیروان";
+                    s[2] = "اسفراین";
+                    s[3] = "مانه و سملقان";
+                    s[4] = "فاروج";
+                    s[5] = "راز و جرگلان";
+                    s[6] = "جاجرم";
+                    s[7] = "گرمه";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 7; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'خراسان شمالی ' + s[city];
+
+                case '13':
+                    s[0] = "اهواز";
+                    s[1] = "دزفول";
+                    s[2] = "آبادان";
+                    s[3] = "بندر ماهشهر";
+                    s[4] = "شوش";
+                    s[5] = "ایذه";
+                    s[6] = "شوشتر";
+                    s[7] = "بهبهان";
+                    s[8] = "اندیمشک";
+                    s[9] = "خرمشهر";
+                    s[10] = "شادگان";
+                    s[11] = "رامهرمز";
+                    s[12] = "مسجدسلیمان";
+                    s[13] = "دشت آزادگان";
+                    s[14] = "کارون";
+                    s[15] = "باغ‌ملک";
+                    s[16] = "باوی";
+                    s[17] = "امیدیه";
+                    s[18] = "گتوند";
+                    s[19] = "رامشیر";
+                    s[20] = "حمیدیه";
+                    s[21] = "اندیکا";
+                    s[22] = "هویزه";
+                    s[23] = "هندیجان";
+                    s[24] = "لالی";
+                    s[25] = "هفتکل";
+                    s[26] = "آغاجاری";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 26; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'خوزستان ' + s[city];
+
+                case '14':
+                    s[0] = "زنجان";
+                    s[1] = "خدابنده";
+                    s[2] = "ابهر";
+                    s[3] = "خرمدره";
+                    s[4] = "طارم";
+                    s[5] = "ماه‌نشان";
+                    s[6] = "ایجرود";
+                    s[7] = "سلطانیه";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 7; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'زنجان ' + s[city];
+
+                case '15':
+                    s[0] = "شاهرود";
+                    s[1] = "سمنان";
+                    s[2] = "دامغان";
+                    s[3] = "گرمسار";
+                    s[4] = "مهدی‌شهر";
+                    s[5] = "میامی";
+                    s[6] = "سرخه";
+                    s[7] = "آرادان";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 7; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'سمنان ' + s[city];
+
+                case '16':
+                    s[0] = "زاهدان";
+                    s[1] = "چابهار";
+                    s[2] = "ایرانشهر";
+                    s[3] = "سراوان";
+                    s[4] = "راسک";
+                    s[5] = "خاش";
+                    s[6] = "زابل";
+                    s[7] = "نیک شهر";
+                    s[8] = "کنارک";
+                    s[9] = "سیب و سوران";
+                    s[10] = "زهک";
+                    s[11] = "مهرستان";
+                    s[12] = "دلگان";
+                    s[13] = "هیرمند";
+                    s[14] = "قصرقند";
+                    s[15] = "فنوج";
+                    s[16] = "نیمروز";
+                    s[17] = "میرجاوه";
+                    s[18] = "هامون";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 18; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'سیستان و بلوچستان ' + s[city];
+
+                case '17':
+                    s[0] = "شیراز";
+                    s[1] = "مرودشت";
+                    s[2] = "کازرون";
+                    s[3] = "جهرم";
+                    s[4] = "لارستان";
+                    s[5] = "فسا";
+                    s[6] = "داراب";
+                    s[7] = "فیروزآباد";
+                    s[8] = "ممسنی";
+                    s[9] = "نی ریز";
+                    s[10] = "آباده";
+                    s[11] = "اقلید";
+                    s[12] = "لامرد";
+                    s[13] = "سپیدان";
+                    s[14] = "کوار";
+                    s[15] = "زرین‌دشت";
+                    s[16] = "قیر و کارزین";
+                    s[17] = "استهبان";
+                    s[18] = "مهر";
+                    s[19] = "خرامه";
+                    s[20] = "گراش";
+                    s[21] = "خرم‌بید";
+                    s[22] = "بوانات";
+                    s[23] = "فراشبند";
+                    s[24] = "رستم";
+                    s[25] = "ارسنجان";
+                    s[26] = "خنج";
+                    s[27] = "سروستان";
+                    s[28] = "پاسارگاد";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 28; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'فارس ' + s[city];
+
+                case '18':
+                    s[0] = "قزوین";
+                    s[1] = "البرز";
+                    s[2] = "تاکستان";
+                    s[3] = "بوئین‌زهرا";
+                    s[4] = "آبیک";
+                    s[5] = "آوج";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 5; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'قزوین ' + s[city];
+
+                case '19':
+                    s[0] = "قم";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 0; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'قم ' + s[city];
+
+                case '20':
+                    s[0] = "سنندج";
+                    s[1] = "سقز";
+                    s[2] = "مریوان";
+                    s[3] = "بانه";
+                    s[4] = "قروه";
+                    s[5] = "کامیاران";
+                    s[6] = "بیجار";
+                    s[7] = "دیواندره";
+                    s[8] = "دهگلان";
+                    s[9] = "سروآباد";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 9; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'کردستان ' + s[city];
+
+                case '21':
+                    s[0] = "کرمان";
+                    s[1] = "سیرجان";
+                    s[2] = "رفسنجان";
+                    s[3] = "جیرفت";
+                    s[4] = "بم";
+                    s[5] = "زرند";
+                    s[6] = "رودبار جنوب";
+                    s[7] = "شهربابک";
+                    s[8] = "کهنوج";
+                    s[9] = "ریگان";
+                    s[10] = "بافت";
+                    s[11] = "عنبرآباد";
+                    s[12] = "بردسیر";
+                    s[13] = "قلعه گنج";
+                    s[14] = "فهرج";
+                    s[15] = "منوجان";
+                    s[16] = "نرماشیر";
+                    s[17] = "راور";
+                    s[18] = "ارزوئیه";
+                    s[19] = "انار";
+                    s[20] = "رابر";
+                    s[21] = "فاریاب";
+                    s[22] = "کوهبنان";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 22; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'کرمان ' + s[city];
+
+                case '22':
+                    s[0] = "کرمانشاه";
+                    s[1] = "اسلام‌آبادغرب";
+                    s[2] = "سرپل ذهاب";
+                    s[3] = "سنقر";
+                    s[4] = "هرسین";
+                    s[5] = "کنگاور";
+                    s[6] = "جوانرود";
+                    s[7] = "صحنه";
+                    s[8] = "پاوه";
+                    s[9] = "گیلانغرب";
+                    s[10] = "روانسر";
+                    s[11] = "دالاهو";
+                    s[12] = "ثلاث باباجانی";
+                    s[13] = "قصرشیرین";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 13; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'کرمانشاه ' + s[city];
+
+                case '23':
+                    s[0] = "بویراحمد";
+                    s[1] = "کهگیلویه";
+                    s[2] = "گچساران";
+                    s[3] = "دنا";
+                    s[4] = "بهمئی";
+                    s[5] = "چرام";
+                    s[6] = "لنده";
+                    s[7] = "باشت";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 7; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'کهگیلویه و بویراحمد ' + s[city];
+
+                case '24':
+                    s[0] = "گرگان";
+                    s[1] = "گنبد کاووس";
+                    s[2] = "علی‌آباد";
+                    s[3] = "آق‌قلا";
+                    s[4] = "کلاله";
+                    s[5] = "آزادشهر";
+                    s[6] = "رامیان";
+                    s[7] = "ترکمن";
+                    s[8] = "مینودشت";
+                    s[9] = "کردکوی";
+                    s[10] = "گمیشان";
+                    s[11] = "گالیکش";
+                    s[12] = "مراوه‌تپه";
+                    s[13] = "بندر گز";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 7; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'گلستان ' + s[city];
+
+                case '25':
+                    s[0] = "رشت";
+                    s[1] = "تالش";
+                    s[2] = "لاهیجان";
+                    s[3] = "رودسر";
+                    s[4] = "لنگرود";
+                    s[5] = "بندر انزلی";
+                    s[6] = "صومعه‌سرا";
+                    s[7] = "آستانه اشرفیه";
+                    s[8] = "رودبار";
+                    s[9] = "فومن";
+                    s[10] = "آستارا";
+                    s[11] = "رضوانشهر";
+                    s[12] = "شفت";
+                    s[13] = "ماسال";
+                    s[13] = "سیاهکل";
+                    s[13] = "املش";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 13; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'گیلان ' + s[city];
+
+                case '26':
+                    s[0] = "خرم‌آباد";
+                    s[1] = "بروجرد";
+                    s[2] = "دورود";
+                    s[3] = "کوهدشت";
+                    s[4] = "دلفان";
+                    s[5] = "الیگودرز";
+                    s[6] = "سلسله";
+                    s[7] = "ازنا";
+                    s[8] = "پلدختر";
+                    s[9] = "دوره";
+                    s[10] = "رومشکان";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 10; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'لرستان ' + s[city];
+
+                case '27':
+                    s[0] = "بابل";
+                    s[1] = "ساری";
+                    s[2] = "آمل";
+                    s[3] = "قائم‌شهر";
+                    s[4] = "بهشهر";
+                    s[5] = "تنکابن";
+                    s[6] = "نوشهر";
+                    s[7] = "بابلسر";
+                    s[8] = "نور";
+                    s[9] = "نکا";
+                    s[10] = "چالوس";
+                    s[11] = "نوشهر";
+                    s[12] = "بابلسر";
+                    s[13] = "نور";
+                    s[14] = "نکا";
+                    s[15] = "چالوس";
+                    s[16] = "محمودآباد";
+                    s[17] = "جویبار";
+                    s[18] = "رامسر";
+                    s[19] = "فریدونکنار";
+                    s[20] = "میاندرود";
+                    s[21] = "عباس‌آباد";
+                    s[22] = "سوادکوه";
+                    s[23] = "گلوگاه";
+                    s[24] = "سوادکوه شمالی";
+                    s[25] = "کلاردشت";
+                    s[26] = "سیمرغ";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 26; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'مازندران ' + s[city];
+
+                case '28':
+                    s[0] = "اراک";
+                    s[1] = "ساوه";
+                    s[2] = "شازند";
+                    s[3] = "خمین";
+                    s[4] = "زرندیه";
+                    s[5] = "محلات";
+                    s[6] = "خنداب";
+                    s[7] = "دلیجان";
+                    s[8] = "کمیجان";
+                    s[9] = "فراهان";
+                    s[10] = "تفرش";
+                    s[11] = "آشتیان";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 11; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'مرکزی ' + s[city];
+
+                case '29':
+                    s[0] = "بندرعباس";
+                    s[1] = "میناب";
+                    s[2] = "بندر لنگه";
+                    s[3] = "قشم";
+                    s[4] = "رودان";
+                    s[5] = "بستک";
+                    s[6] = "حاجی‌آباد";
+                    s[7] = "جاسک";
+                    s[8] = "خمیر";
+                    s[9] = "پارسیان";
+                    s[10] = "سیریک";
+                    s[11] = "بشاگرد";
+                    s[12] = "ابوموسی";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 12; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'هرمزگان ' + s[city];
+
+                case '30':
+                    s[0] = "همدان";
+                    s[1] = "ملایر";
+                    s[2] = "نهاوند";
+                    s[3] = "کبودرآهنگ";
+                    s[4] = "بهار";
+                    s[5] = "رزن";
+                    s[6] = "تویسرکان";
+                    s[7] = "اسدآباد";
+                    s[8] = "فامنین";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 8; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'همدان ' + s[city];
+
+                case '31':
+                    s[0] = "یزد";
+                    s[1] = "میبد";
+                    s[2] = "اردکان";
+                    s[3] = "مهریز";
+                    s[4] = "ابرکوه";
+                    s[5] = "بافق";
+                    s[6] = "تفت";
+                    s[7] = "خاتم";
+                    s[8] = "اشکذر";
+                    s[9] = "بهاباد";
+
+                    if (type === 'createOptions') {
+                        for (i = 0; i <= 9; i++) {
+                            let opt = document.createElement('option');
+                            opt.value = i;
+                            opt.innerHTML = s[i];
+                            select.append(opt);
+                        }
+                        break;
+                    } else
+                        return 'یزد ' + s[city];
             }
         }
 

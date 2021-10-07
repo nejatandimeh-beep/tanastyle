@@ -41,7 +41,7 @@ class Basic extends Controller
             ->take(10)
             ->get();
 
-        return view('customer.Master', compact('data'));
+        return view('Customer.Master', compact('data'));
     }
 
     public function userProfile($location)
@@ -1583,7 +1583,7 @@ class Basic extends Controller
             ->max('ID');
 
         $productInfo = DB::table('product_detail as pd')
-            ->select('pd.*', 'p.SellerID')
+            ->select('pd.*', 'p.SellerID','p.ID as productID')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
             ->where('pd.ID', $id)
             ->first();
@@ -1653,18 +1653,50 @@ class Basic extends Controller
             ->where('ProductDetailID', $id)
             ->delete();
 
+        $seller=DB::table('sellers')
+            ->select('id','Mobile')
+            ->where('id',$productInfo->SellerID)
+            ->first();
+
         //--------------
         try {
-            $sender = "10008663";        //This is the Sender number
-
-            $message = "فاکتور شما ثبت شد.";        //The body of SMS
-            $receptor = array("09013946105");            //Receptors numbers
-
+            $token =$orderID;
+            $token2 = $orderDetailID;
+            $token3 = "";
+            Session::put('token', $token);
+            Session::put('token2', $token2);
+//            Session::put('token', $token3);
 
             $api_key = Config::get('kavenegar.apikey');
             $var = new Kavenegar\KavenegarApi($api_key);
-            $result = $var->Send($sender, $receptor, $message);
+            $template = "factorSmsCustomer";
+            $type = "sms";
 
+            $result = $var->VerifyLookup(Auth::user()->Mobile, $token, $token2, $token3, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
+        //--------------
+
+        //--------------
+        try {
+            $token =$productInfo->ID;
+            $token2 = $orderID;
+            $token3 = $orderDetailID;
+            Session::put('token', $token);
+            Session::put('token2', $token2);
+            Session::put('token3', $token3);
+
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "factorSmsCustomer";
+            $type = "sms";
+
+            $result = $var->VerifyLookup($seller->Mobile, $token, $token2, $token3, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();

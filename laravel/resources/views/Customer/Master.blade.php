@@ -19,7 +19,7 @@
                     data-rotate="0"
                     data-saveperformance="off"
                     data-title="Intro">
-                    <img class="rev-slidebg" src="img/Banners/landscape.jpg" alt="Image description"
+                    <img class="rev-slidebg" src="{{asset('img/Banners/landscape.jpg')}}" alt="Image description"
                          data-bgposition="center center"
                          data-bgfit="cover"
                          data-bgrepeat="no-repeat"

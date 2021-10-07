@@ -18,49 +18,6 @@ class Seller extends Controller
         $this->middleware('IsAdmin');
     }
 
-    public function new(Request $request)
-    {
-        $nationalId = $request->get('nationalId');
-
-        File::makeDirectory($nationalId, 0777, true, true);
-        // Upload Images
-
-        $path = 'img\SellerProfileImage\\' . $nationalId . '\\';
-        $request->file('pic11')->storeAs(
-            $path, 'user' . '.png', 'public'
-        );
-
-        $request->file('pic12')->storeAs(
-            $path, 'nationalityCard' . '.png', 'public'
-        );
-
-        DB::table('seller_new')
-            ->insert([
-                'Name' => $request->get('name'),
-                'Family' => $request->get('family'),
-                'Email' => $request->get('email'),
-                'NationalID' => $nationalId,
-                'BDay' => $request->get('day'),
-                'BMon' => $request->get('mon'),
-                'BYear' => $request->get('year'),
-                'Gender' => $request->get('gender'),
-                'PrePhone' => $request->get('prePhone'),
-                'Phone' => $request->get('phone'),
-                'Mobile' => $request->get('mobile'),
-                'State' => $request->get('state'),
-                'City' => $request->get('city'),
-                'HomeAddress' => $request->get('homeAddress'),
-                'HomePostalCode' => $request->get('homePostalCode'),
-                'WorkAddress' => $request->get('workAddress'),
-                'WorkPostalCode' => $request->get('workPostalCode'),
-                'ShopNumber' => $request->get('shopNumber'),
-                'CreditCard' => (string)$request->get('creditCard4') . (string)$request->get('creditCard3') . (string)$request->get('creditCard2') . (string)$request->get('creditCard1'),
-                'PicPath' => $path,
-            ]);
-
-        return redirect()->route('sellerRegister')->with('msg', 'success');
-    }
-
     public function verify()
     {
         $data = DB::table('seller_new')
