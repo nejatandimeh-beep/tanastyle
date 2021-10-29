@@ -22,7 +22,7 @@
     @endif
     <!-- End Delete Product Msg -->
 
-    <div class="container g-brd-top g-brd-gray-light-v4 g-mb-100">
+    <div class="container g-brd-top g-brd-gray-light-v4 g-mb-100 customBox">
         {{-- Total Info--}}
         <div class="rowSeller g-mt-30 g-mb-10 g-mr-0 g-ml-0">
 

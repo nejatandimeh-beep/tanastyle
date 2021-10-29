@@ -2,7 +2,7 @@
     <body>
     <div id="load" class="load"></div>
     <span id="loginAlert" class="d-none">{{ (isset(Auth::user()->id)) ? 'login':'logout' }}</span>
-    <header id="js-header2" class="u-header u-header--static">
+    <header id="js-header" class="u-header u-header--static">
         <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-pt-10 g-pb-10--lg">
             <nav class="js-mega-menu hs-menu-initialized hs-menu-horizontal navbar navbar-toggleable-md">
                 <div class="container g-px-0" id="HeaderContainer">
@@ -22,13 +22,13 @@
 
                     <!-- Logo -->
                     <a href="{{ url('/') }}" class="navbar-brand">
-                        <img src="{{ asset('img/Logo/logo.png') }}" alt="Image Description" width="120"
+                        <img src="{{ asset('img/Logo/logo.svg') }}" alt="Image Description" width="120"
                              class="g-pt-7 g-pt-0--lg">
                     </a>
                     <!-- End Logo -->
 
                     <!-- Navigation -->
-                    <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pt-5--lg" id="navBar">
+                    <div class="collapse navbar-collapse align-items-center flex-sm-row g-pt-10 g-pb-20 g-pb-0--lg g-pt-5--lg" id="navBar">
                         <ul style="direction: rtl" class="navbar-nav g-font-weight-600 ml-auto p-0">
                             {{--صفحه اصلی--}}
                             <li class="nav-item g-mx-20--lg">
@@ -40,11 +40,11 @@
                                 data-animation-out="fadeOut" data-position="right" id="femaleCat">
                                 <a id="mega-menu-label-4" class="nav-link g-px-0" href="#" aria-haspopup="true"
                                    aria-expanded="false">پوشاک زنانه
-                                    <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-mr-7"></i></a>
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
                                 <!-- Mega Menu -->
                                 <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-55--lg g-mt-7--lg--scrolling"
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
                                     aria-labelledby="mega-menu-label-4" style="display: none;">
                                     <div class="row">
                                         {{-- لباس --}}
@@ -733,11 +733,11 @@
                                 data-animation-out="fadeOut" data-position="right" id="maleCat">
                                 <a id="mega-menu-label-5" class="nav-link g-px-0" href="#" aria-haspopup="true"
                                    aria-expanded="false">پوشاک مردانه
-                                    <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-mr-7"></i></a>
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
                                 <!-- Mega Menu -->
                                 <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-55--lg g-mt-7--lg--scrolling"
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
                                     aria-labelledby="mega-menu-label-5" style="display: none;">
                                     <div class="row">
                                         {{-- لباس --}}
@@ -1271,11 +1271,11 @@
                                 data-animation-out="fadeOut" data-position="right" id="kidsCat">
                                 <a id="mega-menu-label-6" class="nav-link g-px-0" href="#" aria-haspopup="true"
                                    aria-expanded="false">پوشاک بچگانه
-                                    <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-mr-7"></i></a>
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
                                 <!-- Mega Menu -->
                                 <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-55--lg g-mt-7--lg--scrolling"
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
                                     aria-labelledby="mega-menu-label-6" style="display: none;">
                                     <div class="row">
                                         {{-- دخترانه --}}
@@ -1956,11 +1956,11 @@
                                 data-animation-out="fadeOut" data-position="right" id="kidsCat">
                                 <a id="mega-menu-label-9" class="nav-link g-px-0" href="#" aria-haspopup="true"
                                    aria-expanded="false">پوشاک نوزادی
-                                    <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-mr-7"></i></a>
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
                                 <!-- Mega Menu -->
                                 <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-55--lg g-mt-7--lg--scrolling"
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
                                     aria-labelledby="mega-menu-label-9" style="display: none;">
                                     <div class="row">
                                         {{-- دخترانه --}}
@@ -2402,11 +2402,11 @@
                                 data-animation-out="fadeOut" data-position="right" id="spacialSale">
                                 <a id="mega-menu-label-2" class="nav-link g-px-0" href="#" aria-haspopup="true"
                                    aria-expanded="false">فروش ویژه
-                                    <i class="hs-icon hs-icon-arrow-bottom g-font-size-11 g-mr-7"></i></a>
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
                                 <!-- Mega Menu -->
                                 <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-mb-25 g-pa-30 g-mt-17 g-mt-55--lg g-mt-7--lg--scrolling animated hs-position-right fadeOut"
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-mb-25 g-pa-30 g-mt-17 g-mt-7--lg--scrolling animated hs-position-right fadeOut"
                                     aria-labelledby="mega-menu-label-2" style="display: none;">
                                     <div class="row align-items-stretch text-left">
                                         <div class="col-md-4 g-mb-30 g-mb-0--md">

@@ -44,7 +44,7 @@
         <div class="col-md-12 m-0 p-0">
             {{--  Menu --}}
             <div class="bigDevice">
-                <ul style="direction: rtl"
+                <ul
                     class="nav text-md-right justify-content-end u-nav-v8-1 u-nav-dark g-bg-black-opacity-0_8 p-0"
                     role="tablist"
                     data-target="nav-8-1-dark-hor-right"

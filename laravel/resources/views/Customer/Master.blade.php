@@ -1,160 +1,17 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <div id="rev_slider_495_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
-         data-alias="search-form-hero42" data-source="gallery"
-         style="margin:0px auto;background-color:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
-        <div id="rev_slider_495_1" class="rev_slider fullwidthabanner" style="display:none;"
-             data-version="5.4.1">
-            <ul>
-                <li
-                    data-index="rs-1708"
-                    data-transition="zoomout"
-                    data-slotamount="default"
-                    data-hideafterloop="0"
-                    data-hideslideonmobile="off"
-                    data-easein="Power4.easeInOut"
-                    data-easeout="Power4.easeInOut"
-                    data-masterspeed="2000"
-                    data-thumb="img/Banners/landscape-100x50.jpg"
-                    data-rotate="0"
-                    data-saveperformance="off"
-                    data-title="Intro">
-                    <img class="rev-slidebg" src="{{asset('img/Banners/landscape.jpg')}}" alt="Image description"
-                         data-bgposition="center center"
-                         data-bgfit="cover"
-                         data-bgrepeat="no-repeat"
-                         data-bgparallax="10">
-
-                    <!-- LAYER NR. 1 -->
-                    <div id="slide-1708-layer-10" class="tp-caption tp-shape tp-shapewrapper"
-                         style="z-index: 5; background-color: rgba(0, 0, 0, 0); border-color: rgba(0, 0, 0, .5); border-width: 0;"
-                         data-x="['center','center','center','center']"
-                         data-hoffset="['0','0','0','0']"
-                         data-y="['middle','middle','middle','middle']"
-                         data-voffset="['0','0','0','0']"
-                         data-width="full"
-                         data-height="full"
-                         data-whitespace="nowrap"
-                         data-type="shape"
-                         data-basealign="slide"
-                         data-responsive_offset="on"
-                         data-responsive="off"
-                         data-frames='[
-                       {"from":"opacity:0;","speed":1500,"to":"o:1;","delay":750,"ease":"Power3.easeInOut"},
-                       {"delay":"wait","speed":300,"ease":"nothing"}
-                     ]'
-                         data-textAlign="['left','left','left','left']"
-                         data-paddingtop="[0,0,0,0]"
-                         data-paddingright="[0,0,0,0]"
-                         data-paddingbottom="[0,0,0,0]"
-                         data-paddingleft="[0,0,0,0]"></div>
-
-                    <!-- LAYER NR. 2 -->
-                    <div id="slide-1708-layer-8" class="tp-caption NotGeneric-Icon tp-resizeme"
-                         style="z-index: 6; white-space: nowrap; cursor: default;"
-                         data-x="['center','center','center','center']"
-                         data-hoffset="['0','0','0','0']"
-                         data-y="['middle','middle','middle','middle']"
-                         data-voffset="['-62','-68','-78','-78']"
-                         data-width="none"
-                         data-height="none"
-                         data-whitespace="nowrap"
-                         data-type="text"
-                         data-responsive_offset="on"
-                         data-frames='[
-                       {"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power4.easeInOut"},
-                       {"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}
-                     ]'
-                         data-textAlign="['left','left','left','left']"
-                         data-paddingtop="[0,0,0,0]"
-                         data-paddingright="[0,0,0,0]"
-                         data-paddingbottom="[0,0,0,0]"
-                         data-paddingleft="[0,0,0,0]">
-                    </div>
-
-                    <!-- LAYER NR. 3 -->
-                    <div id="slide-1708-layer-1" class="tp-caption NotGeneric-Title tp-resizeme bigDevice"
-                         style="z-index: 7; white-space: nowrap; font-size: 50px; line-height: 50px; font-family: Vazir, serif"
-                         data-x="['center','center','center','center']"
-                         data-hoffset="['0','0','0','0']"
-                         data-y="['middle','middle','middle','middle']"
-                         data-voffset="['0','0','-22','-29']"
-                         data-fontsize="['50','70','40','30']"
-                         data-lineheight="['50','70','40','30']"
-                         data-width="none"
-                         data-height="none"
-                         data-whitespace="nowrap"
-                         data-type="text"
-                         data-responsive_offset="on"
-                         data-frames='[
-                       {"from":"z:0;rX:0deg;rY:0;rZ:0;sX:1.5;sY:1.5;skX:0;skY:0;opacity:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power3.easeInOut"},
-                       {"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}
-                     ]'
-                         data-textAlign="['left','left','left','left']"
-                         data-paddingtop="[10,10,10,10]"
-                         data-paddingright="[0,0,0,0]"
-                         data-paddingbottom="[10,10,10,10]"
-                         data-paddingleft="[0,0,0,0]">دنبال پوشاک خاصی میگردید؟
-                    </div>
-
-                    <!-- LAYER NR. 4 -->
-                    <div id="slide-1708-layer-4" class="tp-caption NotGeneric-SubTitle tp-resizeme"
-                         style="letter-spacing: 0!important; z-index: 8; white-space: nowrap;"
-                         data-x="['center','center','center','center']"
-                         data-hoffset="['0','0','0','0']"
-                         data-y="['middle','middle','middle','middle']"
-                         data-voffset="['42','52','18','7']"
-                         data-width="none"
-                         data-height="none"
-                         data-whitespace="nowrap"
-                         data-type="text"
-                         data-responsive_offset="on"
-                         data-frames='[
-                       {"from":"y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;","mask":"x:0px;y:[100%];s:inherit;e:inherit;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power4.easeInOut"},
-                       {"delay":"wait","speed":1000,"to":"y:[100%];","mask":"x:inherit;y:inherit;s:inherit;e:inherit;","ease":"Power2.easeInOut"}
-                     ]'
-                         data-textAlign="['left','left','left','left']"
-                         data-paddingtop="[0,0,0,0]"
-                         data-paddingright="[0,0,0,0]"
-                         data-paddingbottom="[0,0,0,0]"
-                         data-paddingleft="[0,0,0,0]">جــســتــجــوگــر هــوشــمــنــد مــا کــمــکــتــان مــی کــنــد
-                    </div>
-
-                    <!-- LAYER NR. 5 -->
-                    <div id="slide-1708-layer-11" class="tp-caption NotGeneric-CallToAction"
-                         style="z-index: 9; white-space: nowrap; border-color: rgba(255, 255, 255, 0); border-style: none; cursor: default;"
-                         data-x="['center','center','center','center']"
-                         data-hoffset="['0','0','0','0']"
-                         data-y="['top','top','top','top']"
-                         data-voffset="['376','336','252','191']"
-                         data-width="none"
-                         data-height="none"
-                         data-whitespace="nowrap"
-                         data-type="text"
-                         data-responsive_offset="on"
-                         data-responsive="off"
-                         data-frames='[
-                       {"from":"y:50px;opacity:0;","speed":1500,"to":"o:1;","delay":1000,"ease":"Power4.easeInOut"},
-                       {"delay":"wait","speed":1000,"to":"opacity:0;","ease":"Power2.easeInOut"}
-                     ]'
-                         data-textAlign="['left','left','left','left']"
-                         data-paddingtop="[0,0,0,0]"
-                         data-paddingright="[0,0,0,0]"
-                         data-paddingbottom="[0,0,0,0]"
-                         data-paddingleft="[0,0,0,0]">
-
-                        <form style="direction: rtl" class="revtp-searchform">
-                            <input oninput="productSearch('productSearch',$(this).attr('value'))"
-                                   onclick="$('#productSearch').removeClass('d-none')"
-                                   style="direction:rtl; outline: none; font-family: Vazir, serif; opacity: 0.95; font-size: 16px;"
-                                   type="text" placeholder="تایپ کن و بگرد..">
-                            <ul id="productSearch" class="ajaxDropDown p-0 outSideClick"></ul>
-                        </form>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
+<div class="masterWallpaper d-flex justify-content-center">
+        <form style="direction: rtl" class="align-self-center text-center">
+            <h1 style="font-weight: bold" class="g-color-white g-font-size-50--md g-font-size-20">دنبال پوشاک خاصی می گردید؟</h1>
+            <p style="font-family: Tahoma" class="g-color-white">جستجوگر ما کمکتان میکند..</p>
+            <input oninput="productSearch('productSearch',$(this).attr('value'))"
+                   onclick="$('#productSearch').removeClass('d-none')"
+                   style="direction:rtl; padding: 10px; outline: none; border:none; opacity:0.9; border-radius: 0"
+                   class="col-lg-9 col-11 g-font-size-16"
+                   type="text" placeholder="تایپ کن و بگرد..">
+            <ul id="productSearch" class="d-none p-0 col-lg-9 col-11 m-auto outSideClick"></ul>
+        </form>
+</div>
     <div class="container g-pt-80">
         <div class="row m-0">
             <div class="col-lg-4 g-mb-30">
@@ -163,7 +20,7 @@
                     <span
                         class="d-inline-block u-icon-v4 u-icon-v4-rounded-50x u-icon-size--xl u-icon-v4-bg-primary--hover g-color-white--hover g-mb-20">
                       <span class="u-icon-v4-inner">
-                        <i class="icon-hotel-restaurant-186 u-line-icon-pro g-mt-5 g-ml-5"></i>
+                        <i class="icon-present g-mt-5 g-ml-5"></i>
                       </span>
                     </span>
                     <h3 class="h5 g-color-black mb-3">کسب 3 امتیاز در تانا استایل</h3>
@@ -178,7 +35,7 @@
                     <span
                         class="d-inline-block u-icon-v4 u-icon-v4-rounded-50x u-icon-size--xl u-icon-v4-bg-primary--hover g-color-white--hover g-mb-20">
                       <span class="u-icon-v4-inner">
-                        <i class="icon-finance-237 u-line-icon-pro g-mt-5"></i>
+                        <i class="icon-present g-mt-5"></i>
                       </span>
                     </span>
                     <h3 class="h5 g-color-black mb-3">کسب 15 امتیاز در تانا استایل</h3>
@@ -193,7 +50,7 @@
                     <span
                         class="d-inline-block u-icon-v4 u-icon-v4-rounded-50x u-icon-size--xl u-icon-v4-bg-primary--hover g-color-white--hover g-mb-20">
                       <span class="u-icon-v4-inner">
-                        <i class="icon-christmas-037 u-line-icon-pro g-mt-5"></i>
+                        <i class="icon-present g-mt-5"></i>
                       </span>
                     </span>
                     <h3 class="h5 g-color-black mb-3">کسب 8 امتیاز در تانا استایل</h3>
@@ -205,98 +62,139 @@
     </div>
     <div class="container g-pt-40 g-pb-70">
         <div class="row g-mx-minus-10">
-            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
-                <article class="u-block-hover">
-                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                         src="img/Other/cat-female.jpg"
-                         alt="Image Description">
+            <div class="col-sm-6 col-md-4 g-mb-30">
+                <!-- Article -->
+                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
+                    <!-- Article Image -->
+                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productFemaleList') }}">
+                        <img class="w-100" src="img/Other/cat-female.jpg" alt="Image Description">
+                    </a>
+                    <!-- End Article Image -->
 
-                    <div class="g-pos-abs g-bottom-30 g-left-30">
-                        <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h1 class="h3 mb-0">زنانه</h1>
+                    <!-- Article Content -->
+                    <div class="g-bg-secondary g-pa-30">
+                        <h3 class="h4">
+                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productFemaleList') }}">پوشاک زنانه</a>
+                        </h3>
+                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
                     </div>
-                    <a class="u-link-v2" href="{{ route('productFemaleList') }}"></a>
+                    <!-- End Article Content -->
                 </article>
+                <!-- End Article -->
             </div>
+            <div class="col-sm-6 col-md-4 g-mb-30">
+                <!-- Article -->
+                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
+                    <!-- Article Image -->
+                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productMaleList') }}">
+                    <img class="w-100" src="img/Other/cat-male.jpg" alt="Image Description">
+                    </a>
+                    <!-- End Article Image -->
 
-            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
-                <article class="u-block-hover">
-                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                         src="img/Other/cat-male.jpg"
-                         alt="Image Description">
-                    <div class="g-pos-abs g-bottom-30 g-left-30">
-                        <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h1 class="h3 mb-0">مردانه</h1>
+                    <!-- Article Content -->
+                    <div class="g-bg-secondary g-pa-30">
+                        <h3 class="h4">
+                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productMaleList') }}">پوشاک مردانه</a>
+                        </h3>
+                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
                     </div>
-                    <a class="u-link-v2" href="{{ route('productMaleList') }}"></a>
+                    <!-- End Article Content -->
                 </article>
+                <!-- End Article -->
             </div>
+            <div class="col-sm-6 col-md-4 g-mb-30">
+                <!-- Article -->
+                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
+                    <!-- Article Image -->
+                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productGirlList') }}">
+                    <img class="w-100" src="img/Other/cat-girl.jpg" alt="Image Description">
+                    </a>
+                    <!-- End Article Image -->
 
-            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
-                <article class="u-block-hover">
-                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                         src="img/Other/cat-girl.jpg"
-                         alt="Image Description">
-                    <div class="g-pos-abs g-bottom-30 g-left-30">
-                        <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h1 class="h3 mb-0">دخترانه</h1>
+                    <!-- Article Content -->
+                    <div class="g-bg-secondary g-pa-30">
+                        <h3 class="h4">
+                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productGirlList') }}">پوشاک دخترانه</a>
+                        </h3>
+                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
                     </div>
-                    <a class="u-link-v2" href="{{ route('productGirlList') }}"></a>
+                    <!-- End Article Content -->
                 </article>
+                <!-- End Article -->
             </div>
+            <div class="col-sm-6 col-md-4 g-mb-30">
+                <!-- Article -->
+                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
+                    <!-- Article Image -->
+                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBoyList') }}">
+                    <img class="w-100" src="img/Other/cat-boy.jpg" alt="Image Description">
+                    </a>
+                    <!-- End Article Image -->
 
-            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
-                <article class="u-block-hover">
-                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                         src="img/Other/cat-boy.jpg"
-                         alt="Image Description">
-
-                    <div class="g-pos-abs g-bottom-30 g-left-30">
-                        <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h1 class="h3 mb-0">پسرانه</h1>
+                    <!-- Article Content -->
+                    <div class="g-bg-secondary g-pa-30">
+                        <h3 class="h4">
+                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBoyList') }}">پوشاک پسرانه</a>
+                        </h3>
+                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
                     </div>
-                    <a class="u-link-v2" href="{{ route('productBoyList') }}"></a>
+                    <!-- End Article Content -->
                 </article>
+                <!-- End Article -->
             </div>
+            <div class="col-sm-6 col-md-4 g-mb-30">
+                <!-- Article -->
+                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
+                    <!-- Article Image -->
+                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyGirlList') }}">
+                    <img class="w-100" src="img/Other/cat-babyGirl.jpg" alt="Image Description">
+                    </a>
+                    <!-- End Article Image -->
 
-            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
-                <article class="u-block-hover">
-                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                         src="img/Other/cat-babyGirl.jpg"
-                         alt="Image Description">
-                    <div class="g-pos-abs g-bottom-30 g-left-30">
-                        <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h1 class="h3 mb-0">نوزادی دخترانه</h1>
+                    <!-- Article Content -->
+                    <div class="g-bg-secondary g-pa-30">
+                        <h3 class="h4">
+                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyGirlList') }}">پوشاک نوزادی دخترانه</a>
+                        </h3>
+                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
                     </div>
-                    <a class="u-link-v2" href="{{ route('productBabyGirlList') }}"></a>
+                    <!-- End Article Content -->
                 </article>
+                <!-- End Article -->
             </div>
+            <div class="col-sm-6 col-md-4 g-mb-30">
+                <!-- Article -->
+                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
+                    <!-- Article Image -->
+                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyBoyList') }}">
+                    <img class="w-100" src="img/Other/cat-babyBoy.jpg" alt="Image Description">
+                    </a>
+                    <!-- End Article Image -->
 
-            <div class="col-sm-6 col-md-4 g-px-10 g-mb-30">
-                <article class="u-block-hover">
-                    <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                         src="img/Other/cat-babyBoy.jpg"
-                         alt="Image Description">
-                    <div class="g-pos-abs g-bottom-30 g-left-30">
-                        <span class="d-block g-color-black">مجموعه لباس</span>
-                        <h1 class="h3 mb-0">نوزادی پسرانه</h1>
+                    <!-- Article Content -->
+                    <div class="g-bg-secondary g-pa-30">
+                        <h3 class="h4">
+                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyBoyList') }}">پوشاک نوزادی پسرانه</a>
+                        </h3>
+                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
                     </div>
-                    <a class="u-link-v2" href="{{ route('productBabyBoyList') }}"></a>
+                    <!-- End Article Content -->
                 </article>
+                <!-- End Article -->
             </div>
         </div>
     </div>
     <p style="direction: rtl" class="container g-color-gray-drk-v3 g-pr-0--lg g-font-size-16">تخفیفات ویژه</p>
     <!-- Products -->
-    <div class="container g-pb-100 g-brd-around g-brd-gray-light-v4 g-pt-15 g-mb-100">
-        <div id="js-carousel-1" class="js-carousel g-pb-100 g-mx-minus-10"
+    <div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
+        <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60--lg g-pb-20"
              data-infinite="true"
              data-slides-show="4"
              data-autoplay="1"
              data-speed="5000"
              data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
-             data-arrow-left-classes="fa fa-angle-left g-left-10 rounded-0"
-             data-arrow-right-classes="fa fa-angle-right g-right-10 rounded-0"
+             data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
+             data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">
             @foreach($data as $key =>$row)
                 <div class="js-slide g-mx-10">

@@ -20,11 +20,11 @@
                 <div class="d-inline-block">
                     <div class="d-block text-center">
                         <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                            <i class="et-icon-chat g-font-size-25"></i>
+                            <i class="icon-bubble g-font-size-25"></i>
                         </span>
                     </div>
                     <div class="d-block text-center">
-                        <h6 class="g-color-black mb-3">عنوان گفتگو</h6>
+                        <h6 class="g-color-black mb-0">عنوان گفتگو</h6>
                     </div>
                     <span
                         class="u-label g-color-teal g-mb-5 g-font-size-14">{{ (isset($data)) ? $data[0]->Subject : $title }}</span>

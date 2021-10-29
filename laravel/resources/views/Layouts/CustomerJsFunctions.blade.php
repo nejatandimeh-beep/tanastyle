@@ -6,6 +6,7 @@
             if ($('.loginBtn').length > 0)
                 $.ajax({
                     type: 'GET',
+                    async: false,
                     url: '/Customer-Cart-Count',
                     success: function (data) {
                         $('#basketNum').text(data);
@@ -76,17 +77,6 @@
                     }
                 });
             });
-
-            if ($('#productPage').length > 0)
-                setTimeout(function () {
-                    $.ajax({
-                        type: 'GET',
-                        url: '/Customer-Product-Visit/' + $('#productDetailID').text(),
-                        success: function (data) {
-                            console.log(data);
-                        }
-                    });
-                }, 1000);
 
             if ($('#cartCount').text() === 0) {
                 $('#cartBuyBtn').hide();
@@ -273,7 +263,7 @@
             }
         });
 
-        $(document).mouseup(function (e) {
+        $(document).bind( "mouseup touchend", function(e){
             let container = $(".outSideClick");
 
             // if click on out side container
@@ -291,12 +281,10 @@
         });
 
         document.onreadystatechange = function () {
-            $(document.body).removeClass('me-position-fix');
-            $(document.body).addClass('me-position-normally');
-
             let state = document.readyState;
             if (state === 'complete') {
-                document.getElementById('load').remove();
+                $(document.body).removeClass('me-position-fix');
+                $(document.body).addClass('me-position-normally');
             }
         }
 
@@ -371,7 +359,7 @@
                     $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
                 }
             });
-            $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
 
@@ -401,7 +389,7 @@
                 }
             });
 
-            $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
             if (!$('#lineBreak').length)
@@ -422,14 +410,14 @@
                 size.push(id);
                 if (id === 'size-all') {
                     $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">سایز: همه</span>');
-                    size.push('XS', 'S', 'L', 'M', 'XL', 'XXL', 'XXXL');
+                    size.push('XS', 'S', 'L', 'M', 'XL', 'XXL', 'XXXL','Free');
                     return false;
                 } else {
                     $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
                     $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
                 }
             });
-            $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
             if (!$('#lineBreak').length)
@@ -458,7 +446,7 @@
                 }
             });
 
-            $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
             if (!$('#lineBreak').length)
@@ -466,9 +454,9 @@
         });
 
         function filtering(filterChange) {
+            console.log('gender='+gender,'\n category='+category,'\n size='+size,'\n priceMin='+priceMin,'\n priceMax='+priceMax,'\n color='+color);
             if (filterChange === 1)
                 $('#productContainer').empty();
-
             $.ajax({
                 type: 'GET',
                 async: false,
@@ -481,7 +469,7 @@
                     + JSON.stringify(color) + '/'
                     + filterChange,
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                     $('#loadProduct').addClass('d-none');
                     $('#productContainer').append(data);
                 }
@@ -498,8 +486,8 @@
             $('#filters-on').removeClass('d-none');
             $('#filters-on-label').removeClass('d-none');
             if (priceMax > priceMin)
-                $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
-            lastScrollTop = $(window).scrollTop();
+                // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+                lastScrollTop = $(window).scrollTop();
             filtering(1);
 
             if (!$('#lineBreak').length)
@@ -511,7 +499,7 @@
             priceMin = 1000;
             priceMax = 100000000;
             $('#filters-on-price').find('span').text('قیمت: همه');
-            $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
             lastScrollTop = $(window).scrollTop();
             filtering(1);
             $('#price-all').prop('disabled', true);
@@ -899,15 +887,17 @@
 
         // ---------------------------------------------------My Function-----------------------------------------------
         function productSearch(id, val) {
-            $.ajax({
-                type: 'GET',
-                url: "/Customer-Product-Search/" + val,
-                success: function (data) {
-                    console.log(data);
-                    $('#' + id).removeClass('d-none');
-                    $('#' + id).html(data);
-                }
-            });
+            if (val !== '')
+                $.ajax({
+                    type: 'GET',
+                    url: "/Customer-Product-Search/" + val,
+                    success: function (data) {
+                        $('#' + id).removeClass('d-none');
+                        $('#' + id).html(data);
+                    }
+                });
+            else
+                $('#' + id).addClass('d-none');
         }
 
         function minPriceAllOff(ele) {

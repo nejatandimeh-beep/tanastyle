@@ -15,9 +15,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="fa fa-comment-o g-font-size-25"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">کل واکنش مشتریان</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $totalComment }}</span>عدد </span>
@@ -27,9 +24,6 @@
             <!-- Icon Blocks -->
             <div style="direction: rtl"
                  class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="icon-finance-160 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">واکنش مشتریان به تفکیک جنسیت</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">زنانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $female }}</span>عدد</span>
@@ -49,9 +43,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="fa fa-heart-o g-font-size-25"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">محصولات داخل سبد علاقه مشتریان</h3>
                 <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $totalLike }}</span>عدد </span>
@@ -61,9 +52,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="fa fa-star-half-full g-font-size-25"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">میانگین امتیاز شما از دید مشتریان</h3>
                 <span style="direction: rtl" class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $avgRating }}</span></span>
@@ -216,7 +204,7 @@
         <div class="g-pb-15">
             <h3 style="direction: rtl"
                 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                <i class="icon-real-estate-079 u-line-icon-pro g-font-size-22 g-ml-5"></i>جزئیات واکنش مشتریان
+                جزئیات واکنش مشتریان
             </h3>
             {{--        @if ($data->count()!==0)--}}
             <h6 style="direction: rtl"

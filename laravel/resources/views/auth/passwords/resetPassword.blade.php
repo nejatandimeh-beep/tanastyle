@@ -20,7 +20,7 @@
                                            type="password"
                                            class="form-control @error('password') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
                                            name="password"
-                                           placeholder="الزاما 8 رقم به بالا"
+                                           placeholder="الزاما 8 کاراکتر به بالا"
                                            value="{{ old('password') }}"
                                            required=""
                                            autocomplete="current-password">

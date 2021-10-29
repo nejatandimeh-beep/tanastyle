@@ -9,7 +9,7 @@
         </h3>
     </div>
     <!-- End Info Panel -->
-    <div class="container p-lg-5 g-mt-10 gmb-10">
+    <div class="container p-lg-5 g-mt-10 gmb-10 modalBox">
 
         {{--        Header--}}
         <h3 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
@@ -225,7 +225,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white  g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-clothes-015 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>
                                                                 سوتین
                                                             </h5>
 
@@ -299,7 +298,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white  g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-clothes-046 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>لباس
                                                                 پایین تنه
                                                             </h5>
                                                             <div class="table-responsive">
@@ -406,7 +404,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white  g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-clothes-072 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>لباس
                                                                 بالا تنه
                                                             </h5>
                                                             <div class="table-responsive">
@@ -495,7 +492,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-clothes-088 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>
                                                                 کفش
                                                             </h5>
 
@@ -599,7 +595,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white  g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-clothes-072 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>لباس
                                                                 بالا تنه
                                                             </h5>
                                                             <div class="table-responsive">
@@ -688,7 +683,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white  g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-clothes-046 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>لباس
                                                                 پایین تنه
                                                             </h5>
                                                             <div class="table-responsive">
@@ -777,7 +771,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white  g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-clothes-088 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>
                                                                 کفش
                                                             </h5>
 
@@ -897,7 +890,7 @@
                                                         <a class="d-block u-link-v5 g-color-main g-color-primary--hover text-right collapsed" data-parent="#accordion-02"
                                                            href="#accordion-02-body-03"
                                                            data-toggle="collapse" aria-expanded="false" aria-controls="accordion-02-body-03"><i
-                                                                class="icon-travel-074 u-line-icon-proalign-middle g-font-size-25 g-ml-5"></i>بچگانه 8-3 سال</a>
+                                                                class="icon-graduation g-font-size-25 g-ml-5"></i>بچگانه 8-3 سال</a>
                                                     </h5>
                                                 </div>
                                                 <div id="accordion-02-body-03" class="collapse g-mt-5" role="tabpanel"
@@ -906,7 +899,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-travel-074 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>لباس
                                                                 بالا و پایین تنه دخترانه و پسرانه
                                                             </h5>
                                                             <div class="table-responsive">
@@ -1063,7 +1055,7 @@
                                                         <a class="d-block u-link-v5 g-color-main g-color-primary--hover text-right collapsed" data-parent="#accordion-02"
                                                            href="#accordion-02-body-04"
                                                            data-toggle="collapse" aria-expanded="false" aria-controls="accordion-02-body-04"><i
-                                                                class="icon-education-192 u-line-icon-pro align-middle g-font-size-27 g-ml-5"></i>بچگانه 15-8 سال</a>
+                                                                class="icon-graduation align-middle g-font-size-27 g-ml-5"></i>بچگانه 15-8 سال</a>
                                                     </h5>
                                                 </div>
                                                 <div id="accordion-02-body-04" class="collapse g-mt-5" role="tabpanel"
@@ -1072,7 +1064,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-education-192 u-line-icon-pro align-middle g-font-size-22 g-ml-5 d-lg-inline-block d-none"></i>لباس
                                                                 بالا و پایین تنه دخترانه
                                                             </h5>
                                                             <div class="table-responsive">
@@ -1422,7 +1413,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-emotsmile align-middle g-ml-5 d-lg-inline-block d-none"></i>لباس
                                                                 بالا و پایین تنه نوزادی
                                                             </h5>
                                                             <div class="table-responsive">
@@ -1559,7 +1549,6 @@
                                                     <div class="card-block g-pa-0 g-mb-10 g-mb-0--lg">
                                                         <div>
                                                             <h5 class="card-header g-bg-gray-dark-v4 g-brd-around g-brd-gray-light-v4 g-color-white g-pa-5 g-font-size-18--lg g-font-size-12 rounded-0 g-mb-5 text-right">
-                                                                <i class="icon-clothes-088 u-line-icon-pro align-middle g-font-size-22 g-ml-5"></i>
                                                                 کفش دخترانه و پسرانه
                                                             </h5>
 
@@ -1671,7 +1660,7 @@
                             <div class="input-group g-brd-primary--focus g-mb-10">
                                 <div
                                     class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v5 rounded-0">
-                                    <i class="icon-education-004 u-line-icon-pro g-font-size-16 g-line-height-0_7"></i>
+                                    <i class="fa fa-paint-brush g-font-size-14 g-line-height-0_7"></i>
                                 </div>
                                 <button id="colorBtn{{$i}}" style="direction: rtl" type="button" class="form-control g-color-primary--hover form-control-md btn u-btn-white g-brd-around g-brd-gray-light-v2 rounded-0 g-font-size-16" data-toggle="modal" data-target="#colorModal{{$i}}">
                                     انتخاب کنید
@@ -2608,6 +2597,7 @@
                            tabindex="6"
                            name="unitPrice"
                            id="unitPrice"
+{{--                           pattern="\d*"--}}
                            onkeypress="$('#lblUnitPrice').removeClass('g-color-red')"
                            value="">
                     <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">کمترین مقدار 10000 تومان می
@@ -2639,6 +2629,7 @@
                            id="discount"
                            tabindex="7"
                            name="discount"
+                           pattern="\d*"
                            value=""
                            onkeypress="$('#lblDiscount').removeClass('g-color-red')"
                            maxlength="2">
@@ -2723,7 +2714,7 @@
                             <div class="modal-body">
                                 <div class="img-container">
                                     <div class="col-md-12 p-0">
-                                        <img src="" id="sample_image" width="600px" height="600px">
+                                        <img style="width: 100%;" src="" id="sample_image">
                                     </div>
                                     {{--                        <div class="col-md-4">--}}
                                     {{--                            <div class="preview rounded-circle mx-auto g-mt-20"></div>--}}

@@ -52,7 +52,7 @@
                                     <a href="#" class="nav-link" id="nav-link-408"
                                        aria-haspopup="true"
                                        aria-expanded="false"
-                                       aria-controls="nav-megamenu-408"> افزودن پوشاک زنانه<i class="hs-icon hs-icon-arrow-bottom g-font-size-10 g-mr-7"></i></a>
+                                       aria-controls="nav-megamenu-408"> افزودن پوشاک زنانه<i class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
                                     <!-- Add Female Product -->
                                     <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
                                          id="nav-megamenu-408"
@@ -70,7 +70,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            زیر</a>
+                                                            زیر <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['00','0']) }}"
@@ -101,7 +101,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">پایین
-                                                            تنه</a>
+                                                            تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['10','0']) }}"
@@ -136,7 +136,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">بالا
-                                                            تنه</a>
+                                                            تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu SubMenuScroll">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['20','0']) }}"
@@ -213,12 +213,12 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">تمام
-                                                            تنه</a>
+                                                            تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['30','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">لباس
-                                                                    خواب</a>
+                                                                    خواب<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['31','0']) }}"
@@ -355,7 +355,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            زیر </a>
+                                                            زیر <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['600','0']) }}"
@@ -369,7 +369,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            پایین تنه </a>
+                                                            پایین تنه <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['610','0']) }}"
@@ -395,7 +395,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            بالا تنه </a>
+                                                            بالا تنه <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['620','0']) }}"
@@ -437,7 +437,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            تمام تنه </a>
+                                                            تمام تنه <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['630','0']) }}"
@@ -451,7 +451,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کیف
-                                                            ورزشی</a>
+                                                            ورزشی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['640','0']) }}"
@@ -470,7 +470,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش
-                                                            ورزشی</a>
+                                                            ورزشی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['650','0']) }}"
@@ -498,7 +498,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری
-                                                            ورزشی</a>
+                                                            ورزشی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu SubMenuScroll">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['ProSportCap','0']) }}"
@@ -565,7 +565,7 @@
                                                 <ul class="list-unstyled h-100 g-py-10 g-pt-0">
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">بدلیجات </a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">بدلیجات<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['700','0']) }}"
@@ -604,7 +604,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری
-                                                            مو</a>
+                                                            مو<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['710','0']) }}"
@@ -634,7 +634,7 @@
                                                     <br>
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">سرپوش</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">سرپوش<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['720','0']) }}"
@@ -664,7 +664,7 @@
                                                     <br>
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">سایر</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">سایر<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['730','0']) }}"
@@ -717,7 +717,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408"> افزودن پوشاک مردانه<i
-                                            class="hs-icon hs-icon-arrow-bottom g-font-size-10 g-mr-7"></i></a>
+                                            class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
                                     <!-- Add Male Product -->
                                     <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
                                          id="nav-megamenu-408"
@@ -735,7 +735,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            زیر</a>
+                                                            زیر<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['00','1']) }}"
@@ -759,7 +759,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">پایین
-                                                            تنه</a>
+                                                            تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['10','1']) }}"
@@ -786,7 +786,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">بالا
-                                                            تنه</a>
+                                                            تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['20','1']) }}"
@@ -842,7 +842,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">تمام
-                                                            تنه</a>
+                                                            تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['30','1']) }}"
@@ -955,7 +955,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            زیر </a>
+                                                            زیر <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['600','1']) }}"
@@ -969,7 +969,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            پایین تنه </a>
+                                                            پایین تنه <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['610','1']) }}"
@@ -987,7 +987,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            بالا تنه </a>
+                                                            بالا تنه <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['620','1']) }}"
@@ -1021,7 +1021,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            تمام تنه </a>
+                                                            تمام تنه <i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['630','1']) }}"
@@ -1035,7 +1035,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کیف
-                                                            ورزشی</a>
+                                                            ورزشی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['640','1']) }}"
@@ -1054,7 +1054,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش
-                                                            ورزشی</a>
+                                                            ورزشی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['650','1']) }}"
@@ -1081,7 +1081,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری
-                                                            ورزشی</a>
+                                                            ورزشی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu SubMenuScroll">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['ProSportCap','1']) }}"
@@ -1148,7 +1148,7 @@
                                                 <ul class="list-unstyled h-100 g-py-10 g-pt-0">
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">بدلیجات </a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">بدلیجات<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['700','1']) }}"
@@ -1173,7 +1173,7 @@
                                                     <br>
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">سرپوش</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">سرپوش<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['710','1']) }}"
@@ -1195,7 +1195,7 @@
                                                     <br>
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">سایر</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">سایر<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['720','1']) }}"
@@ -1243,12 +1243,12 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408"> افزودن پوشاک بچگانه<i
-                                            class="hs-icon hs-icon-arrow-bottom g-font-size-10 g-mr-7"></i></a>
+                                            class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
                                     <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                                            افزودن پوشاک بچگانه<i class="icon-travel-074 u-line-icon-pro g-font-size-25 g-ml-10"></i>
+                                            افزودن پوشاک بچگانه<i class="icon-graduation g-font-size-25 g-ml-10"></i>
                                         </h5>
 
                                         <div style="height: 90%;" class="rowSeller align-items-stretch">
@@ -1260,7 +1260,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            زیر</a>
+                                                            زیر<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['00','2']) }}"
@@ -1278,7 +1278,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            پایین تنه</a>
+                                                            پایین تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['10','2']) }}"
@@ -1309,7 +1309,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            بالا تنه</a>
+                                                            بالا تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['20','2']) }}"
@@ -1363,7 +1363,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            تمام تنه</a>
+                                                            تمام تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['30','2']) }}"
@@ -1388,7 +1388,7 @@
                                                     <!-- Girl Bag -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کیف</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کیف<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['40','2']) }}"
@@ -1409,7 +1409,7 @@
                                                     <!-- Girl Shoe -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['50','2']) }}"
@@ -1443,7 +1443,7 @@
                                                     <!-- Girl Sport -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">ورزشی</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">ورزشی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['60','2']) }}"
@@ -1492,7 +1492,7 @@
                                                     <!-- Girl Accessory -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu SubMenuScroll">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['70','2']) }}"
@@ -1555,7 +1555,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            زیر</a>
+                                                            زیر<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['00','3']) }}"
@@ -1573,7 +1573,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            پایین تنه</a>
+                                                            پایین تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['10','3']) }}"
@@ -1595,7 +1595,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            بالا تنه</a>
+                                                            بالا تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['20','3']) }}"
@@ -1641,7 +1641,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            تمام تنه</a>
+                                                            تمام تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['30','3']) }}"
@@ -1666,7 +1666,7 @@
                                                     <!-- Boy Bag -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کیف</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کیف<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['40','3']) }}"
@@ -1687,7 +1687,7 @@
                                                     <!-- Boy Shoe -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['50','3']) }}"
@@ -1717,7 +1717,7 @@
                                                     <!-- Boy Sport -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">ورزشی</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">ورزشی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['60','3']) }}"
@@ -1758,7 +1758,7 @@
                                                     <!-- Boy Accessory -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu  SubMenuScroll">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['70','3']) }}"
@@ -1810,7 +1810,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408"> افزودن پوشاک نوزادی<i
-                                            class="hs-icon hs-icon-arrow-bottom g-font-size-10 g-mr-7"></i></a>
+                                            class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
                                     <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
@@ -1827,7 +1827,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            زیر</a>
+                                                            زیر<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['00','4']) }}"
@@ -1843,7 +1843,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            پایین تنه</a>
+                                                            پایین تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['10','4']) }}"
@@ -1865,7 +1865,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            بالا تنه</a>
+                                                            بالا تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['20','4']) }}"
@@ -1899,7 +1899,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            تمام تنه</a>
+                                                            تمام تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['30','4']) }}"
@@ -1912,7 +1912,7 @@
                                                     <!-- Baby Shoe -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['40','4']) }}"
@@ -1937,7 +1937,7 @@
                                                     <!-- Baby Accessory -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
 {{--                                                            <li>--}}
 {{--                                                                <a href="{{ route('AddProduct_askSize',['50','4']) }}"--}}
@@ -1994,7 +1994,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            پایین زیر</a>
+                                                            پایین زیر<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['00','5']) }}"
@@ -2011,7 +2011,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            پایین تنه</a>
+                                                            پایین تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['10','5']) }}"
@@ -2025,7 +2025,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            بالا تنه</a>
+                                                            بالا تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['20','5']) }}"
@@ -2059,7 +2059,7 @@
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لباس
-                                                            تمام تنه</a>
+                                                            تمام تنه<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['30','5']) }}"
@@ -2072,7 +2072,7 @@
                                                     <!-- Baby Shoe -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">کفش<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['40','5']) }}"
@@ -2097,7 +2097,7 @@
                                                     <!-- Baby Accessory -->
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری</a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
 {{--                                                            <li>--}}
 {{--                                                                <a href="{{ route('AddProduct_askSize',['50','5']) }}"--}}

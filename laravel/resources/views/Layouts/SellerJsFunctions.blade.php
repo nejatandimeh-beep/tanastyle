@@ -10,11 +10,11 @@
             $('#load').hide();
         });
 
-        document.onreadystatechange = function () {
-            if (state === 'complete') {
-                document.getElementById('load').remove();
-            }
-        }
+        // document.onreadystatechange = function () {
+        //     if (state === 'complete') {
+        //         document.getElementById('load').remove();
+        //     }
+        // }
 
         function loaderShow() {
             let loader = '<div id="load" class="load"></div>';
@@ -543,7 +543,7 @@
             currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
 
             let currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
-
+            console.log(currentTimeString);
             $("#persianTime").html(currentTimeString);
         }
 
@@ -688,7 +688,7 @@
         // Add FileName and Check Mark when Uploaded Image
         function addPathCheckMark(picID, filePathID, checkMarkID) {
             let pic = $('#' + picID),
-                ext = $('#' + picID).val().split('.').pop().toLowerCase(),
+                ext = pic.val().split('.').pop().toLowerCase(),
                 filePath = $('#' + filePathID),
                 checkMark = $("#" + checkMarkID);
             if ((pic.val() !== '') && ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) !== -1)) {
@@ -773,8 +773,8 @@
                     viewMode: 0,
                     zoomable: true,
                     background: true,
-                    minCropBoxWidth: 400,
-                    minCropBoxHeight: 400,
+                    minCropBoxWidth: 1000,
+                    minCropBoxHeight: 1000,
                     // cropBoxResizable: false,
                     dragCrop: true,
                     dragMode: 'move',
@@ -797,8 +797,8 @@
 
             $('#crop').on('click', function () {
                 let canvas = cropper.getCroppedCanvas({
-                    width: 400,
-                    height: 400
+                    width: 1000,
+                    height: 1000
                 });
 
                 canvas.toBlob(function (blob) {
@@ -822,6 +822,9 @@
             // Remove Element When Use Big Device
             if (window.matchMedia('screen and (min-width:900px)').matches) {
                 $('#removeWhenBD').remove();
+            } else {
+                if($('#mobile').length>0)
+                    $('#mobile').attr('pattern','\d*');
             }
 
             // Product Table Events Success Message
@@ -829,7 +832,7 @@
 
             setTimeout(function () {
                 $('#overlay').modal('hide');
-            }, 5000);
+            }, 3000);
 
             // Set Seller Navigation Date
             nowDate();

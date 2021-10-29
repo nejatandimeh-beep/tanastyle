@@ -10,5 +10,18 @@
 @yield('Content')
 @yield('SellerFooter')
 @yield('BaseJsLinks')
+{{--{{dd($_SERVER['REQUEST_URI'])}}--}}
+@switch($_SERVER['REQUEST_URI'])
+    @case(strpos($_SERVER['REQUEST_URI'],'/Add-Product'))
+    <!--Modal and cropper-->
+    <script src="{{ asset('assets/js/cropper.js') }}"></script>
+    <script src="{{ asset('assets/vendor/custombox/custombox.min.js') }}"></script>
+    <script src="{{ asset('assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
+    <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
+    <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.js') }}"></script>
+    @break
+@endswitch
+</body>
 @yield('BaseJsFunction')
 @yield('SellerJsFunction')

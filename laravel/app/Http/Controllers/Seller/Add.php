@@ -73,6 +73,7 @@ class Add extends Controller
         $catCode = $_GET['catCode'];
         $name = $_GET['name'];
         $hintCat = $_GET['hintCat'];
+        $size='';
         if (isset($_GET['qty']))
             $qty = $_GET['qty'];
 
@@ -156,7 +157,7 @@ class Add extends Controller
             case 'o':
             case 'p':
             case 'q':
-                $size = ['آزاد'];
+                $size = ['Free'];
                 break;
             default:
                 switch ($gender) {
@@ -182,7 +183,6 @@ class Add extends Controller
                         ];
                 }
         }
-
         return view('Seller.AddProduct', compact('gender', 'cat', 'catCode', 'name', 'hintCat', 'qty', 'size'));
     }
 
@@ -192,7 +192,7 @@ class Add extends Controller
         // Upload Images
         date_default_timezone_set('Asia/Tehran');
         $folderName = 'p-' . date("Y.m.d-H.i.s");
-        $picPath = public_path() . '\img\products\\' . $folderName;
+        $picPath = public_path('/img/products/' ) . $folderName;
         File::makeDirectory($picPath, 0777, true, true);
         // Get Size Qty For Loop Steps
 
@@ -224,7 +224,7 @@ class Add extends Controller
         for ($i = 0; $i < $qty; $i++) {
             if (!is_null($imageColor[$i]['image'])) {
                 $j++;
-                $folderPath = public_path('\img\products\\' . $folderName . '\\');
+                $folderPath = public_path('/img/products/' . $folderName . '/');
                 $image_parts = explode(";base64,", $imageColor[$i]['image']);
                 $image_type_aux = explode("image/", $image_parts[0]);
                 $image_type = $image_type_aux[1];
@@ -249,7 +249,7 @@ class Add extends Controller
             }
         }
         // Compilation Pic Path
-        $picPath = '\img\products\\' . $folderName . '\\';
+        $picPath = '/img/products/' . $folderName . '/';
         // Get Data From Form
         $sellerId = Auth::guard('seller')->user()->id;
         $gender = $request->get('gender');

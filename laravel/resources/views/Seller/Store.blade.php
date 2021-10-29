@@ -88,7 +88,7 @@
     <div style="direction: rtl; position: -webkit-sticky; position: sticky; top: 0; z-index: 100;"
          class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0">
         <h3 class="card-header h5 g-color-white-opacity-0_9">
-            <i class="fa fa-list-alt g-font-size-default g-ml-5"></i> انبار من
+            <i class="fa fa-list-alt g-font-size-default g-ml-5"></i>انبار من
         </h3>
     </div>
     <!-- End Info Panel -->
@@ -100,9 +100,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="et-icon-layers g-font-size-25"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">تعداد کل محصولات موجود در انبار</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $allQty }}</span>عدد </span>
@@ -112,9 +109,6 @@
             <!-- Icon Blocks -->
             <div style="direction: rtl"
                 class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="icon-finance-160 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">تعداد محصولات به تفکیک جنسیت</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">زنانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $female }}</span>عدد</span>
@@ -134,9 +128,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="icon-finance-150 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">ارزش کل محصولات موجود در انبار</h3>
                 <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($sumFPrice) }}</span>تومان </span>
@@ -347,7 +338,7 @@
         {{-- Table --}}
         <div class="g-pb-15">
             <h3 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                لیست موجودی انبار<i class="icon-real-estate-079 u-line-icon-pro g-font-size-22 g-ml-5"></i>
+                لیست موجودی انبار
             </h3>
             @if ($data->count()!==0)
                 <h6 style="direction: rtl"
@@ -409,7 +400,7 @@
                             <th class="align-middle text-center">عکس</th>
                             <th class="align-middle text-center">جزییات</th>
                             <th class="align-middle text-center">مشخصات</th>
-                            <th class="align-middle text-center">تغییرات</th>
+                            <th class="align-middle text-center">حذف</th>
                         </tr>
                         </thead>
 
@@ -479,7 +470,7 @@
                                         <span class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
                                            data-toggle="tooltip"
                                            data-placement="top" data-original-title="فروخته شد">
-                                            <i class="icon-finance-202 u-line-icon-pro g-font-size-22 g-color-gray-dark-v3"></i>
+                                            <i class="fa fa-lock g-font-size-22 g-color-gray-dark-v3"></i>
                                         </span>
                                     @endif
                                 </td>

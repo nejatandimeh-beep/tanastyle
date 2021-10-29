@@ -15,6 +15,14 @@ class VerifyController extends Controller
 {
     function getMobile()
     {
+        if($_GET['source'] ==='forget') {
+            $mobileNum=DB::table('customers')
+                ->select('Mobile')
+                ->where('Mobile',(string)$_GET['mobile'])
+                ->first();
+            if(is_null($mobileNum))
+                return redirect()->route('requestMobile', ['source' => 'forget'])->with('message', 'شما قبلا ثبت نام نکرده اید');
+        }
         session_start();
         if (!isset($_SESSION['SEND'])) {
             $_SESSION['SEND']=time();

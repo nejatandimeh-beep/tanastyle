@@ -13,7 +13,7 @@
         <form class="g-brd-around g-brd-gray-light-v4 g-pa-15 g-mb-17 g-mt-17">
             {{--Order Info Header--}}
             <h3 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-10 text-right">
-                <i class="icon-real-estate-087 u-line-icon-pro g-font-size-18 g-mt-5 g-ml-5"></i>مشخصات فاکتور
+                مشخصات فاکتور
             </h3>
             {{--Order Info--}}
             <div class="row g-mb-10 text-right">

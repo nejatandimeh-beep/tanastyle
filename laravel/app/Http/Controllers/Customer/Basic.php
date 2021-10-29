@@ -27,17 +27,15 @@ class Basic extends Controller
 //            ->orderBy('pod.SellCount')
 //            ->take(10)
 //            ->get();
-        $minDiscount = 5;
-        $maxDiscount = 30;
+        $minDiscount = 1;
+        $maxDiscount = 99;
 
         $data = DB::table('product as p')
             ->select('*')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->orderBy('Discount', 'DESC')
             ->orderBy('pd.VisitCounter', 'DESC')
-            ->whereIn('Discount', function ($query) use ($minDiscount, $maxDiscount) {
-                $query->select('Discount')
-                    ->whereBetween('Discount', [$minDiscount, $maxDiscount]);
-            })
+            ->whereBetween('Discount', [$minDiscount, $maxDiscount])
             ->take(10)
             ->get();
 
@@ -755,7 +753,7 @@ class Basic extends Controller
         // Upload Images
         date_default_timezone_set('Asia/Tehran');
         $folderName = 'r-' . date("Y.m.d-H.i.s");
-        $picPath = '\img\return\\' . $folderName;
+        $picPath = public_path('/img/return/') . $folderName;
         File::makeDirectory($picPath, 0777, true, true);
 
         $request->file('returnPic')->storeAs(
@@ -1040,7 +1038,7 @@ class Basic extends Controller
     public function uploadImage(Request $request)
     {
         $image = $request->get('imageUrl');
-        $folderPath = public_path('img\CustomerProfileImage\\');
+        $folderPath = public_path('img/CustomerProfileImage/');
         $image_parts = explode(";base64,", $image);
         $image_type_aux = explode("image/", $image_parts[0]);
         $image_type = $image_type_aux[1];
@@ -1224,10 +1222,7 @@ class Basic extends Controller
                 }
             })
             ->whereIn('pd.ColorCode', $color)
-            ->whereIn('p.FinalPrice', function ($query) use ($priceMin, $priceMax) {
-                $query->select('p.FinalPrice')
-                    ->whereBetween('p.FinalPrice', [$priceMin, $priceMax]);
-            })
+            ->whereBetween('p.FinalPrice', [$priceMin, $priceMax])
             ->orderBy('p.GenderCode')
             ->orderBy('p.CatCode')
 //            ->groupBy('p.ID')
@@ -1280,7 +1275,7 @@ class Basic extends Controller
                    class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
                    data-toggle="tooltip"
                    data-placement="top"
-                   href="http://tanastyle/Customer-Product-Detail/' . $row->ID . '"
+                   href="https://tanastyle/Customer-Product-Detail/' . $row->ID . '"
                    data-original-title="جزئیات محصول">
                    <i class="icon-eye g-line-height-0_7"></i>
                 </a>
@@ -1490,19 +1485,13 @@ class Basic extends Controller
 
         $data = DB::table('product')
             ->select('*')
-            ->whereIn('Discount', function ($query) use ($minDiscount, $maxDiscount) {
-                $query->select('Discount')
-                    ->whereBetween('Discount', [$minDiscount, $maxDiscount]);
-            })
+            ->whereBetween('Discount', [$minDiscount, $maxDiscount])
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->whereIn('Discount', function ($query) use ($minDiscount, $maxDiscount) {
-                $query->select('Discount')
-                    ->whereBetween('Discount', [$minDiscount, $maxDiscount]);
-            })
+            ->whereBetween('Discount', [$minDiscount, $maxDiscount])
             ->groupBy('p.ID')
             ->paginate(10);
 
@@ -1583,7 +1572,7 @@ class Basic extends Controller
             ->max('ID');
 
         $productInfo = DB::table('product_detail as pd')
-            ->select('pd.*', 'p.SellerID','p.ID as productID')
+            ->select('pd.*', 'p.SellerID','p.ID as productID','pd.ID as productDetailId')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
             ->where('pd.ID', $id)
             ->first();
@@ -1654,17 +1643,17 @@ class Basic extends Controller
             ->delete();
 
         $seller=DB::table('sellers')
-            ->select('id','Mobile')
+            ->select('id','Mobile','name','family')
             ->where('id',$productInfo->SellerID)
             ->first();
 
         //--------------
         try {
-            $token =$orderID;
-            $token2 = $orderDetailID;
-            $token3 = "";
+            $token =$orderID.'/'.$orderDetailID;
+            $token2='';
+            $token3='';
             Session::put('token', $token);
-            Session::put('token2', $token2);
+//            Session::put('token2', $token2);
 //            Session::put('token', $token3);
 
             $api_key = Config::get('kavenegar.apikey');
@@ -1672,7 +1661,7 @@ class Basic extends Controller
             $template = "factorSmsCustomer";
             $type = "sms";
 
-            $result = $var->VerifyLookup(Auth::user()->Mobile, $token, $token2, $token3, $template, $type);
+            $result = $var->VerifyLookup(Auth::user()->Mobile, $token,$token2,$token3, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();
@@ -1684,19 +1673,19 @@ class Basic extends Controller
 
         //--------------
         try {
-            $token =$productInfo->ID;
-            $token2 = $orderID;
-            $token3 = $orderDetailID;
+            $token=$seller->name.'/'.$seller->family;
+            $token2 =$productInfo->ID.'/'.$productInfo->productDetailId;
+            $token3 =$orderID.'/'.$orderDetailID;
             Session::put('token', $token);
             Session::put('token2', $token2);
             Session::put('token3', $token3);
 
             $api_key = Config::get('kavenegar.apikey');
             $var = new Kavenegar\KavenegarApi($api_key);
-            $template = "factorSmsCustomer";
+            $template = "factorSmsSeller";
             $type = "sms";
 
-            $result = $var->VerifyLookup($seller->Mobile, $token, $token2, $token3, $template, $type);
+            $result = $var->VerifyLookup($seller->Mobile, $token, $token2,$token3, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();

@@ -20569,7 +20569,7 @@ video {
 }
 
 .navbar .u-sub-menu-v1 .hs-has-mega-menu .hs-has-sub-menu > a::after {
-    content: "\e901";
+    /*content: "\e901";*/
 }
 
 .navbar .u-sub-menu-v1 .hs-sub-menu,

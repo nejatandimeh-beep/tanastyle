@@ -560,10 +560,10 @@
                                         چهره</label>
                                     <div dir="ltr" class="col-sm-9 force-col-12">
                                         <img class="img-fluid img-thumbnail g-rounded-3"
-                                             src="{{asset($data->PicPath.'user.png')}}" alt="Image Description">
+                                             src="{{asset($data->PicPath.'pic11.jpg')}}" alt="Image Description">
                                     </div>
                                 </div>
-                                <input class="d-none" type="text" name="userImage" value="{{$data->PicPath.'user.png'}}">
+                                <input class="d-none" type="text" name="userImage" value="{{$data->PicPath.'pic11.jpg'}}">
 
                                 {{--تصویر کارت ملی--}}
                                 <div class="form-group row g-mb-15 justify-content-center">
@@ -571,11 +571,11 @@
                                         ملی</label>
                                     <div dir="ltr" class="col-sm-9 force-col-12">
                                         <img class="img-fluid img-thumbnail g-rounded-3"
-                                             src="{{asset($data->PicPath.'nationalityCard.png')}}"
+                                             src="{{asset($data->PicPath.'pic12.jpg')}}"
                                              alt="Image Description">
                                     </div>
                                 </div>
-                                <input class="d-none" type="text" name="nationalityCardImage" value="{{$data->PicPath.'nationalityCard.png'}}">
+                                <input class="d-none" type="text" name="nationalityCardImage" value="{{$data->PicPath.'pic12.jpg'}}">
 
                                 <div class="d-flex justify-content-end g-my-100">
                                     <a class="btn btn-l u-btn-outline-lightred u-btn-content g-font-weight-600 g-letter-spacing-0_5 g-brd-2 g-mr-10 g-mb-15"
@@ -594,7 +594,7 @@
                                         <span class="float-right text-right">
                                               تایید و افزودن فروشنده به سیستم
                                               <span class="d-block g-font-size-11">تایید توسط ادمین سیستم</span>
-                                            </span>
+                                        </span>
                                     </button>
                                 </div>
                                 <div class="modal fade text-center" id="modalLoginForm" tabindex="-1" role="dialog"

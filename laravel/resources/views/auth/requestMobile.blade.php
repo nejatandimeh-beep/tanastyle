@@ -6,11 +6,11 @@
             <div class="col-md-8">
                 <div class="card">
                     <h5 class="card-header text-right">{{($source==='register'?'ثبت نام در سایت':'درخواست رمز جدید')}}</h5>
-
                     <div class="card-body">
                         <form method="GET" action="{{ route('checkMobile') }}" style="direction: rtl"
                               novalidate>
                             @csrf
+                            <input class="d-none" type="text" name="source" value="{{$source}}">
                             <div class="form-group row">
                                 <label for="mobile"
                                        class="col-md-4 col-form-label text-right text-md-left g-font-size-16">شماره
@@ -23,7 +23,6 @@
                                            class="form-control @error('mobile') is-invalid @enderror @if(session()->has('message')) is-invalid @endif input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md forceEnglishNumber"
                                            name="mobile"
                                            placeholder="فقط اعداد انگلیسی"
-                                           pattern="\d*"
                                            onKeyPress="if(this.value.length===11) return false;"
                                            value="{{ old('mobile') }}"
                                            required autocomplete="off"

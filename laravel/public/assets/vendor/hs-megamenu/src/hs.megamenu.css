@@ -64,7 +64,7 @@
 }
 
 .hs-has-sub-menu > a::after {
-  content: "\e900";
+  /*content: "\e900";*/
   font-family: "hs-icons" !important;
   font-size: 10px;
   display: inline;

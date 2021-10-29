@@ -13,7 +13,7 @@
     <span id="firstColorInfo" class="d-none">{{ $colorInfo }}</span>
     <span id="picPath" class="d-none">{{ $data->PicPath }}</span>
 
-    <div class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4">
+    <div class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4 modalBox">
         <!-- Article -->
         <article class="row justify-content-between g-color-gray-dark-v5">
             {{--اطلاعات محصول--}}
@@ -220,7 +220,7 @@
                             <div class="d-flex justify-content-between g-pt-15 g-pb-8">
                                 <button style="outline: none" type="button" class="close"
                                         onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
-                                    <i class="hs-icon hs-icon-close"></i>
+                                    <i class="hs-icon hs-icon-close">×</i>
                                 </button>
                                 <h6 class="text-right m-0">فاکتور فروش به شماره:<span id="orderID"
                                                                                       class=" g-mr-5"></span></h6>
@@ -345,14 +345,14 @@
                                      class="d-lg-flex d-block col-12 col-lg-8 g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
 
                                     <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
-                                        <i class="icon-communication-011 u-line-icon-pro g-color-white g-pt-5"></i>
+                                        <i class="icon-location-pin u-line-icon-pro g-color-white"></i>
                                     </span>
                                     @if(!isset($sendAddress))
                                         <div class="align-self-center g-pt-35 g-pt-0--lg">
                                             <a href="{{ (isset(Auth::user()->id)) ? route('attachAddress', ['location'=>'addAddress'.$data->ID, 'size'=>$sizeInfo,'color'=>$colorInfo]) : route('login') }}"
                                                id="addAddress"
                                                class="g-color-red g-color-primary--hover g-mt-0--lg g-mt-30 g-text-underline--none--hover">
-                                                افزودن آدرس<i class="icon-paper-clip g-mr-5 align-middle"></i>
+                                                افزودن آدرس<i class="icon-pencil g-mr-5 align-middle"></i>
                                             </a>
                                         </div>
                                     @else
@@ -547,6 +547,7 @@
                         </button>
                     </div>
                 </footer>
+                <hr class="d-lg-none d-block g-brd-gray-light-v3 g-mt-6 g-mb-5">
             </div>
 
             {{--گالری--}}

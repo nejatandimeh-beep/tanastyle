@@ -1,7 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <p id="pageLocation" class="d-none">{{ $location }}</p>
-    <div class="container-fluid">
+    <div class="container-fluid modalBox">
         <div class="row">
             <div class="col-lg-12 g-brd-top g-brd-gray-light-v4">
                 <!-- Figure -->
@@ -136,7 +136,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="img-container">
-                            <div style="min-width: 50vw; min-height: 50vh;" class="col-md-12 p-0">
+                            <div class="col-md-12 p-0">
                                 <img style="width: 100%;" src="" id="sample_image">
                             </div>
                             {{--                        <div class="col-md-4">--}}
@@ -181,7 +181,7 @@
                                            class="nav-link g-color-primary g-color-primary--hover p-0"
                                            onclick="showPanel('data');">
                                             مشخصات فردی
-                                            <i class="icon-user float-left g-font-size-16 g-pb-5 g-pl-5"></i>
+                                            <i class="icon-user float-left g-font-size-17 g-pb-5 g-pl-5"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -208,7 +208,7 @@
                                            href="{{route('cart')}}"
                                            class="nav-link g-color-main g-color-primary--hover p-0">
                                             سبد خرید
-                                            <i class="icon-basket float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                            <i class="icon-basket float-left g-font-size-17 g-pb-5 g-pl-5"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -235,7 +235,7 @@
                                            id="filter-user-delivery"
                                            class="nav-link g-color-main g-color-primary--hover p-0"
                                            onclick="showPanel('delivery');">در انتظار تحویل
-                                            <i class="icon-hotel-restaurant-186 u-line-icon-pro float-left g-font-size-20 g-pb-5 g-pl-5 g-line-height-0_7"></i>
+                                            <i class="icon-hourglass float-left g-font-size-17 g-pb-5 g-pl-5 g-pl-5"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -248,8 +248,7 @@
                                            id="filter-user-return"
                                            class="nav-link g-color-main g-color-primary--hover p-0"
                                            onclick="showPanel('return');">برگشت محصول
-                                            <i style="transform: scaleX(-1);"
-                                               class="icon-hotel-restaurant-186 u-line-icon-pro float-left g-font-size-20 g-pb-5 g-line-height-0_7"></i>
+                                            <i class="icon-action-undo float-left g-font-size-17 g-pb-5 g-pl-5"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -262,7 +261,7 @@
                                            id="filter-user-like"
                                            class="nav-link g-color-main g-color-primary--hover p-0"
                                            onclick="showPanel('like');">محصولات ذخیره شده
-                                            <i class="fa fa-bookmark-o float-left g-font-size-17 g-pb-5 g-pl-5"></i>
+                                            <i class="fa fa-bookmark-o float-left g-font-size-17 g-pb-5 g-pl-8"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -275,7 +274,7 @@
                                         <a style="cursor: pointer"
                                            class="nav-link g-color-main g-color-lightred--hover p-0"
                                            onclick="confirmLogout()">خروج
-                                            <i class="icon-logout float-left g-font-size-17 g-pb-5"></i>
+                                            <i class="icon-logout float-left g-font-size-17 g-pb-5 g-pl-3"></i>
                                         </a>
                                         <form id="logout-customer-form" action="{{route('logout')}}" method="POST"
                                               style="display: none;">
@@ -294,7 +293,7 @@
                 <!-- مشخصات فردی -->
                 <div id="user-data">
                     <div class="g-bg-white-opacity-0_9 g-mb-30 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 13px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
+                        <div style="padding-bottom: 18px;" class="g-pr-15 d-flex g-pt-20--lg g-pt-10 g-color-primary">
                             <i class="icon-user g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-7">
@@ -687,7 +686,7 @@
                 <!-- آدرسها -->
                 <div style="display: none" id="user-address">
                     <div class="g-bg-white-opacity-0_9 g-mb-50 g-mb-30--lg g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 13px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
+                        <div style="padding-bottom: 18px;" class="g-pr-15 d-flex g-pt-20--lg g-pt-10 g-color-primary">
                             <i class="icon-location-pin g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-7">
@@ -734,7 +733,7 @@
                                                     <!-- Track Avatar -->
                                                         <span style="cursor: default"
                                                               class="g-ml-10 g-ml-25--lg g-bg-primary g-py-10 g-pr-15 g-pl-10 g-font-size-16">
-                                                        <i class="icon-communication-011 g-color-white align-middle g-line-height-0"></i>
+                                                        <i class="icon-location-pin g-color-white align-middle g-line-height-0"></i>
                                                     </span>
                                                         <!-- End Track Avatar -->
                                                 @else
@@ -746,7 +745,7 @@
                                                            data-toggle="tooltip"
                                                            data-placement="top"
                                                            data-original-title="فعال سازی آدرس">
-                                                            <i class="icon-communication-011 g-color-white align-middle g-line-height-0"></i>
+                                                            <i class="icon-location-pin g-color-white align-middle g-line-height-0"></i>
                                                         </a>
                                                 @endif
                                                 <!-- End Track Avatar -->
@@ -1049,7 +1048,7 @@
                                         <div class="d-flex justify-content-between g-pt-15 g-pb-8">
                                             <button style="outline: none" type="button" class="close"
                                                     onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-address').trigger('click')}, 400);">
-                                                <i class="hs-icon hs-icon-close"></i>
+                                                <span aria-hidden="true">×</span>
                                             </button>
                                             <h6 class="text-right m-0">افزودن آدرس جدید</h6>
                                         </div>
@@ -1243,8 +1242,8 @@
                 <!-- خریداری شده -->
                 <div style="display: none" id="user-bought">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 13px;"
-                             class="g-pr-15 g-pt-25--lg g-pt-10 g-color-primary">
+                        <div style="padding-bottom: 18px;"
+                             class="g-pr-15 g-pt-20--lg g-pt-10 g-color-primary">
                             <div class="d-flex m-0 p-0">
                                 <i class="icon-tag g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
@@ -1256,7 +1255,6 @@
                         <hr style="z-index: 100 !important" class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
                         <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
                     </div>
-
                     <div class="g-mb-40 g-mb-0--lg">
                         @if(!isset($order[0]->ID))
                             <div class="d-inline-block alert alert-info g-px-15--lg g-px-5 text-lg-right text-center"
@@ -1277,7 +1275,6 @@
                                         </div>
                                     </div>
                                     <!-- End Date -->
-
                                     <!-- Article Image -->
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
@@ -1346,7 +1343,7 @@
                                                             <button style="outline: none" type="button"
                                                                     class="close"
                                                                     onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
-                                                                <i class="hs-icon hs-icon-close"></i>
+                                                                <span aria-hidden="true">×</span>
                                                             </button>
                                                             <h6 class="text-right m-0">فاکتور فروش به
                                                                 شماره: {{ $row->orderID.'/'.$row->orderDetailID }}</h6>
@@ -1570,7 +1567,7 @@
                                         </div>
                                     </div>
                                     <!-- End Actions -->
-                                </article>
+                                    </article>
                                 </div>
                             @endforeach
                         @endif
@@ -1580,8 +1577,8 @@
                 <!-- در انتظار تحویل -->
                 <div style="display: none" id="user-delivery">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 3px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
-                            <i class="icon-hotel-restaurant-186 u-line-icon-pro g-pl-5 g-font-size-23 g-font-weight-500"></i>
+                        <div style="padding-bottom: 18px;" class="g-pr-15 d-flex g-pt-20--lg g-pt-10 g-color-primary">
+                            <i class="icon-hourglass g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-7">
                                 در انتظار تحویل
@@ -1672,7 +1669,7 @@
                                                     <div
                                                         style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
                                                         class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->DeliveryProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
-                                                        <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                                        <i style="transform: scaleX(-1);" class="fa fa-truck g-font-size-17"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1700,9 +1697,8 @@
                 <!-- برگشت محصول -->
                 <div style="display: none" id="user-return">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 3px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
-                            <i style="transform: scaleX(-1);"
-                               class="icon-hotel-restaurant-186 u-line-icon-pro g-pr-5 g-font-size-23 g-font-weight-500"></i>
+                        <div style="padding-bottom: 18px;" class="g-pr-15 d-flex g-pt-20--lg g-pt-10 g-color-primary">
+                            <i class="icon-action-undo g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-7">
                                 برگشت محصول
@@ -1815,7 +1811,7 @@
                                                         <div
                                                             style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
                                                             class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->ReturnProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
-                                                            <i class="icon-hotel-restaurant-186 u-line-icon-pro g-line-height-0 g-font-size-20"></i>
+                                                            <i class="fa fa-truck g-font-size-17"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1860,7 +1856,7 @@
                                         <div class="d-flex justify-content-between g-pt-15 g-pb-8">
                                             <button style="outline: none" type="button" class="close"
                                                     onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix'); setTimeout(function () {$('#filter-user-return').trigger('click')}, 400); ">
-                                                <i class="hs-icon hs-icon-close"></i>
+                                                <span aria-hidden="true">×</span>
                                             </button>
                                             <h6 class="m-0 text-right">برگشت محصول</h6>
                                         </div>
@@ -2003,7 +1999,7 @@
                 <!-- علاقه مندیها -->
                 <div style="display: none" id="user-like">
                     <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 16px;" class="g-pr-15 d-flex g-pt-25--lg g-pt-10 g-color-primary">
+                        <div style="padding-bottom: 21px;" class="g-pr-15 d-flex g-pt-20--lg g-pt-10 g-color-primary">
                             <i class="fa fa-bookmark-o g-pl-5 g-font-size-20 g-font-weight-500"></i>
 
                             <h6 class="m-0 g-mt-4">

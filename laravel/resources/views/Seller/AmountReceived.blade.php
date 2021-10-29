@@ -17,9 +17,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="icon-finance-131 u-line-icon-pro g-font-size-25 g-pt-15"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">درآمد من از تانا استایل</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($totalSaleAmount) }}</span>تومان </span>
@@ -29,9 +26,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="icon-finance-210 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">کل دریافتی های من</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($totalReceivedAmount) }}</span>تومان </span>
@@ -41,9 +35,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="icon-hotel-restaurant-003 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">زمان آخرین دریافت وجه</h3>
                 @if ($lastPaymentDate === 0)
                     <span class="u-label g-bg-bluegray g-mb-5">
@@ -63,9 +54,6 @@
             <!-- Icon Blocks -->
             <div
                 class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                    <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                        <i class="icon-finance-178 u-line-icon-pro g-font-size-25 g-mt-5 g-ml-5"></i>
-                    </span>
                 <h3 class="h6 g-color-black mb-3">طلب من از تانا استایل</h3>
                 <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($credit) }}</span>تومان </span>
@@ -575,7 +563,7 @@
         <div class="g-pb-15">
             <h3 style="direction: rtl"
                 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                <i class="icon-real-estate-079 u-line-icon-pro g-font-size-22 g-ml-5"></i>لیست مبالغ دریافتی
+                لیست مبالغ دریافتی
             </h3>
             @if ($data->count()!==0)
                 <h6 style="direction: rtl"

@@ -13,7 +13,7 @@
         <form class="g-brd-around g-brd-gray-light-v4 g-pa-15 g-mb-17 g-mt-17">
             {{--        Header--}}
             <h3 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-25 text-right">
-                <i class="fa fa-file-text-o g-ml-5"></i>مشخصات محصول
+                مشخصات محصول
             </h3>
 
             {{--        Product Info--}}

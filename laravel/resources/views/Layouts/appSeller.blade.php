@@ -25,6 +25,9 @@
     <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
     <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
 
+    <!-- Cropper img -->
+    <link  href="{{ asset('css/cropper.css') }}" rel="stylesheet">
+
 </head>
 <body>
 <div style="display: none" id="load" class="load"></div>
@@ -62,6 +65,8 @@
         @yield('content')
     </main>
 </div>
+{{--Cropper--}}
+<script src="{{ asset('assets/js/cropper.js') }}"></script>
 </body>
 <script>
     jQuery(window).bind('beforeunload', function(){

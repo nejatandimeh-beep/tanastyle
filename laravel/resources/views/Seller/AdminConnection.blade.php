@@ -31,7 +31,7 @@
     </div>
     <!-- End Info Panel -->
 
-    <div class="container">
+    <div class="container customBox">
         {{-- Total Info--}}
         <div class="rowSeller g-mt-30 g-mb-20 g-mr-0 g-ml-0">
 
@@ -44,9 +44,9 @@
                         data-toggle="modal"
                         data-target="#modalLoginForm"
                         href="#">
-                        <i class="et-icon-chat g-font-size-25"></i>
+                        <i class="icon-bubble g-font-size-25"></i>
                     </a>
-                    <h6 class="g-color-black mb-3">ایجاد گفتگو</h6>
+                    <h6 class="g-color-black mb-0">ایجاد گفتگو</h6>
                     <span class="u-label g-color-teal g-mb-5 g-font-size-14">با درج عنوان جدید</span>
                 </div>
             </div>
@@ -127,7 +127,7 @@
         <div class="g-pb-15">
             <h3 style="direction: rtl"
                 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                <i class="icon-real-estate-079 u-line-icon-pro g-font-size-22 g-ml-5"></i>لیست گفتگوها
+                لیست گفتگوها
             </h3>
             @if ($data->count()!==0)
                 <h6 style="direction: rtl"

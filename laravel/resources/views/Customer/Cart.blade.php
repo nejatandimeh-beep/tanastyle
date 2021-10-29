@@ -1,7 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <!-- سبد خرید -->
-    <div style="direction: rtl" class="container-fluid">
+    <div style="direction: rtl" class="container-fluid customBox">
         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
 
         <div class="breadCrumbs">

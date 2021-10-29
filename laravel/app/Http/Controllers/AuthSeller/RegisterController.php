@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use File;
@@ -80,18 +81,21 @@ class RegisterController extends Controller
     public function new(Request $request)
     {
         $nationalId = $request->get('nationalId');
+        $path = 'img/SellerProfileImage/' . $nationalId;
 
-        File::makeDirectory($nationalId, 0777, true, true);
+        File::makeDirectory($path, 0777, true, true);
         // Upload Images
 
-        $path = 'img\SellerProfileImage\\' . $nationalId . '\\';
-        $request->file('pic11')->storeAs(
-            $path, 'user' . '.png', 'public'
-        );
+        for ($i = 1; $i <= 2; $i++) {
+                $image = $request->get('imageUrl1' . $i);
+                $image_parts = explode(";base64,", $image);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_base64 = base64_decode($image_parts[1]);
 
-        $request->file('pic12')->storeAs(
-            $path, 'nationalityCard' . '.png', 'public'
-        );
+                $imageFullPath = $path.'/' . 'pic1' . $i . '.jpg';
+
+                file_put_contents($imageFullPath, $image_base64);
+        }
 
         DB::table('seller_new')
             ->insert([
@@ -114,7 +118,7 @@ class RegisterController extends Controller
                 'WorkPostalCode' => $request->get('workPostalCode'),
                 'ShopNumber' => $request->get('shopNumber'),
                 'CreditCard' => (string)$request->get('creditCard4') . (string)$request->get('creditCard3') . (string)$request->get('creditCard2') . (string)$request->get('creditCard1'),
-                'PicPath' => $path,
+                'PicPath' => $path.'/',
             ]);
 
         return redirect()->route('sellerRegister')->with('msg', 'success');
@@ -200,7 +204,7 @@ class RegisterController extends Controller
     }
 
     function randomPassword() {
-        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890#$%!';
         $pass = array(); //remember to declare $pass as an array
         $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
         for ($i = 0; $i < 8; $i++) {

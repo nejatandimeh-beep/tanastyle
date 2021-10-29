@@ -6,9 +6,9 @@
             <!-- Filters -->
             <div style="display: none" id="filterDiv" class="col-md-3 flex-md-first g-brd-left--lg g-brd-gray-light-v4">
                 <div id="stickyDiv1" class="sticky-top g-z-index-1">
-                    <div class="">
+                    <div>
                         <div class="g-pr-15--lg d-flex justify-content-between g-pb-10 g-pt-10">
-                            <h5 class="m-0 align-self-center">فیلتر ها</h5>
+                            <h5 class="m-0 g-mr-10 g-mr-0--lg align-self-center">فیلتر ها</h5>
                             <button
                                 style="color:rgba(0,0,0,0.4);
                                 line-height: 0.65;
@@ -17,7 +17,7 @@
                                 border: none !important;
                                 outline:none !important;"
                                 onclick="closeSideBar()"
-                                class="font-smooth g-pt-5 g-font-size-35"
+                                class="font-smooth g-pt-5 g-font-size-35 g-ml-minus-25 g-ml-0--lg"
                                 type="button">&times;
                             </button>
                         </div>
@@ -47,7 +47,7 @@
                                            data-toggle="collapse"
                                            aria-expanded="false"
                                            aria-controls="accordion-100-body-01">جنسیت
-                                            <i class="icon-user float-left g-font-size-16 g-pb-5 g-pl-5"></i>
+                                            <i class="icon-user float-left g-font-size-18 g-pb-5 g-pl-5"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -190,7 +190,7 @@
                                            data-toggle="collapse"
                                            aria-expanded="false"
                                            aria-controls="accordion-100-body-02">طبقه بندی
-                                            <i class="icon-clothes-034 u-line-icon-pro float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                            <i class="fa fa-clone float-left g-font-size-18 g-pb-5 g-pl-5"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -538,7 +538,7 @@
                                            data-toggle="collapse"
                                            aria-expanded="false"
                                            aria-controls="accordion-100-body-05">سایز
-                                            <i class="icon-education-068 u-line-icon-pro float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                            <i class="fa fa-sort-amount-asc float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v4"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -692,6 +692,24 @@
                                                     </label>
                                                 </div>
                                             </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>Free</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="size"
+                                                                   id="Free"
+                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   type="checkbox"
+                                                                   checked="checked">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -706,7 +724,7 @@
                                            data-toggle="collapse"
                                            aria-expanded="false"
                                            aria-controls="accordion-100-body-03">قیمت
-                                            <i class="icon-finance-008 u-line-icon-pro float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                            <i class="fa fa-money float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v4"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -785,7 +803,7 @@
                                            data-toggle="collapse"
                                            aria-expanded="false"
                                            aria-controls="accordion-100-body-04">رنگ
-                                            <i class="icon-education-004 u-line-icon-pro float-left g-font-size-18 g-pb-5 g-pl-5"></i>
+                                            <i class="fa fa-paint-brush float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v4"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -1403,7 +1421,8 @@
                     </div>
 
                     <div style="display: none" id="noProduct">
-                        <div class="noProduct g-mt-100--lg g-mb-100--lg mx-auto"></div>
+                        <div class="noProduct g-mt-100--lg mx-auto"></div>
+                        <p class="text-center">عدم موجودی</p>
                     </div>
                     <!-- End Products -->
 

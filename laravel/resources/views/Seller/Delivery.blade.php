@@ -28,7 +28,7 @@
             <div class="g-pb-15">
                 <h3 style="direction: rtl"
                     class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                    <i class="icon-real-estate-079 u-line-icon-pro g-font-size-22 g-ml-5"></i>محصولات تحویلی به تانا استایل
+                    محصولات تحویلی به تانا استایل
                 </h3>
                 @if ($data->count()!==0)
                     <h6 style="direction: rtl"
