@@ -40,21 +40,26 @@
 </head>
 
 <body>
-    <label class="customerCropper" for="upload_image" style="cursor: pointer">
-        <span class="customLink">تنظیم تصویر حساب کاربری</span>
-        <input type="file" name="image" id="upload_image" class="image"
-               style="display: none">
-        <input type="text" id="imageUrl" name="imageUrl"
-               style="display: none">
-    </label>
-<form action="file-echo2.php" method="post" enctype="multipart/form-data">
-    <input type="file" name="myfile"><br>
-    <input type="submit" value="Upload File to Server">
-</form>
-<div class="progress">
-    <div class="bar"></div >
-    <div class="percent">0%</div >
-</div>
+{{--    <label class="customerCropper" for="upload_image" style="cursor: pointer">--}}
+{{--        <span class="customLink">تنظیم تصویر حساب کاربری</span>--}}
+{{--        <input type="file" name="image" id="upload_image" class="image"--}}
+{{--               style="display: none">--}}
+{{--        <input type="text" id="imageUrl" name="imageUrl"--}}
+{{--               style="display: none">--}}
+{{--    </label>--}}
+    <form action="{{route('sellerRegisterImage')}}" id="imageUploadForm" method="post" enctype="multipart/form-data">
+        @csrf
+        <input name="nationalId" type="text" value="22222">
+        <input type="file" name="myfile"><br>
+        <input type="submit" value="Upload File to Server">
+    </form>
+
+    <div class="progress">
+        <div class="bar"></div >
+        <div class="percent">0%</div >
+    </div>
+
+    <div id="status"></div>
 
 <!-- JS Global Compulsory -->
 <script src="../../../assets/vendor/jquery/jquery.min.js"></script>
@@ -84,27 +89,44 @@
 
 <!-- JS Plugins Init. -->
 <script>
-    $(function() {
+    $(document).ready(function (e) {
+        $('#imageUploadForm').on('submit',(function(e) {
+            e.preventDefault();
+            let formData = new FormData(this),bar = $('.bar'),percent = $('.percent'),status = $('#status');
+            $.ajax({
+                type:'POST',
+                url: $(this).attr('action'),
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    status.empty();
+                    let percentVal = '0%';
+                    bar.width(percentVal);
+                    percent.html(percentVal);
+                },
+                uploadProgress: function(event, position, total, percentComplete) {
+                    let percentVal = percentComplete + '%';
+                    bar.width(percentVal);
+                    percent.html(percentVal);
+                },
+                success:function(data){
+                    console.log("success");
+                    console.log(data);
+                },
+                error: function(data){
+                    console.log("error");
+                    console.log(data);
+                },
+                complete: function(xhr) {
+                    status.html(xhr.responseText);
+                }
+            });
+        }));
 
-        var bar = $('.bar');
-        var percent = $('.percent');
-        var status = $('#status');
-
-        $('form').ajaxForm({
-            beforeSend: function() {
-                status.empty();
-                var percentVal = '0%';
-                bar.width(percentVal);
-                percent.html(percentVal);
-            },
-            uploadProgress: function(event, position, total, percentComplete) {
-                var percentVal = percentComplete + '%';
-                bar.width(percentVal);
-                percent.html(percentVal);
-            },
-            complete: function(xhr) {
-                status.html(xhr.responseText);
-            }
+        $("#ImageBrowse").on("change", function() {
+            $("#imageUploadForm").submit();
         });
     });
 </script>

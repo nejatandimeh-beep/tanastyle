@@ -1,35 +1,30 @@
 @extends('Layouts.IndexAdmin')
 @section('Content')
-{{--    <h1 class="g-color-black">{{Auth::guard('admin')->user()->name}}</h1>--}}
-    <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-black-opacity-0_8--after mode-scroll">
-        <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background: url({{asset('img/Other/adminWall3.png')}}); transform: translate3d(0px, 0px, 0px);"></div>
-        <div class="container g-z-index-1 g-py-100">
-            <!-- Testimonials -->
-            <div class="row justify-content-center">
-                <div class="col-lg-9">
-                    <div class="text-center g-z-index-1 text-uppercase">
-                        <blockquote class="g-color-white g-font-size-28 g-mb-20">پنل مدیریت سیستم</blockquote>
-                        <!-- Logo -->
-                        <div class="navbar-brand g-mb-10--lg g-mr-0">
-                            <img src="img/Logo/logo_white.png" alt="Image Description" width="300">
-                        </div>
-                        <h4 class="h6 g-color-white-opacity-0_6 g-mb-0">
-                            <div class="text-center hidden-lg-down">
-                                <span class="mb-0" id="persianDate"></span>
-                                <span class="mb-0"> ساعت </span>
-                                <span class="mb-0" id="persianTime"></span>
-                            </div>
-                        </h4>
-                        <!-- End Logo -->
-                    </div>
-                </div>
-            </div>
-            <!-- End Testimonials -->
-        </div>
-    </div>
+    {{--    <h1 class="g-color-black">{{Auth::guard('admin')->user()->name}}</h1>--}}
 
+    <div class="g-z-index-1 g-py-100 g-bg-black">
+        <!-- Testimonials -->
+        <div class="row justify-content-center">
+            <div class="text-center g-z-index-1 text-uppercase">
+                <blockquote class="g-color-white g-font-size-28 g-mb-20">پنل مدیریت سیستم</blockquote>
+                <!-- Logo -->
+                <div class="navbar-brand g-mb-10--lg g-mr-0">
+                    <img src="img/Logo/logo_white.png" alt="Image Description" width="300">
+                </div>
+                <h4 class="h6 g-color-white-opacity-0_6 g-mb-0">
+                    <div class="text-center hidden-lg-down">
+                        <span class="mb-0" id="persianDate"></span>
+                        <span class="mb-0"> ساعت </span>
+                        <span class="mb-0" id="persianTime"></span>
+                    </div>
+                </h4>
+                <!-- End Logo -->
+            </div>
+        </div>
+        <!-- End Testimonials -->
+    </div>
     <div class="g-pa-60 g-pt-0 g-bg-black">
-    <!-- Icon Blocks -->
+        <!-- Icon Blocks -->
         <div style="direction: rtl" class="row">
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->

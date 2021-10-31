@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AuthSeller;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Seller;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -78,24 +79,28 @@ class RegisterController extends Controller
         return view('auth.sellerAuth.register');
     }
 
+    public function uploadImage(Request $request)
+    {
+        $nationalId = $request->get('nationalId');
+        $imgNumber = $request->get('imgNumber');
+        $image = $request->get('imageUrl');
+        $path = 'img/imagesTemp/sellerProfileImage/' . $nationalId;
+        File::makeDirectory($path, 0777, true, true);
+        $image_parts = explode(";base64,", $image);
+        $image_base64 = base64_decode($image_parts[1]);
+        $imageFullPath = $path . '/pic' . $imgNumber . '.jpg';
+        file_put_contents($imageFullPath, $image_base64);
+        return $path;
+    }
+
     public function new(Request $request)
     {
         $nationalId = $request->get('nationalId');
+        $tempPath = 'img/imagesTemp/sellerProfileImage/' . $nationalId;
         $path = 'img/SellerProfileImage/' . $nationalId;
 
-        File::makeDirectory($path, 0777, true, true);
-        // Upload Images
-
-        for ($i = 1; $i <= 2; $i++) {
-                $image = $request->get('imageUrl1' . $i);
-                $image_parts = explode(";base64,", $image);
-                $image_type_aux = explode("image/", $image_parts[0]);
-                $image_base64 = base64_decode($image_parts[1]);
-
-                $imageFullPath = $path.'/' . 'pic1' . $i . '.jpg';
-
-                file_put_contents($imageFullPath, $image_base64);
-        }
+        $file = new Filesystem();
+        $file->moveDirectory($tempPath, $path);
 
         DB::table('seller_new')
             ->insert([
@@ -118,7 +123,7 @@ class RegisterController extends Controller
                 'WorkPostalCode' => $request->get('workPostalCode'),
                 'ShopNumber' => $request->get('shopNumber'),
                 'CreditCard' => (string)$request->get('creditCard4') . (string)$request->get('creditCard3') . (string)$request->get('creditCard2') . (string)$request->get('creditCard1'),
-                'PicPath' => $path.'/',
+                'PicPath' => $path . '/',
             ]);
 
         return redirect()->route('sellerRegister')->with('msg', 'success');
@@ -132,17 +137,17 @@ class RegisterController extends Controller
 //            'password' => 'required|string|min:8|confirmed',
 //        ]);
 
-        $name=$request['name'];
-        $family=$request['family'];
-        $mobile=$request['mobile'];
-        $password=$this->randomPassword();
+        $name = $request['name'];
+        $family = $request['family'];
+        $mobile = $request['mobile'];
+        $password = $this->randomPassword();
         $seller = Seller::create([
             'name' => $name,
             'Family' => $family,
             'NationalID' => $request['nationalId'],
-            'Birthday' => $request['year'].'/'. $request['mon'].'/'. $request['day'],
+            'Birthday' => $request['year'] . '/' . $request['mon'] . '/' . $request['day'],
             'Gender' => (int)$request['gender'],
-            'Phone' => $request['prePhone'].$request['phone'],
+            'Phone' => $request['prePhone'] . $request['phone'],
             'Mobile' => $mobile,
             'State' => $request['state'],
             'City' => $request['city'],
@@ -155,29 +160,29 @@ class RegisterController extends Controller
             'PicPathCard' => $request['nationalityCardImage'],
             'email' => $request['email'],
             'password' => Hash::make($password),
-            'PasswordHint' =>$password,
+            'PasswordHint' => $password,
         ]);
 
-        $id=DB::table('sellers')
+        $id = DB::table('sellers')
             ->select('id')
-            ->orderBy('id','DESC')
+            ->orderBy('id', 'DESC')
             ->first();
 
         DB::table('seller_credit_card')
             ->insert([
-                'SellerID'=>$id->id,
-                'CardNumber'=>$request['creditCard1'].'-'.$request['creditCard2'].'-'.$request['creditCard3'].'-'.$request['creditCard4'],
-                'Status'=>1,
-                'Wrong'=>0,
+                'SellerID' => $id->id,
+                'CardNumber' => $request['creditCard1'] . '-' . $request['creditCard2'] . '-' . $request['creditCard3'] . '-' . $request['creditCard4'],
+                'Status' => 1,
+                'Wrong' => 0,
             ]);
 
         DB::table('seller_new')
-            ->where('ID',$request->get('id'))
+            ->where('ID', $request->get('id'))
             ->delete();
 
         //--------------
         try {
-            $token =$name;
+            $token = $name;
             $token2 = $family;
             $token3 = $password;
             Session::put('token', $token);
@@ -203,7 +208,8 @@ class RegisterController extends Controller
         return redirect()->route('sellerVerify');
     }
 
-    function randomPassword() {
+    function randomPassword()
+    {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890#$%!';
         $pass = array(); //remember to declare $pass as an array
         $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache

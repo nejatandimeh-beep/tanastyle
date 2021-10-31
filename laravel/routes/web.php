@@ -35,6 +35,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/login/seller', 'AuthSeller\LoginController@showSellerLoginForm')->name('sellerLog');
 Route::post('/logout/seller', 'AuthSeller\LoginController@sellerLogout')->name('sellerLogout');
 Route::get('/register/seller', 'AuthSeller\RegisterController@showSellerRegisterForm')->name('sellerRegister');
+Route::post('/register/seller-UploadImage', 'AuthSeller\RegisterController@uploadImage')->name('sellerRegisterImage');
 Route::post('/login/seller', 'AuthSeller\LoginController@sellerLogin')->name('sellerLogin');
 Route::post('/register/seller', 'AuthSeller\RegisterController@createSeller')->name('sellerSave');
 

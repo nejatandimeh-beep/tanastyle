@@ -7,7 +7,15 @@
             $.HSCore.helpers.HSHamburgers.init('.hamburger');
 
             // initialization of HSMegaMenu component
-            $('.js-mega-menu').HSMegaMenu();
+            if ($('.customerNavigation').length > 0){
+                $('.js-mega-menu').HSMegaMenu();
+            } else {
+                $('.js-mega-menu').HSMegaMenu({
+                    event: 'hover',
+                    direction: 'vertical',
+                    breakpoint: 991
+                });
+            }
         });
 
         $(document).on('ready', function () {

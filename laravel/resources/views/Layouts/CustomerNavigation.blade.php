@@ -5,7 +5,7 @@
     <header id="js-header" class="u-header u-header--static">
         <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-pt-10 g-pb-10--lg">
             <nav class="js-mega-menu hs-menu-initialized hs-menu-horizontal navbar navbar-toggleable-md">
-                <div class="container g-px-0" id="HeaderContainer">
+                <div class="container g-px-0 customerNavigation" id="HeaderContainer">
                     <!-- Responsive Toggle Button -->
                     <button onclick="closeOtherMenu()"
                             class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0 g-pos-abs g-right-0"

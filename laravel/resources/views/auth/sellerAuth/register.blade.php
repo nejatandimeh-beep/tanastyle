@@ -105,6 +105,7 @@
                                                 id="nationalId"
                                                 name="nationalId"
                                                 value=""
+                                                oninput="$('#nationalId12').val($(this).val())"
                                                 onblur=" if($(this).val().length===10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                                 maxlength="10"
                                                 placeholder="فقط اعداد"
@@ -557,8 +558,14 @@
                                                            type="file"
                                                            name="{{'pic11'}}"
                                                            accept="image/*">
-                                                    <input type="text" id="imageUrl11" name="imageUrl11"
-                                                           style="display: none">
+                                                    <div id="userImageDiv11">
+                                                        <input type="text" id="imageUrl11" name="imageUrl"
+                                                               style="display: none">
+                                                    </div>
+                                                    <div class="progress">
+                                                        <div class="bar"></div>
+                                                        <div class="percent">0%</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -591,8 +598,14 @@
                                                            type="file"
                                                            name="{{'pic12'}}"
                                                            accept="image/*">
-                                                    <input type="text" id="imageUrl12" name="imageUrl12"
-                                                           style="display: none">
+                                                    <div id="userImageDiv12">
+                                                        <input type="text" id="imageUrl12" name="imageUrl"
+                                                               style="display: none">
+                                                    </div>
+                                                    <div class="progress">
+                                                        <div class="bar"></div>
+                                                        <div class="percent">0%</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -695,14 +708,52 @@
                                         </div>
                                     </div>
 
-                                    <button id="save" type="button"
-                                            class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mt-15"
-                                            onclick="saveUserData()">
-                                        ارسال اطلاعات
-                                    </button>
+                                    <!-- Danger Alert -->
+                                    <div style="direction: rtl"
+                                         class="alert alert-danger alert-dismissible fade show text-right g-pa-20--lg g-px-10 g-py-10"
+                                         role="alert">
+                                        <h4 class="h5"><i class="fa fa-minus-circle"></i> تایید قرارداد</h4>
+                                        <p class="g-mb-10">فروشنده عزیز برای ثبت نام در سامانه فروش تانا استایل لازم و
+                                            ضروری است که موافقت خود را با قوانین تانا استایل اعلام کنید. برای اینکار
+                                            ابتدا قوانین را مطالعه فرمایید و در صورت موافقت با قوانین کلید موافقم را
+                                            فشار دهید. کلید موافقم به منزله امضاء الکترونیکی شما خواهد بود.<a style="font-weight: bold" href="#" class="g-mr-5">مطالعه قوانین</a></p>
+                                        <div class="text-lg-left text-center">
+                                            <div class="d-inline-block">
+                                                <div style="cursor: pointer"
+                                                     id="noAgree"
+                                                     onclick="$(this).addClass('d-none'); $('#agree').removeClass('d-none');"
+                                                     class="g-py-10 g-px-15 g-bg-white g-color-gray-dark-v5">
+                                                    موافق تمامی قوانین هستم
+                                                </div>
+                                            </div>
+                                            <div class="d-inline-block">
+                                                <div style="cursor: pointer;"
+                                                     id="agree"
+                                                     onclick="$(this).addClass('d-none'); $('#noAgree').removeClass('d-none');"
+                                                     class="d-none g-py-10 g-px-15 g-bg-primary g-color-white">
+                                                    موافق تمامی قوانین هستم
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
+                                <!-- Danger Alert -->
+
+                                <button id="save" type="button"
+                                        class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mt-15"
+                                        onclick="saveUserData()">
+                                    ارسال اطلاعات
+                                </button>
                             </form>
                         </div>
+
+                        <form action="{{route('sellerRegisterImage')}}" id="imageUploadForm"
+                              method="post" enctype="multipart/form-data">
+                            @csrf
+                            <input id="nationalId12" name="nationalId" type="text"
+                                   class="d-none">
+                            <input id="imgNumber" name="imgNumber" type="text" class="d-none">
+                        </form>
                     @endif
                 </div>
             </div>
@@ -714,21 +765,24 @@
                 image = document.getElementById('sample_image'),
                 cropper, inputID;
             $('input[id^="pic"]').on('change', function (event) {
-                inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
-                $('#fileShow' + inputID).removeClass('g-color-red');
-                let files = event.target.files,
-                    done = function (url) {
-                        image.src = url;
-                        $modal.modal('show');
-                    };
+                if ($('#nationalId').val().length === 10) {
+                    inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
+                    $('#fileShow' + inputID).removeClass('g-color-red');
+                    let files = event.target.files,
+                        done = function (url) {
+                            image.src = url;
+                            $modal.modal('show');
+                        };
 
-                if (files && files.length > 0) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]);
-                }
+                    if (files && files.length > 0) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            done(reader.result);
+                        };
+                        reader.readAsDataURL(files[0]);
+                    }
+                } else
+                    alert('ابتدا لطفا کد ملی را بصورت صحیح وارد کنید.');
             });
 
             $modal.on('shown.bs.modal', function () {
@@ -737,8 +791,8 @@
                     viewMode: 0,
                     zoomable: true,
                     background: true,
-                    minCropBoxWidth: 1000,
-                    minCropBoxHeight: 1000,
+                    minCropBoxWidth: 400,
+                    minCropBoxHeight: 400,
                     // cropBoxResizable: false,
                     dragCrop: true,
                     dragMode: 'move',
@@ -760,8 +814,8 @@
 
             $('#crop').on('click', function () {
                 let canvas = cropper.getCroppedCanvas({
-                    width: 1000,
-                    height: 1000
+                    width: 400,
+                    height: 400
                 });
 
                 canvas.toBlob(function (blob) {
@@ -771,10 +825,46 @@
                     reader.onloadend = function () {
                         $('#imageUrl' + inputID).val(reader.result);
                         $modal.modal('hide');
+                        $("#userImageDiv" + inputID).clone().appendTo("#imageUploadForm");
+                        $("#imgNumber").val(inputID);
+                        $('#imageUploadForm').submit();
                         addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
                     };
                 });
             });
+
+            $('#imageUploadForm').on('submit', (function (e) {
+                e.preventDefault();
+                let formData = new FormData(this), bar = $('.bar'), percent = $('.percent');
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function () {
+                        console.log('befor');
+                        let percentVal = '0%';
+                        bar.width(percentVal);
+                        percent.html(percentVal);
+                    },
+                    uploadProgress: function (event, position, total, percentComplete) {
+                        console.log('progress');
+                        let percentVal = percentComplete + '%';
+                        bar.width(percentVal);
+                        percent.html(percentVal);
+                    },
+                    success: function (data) {
+                        console.log("success");
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        console.log("error");
+                        console.log(data);
+                    }
+                });
+            }));
         });
 
         function saveUserData() {
