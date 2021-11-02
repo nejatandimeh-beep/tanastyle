@@ -15,15 +15,12 @@
     <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/jquery/jquery.js') }}"></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/unify_1.css') }}">
     <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/icon-awesome/css/font-awesome.min.css') }}">
 
     <!-- Cropper img -->
     <link  href="{{ asset('css/cropper.css') }}" rel="stylesheet">

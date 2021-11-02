@@ -20,8 +20,12 @@
     <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
     <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
     <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.js') }}"></script>
+    <script src="{{ asset('assets/js/components/hs.progress-bar.js') }}"></script>
+    @case('/Seller-productDelivery')
+    @default
+    <script src="{{ asset('assets/js/components/hs.progress-bar.js') }}"></script>
     @break
 @endswitch
 </body>
-@yield('BaseJsFunction')
 @yield('SellerJsFunction')
+@yield('BaseJsFunction')

@@ -46,5 +46,5 @@
     @break
 @endswitch
 </body>
-@yield('BaseJsFunction')
 @yield('CustomerJsFunction')
+@yield('BaseJsFunction')

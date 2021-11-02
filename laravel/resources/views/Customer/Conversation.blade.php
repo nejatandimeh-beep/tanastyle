@@ -37,7 +37,7 @@
                         <div class="circle-wrapper">
                             <div class="success circle"></div>
                             <div class="icon">
-                                <i class="et-icon-chat"></i>
+                                <i class="icon-bubble"></i>
                             </div>
                         </div>
                     </a>
