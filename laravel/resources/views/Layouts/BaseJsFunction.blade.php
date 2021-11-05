@@ -21,6 +21,11 @@
 
         $(document).on('ready', function () {
             // initialization of carousel
+            if($('.js-carousel').length>0) {
+                $.HSCore.components.HSRating.init($('.js-rating'), {
+                    spacing: 4
+                });
+            }
             if($('.js-carousel').length>0){
                 $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
                 // initialization of carousels
