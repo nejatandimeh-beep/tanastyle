@@ -1326,6 +1326,126 @@ class Basic extends Controller
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
+    public function productFemaleClothesList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '0')
+            ->whereIn('CatCode', ['a','b','c','d'])
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '0')
+            ->whereIn('CatCode', ['a','b','c','d'])
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '0';
+        $catCode = 'clothes';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productFemaleBagsList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '0')
+            ->where('CatCode', 'e')
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '0')
+            ->where('CatCode', 'e')
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '0';
+        $catCode = 'e';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productFemaleShoesList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '0')
+            ->where('CatCode', 'f')
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '0')
+            ->where('CatCode', 'f')
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '0';
+        $catCode = 'f';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productFemaleSportsList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '0')
+            ->whereIn('CatCode', ['g','h','i','j','k','l','m'])
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '0')
+            ->whereIn('CatCode', ['g','h','i','j','k','l','m'])
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '0';
+        $catCode = 'sports';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productFemaleRhinestoneList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '0')
+            ->whereIn('CatCode', ['n','o','p','q'])
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '0')
+            ->whereIn('CatCode', ['n','o','p','q'])
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '0';
+        $catCode = 'rhinestone';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
     public function productMaleList()
     {
         session_start();
@@ -1345,6 +1465,126 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'all';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productMaleClothesList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '1')
+            ->whereIn('CatCode', ['a','b','c','d'])
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '1')
+            ->whereIn('CatCode', ['a','b','c','d'])
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '1';
+        $catCode = 'clothes';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productMaleBagsList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '1')
+            ->where('CatCode', 'e')
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '1')
+            ->where('CatCode', 'e')
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '1';
+        $catCode = 'e';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productMaleShoesList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '1')
+            ->where('CatCode', 'f')
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '1')
+            ->where('CatCode', 'f')
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '1';
+        $catCode = 'f';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productMaleSportsList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '1')
+            ->whereIn('CatCode', ['g','h','i','j','k','l','m'])
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '1')
+            ->whereIn('CatCode', ['g','h','i','j','k','l','m'])
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '1';
+        $catCode = 'sports';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productMaleRhinestoneList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '1')
+            ->whereIn('CatCode', ['n','o','p','q'])
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '1')
+            ->whereIn('CatCode', ['n','o','p','q'])
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $gender = '1';
+        $catCode = 'rhinestone';
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 

@@ -227,7 +227,7 @@
                                                                    name="category"
                                                                    id="a"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'a') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'a' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -245,7 +245,7 @@
                                                                    name="category"
                                                                    id="b"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'b') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'b' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -263,7 +263,7 @@
                                                                    name="category"
                                                                    id="c"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'c') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'c' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -281,7 +281,7 @@
                                                                    name="category"
                                                                    id="d"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'd')? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'd' || $catCode === 'clothes')? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -335,7 +335,7 @@
                                                                    name="category"
                                                                    id="g"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'g') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'g' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -353,7 +353,7 @@
                                                                    name="category"
                                                                    id="h"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'h') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'h' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -371,7 +371,7 @@
                                                                    name="category"
                                                                    id="i"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'i') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'i' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -389,7 +389,7 @@
                                                                    name="category"
                                                                    id="j"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'j') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'j' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -407,7 +407,7 @@
                                                                    name="category"
                                                                    id="k"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'k') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'k' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -425,7 +425,7 @@
                                                                    name="category"
                                                                    id="l"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'l') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'l' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -443,7 +443,7 @@
                                                                    name="category"
                                                                    id="m"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'm') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'm' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -461,7 +461,7 @@
                                                                    name="category"
                                                                    id="n"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'n') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'n' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -479,7 +479,7 @@
                                                                    name="category"
                                                                    id="o"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'o') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'o' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -497,7 +497,7 @@
                                                                    name="category"
                                                                    id="p"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'p') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'p' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -515,7 +515,7 @@
                                                                    name="category"
                                                                    id="q"
                                                                    onchange="$('#cat-all').prop('checked',false)"
-                                                                   {{ ($catCode === 'all' || $catCode === 'q') ? 'checked' : ''}}
+                                                                   {{ ($catCode === 'all' || $catCode === 'q' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>

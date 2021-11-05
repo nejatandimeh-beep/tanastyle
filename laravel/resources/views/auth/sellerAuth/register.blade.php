@@ -396,7 +396,7 @@
                                             <!--ورودی زیر فقط برای دریافت استان جاوااسکریپت استفاده می شود-->
                                             <input id="state" class="d-none" value="">
                                             <select id="stateSelect"
-                                                    style="direction: rtl; padding-right: 30px !important"
+                                                    style="direction: rtl; padding-right: 30px !important; height:calc(2.25rem + 9px) !important;"
                                                     tabindex="13"
                                                     onblur=" if($(this).val()!=='0'){$(this).removeClass('g-brd-red'); $('#citySelect').removeClass('g-brd-red');} else {$(this).addClass('g-brd-red'); $('#citySelect').addClass('g-brd-red');}"
                                                     class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none--lg g-bg-gray-light-v5 g-mb-10 g-mb-0--lg g-brd-red"
@@ -439,7 +439,7 @@
                                             <!--ورودی زیر فقط برای دریافت شهر جاوااسکریپت استفاده می شود-->
                                             <input id="city" class="d-none" value="">
                                             <select id="citySelect"
-                                                    style="direction: rtl; padding-right: 30px !important"
+                                                    style="direction: rtl; padding-right: 30px !important; height:calc(2.25rem + 9px) !important;"
                                                     tabindex="14"
                                                     class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-gray-light-v5 g-brd-red"
                                                     name="city"

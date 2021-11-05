@@ -218,7 +218,7 @@
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['30','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">لباس
-                                                                    خواب<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
+                                                                    خواب</a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['31','0']) }}"

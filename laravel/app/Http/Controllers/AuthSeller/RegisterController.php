@@ -96,11 +96,11 @@ class RegisterController extends Controller
     public function new(Request $request)
     {
         $nationalId = $request->get('nationalId');
-        $tempPath = 'img/imagesTemp/sellerProfileImage/' . $nationalId;
-        $path = 'img/SellerProfileImage/' . $nationalId;
+        $tempPath =  public_path('img\imagesTemp\sellerProfileImage\\') . $nationalId;
+        $path =  public_path('img\SellerProfileImage\\'). $nationalId;
 
         $file = new Filesystem();
-        $file->moveDirectory($tempPath, $path);
+        $file->moveDirectory($tempPath, $path,true);
 
         DB::table('seller_new')
             ->insert([

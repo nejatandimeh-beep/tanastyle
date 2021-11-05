@@ -88,6 +88,8 @@ Route::get('/Add-Product', 'Seller\Add@AddProduct')->name('AddProduct');
 
 Route::post('/Add-Product', 'Seller\Add@SaveProduct')->name('SaveProduct');
 
+Route::post('/Add-Product-Upload-Image', 'Seller\Add@uploadImage')->name('sellerProductImage');
+
 // ------------Store--------------
 
 // Store
@@ -148,6 +150,26 @@ Route::get('/', 'Customer\Basic@Master')->name('Master');
 
 //-------------------[ Customer Product List ]-----------------------
 Route::get('/Customer-Product-Female-List', 'Customer\Basic@productFemaleList')->name('productFemaleList');
+
+Route::get('/Customer-Product-Female-Clothes-List', 'Customer\Basic@productFemaleClothesList')->name('productFemaleClothesList');
+
+Route::get('/Customer-Product-Female-Shoes-List', 'Customer\Basic@productFemaleShoesList')->name('productFemaleShoesList');
+
+Route::get('/Customer-Product-Female-Bags-List', 'Customer\Basic@productFemaleBagsList')->name('productFemaleBagsList');
+
+Route::get('/Customer-Product-Female-Sports-List', 'Customer\Basic@productFemaleSportsList')->name('productFemaleSportsList');
+
+Route::get('/Customer-Product-Female-Rhinestone-List', 'Customer\Basic@productFemaleRhinestoneList')->name('productFemaleRhinestoneList');
+
+Route::get('/Customer-Product-Male-Clothes-List', 'Customer\Basic@productMaleClothesList')->name('productMaleClothesList');
+
+Route::get('/Customer-Product-Male-Shoes-List', 'Customer\Basic@productMaleShoesList')->name('productMaleShoesList');
+
+Route::get('/Customer-Product-Male-Bags-List', 'Customer\Basic@productMaleBagsList')->name('productMaleBagsList');
+
+Route::get('/Customer-Product-Male-Sports-List', 'Customer\Basic@productMaleSportsList')->name('productMaleSportsList');
+
+Route::get('/Customer-Product-Male-Rhinestone-List', 'Customer\Basic@productMaleRhinestoneList')->name('productMaleRhinestoneList');
 
 Route::get('/Customer-Product-Male-List', 'Customer\Basic@productMaleList')->name('productMaleList');
 

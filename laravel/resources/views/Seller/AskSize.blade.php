@@ -79,7 +79,7 @@
                                     سایز
                                 </div>
                                 <select
-                                    class="form-control form-control-md custom-select rounded-0 text-right h-25 g-font-size-16"
+                                    class="form-control form-control-md custom-select rounded-0 text-left h-25 g-font-size-16"
                                     name="qty">
                                     @for ($i = 1; $i<= 10; $i++)
                                         <option value="{{ $i }}">{{$i}}</option>

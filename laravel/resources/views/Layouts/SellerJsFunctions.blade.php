@@ -543,7 +543,6 @@
             currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
 
             let currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
-            console.log(currentTimeString);
             $("#persianTime").html(currentTimeString);
         }
 
@@ -738,8 +737,21 @@
             });
         }
 
-        // ------------------------------End Seller Delete And False Produc---------------------------------------
+        // ------------------------------End Seller Delete And False Product---------------------------------------
 
+        if($('#addProductPage').length>0){
+            let today = new Date(),
+                year = today.getFullYear(),
+                month = today.getMonth() + 1,
+                day = today.getDay(),
+                currentHours = today.getHours(),
+                currentMinutes = today.getMinutes(),
+                currentSeconds = today.getSeconds(),
+                folderName='p-'+year+'.'+month+'.'+day+'-'+currentHours+'.'+currentMinutes+'.'+currentSeconds;
+            $('#folderName').val(folderName);
+            $('#folderName2').val(folderName);
+            // console.log($('#folderName').val());
+        }
         // Auto Focus in Modal Window
         $('.modal').on('shown.bs.modal', function () {
             $(this).find('[autofocus]').focus();
@@ -808,11 +820,37 @@
                     reader.onloadend = function () {
                         $('#imageUrl' + inputID).val(reader.result);
                         $modal.modal('hide');
+                        $("#imageUrl" + inputID).clone().appendTo("#imageUploadForm");
+                        $("#imgNumber").val(inputID);
+                        $('#imageUploadForm').submit();
                         addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
                         $('#img-file-label' + inputID).removeClass('g-color-red');
                     };
                 });
             });
+
+            $('#imageUploadForm').on('submit', (function (e) {
+                $('#uploadingIcon'+inputID).removeClass('d-none');
+                $('#uploadingText'+inputID).removeClass('d-none');
+                $('#fileShow'+inputID).addClass('d-none');
+                e.preventDefault();
+                let formData = new FormData(this);
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        $('#uploadingIcon'+inputID).addClass('d-none');
+                        $('#uploadingText'+inputID).addClass('d-none');
+                        $('#fileShow'+inputID).removeClass('d-none');
+                        console.log("success");
+                        console.log(data);
+                    }
+                });
+            }));
 
             // Back button Force click Reload Page
             if (!!window.performance && window.performance.navigation.type == 2) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
 use File;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -186,15 +187,31 @@ class Add extends Controller
         return view('Seller.AddProduct', compact('gender', 'cat', 'catCode', 'name', 'hintCat', 'qty', 'size'));
     }
 
+    public function uploadImage(Request $request)
+    {
+        // Upload Images
+        $imgNumber = $request->get('imgNumber');
+        $image = $request->get('imageUrl'.$imgNumber);
+        $folderName = $request->get('folderName');
+        $path = 'img/imagesTemp/products/'  . $folderName;
+        File::makeDirectory($path, 0777, true, true);
+        // Get Size Qty For Loop Steps
+        $image_parts = explode(";base64,", $image);
+        $image_base64 = base64_decode($image_parts[1]);
+        $imageFullPath = $path . '/pic' . (int)($imgNumber+1) . '.jpg';
+        file_put_contents($imageFullPath, $image_base64);
+        return $path;
+    }
+
     // Insert Form Data to Database
     public function SaveProduct(Request $request)
     {
         // Upload Images
-        date_default_timezone_set('Asia/Tehran');
-        $folderName = 'p-' . date("Y.m.d-H.i.s");
-        $picPath = public_path('/img/products/' ) . $folderName;
-        File::makeDirectory($picPath, 0777, true, true);
-        // Get Size Qty For Loop Steps
+        $folderName = $request->get('folderName2');
+        $source = public_path('img\imagesTemp\products\\') . $folderName;
+        $destination= public_path('img\products\\').$folderName;
+        $file = new Filesystem();
+        $file->moveDirectory( $source, $destination,true);
 
         $qty = $request->get('qty');
         $j = 0;
@@ -203,8 +220,7 @@ class Add extends Controller
             'colorCode' => '',
             'size' => '',
             'sizeQty' => '',
-            'image' => '',
-            'fileName' => '',
+            'hexCode' => '',
         ]);
 
         for ($i = 0; $i < $qty; $i++) {
@@ -215,39 +231,11 @@ class Add extends Controller
             $imageColor[$i]['size'] = $request->get('size' . $temp);
             $imageColor[$i]['sizeQty'] = $request->get('sizeQty' . $temp);
             $imageColor[$i]['hexCode'] = $request->get('hexCode' . $temp);
-            $imageColor[$i]['image'] = $request->get('imageUrl' . $i);
         }
 
         $imageColor = collect($imageColor)->sortBy('color')->toArray();
         $imageColor = array_values($imageColor);
-        $folderPath = '';
-        for ($i = 0; $i < $qty; $i++) {
-            if (!is_null($imageColor[$i]['image'])) {
-                $j++;
-                $folderPath = public_path('/img/products/' . $folderName . '/');
-                $image_parts = explode(";base64,", $imageColor[$i]['image']);
-                $image_type_aux = explode("image/", $image_parts[0]);
-                $image_type = $image_type_aux[1];
-                $image_base64 = base64_decode($image_parts[1]);
-                $imageColor[$i]['fileName'] = 'pic' . $j;
-                $imageFullPath = $folderPath . $imageColor[$i]['fileName'] . '.jpg';
-                file_put_contents($imageFullPath, $image_base64);
-            } else {
-                $imageColor[$i]['fileName'] = 'pic' . $j;
-            }
-        }
-        for ($i = 1; $i <= 2; $i++) {
-            if (!is_null($request->get('imageUrl1' . $i))) {
-                $image = $request->get('imageUrl1' . $i);
-                $image_parts = explode(";base64,", $image);
-                $image_type_aux = explode("image/", $image_parts[0]);
-                $image_base64 = base64_decode($image_parts[1]);
 
-                $imageFullPath = $folderPath . 'pic1' . $i . '.jpg';
-
-                file_put_contents($imageFullPath, $image_base64);
-            }
-        }
         // Compilation Pic Path
         $picPath = '/img/products/' . $folderName . '/';
         // Get Data From Form
@@ -321,7 +309,7 @@ class Add extends Controller
                     'ColorCode' => $imageColor[$i]['colorCode'],
                     'HexCode' => $imageColor[$i]['hexCode'],
                     'Qty' => $imageColor[$i]['sizeQty'],
-                    'PicNumber' => $imageColor[$i]['fileName'],
+                    'PicNumber' => 'pic'.($i+1),
                     'VisitCounter' => 0,
                 ],
             ]);

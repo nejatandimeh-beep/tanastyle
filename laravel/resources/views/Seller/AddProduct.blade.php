@@ -2,7 +2,7 @@
 
 @section('Content')
     <!-- Info Panel -->
-    <div style="direction: rtl;"
+    <div style="direction: rtl;" id="addProductPage"
          class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0">
         <h3 class="card-header h5 g-color-white-opacity-0_9">
             <i class="fa fa-list-alt g-font-size-default g-ml-5"></i>افزودن مشخصات محصول
@@ -81,30 +81,19 @@
                 <label id="lblBrand" class="g-mb-10">برند محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                        <i class="fa fa-ellipsis-v"></i>
+                        <i class="fa fa-i-cursor"></i>
                     </div>
-                    <select class="form-control form-control-md custom-select rounded-0 text-right h-25 g-font-size-16"
-                            tabindex="3"
-                            id="addProductBrand"
-                            onchange="$('#lblBrand').removeClass('g-color-red')"
-                            name="brand">
-                        <option value="---">---</option>
-                        <option value="Adidas">Adidas</option>
-                        <option value="Nike">Nike</option>
-                        <option value="D&G">D&G</option>
-                        <option value="H&M">H&M</option>
-                        <option value="Breshka">Breshka</option>
-                        <option value="Sprit">Sprit</option>
-                        <option value="Kiabi">Kiabi</option>
-                        <option value="Lupillo">Lupillo</option>
-                        <option value="FreeBrand">FreeBrand</option>
-                    </select>
-
+                    <input class="form-control form-control-md rounded-0 text-left g-font-size-16" type="text"
+                           tabindex="3"
+                           name="brand"
+                           id="addProductBrand"
+                           onkeypress="$('#lblBrand').removeClass('g-color-red')"
+                           value="">
                 </div>
 
                 <div style="direction: rtl">
                     <small class="text-muted g-font-size-12">برند هویت محصول شماست.</small><br>
-                    <small class="text-muted g-font-size-12">اگر محصولتان برند ندارد مقدار FreeBrand را انتخاب
+                    <small class="text-muted g-font-size-12">اگر محصولتان برند ندارد مقدار FreeBrand را وارد
                         نمایید.</small><br>
                 </div>
             </div>
@@ -2524,6 +2513,7 @@
                                 <input class="d-none" type="text" value="" id="hexCode{{$i}}" name="hexCode{{$i}}">
                             </div>
                         </div>
+
                         {{--موجودی--}}
                         <div class="form-group g-mb-0 text-right col-lg-3">
                             <label class="g-mb-10">تعداد موجود</label>
@@ -2544,14 +2534,19 @@
                                 </select>
                             </div>
                         </div>
+
                         {{--تصویر--}}
                         <div id="colorImgDiv{{$i}}" class="form-group g-mb-0 text-right col-lg-3">
                             <label class="g-mb-10" for="{{ 'fileShow'.$i }}" id="{{ 'img-file-label'.$i }}">تصویر محصول
                                 <span id="{{ 'productColorImg'.$i }}"></span></label>
                             <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
-                                <span style="display: none; cursor: default"
-                                  class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                                  id="{{ 'check'.$i }}"></span>
+                                 <span style="cursor: default"
+                                       class="d-none align-self-center g-mr-5 g-bg-primary g-pa-15 g-color-white"
+                                       id="uploadingIcon"{{$i}}><i class="fa fa-spinner fa-spin"></i></span>
+                                <input style="direction: rtl" id="uploadingIcon{{$i}}"
+                                       class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
+                                       type="text"
+                                       placeholder="درحال بارگذاری.." readonly="">
                                 <input id="{{ 'fileShow'.$i }}"
                                        class="form-control form-control-md rounded-0 g-font-size-16 g-px-5 text-right"
                                        type="text"
@@ -2661,9 +2656,13 @@
             <div id="imgContainer" class="form-group  text-right">
                 <label class="g-mb-10" for="{{ 'fileShow11' }}" id="{{ 'img-file-label11' }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
-                    <span style="display: none; cursor: default"
-                          class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                          id="{{ 'check11' }}"></span>
+                    <span style="cursor: default"
+                          class="d-none align-self-center g-mr-5 g-bg-primary g-pa-15 g-color-white"
+                          id="uploadingIcon11"><i class="fa fa-spinner fa-spin"></i></span>
+                    <input style="direction: rtl" id="uploadingText11"
+                           class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
+                           type="text"
+                           placeholder="درحال بارگذاری.." readonly="">
                     <input id="{{ 'fileShow11' }}" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
                            placeholder="فاقد تصویر" readonly="">
 
@@ -2681,9 +2680,13 @@
                 </div>
                 <label class="g-mb-10" for="{{ 'fileShow12' }}" id="{{ 'img-file-label12' }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
-                    <span style="display: none; cursor: default"
-                          class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                          id="{{ 'check12' }}"></span>
+                   <span style="cursor: default"
+                         class="d-none align-self-center g-mr-5 g-bg-primary g-pa-15 g-color-white"
+                         id="uploadingIcon12"><i class="fa fa-spinner fa-spin"></i></span>
+                    <input style="direction: rtl" id="uploadingText12"
+                           class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
+                           type="text"
+                           placeholder="درحال بارگذاری.." readonly="">
                     <input id="{{ 'fileShow12' }}" class="form-control form-control-md rounded-0 g-font-size-16" type="text"
                            placeholder="فاقد تصویر" readonly="">
 
@@ -2754,7 +2757,15 @@
                 </div>
             </div>
             <!-- End File Input -->
+            <input id="folderName2" name="folderName2" type="text" class="d-none">
         </form>
+
     </div>
+    <form action="{{route('sellerProductImage')}}" id="imageUploadForm"
+          method="post" enctype="multipart/form-data">
+        @csrf
+        <input id="folderName" name="folderName" type="text" class="d-none">
+        <input id="imgNumber" name="imgNumber" type="text" class="d-none">
+    </form>
 @endsection
 

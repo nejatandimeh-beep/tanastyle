@@ -38,7 +38,7 @@
                             {{--زنانه--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="femaleCat">
-                                <a id="mega-menu-label-4" class="nav-link g-px-0" href="#" aria-haspopup="true"
+                                <a id="mega-menu-label-4" class="nav-link g-px-0" href="{{ route('productFemaleList') }}" aria-haspopup="true"
                                    aria-expanded="false">پوشاک زنانه
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
@@ -49,7 +49,9 @@
                                     <div class="row">
                                         {{-- لباس --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">لباس</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productFemaleClothesList') }}" class="nav-link g-color-primary--hover p-0">لباس</a>
+                                            </h4>
                                             <div id="accordion-06" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -256,7 +258,9 @@
                                         </div>
                                         {{-- کیف و کفش --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5  g-font-weight-600">کفش</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productFemaleShoesList') }}" class="nav-link g-color-primary--hover p-0">کفش</a>
+                                            </h4>
                                             <ul class="list-unstyled g-mb-25 p-0 g-pl-40--lg">
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','50','f']) }}">دمپایی</a></li>
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','51','f']) }}">صندل</a></li>
@@ -268,7 +272,9 @@
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','shoeCare','f']) }}">مراقبت کفش</a></li>
                                             </ul>
 
-                                            <h4 class="h5  g-font-weight-600">کیف</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productFemaleBagsList') }}" class="nav-link g-color-primary--hover p-0">کیف</a>
+                                            </h4>
                                             <ul class="list-unstyled p-0 g-pl-40--lg">
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','40','e']) }}">پول</a></li>
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['0','41','e']) }}">کارت</a></li>
@@ -281,7 +287,9 @@
                                         </div>
                                         {{-- ورزشی --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">ورزشی</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productFemaleSportsList') }}" class="nav-link g-color-primary--hover p-0">ورزشی</a>
+                                            </h4>
                                             <div id="accordion-07" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -542,7 +550,9 @@
                                         </div>
                                         {{-- اکسسوری --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600  g-mb-15">اکسسوری</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productFemaleRhinestoneList') }}" class="nav-link g-color-primary--hover p-0">اکسسوری</a>
+                                            </h4>
                                             <div id="accordion-08" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -731,7 +741,7 @@
                             {{--مردانه--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="maleCat">
-                                <a id="mega-menu-label-5" class="nav-link g-px-0" href="#" aria-haspopup="true"
+                                <a id="mega-menu-label-5" class="nav-link g-px-0" href="{{ route('productMaleList') }}" aria-haspopup="true"
                                    aria-expanded="false">پوشاک مردانه
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
@@ -742,7 +752,9 @@
                                     <div class="row">
                                         {{-- لباس --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">لباس</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productMaleClothesList') }}" class="nav-link g-color-primary--hover p-0">لباس</a>
+                                            </h4>
                                             <div id="accordion-10" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -900,7 +912,9 @@
                                         </div>
                                         {{-- کیف و کفش --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5  g-font-weight-600">کفش</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productMaleShoesList') }}" class="nav-link g-color-primary--hover p-0">کفش</a>
+                                            </h4>
                                             <ul class="list-unstyled g-mb-25 p-0 g-pl-40--lg">
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['1','50','f']) }}">دمپایی</a></li>
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['1','51','f']) }}">صندل</a></li>
@@ -911,7 +925,9 @@
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['1','shoeCare','f']) }}">مراقبت کفش</a></li>
                                             </ul>
 
-                                            <h4 class="h5  g-font-weight-600">کیف</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productMaleBagsList') }}" class="nav-link g-color-primary--hover p-0">کیف</a>
+                                            </h4>
                                             <ul class="list-unstyled p-0 g-pl-40--lg">
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['1','40','e']) }}">پول</a></li>
                                                 <li class="g-mb-5"><a class="g-color-main" href="{{ route('menuProduct',['1','41','e']) }}">کارت</a></li>
@@ -925,7 +941,9 @@
                                         </div>
                                         {{-- ورزشی --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">ورزشی</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productMaleSportsList') }}" class="nav-link g-color-primary--hover p-0">ورزشی</a>
+                                            </h4>
                                             <div id="accordion-11" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -1145,7 +1163,9 @@
                                         </div>
                                         {{-- اکسسوری --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600  g-mb-15">اکسسوری</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productMaleRhinestoneList') }}" class="nav-link g-color-primary--hover p-0">بدلیجات</a>
+                                            </h4>
                                             <div id="accordion-12" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -1280,7 +1300,9 @@
                                     <div class="row">
                                         {{-- دخترانه --}}
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">دخترانه</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productGirlList') }}" class="nav-link g-color-primary--hover p-0">پوشاک دخترانه</a>
+                                            </h4>
                                             <div id="accordion-02" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -1627,7 +1649,9 @@
 
                                         {{-- پسرانه --}}
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">پسرانه</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productBoyList') }}" class="nav-link g-color-primary--hover p-0">پوشاک پسرانه</a>
+                                            </h4>
                                             <div id="accordion-03" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -1965,7 +1989,9 @@
                                     <div class="row">
                                         {{-- دخترانه --}}
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">دخترانه</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productBabyGirlList') }}" class="nav-link g-color-primary--hover p-0">پوشاک نوزادی دخترانه</a>
+                                            </h4>
                                             <div id="accordion-00" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
@@ -2182,7 +2208,9 @@
                                         </div>
                                         {{-- پسرانه --}}
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">پسرانه</h4>
+                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productBabyBoyList') }}" class="nav-link g-color-primary--hover p-0">پوشاک نوزادی پسرانه</a>
+                                            </h4>
                                             <div id="accordion-09" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
                                                 <div style="direction: rtl"
