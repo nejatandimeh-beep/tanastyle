@@ -471,6 +471,7 @@
                 success: function (data) {
                     // console.log(data);
                     $('#loadProduct').addClass('d-none');
+                    $('#productTitle').text('نتایج فیلترها');
                     $('#productContainer').append(data);
                 }
             });

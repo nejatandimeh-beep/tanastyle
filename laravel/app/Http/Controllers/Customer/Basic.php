@@ -1323,7 +1323,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='پوشاک زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productFemaleClothesList()
@@ -1347,7 +1348,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'clothes';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='لباس زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productFemaleBagsList()
@@ -1371,7 +1373,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'e';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='کیف زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productFemaleShoesList()
@@ -1395,7 +1398,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'f';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='کفش زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productFemaleSportsList()
@@ -1419,7 +1423,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'sports';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='پوشاک ورزشی زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productFemaleRhinestoneList()
@@ -1443,7 +1448,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'rhinestone';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='بدلیجات زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productMaleList()
@@ -1465,7 +1471,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='پوشاک مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productMaleClothesList()
@@ -1489,7 +1496,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'clothes';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='لباس مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productMaleBagsList()
@@ -1513,7 +1521,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'e';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='کیف مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productMaleShoesList()
@@ -1537,7 +1546,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'f';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='کفش مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productMaleSportsList()
@@ -1561,7 +1571,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'sports';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='پوشاک ورزشی مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productMaleRhinestoneList()
@@ -1585,7 +1596,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'rhinestone';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='بدلیجات مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productGirlList()
@@ -1606,7 +1618,8 @@ class Basic extends Controller
             ->paginate(10);
         $gender = '2';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='پوشاک دخترانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productBoyList()
@@ -1627,7 +1640,8 @@ class Basic extends Controller
             ->paginate(10);
         $gender = '3';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='پوشاک پسرانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productBabyGirlList()
@@ -1648,7 +1662,8 @@ class Basic extends Controller
             ->paginate(10);
         $gender = '4';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='پوشاک نوزادی دخترانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productBabyBoyList()
@@ -1669,7 +1684,8 @@ class Basic extends Controller
             ->paginate(10);
         $gender = '5';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='پوشاک نوزادی پسرانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function productSearch($val)
@@ -1715,7 +1731,8 @@ class Basic extends Controller
 
         $gender = 'all';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title=$data[0]->Name.' '.$data[0]->Gender;
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
     public function spacialSelling($minDiscount, $maxDiscount)
@@ -1737,10 +1754,11 @@ class Basic extends Controller
 
         $gender = 'all';
         $catCode = 'all';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        $title='قیمت بین '.$minDiscount.' تا '.$maxDiscount;
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
-    public function product($gender, $cat, $catCode)
+    public function product($gender, $cat, $catCode,$title)
     {
         session_start();
         $_SESSION['listSkip'] = 0;
@@ -1759,7 +1777,7 @@ class Basic extends Controller
             ->groupBy('p.ID')
             ->paginate(10);
 
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
     }
 
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------
