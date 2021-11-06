@@ -25,10 +25,14 @@
                             class="d-inline-block h4 g-color-black mb-0">{{ $data->Name }}</h1>
                         <span id="productModel" class="align-middle">{{ $data->Model }}</span>
                     </div>
-                    <div
-                        class="js-rating d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center"
-                        data-rating="{{ $rating }}"
-                        data-spacing="{{ 5 - $rating }}"></div>
+                    <div style="direction: ltr"
+                        class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
+                        <i class="{{ $rating>0 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                        <i class="{{ $rating>1 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                        <i class="{{ $rating>2 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                        <i class="{{ $rating>3 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                        <i class="{{ $rating>4 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                    </div>
                 </header>
 
                 <hr class="g-brd-gray-light-v4 g-mt-10 g-mb-15">
@@ -463,15 +467,15 @@
                                     <div style="direction: rtl"
                                          class="media-body u-shadow-v22 g-bg-secondary g-pa-30--lg g-pa-20">
                                         <div class="g-mb-15">
-                                            <h5 class="h5 g-color-gray-dark-v1 mb-0">{{ $row->name.' '.$row->Family }}</h5>
+                                            <h5 class="h5 g-color-gray-dark-v1 mb-0">{{ isset($row->name)||isset($row->Family)? $row->name.' '.$row->Family:'کاربر شماره '.$row->id }}</h5>
                                             <span id="timeComment"
                                                   class="g-color-gray-dark-v4 g-font-size-12">
                                                 @if(isset($commentsHowDay))
-                                                    {{$commentsHowDay[$key]}}
+                                                    <p class="p-0">{{$commentsHowDay[$key]}}</p>
+                                                @else
+                                                    <p class="p-0 m-0">{{$PersianDate[$key][0].'/'.$PersianDate[$key][1].'/'.$PersianDate[$key][2]}}</p>
                                                 @endif
-                                                @if(isset($PersianDate))
-                                                    {{$PersianDate[$key][0].'/'.$PersianDate[$key][1].'/'.$PersianDate[$key][2]}}
-                                                @endif</span>
+                                            </span>
                                         </div>
 
                                         <p>{{ $row->Comment }}</p>

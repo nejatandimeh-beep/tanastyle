@@ -658,7 +658,7 @@ class Basic extends Controller
             $rating = round($rating / $ratingCount);
 
         $comments = DB::table('customer_comment as cc')
-            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID', 'c.PicPath')
+            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID', 'c.PicPath','c.id')
             ->leftJoin('customers as c', 'cc.CustomerID', '=', 'c.id')
             ->where('cc.ProductID', $id)
             ->get();

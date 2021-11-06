@@ -2708,7 +2708,7 @@
             img = document.getElementById(imgID);
             /*create magnifier glass:*/
             glass = document.createElement("DIV");
-            glass.setAttribute("class", "img-magnifier-glass");
+            glass.setAttribute("class", "img-magnifier-glass magnifierDiv");
             /*insert magnifier glass:*/
             img.parentElement.insertBefore(glass, img);
             /*set background properties for the magnifier glass:*/
@@ -2767,5 +2767,13 @@
                 return {x: x, y: y};
             }
         }
+
+        $('#js-carousel-11').on('mouseenter', function () {
+            $('.magnifierDiv').removeClass('d-none');
+        });
+
+        $('#js-carousel-11').on('mouseleave', function () {
+            $('.magnifierDiv').addClass('d-none');
+        });
     </script>
 @endsection
