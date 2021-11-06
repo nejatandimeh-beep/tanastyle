@@ -1,5 +1,4 @@
 @include('Layouts.BaseCssLink')
-</head>
 @include('Layouts.CustomerNavigation')
 @include('Layouts.CustomerFooter')
 @include('Layouts.BaseJsLink')
@@ -7,6 +6,7 @@
 @include('Layouts.CustomerJsFunctions')
 
 @yield('BaseCssLink')
+</head>
 @yield('CustomerNavigation')
 @yield('Content')
 @yield('CustomerFooter')
@@ -30,6 +30,7 @@
         <script src="{{ asset('assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
         <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
         <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
+        <script src="{{ asset('assets/js/components/hs.rating.js') }}"></script>
     @break
     @case(strpos($_SERVER['REQUEST_URI'],'/Customer-Profile/'))
         <!--Side Menu-->

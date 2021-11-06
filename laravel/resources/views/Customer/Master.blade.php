@@ -187,7 +187,7 @@
     <p style="direction: rtl" class="container g-color-gray-drk-v3 g-pr-0--lg g-font-size-16">تخفیفات ویژه</p>
     <!-- Products -->
     <div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
-        <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60--lg g-pb-20"
+        <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
              data-autoplay="1"
