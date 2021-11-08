@@ -790,7 +790,6 @@
 <script src="{{ asset('assets/js/cropper.js') }}"></script>
 </body>
 <script>
-    let pageInterval='';
     $(window).on('pageshow', function () {
         $('#load').hide();
     });
