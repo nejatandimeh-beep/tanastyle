@@ -790,17 +790,14 @@
 <script src="{{ asset('assets/js/cropper.js') }}"></script>
 </body>
 <script>
-    $(window).bind('beforeunload', function () {
-        loaderShow();
-    });
-
+    let pageInterval='';
     $(window).on('pageshow', function () {
         $('#load').hide();
     });
     $(document).ready(function () {
         let $modal = $('#modal'),
             image = document.getElementById('sample_image'),
-            cropper, inputID;
+            cropper, inputID,inputIdFinshed=[],counter=0;
         $('input[id^="pic"]').on('change', function (event) {
             if ($('#nationalId').val().length === 10) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
@@ -884,13 +881,18 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    $('#uploadingIcon'+inputID).addClass('d-none');
-                    $('#uploadingText'+inputID).addClass('d-none');
-                    $('#fileShow'+inputID).removeClass('d-none');
+                    inputIdFinshed[counter]=data;
+                    counter++;
                     console.log("success");
                     console.log(data);
                 }
-            });
+            }).done(function () {
+                for (let i=0; i<inputIdFinshed.length; i++){
+                    $('#uploadingIcon'+inputIdFinshed[i]).addClass('d-none');
+                    $('#uploadingText'+inputIdFinshed[i]).addClass('d-none');
+                    $('#fileShow'+inputIdFinshed[i]).removeClass('d-none');
+                }
+            })
         }));
     });
 
@@ -909,8 +911,9 @@
             !$('#uploadingText11').hasClass('d-none') || !$('#uploadingText12').hasClass('d-none') ||
             $('#agree').hasClass('d-none'))
             alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و مجدداً تلاش کنید.');
-        else
+        else{
             $('#registerForm').submit();
+        }
     }
 
     function addPathCheckMark(picID, filePathID, checkMarkID) {

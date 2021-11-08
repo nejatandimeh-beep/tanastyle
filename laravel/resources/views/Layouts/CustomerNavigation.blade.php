@@ -1992,7 +1992,7 @@
                             {{--نوزادی--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="kidsCat">
-                                <a id="mega-menu-label-9" class="nav-link g-px-0" href="#" aria-haspopup="true"
+                                <a id="mega-menu-label-9" class="nav-link g-px-0 g-color-primary--hover" href="#" aria-haspopup="true"
                                    aria-expanded="false">پوشاک نوزادی
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
