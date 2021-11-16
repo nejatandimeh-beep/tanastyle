@@ -8,7 +8,7 @@
                     <h2 class="u-heading-v8__title text-uppercase g-font-weight-600 g-mb-25">در باره ما</h2>
                     <p class="lead g-mb-40 g-font-size-14">نیاز روز افزون جامعه به خدمات حرفه ای در دنیای مجازی ما را بر آن داشت تا در
                         صنعت مد و پوشاک این بستر را در سرار کشور ارتقا دهیم. تانا استایل با هدف ساده سازی فرایند خرید پوشاک در فضای مجازی
-                        و همچنین با عرضه بهترین برندهای پوشاک در تلاش است بستری مناسب برای شما عزیزان در زمینه مد و پوشاک فراهم آورد.<a href="#" class="g-mr-5">بیشتر</a> </p>
+                        و همچنین با عرضه بهترین برندهای پوشاک از بازارچه های مرزی در تلاش است بستری مناسب برای شما عزیزان در زمینه مد و پوشاک فراهم آورد.<a href="#" class="g-mr-5">بیشتر</a> </p>
 
 {{--                    <p class="lead g-mb-40 g-font-size-14">نیاز روز افزون جامعه به خدمات حرفه ای در دنیای مجازی ما را بر آن داشت تا در--}}
 {{--                        صنعت مد و پوشاک این بستر را در سرار کشور ارتقا دهیم. تانا استایل با هدف ساده سازی فرایند خرید پوشاک در فضای مجازی و همچنین با عرضه مستقیم بهترین برندهای پوشاک از بازارچه های مرزی در تلاش است بستری مناسب برای شما عزیزان در زمینه مد و پوشاک فراهم آورد.<a href="#" class="g-mr-5">بیشتر</a> </p>--}}
@@ -63,6 +63,15 @@
         <!-- Copyright and Subscribe -->
         <footer class="text-center g-pt-40 g-pb-30">
             <div class="container">
+                <a referrerpolicy="origin"
+                   target="_blank"
+                   href="https://trustseal.enamad.ir/?id=241578&amp;Code=gEEBxepfVp0Ayi5kPrbt">
+                    <img referrerpolicy="origin"
+                         src="{{asset('img/Other/enamad.jpg')}}"
+                         alt=""
+                         style="cursor:pointer"
+                         id="gEEBxepfVp0Ayi5kPrbt">
+                </a>
 {{--                <form>--}}
 {{--                    <div class="form-group g-width-60x--md mx-auto g-mb-20">--}}
 {{--                        <label class="h5 text-uppercase g-mb-20">از جدیدترین ها با خبر شوید</label>--}}
@@ -77,7 +86,7 @@
 {{--                    </div>--}}
 {{--                </form>--}}
 
-                <small class="d-block g-font-size-default">1399 تمامی حقوق این وب سایت برای تانا استایل محفوظ است</small>
+                <small class="d-block g-mt-15 g-font-size-default">1399 تمامی حقوق این وب سایت برای شرکت تابش پس زمینه مکریان محفوظ است</small>
             </div>
         </footer>
         <!-- End Copyright and Subscribe -->

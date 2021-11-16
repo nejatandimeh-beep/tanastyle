@@ -9,7 +9,7 @@
             </li>
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1"
-                   role="tab">مشخصات محصول</a>
+                   role="tab">جزئیات گفتگو</a>
             </li>
         </ul>
         <div id="nav-4-1-primary-hor-fill" class="tab-content g-pt-40">

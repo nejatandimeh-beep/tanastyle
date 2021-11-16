@@ -76,7 +76,7 @@
                         <h3 class="h4">
                             <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productFemaleList') }}">پوشاک زنانه</a>
                         </h3>
-                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
+
                     </div>
                     <!-- End Article Content -->
                 </article>
@@ -96,7 +96,7 @@
                         <h3 class="h4">
                             <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productMaleList') }}">پوشاک مردانه</a>
                         </h3>
-                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
+
                     </div>
                     <!-- End Article Content -->
                 </article>
@@ -116,7 +116,7 @@
                         <h3 class="h4">
                             <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productGirlList') }}">پوشاک دخترانه</a>
                         </h3>
-                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
+
                     </div>
                     <!-- End Article Content -->
                 </article>
@@ -136,7 +136,7 @@
                         <h3 class="h4">
                             <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBoyList') }}">پوشاک پسرانه</a>
                         </h3>
-                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
+
                     </div>
                     <!-- End Article Content -->
                 </article>
@@ -156,7 +156,7 @@
                         <h3 class="h4">
                             <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyGirlList') }}">پوشاک نوزادی دخترانه</a>
                         </h3>
-                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
+
                     </div>
                     <!-- End Article Content -->
                 </article>
@@ -176,7 +176,7 @@
                         <h3 class="h4">
                             <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyBoyList') }}">پوشاک نوزادی پسرانه</a>
                         </h3>
-                        <p>لباس زیر، لباس بالاتنه و پاین تنه و تمام تنه، کیف، کفش، ورزشی، اکسسوری</p>
+
                     </div>
                     <!-- End Article Content -->
                 </article>

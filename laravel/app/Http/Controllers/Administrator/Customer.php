@@ -394,19 +394,6 @@ class Customer extends Controller
             ->where('ccd.ConversationID', $id)
             ->paginate(10);
 
-        if ($status === '0') {
-            foreach ($data as $key => $rec)
-                if ($rec->Replay !== 0) {
-                    DB::table('customer_conversation')
-                        ->where('ID', $id)
-                        ->update(['Status' => 2]);
-                } else {
-                    DB::table('customer_conversation')
-                        ->where('ID', $id)
-                        ->update(['Status' => 2]);
-                }
-        }
-
         $questionMinuets = array();
         $answerMinuets = array();
         $questionHowDay = array();

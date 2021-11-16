@@ -36,7 +36,7 @@
                        href="#">
                         <div class="circle-wrapper">
                             <div class="success circle"></div>
-                            <div class="icon">
+                            <div style="line-height: 0" class="icon">
                                 <i class="icon-bubble"></i>
                             </div>
                         </div>
@@ -72,6 +72,7 @@
                                             type="text"
                                             value=""
                                             id="login"
+                                            required
                                             name="title"
                                             autocomplete="off" {{-- hide popup box when clicked --}}
                                             tabindex="1"

@@ -1129,7 +1129,9 @@ class Basic extends Controller
             }
         }
 
-        return view('Customer.ConversationDetail', compact('data', 'answerHowDay', 'questionHowDay', 'qPersianDate', 'aPersianDate'));
+        $title=$data[0]->Subject;
+
+        return view('Customer.ConversationDetail', compact('data', 'answerHowDay', 'questionHowDay', 'qPersianDate', 'aPersianDate','title'));
     }
 
     public function connectionNew(Request $request)
@@ -1830,7 +1832,7 @@ class Basic extends Controller
             ->max('ID');
 
         $productInfo = DB::table('product_detail as pd')
-            ->select('pd.*', 'p.SellerID','p.ID as productID','pd.ID as productDetailId')
+            ->select('pd.*', 'p.SellerID','p.ID','pd.ID as productDetailId')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
             ->where('pd.ID', $id)
             ->first();
@@ -1931,19 +1933,19 @@ class Basic extends Controller
 
         //--------------
         try {
-            $token=$seller->name.'/'.$seller->family;
-            $token2 =$productInfo->ID.'/'.$productInfo->productDetailId;
-            $token3 =$orderID.'/'.$orderDetailID;
+            $token10=$seller->name.' '.$seller->family;
+            $token =$productInfo->ProductID.'/'.$productInfo->productDetailId;
+            $token2 =$orderID.'/'.$orderDetailID;
+            Session::put('token10', $token10);
             Session::put('token', $token);
             Session::put('token2', $token2);
-            Session::put('token3', $token3);
 
             $api_key = Config::get('kavenegar.apikey');
             $var = new Kavenegar\KavenegarApi($api_key);
             $template = "factorSmsSeller";
             $type = "sms";
 
-            $result = $var->VerifyLookup($seller->Mobile, $token, $token2,$token3, $template, $type);
+            $result = $var->VerifyLookup($seller->Mobile, $token10, $token,$token2, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();

@@ -14,7 +14,7 @@
                     <div class="d-block">
                         <h6 class="g-color-black g-mb-5">عنوان گفتگو</h6>
                     </div>
-                    <span class="u-label g-color-darkblue g-font-weight-500 p-0 g-font-size-14">بازگشت محصول</span>
+                    <span class="u-label g-color-darkblue g-font-weight-500 p-0 g-font-size-14">{{$title}}</span>
                 </div>
             </div>
             <!-- End Icon Blocks -->

@@ -833,16 +833,11 @@
                 movable: true
                 // preview: '.preview'
             });
-
-            $(document.body).addClass('me-position-fix');
-            $(document.body).removeClass('me-position-normally');
         });
 
         $modal.on('hidden.bs.modal', function () {
             cropper.destroy();
             cropper = null;
-            $(document.body).addClass('me-position-normally');
-            $(document.body).removeClass('me-position-fix');
         });
 
         $('#crop').on('click', function () {
