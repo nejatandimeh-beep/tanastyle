@@ -305,7 +305,7 @@
                                                 <p>قیمت جدید</p>
                                                 <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <button class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewPrice({{$data->ID}},$('#tempPrice').val(),$('#tempFinalPrice').val())">بروز رسانی</button>
+                                                        <button id="newPriceBtn" disabled class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewPrice({{$data->ID}},$('#tempPrice').val(),$('#tempFinalPrice').val())">بروز رسانی</button>
                                                       </span>
                                                     <span class="input-group-addon">تومان</span>
                                                     <input class="form-control form-control-md rounded-0 text-left g-font-size-16"
@@ -368,7 +368,7 @@
                                                 <p>تخفیف جدید</p>
                                                 <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <button class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewDiscount({{$data->ID}},$('#newDiscount').val(),$('#tempNewFinalPrice').val())">بروز رسانی</button>
+                                                        <button id="newDiscountBtn" disabled class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewDiscount({{$data->ID}},$('#newDiscount').val(),$('#tempNewFinalPrice').val())">بروز رسانی</button>
                                                       </span>
                                                     <span class="input-group-addon">درصد</span>
                                                     <input type="text"

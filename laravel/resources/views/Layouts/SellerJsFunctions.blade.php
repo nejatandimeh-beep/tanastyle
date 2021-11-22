@@ -672,9 +672,11 @@
                     let calc = salePrice(discount, temp1);
                     $('#finalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#tempFinalPrice').val(calc);
+                    $('#newPriceBtn').prop('disabled',false);
                 } else{
                     $('#finalPrice').text('---');
                     $('#tempFinalPrice').val('');
+                    $('#newPriceBtn').prop('disabled',true);
                 }
             }
 
@@ -692,9 +694,11 @@
                 let calc = salePrice(discount, temp1);
                 $('#newFinalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $('#tempNewFinalPrice').val(calc);
+                $('#newDiscountBtn').prop('disabled',false);
             } else{
                 $('#newFinalPrice').text('---');
                 $('#tempNewFinalPrice').val('');
+                $('#newDiscountBtn').prop('disabled',true);
             }
         });
 
