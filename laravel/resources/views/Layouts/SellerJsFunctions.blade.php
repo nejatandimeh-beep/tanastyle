@@ -671,8 +671,11 @@
                 if (temp1 >= 10000) {
                     let calc = salePrice(discount, temp1);
                     $('#finalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-                } else
+                    $('#tempFinalPrice').val(calc);
+                } else{
                     $('#finalPrice').text('---');
+                    $('#tempFinalPrice').val('');
+                }
             }
 
             $("#discount").val('');
@@ -688,8 +691,11 @@
             if ($(this).val() >= 1 && $(this).val() <= 99) {
                 let calc = salePrice(discount, temp1);
                 $('#newFinalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-            } else
+                $('#tempNewFinalPrice').val(calc);
+            } else{
                 $('#newFinalPrice').text('---');
+                $('#tempNewFinalPrice').val('');
+            }
         });
 
         function salePrice(discount, unitPrice) {
@@ -712,7 +718,6 @@
             }
             if (discount === 0)
                 $("#BsalePrice").text('---');
-            salePrice($(this).val(), $("#tempPrice").val());
         });
 
         // ---------------------------------- Add Image Success Icon ----------------------------
@@ -765,6 +770,36 @@
                         $.alert('عملیات گزارش اطلاعات اشتباه لغو شد!');
                     },
 
+                }
+            });
+        }
+
+        function confirmNewPrice(id,unitPrice,finalPrice) {
+            $.confirm({
+                title: 'تغییر قیمت محصول',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        location.href = '/Seller-ChangePrice-Product/' + id+'/'+unitPrice+'/'+finalPrice;
+                    },
+                    انصراف: function () {
+                        $.alert('عملیات تغییر قیمت محصول لغو شد!');
+                    },
+                }
+            });
+        }
+
+        function confirmNewDiscount(id,discount,finalPrice) {
+            $.confirm({
+                title: 'تغییر قیمت محصول',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        location.href = '/Seller-ChangeDiscount-Product/' + id+'/'+discount+'/'+finalPrice;
+                    },
+                    انصراف: function () {
+                        $.alert('عملیات تغییر قیمت محصول لغو شد!');
+                    },
                 }
             });
         }

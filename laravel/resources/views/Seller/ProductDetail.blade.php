@@ -20,7 +20,7 @@
             <div class="form-group row g-mb-25">
                 <label for="example-text-input" class="col-sm-2 col-form-label">کد محصول</label>
                 <div class="col-sm-10 force-col-12">
-                    <input class="form-control form-control-md rounded-0" type="text" value="{{ $dataDetail->ID }}"
+                    <input class="form-control form-control-md rounded-0" type="text" value="{{ $data->ID.'/'.$dataDetail->ID }}"
                            id="example-text-input" readonly>
                 </div>
             </div>
@@ -305,7 +305,7 @@
                                                 <p>قیمت جدید</p>
                                                 <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <button class="btn u-btn-primary rounded-0" type="button">بروز رسانی</button>
+                                                        <button class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewPrice({{$data->ID}},$('#tempPrice').val(),$('#tempFinalPrice').val())">بروز رسانی</button>
                                                       </span>
                                                     <span class="input-group-addon">تومان</span>
                                                     <input class="form-control form-control-md rounded-0 text-left g-font-size-16"
@@ -322,6 +322,8 @@
                                                 </div>
                                                 <div style="direction: rtl"  class=" g-mt-10">
                                                     <small class="text-muted g-font-size-12">قبلا <span class="g-color-red g-font-weight-600">{{ $data->Discount }}%</span> تخفیف را برای این محصول در نظر گرفته اید.</small>
+                                                    <input style="display: none" type="number" name="tempFinalPrice" id="tempFinalPrice"
+                                                           value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -366,7 +368,7 @@
                                                 <p>تخفیف جدید</p>
                                                 <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <button class="btn u-btn-primary rounded-0" type="button">بروز رسانی</button>
+                                                        <button class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewDiscount({{$data->ID}},$('#newDiscount').val(),$('#tempNewFinalPrice').val())">بروز رسانی</button>
                                                       </span>
                                                     <span class="input-group-addon">درصد</span>
                                                     <input type="text"
@@ -388,6 +390,8 @@
                                               class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12">
                                               قیمت فروش با احتساب تخفیف جدید
                                               <span class="g-color-primary g-mr-5" id="newFinalPrice">---</span>
+                                                 <input style="display: none" type="number" name="tempNewFinalPrice" id="tempNewFinalPrice"
+                                                        value="">
                                               <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                           </span>
                                     </div>

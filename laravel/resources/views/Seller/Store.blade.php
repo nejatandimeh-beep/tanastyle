@@ -1,6 +1,7 @@
 @extends('Layouts.IndexSeller')
 @section('Content')
 
+    <!-- Add Product Msg -->
     @if(session()->has('addStatus'))
         <div class="modal fade" id="overlay">
             <div class="modal-dialog">
@@ -20,7 +21,7 @@
         </div>
     @endif
 
-    <!-- End False Product Msg -->
+    <!-- Add Qty Product Msg -->
     @if(session()->has('productId') && (Session::get('productId') !== 0))
         <div class="modal fade" id="overlay">
             <div class="modal-dialog">
@@ -40,7 +41,6 @@
             </div>
         </div>
     @endif
-    <!-- End False Product Msg -->
 
     <!-- False Product Msg -->
     @if(session()->has('falseStatus'))
@@ -61,7 +61,46 @@
             </div>
         </div>
     @endif
-    <!-- End False Product Msg -->
+
+    <!-- Change Price Product Msg -->
+    @if(session()->has('changePrice'))
+        <div class="modal fade" id="overlay">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-right g-bg-gray-light-v5">
+                        <button type="button" class="close g-font-size-20" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title"><span
+                                class="fa fa-check-square g-color-primary g-font-size-25 g-ml-15"></span></h4>
+                    </div>
+                    <div class="modal-body text-right">
+                        <p style="direction: rtl">قیمت محصول مورد نظر با موفقیت تغییر یافت.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
+    <!-- Change Discount Product Msg -->
+    @if(session()->has('changeDiscount'))
+        <div class="modal fade" id="overlay">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-right g-bg-gray-light-v5">
+                        <button type="button" class="close g-font-size-20" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title"><span
+                                class="fa fa-check-square g-color-primary g-font-size-25 g-ml-15"></span></h4>
+                    </div>
+                    <div class="modal-body text-right">
+                        <p style="direction: rtl">تخفیف محصول مورد نظر با موفقیت تغییر یافت.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     <!-- Delete Product Msg -->
     @if(session()->has('status'))
@@ -82,7 +121,6 @@
             </div>
         </div>
     @endif
-    <!-- End Delete Product Msg -->
 
     <!-- Info Panel -->
     <div style="direction: rtl; position: -webkit-sticky; position: sticky; top: 0; z-index: 100;"

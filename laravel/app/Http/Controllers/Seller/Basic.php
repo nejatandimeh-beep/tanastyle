@@ -171,6 +171,30 @@ class Basic extends Controller
         return redirect('/Seller-Store')->with('falseStatus', 'success');
     }
 
+//  Change Product Price
+    public function changePriceProduct($id,$unitPrice,$finalPrice)
+    {
+        DB::table('product')
+            ->where('ID',$id)
+            ->update([
+                'UnitPrice'=>(int)$unitPrice,
+                'FinalPrice'=>(int)$finalPrice
+            ]);
+
+        return redirect('/Seller-Store')->with('changePrice', 'success');
+    }
+
+    public function changeDiscountProduct($id,$discount,$finalPrice)
+    {
+        DB::table('product')
+            ->where('ID',$id)
+            ->update([
+                'Discount'=>(int)$discount,
+                'FinalPrice'=>(int)$finalPrice
+            ]);
+
+        return redirect('/Seller-Store')->with('changeDiscount', 'success');
+    }
 //  Product Detail
     public function productDetail($id)
     {
