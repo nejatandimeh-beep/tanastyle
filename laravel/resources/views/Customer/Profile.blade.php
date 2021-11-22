@@ -1279,7 +1279,7 @@
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                        <img class="img-fluid" src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
@@ -1612,7 +1612,7 @@
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                        <img class="img-fluid" src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
@@ -1734,7 +1734,7 @@
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                        <img class="img-fluid" src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
@@ -2025,7 +2025,7 @@
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                        <img class="img-fluid" src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->

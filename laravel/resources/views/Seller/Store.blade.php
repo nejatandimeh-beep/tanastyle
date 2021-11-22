@@ -407,7 +407,7 @@
                         <tbody>
                         @foreach($data as $rec)
                             <tr>
-                                <td class="align-middle text-nowrap text-center">{{ $rec->pDetailID }}</td>
+                                <td class="align-middle text-nowrap text-center">{{ $rec->ID.'/'.$rec->pDetailID }}</td>
                                 <td class="align-middle text-nowrap text-center">{{ $rec->Name }}</td>
 
                                 @if($rec->Gender == 'زنانه')
@@ -431,7 +431,7 @@
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ $rec->PicPath.$rec->PicNumber }}.jpg" alt="Image Description">
+                                             src="{{ $rec->PicPath.$rec->SampleNumber }}.png" alt="Image Description">
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">

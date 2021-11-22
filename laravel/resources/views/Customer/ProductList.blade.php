@@ -1256,7 +1256,7 @@
                                             <div class="js-slide">
                                                 <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                     <img class="img-fluid w-100"
-                                                         src="{{ $row->PicPath }}pic1.jpg"
+                                                         src="{{ $row->PicPath }}sample1.png"
                                                          alt="Image Description">
                                                 </a>
                                             </div>
@@ -1264,7 +1264,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic2.jpg"
+                                                             src="{{ $row->PicPath }}sample2.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1274,7 +1274,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic3.jpg"
+                                                             src="{{ $row->PicPath }}sample3.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1284,7 +1284,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic4.jpg"
+                                                             src="{{ $row->PicPath }}sample4.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1294,7 +1294,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic5.jpg"
+                                                             src="{{ $row->PicPath }}sample5.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1304,7 +1304,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic6.jpg"
+                                                             src="{{ $row->PicPath }}sample6.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1314,7 +1314,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic7.jpg"
+                                                             src="{{ $row->PicPath }}sample7.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1324,7 +1324,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic8.jpg"
+                                                             src="{{ $row->PicPath }}sample8.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1334,7 +1334,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic9.jpg"
+                                                             src="{{ $row->PicPath }}sample9.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1344,7 +1344,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic10.jpg"
+                                                             src="{{ $row->PicPath }}sample10.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1354,7 +1354,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic11.jpg"
+                                                             src="{{ $row->PicPath }}sample11.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>
@@ -1364,7 +1364,7 @@
                                                 <div class="js-slide">
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
-                                                             src="{{ $row->PicPath }}pic12.jpg"
+                                                             src="{{ $row->PicPath }}sample12.png"
                                                              alt="Image Description">
                                                     </a>
                                                 </div>

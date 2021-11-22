@@ -80,6 +80,7 @@ class Add extends Controller
 
         switch ($catCode) {
             case 'f':
+            case 'l':
                 switch ($gender) {
                     case '0':
                         $size = [
@@ -195,12 +196,25 @@ class Add extends Controller
         $folderName = $request->get('folderName');
         $path = 'img/imagesTemp/products/'  . $folderName;
         File::makeDirectory($path, 0777, true, true);
-        // Get Size Qty For Loop Steps
+        // 1000*1000 pic save
         $image_parts = explode(";base64,", $image);
         $image_base64 = base64_decode($image_parts[1]);
         $imageFullPath = $path . '/pic' . (int)($imgNumber+1) . '.jpg';
         file_put_contents($imageFullPath, $image_base64);
-        return $path;
+
+        // 250*250 sample save
+        list($width, $height) = getimagesize($image);
+        $newWidth = 250;
+        $newHeight = 250;
+        $source=imagecreatefrompng($image);
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        $imageFullPath =$path . '/sample' . (int)($imgNumber+1)  . '.png';
+        imagepng($thumb,$imageFullPath);
+
+        imagedestroy($thumb);
+        imagedestroy($source);
+        return $imgNumber;
     }
 
     // Insert Form Data to Database
@@ -208,8 +222,8 @@ class Add extends Controller
     {
         // Upload Images
         $folderName = $request->get('folderName2');
-        $source = public_path('img\imagesTemp\products\\') . $folderName;
-        $destination= public_path('img\products\\').$folderName;
+        $source = public_path('img/imagesTemp/products/') . $folderName;
+        $destination= public_path('img/products/').$folderName;
         $file = new Filesystem();
         $file->moveDirectory( $source, $destination,true);
 
@@ -310,6 +324,7 @@ class Add extends Controller
                     'HexCode' => $imageColor[$i]['hexCode'],
                     'Qty' => $imageColor[$i]['sizeQty'],
                     'PicNumber' => 'pic'.($i+1),
+                    'SampleNumber' => 'sample'.($i+1),
                     'VisitCounter' => 0,
                 ],
             ]);

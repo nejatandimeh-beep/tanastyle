@@ -67,7 +67,7 @@
 
         function hexc(colorval) {
             var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-            delete(parts[0]);
+            delete (parts[0]);
             for (var i = 1; i <= 3; ++i) {
                 parts[i] = parseInt(parts[i]).toString(16);
                 if (parts[i].length == 1) parts[i] = '0' + parts[i];
@@ -364,12 +364,12 @@
         }
 
         function resetDate(idStartDay, idStartMon, idStartYear, idEndDay, idEndMon, idEndYear) {
-            $('#'+idStartDay).val('روز');
-            $('#'+idStartMon).val('ماه');
-            $('#'+idStartYear).val('سال');
-            $('#'+idEndDay).val('روز');
-            $('#'+idEndMon).val('ماه');
-            $('#'+idEndYear).val('سال');
+            $('#' + idStartDay).val('روز');
+            $('#' + idStartMon).val('ماه');
+            $('#' + idStartYear).val('سال');
+            $('#' + idEndDay).val('روز');
+            $('#' + idEndMon).val('ماه');
+            $('#' + idEndYear).val('سال');
         }
 
         // ---------------------------------------------------General Function------------------------------------------
@@ -650,37 +650,69 @@
 
         // ------------------------Add coma to Price For Add Product Form--------------------------
         $("#unitPrice").on('input', function () {
-            if ($("#unitPrice").val() === '') {
-                $("#BsalePrice").text('---');
-                $("#SsalePrice").text('---');
-                $("#discount").val('');
+            let discount = $("#currentDiscount").val(),
+                unitPrice = $(this).val(),
+                temp1;
+
+            if ($('#addProductPage').length > 0) {
+                if ($("#unitPrice").val() === '') {
+                    $("#BsalePrice").text('---');
+                    $("#SsalePrice").text('---');
+                    $("#discount").val('');
+                }
             }
-            let x = $(this).val();
-            let temp1;
-            $(this).val(x.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // add coma
-            temp1 = x.replace(new RegExp(',', 'g'), ""); // remove coma
+
+            $(this).val(unitPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // add coma
+            temp1 = unitPrice.replace(new RegExp(',', 'g'), ""); // remove coma
             temp1 = parseInt(temp1);
             $("#tempPrice").val(temp1);
+
+            if (!$('#addProductPage').length > 0) {
+                if (temp1 >= 10000) {
+                    let calc = salePrice(discount, temp1);
+                    $('#finalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                } else
+                    $('#finalPrice').text('---');
+            }
+
             $("#discount").val('');
             $("#BsalePrice").text('...');
         });
 
+        $("#newDiscount").on('input', function () {
+            let discount = $(this).val(),
+                currentPrice = $("#currentPrice").val(),
+                temp1;
+
+            temp1 = parseInt(currentPrice.replace(new RegExp(',', 'g'), "")); // remove coma
+            if ($(this).val() >= 1 && $(this).val() <= 99) {
+                let calc = salePrice(discount, temp1);
+                $('#newFinalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+            } else
+                $('#newFinalPrice').text('---');
+        });
+
+        function salePrice(discount, unitPrice) {
+            return unitPrice - ((unitPrice * discount) / 100);
+        }
+
         // -------------------Calculate UintPrice Discount And Show in salePrice-----------------
         $("#discount").on('input', function () {
-            let x = $(this).val();
-            let y = $("#tempPrice").val();
-            if (y !== 0) {
-                let calc;
-                calc = y - ((y * x) / 100);
+            let discount = $(this).val(),
+                unitPrice = $('#tempPrice').val();
+
+            if (unitPrice >= 10000) {
+                let calc = salePrice(discount, unitPrice);
                 $("#BsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#SsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
             } else {
-                $("#BsalePrice").text('قیمت پایه ذکر شود.');
+                $("#BsalePrice").text('قیمت پایه باید بیشتر از 10000 تومان باشد.');
                 $("#SsalePrice").text('!!!');
                 $("#discount").val('');
             }
-            if (x === 0)
+            if (discount === 0)
                 $("#BsalePrice").text('---');
+            salePrice($(this).val(), $("#tempPrice").val());
         });
 
         // ---------------------------------- Add Image Success Icon ----------------------------
@@ -739,7 +771,7 @@
 
         // ------------------------------End Seller Delete And False Product---------------------------------------
 
-        if($('#addProductPage').length>0){
+        if ($('#addProductPage').length > 0) {
             let today = new Date(),
                 year = today.getFullYear(),
                 month = today.getMonth() + 1,
@@ -747,7 +779,7 @@
                 currentHours = today.getHours(),
                 currentMinutes = today.getMinutes(),
                 currentSeconds = today.getSeconds(),
-                folderName='p-'+year+'.'+month+'.'+day+'-'+currentHours+'.'+currentMinutes+'.'+currentSeconds;
+                folderName = 'p-' + year + '.' + month + '.' + day + '-' + currentHours + '.' + currentMinutes + '.' + currentSeconds;
             $('#folderName').val(folderName);
             $('#folderName2').val(folderName);
             // console.log($('#folderName').val());
@@ -760,7 +792,7 @@
         $(document).on('ready', function () {
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
-                cropper, inputID;
+                cropper, inputID, inputIdFinshed = [], counter = 0;
             $('input[id^="pic"]').on('change', function (event) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
                 $('#fileShow' + inputID).removeClass('g-color-red');
@@ -782,12 +814,11 @@
             $modal.on('shown.bs.modal', function () {
                 cropper = new Cropper(image, {
                     aspectRatio: 1,
-                    viewMode: 0,
+                    viewMode: 2,
                     zoomable: true,
                     background: true,
                     minCropBoxWidth: 1000,
                     minCropBoxHeight: 1000,
-                    // cropBoxResizable: false,
                     dragCrop: true,
                     dragMode: 'move',
                     multiple: true,
@@ -809,8 +840,8 @@
 
             $('#crop').on('click', function () {
                 let canvas = cropper.getCroppedCanvas({
-                    width: 1000,
-                    height: 1000
+                    width: 400,
+                    height: 400
                 });
 
                 canvas.toBlob(function (blob) {
@@ -830,9 +861,9 @@
             });
 
             $('#imageUploadForm').on('submit', (function (e) {
-                $('#uploadingIcon'+inputID).removeClass('d-none');
-                $('#uploadingText'+inputID).removeClass('d-none');
-                $('#fileShow'+inputID).addClass('d-none');
+                $('#uploadingIcon' + inputID).removeClass('d-none');
+                $('#uploadingText' + inputID).removeClass('d-none');
+                $('#fileShow' + inputID).addClass('d-none');
                 e.preventDefault();
                 let formData = new FormData(this);
                 $.ajax({
@@ -843,11 +874,16 @@
                     contentType: false,
                     processData: false,
                     success: function (data) {
-                        $('#uploadingIcon'+inputID).addClass('d-none');
-                        $('#uploadingText'+inputID).addClass('d-none');
-                        $('#fileShow'+inputID).removeClass('d-none');
+                        inputIdFinshed[counter] = data;
+                        counter++;
                         console.log("success");
                         console.log(data);
+                    }
+                }).done(function () {
+                    for (let i = 0; i < inputIdFinshed.length; i++) {
+                        $('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');
+                        $('#uploadingText' + inputIdFinshed[i]).addClass('d-none');
+                        $('#fileShow' + inputIdFinshed[i]).removeClass('d-none');
                     }
                 });
             }));
@@ -861,8 +897,8 @@
             if (window.matchMedia('screen and (min-width:900px)').matches) {
                 $('#removeWhenBD').remove();
             } else {
-                if($('#mobile').length>0)
-                    $('#mobile').attr('pattern','\d*');
+                if ($('#mobile').length > 0)
+                    $('#mobile').attr('pattern', '\d*');
             }
 
             // Product Table Events Success Message

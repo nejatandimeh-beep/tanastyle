@@ -31,7 +31,7 @@
                                         <div class="js-slide">
                                             <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
                                                 <img class="img-fluid w-100"
-                                                     src="{{ $row->PicPath.$row->PicNumber.'.jpg' }}"
+                                                     src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
                                                      alt="Image Description">
                                             </a>
                                         </div>

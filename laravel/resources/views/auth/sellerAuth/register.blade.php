@@ -821,12 +821,11 @@
         $modal.on('shown.bs.modal', function () {
             cropper = new Cropper(image, {
                 aspectRatio: 1,
-                viewMode: 0,
+                viewMode: 2,
                 zoomable: true,
                 background: true,
-                minCropBoxWidth: 400,
-                minCropBoxHeight: 400,
-                // cropBoxResizable: false,
+                minCropBoxWidth: 300,
+                minCropBoxHeight: 300,
                 dragCrop: true,
                 dragMode: 'move',
                 multiple: true,
@@ -842,8 +841,8 @@
 
         $('#crop').on('click', function () {
             let canvas = cropper.getCroppedCanvas({
-                width: 400,
-                height: 400
+                width: 300,
+                height: 300
             });
 
             canvas.toBlob(function (blob) {
@@ -881,7 +880,7 @@
                     console.log(data);
                 }
             }).done(function () {
-                for (let i=0; i<inputIdFinshed.length; i++){
+                for (let i=0; i<=inputIdFinshed.length; i++){
                     $('#uploadingIcon'+inputIdFinshed[i]).addClass('d-none');
                     $('#uploadingText'+inputIdFinshed[i]).addClass('d-none');
                     $('#fileShow'+inputIdFinshed[i]).removeClass('d-none');

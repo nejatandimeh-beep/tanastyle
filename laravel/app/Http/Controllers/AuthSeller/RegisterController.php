@@ -90,6 +90,7 @@ class RegisterController extends Controller
         $image_base64 = base64_decode($image_parts[1]);
         $imageFullPath = $path . '/pic' . $imgNumber . '.jpg';
         file_put_contents($imageFullPath, $image_base64);
+
         return $imgNumber;
     }
 

@@ -63,7 +63,7 @@
                                 <td class="align-middle text-center text-nowrap">
                                     <div class="media">
                                         <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ $rec->PicPath }}pic1.jpg" alt="">
+                                             src="{{ $rec->PicPath }}sample1.png" alt="">
                                     </div>
                                 </td>
                                 @if ($deliveryStatus[$key] > 540)

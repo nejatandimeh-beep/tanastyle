@@ -6,6 +6,7 @@
 @include('Layouts.BaseJsFunction')
 
 @yield('BaseCssLink')
+</head>
 @yield('SellerNavigation')
 @yield('Content')
 @yield('SellerFooter')
@@ -21,8 +22,8 @@
     <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
     <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.js') }}"></script>
     <script src="{{ asset('assets/js/components/hs.progress-bar.js') }}"></script>
+    @break
     @case('/Seller-productDelivery')
-    @default
     <script src="{{ asset('assets/js/components/hs.progress-bar.js') }}"></script>
     @break
 @endswitch

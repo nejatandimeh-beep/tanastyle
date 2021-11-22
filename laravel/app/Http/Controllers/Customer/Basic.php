@@ -341,7 +341,7 @@ class Basic extends Controller
 
         // Get data after Database update
         $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.PicNumber')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('product_detail as pd', function ($join) {
@@ -352,7 +352,7 @@ class Basic extends Controller
             ->get();
 
         $delivery = DB::table('product_delivery as delivery')
-            ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'pd.PicNumber')
+            ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'pd.SampleNumber')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'delivery.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
@@ -1249,7 +1249,7 @@ class Basic extends Controller
                  <div class="js-slide">
                     <a
                         href="' . route('productDetail', [$row->ProductID, $row->Size, $row->Color]) . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . $row->PicNumber . '.jpg" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . $row->SampleNumber . '.png" alt="Image Description">
                     </a>
                  </div>
             </div>
@@ -1933,19 +1933,19 @@ class Basic extends Controller
 
         //--------------
         try {
-            $token10=$seller->name.' '.$seller->family;
-            $token =$productInfo->ProductID.'/'.$productInfo->productDetailId;
-            $token2 =$orderID.'/'.$orderDetailID;
-            Session::put('token10', $token10);
-            Session::put('token', $token);
-            Session::put('token2', $token2);
+            $token=$seller->name.'~'.$seller->family;
+            $token2 =$productInfo->ProductID.'/'.$productInfo->productDetailId;
+            $token3 =$orderID.'/'.$orderDetailID;
+            Session::put('token10', $token);
+            Session::put('token', $token2);
+            Session::put('token2', $token3);
 
             $api_key = Config::get('kavenegar.apikey');
             $var = new Kavenegar\KavenegarApi($api_key);
             $template = "factorSmsSeller";
             $type = "sms";
 
-            $result = $var->VerifyLookup($seller->Mobile, $token10, $token,$token2, $template, $type);
+            $result = $var->VerifyLookup($seller->Mobile, $token, $token2,$token3, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();

@@ -163,7 +163,7 @@
                             <span class="h4 g-mr-5">{{$i+1}}</span>
                         </label>
                         {{--سایز--}}
-                        <div class="form-group g-mb-10 text-right col-lg-3">
+                        <div class="form-group g-mb-20 text-right col-lg-3">
                             <label class="g-mb-10">سایز</label>
                             <div class="input-group g-brd-primary--focus g-mb-10">
                                 <button style="outline: 0; cursor: pointer" type="button"
@@ -2515,7 +2515,7 @@
                         </div>
 
                         {{--موجودی--}}
-                        <div class="form-group g-mb-0 text-right col-lg-3">
+                        <div class="form-group g-mb-20 text-right col-lg-3">
                             <label class="g-mb-10">تعداد موجود</label>
                             <div class="input-group g-brd-primary--focus g-mb-10">
                                 <div
@@ -2595,7 +2595,7 @@
 {{--                           pattern="\d*"--}}
                            onkeypress="$('#lblUnitPrice').removeClass('g-color-red')"
                            value="">
-                    <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">کمترین مقدار 10000 تومان می
+                    <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">کمترین مقدار 10,000 تومان می
                         باشد.</b>
                     <input style="display: none" type="number" name="tempPrice" id="tempPrice"
                            value="">
