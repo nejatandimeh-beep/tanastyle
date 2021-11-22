@@ -650,6 +650,9 @@
 
         // ------------------------Add coma to Price For Add Product Form--------------------------
         $("#unitPrice").on('input', function () {
+            if ($(this).val() === '0')
+                $(this).val('');
+
             let discount = $("#currentDiscount").val(),
                 unitPrice = $(this).val(),
                 temp1;
@@ -672,11 +675,11 @@
                     let calc = salePrice(discount, temp1);
                     $('#finalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#tempFinalPrice').val(calc);
-                    $('#newPriceBtn').prop('disabled',false);
-                } else{
+                    $('#newPriceBtn').prop('disabled', false);
+                } else {
                     $('#finalPrice').text('---');
                     $('#tempFinalPrice').val('');
-                    $('#newPriceBtn').prop('disabled',true);
+                    $('#newPriceBtn').prop('disabled', true);
                 }
             }
 
@@ -685,6 +688,11 @@
         });
 
         $("#newDiscount").on('input', function () {
+            if ($(this).val() === '0'){
+                $(this).val('');
+                return false;
+            }
+
             let discount = $(this).val(),
                 currentPrice = $("#currentPrice").val(),
                 temp1;
@@ -694,11 +702,11 @@
                 let calc = salePrice(discount, temp1);
                 $('#newFinalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $('#tempNewFinalPrice').val(calc);
-                $('#newDiscountBtn').prop('disabled',false);
-            } else{
+                $('#newDiscountBtn').prop('disabled', false);
+            } else {
                 $('#newFinalPrice').text('---');
                 $('#tempNewFinalPrice').val('');
-                $('#newDiscountBtn').prop('disabled',true);
+                $('#newDiscountBtn').prop('disabled', true);
             }
         });
 
@@ -708,6 +716,9 @@
 
         // -------------------Calculate UintPrice Discount And Show in salePrice-----------------
         $("#discount").on('input', function () {
+            if ($(this).val() === '0')
+                $(this).val('');
+
             let discount = $(this).val(),
                 unitPrice = $('#tempPrice').val();
 
@@ -720,7 +731,7 @@
                 $("#SsalePrice").text('!!!');
                 $("#discount").val('');
             }
-            if (discount === 0)
+            if (discount === 0 || discount==='')
                 $("#BsalePrice").text('---');
         });
 
@@ -778,13 +789,13 @@
             });
         }
 
-        function confirmNewPrice(id,unitPrice,finalPrice) {
+        function confirmNewPrice(id, unitPrice, finalPrice) {
             $.confirm({
                 title: 'تغییر قیمت محصول',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        location.href = '/Seller-ChangePrice-Product/' + id+'/'+unitPrice+'/'+finalPrice;
+                        location.href = '/Seller-ChangePrice-Product/' + id + '/' + unitPrice + '/' + finalPrice;
                     },
                     انصراف: function () {
                         $.alert('عملیات تغییر قیمت محصول لغو شد!');
@@ -793,13 +804,13 @@
             });
         }
 
-        function confirmNewDiscount(id,discount,finalPrice) {
+        function confirmNewDiscount(id, discount, finalPrice) {
             $.confirm({
                 title: 'تغییر قیمت محصول',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        location.href = '/Seller-ChangeDiscount-Product/' + id+'/'+discount+'/'+finalPrice;
+                        location.href = '/Seller-ChangeDiscount-Product/' + id + '/' + discount + '/' + finalPrice;
                     },
                     انصراف: function () {
                         $.alert('عملیات تغییر قیمت محصول لغو شد!');
