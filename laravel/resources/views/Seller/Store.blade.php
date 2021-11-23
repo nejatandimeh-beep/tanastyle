@@ -208,12 +208,12 @@
                                     <div class="form-group g-mb-10 text-right col-lg-6 mx-auto">
                                         <div class="input-group g-brd-primary--focus g-mb-10">
                                             <input style="direction: rtl"
-                                                   class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16"
+                                                   class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 pl-0 text-right g-font-size-16"
                                                    type="text" name="productSearch" id="storeProduct_search"
                                                    placeholder="{{ (!isset($valName)) ? 'همه' : $valName }}"
                                                    value="">
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0 w-50">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0 w-50">
                                                 براساس نام
                                             </div>
                                         </div>
@@ -224,7 +224,7 @@
                                     <div class="form-group g-mb-10 text-right col-lg-6 mx-auto">
                                         <div class="input-group g-brd-primary--focus g-mb-10">
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
+                                                class="form-control form-control-md g-color-gray-dark-v3 custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
                                                 name="brand"
                                                 tabindex="2"
                                                 id="storeGender">
@@ -238,7 +238,7 @@
                                                 <option value="5" {{ (isset($val) && $val == 5) ? 'selected' : '' }}>نوزادی پسرانه</option>
                                             </select>
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0 w-50">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0 w-50">
                                                 براساس جنسیت
                                             </div>
                                         </div>
@@ -259,7 +259,7 @@
                                             <input class="d-none" type="number" id="MinPriceTemp">
 
                                             <input
-                                                class="form-control form-control-md rounded-0 text-center g-font-size-16 g-color-gray-light-v1"
+                                                class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 text-center g-font-size-16 g-color-gray-light-v1"
                                                 type="text"
                                                 id="storeMaxPriceBD"
                                                 placeholder="{{ (!isset($valMax)) ? 'بیش ترین' : $valMax }}"
@@ -267,11 +267,11 @@
                                                 oninput="filterPriceCheck('storeMinPriceBD', 'storeMaxPriceBD', 'filterPriceBtnBD')"
                                                 value="{{ (!isset($valMax)) ? '' : number_format($valMax) }}">
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 تا
                                             </div>
                                             <input
-                                                class="form-control form-control-md rounded-0 text-center g-font-size-16 g-color-gray-light-v1"
+                                                class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 text-center g-font-size-16 g-color-gray-light-v1"
                                                 type="text"
                                                 id="storeMinPriceBD"
                                                 placeholder="{{ (!isset($valMin)) ? 'کم ترین' : $valMin }}"
@@ -279,11 +279,11 @@
                                                 oninput="filterPriceCheck('storeMinPriceBD', 'storeMaxPriceBD', 'filterPriceBtnBD')"
                                                 value="{{ (!isset($valMin)) ? '' : number_format($valMin) }}">
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 از
                                             </div>
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 قیمت پایه
                                             </div>
                                         </div>
@@ -299,7 +299,7 @@
                                         </div>
                                         <div class="input-group g-brd-primary--focus g-mb-5">
                                             <input style="direction: rtl"
-                                                   class="form-control form-control-md rounded-0 text-left g-font-size-16 g-color-gray-light-v1"
+                                                   class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 text-left g-font-size-16 g-color-gray-light-v1"
                                                    type="text"
                                                    id="storeMinPriceSD"
                                                    placeholder="{{ (!isset($valMin)) ? 'کم ترین' : $valMin }}"
@@ -313,7 +313,7 @@
                                         </div>
                                         <div class="input-group g-brd-primary--focus g-mb-5">
                                             <input style="direction: rtl"
-                                                   class="form-control form-control-md rounded-0 text-left g-font-size-16 g-color-gray-light-v1"
+                                                   class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 text-left g-font-size-16 g-color-gray-light-v1"
                                                    type="text"
                                                    id="storeMaxPriceSD"
                                                    placeholder="{{ (!isset($valMax)) ? 'بیش ترین' : $valMax }}"
@@ -347,19 +347,14 @@
                                                    type="radio" id="false" onclick="trueInfo('storeInfoStatus')"
                                                 {{ (isset($valStatus)) ? (($valStatus == 'مشخصات اشتباه') ? ' checked=""' : '') : '' }}>
                                             <span
-                                                class="btn btn-lg btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">اشتباه</span>
+                                                class="btn btn-lg btn-block u-btn-outline-lightgray g-font-size-16 g-color-white--checked g-bg-primary--checked rounded-0">مشخصات اشتباه</span>
                                         </label>
                                         <label class="u-check m-0">
                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="mistak"
                                                    type="radio" id="true" onclick="trueInfo('storeInfoStatus')"
                                                 {{ (isset($valStatus)) ? (($valStatus == 'مشخصات صحیح') ? ' checked=""' : '') : '' }}>
                                             <span
-                                                class="btn btn-lg btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">صحیح</span>
-                                        </label>
-                                        <label
-                                            class="g-brd-around g-brd-gray-light-v4 rounded-0 g-brd-left-none m-0 text-center bigDevice">
-                            <span
-                                class="g-color-gray-light-v1">مشخصات</span>
+                                                class="btn btn-lg btn-block u-btn-outline-lightgray g-font-size-16 g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">مشخصات صحیح</span>
                                         </label>
                                     </div>
 

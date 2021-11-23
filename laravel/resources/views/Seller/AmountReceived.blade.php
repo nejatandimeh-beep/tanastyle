@@ -95,7 +95,7 @@
                                         <div class="input-group g-brd-primary--focus g-mb-0">
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
                                                 id="startYearBD"
                                                 tabindex="5">
                                                 <option
@@ -104,7 +104,7 @@
                                             </select>
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="startMonBD"
                                                 tabindex="4">
                                                 <option
@@ -124,7 +124,7 @@
                                             </select>
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="startDayBD"
                                                 tabindex="3">
                                                 <option
@@ -163,11 +163,11 @@
                                             </select>
 
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 از
                                             </div>
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 محدوده تاریخ واریز
                                             </div>
                                         </div>
@@ -189,7 +189,7 @@
                                                 از نو
                                             </button>
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="endYearBD"
                                                 tabindex="8">
                                                 <option
@@ -198,7 +198,7 @@
                                             </select>
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="endMonBD"
                                                 tabindex="7">
                                                 <option
@@ -218,7 +218,7 @@
                                             </select>
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="endDayBD"
                                                 tabindex="6">
                                                 <option
@@ -257,7 +257,7 @@
                                             </select>
 
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 تا
                                             </div>
                                         </div>
@@ -267,13 +267,13 @@
                                         <div
                                             class="g-brd-around g-brd-gray-light-v2 rounded-0 g-pt-6 text-center g-mb-5">
                                             <label style="direction: rtl"
-                                                   class="g-color-gray-light-v1 align-self-center">محدوده تاریخ
+                                                   class="g-color-gray-dark-v3 align-self-center">محدوده تاریخ
                                                 واریز</label>
                                         </div>
                                         <div class="input-group g-brd-primary--focus g-mb-5">
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
                                                 id="startYearSD"
                                                 tabindex="5">
                                                 <option
@@ -282,7 +282,7 @@
                                             </select>
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="startMonSD"
                                                 tabindex="4">
                                                 <option
@@ -302,7 +302,7 @@
                                             </select>
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="startDaySD"
                                                 tabindex="3">
                                                 <option
@@ -341,14 +341,14 @@
                                             </select>
 
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 از
                                             </div>
                                         </div>
                                         <div class="input-group g-brd-primary--focus g-mb-5">
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-color-gray-light-v1"
                                                 id="endYearSD"
                                                 tabindex="8">
                                                 <option
@@ -357,7 +357,7 @@
                                             </select>
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="endMonSD"
                                                 tabindex="7">
                                                 <option
@@ -377,7 +377,7 @@
                                             </select>
 
                                             <select
-                                                class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
+                                                class="form-control form-control-md custom-select g-color-gray-dark-v3 rounded-0 h-25 g-font-size-16 g-brd-left-none g-color-gray-light-v1"
                                                 id="endDaySD"
                                                 tabindex="6">
                                                 <option
@@ -416,7 +416,7 @@
                                             </select>
 
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 تا
                                             </div>
                                         </div>
@@ -448,7 +448,7 @@
                                                    placeholder="{{ (!isset($valCode)) ? 'همه' : $valCode }}"
                                                    value="">
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0 w-50">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0 w-50">
                                                 براساس کد تراکنش
                                             </div>
                                         </div>
@@ -479,7 +479,7 @@
                                                 oninput="filterPriceCheck('amountMinPriceBD', 'amountMaxPriceBD', 'filterPriceBtnBD')"
                                                 value="{{ (!isset($valMax)) ? '' : number_format($valMax) }}">
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 تا
                                             </div>
                                             <input
@@ -492,11 +492,11 @@
                                                 oninput="filterPriceCheck('amountMinPriceBD', 'amountMaxPriceBD', 'filterPriceBtnBD')"
                                                 value="{{ (!isset($valMin)) ? '' : number_format($valMin) }}">
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 از
                                             </div>
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 مبلغ واریز
                                             </div>
                                         </div>
@@ -507,7 +507,7 @@
                                         <div
                                             class="g-brd-around g-brd-gray-light-v2 rounded-0 g-pt-6 text-center g-mb-5">
                                             <label style="direction: rtl"
-                                                   class="g-color-gray-light-v1 align-self-center">مبلغ واریز
+                                                   class="g-color-gray-dark-v3 align-self-center">مبلغ واریز
                                                 تومان</label>
                                         </div>
                                         <div class="input-group g-brd-primary--focus g-mb-5">
@@ -520,7 +520,7 @@
                                                    oninput="filterPriceCheck('saleMinPriceSD', 'saleMaxPriceSD', 'filterPriceBtnSD')"
                                                    value="{{ (!isset($valMin)) ? '' : number_format($valMin) }}">
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 از
                                             </div>
                                         </div>
@@ -534,7 +534,7 @@
                                                    oninput="filterPriceCheck('amountMinPriceSD', 'amountMaxPriceSD', 'filterPriceBtnSD')"
                                                    value="{{ (!isset($valMax)) ? '' : number_format($valMax) }}">
                                             <div
-                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0">
                                                 تا
                                             </div>
                                         </div>

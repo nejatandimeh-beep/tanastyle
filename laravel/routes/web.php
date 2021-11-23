@@ -101,11 +101,13 @@ Route::get('/Seller-Delete-Product/{id}', 'Seller\Basic@deleteProduct');
 // False Product
 Route::get('/Seller-False-Product/{id}', 'Seller\Basic@falseProduct');
 
-// Change Price Product
+// Change Price Products
 Route::get('/Seller-ChangePrice-Product/{id}/{unitPrice}/{finalPrice}', 'Seller\Basic@changePriceProduct');
 
 // Change Discount Product
 Route::get('/Seller-ChangeDiscount-Product/{id}/{discount}/{finalPrice}', 'Seller\Basic@changeDiscountProduct');
+
+Route::post('/Seller-checkImg', 'Seller\Basic@checkImg')->name('checkImg');
 
 // Product Detail
 Route::get('/Seller-Product-Detail/{id}', 'Seller\Basic@productDetail')->name('sellerProductDetail');

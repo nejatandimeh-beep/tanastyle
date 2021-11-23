@@ -186,7 +186,7 @@
                                         <label
                                             class="g-brd-around g-brd-gray-light-v4 rounded-0 g-brd-left-none m-0 text-center bigDevice">
                             <span
-                                class="g-color-gray-light-v1">امتیاز محصولات</span>
+                                class="g-color-gray-dark-v3">امتیاز محصولات</span>
                                         </label>
                                     </div>
 

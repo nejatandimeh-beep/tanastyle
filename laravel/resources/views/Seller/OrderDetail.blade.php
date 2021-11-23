@@ -20,10 +20,10 @@
                 {{--                Number--}}
                 <div class="input-group col-lg-6 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         شماره فاکتور
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
@@ -33,15 +33,15 @@
                 {{--                Date--}}
                 <div class="input-group col-lg-6 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
-                        تاریخ فاکتور
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
+                        زمان فاکتور
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
                            disabled
-                           value="{{ $persianDate[0].'/'.$persianDate[1].'/'.$persianDate[2] }}">
+                           value="{{ substr($data->Time,0,-3).'--'.$persianDate[0].'/'.$persianDate[1].'/'.$persianDate[2]  }}">
                 </div>
             </div>
             {{--Product Info Header--}}
@@ -53,10 +53,10 @@
                 {{--                Name--}}
                 <div class="input-group col-lg-6 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         نام محصول
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
@@ -66,12 +66,12 @@
                 {{--                Gender--}}
                 <div class="input-group col-lg-6 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         جنسیت محصول
                     </div>
                     @if($data->Gender == 0)
                         <input
-                            class="form-control form-control-md g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
+                            class="form-control form-control-md g-color-darkblue g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
                             type="text"
                             tabindex="1"
                             placeholder=""
@@ -79,7 +79,7 @@
                             value="زنانه">
                     @elseif($rec->Gender == 1)
                         <input
-                            class="form-control form-control-md g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
+                            class="form-control form-control-md g-color-darkblue g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
                             type="text"
                             tabindex="1"
                             placeholder=""
@@ -87,7 +87,7 @@
                             value="مردانه">
                     @elseif($rec->Gender == 2)
                         <input
-                            class="form-control form-control-md g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
+                            class="form-control form-control-md g-color-darkblue g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
                             type="text"
                             tabindex="1"
                             placeholder=""
@@ -95,7 +95,7 @@
                             value="بچگانه نوزادی">
                     @elseif($rec->Gender == 3)
                         <input
-                            class="form-control form-control-md g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
+                            class="form-control form-control-md g-color-darkblue g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
                             type="text"
                             tabindex="1"
                             placeholder=""
@@ -103,7 +103,7 @@
                             value="بچگانه دخترانه">
                     @else
                         <input
-                            class="form-control form-control-md g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
+                            class="form-control form-control-md g-color-darkblue g-bg-gray-light-v5 rounded-0 text-center g-font-size-16"
                             type="text"
                             tabindex="1"
                             placeholder=""
@@ -114,10 +114,10 @@
                 {{--                Model--}}
                 <div class="input-group col-lg-6 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         مدل محصول
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
@@ -127,10 +127,10 @@
                 {{--                Brand--}}
                 <div class="input-group col-lg-6 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         برند محصول
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
@@ -140,10 +140,10 @@
                 {{--                Size--}}
                 <div class="input-group col-lg-6 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         سایز محصول
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
@@ -153,10 +153,10 @@
                 {{--                Color--}}
                 <div class="input-group col-lg-6 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         رنگ محصول
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
@@ -166,11 +166,11 @@
                 {{--                Detail--}}
                 <div class="input-group col-lg-12 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         توضیحات
                     </div>
                     <textarea
-                        class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-right g-font-size-16 text-truncate"
+                        class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-right g-font-size-16 text-truncate"
                         type="text"
                         tabindex="1"
                         placeholder=""
@@ -181,78 +181,88 @@
                 {{--                UnitPrice--}}
                 <div class="input-group col-lg-12 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         قیمت پایه
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
                            disabled
                            value="{{ number_format($data->UnitPrice) }}">
                     <span style="border-left: 1px solid #ccc"
-                          class="input-group-addon g-color-gray-light-v1 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
+                          class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
                 </div>
                 {{--                Discount--}}
                 <div class="input-group col-lg-12 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         تخفیف
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
                            disabled
                            value="{{ $data->Discount }}">
                     <span style="border-left: 1px solid #ccc"
-                          class="input-group-addon g-color-gray-light-v1 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">درصد</span>
+                          class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">درصد</span>
                 </div>
                 {{--                FinalPrice--}}
                 <div class="input-group col-lg-12 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         قیمت نهایی
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
                            disabled
                            value="{{ number_format($data->FinalPrice) }}">
                     <span style="border-left: 1px solid #ccc"
-                          class="input-group-addon g-color-gray-light-v1 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
+                          class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
                 </div>
                 {{--                Qty--}}
                 <div class="input-group col-lg-12 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         تعداد خرید
                     </div>
-                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
                            disabled
                            value="{{ $data->Qty }}">
                     <span style="border-left: 1px solid #ccc"
-                          class="input-group-addon g-color-gray-light-v1 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">عدد</span>
+                          class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">عدد</span>
                 </div>
                 {{--                AllPrice--}}
                 <div class="input-group col-lg-12 g-mb-10">
                     <div style="border-right: 1px solid #ccc"
-                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 g-brd-left-none rounded-0 w-50">
+                         class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         مبلغ کل فاکتور
                     </div>
                     <input
-                        class="form-control form-control-md rounded-0 g-bg-primary-opacity-0_3 text-center g-font-size-16"
+                        class="form-control form-control-md g-color-darkblue rounded-0 g-bg-primary-opacity-0_3 text-center g-font-size-16"
                         type="text"
                         tabindex="1"
                         placeholder=""
                         disabled
                         value="{{ number_format($data->FinalPrice * $data->Qty) }}">
                     <span style="border-left: 1px solid #ccc"
-                          class="input-group-addon g-color-gray-light-v1 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
+                          class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
+                </div>
+            </div>
+            <div class="form-group row g-mb-25">
+                <label for="example-text-input" class="col-sm-2 col-form-label">تصاویر</label>
+                <div style="direction: ltr" class="col-sm-10 text-left p-0">
+                    <div class="col-sm-3 g-mb-10">
+                        <img class="img-fluid img-thumbnail g-rounded-1"
+                             src="{{ $data->PicPath.$data->SampleNumber }}.png"
+                             alt="Image Description">
+                    </div>
                 </div>
             </div>
         </form>

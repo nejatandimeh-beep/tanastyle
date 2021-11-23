@@ -270,6 +270,12 @@ class Basic extends Controller
         return view('Seller.Sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate'));
     }
 
+    public function checkImg(Request $request)
+    {
+        $image = $request->file('fileToUpload');
+        dd($image);
+    }
+
 //  Order Detail
     public function orderDetail($addressID, $id)
     {
@@ -280,9 +286,10 @@ class Basic extends Controller
 
         // Get Product Data
         $data = DB::table('product_order_detail as pod')
-            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct')
+            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'po.Time', 'p.*', 'pf.ID as falseProduct','pd.SampleNumber')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
             ->where('pod.ID', $id)
             ->first();
@@ -912,9 +919,10 @@ class Basic extends Controller
             $data = DB::table('product as p')
                 ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color','pd.SampleNumber')
                 ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
-                ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
-                ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
+                ->leftJoin('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID')
                 ->where('p.SellerID', $sellerID)
+                ->groupBy('pd.ID')
                 ->get();
 
             foreach ($data as $d) {
@@ -933,7 +941,6 @@ class Basic extends Controller
                 else
                     $generalInfo['babyBoy'] += $d->Qty;
             }
-
             return $generalInfo;
         }
 
