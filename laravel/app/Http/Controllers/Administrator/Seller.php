@@ -679,15 +679,21 @@ class Seller extends Controller
 
     public function amountPay(Request $request)
     {
-        date_default_timezone_set('Asia/Tehran');
+        $year=$request->get('year');
+        $mon=$request->get('mon');
+        $day=$request->get('day');
+        $date=Verta::getGregorian($year, $mon, $day);
+        $year=$date[0];
+        $mon=$date[1];
+        $day=$date[2];
         $sellerId = $request->get('sellerId');
         DB::table('seller_amount_received')
             ->insert([
                 'SellerID' => $sellerId,
                 'Amount' => $request->get('amount'),
-                'TransactionCode' => $request->get('transactionCode'),
-                'Date' => date('Y-m-d'),
-                'Time' => date('H:i:s'),
+                'TransactionCode' => '---',
+                'Date' => $year.'-'.$mon.'-'.$day,
+                'Time' => $request->get('hour').':'.$request->get('minute').':'.$request->get('second'),
                 'Detail' => $request->get('detail'),
             ]);
 

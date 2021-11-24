@@ -499,9 +499,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-131 u-line-icon-pro g-font-size-25 g-pt-15"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">درآمد فروشنده از تانا استایل</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($amountSum['totalSaleAmount']) }}</span>تومان </span>
@@ -511,9 +508,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-210 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">کل دریافتی های فروشنده</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($amountSum['totalReceivedAmount']) }}</span>تومان </span>
@@ -523,9 +517,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-hotel-restaurant-003 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">زمان آخرین دریافت وجه</h3>
                             @if ($lastPaymentDate === 0)
                                 <span class="u-label g-bg-bluegray g-mb-5">
@@ -545,9 +536,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-178 u-line-icon-pro g-font-size-25 g-mt-5 g-ml-5"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">طلب فروشنده از تانا استایل</h3>
                             <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($amountSum['credit']) }}</span>تومان </span>
@@ -896,19 +884,35 @@
                               enctype='multipart/form-data'>
                             @csrf
                             <input type="hidden" name="sellerId" value="{{$sellerInfo->id}}">
-                            <div style="direction: rtl" class="d-flex g-pa-20 g-mb-10">
+                            <div style="direction: rtl" class="d-flex g-pt-20 g-pb-0 g-px-20">
                                 <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
                                 <span style="border-right: 1px solid lightgrey; width: 30%"
                                       class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">مبلغ پرداختی</span>
                                     <input id="paymentAmount" class="form-control form-control-md rounded-0 text-center"
-                                           type="text" name="amount" oninput="addComa($(this))">
+                                           type="text" name="amount" oninput="addComa($(this))" placeholder="تومان">
                                 </div>
                                 <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
                                 <span style="border-right: 1px solid lightgrey; width: 30%"
-                                      class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">کد تراکنش</span>
-                                    <input class="form-control form-control-md rounded-0 text-center" type="text"
-                                           name="transactionCode">
+                                      class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">تاریخ تراکنش</span>
+                                    <input id="paymentAmount" class="form-control form-control-md g-brd-left-none rounded-0 text-center"
+                                           type="text" name="day" placeholder="روز">
+                                    <input id="paymentAmount" class="form-control form-control-md g-brd-left-none rounded-0 text-center"
+                                           type="text" name="mon" placeholder="ماه">
+                                    <input id="paymentAmount" class="form-control form-control-md rounded-0 text-center"
+                                           type="text" name="year" placeholder="سال">
                                 </div>
+                                <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
+                                <span style="border-right: 1px solid lightgrey; width: 30%"
+                                      class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">ساعت تراکنش</span>
+                                    <input id="paymentAmount" class="form-control form-control-md g-brd-left-none rounded-0 text-center"
+                                           type="text" name="second" placeholder="ثانیه">
+                                    <input id="paymentAmount" class="form-control form-control-md g-brd-left-none rounded-0 text-center"
+                                           type="text" name="minute" placeholder="دقیقه">
+                                    <input id="paymentAmount" class="form-control form-control-md rounded-0 text-center"
+                                           type="text" name="hour" placeholder="ساعت">
+                                </div>
+                            </div>
+                            <div style="direction: rtl" class="d-flex g-pb-20 g-pt-10 g-px-20 g-pb-20 g-mb-10">
                                 <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
                                 <span style="border-right: 1px solid lightgrey; width: 30%"
                                       class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">توضیحات</span>
@@ -936,9 +940,7 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-real-estate-069 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                            </span>
+
                             <h3 class="h6 g-color-white mb-3">فاکتورهای فروش امروز</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $saleSum['todayOrder'] }}</span>عدد </span>
@@ -948,9 +950,7 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-real-estate-069 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                            </span>
+
                             <h3 class="h6 g-color-white mb-3">فاکتورهای فروش در طول یک ماه</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $saleSum['monthOrder'] }}</span>عدد </span>
@@ -960,9 +960,7 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-real-estate-069 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                            </span>
+
                             <h3 class="h6 g-color-white mb-3">تعداد کل فاکتورهای فروش</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $saleSum['allOrder'] }}</span>عدد </span>
@@ -972,9 +970,7 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-008 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                            </span>
+
                             <h3 class="h6 g-color-white mb-3">کل درآمد حاصل از فاکتورهای فروش</h3>
                             <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($saleSum['totalSaleAmount']) }}</span>تومان </span>
@@ -1427,9 +1423,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="et-icon-layers g-font-size-25"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">تعداد کل محصولات موجود در انبار</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $storeSum['allQty'] }}</span>عدد </span>
@@ -1439,9 +1432,6 @@
                         <!-- Icon Blocks -->
                         <div style="direction: rtl"
                              class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-160 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">تعداد محصولات به تفکیک جنسیت</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">زنانه<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $storeSum['female'] }}</span>عدد</span>
@@ -1461,9 +1451,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-150 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">ارزش کل محصولات موجود در انبار</h3>
                             <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($storeSum['sumFPrice']) }}</span>تومان </span>

@@ -164,9 +164,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-real-estate-069 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">فاکتورهای فروش امروز</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $saleSum['todayOrder'] }}</span>عدد </span>
@@ -176,9 +173,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-real-estate-069 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">فاکتورهای فروش در طول یک ماه</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $saleSum['monthOrder'] }}</span>عدد </span>
@@ -188,9 +182,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-real-estate-069 u-line-icon-pro g-font-size-25 g-pt-10"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">تعداد کل فاکتورهای فروش</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $saleSum['allOrder'] }}</span>عدد </span>
@@ -200,9 +191,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-008 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">کل درآمد حاصل از فاکتورهای فروش</h3>
                             <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($saleSum['totalSaleAmount']) }}</span>تومان </span>
@@ -654,9 +642,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="et-icon-layers g-font-size-25"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">تعداد کل محصولات موجود در انبار</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $storeSum['allQty'] }}</span>عدد </span>
@@ -666,9 +651,6 @@
                         <!-- Icon Blocks -->
                         <div style="direction: rtl"
                              class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-160 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">تعداد محصولات به تفکیک جنسیت</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">زنانه<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ $storeSum['female'] }}</span>عدد</span>
@@ -688,9 +670,6 @@
                         <!-- Icon Blocks -->
                         <div
                             class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                            <span class="u-icon-v2 g-color-teal rounded-circle g-mb-20">
-                                <i class="icon-finance-150 u-line-icon-pro g-font-size-25 g-mt-5"></i>
-                            </span>
                             <h3 class="h6 g-color-white mb-3">ارزش کل محصولات موجود در انبار</h3>
                             <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($storeSum['sumFPrice']) }}</span>تومان </span>

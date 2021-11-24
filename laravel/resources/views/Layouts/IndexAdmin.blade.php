@@ -6,6 +6,7 @@
 @include('Layouts.AdminJsFunctions')
 
 @yield('BaseCssLink')
+</head>
 @yield('AdminNavigation')
 @yield('Content')
 @yield('AdminFooter')
