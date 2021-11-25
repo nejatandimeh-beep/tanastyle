@@ -114,6 +114,78 @@
         let loader = '<div id="load" class="load"></div>';
         $('body').prepend(loader);
     }
+
+
+    $(document).on('ready',function () {
+        if($('#password').length>0){
+            let myInput=$('#password'),
+                letter = $("#lowercase"),
+                capital = $("#uppercase"),
+                number = $("#number"),
+                length = $("#length");
+
+            myInput.on('keyup',function() {
+                // Validate lowercase letters
+                let lowerCaseLetters = /[a-z]/g;
+                if(myInput.val().match(lowerCaseLetters)) {
+                    letter.removeClass("g-bg-red");
+                    letter.addClass("g-bg-primary");
+                } else {
+                    letter.removeClass("g-bg-primary");
+                    letter.addClass("g-bg-red");
+                }
+
+                // Validate capital letters
+                let upperCaseLetters = /[A-Z]/g;
+                if(myInput.val().match(upperCaseLetters)) {
+                    capital.removeClass("g-bg-red");
+                    capital.addClass("g-bg-primary");
+                } else {
+                    capital.removeClass("g-bg-primary");
+                    capital.addClass("g-bg-red");
+                }
+
+                // Validate numbers
+                let numbers = /[0-9]/g;
+                if(myInput.val().match(numbers)) {
+                    number.removeClass("g-bg-red");
+                    number.addClass("g-bg-primary");
+                } else {
+                    number.removeClass("g-bg-primary");
+                    number.addClass("g-bg-red");
+                }
+
+                // Validate length
+                if(myInput.val().length >= 8) {
+                    length.removeClass("g-bg-red");
+                    length.addClass("g-bg-primary");
+                } else {
+                    length.removeClass("g-bg-primary");
+                    length.addClass("g-bg-red");
+                }
+            });
+        }
+    });
+
+
+    function checkPass() {
+        let myInput=$('#password'),
+            letter = $("#lowercase"),
+            capital = $("#uppercase"),
+            number = $("#number"),
+            length = $("#length");
+
+        if (letter.hasClass('g-bg-red')||capital.hasClass('g-bg-red')||number.hasClass('g-bg-red')||length.hasClass('g-bg-red')) {
+            alert('لطفا قواعد رمزگذاری را رعایت کنید.');
+        } else {
+            if(myInput.val() === $('#password-confirm').val()) {
+                loaderShow();
+                $('form').submit();
+            } else {
+                alert('رمز و تکرار رمز یکسان نیستند.')
+            }
+        }
+    }
 </script>
 </html>
 

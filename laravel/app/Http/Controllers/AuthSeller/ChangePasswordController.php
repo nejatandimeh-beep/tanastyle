@@ -43,7 +43,7 @@ class ChangePasswordController extends Controller
         $request->validate([
             'current_password' => ['required', new MatchOldPasswordForSeller],
             'new_password' => ['required'],
-            'new_confirm_password' => ['same:new_password'],
+            'password-confirm' => ['same:new_password'],
         ]);
         Seller::find(Auth::guard('seller')->user()->id)->update(['password'=> Hash::make($request->new_password)]);
 

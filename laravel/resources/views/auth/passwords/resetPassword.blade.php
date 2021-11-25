@@ -20,10 +20,10 @@
                                            type="password"
                                            class="form-control @error('password') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
                                            name="password"
-                                           placeholder="الزاما 8 کاراکتر به بالا"
+                                           placeholder="انگلیسی"
                                            value="{{ old('password') }}"
-                                           required=""
-                                           autocomplete="current-password">
+                                           required
+                                           autocomplete="off">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -44,15 +44,22 @@
                                            class="form-control input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
                                            name="password_confirmation"
                                            required
-                                           autocomplete="new-password">
+                                           autocomplete="off">
                                 </div>
+                            </div>
+
+                            <div id="passwordHint" class="d-flex flex-column justify-content-start d-lg-block col-lg-10 col-12 pl-1 pr-0">
+                                <span id="length" class="u-label g-bg-red g-mb-5">بیشتر از 8 کاراکتر</span>
+                                <span id="number" class="u-label g-bg-red g-mb-5">اعداد</span>
+                                <span id="uppercase" class="u-label g-bg-red g-mb-5">حروف بزرگ</span>
+                                <span id="lowercase" class="u-label g-bg-red g-mb-5">حروف کوچک</span>
                             </div>
 
                             <input type="hidden" value="{{Session::get('mobile')}}" name="mobile">
 
                             <div class="form-group row g-mb-60--lg g-mt-20">
                                 <div class="col-md-10 text-left">
-                                    <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16">
+                                    <button type="button" class="force-col-12 btn u-btn-primary rounded-0 g-font-size-16" onclick="checkPass()">
                                         ثبت رمز جدید
                                     </button>
                                 </div>
