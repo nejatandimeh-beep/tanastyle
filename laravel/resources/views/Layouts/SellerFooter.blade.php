@@ -88,8 +88,8 @@
 
         <!-- Copyright -->
         <div class="container">
-            <small class="g-font-size-default">تمامی حقوق این وب سایت متعلق به تانا استایل است.
-                <a class="g-color-primary" href="#">قوانین</a></small>
+            <small class="g-font-size-default">تمامی حقوق این وب سایت متعلق به شرکت تابش پس زمینه مکریان است.
+                <span class="g-color-gray-dark-v5">1399</span></small>
         </div>
         <!-- End Copyright -->
     </footer>

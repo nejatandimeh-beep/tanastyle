@@ -39,6 +39,7 @@
 </head>
 <body>
 <div id="load" class="load"></div>
+<div id="currentPage" class="d-none">{{$_SERVER['REQUEST_URI']}}</div>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container text-right g-py-5">
@@ -61,7 +62,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto p-0" style="direction: rtl">
                     <li class="nav-item">
-                        <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{ url('/') }}">صفحه
+                        <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" id="homePage" href="{{ url('/') }}">صفحه
                             نخست</a>
                     </li>
 
@@ -164,6 +165,10 @@
                     length.addClass("g-bg-red");
                 }
             });
+        }
+        //-------------------------
+        if($('#currentPage').text()==='/change-seller-password'){
+            $('#homePage').hide();
         }
     });
 

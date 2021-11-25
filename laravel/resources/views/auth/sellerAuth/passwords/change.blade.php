@@ -16,10 +16,10 @@
                             @endforeach
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-left">پسورد جاری</label>
+                                <label for="current_password" class="col-md-4 col-form-label text-md-left">پسورد جاری</label>
 
                                 <div class="col-md-6">
-                                    <input id="password" type="password" class="form-control" name="current_password" autocomplete="current-password">
+                                    <input id="current_password" type="password" class="form-control" name="current_password" autocomplete="off">
                                 </div>
                             </div>
 
@@ -56,6 +56,13 @@
                                            required
                                            autocomplete="off">
                                 </div>
+                            </div>
+
+                            <div id="passwordHint" class="d-flex flex-column justify-content-start d-lg-block col-lg-10 col-12 pl-1 pr-0">
+                                <span id="length" class="u-label g-bg-red g-mb-5">بیشتر از 8 کاراکتر</span>
+                                <span id="number" class="u-label g-bg-red g-mb-5">اعداد</span>
+                                <span id="uppercase" class="u-label g-bg-red g-mb-5">حروف بزرگ</span>
+                                <span id="lowercase" class="u-label g-bg-red g-mb-5">حروف کوچک</span>
                             </div>
 
                             <div class="form-group row g-mb-60--lg g-mt-20">
