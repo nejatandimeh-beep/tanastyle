@@ -10,7 +10,7 @@
                     <div class="card-body">
                         <form method="POST" action="{{ route('mobileResetPassword') }}" style="direction: rtl" novalidate>
                             @csrf
-                            <div class="form-group row">
+                            <div class="form-group row g-mb-0">
                                 <label for="password"
                                        class="col-md-4 col-form-label text-right text-md-left g-font-size-16">رمز</label>
 
@@ -20,7 +20,7 @@
                                            type="password"
                                            class="form-control @error('password') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
                                            name="password"
-                                           placeholder="انگلیسی"
+                                           autofocus
                                            value="{{ old('password') }}"
                                            required
                                            autocomplete="off">
@@ -30,6 +30,17 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group row g-mb-0">
+                                <label for="password-confirm" class="col-md-4 col-form-label g-py-1 text-md-left"></label>
+                                <div id="passwordHint"
+                                     class="col-md-6">
+                                    <div id="length" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg g-mt-5 align-top g-py-1 col-2"></div>
+                                    <div id="number" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
+                                    <div id="uppercase" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
+                                    <div id="lowercase" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
                                 </div>
                             </div>
 
@@ -48,11 +59,11 @@
                                 </div>
                             </div>
 
-                            <div id="passwordHint" class="d-flex flex-column justify-content-start d-lg-block col-lg-10 col-12 pl-1 pr-0">
-                                <span id="length" class="u-label g-bg-red g-mb-5">بیشتر از 8 کاراکتر</span>
-                                <span id="number" class="u-label g-bg-red g-mb-5">اعداد</span>
-                                <span id="uppercase" class="u-label g-bg-red g-mb-5">حروف بزرگ</span>
-                                <span id="lowercase" class="u-label g-bg-red g-mb-5">حروف کوچک</span>
+                            <div style="direction: rtl" class="form-group row g-mt-30">
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-left"></label>
+                                <div class="col-lg-6 text-right g-px-15">
+                                    <small class="text-muted g-font-size-12">* رمز عبور باید شامل اعداد، حروف بزرگ، حروف کوچک و بیشتر از 8 کاراکتر باشد.</small>
+                                </div>
                             </div>
 
                             <input type="hidden" value="{{Session::get('mobile')}}" name="mobile">

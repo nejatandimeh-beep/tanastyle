@@ -39,12 +39,11 @@
                     viewMode: 2,
                     zoomable: true,
                     background: true,
-                    minCropBoxWidth: 300,
-                    minCropBoxHeight: 300,
+                    minCropBoxWidth: 1000,
+                    minCropBoxHeight: 1000,
                     dragCrop: true,
                     dragMode: 'move',
-                    multiple: true,
-                    movable: true
+                    movable: true,
                     // preview: '.preview'
                 });
 
@@ -63,8 +62,8 @@
                 $('#crop').hide();
                 $('#waitingCrop').show();
                 let canvas = cropper.getCroppedCanvas({
-                    width: 300,
-                    height: 300
+                    width: 1000,
+                    height: 1000
                 });
 
                 canvas.toBlob(function (blob) {

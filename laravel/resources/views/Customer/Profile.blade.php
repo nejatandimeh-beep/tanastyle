@@ -102,7 +102,7 @@
                                             <label class="customerCropper" for="upload_image" style="cursor: pointer">
                                                 <span class="customLink">تنظیم تصویر حساب کاربری</span>
                                                 <input type="file" name="image" id="upload_image" class="image"
-                                                       style="display: none">
+                                                       style="display: none" accept="image/*">
                                                 <input type="text" id="imageUrl" name="imageUrl"
                                                        style="display: none">
                                             </label>
