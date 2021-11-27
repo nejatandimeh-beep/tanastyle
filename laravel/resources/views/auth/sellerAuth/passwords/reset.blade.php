@@ -19,7 +19,7 @@
 
                             <div class="col-md-6">
 
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ isset($email) ? $email : '' }}" required readonly>
+                                <input id="email" type="email" class="text-left form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ isset($email) ? $email : '' }}" required readonly>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">

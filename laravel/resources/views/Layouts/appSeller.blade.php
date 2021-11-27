@@ -31,7 +31,7 @@
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container text-right g-py-5">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <a class="navbar-brand" href="{{ url('/Seller-Panel') }}">
                 <img src="{{ asset('img/Logo/logo.png') }}" alt="Image Description" width="120" class="">
             </a>
             <button style="border: none !important;" class="navbar-toggler rounded-0" type="button"
@@ -50,7 +50,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto p-0" style="direction: rtl">
                     <li class="nav-item">
-                        <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{ url('/') }}">صفحه
+                        <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{ url('/Seller-Panel') }}">صفحه
                             نخست</a>
                     </li>
                 </ul>
@@ -69,6 +69,79 @@
     jQuery(window).bind('beforeunload', function(){
         $('#load').show();
     });
+
+    $(document).on('ready',function () {
+        if($('#password').length>0){
+            let myInput=$('#password'),
+                letter = $("#lowercase"),
+                capital = $("#uppercase"),
+                number = $("#number"),
+                length = $("#length");
+
+            myInput.on('keyup',function() {
+                // Validate lowercase letters
+                let lowerCaseLetters = /[a-z]/g;
+                if(myInput.val().match(lowerCaseLetters)) {
+                    letter.removeClass("g-bg-red");
+                    letter.addClass("g-bg-primary");
+                } else {
+                    letter.removeClass("g-bg-primary");
+                    letter.addClass("g-bg-red");
+                }
+
+                // Validate capital letters
+                let upperCaseLetters = /[A-Z]/g;
+                if(myInput.val().match(upperCaseLetters)) {
+                    capital.removeClass("g-bg-red");
+                    capital.addClass("g-bg-primary");
+                } else {
+                    capital.removeClass("g-bg-primary");
+                    capital.addClass("g-bg-red");
+                }
+
+                // Validate numbers
+                let numbers = /[0-9]/g;
+                if(myInput.val().match(numbers)) {
+                    number.removeClass("g-bg-red");
+                    number.addClass("g-bg-primary");
+                } else {
+                    number.removeClass("g-bg-primary");
+                    number.addClass("g-bg-red");
+                }
+
+                // Validate length
+                if(myInput.val().length >= 8) {
+                    length.removeClass("g-bg-red");
+                    length.addClass("g-bg-primary");
+                } else {
+                    length.removeClass("g-bg-primary");
+                    length.addClass("g-bg-red");
+                }
+            });
+        }
+    });
+    function loaderShow() {
+        let loader = '<div id="load" class="load"></div>';
+        $('body').prepend(loader);
+    }
+    function checkPass() {
+        let myInput=$('#password'),
+            letter = $("#lowercase"),
+            capital = $("#uppercase"),
+            number = $("#number"),
+            length = $("#length");
+
+        if (letter.hasClass('g-bg-red')||capital.hasClass('g-bg-red')||number.hasClass('g-bg-red')||length.hasClass('g-bg-red')) {
+            alert('لطفا قواعد رمزگذاری را رعایت کنید.');
+        } else {
+            if(myInput.val() === $('#password-confirm').val()) {
+                loaderShow();
+                $('form').submit();
+            } else {
+                alert('رمز و تکرار رمز یکسان نیستند.')
+            }
+        }
+    }
 </script>
 </html>
 

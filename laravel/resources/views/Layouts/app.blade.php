@@ -66,7 +66,7 @@
                             نخست</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li id="sellerProfile" class="nav-item">
                         <a class="{{ (isset(Auth::user()->id)) ? '':'d-none' }} nav-link g-mt-20 g-mt-0--lg g-color-primary--hover"
                            href="{{route('profile', ['id' => 'navigation'])}}">حساب کاربری</a>
                     </li>
@@ -169,6 +169,8 @@
         //-------------------------
         if($('#currentPage').text()==='/change-seller-password'){
             $('#homePage').hide();
+        } else {
+            $('#sellerProfile').hide();
         }
     });
 
