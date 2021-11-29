@@ -422,7 +422,8 @@
                         <thead>
                         <tr>
                             <th class="align-middle text-center focused rtlPosition">کد محصول</th>
-                            <th class="align-middle text-center focused">نام</th>
+                            <th class="align-middle text-center">نام</th>
+                            <th class="align-middle text-center">برند</th>
                             <th class="align-middle text-center">جنسیت</th>
                             <th class="align-middle text-center">سایز</th>
                             <th class="align-middle text-center">رنگ</th>
@@ -442,7 +443,7 @@
                             <tr>
                                 <td class="align-middle text-nowrap text-center">{{ $rec->ID.'/'.$rec->pDetailID }}</td>
                                 <td class="align-middle text-nowrap text-center">{{ $rec->Name }}</td>
-
+                                <td class="align-middle text-center">{{ $row->Brand }}</td>
                                 @if($rec->Gender == 'زنانه')
                                     <td class="align-middle text-center">زنانه</td>
                                 @elseif($rec->Gender == 'مردانه')

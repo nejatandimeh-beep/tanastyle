@@ -1249,7 +1249,7 @@
                                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
                                     <div class="g-pt-10">
                                         <div id="carousel-08-1"
-                                             class="js-carousel text-center g-mb-40"
+                                             class="js-carousel text-center {{file_exists(public_path($row->PicPath.'pic2.jpg')) ? 'g-mb-40':'g-mb-25'}}"
                                              data-infinite="1"
                                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
                                              data-nav-for="#carousel-08-2">
@@ -1373,19 +1373,23 @@
                                     </div>
 
                                     <!-- مشخصات محصول -->
+                                    <h4 class="h6 g-color-black text-left g-brd-top g-brd-gray-light-v4 g-ml-5 g-mt-20 g-pt-20">
+                                        {{$row->Brand}}
+                                    </h4>
+
                                     <div style="direction: rtl"
-                                         class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
+                                         class="media">
                                         <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
                                         <div class="d-flex justify-content-between col-12 p-0">
                                             <div class="d-flex flex-column">
-                                                <h4 class="h6 g-color-black my-1">
+                                                <h1 class="h6 g-color-black my-1">
                                                     <span class="u-link-v5 g-color-black"
                                                           tabindex="0">
                                                         {{ $row->Name }}
                                                         <span
                                                             class="g-font-size-12 g-font-weight-300">{{ $row->Model }}</span>
                                                     </span>
-                                                </h4>
+                                                </h1>
                                                 <ul style="padding: 0"
                                                     class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                                                     <li>
@@ -1395,7 +1399,7 @@
                                                 </ul>
                                             </div>
                                             <a style="cursor: pointer"
-                                               class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
+                                               class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle"
                                                data-toggle="tooltip"
                                                data-placement="top"
                                                href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}"

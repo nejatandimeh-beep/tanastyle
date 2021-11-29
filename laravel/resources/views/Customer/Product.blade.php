@@ -68,6 +68,10 @@
                         </span>
                     @endif
                 </div>
+
+                <h1 id="productName"
+                    class="d-inline-block h5 g-color-black mb-2">{{ $data->Brand }}</h1>
+
                 {{--توضیحات--}}
                 <pre class="g-mb-25 g-font-size-14 g-color-gray-dark-v4" id="productDetail">{{ $data->Detail }}</pre>
 
@@ -754,7 +758,10 @@
                         <!-- مشخصات محصول -->
                         <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
                             <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
-                            <div class="d-flex flex-column">
+                            <div class="d-flex flex-column col-12 g-px-5">
+                                <h1 class="h6 g-color-black my-1 text-left">
+                                    {{$row->Brand}}
+                                </h1>
                                 <h4 class="h6 g-color-black my-1">
                                             <span class="u-link-v5 g-color-black"
                                                   tabindex="0">
@@ -775,7 +782,7 @@
                             </div>
                         </div>
                         <div
-                            class="d-block g-color-black g-font-size-17 g-ml-10">
+                            class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
                                     {{  number_format($row->UnitPrice) }}

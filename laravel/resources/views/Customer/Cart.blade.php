@@ -41,7 +41,10 @@
                                 <!-- مشخصات محصول -->
                                 <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
                                     <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
-                                    <div class="d-flex flex-column">
+                                    <div class="d-flex flex-column g-px-5">
+                                        <h1 class="h6 g-color-black g-mt-5 text-right">
+                                            {{$row->Brand}}
+                                        </h1>
                                         <h4 class="h6 g-color-black my-1">
                                             <span class="u-link-v5 g-color-black"
                                                   tabindex="0">
@@ -80,7 +83,7 @@
                                     </ul>
                                 </div>
                                 <div
-                                    class="d-block g-color-black g-font-size-17 g-ml-10">
+                                    class="d-block g-color-black g-font-size-17 g-ml-5">
                                     <div style="direction: rtl" class="text-left">
                                         <s class="g-color-lightred g-font-weight-500 g-font-size-13">
                                             {{  number_format($row->UnitPrice) }}
@@ -123,6 +126,7 @@
 
                 <div class="{{ isset($data[0]) ? '':'d-none' }} text-left g-ml-10">
                     <button type="button"
+                            id="orderSubmit"
                             class="btn btn-xl btn-primary g-color-white g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 g-ml-0 g-mt-0 g-mt-20--lg force-col-12"
                             data-toggle="modal"
                             onclick="cartOrder($('#cartCount').text())"
@@ -158,6 +162,7 @@
                                                     <th class="text-center">ردیف</th>
                                                     <th class="text-center">کد محصول</th>
                                                     <th class="text-center">نام محصول</th>
+                                                    <th class="text-center">برند</th>
                                                     <th class="text-center">رنگ</th>
                                                     <th class="text-center">سایز</th>
                                                     <th class="text-center">تعداد</th>
@@ -175,44 +180,49 @@
                                                             <span id="rowNumber{{$key}}" class="g-pa-5"></span>
                                                         </td>
                                                         <td class="align-middle text-nowrap text-center">
-                                                <span id="productDetailID{{$key}}" class="g-pa-5">
-                                                    {{ $row->ProductDetailID }}
-                                                </span>
+                                                            <span id="productDetailID{{$key}}" class="g-pa-5">
+                                                                {{ $row->ProductDetailID }}
+                                                            </span>
                                                         </td>
                                                         <td class="align-middle text-center">
-                                                <span class="g-pa-5">
-                                                    {{ $row->Name }}
-                                                </span>
+                                                            <span class="g-pa-5">
+                                                                {{ $row->Name }}
+                                                            </span>
                                                         </td>
                                                         <td class="align-middle text-center">
-                                                <span class="g-pa-5">
-                                                    {{ $row->Color }}
-                                                </span>
+                                                            <span class="g-pa-5">
+                                                                {{ $row->Brand }}
+                                                            </span>
                                                         </td>
                                                         <td class="align-middle text-center">
-                                                <span class="g-pa-5">
-                                                    {{ $row->Size }}
-                                                </span>
+                                                            <span class="g-pa-5">
+                                                                {{ $row->Color }}
+                                                            </span>
+                                                        </td>
+                                                        <td class="align-middle text-center">
+                                                            <span class="g-pa-5">
+                                                                {{ $row->Size }}
+                                                            </span>
                                                         </td>
                                                         <td class="align-middle text-nowrap text-center">
                                                             <span id="orderQty{{$key}}" class="g-pa-5"></span>
                                                         </td>
                                                         <td class="align-middle text-center">
-                                                <span class="g-pa-5">
-                                                    {{ number_format($row->UnitPrice) }}
-                                                </span>
+                                                            <span class="g-pa-5">
+                                                                {{ number_format($row->UnitPrice) }}
+                                                            </span>
                                                         </td>
                                                         <td class="align-middle text-center">
-                                                <span id="productFinalPrice{{$key}}" class="g-pa-5">
-                                                    {{ number_format($row->FinalPrice) }}
-                                                </span>
+                                                            <span id="productFinalPrice{{$key}}" class="g-pa-5">
+                                                                {{ number_format($row->FinalPrice) }}
+                                                            </span>
                                                         </td>
                                                         <td class="align-middle text-center">
-                                            <span class="g-pa-5">
-                                              <img class="g-width-80 g-height-80"
-                                                   src="{{ $row->PicPath.$row->PicNumber }}.jpg"
-                                                   alt="Image Description">
-                                            </span>
+                                                            <span class="g-pa-5">
+                                                              <img class="g-width-80 g-height-80"
+                                                                   src="{{ $row->PicPath.$row->PicNumber }}.jpg"
+                                                                   alt="Image Description">
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 @endforeach

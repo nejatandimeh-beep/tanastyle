@@ -1050,7 +1050,7 @@
                     $('#cartContainer' + key).remove();
                     $('#basketNum').text(parseInt($('#basketNum').text()) - 1);
                     if (data === '0') {
-                        $('#cartBuyBtn').addClass('d-none');
+                        $('#orderSubmit').addClass('d-none');
                         $('#cartEmptyAlert').removeClass('d-none');
                     } else cartReset();
                 }

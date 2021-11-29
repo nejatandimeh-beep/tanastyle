@@ -658,7 +658,7 @@ class Basic extends Controller
             $rating = round($rating / $ratingCount);
 
         $comments = DB::table('customer_comment as cc')
-            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID', 'c.PicPath','c.id')
+            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID', 'c.PicPath', 'c.id')
             ->leftJoin('customers as c', 'cc.CustomerID', '=', 'c.id')
             ->where('cc.ProductID', $id)
             ->get();
@@ -755,13 +755,25 @@ class Basic extends Controller
         $folderName = 'r-' . date("Y.m.d-H.i.s");
         $picPath = public_path('/img/return/') . $folderName;
         File::makeDirectory($picPath, 0777, true, true);
-
-        $request->file('returnPic')->storeAs(
-            $picPath, 'pic' . '.jpg', 'public'
-        );
+        $image = $request->file('returnPic');
+        $source='';
+        switch ($image->getMimeType()) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $source = imagecreatefromjpeg($image);
+                break;
+            case 'image/png':
+                $source = imagecreatefrompng($image);
+                break;
+            case 'image/gif':
+                $source = imagecreatefromgif($image);
+                break;
+        }
+        $imageFullPath = $picPath . '/pic.jpg';
+        imagejpeg($source, $imageFullPath);
 
         // Compilation Pic Path
-        $picPath = $picPath . '\\';
+        $picPath = $picPath . '/';
 
         $poID = $request->get('orderIDFromReturn');
         $podID = $request->get('orderDetailIDFromReturn');
@@ -1129,9 +1141,9 @@ class Basic extends Controller
             }
         }
 
-        $title=$data[0]->Subject;
+        $title = $data[0]->Subject;
 
-        return view('Customer.ConversationDetail', compact('data', 'answerHowDay', 'questionHowDay', 'qPersianDate', 'aPersianDate','title'));
+        return view('Customer.ConversationDetail', compact('data', 'answerHowDay', 'questionHowDay', 'qPersianDate', 'aPersianDate', 'title'));
     }
 
     public function connectionNew(Request $request)
@@ -1209,8 +1221,8 @@ class Basic extends Controller
         $size = json_decode($size);
         $color = json_decode($color);
 
-        if(!isset($size[0]))
-            $size[0]='empty';
+        if (!isset($size[0]))
+            $size[0] = 'empty';
 
         $data = DB::table('product as p')
             ->select('p.*', 'pd.*')
@@ -1218,9 +1230,9 @@ class Basic extends Controller
             ->whereIn('p.GenderCode', $gender)
             ->whereIn('p.CatCode', $cat)
 //            ->whereIn('pd.Size', $size)
-            ->Where(function ($query) use($size) {
+            ->Where(function ($query) use ($size) {
                 for ($i = 0; $i < count($size); $i++) {
-                    $query->orwhere('pd.Size', 'like',  $size[$i] . '%');
+                    $query->orwhere('pd.Size', 'like', $size[$i] . '%');
                 }
             })
             ->whereIn('pd.ColorCode', $color)
@@ -1325,8 +1337,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'all';
-        $title='پوشاک زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'پوشاک زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productFemaleClothesList()
@@ -1337,21 +1349,21 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['a','b','c','d'])
+            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['a','b','c','d'])
+            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
             ->groupBy('p.ID')
             ->paginate(10);
 
         $gender = '0';
         $catCode = 'clothes';
-        $title='لباس زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'لباس زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productFemaleBagsList()
@@ -1375,8 +1387,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'e';
-        $title='کیف زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'کیف زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productFemaleShoesList()
@@ -1400,8 +1412,8 @@ class Basic extends Controller
 
         $gender = '0';
         $catCode = 'f';
-        $title='کفش زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'کفش زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productFemaleSportsList()
@@ -1412,21 +1424,21 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['g','h','i','j','k','l','m'])
+            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['g','h','i','j','k','l','m'])
+            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
             ->groupBy('p.ID')
             ->paginate(10);
 
         $gender = '0';
         $catCode = 'sports';
-        $title='پوشاک ورزشی زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'پوشاک ورزشی زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productFemaleRhinestoneList()
@@ -1437,21 +1449,21 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['n','o','p','q'])
+            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['n','o','p','q'])
+            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
             ->groupBy('p.ID')
             ->paginate(10);
 
         $gender = '0';
         $catCode = 'rhinestone';
-        $title='بدلیجات زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'بدلیجات زنانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productMaleList()
@@ -1473,8 +1485,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'all';
-        $title='پوشاک مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'پوشاک مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productMaleClothesList()
@@ -1485,21 +1497,21 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['a','b','c','d'])
+            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['a','b','c','d'])
+            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
             ->groupBy('p.ID')
             ->paginate(10);
 
         $gender = '1';
         $catCode = 'clothes';
-        $title='لباس مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'لباس مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productMaleBagsList()
@@ -1523,8 +1535,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'e';
-        $title='کیف مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'کیف مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productMaleShoesList()
@@ -1548,8 +1560,8 @@ class Basic extends Controller
 
         $gender = '1';
         $catCode = 'f';
-        $title='کفش مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'کفش مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productMaleSportsList()
@@ -1560,21 +1572,21 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['g','h','i','j','k','l','m'])
+            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['g','h','i','j','k','l','m'])
+            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
             ->groupBy('p.ID')
             ->paginate(10);
 
         $gender = '1';
         $catCode = 'sports';
-        $title='پوشاک ورزشی مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'پوشاک ورزشی مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productMaleRhinestoneList()
@@ -1585,21 +1597,21 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['n','o','p','q'])
+            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['n','o','p','q'])
+            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
             ->groupBy('p.ID')
             ->paginate(10);
 
         $gender = '1';
         $catCode = 'rhinestone';
-        $title='بدلیجات مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'بدلیجات مردانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productGirlList()
@@ -1620,8 +1632,8 @@ class Basic extends Controller
             ->paginate(10);
         $gender = '2';
         $catCode = 'all';
-        $title='پوشاک دخترانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'پوشاک دخترانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productBoyList()
@@ -1642,8 +1654,8 @@ class Basic extends Controller
             ->paginate(10);
         $gender = '3';
         $catCode = 'all';
-        $title='پوشاک پسرانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'پوشاک پسرانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productBabyGirlList()
@@ -1664,8 +1676,8 @@ class Basic extends Controller
             ->paginate(10);
         $gender = '4';
         $catCode = 'all';
-        $title='پوشاک نوزادی دخترانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'پوشاک نوزادی دخترانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productBabyBoyList()
@@ -1686,8 +1698,8 @@ class Basic extends Controller
             ->paginate(10);
         $gender = '5';
         $catCode = 'all';
-        $title='پوشاک نوزادی پسرانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'پوشاک نوزادی پسرانه';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function productSearch($val)
@@ -1733,8 +1745,8 @@ class Basic extends Controller
 
         $gender = 'all';
         $catCode = 'all';
-        $title=$data[0]->Name.' '.$data[0]->Gender;
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = $data[0]->Name . ' ' . $data[0]->Gender;
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
     public function spacialSelling($minDiscount, $maxDiscount)
@@ -1756,11 +1768,11 @@ class Basic extends Controller
 
         $gender = 'all';
         $catCode = 'all';
-        $title='قیمت بین '.$minDiscount.' تا '.$maxDiscount;
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        $title = 'قیمت بین ' . $minDiscount . ' تا ' . $maxDiscount;
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
-    public function product($gender, $cat, $catCode,$title)
+    public function product($gender, $cat, $catCode, $title)
     {
         session_start();
         $_SESSION['listSkip'] = 0;
@@ -1779,7 +1791,7 @@ class Basic extends Controller
             ->groupBy('p.ID')
             ->paginate(10);
 
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size','title'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------
@@ -1832,7 +1844,7 @@ class Basic extends Controller
             ->max('ID');
 
         $productInfo = DB::table('product_detail as pd')
-            ->select('pd.*', 'p.SellerID','p.ID','pd.ID as productDetailId')
+            ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
             ->where('pd.ID', $id)
             ->first();
@@ -1902,16 +1914,16 @@ class Basic extends Controller
             ->where('ProductDetailID', $id)
             ->delete();
 
-        $seller=DB::table('sellers')
-            ->select('id','Mobile','name','family')
-            ->where('id',$productInfo->SellerID)
+        $seller = DB::table('sellers')
+            ->select('id', 'Mobile', 'name', 'family')
+            ->where('id', $productInfo->SellerID)
             ->first();
 
         //--------------
         try {
-            $token =$orderID.'/'.$orderDetailID;
-            $token2='';
-            $token3='';
+            $token = $orderID . '/' . $orderDetailID;
+            $token2 = '';
+            $token3 = '';
             Session::put('token', $token);
 //            Session::put('token2', $token2);
 //            Session::put('token', $token3);
@@ -1921,7 +1933,7 @@ class Basic extends Controller
             $template = "factorSmsCustomer";
             $type = "sms";
 
-            $result = $var->VerifyLookup(Auth::user()->Mobile, $token,$token2,$token3, $template, $type);
+            $result = $var->VerifyLookup(Auth::user()->Mobile, $token, $token2, $token3, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();
@@ -1933,9 +1945,9 @@ class Basic extends Controller
 
         //--------------
         try {
-            $token=$seller->name.'~'.$seller->family;
-            $token2 =$productInfo->ProductID.'/'.$productInfo->productDetailId;
-            $token3 =$orderID.'/'.$orderDetailID;
+            $token = $seller->name . '~' . $seller->family;
+            $token2 = $productInfo->ProductID . '/' . $productInfo->productDetailId;
+            $token3 = $orderID . '/' . $orderDetailID;
             Session::put('token10', $token);
             Session::put('token', $token2);
             Session::put('token2', $token3);
@@ -1945,7 +1957,7 @@ class Basic extends Controller
             $template = "factorSmsSeller";
             $type = "sms";
 
-            $result = $var->VerifyLookup($seller->Mobile, $token, $token2,$token3, $template, $type);
+            $result = $var->VerifyLookup($seller->Mobile, $token, $token2, $token3, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();

@@ -669,6 +669,7 @@
                         <tr>
                             <th class="align-middle text-center focused rtlPosition">کد محصول</th>
                             <th class="align-middle text-center">نام</th>
+                            <th class="align-middle text-center">برند</th>
                             <th class="align-middle text-center">جنسیت</th>
                             <th class="align-middle text-center">تعداد</th>
                             <th class="align-middle text-center text-nowrap">مبلغ فاکتور<span
@@ -687,7 +688,7 @@
                             <tr>
                                 <td class="align-middle text-nowrap text-center text-nowrap">{{ $rec->pDetailID }}</td>
                                 <td class="align-middle text-nowrap text-center text-nowrap">{{ $rec->Name }}</td>
-
+                                <td class="align-middle text-center">{{ $row->Brand }}</td>
                                 @if($rec->Gender == '0')
                                     <td class="align-middle text-center">زنانه</td>
                                 @elseif($rec->Gender == '1')

@@ -43,6 +43,7 @@
                         <thead>
                         <tr>
                             <th class="align-middle text-center text-nowrap focused rtlPosition">نام محصول</th>
+                            <th class="align-middle text-center text-nowrap">برند</th>
                             <th class="align-middle text-center text-nowrap">تاریخ فروش</th>
                             <th class="align-middle text-center text-nowrap">ساعت فروش</th>
                             <th class="align-middle text-center text-nowrap">شماره فاکتور</th>
@@ -57,6 +58,7 @@
                         @foreach($data as $key => $rec)
                             <tr>
                                 <td class="align-middle text-nowrap text-center">{{ $rec->Name }}</td>
+                                <td class="align-middle text-nowrap text-center">{{ $rec->Brand }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->Time }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->ID }}</td>

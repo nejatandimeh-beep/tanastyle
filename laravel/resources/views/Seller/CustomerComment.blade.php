@@ -248,6 +248,7 @@
                         <tr>
                             <th class="align-middle text-center text-nowrap focused rtlPosition">نام مشتری</th>
                             <th class="align-middle text-center text-nowrap">نام محصول</th>
+                            <th class="align-middle text-center text-nowrap">برند</th>
                             <th class="align-middle text-center">عکس</th>
                             <th class="align-middle text-center text-nowrap">علاقه مندی</th>
                             <th class="align-middle text-center">امتیاز</th>
@@ -260,6 +261,7 @@
                             <tr>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->name.' '.$rec->Family }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->productName }}</td>
+                                <td class="align-middle text-center text-nowrap">{{ $rec->Brand}}</td>
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"

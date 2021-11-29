@@ -1275,6 +1275,7 @@
                                         </div>
                                     </div>
                                     <!-- End Date -->
+
                                     <!-- Article Image -->
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}"
@@ -1375,6 +1376,15 @@
                                                             <div
                                                                 class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
                                                                 <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    برند محصول
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
+                                                                    {{ $row->Brand }}
+                                                                </span>
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
                                                                     رنگ
                                                                 </h6>
                                                                 <span class="g-pa-5--lg color-primary-smallDevice">
@@ -1400,7 +1410,7 @@
                                                         </span>
                                                             </div>
                                                             <div
-                                                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
                                                                 <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
                                                                     قیمت واحد
                                                                 </h6>
@@ -1630,6 +1640,9 @@
 
                                     <!-- Article Content -->
                                     <div class="d-md-table-cell align-middle g-px-20--lg g-px-10">
+                                        <h3 class="h6 d-block m-0 g-font-weight-700 ">
+                                            {{$row->Brand}}
+                                        </h3>
                                         <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
                                             <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                             <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-14">{{ $row->Model }}</em>
@@ -1751,6 +1764,9 @@
 
                                     <!-- Article Content -->
                                     <div class="d-md-table-cell align-middle g-px-20--lg g-px-10">
+                                        <h3 class="h6 d-block m-0 g-font-weight-700 ">
+                                            {{$row->Brand}}
+                                        </h3>
                                         <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
                                             <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                             <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
@@ -1811,7 +1827,7 @@
                                                         <div
                                                             style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
                                                             class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->ReturnProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
-                                                            <i class="fa fa-truck g-font-size-17"></i>
+                                                            <i style="transform: scaleX(-1)" class="fa fa-truck g-font-size-17"></i>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -2034,6 +2050,9 @@
                                     <div class="d-md-table-cell align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
                                         <div class="d-flex justify-content-between">
                                             <div class="d-md-table-cell align-middle g-px-20--lg g-px-10">
+                                                <h3 class="h6 d-block m-0 g-font-weight-700 ">
+                                                    {{$row->Brand}}
+                                                </h3>
                                                 <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
                                                     <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                                     <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>

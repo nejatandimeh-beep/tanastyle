@@ -219,28 +219,34 @@
                         <!-- مشخصات محصول -->
                         <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
                             <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
-                            <div class="d-flex flex-column">
+                            <div class="d-flex flex-column col-12 g-px-5">
+                                <h1 class="h6 g-color-black my-1 text-left">
+                                    {{$row->Brand}}
+                                </h1>
                                 <h4 class="h6 g-color-black my-1">
-                                            <span class="u-link-v5 g-color-black"
-                                                  tabindex="0">
-                                                {{ $row->Name }}
-                                                <span
-                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
-                                                <span
-                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
-                                            </span>
+                                    <span class="u-link-v5 g-color-black"
+                                          tabindex="0">
+                                        {{ $row->Name }}
+                                        <span
+                                            class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
+                                        <span
+                                            class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
+                                    </span>
                                 </h4>
                                 <div>
-                                            <span class="g-ml-5">سایز <span
-                                                    class="g-color-primary">{{ $row->Size }}</span></span>
-                                    <span>رنگ <span class="g-color-primary">{{ $row->Color }}</span></span>
+                                    <span class="g-ml-5">سایز
+                                        <span class="g-color-primary">{{ $row->Size }}</span>
+                                    </span>
+                                    <span>رنگ
+                                        <span class="g-color-primary">{{ $row->Color }}</span>
+                                    </span>
                                 </div>
                                 <span>موجودی <span id="{{ 'cartQty'.$key }}"
                                                    class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
                             </div>
                         </div>
                         <div
-                            class="d-block g-color-black g-font-size-17 g-ml-10">
+                            class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
                                     {{  number_format($row->UnitPrice) }}
