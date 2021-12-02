@@ -47,13 +47,13 @@
         }
 
         $('.customTooltip').on('click', function () {
-            let color = $(this).find(">:first").text() + $(this).parent().closest('div').attr('id')[0],
+            let parentID=$(this).parent().closest('div').attr('id').toString(),
+                color = $(this).find(">:first").text() + parentID[0],
                 colorList = [],
                 colorText = color.replace(/\d+/g, ''),
                 id = $(this).parent().closest('div').attr('id').substring(2);
             $('#colorBtn' + id).text(colorText);
             $('#hexCode' + id).attr('value', hexc($(this).css('backgroundColor')));
-            console.log(hexc($(this).css('backgroundColor')));
             $('#color' + id + ' option').val(color);
             $('#colorModal' + id).modal('toggle');
             $('#lblColor' + id).removeClass('g-color-red');
@@ -688,7 +688,7 @@
         });
 
         $("#newDiscount").on('input', function () {
-            if ($(this).val() === '0'){
+            if ($(this).val() === '0') {
                 $(this).val('');
                 return false;
             }
@@ -731,7 +731,7 @@
                 $("#SsalePrice").text('!!!');
                 $("#discount").val('');
             }
-            if (discount === 0 || discount==='')
+            if (discount === 0 || discount === '')
                 $("#BsalePrice").text('---');
         });
 
@@ -820,8 +820,12 @@
         }
 
         // ------------------------------End Seller Delete And False Product---------------------------------------
+        // Auto Focus in Modal Window
+        $('.modal').on('shown.bs.modal', function () {
+            $(this).find('[autofocus]').focus();
+        });
 
-        if ($('#addProductPage').length > 0) {
+        function createFolderName() {
             let today = new Date(),
                 year = today.getFullYear(),
                 month = today.getMonth() + 1,
@@ -829,20 +833,16 @@
                 currentHours = today.getHours(),
                 currentMinutes = today.getMinutes(),
                 currentSeconds = today.getSeconds(),
-                folderName = 'p-' + year + '.' + month + '.' + day + '-' + currentHours + '.' + currentMinutes + '.' + currentSeconds;
-            $('#folderName').val(folderName);
-            $('#folderName2').val(folderName);
-            // console.log($('#folderName').val());
+                result = 'p-' + year + '.' + month + '.' + day + '-' + currentHours + '.' + currentMinutes + '.' + currentSeconds;
+            return result;
         }
-        // Auto Focus in Modal Window
-        $('.modal').on('shown.bs.modal', function () {
-            $(this).find('[autofocus]').focus();
-        });
 
         $(document).on('ready', function () {
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
-                cropper, inputID, inputIdFinshed = [], counter = 0;
+                cropper, inputID, inputIdFinshed = [], counter = 0, file_upload, file_type,
+                folderName = createFolderName();
+                $('#folderName2').val(createFolderName());
             $('input[id^="pic"]').on('change', function (event) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
                 $('#fileShow' + inputID).removeClass('g-color-red');
@@ -858,6 +858,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             });
 
@@ -867,8 +868,8 @@
                     viewMode: 2,
                     zoomable: true,
                     background: true,
-                    minCropBoxWidth: 1000,
-                    minCropBoxHeight: 1000,
+                    minCropBoxWidth: 1500,
+                    minCropBoxHeight: 1500,
                     dragCrop: true,
                     dragMode: 'move',
                     multiple: true,
@@ -890,8 +891,8 @@
 
             $('#crop').on('click', function () {
                 let canvas = cropper.getCroppedCanvas({
-                    width: 1000,
-                    height: 1000
+                    width: 1500,
+                    height: 1500
                 });
 
                 canvas.toBlob(function (blob) {
@@ -899,44 +900,47 @@
                         reader = new FileReader();
                     reader.readAsDataURL(blob);
                     reader.onloadend = function () {
-                        $('#imageUrl' + inputID).val(reader.result);
                         $modal.modal('hide');
-                        $("#imageUrl" + inputID).clone().appendTo("#imageUploadForm");
-                        $("#imgNumber").val(inputID);
-                        $('#imageUploadForm').submit();
-                        addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
-                        $('#img-file-label' + inputID).removeClass('g-color-red');
+                        let type = file_type.split('/'), form;
+                        file_upload = new File([blob], "pic." + type[1]);
+                        form = new FormData();
+                        form.append('imageUrl', file_upload);
+                        form.append('imgNumber', inputID);
+                        form.append('folderName', folderName);
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: '/Add-Product-Upload-Image',
+                            data: form,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            beforSend: function (){
+                                $('#uploadingIcon' + inputID).removeClass('d-none');
+                                $('#uploadingText' + inputID).removeClass('d-none');
+                                $('#fileShow' + inputID).addClass('d-none');
+                            },
+                            success: function (data) {
+                                inputIdFinshed[counter] = data;
+                                counter++;
+                                addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
+                                $('#img-file-label' + inputID).removeClass('g-color-red');
+                                console.log("success");
+                                console.log(data);
+                            }
+                        }).done(function () {
+                            for (let i = 0; i < inputIdFinshed.length; i++) {
+                                $('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');
+                                $('#uploadingText' + inputIdFinshed[i]).addClass('d-none');
+                                $('#fileShow' + inputIdFinshed[i]).removeClass('d-none');
+                            }
+                        });
                     };
                 });
             });
-
-            $('#imageUploadForm').on('submit', (function (e) {
-                $('#uploadingIcon' + inputID).removeClass('d-none');
-                $('#uploadingText' + inputID).removeClass('d-none');
-                $('#fileShow' + inputID).addClass('d-none');
-                e.preventDefault();
-                let formData = new FormData(this);
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        inputIdFinshed[counter] = data;
-                        counter++;
-                        console.log("success");
-                        console.log(data);
-                    }
-                }).done(function () {
-                    for (let i = 0; i < inputIdFinshed.length; i++) {
-                        $('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');
-                        $('#uploadingText' + inputIdFinshed[i]).addClass('d-none');
-                        $('#fileShow' + inputIdFinshed[i]).removeClass('d-none');
-                    }
-                });
-            }));
 
             // Back button Force click Reload Page
             if (!!window.performance && window.performance.navigation.type == 2) {

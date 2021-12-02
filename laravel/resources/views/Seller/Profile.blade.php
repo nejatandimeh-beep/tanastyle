@@ -42,6 +42,12 @@
 
     <section>
         <div class="col-md-12 m-0 p-0">
+            <div class="g-bg-gray-dark-v1 text-right smallDevice">
+                <a class="nav-link g-pa-15"
+                   href="{{ route('changeSellerPass') }}">
+                    <strong class="g-color-white u-nav-v8__title">تغییر رمز عبور</strong>
+                </a>
+            </div>
             {{--  Menu --}}
             <div class="bigDevice">
                 <ul

@@ -82,10 +82,10 @@
 
                                 <ul class="list-inline text-center g-flex-middle-item">
                                     <li class="list-inline-item justify-content-center g-mx-7">
-                                                <span
-                                                    class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
-                                                    <i class="icon-lock-open"></i>
-                                                </span>
+                                        <span
+                                            class="g-color-gray-dark-v5 g-color-primary--hover g-font-size-20">
+                                            <i class="icon-lock-open"></i>
+                                        </span>
                                         <a class="customLink" href="{{ route('requestMobile',['source'=>'forget']) }}">تغییر
                                             رمز
                                             عبور</a>
@@ -103,8 +103,6 @@
                                                 <span class="customLink">تنظیم تصویر حساب کاربری</span>
                                                 <input type="file" name="image" id="upload_image" class="image"
                                                        style="display: none" accept="image/*">
-                                                <input type="text" id="imageUrl" name="imageUrl"
-                                                       style="display: none">
                                             </label>
                                         </form>
                                     </li>
@@ -148,10 +146,12 @@
                         <button type="button"
                                 class="btn btn-secondary" data-dismiss="modal">انصراف
                         </button>
-                        <button type="button" id="crop" class="btn btn-primary g-mr-5">برش</button>
-                        <i id="waitingCrop"
-                           style="display: none"
-                           class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                        <button type="button"id="crop" class="btn btn-primary g-mr-5">
+                            <span id="cropText">برش</span>
+                            <i id="waitingCrop"
+                               style="display: none"
+                               class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-white"></i>
+                        </button>
                     </div>
                 </div>
             </div>

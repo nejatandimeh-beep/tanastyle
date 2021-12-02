@@ -1,6 +1,7 @@
 @extends('Layouts.IndexSeller')
 
 @section('Content')
+    <input id="folderName" name="folderName" type="text" class="d-none">
     <!-- Info Panel -->
     <div style="direction: rtl;" id="addProductPage"
          class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0">
@@ -46,7 +47,6 @@
                             class="g-font-weight-600 g-ml-1 g-mr-1">{{$hintCat}}</span> قرار می گیرد.</small>
                 </div>
             </div>
-            <!-- End Name -->
 
             <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
@@ -72,7 +72,6 @@
                         بگذارید.</small>
                 </div>
             </div>
-            <!-- End Model -->
 
             <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
@@ -97,10 +96,10 @@
                         نمایید.</small><br>
                 </div>
             </div>
-            <!-- End Brand -->
 
             <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
+
             <!-- Detail -->
             <div class="form-group g-mb-20 text-right">
                 <label id="lblDetail" class="g-mb-10">توضیحات محصول</label>
@@ -131,7 +130,6 @@
                     <small class="text-muted g-font-size-12">لطفا توضیحات را مرتب و در سطرهای جدا وارد نمایید.</small>
                 </div>
             </div>
-            <!-- End Detail -->
 
             <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
@@ -2561,8 +2559,6 @@
                                            type="file"
                                            name="{{ 'pic'.$i }}"
                                            accept="image/*">
-                                    <input type="text" id="{{ 'imageUrl'.$i }}" name="{{ 'imageUrl'.$i }}"
-                                           style="display: none">
                                 </div>
                             </div>
                         </div>
@@ -2606,7 +2602,6 @@
                         شود.</small>
                 </div>
             </div>
-            <!-- End UnitPrice -->
 
             <!-- Discount -->
             <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
@@ -2648,11 +2643,10 @@
                     <small class="text-muted g-font-size-12">تخفیف می تواند مشتریان را به خود جلب کند.</small>
                 </div>
             </div>
-            <!-- End Discount -->
 
             <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
-            <!-- File Input -->
+            <!-- تصویر از نمایی دیگر -->
             <div id="imgContainer" class="form-group  text-right">
                 <label class="g-mb-10" for="{{ 'fileShow11' }}" id="{{ 'img-file-label11' }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
@@ -2675,7 +2669,6 @@
                                type="file"
                                name="{{'pic11'}}"
                                accept="image/*">
-                        <input type="text" id="{{'imageUrl11'}}" name="{{'imageUrl11'}}" style="display: none">
                     </div>
                 </div>
                 <label class="g-mb-10" for="{{ 'fileShow12' }}" id="{{ 'img-file-label12' }}">تصویر از نمایی دیگر</label>
@@ -2699,7 +2692,6 @@
                                type="file"
                                name="{{ 'pic12' }}"
                                accept="image/*">
-                        <input type="text" id="{{ 'imageUrl12' }}" name="{{ 'imageUrl12' }}" style="display: none">
                     </div>
                 </div>
                 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog"
@@ -2756,16 +2748,10 @@
                     </button>
                 </div>
             </div>
-            <!-- End File Input -->
+
             <input id="folderName2" name="folderName2" type="text" class="d-none">
         </form>
 
     </div>
-    <form action="{{route('sellerProductImage')}}" id="imageUploadForm"
-          method="post" enctype="multipart/form-data">
-        @csrf
-        <input id="folderName" name="folderName" type="text" class="d-none">
-        <input id="imgNumber" name="imgNumber" type="text" class="d-none">
-    </form>
 @endsection
 

@@ -1,6 +1,7 @@
 @section('CustomerJsFunction')
     <script>
-        let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [];
+        let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
+            file_upload, file_type;
 
         $(document).ready(function () {
             if ($('.loginBtn').length > 0)
@@ -30,6 +31,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             });
 
@@ -59,7 +61,7 @@
             });
 
             $('#crop').on('click', function () {
-                $('#crop').hide();
+                $('#cropText').hide();
                 $('#waitingCrop').show();
                 let canvas = cropper.getCroppedCanvas({
                     width: 1000,
@@ -71,11 +73,39 @@
                         reader = new FileReader();
                     reader.readAsDataURL(blob);
                     reader.onloadend = function () {
-                        $('#imageUrl').val(reader.result);
-                        $('#uploadImage').submit();
+                        let type = file_type.split('/'), form;
+                        file_upload = new File([blob], "pic."+type[1]);
+                        form=new FormData();
+                        form.append('imageUrl',file_upload);
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url         : '/Customer-Profile-Image',
+                            data        : form,
+                            processData : false,
+                            contentType : false,
+                            type: 'POST',
+                            success: function () {
+                                location.reload();
+                            }
+                        });
                     }
                 });
             });
+
+            function urltoFile(url, filename, mimeType) {
+                return (fetch(url)
+                        .then(function (res) {
+                            return res.arrayBuffer();
+                        })
+                        .then(function (buf) {
+                            return new File([buf], filename, {type: mimeType});
+                        })
+                );
+            }
 
             if ($('#cartCount').text() === 0) {
                 $('#cartBuyBtn').hide();
@@ -262,7 +292,7 @@
             }
         });
 
-        $(document).bind( "mouseup touchend", function(e){
+        $(document).bind("mouseup touchend", function (e) {
             let container = $(".outSideClick");
 
             // if click on out side container
@@ -409,7 +439,7 @@
                 size.push(id);
                 if (id === 'size-all') {
                     $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">سایز: همه</span>');
-                    size.push('XS', 'S', 'L', 'M', 'XL', 'XXL', 'XXXL','Free');
+                    size.push('XS', 'S', 'L', 'M', 'XL', 'XXL', 'XXXL', 'Free');
                     return false;
                 } else {
                     $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
@@ -453,7 +483,7 @@
         });
 
         function filtering(filterChange) {
-            console.log('gender='+gender,'\n category='+category,'\n size='+size,'\n priceMin='+priceMin,'\n priceMax='+priceMax,'\n color='+color);
+            console.log('gender=' + gender, '\n category=' + category, '\n size=' + size, '\n priceMin=' + priceMin, '\n priceMax=' + priceMax, '\n color=' + color);
             if (filterChange === 1)
                 $('#productContainer').empty();
             $.ajax({

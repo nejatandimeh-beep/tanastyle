@@ -192,21 +192,32 @@ class Add extends Controller
     {
         // Upload Images
         $imgNumber = $request->get('imgNumber');
-        $image = $request->get('imageUrl'.$imgNumber);
+        $image = $request->file('imageUrl');
         $folderName = $request->get('folderName');
         $path = 'img/imagesTemp/products/'  . $folderName;
         File::makeDirectory($path, 0777, true, true);
+
         // 1000*1000 pic save
-        $image_parts = explode(";base64,", $image);
-        $image_base64 = base64_decode($image_parts[1]);
+        $source='';
+        switch ($image->getMimeType()) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $source = imagecreatefromjpeg($image);
+                break;
+            case 'image/png':
+                $source = imagecreatefrompng($image);
+                break;
+            case 'image/gif':
+                $source = imagecreatefromgif($image);
+                break;
+        }
         $imageFullPath = $path . '/pic' . (int)($imgNumber+1) . '.jpg';
-        file_put_contents($imageFullPath, $image_base64);
+        imagejpeg($source, $imageFullPath);
 
         // 250*250 sample save
         list($width, $height) = getimagesize($image);
         $newWidth = 250;
         $newHeight = 250;
-        $source=imagecreatefrompng($image);
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         $imageFullPath =$path . '/sample' . (int)($imgNumber+1)  . '.png';
@@ -214,6 +225,7 @@ class Add extends Controller
 
         imagedestroy($thumb);
         imagedestroy($source);
+
         return $imgNumber;
     }
 
@@ -247,7 +259,7 @@ class Add extends Controller
             $imageColor[$i]['hexCode'] = $request->get('hexCode' . $temp);
         }
 
-        $imageColor = collect($imageColor)->sortBy('color')->toArray();
+        $imageColor = collect($imageColor)->toArray();
         $imageColor = array_values($imageColor);
 
         // Compilation Pic Path

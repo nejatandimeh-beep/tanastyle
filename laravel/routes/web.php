@@ -107,8 +107,6 @@ Route::get('/Seller-ChangePrice-Product/{id}/{unitPrice}/{finalPrice}', 'Seller\
 // Change Discount Product
 Route::get('/Seller-ChangeDiscount-Product/{id}/{discount}/{finalPrice}', 'Seller\Basic@changeDiscountProduct');
 
-Route::post('/Seller-checkImg', 'Seller\Basic@checkImg')->name('checkImg');
-
 // Product Detail
 Route::get('/Seller-Product-Detail/{id}', 'Seller\Basic@productDetail')->name('sellerProductDetail');
 

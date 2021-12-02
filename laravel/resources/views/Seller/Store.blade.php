@@ -443,7 +443,7 @@
                             <tr>
                                 <td class="align-middle text-nowrap text-center">{{ $rec->ID.'/'.$rec->pDetailID }}</td>
                                 <td class="align-middle text-nowrap text-center">{{ $rec->Name }}</td>
-                                <td class="align-middle text-center">{{ $row->Brand }}</td>
+                                <td class="align-middle text-center">{{ $rec->Brand }}</td>
                                 @if($rec->Gender == 'زنانه')
                                     <td class="align-middle text-center">زنانه</td>
                                 @elseif($rec->Gender == 'مردانه')

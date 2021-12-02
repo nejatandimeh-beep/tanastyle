@@ -270,12 +270,6 @@ class Basic extends Controller
         return view('Seller.Sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate'));
     }
 
-    public function checkImg(Request $request)
-    {
-        $image = $request->file('fileToUpload');
-        dd($image);
-    }
-
 //  Order Detail
     public function orderDetail($addressID, $id)
     {

@@ -1049,27 +1049,34 @@ class Basic extends Controller
 
     public function uploadImage(Request $request)
     {
-        $image = $request->get('imageUrl');
+        $image = $request->file('imageUrl');
+
+//        return $image;
         $folderPath = public_path('img/CustomerProfileImage/');
-        $image_parts = explode(";base64,", $image);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
-
         $imageName = Auth::user()->id . '.png';
-
         $imageFullPath = $folderPath . $imageName;
 
-        file_put_contents($imageFullPath, $image_base64);
+        $source='';
+        switch ($image->getMimeType()) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $source = imagecreatefromjpeg($image);
+                break;
+            case 'image/png':
+                $source = imagecreatefrompng($image);
+                break;
+            case 'image/gif':
+                $source = imagecreatefromgif($image);
+                break;
+        }
+        imagejpeg($source, $imageFullPath);
 
         DB::table('customers')
             ->where('id', Auth::user()->id)
             ->update([
-                'PicPath' => 'img\CustomerProfileImage\\' . $imageName,
+                'PicPath' => 'img/CustomerProfileImage/' . $imageName,
             ]);
-
-        return redirect()->route('userProfile', 'profileImageChange');
-
+        return true;
     }
 
     public function connection()

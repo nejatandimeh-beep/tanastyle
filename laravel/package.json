@@ -25,6 +25,7 @@
     },
     "dependencies": {
         "cropperjs": "^1.5.9",
+        "exif-js": "^2.3.0",
         "jquery-cropper": "^1.0.1",
         "jzoom": "^1.1.7"
     }
