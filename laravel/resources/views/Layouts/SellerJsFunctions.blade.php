@@ -746,11 +746,11 @@
                 let fileName = pic.val().split("\\").pop();
                 filePath.attr("placeholder", fileName);
                 filePath.addClass('g-color-primary');
-                checkMark.css('display', 'inline');
+                checkMark.removeClass('d-none');
             } else {
                 filePath.attr("placeholder", 'فاقد تصویر');
                 filePath.addClass('g-color-red');
-                checkMark.css('display', 'none');
+                checkMark.addClass('d-none');
             }
         }
 
@@ -918,22 +918,23 @@
                             processData: false,
                             contentType: false,
                             type: 'POST',
-                            beforSend: function (){
+                            beforeSend: function (){
+                                console.log('ok')
+                                $('#fileShow' + inputID).addClass('d-none');
                                 $('#uploadingIcon' + inputID).removeClass('d-none');
                                 $('#uploadingText' + inputID).removeClass('d-none');
-                                $('#fileShow' + inputID).addClass('d-none');
                             },
                             success: function (data) {
                                 inputIdFinshed[counter] = data;
                                 counter++;
-                                addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
-                                $('#img-file-label' + inputID).removeClass('g-color-red');
                                 console.log("success");
-                                console.log(data);
+                                console.log(inputIdFinshed);
                             }
                         }).done(function () {
                             for (let i = 0; i < inputIdFinshed.length; i++) {
                                 $('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');
+                                $('#img-file-label' + inputIdFinshed[i]).removeClass('g-color-red');
+                                addPathCheckMark('pic' + inputIdFinshed[i], 'fileShow' + inputIdFinshed[i], 'check' + inputIdFinshed[i]);
                                 $('#uploadingText' + inputIdFinshed[i]).addClass('d-none');
                                 $('#fileShow' + inputIdFinshed[i]).removeClass('d-none');
                             }

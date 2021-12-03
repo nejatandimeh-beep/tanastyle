@@ -2514,7 +2514,7 @@
 
                         {{--موجودی--}}
                         <div class="form-group g-mb-20 text-right col-lg-3">
-                            <label class="g-mb-10">تعداد موجود</label>
+                            <label class="g-mb-10 g-color-gray-dark-v3">تعداد موجود</label>
                             <div class="input-group g-brd-primary--focus g-mb-10">
                                 <div
                                     class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
@@ -2535,16 +2535,21 @@
 
                         {{--تصویر--}}
                         <div id="colorImgDiv{{$i}}" class="form-group g-mb-0 text-right col-lg-3">
-                            <label class="g-mb-10" for="{{ 'fileShow'.$i }}" id="{{ 'img-file-label'.$i }}">تصویر محصول
+                            <label class="g-mb-10 g-color-gray-dark-v3" for="{{ 'fileShow'.$i }}" id="{{ 'img-file-label'.$i }}">تصویر محصول
                                 <span id="{{ 'productColorImg'.$i }}"></span></label>
                             <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
+                                    <span style="cursor: default"
+                                          class="d-none align-self-center g-bg-primary g-brd-around g-brd-primary
+                                        g-pa-10 g-color-white"
+                                          id="check{{$i}}"><i class="fa fa-check"></i></span>
                                  <span style="cursor: default"
-                                       class="d-none align-self-center g-mr-5 g-bg-primary g-pa-15 g-color-white"
-                                       id="uploadingIcon"{{$i}}><i class="fa fa-spinner fa-spin"></i></span>
-                                <input style="direction: rtl" id="uploadingIcon{{$i}}"
+                                       class="d-none align-self-center g-bg-primary g-brd-around g-brd-primary
+                                        g-pa-10 g-color-white"
+                                       id="uploadingIcon{{$i}}"><i class="fa fa-spinner fa-spin"></i></span>
+                                <input style="direction: rtl" id="uploadingText{{$i}}"
                                        class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
                                        type="text"
-                                       placeholder="درحال بارگذاری.." readonly="">
+                                       placeholder="..." readonly="">
                                 <input id="{{ 'fileShow'.$i }}"
                                        class="form-control form-control-md rounded-0 g-font-size-16 g-px-5 text-right"
                                        type="text"
