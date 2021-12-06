@@ -112,7 +112,7 @@
                 err = 'model';
                 $('#lblModel').addClass('g-color-red');
             }
-            if ($('#addProductBrand').val() === '---') {
+            if ($('#addProductBrand').val() === '') {
                 err = 'brand';
                 $('#lblBrand').addClass('g-color-red');
             }
