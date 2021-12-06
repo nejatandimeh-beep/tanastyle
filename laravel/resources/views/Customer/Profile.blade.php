@@ -828,20 +828,21 @@
                                                             <div class="col-sm-10 force-col-12">
                                                                 <input
                                                                     id="{{ 'receiver-name-'.$key }}"
-                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    class="formValidate form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
                                                                     type="text"
                                                                     name="receiver-name"
                                                                     maxlength="15"
+                                                                    oninput="($(this).val().length>1) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                                     value="{{ $row->ReceiverName }}"
                                                                     placeholder="الزاماً فارسی"
                                                                     {{--                                           lang="fa"--}}
                                                                     onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                            str = $(this).val();
-                                                            str = str.substring(0, str.length - 1);
-                                                            $(this).val(str);
-                                                            $(this).attr('autocomplete', 'off');
-                                                            } else
-                                                            $(this).attr('autocomplete', 'name');"
+                                                                        str = $(this).val();
+                                                                        str = str.substring(0, str.length - 1);
+                                                                        $(this).val(str);
+                                                                        $(this).attr('autocomplete', 'off');
+                                                                        } else
+                                                                        $(this).attr('autocomplete', 'name');"
                                                                     readonly="">
                                                             </div>
                                                         </div>
@@ -853,20 +854,21 @@
                                                             </label>
                                                             <div class="col-sm-10 force-col-12">
                                                                 <input
-                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                    class="formValidate form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
                                                                     type="text"
                                                                     name="receiver-family"
                                                                     maxlength="15"
                                                                     value="{{ $row->ReceiverFamily }}"
+                                                                    oninput="($(this).val().length>1) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                                     placeholder="الزاماً فارسی"
                                                                     {{--                                           lang="fa"--}}
                                                                     onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                                    str = $(this).val();
-                                                                    str = str.substring(0, str.length - 1);
-                                                                    $(this).val(str);
-                                                                    $(this).attr('autocomplete', 'off');
-                                                                    } else
-                                                                    $(this).attr('autocomplete', 'name');"
+                                                                        str = $(this).val();
+                                                                        str = str.substring(0, str.length - 1);
+                                                                        $(this).val(str);
+                                                                        $(this).attr('autocomplete', 'off');
+                                                                        } else
+                                                                        $(this).attr('autocomplete', 'name');"
                                                                     readonly="">
                                                             </div>
                                                         </div>
@@ -876,37 +878,12 @@
                                                                 پستی</label>
                                                             <div class="col-sm-10 force-col-12">
                                                                 <input style="direction: ltr"
-                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                       class="formValidate text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
                                                                        value="{{ $row->PostalCode }}"
                                                                        name="receiver-postalCode"
-                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#receiverMobile'.$key }},10)"
+                                                                       oninput="forceEnglishNumber($(this).val(), $(this),'null',10)"
                                                                        pattern="\d*"
                                                                        placeholder="فقط اعداد انگلیسی"
-                                                                       readonly="">
-                                                            </div>
-                                                        </div>
-                                                        {{--تلفن ثابت گیرنده--}}
-                                                        <div class="form-group row g-mb-15">
-                                                            <label class="col-sm-2 col-form-label align-self-center">تلفن
-                                                                ثابت</label>
-                                                            <div class="col-sm-10 force-col-12 d-flex">
-                                                                <input style="width: 70%; direction: ltr"
-                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                       id="{{ 'receiverPhoneNum'.$key }}"
-                                                                       name="receiver-phone"
-                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#receiverMobile'.$key }},8)"
-                                                                       pattern="\d*"
-                                                                       value="{{ $row->Phone }}"
-                                                                       placeholder="xxxxxxxx"
-                                                                       readonly="">
-                                                                <input style="width: 30%; direction: ltr"
-                                                                       id="{{ 'receiverPrePhone'.$key }}"
-                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-brd-right-none g-font-size-16"
-                                                                       name="receiver-prePhone"
-                                                                       value="{{ $row->PrePhone }}"
-                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#receiverPhoneNum'.$key }},3)"
-                                                                       pattern="\d*"
-                                                                       placeholder="0xx"
                                                                        readonly="">
                                                             </div>
                                                         </div>
@@ -917,8 +894,8 @@
                                                             <div class="col-sm-10 force-col-12">
                                                                 <input style="direction: ltr"
                                                                        id="{{ 'receiverMobile'.$key }}"
-                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
-                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#stateSelectReceiver-'.$key }},11)"
+                                                                       class="formValidate text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                       oninput="forceEnglishNumber($(this).val(), $(this),'null',11)"
                                                                        pattern="\d*"
                                                                        placeholder="09xxxxxxxx"
                                                                        name="receiver-mobile"
@@ -938,7 +915,14 @@
                                                                     <select id="{{ 'stateSelectReceiver-'.$key }}"
                                                                             style="direction: rtl; padding-right: 30px !important; pointer-events: none"
                                                                             name="receiver-state"
-                                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-gray-light-v5"
+                                                                            oninput="if($(this).val()!=='0') {
+                                                                                $(this).removeClass('g-brd-red');
+                                                                                $(this).parent().find('.city').removeClass('g-brd-red');
+                                                                            } else {
+                                                                                $(this).parent().find('.city').addClass('g-brd-red');
+                                                                                $(this).addClass('g-brd-red');
+                                                                            }"
+                                                                            class="formValidate form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-gray-light-v5"
                                                                             tabindex="3"
                                                                             onchange="changeState('stateSelectReceiver-'+ {{$key}} , 'citySelectReceiver-' + {{$key}})">
                                                                         <option value="0">استان</option>
@@ -981,7 +965,8 @@
                                                                     <select id="{{ 'citySelectReceiver-'.$key }}"
                                                                             style="direction: rtl; padding-right: 30px !important; pointer-events: none"
                                                                             name="receiver-city"
-                                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-gray-light-v5"
+                                                                            onchange="$('.custombox-content #receiverAddress{{$key}}').focus();"
+                                                                            class="formValidate city form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-gray-light-v5"
                                                                             tabindex="4">
                                                                         <option value="0">شهر</option>
                                                                     </select>
@@ -992,13 +977,40 @@
                                                         <div class="form-group row g-mb-25">
                                                             <label class="col-sm-2 col-form-label">آدرس دقیق</label>
                                                             <div class="col-sm-10 force-col-12">
-                                                                <input
-                                                                    class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                <input id="receiverAddress{{$key}}"
+                                                                    class="formValidate form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
                                                                     maxlength="300"
                                                                     name="receiver-address"
+                                                                    oninput="($(this).val().length>5) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                                     placeholder="الزاماً فارسی"
                                                                     value="{{$row->Address}}"
                                                                     readonly>
+                                                            </div>
+                                                        </div>
+
+                                                        {{--تلفن ثابت گیرنده--}}
+                                                        <div class="form-group row g-mb-15">
+                                                            <label class="col-sm-2 col-form-label align-self-center">تلفن
+                                                                ثابت</label>
+                                                            <div class="col-sm-10 force-col-12 d-flex">
+                                                                <input style="width: 70%; direction: ltr"
+                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                                                       id="{{ 'receiverPhoneNum'.$key }}"
+                                                                       name="receiver-phone"
+                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#receiverMobile'.$key }},8)"
+                                                                       pattern="\d*"
+                                                                       value="{{ $row->Phone }}"
+                                                                       placeholder="xxxxxxxx"
+                                                                       readonly="">
+                                                                <input style="width: 30%; direction: ltr"
+                                                                       id="{{ 'receiverPrePhone'.$key }}"
+                                                                       class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-brd-right-none g-font-size-16"
+                                                                       name="receiver-prePhone"
+                                                                       value="{{ $row->PrePhone }}"
+                                                                       oninput="forceEnglishNumber($(this).val(), $(this),{{ '#receiverPhoneNum'.$key }},3)"
+                                                                       pattern="\d*"
+                                                                       placeholder="0xx"
+                                                                       readonly="">
                                                             </div>
                                                         </div>
 
@@ -1020,14 +1032,14 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <hr class="{{ ($key === count($address)-1) ? 'd-none':'' }} g-brd-gray-light-v4 g-mx-minus-20 g-my-30">
+                                        <hr class="{{ ($key === count($address)-1) ? 'd-none':'' }} g-brd-gray-light-v4 mx-0 g-my-30">
                                     </div>
                                 @endforeach
                             @endif
                         </div>
                     </div>
 
-                    <div style="direction: rtl" class="g-mx-80--lg g-mt-40 g-mb-25 g-px-10">
+                    <div style="direction: rtl" class="g-mx-60--lg g-mt-40 g-mb-25">
                         <div class="text-left g-pt-10 g-brd-top g-brd-gray-light-v3">
                             <a href="#modal17"
                                id="newAddressLink"
@@ -1069,11 +1081,13 @@
                                             <div class="col-sm-10 force-col-12">
                                                 <input
                                                     id="receiver-name"
-                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
+                                                    class="formValidateNew form-control g-brd-red form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
                                                     name="receiver-name"
                                                     maxlength="15"
+                                                    tabindex="1"
                                                     type="text"
                                                     value=""
+                                                    oninput="($(this).val().length>1) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                     placeholder="الزاماً فارسی"
                                                     {{--                                           lang="fa"--}}
                                                     onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
@@ -1092,10 +1106,13 @@
                                             </label>
                                             <div class="col-sm-10 force-col-12">
                                                 <input
-                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    class="formValidateNew form-control g-brd-red form-control-md rounded-0 g-bg-white g-font-size-16"
                                                     type="text"
+                                                    id="receiver-family"
                                                     name="receiver-family"
                                                     maxlength="15"
+                                                    tabindex="2"
+                                                    oninput="($(this).val().length>1) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                     value=""
                                                     placeholder="الزاماً فارسی"
                                                     {{--                                           lang="fa"--}}
@@ -1110,49 +1127,30 @@
                                         </div>
                                         {{--کد پستی گیرنده--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label id="ok" class="col-sm-2 col-form-label align-self-center">کد
+                                            <label id="ok" class="col-sm-2 g-brd-red col-form-label align-self-center">کد
                                                 پستی</label>
                                             <div class="col-sm-10 force-col-12">
                                                 <input style="direction: ltr"
-                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                       class="formValidateNew text-left g-brd-red form-control form-control-md rounded-0 g-bg-white g-font-size-16"
                                                        name="receiver-postalCode"
-                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiver-prePhone-new',10)"
+                                                       id="receiver-postalCode"
+                                                       tabindex="3"
+                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiverNewMobile',10)"
                                                        pattern="\d*"
                                                        value=""
                                                        placeholder="فقط اعداد انگلیسی">
                                             </div>
                                         </div>
-                                        {{--تلفن ثابت گیرنده--}}
-                                        <div class="form-group row g-mb-30 g-mb-15--lg">
-                                            <label class="col-sm-2 col-form-label align-self-center">تلفن
-                                                ثابت</label>
-                                            <div class="col-sm-10 force-col-12 d-flex">
-                                                <input style="width: 70%; direction: ltr"
-                                                       id="receiver-phone-new"
-                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
-                                                       name="receiver-phone"
-                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiverNewMobile',8)"
-                                                       pattern="\d*"
-                                                       value=""
-                                                       placeholder="xxxxxxxx">
-                                                <input style="width: 30%; direction: ltr"
-                                                       id="receiver-prePhone-new"
-                                                       name="receiver-prePhone"
-                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-brd-right-none g-font-size-16"
-                                                       value=""
-                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiver-phone-new',3)"
-                                                       pattern="\d*"
-                                                       placeholder="0xx">
-                                            </div>
-                                        </div>
+
                                         {{--موبایل گیرنده--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
                                             <label style="direction: ltr"
                                                    class="col-sm-2 col-form-label align-self-center">موبایل</label>
                                             <div class="col-sm-10 force-col-12">
-                                                <input
+                                                <input style="direction: ltr"
                                                     id="receiverNewMobile"
-                                                    class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    class="formValidateNew text-left g-brd-red form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    tabindex="4"
                                                     name="receiver-mobile"
                                                     oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #stateSelectReceiver-new',11)"
                                                     pattern="\d*"
@@ -1163,14 +1161,21 @@
                                         {{--آدرس سکونت گیرنده--}}
                                         <div class="form-group row g-mb-30 g-mb-15--lg">
                                             <label
-                                                class="col-sm-2 col-form-label align-self-center">استان/شهر</label>
+                                                class="col-sm-2 g-brd-red col-form-label align-self-center">استان/شهر</label>
                                             <div class="col-sm-10 force-col-12">
                                                 <div class="d-flex">
                                                     <select id="stateSelectReceiver-new"
                                                             style="direction: rtl; padding-right: 30px !important;"
+                                                            tabindex="5"
                                                             name="receiver-state"
-                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-white"
-                                                            tabindex="3"
+                                                            oninput="if($(this).val()!=='0') {
+                                                                $(this).removeClass('g-brd-red');
+                                                                $('.custombox-content #citySelectReceiver-new').removeClass('g-brd-red');
+                                                            } else {
+                                                                $(this).addClass('g-brd-red');
+                                                                $('.custombox-content #citySelectReceiver-new').addClass('g-brd-red');
+                                                            }"
+                                                            class="formValidateNew form-control g-brd-red form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-white"
                                                             onchange="changeState('stateSelectReceiver-new','citySelectReceiver-new')">
                                                         <option value="0">استان</option>
                                                         <option value="1">آذربایجان شرقی</option>
@@ -1209,8 +1214,9 @@
                                                     <select id="citySelectReceiver-new"
                                                             style="direction: rtl; padding-right: 30px !important;"
                                                             name="receiver-city"
-                                                            class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-white"
-                                                            tabindex="4">
+                                                            class="formValidateNew form-control g-brd-red form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-white"
+                                                            onchange="$('.custombox-content #receiver-address').focus();"
+                                                            tabindex="6">
                                                         <option value="0">شهر</option>
                                                     </select>
                                                 </div>
@@ -1221,14 +1227,43 @@
                                             <label class="col-sm-2 col-form-label">آدرس دقیق</label>
                                             <div class="col-sm-10 force-col-12">
                                                 <input
-                                                    class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    class="formValidateNew form-control g-brd-red form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                    id="receiver-address"
+                                                    tabindex="7"
+                                                    oninput="($(this).val().length>5) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red');"
                                                     name="receiver-address"
                                                     placeholder="الزاماً فارسی">
+                                            </div>
+                                        </div>
+                                        {{--تلفن ثابت گیرنده--}}
+                                        <div class="form-group row g-mb-30 g-mb-15--lg">
+                                            <label class="col-sm-2 col-form-label align-self-center">تلفن
+                                                ثابت(اختیاری)</label>
+                                            <div class="col-sm-10 force-col-12 d-flex">
+                                                <input style="width: 70%; direction: ltr"
+                                                       id="receiver-phone-new"
+                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                       name="receiver-phone"
+                                                       tabindex="9"
+                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiverNewMobile',8)"
+                                                       pattern="\d*"
+                                                       value=""
+                                                       placeholder="xxxxxxxx">
+                                                <input style="width: 30%; direction: ltr"
+                                                       id="receiver-prePhone-new"
+                                                       name="receiver-prePhone"
+                                                       class="text-left form-control form-control-md rounded-0 g-bg-white g-brd-right-none g-font-size-16"
+                                                       value=""
+                                                       tabindex="8"
+                                                       oninput="forceEnglishNumber($(this).val(), $(this),'.custombox-content #receiver-phone-new',3)"
+                                                       pattern="\d*"
+                                                       placeholder="0xx">
                                             </div>
                                         </div>
                                     </div>
                                     <a onclick="addUserAddress()"
                                        id="submitAddress"
+                                       tabindex="10"
                                        class="btn btn-md u-btn-primary rounded-0 g-color-white g-mt-15 g-mx-60--lg g-mb-20 g-mx-20">
                                         ثبت آدرس جدید
                                     </a>
@@ -1857,7 +1892,7 @@
                                data-modal-target="#returnModal"
                                data-modal-effect="slidetogether"
                                class="d-none btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15">
-                                ورود داده های محصول برگشتی
+                                تکمیل فرم محصول برگشتی
                             </a>
                             <!-- Demo modal window -->
                             <div id="returnModal"
@@ -1894,18 +1929,19 @@
                                             {{--کد دریافتی از اداره پست--}}
                                             <div class="form-group row g-mb-30 g-mb-15--lg">
                                                 <label
-                                                    class="col-sm-2 col-form-label align-self-center">کد دریافتی از
+                                                    class="col-sm-2 col-form-label align-self-center">شناسه رهگیری
                                                     اداره
                                                     پست</label>
                                                 <div class="col-sm-10 force-col-12">
                                                     <input
                                                         id="returnPostCode"
-                                                        class="form-control form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
+                                                        class="form-control g-brd-red returnFormValidate form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
                                                         name="returnPostCode"
+                                                        oninput="($(this).val().length>24) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                         maxlength="100"
                                                         type="text"
                                                         value=""
-                                                        placeholder="لطفا با دقت وارد کنید">
+                                                        placeholder="24 کاراکتر">
                                                 </div>
                                             </div>
                                             {{--علت برگشت--}}
@@ -1922,14 +1958,15 @@
                                                                class="fa fa-question g-font-size-20"></i>
                                                         </div>
                                                         <select style="direction: rtl"
-                                                                class="form-control form-control-md custom-select rounded-0 g-font-size-16 text-right h-25 g-pr-30"
+                                                                class="form-control g-brd-red returnFormValidate form-control-md custom-select rounded-0 g-font-size-16 text-right h-25 g-pr-30"
+                                                                oninput="($(this).val()!=='0') ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                                 id="returnReason" name="returnReason">
+                                                            <option value="0">انتخاب کنید..
+                                                            </option>
                                                             <option value="1">محصول تحویلی، شباهتی با محصول درون سایت
                                                                 ندارد
                                                             </option>
-                                                            <option value="2">محصول تحویلی، سالم نیست
-                                                            </option>
-                                                            <option value="3">برند محصول تحویلی مطابق محصول درون سایت
+                                                            <option value="2">برند محصول تحویلی مطابق محصول درون سایت
                                                                 نیست
                                                             </option>
                                                         </select>
@@ -1942,13 +1979,14 @@
                                                     ایرادات</label>
                                                 <div class="col-sm-10 force-col-12">
                                                <textarea
-                                                   class="form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                   class="form-control g-brd-red returnFormValidate form-control-md rounded-0 g-bg-white g-font-size-16"
                                                    type="text"
                                                    name="returnReasonDetail"
+                                                   oninput="($(this).val().length > 15) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                    maxlength="300"
                                                    rows="4"
                                                    value=""
-                                                   placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید"></textarea>
+                                                   placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید. بین 16 تا 300 کاراکتر"></textarea>
                                                 </div>
                                             </div>
 
@@ -1962,7 +2000,7 @@
                                                       class="align-self-center fa fa-check g-mr-5 g-bg-primary g-pa-15 g-color-white"
                                                       id="Check1"></span>
                                                         <input id="fileShow1"
-                                                               class="form-control form-control-md rounded-0 g-font-size-16"
+                                                               class="form-control returnFormValidate g-brd-red form-control-md rounded-0 g-font-size-16"
                                                                type="text"
                                                                placeholder="فاقد تصویر" readonly="">
 
@@ -1972,8 +2010,8 @@
                                                                     type="submit">اضافه کردن
                                                             </button>
                                                             <input id="pic1"
-                                                                   onchange="addPathCheckMark('pic1','fileShow1','Check1')"
-                                                                   onclick="$('.custombox-content #fileShow1').removeClass('g-brd-lightred')"
+                                                                   onchange="addPathCheckMark('pic1','fileShow1','Check1');
+                                                                            ($('.custombox-content #fileShow1').val()==='فاقد تصویر') ? $('.custombox-content #fileShow1').addClass('g-brd-red'):$('.custombox-content #fileShow1').removeClass('g-brd-red')"
                                                                    type="file"
                                                                    name="returnPic"
                                                                    accept="image/jpg,image/png,image/jpeg,image/gif">
@@ -1989,9 +2027,10 @@
                                                 <div class="col-sm-10 force-col-12 d-flex">
                                                     <input
                                                         id="return-card"
-                                                        class="text-left form-control form-control-md rounded-0 g-bg-white g-font-size-16"
+                                                        class="text-left g-brd-red returnFormValidate form-control form-control-md rounded-0 g-bg-white g-font-size-16"
                                                         name="returnCard"
                                                         maxlength="19"
+                                                        oninput="($(this).val().length === 16) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                         value=""
                                                         placeholder="xxxx-xxxx-xxxx-xxxx">
                                                 </div>

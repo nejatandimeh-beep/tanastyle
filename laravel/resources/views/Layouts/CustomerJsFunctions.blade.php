@@ -74,19 +74,19 @@
                     reader.readAsDataURL(blob);
                     reader.onloadend = function () {
                         let type = file_type.split('/'), form;
-                        file_upload = new File([blob], "pic."+type[1]);
-                        form=new FormData();
-                        form.append('imageUrl',file_upload);
+                        file_upload = new File([blob], "pic." + type[1]);
+                        form = new FormData();
+                        form.append('imageUrl', file_upload);
                         $.ajaxSetup({
                             headers: {
                                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
                             }
                         });
                         $.ajax({
-                            url         : '/Customer-Profile-Image',
-                            data        : form,
-                            processData : false,
-                            contentType : false,
+                            url: '/Customer-Profile-Image',
+                            data: form,
+                            processData: false,
+                            contentType: false,
                             type: 'POST',
                             success: function () {
                                 location.reload();
@@ -877,7 +877,20 @@
             if (val.length >= len) {
                 val = val.slice(0, len);
                 ele.val(val);
-                $(nextFocus).focus();
+                if(ele.attr('name')==='receiver-postalCode'){
+                    ele.removeClass('g-brd-red');
+                    $(nextFocus).focus();
+                } else if(ele.attr('name') === 'receiver-mobile'){
+                    if(val.substring(0,2)==='09'){
+                        ele.removeClass('g-brd-red');
+                        $(nextFocus).focus();
+                    }
+                }
+
+            } else {
+                if (ele.attr('name') === 'receiver-postalCode' || (ele.attr('name') === 'receiver-mobile')) {
+                    ele.addClass('g-brd-red');
+                }
             }
             ele.val(fixNumbers(val));
         }
@@ -1233,11 +1246,13 @@
 
             if ((pic.val() !== '') && ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) !== -1)) {
                 let fileName = pic.val().split("\\").pop();
-                filePath.attr("placeholder", fileName);
+                filePath.attr("value", fileName);
+                filePath.removeClass('g-color-red');
                 filePath.addClass('g-color-primary');
                 checkMark.css('display', 'inline');
             } else {
-                filePath.attr("placeholder", 'فاقد تصویر');
+                filePath.attr("value", 'فاقد تصویر');
+                filePath.removeClass('g-color-primary');
                 filePath.addClass('g-color-red');
                 checkMark.css('display', 'none');
             }
@@ -1606,41 +1621,51 @@
         function saveUserAddress(num) {
             // let row = 'addressUpdate' + num;
             // console.log($('#'+row+' [name="receiver-state"]').val());
-            $.confirm({
-                title: 'بروز رسانی آدرس',
-                content: 'آیا مطمئن هستید؟',
-                buttons: {
-                    تایید: function () {
-                        $('#addressUpdate' + num).submit();
-                    },
-                    انصراف: function () {
-                        $('#saveAddress' + num).hide();
-                        $('#editAddress' + num).show();
+            if($('.formValidate').hasClass('g-brd-red')) {
+                alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و دوباره تلاش کنید.');
+            } else {
+                $.confirm({
+                    title: 'بروز رسانی آدرس',
+                    content: 'آیا مطمئن هستید؟',
+                    buttons: {
+                        تایید: function () {
+                            $('#addressUpdate' + num).submit();
+                        },
+                        انصراف: function () {
+                            $('#saveAddress' + num).hide();
+                            $('#editAddress' + num).show();
 
-                        let clone = $('#accordion-13-body-' + num + ' :input');
-                        clone.attr("readonly", true);
-                        clone.addClass("g-bg-gray-light-v5");
+                            let clone = $('#accordion-13-body-' + num + ' :input');
+                            clone.attr("readonly", true);
+                            clone.addClass("g-bg-gray-light-v5");
 
-                        clone = $('#stateCity' + num + ' select');
-                        clone.css('pointer-events', 'none');
-                        clone.addClass('g-bg-gray-light-v5');
-                    },
-                }
-            });
+                            clone = $('#stateCity' + num + ' select');
+                            clone.css('pointer-events', 'none');
+                            clone.addClass('g-bg-gray-light-v5');
+                        },
+                    }
+                });
+            }
         }
 
         function addUserAddress() {
-            $.confirm({
-                title: 'بروز رسانی آدرس',
-                content: 'آیا مطمئن هستید؟',
-                buttons: {
-                    تایید: function () {
-                        $('.custombox-content #addAddress').submit();
-                    },
-                    انصراف: function () {
-                    },
-                }
-            });
+            if($('.custombox-content .formValidateNew').hasClass('g-brd-red')) {
+
+                alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و دوباره تلاش کنید.')
+            } else {
+                $.confirm({
+                    title: 'بروز رسانی آدرس',
+                    content: 'آیا مطمئن هستید؟',
+                    buttons: {
+                        تایید: function () {
+                            $('.custombox-content #addAddress').submit();
+                        },
+                        انصراف: function () {
+                        },
+                    }
+                });
+            }
+
         }
 
         function setReturnProductID(orderID, orderDetailID) {
@@ -1649,17 +1674,21 @@
         }
 
         function returnSubmit() {
-            $.confirm({
-                title: 'بازگشت محصول',
-                content: 'آیا مطمئن هستید؟',
-                buttons: {
-                    تایید: function () {
-                        $('.custombox-content #returnProduct').submit();
-                    },
-                    انصراف: function () {
-                    },
-                }
-            });
+            if($('.custombox-content .returnFormValidate').hasClass('g-brd-red')){
+                alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و دوباره تلاش کنید.')
+            } else {
+                $.confirm({
+                    title: 'بازگشت محصول',
+                    content: 'آیا مطمئن هستید؟',
+                    buttons: {
+                        تایید: function () {
+                            $('.custombox-content #returnProduct').submit();
+                        },
+                        انصراف: function () {
+                        },
+                    }
+                });
+            }
         }
 
         function deleteAddress(id, idBtn) {

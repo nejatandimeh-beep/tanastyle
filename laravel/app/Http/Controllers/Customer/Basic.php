@@ -576,6 +576,9 @@ class Basic extends Controller
         $city = $request->get('receiver-city');
         $address = $request->get('receiver-address');
 
+        ($prePhone===null)?$prePhone='000':true;
+        ($phone===null)?$phone='00000000':true;
+
         DB::table('customer_address')
             ->where('CustomerID', Auth::user()->id)
             ->update([
