@@ -688,7 +688,7 @@
                             <tr>
                                 <td class="align-middle text-nowrap text-center text-nowrap">{{ $rec->pDetailID }}</td>
                                 <td class="align-middle text-nowrap text-center text-nowrap">{{ $rec->Name }}</td>
-                                <td class="align-middle text-center">{{ $row->Brand }}</td>
+                                <td class="align-middle text-center">{{ $rec->Brand }}</td>
                                 @if($rec->Gender == '0')
                                     <td class="align-middle text-center">زنانه</td>
                                 @elseif($rec->Gender == '1')

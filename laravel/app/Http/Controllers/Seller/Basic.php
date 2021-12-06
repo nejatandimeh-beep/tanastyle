@@ -1039,7 +1039,7 @@ class Basic extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber','p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1054,7 +1054,7 @@ class Basic extends Controller
         if ($where2 === '') {
 
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber','p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1066,7 +1066,7 @@ class Basic extends Controller
 
         } elseif ($where2 === 'In') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber','p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1080,7 +1080,7 @@ class Basic extends Controller
 
         } elseif ($where2 === 'NotIn') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber','p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1093,7 +1093,7 @@ class Basic extends Controller
                 ->paginate(10);
         } elseif ($where2 === 'whereRaw') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber','p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1104,7 +1104,7 @@ class Basic extends Controller
                 ->paginate(10);
         } elseif ($where2 === 'whereBetween') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber','p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
