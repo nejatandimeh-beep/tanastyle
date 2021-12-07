@@ -1717,7 +1717,7 @@
                                                     <div
                                                         style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
                                                         class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->DeliveryProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
-                                                        <i style="transform: scaleX(-1);" class="fa fa-truck g-font-size-17"></i>
+                                                        <i style="transform: scaleX(-1);" class="g-color-gray-light-v5 fa fa-truck g-font-size-17"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1862,7 +1862,7 @@
                                                         <div
                                                             style="width: 25px !important; height: 25px !important; top: 100% !important; line-height: 25px !important;"
                                                             class="text-center u-progress__pointer-v1 g-font-size-11 g-color-white  {{ ($row->ReturnProblem === 1) ? 'g-bg-red':'g-bg-primary' }} g-pt-3">
-                                                            <i style="transform: scaleX(-1)" class="fa fa-truck g-font-size-17"></i>
+                                                            <i style="transform: scaleX(-1)" class="g-color-gray-light-v5 fa fa-truck g-font-size-17"></i>
                                                         </div>
                                                     </div>
                                                 </div>

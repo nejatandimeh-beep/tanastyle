@@ -1837,6 +1837,12 @@ class Basic extends Controller
             ->where('c.id', Auth::user()->id)
             ->first();
 
+        $productInfo = DB::table('product_detail as pd')
+            ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId','p.FinalPrice')
+            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
+            ->where('pd.ID', $id)
+            ->first();
+
         date_default_timezone_set('Asia/Tehran');
         $date = date('Y-m-d');
         $time = date('H:i:s');
@@ -1852,12 +1858,6 @@ class Basic extends Controller
         $orderID = DB::table('product_order')
             ->select('ID')
             ->max('ID');
-
-        $productInfo = DB::table('product_detail as pd')
-            ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId')
-            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-            ->where('pd.ID', $id)
-            ->first();
 
         DB::table('product_order_detail')->insert([
             'SellerID' => $productInfo->SellerID,

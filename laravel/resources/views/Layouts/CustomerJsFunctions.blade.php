@@ -1003,6 +1003,7 @@
                     $('#cartOrderForm').append("<input name='productDetailID" + i + "' value=" + val[i] + ">");
                     $('#cartOrderForm').append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
+                allPrice+=15000;
                 $('#cartOrderForm').append("<input name='row' value=" + row + ">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
@@ -1317,19 +1318,18 @@
 
         // پر کردن فرم فاکتور فروش در هنگام نمایش مودال
         function addOrderTable() {
+            let orderPrice=parseInt($('#productFinalPrice').text().replace(/[^0-9]/gi, '')) * parseInt($('#productQtyBought').val());
             $('#orderID').text($('#productID').text() + '/' + $('#productDetailID').text());
             $('#orderProductID').text($('#productDetailID').text());
             $('#orderProductName').text($('#productName').text() + ' ' + $('#productModel').text());
             $('#orderProductColor').text($('input[name="color"]:checked').val());
             $('#orderProductSize').text($('input[name="size"]:checked').val());
             $('#orderProductQty').text($('#productQtyBought').val());
-            $('#orderProductUnitPrice').text($('#productFinalPrice').text());
             $('#orderProductDiscount').text($('#productDiscount').text());
             $('#orderProductUnitPrice').text($('#productUnitPrice').text());
             $('#orderProductFinalPrice').text($('#productFinalPrice').text());
-            $('#orderProductQtyPrice').text(parseInt($('#productFinalPrice').text().replace(/[^0-9]/gi, '')) * parseInt($('#productQtyBought').val()));
-            $('#orderProductQtyPrice').text($('#orderProductQtyPrice').text().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $('#orderPrice').text($('#orderProductQtyPrice').text());
+            $('#orderProductQtyPrice').text(orderPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#orderPrice').text((orderPrice+15000).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#orderDate').text(nowDate());
             $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }

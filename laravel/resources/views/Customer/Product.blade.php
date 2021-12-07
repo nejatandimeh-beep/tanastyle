@@ -26,7 +26,7 @@
                         <span id="productModel" class="align-middle">{{ $data->Model }}</span>
                     </div>
                     <div style="direction: ltr"
-                        class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
+                         class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
                         <i class="{{ $rating>0 ? 'fa fa-star':'fa fa-star-o'}}"></i>
                         <i class="{{ $rating>1 ? 'fa fa-star':'fa fa-star-o'}}"></i>
                         <i class="{{ $rating>2 ? 'fa fa-star':'fa fa-star-o'}}"></i>
@@ -108,7 +108,7 @@
                                        {{ ($i === 0) ? 'checked' : '' }}
                                        class="u-checkbox-v1--checked-color-primary u-checkbox-v1--checked-brd-primary">
                                 <label for="{{ 'inputSize'.$size[$i]['pdId'] }}"
-                                       class="d-inline-block text-center g-brd-around g-brd-2 g-brd-gray-light-v3 g-color-gray-light-v3 g-brd-primary--hover g-color-primary--hover g-width-60 g-py-7 g-transition-0_3 g-mr-3">{{ $size[$i]['size'] }}</label>
+                                       class="d-inline-block text-center g-brd-around g-brd-2 g-brd-gray-light-v3 g-color-gray-light-v3 g-brd-primary--hover g-color-primary--hover {{ ($size[$i]['size']==='FreeSize') ? 'g-width-80':'g-width-60'}} g-py-7 g-transition-0_3 g-mr-3">{{ $size[$i]['size'] }}</label>
                             @endfor
                         </div>
                     </fieldset>
@@ -237,7 +237,8 @@
                         </div>
                         <div class="g-px-20">
                             <div style="direction: rtl" class="alert alert-warning text-right g-mr-5" role="alert">
-                                <strong class="g-ml-5">توجه!</strong>لطفا قبل از ادامه خرید، فاکتور فروش را به دقت بررسی نمایید.
+                                <strong class="g-ml-5">توجه!</strong>لطفا قبل از ادامه خرید، فاکتور فروش را به دقت بررسی
+                                نمایید.
                             </div>
                             {{--جدول--}}
                             <div style="direction: rtl"
@@ -341,12 +342,19 @@
                             </div>
                             {{--آدرس و مبلغ فاکتور--}}
                             <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
-                                {{--مبلغ فاکتور--}}
-                                <span
-                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span
-                                        id="orderPrice"></span>
-                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
-                                </span>
+                                <div class=" col-12 col-lg-3 g-px-0">
+                                    <span
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-20--lg text-center">هزینه پستی:
+                                        <span>15،000</span>
+                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                    </span>
+                                    {{--مبلغ فاکتور--}}
+                                    <span
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
+                                            id="orderPrice"></span>
+                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                    </span>
+                                </div>
 
                                 {{--آدرس--}}
                                 <div style="direction: rtl"
@@ -366,7 +374,7 @@
                                     @else
                                         <div id="addressContainer">
                                             <div
-                                                class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify">
+                                                class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-20 g-pt-0--lg text-justify">
                                                 <h5 class="d-lg-inline-block d-block g-color-gray-dark-v2">آدرس
                                                     ارسال:</h5>
                                                 <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
@@ -451,7 +459,8 @@
                                 <span class="g-font-size-12">{{$data->HintCat.' '.$data->Gender}}</span>
                             </div>
                             <a style="cursor: pointer" class="g-color-primary"
-                               onclick="$('.customerComment').removeClass('d-none');">نظرات <span class="g-font-weight-600">{{ (!isset($comments[0]->Comment)) ? '0' : count($comments) }}</span></a>
+                               onclick="$('.customerComment').removeClass('d-none');">نظرات <span
+                                    class="g-font-weight-600">{{ (!isset($comments[0]->Comment)) ? '0' : count($comments) }}</span></a>
                         </div>
                         <span style="cursor: pointer"
                               onclick="$(this).hide(); $('#addProductComment').removeClass('d-none'); $('#addCustomerComment').focus();"
@@ -639,7 +648,7 @@
                 <!-- End Carousel Images -->
 
                 <!-- Carousel Nav -->
-                <div id="js-carousel-11-nav" class="js-carousel u-carousel-v11" data-infinite="1" data-center-mode="1"
+                <div style="pointer-events: none" id="js-carousel-11-nav" class="js-carousel u-carousel-v11" data-infinite="1" data-center-mode="1"
                      data-slides-show="3" data-is-thumbs="1" data-nav-for="#js-carousel-11">
                     <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
                         <img class="w-100"

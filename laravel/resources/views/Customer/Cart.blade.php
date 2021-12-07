@@ -23,12 +23,8 @@
                         <div id="cartContainer{{$key}}" class="col-12 col-lg-3 g-mb-30">
                             <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24">
                                 <div class="g-pt-10">
-                                    <div id="carousel-08-1"
-                                         class="js-carousel text-center g-mb-20"
-                                         data-infinite="1"
-                                         data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
-                                         data-nav-for="#carousel-08-2">
-                                        <div class="js-slide">
+                                    <div class="text-center g-mb-20">
+                                        <div>
                                             <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
                                                 <img class="img-fluid w-100"
                                                      src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"

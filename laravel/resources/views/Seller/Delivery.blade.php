@@ -86,14 +86,14 @@
                                              data-toggle="tooltip"
                                              data-placement="top"
                                              data-original-title="{{ 'زمان مانده '.(int)(24-($deliveryStatus[$key]/60)).' ساعت' }}">
-                                            <div class="progress-bar u-progress-bar--lg g-bg-cyan"
+                                            <div class="progress-bar u-progress-bar--lg g-bg-primary"
                                                  role="progressbar"
                                                  style="width: {{ $range.'%' }}" aria-valuenow="{{ $range }}"
                                                  aria-valuemin="0"
                                                  aria-valuemax="100"></div>
                                         </div>
                                     </td>
-                                    <td class="align-middle text-center text-nowrap g-color-cyan"><i class="fa fa-spinner fa-spin g-ml-5"></i>در انتظار تحویل</td>
+                                    <td class="align-middle text-center text-nowrap g-color-primary"><i class="fa fa-spinner fa-spin g-ml-5"></i>در انتظار تحویل</td>
                                 @endif
                                 <td class="align-middle text-center text-nowrap">{{ $rec->DeliveryProblem }}</td>
                             </tr>

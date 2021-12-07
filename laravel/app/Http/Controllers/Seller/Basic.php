@@ -360,7 +360,7 @@ class Basic extends Controller
 //            ->get();
 
         $data = DB::table('product_delivery as pd')
-            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*')
+            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*','p.Brand')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
