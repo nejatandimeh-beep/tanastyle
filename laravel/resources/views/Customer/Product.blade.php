@@ -344,7 +344,7 @@
                             <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
                                 <div class=" col-12 col-lg-3 g-px-0">
                                     <span
-                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-20--lg text-center">هزینه پستی:
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-15--lg text-center">هزینه پستی:
                                         <span>15،000</span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                     </span>
@@ -358,7 +358,7 @@
 
                                 {{--آدرس--}}
                                 <div style="direction: rtl"
-                                     class="d-lg-flex d-block col-12 col-lg-8 g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
+                                     class="d-lg-flex d-block col-12 col-lg-8 g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-start g-brd-top g-mt-15--lg g-brd-top-none--lg g-brd-gray-light-v4">
 
                                     <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
                                         <i class="icon-location-pin u-line-icon-pro g-color-white"></i>

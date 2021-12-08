@@ -226,30 +226,38 @@
                                             </table>
                                         </div>
                                         <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
-                                <span
-                                    class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12 col-lg-3">مبلغ کل فاکتور: <span
-                                        id="orderPrice"></span>
-                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
-                                </span>
+                                            <div class=" col-12 col-lg-3 g-px-0">
+                                                <span
+                                                    class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-0--lg text-center">هزینه پستی:
+                                                    <span>15،000</span>
+                                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                                </span>
+                                                    {{--مبلغ فاکتور--}}
+                                                    <span
+                                                    class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
+                                                                    id="orderPrice"></span>
+                                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                                </span>
+                                            </div>
 
                                             <span style="direction: rtl"
-                                                  class="d-block g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-center force-col-12">
-                                    <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
-                                        <i class="icon-location-pin u-line-icon-pro g-color-white"></i>
-                                    </span>
+                                                  class="d-block g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-start force-col-12">
+                                                <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
+                                                    <i class="icon-location-pin u-line-icon-pro g-color-white"></i>
+                                            </span>
                                     @if(isset($sendAddress->ID))
                                                     <span>آدرس ارسال:</span>
                                                     <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
                                                     <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
                                                     <span class="receiverStateCity g-font-size-16 g-font-weight-300"></span>
                                                     <span id="addressID"
-                                                          class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$sendAddress->Address}}<strong class="g-color-gray-dark-v2 g-mr-5">گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}} <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
+                                                          class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$sendAddress->Address}}<strong class="g-color-gray-dark-v2 g-mr-5"> گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}} <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
                                                 @else
                                                     <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', 'navigation') : route('login') }}"
                                                        id="addAddress"
                                                        class="g-color-red g-color-primary--hover g-mt-0--lg g-mt-30 g-text-underline--none--hover">
-                                                افزودن آدرس<i class="icon-pencil g-mr-5 align-middle"></i>
-                                            </a>
+                                                        افزودن آدرس<i class="icon-pencil g-mr-5 align-middle"></i>
+                                                    </a>
                                                 @endif
                                 </span>
                                         </div>

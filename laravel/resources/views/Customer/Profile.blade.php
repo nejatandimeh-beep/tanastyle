@@ -1487,20 +1487,27 @@
                                                                     @else
                                                                         <i class="fa fa-spinner fa-spin m-0 g-font-size-16 g-color-primary"></i>
                                                                     @endif
-                                                        </span>
+                                                                 </span>
                                                             </div>
                                                         </div>
                                                         <div class="d-lg-flex justify-content-between">
-                                                            <div class="col-12 col-lg-3 g-pl-0--lg">
-                                                            <span
-                                                                class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-my-20 text-center force-col-12">مبلغ کل فاکتور: <span>{{ number_format($row->FinalPrice * $row->Qty) }}</span><span
-                                                                    class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span></span>
+                                                            <div class=" col-12 col-lg-3 g-px-0">
+                                                                <span
+                                                                    class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-15--lg text-center">هزینه پستی:
+                                                                    <span>15،000</span>
+                                                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                                                </span>
+                                                                {{--مبلغ فاکتور--}}
+                                                                <span
+                                                                    class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-20 text-center force-col-12">مبلغ کل فاکتور: <span>{{ number_format(($row->FinalPrice * $row->Qty)+15000) }}</span><span
+                                                                        class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                                                </span>
                                                             </div>
-                                                            <div class="col-12 col-lg-9 g-pr-0--lg">
+                                                            <div class="col-12 col-lg-9 g-px-0">
                                                                 @switch($delivery[$key]->DeliveryStatus)
                                                                     @case('-1')
                                                                     <div style="direction: rtl"
-                                                                         class="g-mt-20 text-right">
+                                                                         class="g-mt-15 text-right">
                                                                         <div
                                                                             class="d-inline-block alert g-bg-orange-opacity-0_1 g-color-orange rounded-0"
                                                                             role="alert">
@@ -1515,7 +1522,7 @@
                                                                     @case('2')
                                                                     @case('3')
                                                                     <div style="direction: rtl"
-                                                                         class="g-mt-20 text-right">
+                                                                         class="g-mt-15 text-right">
                                                                         <div
                                                                             class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
                                                                             role="alert">
@@ -1527,7 +1534,7 @@
                                                                     @break
                                                                     @case('4')
                                                                     <div style="direction: rtl"
-                                                                         class="g-mt-20 text-right">
+                                                                         class="g-mt-15 text-right">
                                                                         <div
                                                                             class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
                                                                             role="alert">
@@ -1540,7 +1547,7 @@
                                                                     @case('5')
                                                                     @if(($deliveryMin[$key] < 10200))
                                                                         <div style="direction: rtl"
-                                                                             class="g-mt-20 text-right">
+                                                                             class="g-mt-15 text-right">
                                                                             <div>
                                                                                 <div
                                                                                     class="d-inline-block alert g-bg-gray-light-v5 rounded-0 g-mb-5"
@@ -1589,7 +1596,7 @@
                                                                         </div>
                                                                     @else
                                                                         <div style="direction: rtl"
-                                                                             class="g-mt-20 text-right">
+                                                                             class="g-mt-15 text-right">
                                                                             <div
                                                                                 class="d-inline-block alert alert-success"
                                                                                 role="alert">
