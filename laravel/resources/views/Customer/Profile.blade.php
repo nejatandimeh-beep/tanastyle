@@ -781,9 +781,9 @@
                                                 <!-- آدرس دقیق ارسالی -->
                                                 <div
                                                     class="d-md-table-cell hidden-sm-down g-font-weight-700 g-valign-middle g-px-10 g-py-5">
-                                                <span
-                                                    style="display: inline-block; width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
-                                                    class="align-middle">{{ $row->Address }}</span>
+                                                    <span
+                                                        style="display: inline-block; width: 500px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"
+                                                        class="align-middle">{{ $row->Address }}</span>
                                                 </div>
                                                 <!-- حذف آدرس -->
                                                 <div
@@ -1364,7 +1364,8 @@
                                         <div class="g-mt-minus-10 g-mx-minus-5">
                                             <div class="text-left g-mt-15 g-mt-0--lg">
                                                 <a href="{{ '#modal16'.$key }}"
-                                                   onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
+                                                   onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');
+                                                            $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));"
                                                    data-modal-target="{{ '#modal16'.$key }}"
                                                    data-modal-effect="slidetogether"
                                                    class="d-lg-flex justify-content-end g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pt-10 bigDevice">
@@ -1504,10 +1505,24 @@
                                                                 </span>
                                                             </div>
                                                             <div class="col-12 col-lg-9 g-px-0">
+                                                                <div style="direction: rtl" id="addressContainer" class="text-right g-mt-15">
+                                                                    <div
+                                                                        class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 g-pt-0--lg text-justify">
+                                                                        <h5 class="d-lg-inline-block d-block g-color-gray-dark-v2">آدرس
+                                                                            ارسال:</h5>
+                                                                        <span id="receiverState" class="d-none">{{ $row->State }}</span>
+                                                                        <span id="receiverCity" class="d-none">{{ $row->City }}</span>
+                                                                        <span class="receiverStateCity"></span>
+                                                                        <span id="addressID"
+                                                                              class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$row->Address}}
+                                                                            <strong class="g-color-gray-dark-v2 g-mr-5">گیرنده:</strong> {{$row->ReceiverName.' '.$row->ReceiverFamily}}
+                                                                            <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$row->Mobile}}</span>
+                                                                    </div>
+                                                                </div>
                                                                 @switch($delivery[$key]->DeliveryStatus)
                                                                     @case('-1')
                                                                     <div style="direction: rtl"
-                                                                         class="g-mt-15 text-right">
+                                                                         class="g-mt-15 g-mt-5--lg text-right">
                                                                         <div
                                                                             class="d-inline-block alert g-bg-orange-opacity-0_1 g-color-orange rounded-0"
                                                                             role="alert">
@@ -1522,7 +1537,7 @@
                                                                     @case('2')
                                                                     @case('3')
                                                                     <div style="direction: rtl"
-                                                                         class="g-mt-15 text-right">
+                                                                         class="g-mt-15 g-mt-5--lg text-right">
                                                                         <div
                                                                             class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
                                                                             role="alert">
@@ -1534,7 +1549,7 @@
                                                                     @break
                                                                     @case('4')
                                                                     <div style="direction: rtl"
-                                                                         class="g-mt-15 text-right">
+                                                                         class="g-mt-15 g-mt-5--lg text-right">
                                                                         <div
                                                                             class="d-inline-block alert g-bg-gray-light-v5 rounded-0"
                                                                             role="alert">
@@ -1547,7 +1562,7 @@
                                                                     @case('5')
                                                                     @if(($deliveryMin[$key] < 10200))
                                                                         <div style="direction: rtl"
-                                                                             class="g-mt-15 text-right">
+                                                                             class="g-mt-15 g-mt-5--lg text-right">
                                                                             <div>
                                                                                 <div
                                                                                     class="d-inline-block alert g-bg-gray-light-v5 rounded-0 g-mb-5"
@@ -1596,7 +1611,7 @@
                                                                         </div>
                                                                     @else
                                                                         <div style="direction: rtl"
-                                                                             class="g-mt-15 text-right">
+                                                                             class="g-mt-15 g-mt-5--lg text-right">
                                                                             <div
                                                                                 class="d-inline-block alert alert-success"
                                                                                 role="alert">

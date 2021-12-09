@@ -65,13 +65,9 @@
                                                 ورود
                                             </button>
                                         </div>
-                                        <div class="d-flex flex-column">
-                                            <a class="d-lg-none btn btn-link text-right g-py-0"
-                                               href="{{ url('/request-customer-mobile','register') }}">
-                                                <h5 class="m-0">ثبت نام</h5>
-                                            </a>
+                                        <div class="d-flex">
                                             @if (Route::has('password.request'))
-                                                <a class="btn btn-link g-py-5--lg g-py-0"
+                                                <a class="btn btn-link g-py-5--lg g-py-0 align-middle"
                                                    href="{{ url('/request-customer-mobile','forget') }}">
                                                     رمزتان را فراموش کرده اید؟
                                                 </a>

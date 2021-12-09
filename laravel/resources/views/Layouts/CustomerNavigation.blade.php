@@ -2522,12 +2522,11 @@
                                 <!-- Login -->
                                 @guest
                                     <div class="d-inline-block g-valign-middle g-mr-25 g-pt-8">
-                                        <a href="{{ route('login') }}" id="login"
+                                        <a href="{{ route('loginMode') }}" id="login"
                                            class="u-icon-v1 g-color-main g-text-underline--none--hover g-width-20 g-height-20"
                                            data-toggle="tooltip"
                                            data-placement="bottom"
-                                           title="ورود یا ثبت نام"
-                                        >
+                                           title="ورود یا ثبت نام">
                                             <i style="z-index: 0" class="fa fa-user"></i>
                                         </a>
                                     </div>

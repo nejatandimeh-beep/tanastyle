@@ -65,6 +65,7 @@ class Basic extends Controller
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
+
         $orderHowDay = array();
         $persianDate = array();
         foreach ($order as $key => $row) {
@@ -341,15 +342,17 @@ class Basic extends Controller
 
         // Get data after Database update
         $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber','ca.*')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->leftJoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
             ->leftJoin('product_detail as pd', function ($join) {
                 $join->on('pd.ID', '=', 'pod.ProductDetailID');
             })
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
+
 
         $delivery = DB::table('product_delivery as delivery')
             ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'pd.SampleNumber')
