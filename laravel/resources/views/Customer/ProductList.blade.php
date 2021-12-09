@@ -1193,7 +1193,7 @@
                     <div id="stickyDiv2" style="z-index: 100 !important;"
                          class="sticky-top g-bg-white-opacity-0_9 g-mb-15">
                         <div class="d-flex g-py-10">
-                            <h1 style="display: none" id="productTitle" class="h5 align-self-center m-0 col-6 pr-0">{{$title}}</h1>
+                            <h1 style="display: none" id="productTitle" class="h5 align-self-center m-0 col-6 pr-0 bigDevice">{{$title}}</h1>
                             <div id="filterContent" class="d-flex col-10 justify-content-between g-px-0">
                                 <div style="display: block" id="smallFilterDiv"
                                      class="sideBarButton g-ml-10">
@@ -1243,6 +1243,8 @@
                     <div id="loadProduct" class="d-none loadProduct"></div>
                     <!-- Products -->
                     <div id="productContainer" class="row g-mb-50">
+                        <h1 style="display: none" class="d-lg-none d-block h5 g-pa-10 g-mr-10 g-mt-10">{{$title}}</h1>
+
                         @foreach($data as $key => $row)
                             <div id="productDiv" class="col-12 col-lg-3 g-mb-30">
                                 <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
