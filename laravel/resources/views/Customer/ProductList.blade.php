@@ -66,7 +66,8 @@
                                                                    name="gender"
                                                                    id="gender-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
-                                                                   type="checkbox" {{ ($gender === 'all') ? 'checked=""' : '' }}>
+                                                                   onchange="checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
+                                                            type="checkbox" {{ ($gender === 'all') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -82,7 +83,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
                                                                    id="g-0"
-                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '0' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -99,7 +100,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
                                                                    id="g-1"
-                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '1' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -116,7 +117,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
                                                                    id="g-2"
-                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '2' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -133,7 +134,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
                                                                    id="g-3"
-                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '3' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -150,7 +151,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
                                                                    id="g-4"
-                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '4' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -167,7 +168,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="gender"
                                                                    id="g-5"
-                                                                   onchange="$('#gender-all').prop('checked',false)"
+                                                                   onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '5' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -210,6 +211,7 @@
                                                                    id="cat-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
                                                                    {{ ($catCode === 'all') ? 'checked' : ''}}
+                                                                   onchange="checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -226,7 +228,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="a"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'a' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -244,7 +246,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="b"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'b' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -262,7 +264,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="c"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'c' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -280,7 +282,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="d"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'd' || $catCode === 'clothes')? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -298,7 +300,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="e"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'e') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -316,7 +318,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="f"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'f') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -334,7 +336,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="g"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'g' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -352,7 +354,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="h"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'h' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -370,7 +372,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="i"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'i' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -388,7 +390,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="j"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'j' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -406,7 +408,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="k"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'k' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -424,7 +426,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="l"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'l' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -442,7 +444,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="m"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'm' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -460,7 +462,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="n"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'n' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -478,7 +480,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="o"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'o' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -496,7 +498,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="p"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'p' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -514,7 +516,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="category"
                                                                    id="q"
-                                                                   onchange="$('#cat-all').prop('checked',false)"
+                                                                   onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    {{ ($catCode === 'all' || $catCode === 'q' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
@@ -557,6 +559,7 @@
                                                                    name="size"
                                                                    id="size-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
+                                                                   onchange="checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -574,7 +577,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
                                                                    id="XS"
-                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -592,7 +595,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
                                                                    id="S"
-                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -610,7 +613,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
                                                                    id="M"
-                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -628,7 +631,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
                                                                    id="L"
-                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -646,7 +649,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
                                                                    id="XL"
-                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -664,7 +667,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
                                                                    id="XXL"
-                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -682,7 +685,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
                                                                    id="XXXL"
-                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -700,7 +703,7 @@
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
                                                                    name="size"
                                                                    id="Free"
-                                                                   onchange="$('#size-all').prop('checked',false)"
+                                                                   onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -822,6 +825,7 @@
                                                                    name="color"
                                                                    id="color-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
+                                                                   onchange="checkAllIsOff('#filters-on-color',$(this).attr('name'))"
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
@@ -857,7 +861,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -891,7 +896,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -925,7 +931,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -959,7 +966,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -993,7 +1001,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -1027,7 +1036,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -1061,7 +1071,8 @@
                                                                    $('#c-0').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -1095,7 +1106,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-0').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -1129,7 +1141,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-0').prop('checked',false);
-                                                                   $('#c-9').prop('checked',false);">
+                                                                   $('#c-9').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>
@@ -1163,7 +1176,8 @@
                                                                    $('#c-6').prop('checked',false);
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
-                                                                   $('#c-0').prop('checked',false);">
+                                                                   $('#c-0').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
                                                             </div>

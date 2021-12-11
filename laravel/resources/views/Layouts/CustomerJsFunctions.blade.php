@@ -226,7 +226,7 @@
                     let id = $(this).attr('id'), filterDiv = $('#filters-on-cat');
                     category.push(id);
                     if (id === 'cat-all') {
-                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">دسته بندی: همه</span>');
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">طبقه بندی: همه</span>');
                         return false;
                     } else {
                         $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
@@ -409,7 +409,7 @@
                 let id = $(this).attr('id'), filterDiv = $('#filters-on-cat');
                 category.push(id);
                 if (id === 'cat-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">دسته بندی: همه</span>');
+                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">طبقه بندی: همه</span>');
                     category.push('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q');
                     return false;
                 } else {
@@ -895,6 +895,26 @@
             ele.val(fixNumbers(val));
         }
 
+        function checkAllIsOff(filterDiv,filter) {
+            setTimeout(function () {
+                switch (filter) {
+                    case 'gender':
+                        if($.isEmptyObject(gender))
+                            $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-lightred u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">جنسیت: خاموش</span>');
+                        break;
+                    case 'category':
+                        if($.isEmptyObject(category))
+                            $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-lightred u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">طبقه بندی: خاموش</span>');
+                        break;
+                    case 'size':
+                        if($.isEmptyObject(size))
+                            $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-lightred u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">سایز: خاموش</span>');
+                        break;
+                    default:
+                        break;
+                }
+            }, 1);
+        }
         function allSwitchBtn(btn) {
             switch (btn) {
                 case 'gender-all':

@@ -56,7 +56,7 @@
                         <div class="modal-header">
                             <h4>ایجاد گفتگو جدید</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <i class="hs-icon hs-icon-close"></i>
+                                ×
                             </button>
                         </div>
                         <form action="{{ route('customerConnectionNew')}}" method="post" enctype='multipart/form-data'>
