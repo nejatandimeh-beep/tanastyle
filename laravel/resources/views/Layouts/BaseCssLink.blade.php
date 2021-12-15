@@ -23,8 +23,28 @@
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor/icon-awesome/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/icon-line/css/simple-line-icons.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/icon-awesome/css/font-awesome.min.css') }}">--}}
+{{--    <link rel="stylesheet" href="{{ asset('assets/vendor/icon-line/css/simple-line-icons.css') }}">--}}
+    <script type="text/javascript">
+        (function() {
+            let font_awesome = document.createElement('link');
+
+            font_awesome.href = "{{ asset('assets/vendor/icon-awesome/css/font-awesome.min.css') }}";
+            font_awesome.rel = 'stylesheet';
+            font_awesome.type = 'text/css';
+            document.getElementsByTagName('head')[0].appendChild(font_awesome);
+        })();
+
+        (function() {
+            let simple_line_icons = document.createElement('link');
+
+            simple_line_icons.href = "{{ asset('assets/vendor/icon-line/css/simple-line-icons.css') }}";
+            simple_line_icons.rel = 'stylesheet';
+            simple_line_icons.type = 'text/css';
+            document.getElementsByTagName('head')[0].appendChild(simple_line_icons);
+        })();
+
+    </script>
     <link rel="stylesheet" href="{{ asset('assets/vendor/slick-carousel/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/wait-animate.min.css') }}">

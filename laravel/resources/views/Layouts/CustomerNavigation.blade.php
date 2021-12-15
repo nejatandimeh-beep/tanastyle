@@ -2454,7 +2454,7 @@
                                         <div class="col-md-4 g-mb-30 g-mb-0--md">
                                             <article class="u-block-hover">
                                                 <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                                                     src="{{ asset('img/Other/bronze.jpg')}}" alt="Image Description">
+                                                     src="{{ asset('img/Other/bronze.jpg?v=445')}}" alt="Image Description">
                                                 <div class="g-pos-abs g-bottom-30 g-left-30 custom-bottom">
                                                     <h2 class="h5 mb-0 g-color-black">تخفیف های برنز</h2>
                                                     <span class="d-block g-color-black">15 تا 25 درصد</span>
@@ -2466,7 +2466,7 @@
                                         <div class="col-md-4 g-mb-30 g-mb-0--md">
                                             <article class="u-block-hover">
                                                 <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                                                     src="{{ asset('img/Other/silver.jpg')}}" alt="Image Description">
+                                                     src="{{ asset('img/Other/silver.jpg?v=445')}}" alt="Image Description">
                                                 <div class="g-pos-abs g-bottom-30 g-left-30 custom-bottom">
                                                     <h2 class="h5 mb-0 g-color-black">تخفیف های نقره ای</h2>
                                                     <span class="d-block g-color-black">25 تا 35 درصد</span>
@@ -2478,7 +2478,7 @@
                                         <div class="col-md-4 g-mb-30 g-mb-0--md">
                                             <article class="u-block-hover">
                                                 <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                                                     src="{{ asset('img/Other/gold.jpg')}}" alt="Image Description">
+                                                     src="{{ asset('img/Other/gold.jpg?v=445')}}" alt="Image Description">
                                                 <div class="g-pos-abs g-bottom-30 g-left-30 custom-bottom">
                                                     <h2 class="h5 mb-0 g-color-black">تخفیف های طلایی</h2>
                                                     <span class="d-block g-color-black">35 درصد به بالا</span>

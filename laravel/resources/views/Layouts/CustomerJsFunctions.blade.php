@@ -1,5 +1,6 @@
 @section('CustomerJsFunction')
     <script>
+
         let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
             file_upload, file_type;
 
@@ -41,31 +42,26 @@
                     viewMode: 2,
                     zoomable: true,
                     background: true,
-                    minCropBoxWidth: 1000,
-                    minCropBoxHeight: 1000,
+                    minCropBoxWidth: 400,
+                    minCropBoxHeight: 400,
                     dragCrop: true,
                     dragMode: 'move',
                     movable: true,
                     // preview: '.preview'
                 });
-
-                $(document.body).addClass('me-position-fix');
-                $(document.body).removeClass('me-position-normally');
             });
 
             $modal.on('hidden.bs.modal', function () {
                 cropper.destroy();
                 cropper = null;
-                $(document.body).addClass('me-position-normally');
-                $(document.body).removeClass('me-position-fix');
             });
 
             $('#crop').on('click', function () {
                 $('#cropText').hide();
                 $('#waitingCrop').show();
                 let canvas = cropper.getCroppedCanvas({
-                    width: 1000,
-                    height: 1000
+                    width: 400,
+                    height: 400
                 });
 
                 canvas.toBlob(function (blob) {

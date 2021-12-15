@@ -564,14 +564,14 @@ input[type=number] {
     height:100%;
     position:fixed;
     z-index:9999;
-    background:url("/../img/Other/loader.gif") no-repeat center center rgb(255, 255, 255)
+    background:url("/../img/Other/loader.png") no-repeat center center rgb(255, 255, 255)
 }
 
 .loadProduct{
     width:200px;
     height:200px;
     margin: 40px auto 40px auto;
-    background:url("/../img/Other/loader.gif") no-repeat center center rgb(255, 255, 255)
+    background:url("/../img/Other/loader.png") no-repeat center center rgb(255, 255, 255)
 }
 
 .emptyCart{
