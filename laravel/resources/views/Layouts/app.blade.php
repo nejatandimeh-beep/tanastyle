@@ -38,7 +38,6 @@
     </style>
 </head>
 <body>
-<div id="load" class="load"></div>
 <div id="currentPage" class="d-none">{{$_SERVER['REQUEST_URI']}}</div>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
@@ -93,29 +92,12 @@
 </div>
 </body>
 <script>
-    $(window).bind('beforeunload', function () {
-        $('#load').show();
-    });
-
     $(".forceEnglishNumber").keypress(function(event){
         let ew = event.which;
         if(48 <= ew && ew <= 57)
             return true;
         return false;
     });
-
-    document.onreadystatechange = function () {
-        let state = document.readyState;
-        if (state === 'complete') {
-            document.getElementById('load').remove();
-        }
-    }
-
-    function loaderShow() {
-        let loader = '<div id="load" class="load"></div>';
-        $('body').prepend(loader);
-    }
-
 
     $(document).on('ready',function () {
         if($('#password').length>0){
@@ -174,7 +156,6 @@
         }
     });
 
-
     function checkPass() {
         let myInput=$('#password'),
             letter = $("#lowercase"),
@@ -186,7 +167,9 @@
             alert('لطفا قواعد رمزگذاری را رعایت کنید.');
         } else {
             if(myInput.val() === $('#password-confirm').val()) {
-                loaderShow();
+                $('#submitText').hide();
+                $('#waitingSubmit').show();
+                $('#save').prop('disabled',true);
                 $('form').submit();
             } else {
                 alert('رمز و تکرار رمز یکسان نیستند.')

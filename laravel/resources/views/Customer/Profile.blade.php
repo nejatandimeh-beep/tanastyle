@@ -146,7 +146,7 @@
                         <button type="button"
                                 class="btn btn-secondary" data-dismiss="modal">انصراف
                         </button>
-                        <button type="button"id="crop" class="btn btn-primary g-mr-5">
+                        <button type="button" id="crop" class="btn btn-primary g-mr-5">
                             <span id="cropText">برش</span>
                             <i id="waitingCrop"
                                style="display: none"

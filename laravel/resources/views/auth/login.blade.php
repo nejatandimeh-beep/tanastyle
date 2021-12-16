@@ -60,9 +60,14 @@
                                 <div class="col-md-10 text-left">
                                     <div style="direction: ltr" class="d-flex col-12 p-0">
                                         <div>
-                                            <button type="submit" onclick="loaderShow()"
-                                                    class="btn u-btn-primary rounded-0 g-px-30 g-py-7 g-font-size-16">
-                                                ورود
+                                            <button type="submit"
+                                                    onclick="$('#submitText').hide(); $('#waitingSubmit').show();"
+                                                    onsubmit="$(this).prop('disabled',true)"
+                                                    class="btn u-btn-primary rounded-0 g-font-size-16">
+                                                <span id="submitText">ورود</span>
+                                                <span id="waitingSubmit"
+                                                      style="display: none"
+                                                      class="m-0 g-color-white">منتظر بمانید..</span>
                                             </button>
                                         </div>
                                         <div class="d-flex">

@@ -44,9 +44,14 @@
 
                             <div class="form-group row g-mb-60--lg g-mt-20">
                                 <div class="col-md-10 text-left">
-                                    <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16"
-                                            onclick="loaderShow()">
-                                        ارسال کد
+                                    <button type="submit"
+                                            onclick="$('#submitText').hide(); $('#waitingSubmit').show();"
+                                            onsubmit="$(this).prop('disabled',true)"
+                                            class="btn u-btn-primary rounded-0 g-font-size-16">
+                                        <span id="submitText">ارسال کد</span>
+                                        <span id="waitingSubmit"
+                                              style="display: none"
+                                              class="m-0 g-color-white">منتظر بمانید..</span>
                                     </button>
                                 </div>
                             </div>

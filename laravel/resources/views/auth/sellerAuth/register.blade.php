@@ -767,7 +767,10 @@
                                 <button id="save" type="button"
                                         class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mt-15"
                                         onclick="saveUserData()">
-                                    ارسال اطلاعات
+                                    <span id="submitText">ارسال اطلاعات</span>
+                                    <span id="waitingSubmit"
+                                          style="display: none"
+                                          class="m-0 g-color-white">منتظر بمانید..</span>
                                 </button>
                             </div>
                         </form>
@@ -902,9 +905,13 @@
             $('#workPostalCode').hasClass('g-brd-red') || $('#shopNumber').hasClass('g-brd-red') ||
             $('#fileShow11').hasClass('g-brd-red') || $('#fileShow12').hasClass('g-brd-red') ||
             !$('#uploadingText11').hasClass('d-none') || !$('#uploadingText12').hasClass('d-none') ||
-            $('#agree').hasClass('d-none'))
+            $('#agree').hasClass('d-none')){
             alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و مجدداً تلاش کنید.');
+        }
         else{
+            $('#submitText').hide();
+            $('#waitingSubmit').show();
+            $('#save').prop('disabled',true);
             $('#registerForm').submit();
         }
     }

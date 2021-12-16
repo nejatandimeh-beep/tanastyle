@@ -70,8 +70,11 @@
 
                             <div class="form-group row g-mb-60--lg g-mt-20">
                                 <div class="col-md-10 text-left">
-                                    <button type="button" class="force-col-12 btn u-btn-primary rounded-0 g-font-size-16" onclick="checkPass()">
-                                        ثبت رمز جدید
+                                    <button type="button" class="force-col-12 btn u-btn-primary rounded-0 g-font-size-16" id="save" onclick="checkPass()">
+                                        <span id="submitText">ثبت رمز جدید</span>
+                                        <span id="waitingSubmit"
+                                              style="display: none"
+                                              class="m-0 g-color-white">منتظر بمانید..</span>
                                     </button>
                                 </div>
                             </div>

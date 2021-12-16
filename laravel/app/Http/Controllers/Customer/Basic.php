@@ -1719,19 +1719,22 @@ class Basic extends Controller
     {
         $output = '';
         $data = DB::table('product')
-            ->select('Name')
-            ->where('Name', 'like', $val . '%')
-            ->groupBy('Name')
+            ->select('Name','Model','Brand')
+            ->where('Name', 'like', '%'.$val . '%')
+            ->orWhere('Model', 'like', '%'.$val . '%')
+            ->orWhere('Brand', 'like', '%'.$val . '%')
+            ->groupBy('ID')
             ->take(15)
             ->get();
 
         foreach ($data as $key => $row) {
+            $result=$row->Name.' '.$row->Model.' '.$row->Brand;
             $output .= '<li style="border-radius: 0 !important;"
                         class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
                             <a  href="' . route('productSearchList', [$row->Name]) . '"
                                 style="text-decoration: none"
                                 class="col-12 p-0 text-right g-color-gray-dark-v3 g-color-primary--hover">
-                             ' . $row->Name . '
+                             ' . $result . '
                             </a>
                         </li>';
         }

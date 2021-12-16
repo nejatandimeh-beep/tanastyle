@@ -69,8 +69,14 @@
                                             رمزتان را فراموش کرده اید؟
                                         </a>
                                     @endif
-                                    <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16">
-                                        ورود
+                                    <button type="submit"
+                                            onclick="$('#submitText').hide(); $('#waitingSubmit').show();"
+                                            onsubmit="$(this).prop('disabled',true)"
+                                            class="btn u-btn-primary rounded-0 g-font-size-16">
+                                        <span id="submitText">ورود</span>
+                                        <span id="waitingSubmit"
+                                           style="display: none"
+                                           class="m-0 g-color-white">منتظر بمانید..</span>
                                     </button>
                                 </div>
                             </div>

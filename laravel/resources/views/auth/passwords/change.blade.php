@@ -33,8 +33,14 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-10 text-left">
-                                    <button type="submit" class="btn btn-primary rounded-0">
-                                        بروز رسانی رمز عبور
+                                    <button type="submit"
+                                            onclick="$('#submitText').hide(); $('#waitingSubmit').show();"
+                                            onsubmit="$(this).prop('disabled',true)"
+                                            class="btn u-btn-primary rounded-0 g-font-size-16">
+                                        <span id="submitText">ورود</span>
+                                        <span id="waitingSubmit"
+                                              style="display: none"
+                                              class="m-0 g-color-white">منتظر بمانید..</span>
                                     </button>
                                 </div>
                             </div>

@@ -27,7 +27,6 @@
 
 </head>
 <body>
-<div style="display: none" id="load" class="load"></div>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container text-right g-py-5">
@@ -66,10 +65,6 @@
 <script src="{{ asset('assets/js/cropper.js') }}"></script>
 </body>
 <script>
-    jQuery(window).bind('beforeunload', function(){
-        $('#load').show();
-    });
-
     $(document).on('ready',function () {
         if($('#password').length>0){
             let myInput=$('#password'),
@@ -120,10 +115,7 @@
             });
         }
     });
-    function loaderShow() {
-        let loader = '<div id="load" class="load"></div>';
-        $('body').prepend(loader);
-    }
+
     function checkPass() {
         let myInput=$('#password'),
             letter = $("#lowercase"),
@@ -135,7 +127,9 @@
             alert('لطفا قواعد رمزگذاری را رعایت کنید.');
         } else {
             if(myInput.val() === $('#password-confirm').val()) {
-                loaderShow();
+                $('#submitText').hide();
+                $('#waitingSubmit').show();
+                $('#save').prop('disabled',true);
                 $('form').submit();
             } else {
                 alert('رمز و تکرار رمز یکسان نیستند.')
