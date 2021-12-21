@@ -19,7 +19,7 @@
         <script src="{{ asset('assets/vendor/revolution-slider/revolution/js/extensions/revolution.extension.carousel.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.js') }}"></script>
     @break
-    @case(strpos($_SERVER['REQUEST_URI'],'/Customer-Product-'))
+    @case(strpos($_SERVER['REQUEST_URI'],'/Product'))
         <!--تخفیفات ویژه-->
         <script src="{{ asset('assets/js/components/hs.carousel.js') }}"></script>
         <script src="{{ asset('assets/vendor/revolution-slider/revolution/js/extensions/revolution.extension.carousel.min.js') }}"></script>

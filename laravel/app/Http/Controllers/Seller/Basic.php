@@ -8,7 +8,10 @@ use File;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Kavenegar;
 
 
 class Basic extends Controller
@@ -233,6 +236,40 @@ class Basic extends Controller
             ->update([
                 'Status' => 'exist'
             ]);
+
+        $data=DB::table('product_detail as pd')
+            ->select('pd.ID','pd.Size','pd.Color','p.Name','p.Brand')
+            ->leftJoin('product as p','p.ID','=','pd.ProductID')
+            ->where('pd.ID',$id)
+            ->first();
+
+        $existData = DB::table('customer_call_product_exist as cpe')
+            ->select('cpe.ID as requestID','cpe.CustomerID','c.id','c.Mobile')
+            ->leftJoin('customers as c','c.id','=','cpe.CustomerID')
+            ->where('ProductDetailID', $id)
+            ->get();
+
+        //--------------
+        foreach ($existData as $key => $row){
+            try {
+                $token = '10'.(string)$row->requestID;
+                $token10=$data->Name.'('.$data->Brand.')';
+                $token20=$id.'/'.$data->Size.'/'.$data->Color;
+
+                $api_key = Config::get('kavenegar.apikey');
+                $var = new Kavenegar\KavenegarApi($api_key);
+                $template = "productExist";
+                $type = "sms";
+
+                $result = $var->VerifyLookup($row->Mobile, $token, $token10, $token20, $template, $type);
+            } catch (\Kavenegar\Exceptions\ApiException $e) {
+                // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            } catch (\Kavenegar\Exceptions\HttpException $e) {
+                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            }
+        }
 
         $this->qtyStatus['productIdChangeQty'] = $id;
         $this->qtyStatus['alarmChangeQty'] = 1;

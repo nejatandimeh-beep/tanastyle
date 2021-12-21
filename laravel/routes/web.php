@@ -194,7 +194,7 @@ Route::get('/Customer-Product-Search-List/{val}', 'Customer\Basic@productSearchL
 Route::get('/Customer-Product-/{gender}/{cat}/{catCode}/{title}', 'Customer\Basic@product')->name('menuProduct');
 
 // Customer Product Detail
-Route::get('/Customer-Product-Detail/{id}/{size}/{color}', 'Customer\Basic@productDetail')->name('productDetail');
+Route::get('/Product/{id}/{size}/{color}', 'Customer\Basic@productDetail')->name('productDetail');
 
 Route::get('/Customer-Product-Visit/{id}', 'Customer\Basic@productVisit')->name('productVisit');
 

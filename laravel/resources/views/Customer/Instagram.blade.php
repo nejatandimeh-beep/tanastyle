@@ -32,10 +32,17 @@
                                     @endif
                                 </div>
                             </div>
-
                             <div class="form-group row g-mb-60--lg g-mt-20">
                                 <div class="col-md-10 text-left">
-                                    <button type="submit" class="btn u-btn-primary rounded-0 g-font-size-16">
+                                    <button type="button"
+                                            onclick="
+                                            if($('#pdId').val() !== ''){
+                                                if ($('#loginAlert').text() === 'login')
+                                                    $('form').submit();
+                                                else
+                                                    window.location = '/Login-Mode';
+                                            } else alert('شناسه محصول الزامیست.')"
+                                            class="btn u-btn-primary rounded-0 g-font-size-16">
                                         نمایش محصول
                                     </button>
                                 </div>

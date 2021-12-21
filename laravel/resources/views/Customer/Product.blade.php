@@ -22,8 +22,8 @@
                     <!-- Article Icons -->
                     <div class=" align-self-center">
                         <h1 id="productName"
-                            class="d-inline-block h4 g-color-black mb-0">{{ $data->Name }}</h1>
-                        <span id="productModel" class="align-middle">{{ $data->Model }}</span>
+                            class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}</h1>
+                        <span id="productModel" class="align-middle g-font-size-13">{{ $data->Model }}</span>
                     </div>
                     <div style="direction: ltr"
                          class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
@@ -118,7 +118,7 @@
                         <input type="radio" id="color" name="color" value=""
                                class="u-checkbox-v1--checked-brd-primary">
                         <label for="color"
-                               class="d-inline-block text-center g-brd-gray g-brd-around g-brd-2 g-bg-secondary g-font-size-15 g-py-5 g-px-15 g-transition-0_3 g-ml-5 g-mb-5">
+                               class="d-inline-block text-center g-brd-gray g-brd-around g-brd-2 g-bg-secondary g-font-size-15 g-py-5 g-px-15 g-transition-0_3 g-ml-10 g-mb-5">
                         </label>
                     </div>
                     <!-- Article Color -->
@@ -203,7 +203,7 @@
                     <button type="button"
                             id="addToBasketBtn"
                             class="btn btn-lg u-btn-outline-primary g-font-weight-600 rounded-0 g-mt-10 g-font-size-16 g-px-25"
-                            onclick="if ($('#loginAlert').text() === 'login') { $(this).addClass('d-none'); addToCart($('#productDetailID').text()) } else { alert('لطفا نخست وارد شوید.'); }">
+                            onclick="if ($('#loginAlert').text() === 'login') { $(this).addClass('d-none'); addToCart($('#productDetailID').text()) } else { customerLogin() }">
                         افزودن به سبد
                     </button>
                     <span id="attachToBasket"

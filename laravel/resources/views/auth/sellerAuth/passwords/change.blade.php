@@ -78,6 +78,7 @@
                             <div style="direction: rtl" class="form-group row g-mt-30">
                                 <label for="password-confirm" class="col-md-4 col-form-label text-md-left"></label>
                                 <div class="col-lg-6 text-right g-px-15">
+                                    <small class="text-muted g-font-size-12">* فقط صفحه کلید انگلیسی مجاز است.</small><br>
                                     <small class="text-muted g-font-size-12">* رمز عبور باید شامل اعداد، حروف بزرگ، حروف کوچک و بیشتر از 8 کاراکتر باشد.</small>
                                 </div>
                             </div>

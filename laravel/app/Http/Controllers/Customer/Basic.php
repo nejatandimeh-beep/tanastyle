@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Picture;
-use Darryldecode\Cart\Cart;
-use Darryldecode\Cart\Exceptions\InvalidItemException;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
 use File;
@@ -342,7 +340,7 @@ class Basic extends Controller
 
         // Get data after Database update
         $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber','ca.*')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber', 'ca.*')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
@@ -433,14 +431,43 @@ class Basic extends Controller
     {
         $row = $request->get('row');
         $productDetailID = [];
+        $noExist = null;
         $qty = [];
         for ($i = 0; $i <= $row - 1; $i++) {
             $productDetailID[$i] = $request->get('productDetailID' . $i);
-            $qty[$i] = $request->get('qty' . $i);
-            $new = $this->newOrder($productDetailID[$i], $qty[$i], $i);
+            $noExist = DB::table('product_detail')
+                ->select('ID', 'Qty')
+                ->where('ID', $productDetailID[$i])
+                ->where('Qty', '=', 0)
+                ->first();
+        }
+
+        if ($noExist !== null) {
+            for ($i = 0; $i <= $row - 1; $i++) {
+                $qty[$i] = $request->get('qty' . $i);
+                $new = $this->newOrder($productDetailID[$i], $qty[$i], $i);
+            }
+        } else {
+            return redirect()->route('cart', 'noExist');
         }
 
         return redirect()->route('userProfile', 'deliveryStatus');
+    }
+
+    public function bankingPortal($id, $qty)
+    {
+        $noExist = null;
+        $noExist = DB::table('product_detail')
+            ->select('ID', 'Qty', 'Size', 'Color')
+            ->where('ID', $id)
+            ->first();
+
+        if ($noExist !== null) {
+            $new = $this->newOrder($id, $qty, 0);
+            return redirect()->route('userProfile', 'deliveryStatus');
+        } else {
+            return redirect()->route('productDetail',[$noExist->ProductID,$noExist->Size,$noExist->Color] );
+        }
     }
 
     public function checkCartNumber()
@@ -579,8 +606,8 @@ class Basic extends Controller
         $city = $request->get('receiver-city');
         $address = $request->get('receiver-address');
 
-        ($prePhone===null)?$prePhone='000':true;
-        ($phone===null)?$phone='00000000':true;
+        ($prePhone === null) ? $prePhone = '000' : true;
+        ($phone === null) ? $phone = '00000000' : true;
 
         DB::table('customer_address')
             ->where('CustomerID', Auth::user()->id)
@@ -747,13 +774,6 @@ class Basic extends Controller
         return 'Visit: Success';
     }
 
-    public function bankingPortal($id, $qty)
-    {
-        $new = $this->newOrder($id, $qty, 0);
-
-        return redirect()->route('userProfile', 'deliveryStatus');
-    }
-
     public function returnProduct(Request $request)
     {
         // Upload Images
@@ -762,7 +782,7 @@ class Basic extends Controller
         $picPath = public_path('/img/return/') . $folderName;
         File::makeDirectory($picPath, 0777, true, true);
         $image = $request->file('returnPic');
-        $source='';
+        $source = '';
         switch ($image->getMimeType()) {
             case 'image/jpeg':
             case 'image/jpg':
@@ -1062,7 +1082,7 @@ class Basic extends Controller
         $imageName = Auth::user()->id . '.png';
         $imageFullPath = $folderPath . $imageName;
 
-        $source='';
+        $source = '';
         switch ($image->getMimeType()) {
             case 'image/jpeg':
             case 'image/jpg':
@@ -1302,7 +1322,7 @@ class Basic extends Controller
                    class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
                    data-toggle="tooltip"
                    data-placement="top"
-                   href="https://tanastyle/Customer-Product-Detail/' . $row->ID . '"
+                   href="https://tanastyle/Product/' . $row->ID . '"
                    data-original-title="جزئیات محصول">
                    <i class="icon-eye g-line-height-0_7"></i>
                 </a>
@@ -1719,16 +1739,16 @@ class Basic extends Controller
     {
         $output = '';
         $data = DB::table('product')
-            ->select('Name','Model','Brand')
-            ->where('Name', 'like', '%'.$val . '%')
-            ->orWhere('Model', 'like', '%'.$val . '%')
-            ->orWhere('Brand', 'like', '%'.$val . '%')
+            ->select('Name', 'Model', 'Brand')
+            ->where('Name', 'like', '%' . $val . '%')
+            ->orWhere('Model', 'like', '%' . $val . '%')
+            ->orWhere('Brand', 'like', '%' . $val . '%')
             ->groupBy('ID')
             ->take(15)
             ->get();
 
         foreach ($data as $key => $row) {
-            $result=$row->Name.' '.$row->Model.' '.$row->Brand;
+            $result = $row->Name . ' ' . $row->Model . ' ' . $row->Brand;
             $output .= '<li style="border-radius: 0 !important;"
                         class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
                             <a  href="' . route('productSearchList', [$row->Name]) . '"
@@ -1844,7 +1864,7 @@ class Basic extends Controller
             ->first();
 
         $productInfo = DB::table('product_detail as pd')
-            ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId','p.FinalPrice')
+            ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId', 'p.FinalPrice')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
             ->where('pd.ID', $id)
             ->first();

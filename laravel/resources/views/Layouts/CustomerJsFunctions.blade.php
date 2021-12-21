@@ -328,7 +328,7 @@
             if ($('#loginAlert').text() === 'login') {
                 window.location = '/Customer-Connection';
             } else
-                alert('لطفا ابتدا وارد شوید.');
+                customerLogin();
         }
 
         function submitButton(ele, waitingIcon) {
@@ -340,6 +340,10 @@
                 alert('پیغامتان را کامل بنویسید.');
             } else
                 $('#customerMsgForm').submit();
+        }
+
+        function customerLogin() {
+            window.location = '/Login-Mode';
         }
 
         // ------------------------------------------فیلترینگ صفحه محصولات-----------------------------------------------
@@ -753,12 +757,22 @@
         $('#callMeExist button').on('click', function () {
             let productDetailID = $('input[name="size"]:checked').attr('id').replace(/[^0-9]/gi, '');
             if ($('#loginAlert').text() === 'login') {
-                $.ajax({
-                    type: 'GET',
-                    url: "/Customer-Product-CallMe/" + productDetailID
+                $.confirm({
+                    title: 'اطلاع از موجود شدن محصول',
+                    content: 'کاربر گرامی اطلاع از موجود شدن محصول از طریق پیامک ارسال می گردد.',
+                    buttons: {
+                        تایید: function () {
+                            $.ajax({
+                                type: 'GET',
+                                url: "/Customer-Product-CallMe/" + productDetailID
+                            });
+                            $('#callMeExist').hide();
+                            $('#customerCalled').show();
+                        },
+                        انصراف: function () {
+                        },
+                    }
                 });
-                $('#callMeExist').hide();
-                $('#customerCalled').show();
             } else
                 alert('لطفا نخست داخل شوید.');
         });
@@ -873,11 +887,11 @@
             if (val.length >= len) {
                 val = val.slice(0, len);
                 ele.val(val);
-                if(ele.attr('name')==='receiver-postalCode'){
+                if (ele.attr('name') === 'receiver-postalCode') {
                     ele.removeClass('g-brd-red');
                     $(nextFocus).focus();
-                } else if(ele.attr('name') === 'receiver-mobile'){
-                    if(val.substring(0,2)==='09'){
+                } else if (ele.attr('name') === 'receiver-mobile') {
+                    if (val.substring(0, 2) === '09') {
                         ele.removeClass('g-brd-red');
                         $(nextFocus).focus();
                     }
@@ -891,19 +905,19 @@
             ele.val(fixNumbers(val));
         }
 
-        function checkAllIsOff(filterDiv,filter) {
+        function checkAllIsOff(filterDiv, filter) {
             setTimeout(function () {
                 switch (filter) {
                     case 'gender':
-                        if($.isEmptyObject(gender))
+                        if ($.isEmptyObject(gender))
                             $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-lightred u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">جنسیت: خاموش</span>');
                         break;
                     case 'category':
-                        if($.isEmptyObject(category))
+                        if ($.isEmptyObject(category))
                             $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-lightred u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">طبقه بندی: خاموش</span>');
                         break;
                     case 'size':
-                        if($.isEmptyObject(size))
+                        if ($.isEmptyObject(size))
                             $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-lightred u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">سایز: خاموش</span>');
                         break;
                     default:
@@ -911,6 +925,7 @@
                 }
             }, 1);
         }
+
         function allSwitchBtn(btn) {
             switch (btn) {
                 case 'gender-all':
@@ -996,7 +1011,7 @@
             if ($('#loginAlert').text() === 'login')
                 window.location = '/Customer-Cart';
             else
-                alert('لطفا ابتدا وارد شوید.')
+                customerLogin();
         }
 
         function cartOrder(row) {
@@ -1019,7 +1034,7 @@
                     $('#cartOrderForm').append("<input name='productDetailID" + i + "' value=" + val[i] + ">");
                     $('#cartOrderForm').append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
-                allPrice+=15000;
+                allPrice += 15000;
                 $('#cartOrderForm').append("<input name='row' value=" + row + ">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
@@ -1334,7 +1349,7 @@
 
         // پر کردن فرم فاکتور فروش در هنگام نمایش مودال
         function addOrderTable() {
-            let orderPrice=parseInt($('#productFinalPrice').text().replace(/[^0-9]/gi, '')) * parseInt($('#productQtyBought').val());
+            let orderPrice = parseInt($('#productFinalPrice').text().replace(/[^0-9]/gi, '')) * parseInt($('#productQtyBought').val());
             $('#orderID').text($('#productID').text() + '/' + $('#productDetailID').text());
             $('#orderProductID').text($('#productDetailID').text());
             $('#orderProductName').text($('#productName').text() + ' ' + $('#productModel').text());
@@ -1345,7 +1360,7 @@
             $('#orderProductUnitPrice').text($('#productUnitPrice').text());
             $('#orderProductFinalPrice').text($('#productFinalPrice').text());
             $('#orderProductQtyPrice').text(orderPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $('#orderPrice').text((orderPrice+15000).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#orderPrice').text((orderPrice + 15000).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#orderDate').text(nowDate());
             $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }
@@ -1637,7 +1652,7 @@
         function saveUserAddress(num) {
             // let row = 'addressUpdate' + num;
             // console.log($('#'+row+' [name="receiver-state"]').val());
-            if($('.formValidate').hasClass('g-brd-red')) {
+            if ($('.formValidate').hasClass('g-brd-red')) {
                 alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و دوباره تلاش کنید.');
             } else {
                 $.confirm({
@@ -1665,7 +1680,7 @@
         }
 
         function addUserAddress() {
-            if($('.custombox-content .formValidateNew').hasClass('g-brd-red')) {
+            if ($('.custombox-content .formValidateNew').hasClass('g-brd-red')) {
 
                 alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و دوباره تلاش کنید.')
             } else {
@@ -1690,7 +1705,7 @@
         }
 
         function returnSubmit() {
-            if($('.custombox-content .returnFormValidate').hasClass('g-brd-red')){
+            if ($('.custombox-content .returnFormValidate').hasClass('g-brd-red')) {
                 alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و دوباره تلاش کنید.')
             } else {
                 $.confirm({
