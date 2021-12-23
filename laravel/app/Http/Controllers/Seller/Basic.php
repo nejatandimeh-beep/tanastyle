@@ -225,17 +225,17 @@ class Basic extends Controller
 //  Add Qty
     public function addQty($id, $val)
     {
-        DB::table('product_detail')
-            ->where('ID', $id)
-            ->update([
-                'Qty' => DB::raw('Qty + ' . $val)
-            ]);
-
-        DB::table('customer_call_product_exist')
-            ->where('ProductDetailID', $id)
-            ->update([
-                'Status' => 'exist'
-            ]);
+//        DB::table('product_detail')
+//            ->where('ID', $id)
+//            ->update([
+//                'Qty' => DB::raw('Qty + ' . $val)
+//            ]);
+//
+//        DB::table('customer_call_product_exist')
+//            ->where('ProductDetailID', $id)
+//            ->update([
+//                'Status' => 'exist'
+//            ]);
 
         $data=DB::table('product_detail as pd')
             ->select('pd.ID','pd.Size','pd.Color','p.Name','p.Brand')
@@ -254,7 +254,7 @@ class Basic extends Controller
             try {
                 $token = '10'.(string)$row->requestID;
                 $token10=$data->Name.'('.$data->Brand.')';
-                $token20=$id.'/'.$data->Size.'/'.$data->Color;
+                $token20='/'.$id.'/'.$data->Size.'/'.$data->Color;
 
                 $api_key = Config::get('kavenegar.apikey');
                 $var = new Kavenegar\KavenegarApi($api_key);
