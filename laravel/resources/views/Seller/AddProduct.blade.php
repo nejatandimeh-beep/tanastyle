@@ -102,7 +102,7 @@
 
             <!-- Detail -->
             <div class="form-group g-mb-20 text-right">
-                <label id="lblDetail" class="g-mb-10">توضیحات محصول</label>
+                <label id="lblDetail" class="g-mb-10">توضیحات کیفی محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <div
                         class="input-group-addon d-flex justify-content-start g-color-gray-light-v1 g-bg-white rounded-0 g-py-12">
@@ -115,18 +115,17 @@
                               id="addProductDetail"
                               onkeypress="$('#lblDetail').removeClass('g-color-red')"
                               placeholder="هر توضیح در سطری جدا" name="detail">{{ old('detail') }}</textarea>
-                    <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">توضیحات می تواند به فروش
+                    <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">توضیحات مفید می تواند به فروش
                         بهتر محصول شما کمک کند.</b>
                 </div>
                 <div style="direction: rtl">
-                    <small class="text-muted g-font-size-12">در این قسمت می توانید توضیحاتی برای محصول اضافه
-                        کنید.</small><br>
-                    <small class="text-muted g-font-size-12">به عنوان مثال:</small><br>
+                    <small class="text-muted g-font-size-12">در قسمت توضیحات کیفی می توانید توضیحاتی برای محصول اضافه
+                        کنید. به عنوان مثال:</small><br>
                     <small class="text-muted g-font-size-12"> می توان جنس محصول روشهای شستشو روشهای نگهداری و ... را
                         توضیح داد.
                     </small><br>
-                    <small class="text-muted g-font-size-12">اگر محصولتان سایز بندی خاصی دارد لطفا اندازه ها را در این قسمت قید کنید.
-                    </small><br>
+                    <small class="{{$catCode==='m' || $catCode==='n'|| $catCode==='o' || $catCode==='p'?'d-block':'d-none'}} text-muted g-font-size-12">اگر محصولتان سایز بندی خاصی دارد لطفا اندازه ها را در این قسمت قید کنید.
+                    </small>
                     <small class="text-muted g-font-size-12">لطفا توضیحات را مرتب و در سطرهای جدا وارد نمایید.</small>
                 </div>
             </div>
@@ -2574,6 +2573,53 @@
                                     <span>تصویر موجود است</span>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div style="direction: rtl" class="d-flex col-12 g-pl-15 sizeDetailContainer justify-content-center g-brd-around g-brd-gray-light-v3 g-pa-20">
+                        <div id="sizeDetail{{$i}}" class="{{(($name==='سوتین')||($name==='ست لباس زیر'))&&($gender==='0'||$gender==='2')?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور سوتین</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{($name==='زیر پوش'||$name==='گن'||$catCode==='c'|| $catCode==='i'|| $catCode==='d'|| $catCode==='j'||($gender==='1'&&$name==='ست لباس زیر'))&& $name!=='گن'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور سینه</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{$name==='زیر پوش'||$name==='گن'||$cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h'|| $catCode==='c'|| $catCode==='i'|| $catCode==='d'|| $catCode==='j'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور کمر</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{($name==='زیر پوش'||$name==='گن'||$catCode==='c'|| $catCode==='i' || $catCode==='d'|| $catCode==='j')&& $name!=='گن'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور شکم</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{($cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h')&&($name!=='زیر پوش')?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور باسن</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{ ($cat==='00' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h'|| $catCode==='d'|| $catCode==='j'||($gender==='1'&&$name==='ست لباس زیر'))&&($name!=='زیر پوش')?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه قد</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='f'|| $catCode==='k'|| $catCode==='l'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه طول</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه عرض</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه عمق</span>
+                            <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
                     </div>
                     <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">

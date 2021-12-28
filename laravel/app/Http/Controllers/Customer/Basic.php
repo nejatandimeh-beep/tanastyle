@@ -466,7 +466,7 @@ class Basic extends Controller
             $new = $this->newOrder($id, $qty, 0);
             return redirect()->route('userProfile', 'deliveryStatus');
         } else {
-            return redirect()->route('productDetail',[$noExist->ProductID,$noExist->Size,$noExist->Color] );
+            return redirect()->route('productDetail',[$noExist->ProductID,$noExist->Size,urlencode($noExist->Color)] );
         }
     }
 
@@ -632,7 +632,7 @@ class Basic extends Controller
         if ($productID === 'empty')
             return redirect()->route('userProfile', 'addressStatus');
         else {
-            return redirect()->route('productDetail', [$productID, $size, $color]);
+            return redirect()->route('productDetail', [$productID, $size, urlencode($color)]);
         }
     }
 
@@ -644,8 +644,9 @@ class Basic extends Controller
             ->delete();
     }
 
-    public function productDetail($id, $sizeInfo, $colorInfo)
+    public function productDetail($id, $sizeInfo, $color)
     {
+        $colorInfo=urldecode($color);
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product')
             ->select('*')
@@ -1293,7 +1294,7 @@ class Basic extends Controller
 
                  <div class="js-slide">
                     <a
-                        href="' . route('productDetail', [$row->ProductID, $row->Size, $row->Color]) . '">
+                        href="' . route('productDetail', [$row->ProductID, $row->Size, urlencode($row->Color)]) . '">
                         <img class="img-fluid w-100" src="' . $row->PicPath . $row->SampleNumber . '.png" alt="Image Description">
                     </a>
                  </div>
@@ -1843,7 +1844,7 @@ class Basic extends Controller
             ->first();
 
         if (isset($data->ID))
-            return redirect()->route('productDetail', [$data->ProductID, $data->Size, $data->Color]);
+            return redirect()->route('productDetail', [$data->ProductID, $data->Size, urlencode($data->Color)]);
         else
             return redirect()->route('instagram')->with('error', 'find');
 
@@ -1852,11 +1853,6 @@ class Basic extends Controller
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($id, $qty, $i)
     {
-        $customer = DB::table('customers')
-            ->select('Mobile')
-            ->where('id', Auth::user()->id)
-            ->first();
-
         $customerInfo = DB::table('customers as c')
             ->select('ca.*')
             ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')

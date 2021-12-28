@@ -47,7 +47,7 @@
         }
 
         $('.customTooltip').on('click', function () {
-            let parentID=$(this).parent().closest('div').attr('id').toString(),
+            let parentID = $(this).parent().closest('div').attr('id').toString(),
                 color = $(this).find(">:first").text() + parentID[0],
                 colorList = [],
                 colorText = color.replace(/\d+/g, ''),
@@ -106,7 +106,11 @@
         }
 
         $('#addProductBtn').on('click', function (event) {
-            let r = checkRepeat('size0'), err = '', qty = $('#addProductSizeQty').val();
+            let r = checkRepeat('size0'),
+                err = '',
+                qty = $('#addProductSizeQty').val();
+
+
             if (typeof r !== "undefined") err = 'size';
             if ($('#addProductModel').val() === '') {
                 err = 'model';
@@ -149,6 +153,35 @@
             $('#errorMsg').addClass('d-none');
         });
 
+        $('form').on('submit', function () {
+            let productDetail = $('#addProductDetail');
+
+            // remove last enter keys from addProductDetail value
+            for (let m = 0; m < 10; m++) {
+                if ((productDetail.val().slice(-1)) === '\n')
+                    productDetail.val(productDetail.val().slice(0, -1));
+            }
+
+            $('.sizeDetailContainer').each(function (row) {
+                if (!$('#sizeDetail'+row).children(":first").hasClass('d-none')) {
+                    if (row === 0)
+                        productDetail.val(productDetail.val() + '\n\n' + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '')+'\n' );
+                    else
+                        productDetail.val(productDetail.val() + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '')+'\n');
+                    $(this).find('.sizeDetail').each(function () {
+                        let titleElement = $(this).find('.title'),
+                            title = titleElement.text(),
+                            value = $(this).find('.value').val(),
+                            detail = '';
+                        if (!$(this).hasClass('d-none')) {
+                            detail = detail + title + ': ' + ' cm ' + value + '\n';
+                            productDetail.val(productDetail.val() + detail)
+                        }
+                    });
+                }
+                productDetail.val(productDetail.val() + '\n');
+            });
+        });
         // ---------------------------------- Ajax Search ----------------------------------------
         // Live Search with Key Up AJAX
         function keyUpSearch(id, q) {
@@ -842,7 +875,7 @@
                 image = document.getElementById('sample_image'),
                 cropper, inputID, inputIdFinshed = [], counter = 0, file_upload, file_type,
                 folderName = createFolderName();
-                $('#folderName2').val(createFolderName());
+            $('#folderName2').val(createFolderName());
             $('input[id^="pic"]').on('change', function (event) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
                 $('#fileShow' + inputID).removeClass('g-color-red');
@@ -918,7 +951,7 @@
                             processData: false,
                             contentType: false,
                             type: 'POST',
-                            beforeSend: function (){
+                            beforeSend: function () {
                                 console.log('ok')
                                 $('#fileShow' + inputID).addClass('d-none');
                                 $('#uploadingIcon' + inputID).removeClass('d-none');

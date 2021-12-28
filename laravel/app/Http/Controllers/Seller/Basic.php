@@ -225,49 +225,58 @@ class Basic extends Controller
 //  Add Qty
     public function addQty($id, $val)
     {
-//        DB::table('product_detail')
-//            ->where('ID', $id)
-//            ->update([
-//                'Qty' => DB::raw('Qty + ' . $val)
-//            ]);
-//
-//        DB::table('customer_call_product_exist')
-//            ->where('ProductDetailID', $id)
-//            ->update([
-//                'Status' => 'exist'
-//            ]);
-
         $data=DB::table('product_detail as pd')
-            ->select('pd.ID','pd.Size','pd.Color','p.Name','p.Brand')
+            ->select('pd.ID','pd.Size','pd.Color','p.Name','p.Brand','pd.Qty','pd.ProductID')
             ->leftJoin('product as p','p.ID','=','pd.ProductID')
             ->where('pd.ID',$id)
             ->first();
 
-        $existData = DB::table('customer_call_product_exist as cpe')
-            ->select('cpe.ID as requestID','cpe.CustomerID','c.id','c.Mobile')
-            ->leftJoin('customers as c','c.id','=','cpe.CustomerID')
-            ->where('ProductDetailID', $id)
-            ->get();
+        $qtyEmpty=false;
+        if($data->Qty === 0){
+            $qtyEmpty=true;
+        }
 
-        //--------------
-        foreach ($existData as $key => $row){
-            try {
-                $token = '10'.(string)$row->requestID;
-                $token10=$data->Name.'('.$data->Brand.')';
-                $token20='/'.$id.'/'.$data->Size.'/'.$data->Color;
+        DB::table('product_detail')
+            ->where('ID', $id)
+            ->update([
+                'Qty' => DB::raw('Qty + ' . $val)
+            ]);
 
-                $api_key = Config::get('kavenegar.apikey');
-                $var = new Kavenegar\KavenegarApi($api_key);
-                $template = "productExist";
-                $type = "sms";
+        if($qtyEmpty===true){
+            $existData = DB::table('customer_call_product_exist as cpe')
+                ->select('cpe.ID as requestID','cpe.CustomerID','cpe.Status','c.id','c.Mobile')
+                ->leftJoin('customers as c','c.id','=','cpe.CustomerID')
+                ->where('ProductDetailID', $id)
+                ->where('Status', 'noExist')
+                ->get();
 
-                $result = $var->VerifyLookup($row->Mobile, $token, $token10, $token20, $template, $type);
-            } catch (\Kavenegar\Exceptions\ApiException $e) {
-                // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
-                echo $e->errorMessage();
-            } catch (\Kavenegar\Exceptions\HttpException $e) {
-                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-                echo $e->errorMessage();
+            DB::table('customer_call_product_exist')
+                ->select('*')
+                ->where('ProductDetailID', $id)
+                ->update([
+                    'Status' => 'exist'
+                ]);
+
+            //--------------
+            foreach ($existData as $key => $row){
+                try {
+                    $token = '10'.(string)$row->requestID;
+                    $token10=$data->Name.'('.$data->Brand.')';
+                    $token20=$data->ProductID.'/'.$data->Size.'/'.urlencode($data->Color);
+
+                    $api_key = Config::get('kavenegar.apikey');
+                    $var = new Kavenegar\KavenegarApi($api_key);
+                    $template = "productExist";
+                    $type = "sms";
+
+                    $result = $var->VerifyLookup($row->Mobile, $token,null,null, $template, $type, $token10, $token20);
+                } catch (\Kavenegar\Exceptions\ApiException $e) {
+                    // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                    echo $e->errorMessage();
+                } catch (\Kavenegar\Exceptions\HttpException $e) {
+                    // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                    echo $e->errorMessage();
+                }
             }
         }
 

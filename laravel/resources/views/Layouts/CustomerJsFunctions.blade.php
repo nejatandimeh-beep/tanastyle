@@ -755,7 +755,7 @@
 
         // Call Me Exist
         $('#callMeExist button').on('click', function () {
-            let productDetailID = $('input[name="size"]:checked').attr('id').replace(/[^0-9]/gi, '');
+            let productDetailID = $('input[name="color"]:checked').attr('id').replace(/[^0-9]/gi, '');
             if ($('#loginAlert').text() === 'login') {
                 $.confirm({
                     title: 'اطلاع از موجود شدن محصول',
