@@ -160,8 +160,8 @@ class RegisterController extends Controller
             'PicPath' => $request['userImage'],
             'PicPathCard' => $request['nationalityCardImage'],
             'email' => $request['email'],
-            'password' => Hash::make($password),
             'PasswordHint' => $password,
+            'password' => Hash::make($password),
         ]);
 
         $id = DB::table('sellers')
