@@ -470,6 +470,11 @@ class Basic extends Controller
         }
     }
 
+    public function paymentSuccess()
+    {
+        return view('Customer.PaymentSuccess');
+    }
+
     public function checkCartNumber()
     {
         $data = DB::table('product_cart')

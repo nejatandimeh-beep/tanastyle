@@ -65,6 +65,25 @@
             checkRepeat(id);
         });
 
+        $('.multiColor').on('click', function () {
+            let parentID = $(this).parent().closest('div').attr('id').toString(),
+                color = $(this).find(">:first").text() + '10',
+                colorList = [],
+                colorText = color.replace(/\d+/g, ''),
+                id = $(this).parent().closest('div').attr('id').substring(3);
+            $('#colorBtn' + id).text(colorText);
+            $('#hexCode' + id).attr('value', '0');
+            $('#color' + id + ' option').val(color);
+            $('#colorModal' + id).modal('toggle');
+            $('#lblColor' + id).removeClass('g-color-red');
+
+            $('[name^="color"]').each(function (i, obj) {
+                colorList[i] = $('#color' + i + ' option').val().replace(/\d+/g, '');
+            });
+            colorList.getDuplicates();
+            checkRepeat(id);
+        });
+
         function hexc(colorval) {
             var parts = colorval.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
             delete (parts[0]);
@@ -163,11 +182,11 @@
             }
 
             $('.sizeDetailContainer').each(function (row) {
-                if (!$('#sizeDetail'+row).children(":first").hasClass('d-none')) {
+                if (!$('#sizeDetail' + row).children(":first").hasClass('d-none')) {
                     if (row === 0)
-                        productDetail.val(productDetail.val() + '\n\n' + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '')+'\n' );
+                        productDetail.val(productDetail.val() + '\n\n' + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '') + '\n');
                     else
-                        productDetail.val(productDetail.val() + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '')+'\n');
+                        productDetail.val(productDetail.val() + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '') + '\n');
                     $(this).find('.sizeDetail').each(function () {
                         let titleElement = $(this).find('.title'),
                             title = titleElement.text(),
@@ -897,12 +916,12 @@
 
             $modal.on('shown.bs.modal', function () {
                 cropper = new Cropper(image, {
-                    aspectRatio: 1,
+                    aspectRatio: 4/5,
                     viewMode: 2,
                     zoomable: true,
                     background: true,
-                    minCropBoxWidth: 1200,
-                    minCropBoxHeight: 1200,
+                    minCropBoxWidth: 1350,
+                    minCropBoxHeight: 1080,
                     dragCrop: true,
                     dragMode: 'move',
                     multiple: true,
@@ -924,8 +943,8 @@
 
             $('#crop').on('click', function () {
                 let canvas = cropper.getCroppedCanvas({
-                    width: 1200,
-                    height: 1200
+                    width: 1350,
+                    height: 1080
                 });
 
                 canvas.toBlob(function (blob) {
@@ -984,6 +1003,8 @@
             // Remove Element When Use Big Device
             if (window.matchMedia('screen and (min-width:900px)').matches) {
                 $('#removeWhenBD').remove();
+                if($('#picModal').length>0)
+                    $('#picModal').removeClass('g-ml-minus-4');
             } else {
                 if ($('#mobile').length > 0)
                     $('#mobile').attr('pattern', '\d*');
@@ -1020,6 +1041,11 @@
                 $('html, body').animate({
                     scrollTop: $('#focusAfterPageLoad').offset().top
                 }, 1);
+
+            if ($('.parentShow').length > 0) {
+                $('.sizeDetailContainer').removeClass('d-none');
+                $('.sizeDetailContainer').addClass('d-lg-flex');
+            }
         });
     </script>
     </html>

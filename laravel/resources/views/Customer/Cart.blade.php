@@ -1,7 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <!-- سبد خرید -->
-    <div style="direction: rtl" class="container-fluid customBox">
+    <div style="direction: rtl" class="container-fluid modalBox">
         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
 
         <div class="breadCrumbs">
@@ -121,209 +121,226 @@
                 </form>
 
                 <div class="{{ isset($data[0]) ? '':'d-none' }} text-left g-ml-10">
-                    <button type="button"
-                            id="orderSubmit"
-                            class="btn btn-xl btn-primary g-color-white g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 g-ml-0 g-mt-0 g-mt-20--lg force-col-12"
-                            data-toggle="modal"
-                            onclick="cartOrder($('#cartCount').text())"
-                            data-target="#exampleModal">
+                    <a onclick="$(document.body).addClass('me-position-fix');
+                           $(document.body).removeClass('me-position-normally'); cartOrder($('#cartCount').text())"
+                       id="orderSubmit"
+                       href="#modal70"
+                       data-modal-target="#modal70"
+                       data-modal-effect="slidetogether"
+                       class="btn btn-xl btn-primary g-color-white g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 g-ml-0 g-mt-0 g-mt-20--lg force-col-12">
                         <span class="pull-left">
                             پرداخت امن
                             <span class="d-block g-font-size-11">نهایی کردن خرید</span>
                         </span>
                         <i class="fa fa-shield float-right g-font-size-32 g-ml-25 align-self-center g-line-height-0 g-mt-20"></i>
-                    </button>
+                    </a>
 
                     <!--factor-->
-                    <div style="padding: 0" class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div style="max-width: 100%" class="modal-dialog my-0" role="document">
-                            <div class="modal-content rounded-0">
-                                <div class="modal-header">
-                                    <h6 class="text-right m-0">فاکتور فروش به تاریخ <span id="cartDate"></span></h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body g-pb-200--lg">
-                                    <div class="g-px-20">
-                                        <h6 style="direction: rtl"
-                                            class="card-header g-bg-orange-opacity-0_1 g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right tableHint">
-                                            <i class="fa fa-hand-o-right g-font-size-18"></i>
-                                            <span class="g-font-size-13 g-mr-5">جدول را به سمت چپ بکشید.</span>
-                                        </h6>
-                                        <div class="table-responsive">
-                                            <table style="direction: rtl;" class="table table-bordered u-table--v2">
-                                                <thead>
-                                                <tr>
-                                                    <th class="text-center">ردیف</th>
-                                                    <th class="text-center">کد محصول</th>
-                                                    <th class="text-center">نام محصول</th>
-                                                    <th class="text-center">برند</th>
-                                                    <th class="text-center">رنگ</th>
-                                                    <th class="text-center">سایز</th>
-                                                    <th class="text-center">تعداد</th>
-                                                    <th class="text-center">قیمت واحد</th>
-                                                    <th class="text-center">با
-                                                        تخفیف {{ isset($data[0]) ? $row->Discount.'%' : '' }}</th>
-                                                    <th class="text-center">عکس</th>
-                                                </tr>
-                                                </thead>
 
-                                                <tbody>
-                                                @foreach($data as $key =>$row)
-                                                    <tr id="orderRow{{$key}}">
-                                                        <td class="align-middle text-nowrap text-center">
-                                                            <span id="rowNumber{{$key}}" class="g-pa-5"></span>
-                                                        </td>
-                                                        <td class="align-middle text-nowrap text-center">
+                    <div id="modal70"
+                         class="text-left g-bg-white SubMenuScroll g-pb-20"
+                         style="display: none; overflow-y: auto; height: 100% !important; -webkit-overflow-scrolling: touch; max-height: 100% !important; width: 100%">
+                        <div class="sticky-top g-bg-white g-px-20">
+                            <div class="d-flex justify-content-between g-pt-15 g-pb-8">
+                                <button style="outline: none" type="button" class="close"
+                                        onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
+                                    <i class="hs-icon hs-icon-close">×</i>
+                                </button>
+                                <h6 class="text-right m-0">فاکتور فروش به تاریخ <span id="cartDate"></span></h6>
+                            </div>
+                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
+                        </div>
+                        <div class="g-px-20">
+                            <div style="direction: rtl" class="alert alert-warning text-right g-mr-5" role="alert">
+                                <strong class="g-ml-5">توجه!</strong>لطفا قبل از ادامه خرید، فاکتور فروش را به دقت بررسی
+                                نمایید.
+                            </div>
+                            <h6 style="direction: rtl"
+                                class="card-header g-bg-orange-opacity-0_1 g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right tableHint">
+                                <i class="fa fa-hand-o-right g-font-size-18"></i>
+                                <span class="g-font-size-13 g-mr-5">جدول را به سمت چپ بکشید.</span>
+                            </h6>
+                            <div class="table-responsive">
+                                <table style="direction: rtl;" class="table table-bordered u-table--v2">
+                                    <thead>
+                                    <tr>
+                                        <th class="text-center focused rtlPosition">ردیف</th>
+                                        <th class="text-center">کد محصول</th>
+                                        <th class="text-center">نام محصول</th>
+                                        <th class="text-center">برند</th>
+                                        <th class="text-center">رنگ</th>
+                                        <th class="text-center">سایز</th>
+                                        <th class="text-center">تعداد</th>
+                                        <th class="text-center">قیمت واحد</th>
+                                        <th class="text-center">با
+                                            تخفیف {{ isset($data[0]) ? $row->Discount.'%' : '' }}</th>
+                                        <th class="text-center">عکس</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    @foreach($data as $key =>$row)
+                                        <tr id="orderRow{{$key}}">
+                                            <td class="align-middle text-nowrap text-center">
+                                                <span id="rowNumber{{$key}}" class="g-pa-5"></span>
+                                            </td>
+                                            <td class="align-middle text-nowrap text-center">
                                                             <span id="productDetailID{{$key}}" class="g-pa-5">
                                                                 {{ $row->ProductDetailID }}
                                                             </span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                                 {{ $row->Name }}
                                                             </span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                                 {{ $row->Brand }}
                                                             </span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                                 {{ $row->Color }}
                                                             </span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                                 {{ $row->Size }}
                                                             </span>
-                                                        </td>
-                                                        <td class="align-middle text-nowrap text-center">
-                                                            <span id="orderQty{{$key}}" class="g-pa-5"></span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-nowrap text-center">
+                                                <span id="orderQty{{$key}}" class="g-pa-5"></span>
+                                            </td>
+                                            <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                                 {{ number_format($row->UnitPrice) }}
                                                             </span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                             <span id="productFinalPrice{{$key}}" class="g-pa-5">
                                                                 {{ number_format($row->FinalPrice) }}
                                                             </span>
-                                                        </td>
-                                                        <td class="align-middle text-center">
+                                            </td>
+                                            <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                               <img class="g-width-80 g-height-80"
                                                                    src="{{ $row->PicPath.$row->PicNumber }}.jpg"
                                                                    alt="Image Description">
                                                             </span>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
-                                            <div class=" col-12 col-lg-3 g-px-0">
-                                                <span
-                                                    class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-0--lg text-center">هزینه پستی:
-                                                    <span>15،000</span>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
+                                <div class=" col-12 col-lg-3 g-px-0">
+                                    {{--ارزش افزوده--}}
+                                    <span style="direction: rtl"
+                                          class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">%9 ارزش افزوده:
+                                        <span id="valueAdded"></span>
+                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                    </span>
+                                    {{--هزینه پستی--}}
+                                    <span
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
+                                        <span>15,000</span>
+                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                    </span>
+                                    {{--مبلغ فاکتور--}}
+                                    <span
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5  g-mt-15--lg g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
+                                            id="orderPrice"></span>
                                                     <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                                 </span>
-                                                    {{--مبلغ فاکتور--}}
-                                                    <span
-                                                    class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
-                                                                    id="orderPrice"></span>
-                                                    <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
-                                                </span>
-                                            </div>
+                                </div>
 
-                                            <span style="direction: rtl"
-                                                  class="d-block g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-start force-col-12">
-                                                <span class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
+                                <span style="direction: rtl"
+                                      class="d-block g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-start force-col-12">
+                                                <span
+                                                    class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
                                                     <i class="icon-location-pin u-line-icon-pro g-color-white"></i>
                                             </span>
                                     @if(isset($sendAddress->ID))
-                                                    <span>آدرس ارسال:</span>
-                                                    <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
-                                                    <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
-                                                    <span class="receiverStateCity g-font-size-16 g-font-weight-300"></span>
-                                                    <span id="addressID"
-                                                          class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$sendAddress->Address}}<strong class="g-color-gray-dark-v2 g-mr-5"> گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}} <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
-                                                @else
-                                                    <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', 'navigation') : route('login') }}"
-                                                       id="addAddress"
-                                                       class="g-color-red g-color-primary--hover g-mt-0--lg g-mt-30 g-text-underline--none--hover">
+                                        <span>آدرس ارسال:</span>
+                                        <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
+                                        <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
+                                        <span class="receiverStateCity g-font-size-16 g-font-weight-300"></span>
+                                        <span id="addressID"
+                                              class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$sendAddress->Address}}<strong
+                                                class="g-color-gray-dark-v2 g-mr-5"> گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}} <strong
+                                                class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
+                                    @else
+                                        <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', 'navigation') : route('login') }}"
+                                           id="addAddress"
+                                           class="g-color-red g-color-primary--hover g-mt-0--lg g-mt-30 g-text-underline--none--hover">
                                                         افزودن آدرس<i class="icon-pencil g-mr-5 align-middle"></i>
                                                     </a>
-                                                @endif
+                                    @endif
                                 </span>
-                                        </div>
-                                        <div style="direction: rtl"
-                                             class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
-                                            <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
-                                                <div style="direction: rtl" class="btn-group justified-content">
-                                                    {{--                                        <form class="p-0 m-0" id="selectBankName">--}}
-                                                    <label class="u-check force-col-12">
-                                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                               type="radio" checked="">
-                                                        <span
-                                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ملت</span>
-                                                    </label>
-                                                    <label class="u-check force-col-12">
-                                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                               type="radio">
-                                                        <span
-                                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک پارسیان</span>
-                                                    </label>
-                                                    <label class="u-check force-col-12">
-                                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                               type="radio">
-                                                        <span
-                                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ایرانیان</span>
-                                                    </label>
-                                                    <label class="u-check force-col-12">
-                                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                               type="radio">
-                                                        <span
-                                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک صادرات</span>
-                                                    </label>
-                                                    <label class="u-check force-col-12">
-                                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
-                                                               type="radio">
-                                                        <span
-                                                            class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">بانک ملی</span>
-                                                    </label>
-                                                    {{--                                        </form>--}}
-                                                </div>
-                                            </div>
-                                            <a
-                                                id="orderSubmitBtn"
-                                                onclick="orderSubmit()"
-                                                class="btn btn-xl btn-primary g-color-white g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
+                            </div>
+                            <div style="direction: rtl"
+                                 class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
+                                <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
+                                    <div style="direction: rtl" class="btn-group justified-content">
+                                        {{--                                        <form class="p-0 m-0" id="selectBankName">--}}
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio" checked="">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ملت</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک پارسیان</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک ایرانیان</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">بانک صادرات</span>
+                                        </label>
+                                        <label class="u-check force-col-12">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="bankName"
+                                                   type="radio">
+                                            <span
+                                                class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">بانک ملی</span>
+                                        </label>
+                                        {{--                                        </form>--}}
+                                    </div>
+                                </div>
+                                <a
+                                    id="orderSubmitBtn"
+                                    onclick="orderSubmit()"
+                                    class="btn btn-xl btn-primary g-color-white g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
                                     <span class="pull-left">درگاه بانکی
                                         <span id="payment-door" class="d-block g-font-size-11">ورود به درگاه ملت</span>
                                     </span>
-                                                <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
-                                            </a>
+                                    <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
+                                </a>
 
-                                            <i id="waitingIconSubmit" style="display: none"
-                                               class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                                <i id="waitingIconSubmit" style="display: none"
+                                   class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
                             </div>
                         </div>
                     </div>
                 </div>
-
-                <div id="cartEmptyAlert" class="{{ isset($data[0]) ? 'd-none':'' }}">
-                    <div id="emptyCart" class="emptyCart g-mt-100--lg g-mb-100--lg g-mt-30 g-mb-50 mx-auto"></div>
-                </div>
-
             </div>
+
+            <div id="cartEmptyAlert" class="{{ isset($data[0]) ? 'd-none':'' }}">
+                <div id="emptyCart" class="emptyCart g-mt-100--lg g-mb-100--lg g-mt-30 g-mb-50 mx-auto"></div>
+            </div>
+
         </div>
+    </div>
     </div>
 @endsection

@@ -14,7 +14,7 @@
 
         {{--        Header--}}
         <h3 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-            مشخصات محصول<i class="fa fa-plus-square g-ml-5"></i>
+            مشخصات محصول<span class="g-mx-5">@switch($gender) @case(0) {{$name.' زنانه '}} @break @case(1) {{$name.' مردانه '}} @break @case(2) {{$name.' دخترانه '}} @break @case(3){{$name.' پسرانه '}}@break @case(4){{$name.' دخترانه نوزادی '}}@break @case(4){{$name.' پسرانه نوزادی '}}@break @endswitch</span><i class="fa fa-plus-square g-ml-5"></i>
         </h3>
 
         <!-- Text Input Tooltips -->
@@ -2497,6 +2497,51 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <!-- Multi Color -->
+                                                        <div class="card rounded-0 g-brd-none">
+                                                            <div id="accordion-{{$i}}-heading-11" class="u-accordion__header g-pa-0" role="tab">
+                                                                <h5 class="mb-0 text-uppercase g-font-size-default g-font-weight-700 g-pa-20a mb-0">
+                                                                    <a class="collapsed d-block g-color-main g-text-underline--none--hover"
+                                                                       href="#accordion-{{$i}}-body-11"
+                                                                       data-toggle="collapse"
+                                                                       data-parent="#accordion-{{$i}}"
+                                                                       aria-expanded="false"
+                                                                       aria-controls="accordion-{{$i}}-body-11">
+                                                                        <span class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center g-pa-20">
+                                                                          <i class="fa fa-plus"></i>
+                                                                          <i class="fa fa-minus"></i>
+                                                                        </span>
+                                                                        <span class="d-inline-block g-pa-15">
+                                                                          رنگ های مالتی کالر
+                                                                        </span>
+                                                                    </a>
+                                                                </h5>
+                                                            </div>
+                                                            <div id="accordion-{{$i}}-body-11"
+                                                                 class="collapse"
+                                                                 role="tabpanel"
+                                                                 aria-labelledby="accordion-{{$i}}-heading-11">
+                                                                <div id="10-{{$i}}" class="u-accordion__body g-bg-gray-light-v5 g-px-50 g-py-09">
+                                                                    <div style="cursor: pointer"
+                                                                         class="multiColor d-inline-block g-px-10 g-py-5 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover g-bg-primary--hover g-color-white--hover">
+                                                                        <span class="toolTipText">دو رنگ</span>
+                                                                    </div>
+                                                                    <div style="cursor: pointer"
+                                                                         class="d-inline-block g-px-10 g-py-5 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover g-bg-primary--hover g-color-white--hover">
+                                                                        <span class="toolTipText">سه رنگ</span>
+                                                                    </div>
+                                                                    <div style="cursor: pointer"
+                                                                         class="d-inline-block g-px-10 g-py-5 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover g-bg-primary--hover g-color-white--hover">
+                                                                        <span class="toolTipText">چهار رنگ</span>
+                                                                    </div>
+                                                                    <div style="cursor: pointer"
+                                                                         class="d-inline-block g-px-10 g-py-5 g-brd-around g-brd-gray-light-v3 g-ml-1 g-brd-primary--hover g-bg-primary--hover g-color-white--hover">
+                                                                        <span class="toolTipText">رنگارنگ</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                             </div>
                                         </div>
@@ -2575,48 +2620,50 @@
                             </div>
                         </div>
                     </div>
-                    <div style="direction: rtl" class="d-flex col-12 g-pl-15 sizeDetailContainer justify-content-center g-brd-around g-brd-gray-light-v3 g-pa-20">
-                        <div id="sizeDetail{{$i}}" class="{{(($name==='سوتین')||($name==='ست لباس زیر'))&&($gender==='0'||$gender==='2')?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+
+                    <!-- sizeDetail -->
+                    <div style="direction: rtl" class="d-none col-12 g-pb-15 g-pb-20--lg sizeDetailContainer justify-content-right g-brd-around g-brd-gray-light-v3 g-pa-20">
+                        <div id="sizeDetail{{$i}}" class="{{(($name==='سوتین')||($name==='ست لباس زیر'))&&($gender==='0'||$gender==='2')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور سوتین</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{($name==='زیر پوش'||$name==='گن'||$catCode==='c'|| $catCode==='i'|| $catCode==='d'|| $catCode==='j'||($gender==='1'&&$name==='ست لباس زیر'))&& $name!=='گن'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{($name==='زیر پوش'||$name==='گن'||$catCode==='c'|| $catCode==='i'|| $catCode==='d'|| $catCode==='j'||($gender==='1'&&$name==='ست لباس زیر'))&& $name!=='گن'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور سینه</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{$name==='زیر پوش'||$name==='گن'||$cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h'|| $catCode==='c'|| $catCode==='i'|| $catCode==='d'|| $catCode==='j'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{$name==='زیر پوش'||$name==='گن'||$cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h'|| $catCode==='c'|| $catCode==='i'|| $catCode==='d'|| $catCode==='j'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور کمر</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{($name==='زیر پوش'||$name==='گن'||$catCode==='c'|| $catCode==='i' || $catCode==='d'|| $catCode==='j')&& $name!=='گن'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{($name==='زیر پوش'||$name==='گن'||$catCode==='c'|| $catCode==='i' || $catCode==='d'|| $catCode==='j')&& $name!=='گن'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور شکم</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{($cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h')&&($name!=='زیر پوش')?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{($cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h')&&($name!=='زیر پوش')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دور باسن</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{ ($cat==='00' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h'|| $catCode==='d'|| $catCode==='j'||($gender==='1'&&$name==='ست لباس زیر'))&&($name!=='زیر پوش')?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{ ($cat==='00' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h'|| $catCode==='d'|| $catCode==='j'||($gender==='1'&&$name==='ست لباس زیر'))&&($name!=='زیر پوش')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه قد</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='f'|| $catCode==='k'|| $catCode==='l'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='f'|| $catCode==='k'|| $catCode==='l'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه طول</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه عرض</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه عمق</span>
                             <input class="form-control form-control-md rounded-0 text-center value" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
@@ -2748,7 +2795,7 @@
                 <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog"
                      aria-labelledby="exampleModalCenterTitle"
                      aria-hidden="true">
-                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                    <div id="picModal" class="modal-dialog modal-lg g-width-auto--lg w-100 mx-lg-auto g-ml-minus-4 modal-dialog-centered" role="document">
                         <div style="direction:rtl;" class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLongTitle">برش تصویر</h5>
@@ -2757,7 +2804,7 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">
+                            <div class="modal-body g-pa-25">
                                 <div class="img-container">
                                     <div class="col-md-12 p-0">
                                         <img style="width: 100%;" src="" id="sample_image">

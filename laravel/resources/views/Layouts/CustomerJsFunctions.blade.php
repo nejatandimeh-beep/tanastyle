@@ -5,6 +5,9 @@
             file_upload, file_type;
 
         $(document).ready(function () {
+            if ($('.rtlPosition').length > 0)
+                $('.table-responsive').animate({scrollLeft: $('.rtlPosition').position().left}, 1);
+
             if ($('.loginBtn').length > 0)
                 $.ajax({
                     type: 'GET',
@@ -467,7 +470,7 @@
                 color.push(id.replace(/[^0-9]/gi, ''));
                 if (id === 'color-all') {
                     $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">رنگ: همه</span>');
-                    color.push(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+                    color.push(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
                     return false;
                 } else {
                     $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
@@ -975,6 +978,12 @@
         }
 
         function minPriceAllOff(ele) {
+            if(ele.val() !== '' && ele.val().replace(new RegExp(',', 'g'), "")>9999){
+                $('#lblPrice-min').hide();
+            } else{
+                $('#lblPrice-min').show();
+            }
+
             if ((parseInt(ele.val().replace(new RegExp(',', 'g'), "")) > 9999)
                 && (parseInt($('#price-max').val().replace(new RegExp(',', 'g'), "")) < 100000000)
                 && (parseInt($('#price-max').val().replace(new RegExp(',', 'g'), "")) > parseInt(ele.val().replace(new RegExp(',', 'g'), "")))) // برای برداشتن کوما از مبلغ
@@ -988,11 +997,14 @@
         function maxPriceAllOff(ele) {
             if ((parseInt(ele.val().replace(new RegExp(',', 'g'), "")) < 100000000)
                 && (parseInt($('#price-min').val().replace(new RegExp(',', 'g'), "")) > 9999)
-                && (parseInt($('#price-min').val().replace(new RegExp(',', 'g'), "")) < parseInt(ele.val().replace(new RegExp(',', 'g'), "")))) // برای برداشتن کوما از مبلغ
+                && (parseInt($('#price-min').val().replace(new RegExp(',', 'g'), "")) < parseInt(ele.val().replace(new RegExp(',', 'g'), "")))){
                 $('#priceFilterSubmit').attr('disabled', false);
-            else
+                $('#lblPrice-max').hide();
+            } // برای برداشتن کوما از مبلغ
+            else {
+                $('#lblPrice-max').show();
                 $('#priceFilterSubmit').attr('disabled', true);
-
+            }
             ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         }
 
@@ -1034,7 +1046,9 @@
                     $('#cartOrderForm').append("<input name='productDetailID" + i + "' value=" + val[i] + ">");
                     $('#cartOrderForm').append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
-                allPrice += 15000;
+                let valueAdded=(allPrice*9)/100;
+                $('#valueAdded').text(valueAdded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                allPrice += 15000+valueAdded;
                 $('#cartOrderForm').append("<input name='row' value=" + row + ">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
@@ -1360,7 +1374,7 @@
             $('#orderProductUnitPrice').text($('#productUnitPrice').text());
             $('#orderProductFinalPrice').text($('#productFinalPrice').text());
             $('#orderProductQtyPrice').text(orderPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $('#orderPrice').text((orderPrice + 15000).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#orderPrice').text((orderPrice+((orderPrice*9)/100) + 15000).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#orderDate').text(nowDate());
             $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }

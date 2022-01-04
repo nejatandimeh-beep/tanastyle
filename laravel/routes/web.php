@@ -416,6 +416,8 @@ Route::get('/Instagram', 'Customer\Basic@instagram')->name('instagram');
 Route::post('/Instagram-Request-PdId', 'Customer\Basic@requestPdId')->name('requestPdId');
 
 
+// *********************************************** ( Bank Routes ) *************************************************
+Route::get('/Payment-Success', 'Customer\Basic@paymentSuccess')->name('paymentSuccess');
 
 
 

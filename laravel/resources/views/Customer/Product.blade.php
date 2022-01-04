@@ -343,14 +343,21 @@
                             {{--آدرس و مبلغ فاکتور--}}
                             <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
                                 <div class=" col-12 col-lg-3 g-px-0">
+                                    {{--ارزش افزوده--}}
+                                    <span style="direction: rtl"
+                                          class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-15--lg text-center">%9 ارزش افزوده:
+                                        <span id="valueAdded">{{number_format(($data->FinalPrice * 9)/100)}}</span>
+                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                    </span>
+                                    {{--هزینه پستی--}}
                                     <span
-                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-15--lg text-center">هزینه پستی:
-                                        <span>15،000</span>
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
+                                        <span>15,000</span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                     </span>
                                     {{--مبلغ فاکتور--}}
                                     <span
-                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-15--lg g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
                                             id="orderPrice"></span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                     </span>

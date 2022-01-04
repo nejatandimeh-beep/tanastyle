@@ -763,11 +763,11 @@
                                                     <div class="u-input-group-v2">
                                                         <input id="price-min"
                                                                class="form-control rounded-0 u-form-control g-font-size-16 g-brd-gray-light-v4 g-brd-primary--focus"
-                                                               oninput="minPriceAllOff($(this))"
+                                                               oninput="minPriceAllOff($(this));"
                                                                pattern="\d*"
                                                                name="price-min"
                                                                type="text">
-                                                        <label style="left: 24% !important; cursor: text"
+                                                        <label id="lblPrice-min" style="left: 24% !important; cursor: text"
                                                                for="price-min">از ده هزار</label>
                                                     </div>
                                                 </div>
@@ -781,7 +781,7 @@
                                                                pattern="\d*"
                                                                oninput="maxPriceAllOff($(this))"
                                                                type="text">
-                                                        <label style="left: 17% !important; cursor: text"
+                                                        <label id="lblPrice-max" style="left: 17% !important; cursor: text"
                                                                for="price-max">تا صد میلیون</label>
                                                     </div>
                                                 </div>
@@ -837,7 +837,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/allColor.png') }}"
+                                                         src="{{ asset('img/Other/allColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -862,6 +862,7 @@
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -872,7 +873,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/whiteColor.png') }}"
+                                                         src="{{ asset('img/Other/whiteColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -897,6 +898,7 @@
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -907,7 +909,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/redColor.png') }}"
+                                                         src="{{ asset('img/Other/redColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -932,6 +934,7 @@
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -942,7 +945,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/pinkColor.png') }}"
+                                                         src="{{ asset('img/Other/pinkColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -967,6 +970,7 @@
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -977,7 +981,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/orangeColor.png') }}"
+                                                         src="{{ asset('img/Other/orangeColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -1002,6 +1006,7 @@
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -1012,7 +1017,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/yellowColor.png') }}"
+                                                         src="{{ asset('img/Other/yellowColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -1037,6 +1042,7 @@
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -1047,7 +1053,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/greenColor.png') }}"
+                                                         src="{{ asset('img/Other/greenColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -1072,6 +1078,7 @@
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -1082,7 +1089,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/blueColor.png') }}"
+                                                         src="{{ asset('img/Other/blueColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -1107,6 +1114,7 @@
                                                                    $('#c-0').prop('checked',false);
                                                                    $('#c-8').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -1117,7 +1125,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/magentaColor.png') }}"
+                                                         src="{{ asset('img/Other/magentaColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -1142,6 +1150,7 @@
                                                                    $('#c-7').prop('checked',false);
                                                                    $('#c-0').prop('checked',false);
                                                                    $('#c-9').prop('checked',false);
+                                                                   $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
                                                                 <i class="fa" data-check-icon=""></i>
@@ -1152,7 +1161,7 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/brownColor.png') }}"
+                                                         src="{{ asset('img/Other/brownColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -1168,6 +1177,7 @@
                                                                    checked="checked"
                                                                    onchange="$('#color-all').prop('checked',false);
                                                                    $('#c-9').prop('checked',true);
+                                                                   $('#c-10').prop('checked',false);
                                                                    $('#c-1').prop('checked',false);
                                                                    $('#c-2').prop('checked',false);
                                                                    $('#c-3').prop('checked',false);
@@ -1187,7 +1197,43 @@
                                                 <div>
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
-                                                         src="{{ asset('img/Other/blackColor.png') }}"
+                                                         src="{{ asset('img/Other/blackColor.jpg') }}"
+                                                         alt="Image Description">
+                                                </div>
+                                            </li>
+                                            <li class="g-my-2 g-mb-20">
+                                                <div class="form-group m-0">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>رنگهای مالتی کالر</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                                   name="color"
+                                                                   id="c-10"
+                                                                   type="checkbox"
+                                                                   checked="checked"
+                                                                   onchange="$('#color-all').prop('checked',false);
+                                                                   $('#c-10').prop('checked',true);
+                                                                   $('#c-9').prop('checked',false);
+                                                                   $('#c-1').prop('checked',false);
+                                                                   $('#c-2').prop('checked',false);
+                                                                   $('#c-3').prop('checked',false);
+                                                                   $('#c-4').prop('checked',false);
+                                                                   $('#c-5').prop('checked',false);
+                                                                   $('#c-6').prop('checked',false);
+                                                                   $('#c-7').prop('checked',false);
+                                                                   $('#c-8').prop('checked',false);
+                                                                   $('#c-0').prop('checked',false);
+                                                                   checkAllIsOff('#filters-on-color',$(this).attr('name'))">
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                                <div>
+                                                    <img style="border-radius: 5px"
+                                                         class="img-fluid w-100 g-opacity-0_7"
+                                                         src="{{ asset('img/Other/multiColor.jpg') }}"
                                                          alt="Image Description">
                                                 </div>
                                             </li>
@@ -1445,8 +1491,6 @@
                         <p class="text-center">عدم موجودی</p>
                     </div>
                     <!-- End Products -->
-
-                    <hr class="g-mb-60">
 
                     {{-- Pagination --}}
                     <div style="direction: ltr">

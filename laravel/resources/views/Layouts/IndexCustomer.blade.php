@@ -56,6 +56,12 @@
         <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
         <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
     @break
+    @case(strpos($_SERVER['REQUEST_URI'],'/Customer-Cart'))
+        <script src="{{ asset('assets/vendor/custombox/custombox.min.js') }}"></script>
+        <script src="{{ asset('assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+        <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
+        <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
+    @break
 @endswitch
 </body>
 @yield('CustomerJsFunction')
