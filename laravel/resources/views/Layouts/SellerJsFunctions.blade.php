@@ -1004,7 +1004,7 @@
             if (window.matchMedia('screen and (min-width:900px)').matches) {
                 $('#removeWhenBD').remove();
                 if($('#picModal').length>0)
-                    $('#picModal').removeClass('g-ml-minus-4');
+                     $('#picModal').removeClass('g-ml-minus-4');
             } else {
                 if ($('#mobile').length > 0)
                     $('#mobile').attr('pattern', '\d*');
