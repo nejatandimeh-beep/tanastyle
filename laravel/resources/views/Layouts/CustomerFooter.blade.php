@@ -48,13 +48,13 @@
             <li class="col list-inline-item g-mr-0">
                 <a style="text-decoration: none" class="d-block g-bg-primary-dark-v2 g-color-white-opacity-0_8 g-bg-instagram--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
                    href="https://www.instagram.com/memol_rhinestone/">
-                    <i class="fa fa-instagram"></i> Instagram
+                    <i style="color: white !important;" class="fa fa-instagram"></i> Instagram
                 </a>
             </li>
             <li class="col list-inline-item g-mr-0">
                 <a style="text-decoration: none" class="d-block g-bg-primary-dark-v2 g-color-white-opacity-0_8 g-bg-instagram--hover g-color-white--hover g-font-size-16 text-center g-transition-0_2 g-pa-15"
                    href="https://www.t.me/tanastyleir">
-                    <i class="fa fa-telegram"></i> Telegram
+                    <i style="color: white !important;" class="fa fa-telegram"></i> Telegram
                 </a>
             </li>
         </ul>

@@ -8,7 +8,7 @@
                 <div id="stickyDiv1" class="sticky-top g-z-index-1">
                     <div>
                         <div class="g-pr-15--lg d-flex justify-content-between g-pb-10 g-pt-10">
-                            <h5 class="m-0 g-mr-10 g-mr-0--lg align-self-center">فیلتر ها</h5>
+                            <h5 class="m-0 g-mr-10 g-mr-0--lg align-self-center g-color-gray-dark-v1">فیلتر ها</h5>
                             <button
                                 style="color:rgba(0,0,0,0.4);
                                 line-height: 0.65;
@@ -17,7 +17,7 @@
                                 border: none !important;
                                 outline:none !important;"
                                 onclick="closeSideBar()"
-                                class="font-smooth g-pt-5 g-font-size-35 g-ml-minus-25 g-ml-0--lg"
+                                class="font-smooth g-pt-5 g-font-size-35 g-color-gray-dark-v1 g-ml-minus-25 g-ml-0--lg"
                                 type="button">&times;
                             </button>
                         </div>
@@ -25,7 +25,7 @@
                             class="responsiveBorder g-mx-minus-15 g-mt-0 g-mb-0 sticky-top">
                     </div>
 
-                    <h6 id="filters-on-label" class="d-none g-mt-30 g-pb-10 g-mx-15 g-mb-10 g-brd-bottom g-brd-gray-light-v4">فیلترهای اعمال شده</h6>
+                    <h6 id="filters-on-label" class="d-none g-mt-30 g-pb-10 g-mx-15 g-mb-10 g-brd-bottom g-color-gray-dark-v1">فیلترهای اعمال شده</h6>
                     <div id="filters-on" class="d-none p-0 my-0 g-mx-10">
                         <div id="filters-on-gender" class="d-inline-block p-0 m-0"></div>
                         <div id="filters-on-cat" class="d-inline-block p-0 m-0"></div>
@@ -42,7 +42,7 @@
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
                                     <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
+                                        <a class="collapsed d-block u-link-v5 g-color-black g-color-primary--hover"
                                            href="#accordion-100-body-01"
                                            data-toggle="collapse"
                                            aria-expanded="false"
@@ -69,7 +69,7 @@
                                                                    onchange="checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                             type="checkbox" {{ ($gender === 'all') ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -86,7 +86,7 @@
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '0' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -103,7 +103,7 @@
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '1' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -120,7 +120,7 @@
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '2' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -137,7 +137,7 @@
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '3' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -154,7 +154,7 @@
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '4' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -171,7 +171,7 @@
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
                                                                    type="checkbox" {{ ($gender === '5' || ($gender === 'all')) ? 'checked=""' : '' }}>
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -186,7 +186,7 @@
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-02" class="card-header g-pa-0" role="tab">
                                     <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
+                                        <a class="collapsed d-block u-link-v5 g-color-black g-color-primary--hover"
                                            href="#accordion-100-body-02"
                                            data-toggle="collapse"
                                            aria-expanded="false"
@@ -214,7 +214,7 @@
                                                                    onchange="checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -232,7 +232,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'a' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -250,7 +250,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'b' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -268,7 +268,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'c' || $catCode === 'clothes') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -286,7 +286,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'd' || $catCode === 'clothes')? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -304,7 +304,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'e') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -322,7 +322,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'f') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -340,7 +340,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'g' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -358,7 +358,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'h' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -376,7 +376,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'i' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -394,7 +394,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'j' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -412,7 +412,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'k' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -430,7 +430,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'l' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -448,7 +448,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'm' || $catCode === 'sports') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -466,7 +466,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'n' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -484,7 +484,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'o' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -502,7 +502,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'p' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -520,7 +520,7 @@
                                                                    {{ ($catCode === 'all' || $catCode === 'q' || $catCode === 'rhinestone') ? 'checked' : ''}}
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -535,12 +535,12 @@
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-05" class="card-header g-pa-0" role="tab">
                                     <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
+                                        <a class="collapsed d-block u-link-v5 g-color-black g-color-primary--hover"
                                            href="#accordion-100-body-05"
                                            data-toggle="collapse"
                                            aria-expanded="false"
                                            aria-controls="accordion-100-body-05">سایز
-                                            <i class="fa fa-sort-amount-asc float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v4"></i>
+                                            <i class="fa fa-sort-amount-asc float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v2"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -563,7 +563,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -581,7 +581,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -599,7 +599,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -617,7 +617,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -635,7 +635,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -653,7 +653,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -671,7 +671,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -689,7 +689,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -707,7 +707,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -722,12 +722,12 @@
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-03" class="card-header g-pa-0" role="tab">
                                     <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
+                                        <a class="collapsed d-block u-link-v5 g-color-black g-color-primary--hover"
                                            href="#accordion-100-body-03"
                                            data-toggle="collapse"
                                            aria-expanded="false"
                                            aria-controls="accordion-100-body-03">قیمت
-                                            <i class="fa fa-money float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v4"></i>
+                                            <i class="fa fa-money float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v2"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -750,7 +750,7 @@
                                                                    disabled
                                                                    type="checkbox">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -801,12 +801,12 @@
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-04" class="card-header g-pa-0" role="tab">
                                     <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a class="collapsed d-block u-link-v5 g-color-main g-color-primary--hover"
+                                        <a class="collapsed d-block u-link-v5 g-color-black g-color-primary--hover"
                                            href="#accordion-100-body-04"
                                            data-toggle="collapse"
                                            aria-expanded="false"
                                            aria-controls="accordion-100-body-04">رنگ
-                                            <i class="fa fa-paint-brush float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v4"></i>
+                                            <i class="fa fa-paint-brush float-left g-font-size-18 g-pb-5 g-pl-5 g-color-gray-dark-v2"></i>
                                         </a>
                                     </h5>
                                 </div>
@@ -829,7 +829,7 @@
                                                                    type="checkbox"
                                                                    checked="checked">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -865,7 +865,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -901,7 +901,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -937,7 +937,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -973,7 +973,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -1009,7 +1009,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -1045,7 +1045,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -1081,7 +1081,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -1117,7 +1117,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -1153,7 +1153,7 @@
                                                                    $('#c-10').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -1189,7 +1189,7 @@
                                                                    $('#c-0').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -1225,7 +1225,7 @@
                                                                    $('#c-0').prop('checked',false);
                                                                    checkAllIsOff('#filters-on-color',$(this).attr('name'))">
                                                             <div class="u-check-icon-radio-v8">
-                                                                <i class="fa" data-check-icon=""></i>
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
                                                             </div>
                                                         </div>
                                                     </label>
@@ -1253,13 +1253,13 @@
                     <div id="stickyDiv2" style="z-index: 100 !important;"
                          class="sticky-top g-bg-white-opacity-0_9 g-mb-15">
                         <div class="d-flex g-py-10">
-                            <h1 style="display: none" id="productTitle" class="h5 align-self-center m-0 col-6 pr-0 bigDevice">{{$title}}</h1>
+                            <h1 style="display: none" id="productTitle" class="h5 align-self-center g-color-gray-dark-v2 m-0 col-6 pr-0 bigDevice">{{$title}}</h1>
                             <div id="filterContent" class="d-flex col-10 justify-content-between g-px-0">
                                 <div style="display: block" id="smallFilterDiv"
                                      class="sideBarButton g-ml-10">
                                     <li class="list-inline-item">
-                                        <a class="u-icon-v2 u-icon-size--xs g-brd-gray-light-v3 g-brd-black--hover g-color-gray-dark-v5 g-color-black--hover">
-                                            <i style="color: #aaaaaa;" class="icon-options"></i>
+                                        <a class="u-icon-v2 u-icon-size--xs g-brd-gray-light-v3 g-brd-black--hover g-color-black--hover">
+                                            <i class="icon-options g-color-gray-dark-v1"></i>
                                         </a>
                                     </li>
                                 </div>
@@ -1279,15 +1279,15 @@
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-left rounded-0 text-right">
-                                            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300"
+                                            <a class="dropdown-item g-color-black g-font-weight-300"
                                                href="#">همه</a>
-                                            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300" href="#">پرفروش
+                                            <a class="dropdown-item g-color-black g-font-weight-300" href="#">پرفروش
                                                 ترین ها</a>
-                                            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300" href="#">محبوب
+                                            <a class="dropdown-item g-color-black g-font-weight-300" href="#">محبوب
                                                 ترین ها</a>
-                                            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300" href="#">قیمت
+                                            <a class="dropdown-item g-color-black g-font-weight-300" href="#">قیمت
                                                 صعودی</a>
-                                            <a class="dropdown-item g-color-gray-dark-v4 g-font-weight-300" href="#">قیمت
+                                            <a class="dropdown-item g-color-black g-font-weight-300" href="#">قیمت
                                                 نزولی</a>
                                         </div>
                                     </div>
@@ -1461,7 +1461,7 @@
                                                 </ul>
                                             </div>
                                             <a style="cursor: pointer"
-                                               class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle"
+                                               class="u-icon-v1 g-mt-minus-5 g-color-black g-color-primary--hover rounded-circle"
                                                data-toggle="tooltip"
                                                data-placement="top"
                                                href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}"

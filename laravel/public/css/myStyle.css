@@ -71,6 +71,9 @@
     font-family: Vazir, serif;
 }
 
+.customerPanel ul * {
+    color: black !important;
+}
 
 /* width */
 ::-webkit-scrollbar {
