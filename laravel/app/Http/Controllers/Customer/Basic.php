@@ -1836,6 +1836,11 @@ class Basic extends Controller
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
+    public function aboutMe()
+    {
+        return view('Customer.AboutMe');
+    }
+
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------
     public function instagram()
     {

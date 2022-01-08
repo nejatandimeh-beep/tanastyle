@@ -838,7 +838,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/allColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -874,7 +874,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/whiteColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -910,7 +910,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/redColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -982,7 +982,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/orangeColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -1018,7 +1018,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/yellowColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -1054,7 +1054,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/greenColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -1090,7 +1090,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/blueColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -1126,7 +1126,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/magentaColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -1162,7 +1162,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/brownColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -1198,7 +1198,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/blackColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                             <li class="g-my-2 g-mb-20">
@@ -1234,7 +1234,7 @@
                                                     <img style="border-radius: 5px"
                                                          class="img-fluid w-100 g-opacity-0_7"
                                                          src="{{ asset('img/Other/multiColor.jpg') }}"
-                                                         alt="Image Description">
+                                                         alt="رنگبندی پوشاک تاناکورا">
                                                 </div>
                                             </li>
                                         </ul>
@@ -1319,7 +1319,7 @@
                                                 <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                     <img class="img-fluid w-100"
                                                          src="{{ $row->PicPath }}sample1.png"
-                                                         alt="Image Description">
+                                                         alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                 </a>
                                             </div>
                                             @if (file_exists(public_path($row->PicPath.'pic2.jpg')))
@@ -1327,7 +1327,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample2.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1337,7 +1337,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample3.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1347,7 +1347,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample4.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1357,7 +1357,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample5.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1367,7 +1367,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample6.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1377,7 +1377,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample7.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1387,7 +1387,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample8.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1397,7 +1397,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample9.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1407,7 +1407,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample10.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1417,7 +1417,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample11.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1427,7 +1427,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample12.png"
-                                                             alt="Image Description">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif

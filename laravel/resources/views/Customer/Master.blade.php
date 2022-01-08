@@ -210,7 +210,7 @@
                                     <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
                                         <img class="img-fluid w-100"
                                              src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
-                                             alt="Image Description">
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
                                     </a>
                                 </div>
                             </div>

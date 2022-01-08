@@ -920,8 +920,8 @@
                     viewMode: 2,
                     zoomable: true,
                     background: true,
-                    minCropBoxWidth: 1350,
-                    minCropBoxHeight: 1080,
+                    minCropBoxWidth: 1080,
+                    minCropBoxHeight: 1350,
                     dragCrop: true,
                     dragMode: 'move',
                     multiple: true,
@@ -943,8 +943,8 @@
 
             $('#crop').on('click', function () {
                 let canvas = cropper.getCroppedCanvas({
-                    width: 1350,
-                    height: 1080
+                    width: 1080,
+                    height: 1350
                 });
 
                 canvas.toBlob(function (blob) {
