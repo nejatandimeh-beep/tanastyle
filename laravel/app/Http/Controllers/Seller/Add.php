@@ -216,9 +216,11 @@ class Add extends Controller
 
         // 250*250 sample save
         list($width, $height) = getimagesize($image);
-        $newWidth = 400;
+        $newWidth = 402;
         $newHeight = 500;
         $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $white = imagecolorallocate($thumb, 255, 255, 255);
+        imagefill($thumb, 0, 0, $white);
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         $imageFullPath =$path . '/sample' . (int)($imgNumber+1)  . '.png';
         imagepng($thumb,$imageFullPath);

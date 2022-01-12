@@ -2807,6 +2807,7 @@
 
         // ------------------------------------------------image magnifier ---------------------------------------------
         function magnify(imgID, zoom) {
+            console.log('ok');
             let img, glass, w, h, bw;
             img = document.getElementById(imgID);
             /*create magnifier glass:*/
@@ -2829,6 +2830,7 @@
             img.addEventListener("touchmove", moveMagnifier);
 
             function moveMagnifier(e) {
+                console.log('ok2');
                 let pos, x, y;
                 /*prevent any other actions that may occur when moving over the image*/
                 e.preventDefault();
@@ -2857,6 +2859,7 @@
             }
 
             function getCursorPos(e) {
+                console.log('ok3');
                 let a, x = 0, y = 0;
                 e = e || window.event;
                 /*get the x and y positions of the image:*/

@@ -45,43 +45,70 @@
                     }
             }
         }
-
+        let touchtime = 0;
         $('.customTooltip').on('click', function () {
-            let parentID = $(this).parent().closest('div').attr('id').toString(),
-                color = $(this).find(">:first").text() + parentID[0],
-                colorList = [],
-                colorText = color.replace(/\d+/g, ''),
-                id = $(this).parent().closest('div').attr('id').substring(2);
-            $('#colorBtn' + id).text(colorText);
-            $('#hexCode' + id).attr('value', hexc($(this).css('backgroundColor')));
-            $('#color' + id + ' option').val(color);
-            $('#colorModal' + id).modal('toggle');
-            $('#lblColor' + id).removeClass('g-color-red');
+            if (touchtime === 0) {
+                // set first click
+                touchtime = new Date().getTime();
+            } else {
+                // compare first click to this click and see if they occurred within double click threshold
+                if (((new Date().getTime()) - touchtime) < 500) {
+                    let parentID = $(this).parent().closest('div').attr('id').toString(),
+                        color = $(this).find(">:first").text() + parentID[0],
+                        colorList = [],
+                        colorText = color.replace(/\d+/g, ''),
+                        id = $(this).parent().closest('div').attr('id').substring(2);
+                    $('#colorBtn' + id).text(colorText);
+                    $('#hexCode' + id).attr('value', hexc($(this).css('backgroundColor')));
+                    $('#color' + id + ' option').val(color);
+                    $('#colorModal' + id).modal('toggle');
+                    $('#lblColor' + id).removeClass('g-color-red');
 
-            $('[name^="color"]').each(function (i, obj) {
-                colorList[i] = $('#color' + i + ' option').val().replace(/\d+/g, '');
-            });
-            colorList.getDuplicates();
-            checkRepeat(id);
+                    $('[name^="color"]').each(function (i, obj) {
+                        colorList[i] = $('#color' + i + ' option').val().replace(/\d+/g, '');
+                    });
+                    colorList.getDuplicates();
+                    checkRepeat(id);
+
+                    touchtime = 0;
+                } else {
+                    // not a double click so set as a new first click
+                    touchtime = new Date().getTime();
+                }
+            }
         });
 
         $('.multiColor').on('click', function () {
-            let parentID = $(this).parent().closest('div').attr('id').toString(),
-                color = $(this).find(">:first").text() + '10',
-                colorList = [],
-                colorText = color.replace(/\d+/g, ''),
-                id = $(this).parent().closest('div').attr('id').substring(3);
-            $('#colorBtn' + id).text(colorText);
-            $('#hexCode' + id).attr('value', '0');
-            $('#color' + id + ' option').val(color);
-            $('#colorModal' + id).modal('toggle');
-            $('#lblColor' + id).removeClass('g-color-red');
+            console.log('salammm')
+            if (touchtime === 0) {
+                // set first click
+                touchtime = new Date().getTime();
+            } else {
+                // compare first click to this click and see if they occurred within double click threshold
+                if (((new Date().getTime()) - touchtime) < 500) {
+                    let parentID = $(this).parent().closest('div').attr('id').toString(),
+                        color = $(this).find(">:first").text() + '10',
+                        colorList = [],
+                        colorText = color.replace(/\d+/g, ''),
+                        id = $(this).parent().closest('div').attr('id').substring(3);
+                    $('#colorBtn' + id).text(colorText);
+                    $('#hexCode' + id).attr('value', '0');
+                    $('#color' + id + ' option').val(color);
+                    $('#colorModal' + id).modal('toggle');
+                    $('#lblColor' + id).removeClass('g-color-red');
 
-            $('[name^="color"]').each(function (i, obj) {
-                colorList[i] = $('#color' + i + ' option').val().replace(/\d+/g, '');
-            });
-            colorList.getDuplicates();
-            checkRepeat(id);
+                    $('[name^="color"]').each(function (i, obj) {
+                        colorList[i] = $('#color' + i + ' option').val().replace(/\d+/g, '');
+                    });
+                    colorList.getDuplicates();
+                    checkRepeat(id);
+
+                    touchtime = 0;
+                } else {
+                    // not a double click so set as a new first click
+                    touchtime = new Date().getTime();
+                }
+            }
         });
 
         function hexc(colorval) {
@@ -152,7 +179,7 @@
                 $('#lblDiscount').addClass('g-color-red');
             }
             // قرمز کردن بوردر عکسها هنگام وقوع خطا
-            for (let i = 0; i < qty; i++) {
+            for (let i = 0; i <= qty; i++) {
                 if ($('#pic' + i).val() === '') {
                     err = 'img';
                     $('#img-file-label' + i).addClass('g-color-red');
@@ -160,6 +187,10 @@
                 if ($('#color' + i + ' option').val() === '') {
                     $('#lblColor' + i).addClass('g-color-red');
                     err = 'color';
+                }
+                if ($('#uploadingText' + i).hasClass('d-inline-block')) {
+                    $('#img-file-label' + i).addClass('g-color-red');
+                    err = 'uplaod';
                 }
             }
             if (err !== '') {
@@ -173,6 +204,9 @@
         });
 
         $('form').on('submit', function () {
+            $('#addProductBtnCaption').text('لطفا منتظر بمانید..');
+            $('#addProductBtn').prop('disabled',true);
+
             let productDetail = $('#addProductDetail');
 
             // remove last enter keys from addProductDetail value
@@ -916,7 +950,7 @@
 
             $modal.on('shown.bs.modal', function () {
                 cropper = new Cropper(image, {
-                    aspectRatio: 4/5,
+                    aspectRatio: 4 / 5,
                     viewMode: 2,
                     zoomable: true,
                     background: true,
@@ -975,6 +1009,7 @@
                                 $('#fileShow' + inputID).addClass('d-none');
                                 $('#uploadingIcon' + inputID).removeClass('d-none');
                                 $('#uploadingText' + inputID).removeClass('d-none');
+                                $('#uploadingText' + inputID).addClass('d-inline-block');
                             },
                             success: function (data) {
                                 inputIdFinshed[counter] = data;
@@ -988,6 +1023,7 @@
                                 $('#img-file-label' + inputIdFinshed[i]).removeClass('g-color-red');
                                 addPathCheckMark('pic' + inputIdFinshed[i], 'fileShow' + inputIdFinshed[i], 'check' + inputIdFinshed[i]);
                                 $('#uploadingText' + inputIdFinshed[i]).addClass('d-none');
+                                $('#uploadingText' + inputIdFinshed[i]).removeClass('d-inline-block');
                                 $('#fileShow' + inputIdFinshed[i]).removeClass('d-none');
                             }
                         });
@@ -1003,8 +1039,8 @@
             // Remove Element When Use Big Device
             if (window.matchMedia('screen and (min-width:900px)').matches) {
                 $('#removeWhenBD').remove();
-                if($('#picModal').length>0)
-                     $('#picModal').removeClass('g-ml-minus-4');
+                if ($('#picModal').length > 0)
+                    $('#picModal').removeClass('g-ml-minus-4');
             } else {
                 if ($('#mobile').length > 0)
                     $('#mobile').attr('pattern', '\d*');

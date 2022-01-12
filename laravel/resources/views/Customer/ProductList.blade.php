@@ -1309,9 +1309,9 @@
                             <div id="productDiv" class="col-12 col-lg-3 g-mb-30">
                                 <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
-                                    <div class="g-pt-10">
+                                    <div>
                                         <div id="carousel-08-1"
-                                             class="js-carousel text-center {{file_exists(public_path($row->PicPath.'pic2.jpg')) ? 'g-mb-40':'g-mb-25'}}"
+                                             class="js-carousel text-center g-mb-5"
                                              data-infinite="1"
                                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
                                              data-nav-for="#carousel-08-2">
@@ -1435,7 +1435,7 @@
                                     </div>
 
                                     <!-- مشخصات محصول -->
-                                    <h4 class="h6 g-color-black text-left g-brd-top g-brd-gray-light-v4 g-ml-5 g-mt-20 g-pt-20">
+                                    <h4 class="h6 g-color-black text-left g-brd-top g-brd-gray-light-v4 g-ml-5 g-mt-5 g-pt-5">
                                         {{$row->Brand}}
                                     </h4>
 
@@ -1455,8 +1455,7 @@
                                                 <ul style="padding: 0"
                                                     class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                                                     <li>
-                                                        <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
-                                                           href="#">{{ $row->Gender.' '.$row->HintCat }}</a>
+                                                        <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600">{{ $row->HintCat.' '.$row->Gender }}</a>
                                                     </li>
                                                 </ul>
                                             </div>

@@ -17,8 +17,8 @@
         </div>
         <div style="direction: ltr" class="col-lg-7 col-12 mx-auto d-lg-flex justify-content-between">
             <div class="col-lg-4 col-12 mx-auto g-mb-40 text-center">
-                <img src="{{ asset('img/Other/aboutMe.jpg') }}" alt="tanakora mahabad" width="300"
-                     class="g-pt-7 g-pt-0--lg">
+                <img src="{{ asset('img/Other/aboutMe.jpg') }}" alt="tanakora mahabad"
+                     class="g-pt-7 g-pt-0--lg w-100">
             </div>
             <div style="direction: rtl" class="col-lg-4 col-12 mx-auto g-mb-100">
                 <h6>شرکت تابش پس زمینه مکریان</h6>

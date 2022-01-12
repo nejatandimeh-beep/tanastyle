@@ -755,9 +755,9 @@
                 <div class="js-slide g-mx-10">
                     <!-- Product -->
                     <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-30">
-                        <div class="g-pt-10">
+                        <div>
                             <div id="carousel-08-1"
-                                 class="js-carousel text-center g-mb-20"
+                                 class="js-carousel text-center g-mb-5"
                                  data-infinite="1"
                                  data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                                  data-nav-for="#carousel-08-2">
@@ -772,7 +772,7 @@
                         </div>
 
                         <!-- مشخصات محصول -->
-                        <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
+                        <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
                             <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
                             <div class="d-flex flex-column col-12 g-px-5">
                                 <h1 class="h6 g-color-black my-1 text-left">
@@ -783,9 +783,9 @@
                                                   tabindex="0">
                                                 {{ $row->Name }}
                                                 <span
-                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
-                                                <span
                                                     class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
+                                                <span
+                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
                                             </span>
                                 </h4>
                                 <div>

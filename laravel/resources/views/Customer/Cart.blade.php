@@ -22,8 +22,8 @@
                         {{--    hidden input   --}}
                         <div id="cartContainer{{$key}}" class="col-12 col-lg-3 g-mb-30">
                             <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24">
-                                <div class="g-pt-10">
-                                    <div class="text-center g-mb-20">
+                                <div>
+                                    <div class="text-center g-mb-5">
                                         <div>
                                             <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
                                                 <img class="img-fluid w-100"
@@ -35,7 +35,7 @@
                                 </div>
 
                                 <!-- مشخصات محصول -->
-                                <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
+                                <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
                                     <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
                                     <div class="d-flex flex-column g-px-5">
                                         <h1 class="h6 g-color-black g-mt-5 text-right">
@@ -46,9 +46,9 @@
                                                   tabindex="0">
                                                 {{ $row->Name }}
                                                 <span
-                                                    class="g-font-size-12 g-font-weight-300"> زنانه</span>
-                                                <span
                                                     class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
+                                                <span
+                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
                                             </span>
                                         </h4>
                                         <div>

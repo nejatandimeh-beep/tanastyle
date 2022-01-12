@@ -1290,9 +1290,9 @@ class Basic extends Controller
             $products = $products . '<div class="col-12 col-lg-4 g-mb-30 filterApply">
     <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                     class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
-        <div class="g-pt-10">
+        <div>
             <div id="carousel-08-1"
-             class="js-carousel text-center g-mb-20"
+             class="js-carousel text-center g-mb-5"
              data-infinite="1"
              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
              data-nav-for="#carousel-08-2">
@@ -1305,7 +1305,7 @@ class Basic extends Controller
                  </div>
             </div>
         </div>
-         <div style="direction: rtl" class="media g-mt-20 g-brd-top g-brd-gray-light-v4 g-pt-20">
+         <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
              <div class="d-flex justify-content-between col-12 p-0">
                 <div class="d-flex flex-column">
                     <h4 class="h6 g-color-black my-1">
@@ -1316,11 +1316,10 @@ class Basic extends Controller
                     <ul style="padding: 0"
                         class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
                         <li>
-                            <span class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600 g-mb-5" href="#">' . $row->Size . ' ' . $row->Color . '</span>
+                            <span class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600 g-mb-5">' . $row->Size . ' ' . $row->Color . '</span>
                         </li>
                         <li>
-                            <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600"
-                               href="#">' . $row->Gender . ' ' . $row->HintCat . '</a>
+                            <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600">' . $row->HintCat . ' ' . $row->Gender . '</a>
                         </li>
                     </ul>
                 </div>
@@ -1775,13 +1774,17 @@ class Basic extends Controller
 
         $data = DB::table('product')
             ->select('*')
-            ->where('Name', 'like', $val . '%')
+            ->where('Name', 'like', '%' . $val . '%')
+            ->orWhere('Model', 'like', '%' . $val . '%')
+            ->orWhere('Brand', 'like', '%' . $val . '%')
             ->paginate(10);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('Name', 'like', $val . '%')
+            ->where('Name', 'like', '%' . $val . '%')
+            ->orWhere('Model', 'like', '%' . $val . '%')
+            ->orWhere('Brand', 'like', '%' . $val . '%')
             ->groupBy('p.ID')
             ->paginate(10);
 
