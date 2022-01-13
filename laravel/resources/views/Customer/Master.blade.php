@@ -67,7 +67,7 @@
                 <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
                     <!-- Article Image -->
                     <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productFemaleList') }}">
-                        <img class="w-100" src="img/Other/cat-female.jpg" alt="Image Description">
+                        <img class="w-100" src="img/Other/cat-female.jpg" alt="لباس زنانه تاناکورا مهاباد">
                     </a>
                     <!-- End Article Image -->
 
@@ -87,7 +87,7 @@
                 <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
                     <!-- Article Image -->
                     <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productMaleList') }}">
-                    <img class="w-100" src="img/Other/cat-male.jpg" alt="Image Description">
+                    <img class="w-100" src="img/Other/cat-male.jpg" alt="لباس مردانه تاناکورا مهاباد">
                     </a>
                     <!-- End Article Image -->
 
@@ -107,7 +107,7 @@
                 <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
                     <!-- Article Image -->
                     <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productGirlList') }}">
-                    <img class="w-100" src="img/Other/cat-girl.jpg" alt="Image Description">
+                    <img class="w-100" src="img/Other/cat-girl.jpg" alt="لباس دخترانه تاناکورا مهاباد">
                     </a>
                     <!-- End Article Image -->
 
@@ -127,7 +127,7 @@
                 <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
                     <!-- Article Image -->
                     <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBoyList') }}">
-                    <img class="w-100" src="img/Other/cat-boy.jpg" alt="Image Description">
+                    <img class="w-100" src="img/Other/cat-boy.jpg" alt="لباس پسرانه تاناکورا مهاباد">
                     </a>
                     <!-- End Article Image -->
 
@@ -147,7 +147,7 @@
                 <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
                     <!-- Article Image -->
                     <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyGirlList') }}">
-                    <img class="w-100" src="img/Other/cat-babyGirl.jpg" alt="Image Description">
+                    <img class="w-100" src="img/Other/cat-babyGirl.jpg" alt="لباس نوزادی دخترانه تاناکورا مهاباد">
                     </a>
                     <!-- End Article Image -->
 
@@ -167,7 +167,7 @@
                 <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
                     <!-- Article Image -->
                     <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyBoyList') }}">
-                    <img class="w-100" src="img/Other/cat-babyBoy.jpg" alt="Image Description">
+                    <img class="w-100" src="img/Other/cat-babyBoy.jpg" alt="لباس نوزادی پسرانه تاناکورا مهاباد">
                     </a>
                     <!-- End Article Image -->
 
@@ -210,7 +210,7 @@
                                     <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
                                         <img class="img-fluid w-100"
                                              src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
-                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
+                                             alt="tanakora mahabad">
                                     </a>
                                 </div>
                             </div>

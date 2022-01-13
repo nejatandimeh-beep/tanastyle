@@ -28,7 +28,7 @@
                                             <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
                                                 <img class="img-fluid w-100"
                                                      src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
-                                                     alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
+                                                     alt="tanakora mahabad">
                                             </a>
                                         </div>
                                     </div>
@@ -226,7 +226,7 @@
                                                             <span class="g-pa-5">
                                                               <img class="g-width-64 g-height-80"
                                                                    src="{{ $row->PicPath.$row->PicNumber }}.jpg"
-                                                                   alt="{{ $row->Name.' '.$row->Model.' '.$row->Brand }}">
+                                                                   alt="تاناکورا مهاباد">
                                                             </span>
                                             </td>
                                         </tr>
