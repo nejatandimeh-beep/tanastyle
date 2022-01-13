@@ -199,7 +199,7 @@
             @foreach($data as $key =>$row)
                 <div class="js-slide g-mx-10">
                     <!-- Product -->
-                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-30">
+                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
                         <div>
                             <div id="carousel-08-1"
                                  class="js-carousel text-center g-mb-5"
