@@ -5,7 +5,7 @@
 <head>
     <meta name="enamad" content="533166"/>
     <meta name="description"
-          content="لباس تاناکورا بازارچه مرزی مهاباد بانه پیرانشهر سردشت تانا استایل فروشگاه پوشاک زنانه مردانه بچگانه دخترانه پسرانه لباس زیر کفش کیف ورزشی اکسسوری بدلیجات">
+          content="لباس استوک تاناکورا بازارچه مرزی مهاباد بانه پیرانشهر سردشت تانا استایل فروشگاه پوشاک زنانه مردانه بچگانه دخترانه پسرانه لباس زیر کفش کیف ورزشی اکسسوری بدلیجات">
     <meta name="keywords" content="HTML,CSS,XML,JavaScript">
     <meta name="author" content="nejat andimeh">
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
