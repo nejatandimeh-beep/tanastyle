@@ -1173,7 +1173,7 @@
                                         {{-- اکسسوری --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productMaleRhinestoneList') }}" class="nav-link g-color-primary--hover p-0">بدلیجات</a>
+                                                <a href="{{ route('productMaleRhinestoneList') }}" class="nav-link g-color-primary--hover p-0">اکسسوری</a>
                                             </h4>
                                             <div id="accordion-12" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">

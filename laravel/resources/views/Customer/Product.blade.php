@@ -233,7 +233,7 @@
                                 <h6 class="text-right m-0">فاکتور فروش به شماره:<span id="orderID"
                                                                                       class=" g-mr-5"></span></h6>
                             </div>
-                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
+                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-15">
                         </div>
                         <div class="g-px-20">
                             <div style="direction: rtl" class="alert alert-warning text-right g-mr-5" role="alert">
@@ -398,7 +398,7 @@
                             </div>
                             {{--بانکها--}}
                             <div style="direction: rtl"
-                                 class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
+                                 class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-40--lg">
                                 <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
                                     <div style="direction: rtl" class="btn-group justified-content" id="bankContainer"
                                          onchange="accBank()">
@@ -740,7 +740,7 @@
 
     <div class="container g-pb-100">
         <div style="direction: rtl" class="g-brd-bottom g-brd-gray-light-v4 g-mt-30 g-mb-10">
-            <h6>محصولات که شاید بپسندید</h6>
+            <h6>محصولاتی که شاید بپسندید</h6>
         </div>
         <div id="js-carousel-1" class="js-carousel g-pb-100 g-mx-minus-10"
              data-infinite="true"

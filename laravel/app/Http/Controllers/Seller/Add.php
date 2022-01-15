@@ -159,7 +159,7 @@ class Add extends Controller
             case 'o':
             case 'p':
             case 'q':
-                $size = ['FreeSize'];
+                $size = ['Free'];
                 break;
             default:
                 switch ($gender) {
