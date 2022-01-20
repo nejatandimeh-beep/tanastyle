@@ -9,7 +9,10 @@ use DateTime;
 use File;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Kavenegar;
 
 class Seller extends Controller
 {
@@ -48,6 +51,29 @@ class Seller extends Controller
         DB::table('seller_new')
             ->where('ID', $request->get('id'))
             ->delete();
+
+        $mobile = $request->get('mobile');
+        //--------------
+        try {
+            $token = $request->get('name');
+            $token2 = $request->get('family');
+            $token3= '';
+
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "reject";
+            $type = "sms";
+
+            $result = $var->VerifyLookup($mobile, $token, $token2, $token3, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
+        //--------------
+
         return redirect()->route('sellerVerify');
     }
 

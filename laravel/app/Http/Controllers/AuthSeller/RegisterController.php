@@ -125,6 +125,7 @@ class RegisterController extends Controller
                 'ShopNumber' => $request->get('shopNumber'),
                 'CreditCard' => (string)$request->get('creditCard4') . (string)$request->get('creditCard3') . (string)$request->get('creditCard2') . (string)$request->get('creditCard1'),
                 'PicPath' => $path . '/',
+                'Signature' => $request->get('signature'),
             ]);
 
         return redirect()->route('sellerRegister')->with('msg', 'success');

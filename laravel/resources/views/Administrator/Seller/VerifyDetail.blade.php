@@ -577,6 +577,7 @@
                                 </div>
                                 <input class="d-none" type="text" name="nationalityCardImage" value="{{$data->PicPath.'pic12.jpg'}}">
 
+                                <input type="hidden" name="signature" value="{{$data->Signature}}">
                                 <div class="d-flex justify-content-end g-my-100">
                                     <a class="btn btn-l u-btn-outline-lightred u-btn-content g-font-weight-600 g-letter-spacing-0_5 g-brd-2 g-mr-10 g-mb-15"
                                        href="#"
@@ -770,6 +771,9 @@
                     <form action="{{route('sellerDelete')}}" method="POST" id="sellerDelete">
                         @csrf
                         <input type="hidden" name="id" value="{{$data->ID}}">
+                        <input type="hidden" name="name" value="{{$data->Name}}">
+                        <input type="hidden" name="family" value="{{$data->Family}}">
+                        <input type="hidden" name="family" value="{{$data->Mobile}}">
                     </form>
                 </div>
             </div>
