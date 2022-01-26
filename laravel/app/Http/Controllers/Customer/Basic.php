@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Kavenegar;
+use nusoap_client;
+use SoapClient;
 
 class Basic extends Controller
 {
@@ -463,16 +465,12 @@ class Basic extends Controller
             ->first();
 
         if ($noExist !== null) {
+            $this->payment();
             $new = $this->newOrder($id, $qty, 0);
             return redirect()->route('userProfile', 'deliveryStatus');
         } else {
-            return redirect()->route('productDetail',[$noExist->ProductID,$noExist->Size,urlencode($noExist->Color)] );
+            return redirect()->route('productDetail', [$noExist->ProductID, $noExist->Size, urlencode($noExist->Color)]);
         }
-    }
-
-    public function paymentSuccess()
-    {
-        return view('Customer.PaymentSuccess');
     }
 
     public function checkCartNumber()
@@ -651,7 +649,7 @@ class Basic extends Controller
 
     public function productDetail($id, $sizeInfo, $color)
     {
-        $colorInfo=urldecode($color);
+        $colorInfo = urldecode($color);
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product')
             ->select('*')
@@ -1842,6 +1840,62 @@ class Basic extends Controller
     public function aboutMe()
     {
         return view('Customer.AboutMe');
+    }
+
+    public function payment($price,$orderNo)
+    {
+
+        $client = new SoapClient('https://sep.shaparak.ir/Payments/InitPayment.asmx?WSDL');
+//        $functions = $client->__getFunctions ();
+//        var_dump ($functions);
+
+        $result = $client->RequestToken(
+            '12780197',            /// MID
+            '1021',        /// ResNum
+            15000            /// TotalAmount
+            , 0            /// Optional
+            , 0            /// Optional
+            , 0            /// Optional
+            , 0            /// Optional
+            , 0            /// Optional
+            , 0            /// Optional
+            , '0'        /// Optional
+            , '0'        /// Optional
+            , 0            /// Optional
+            , 'https://tanastyle.ir/Payment-Success' //$RedirectURL	/// Optional
+        );
+
+        echo "<form action='https://sep.shaparak.ir/payment.aspx' method='POST'>
+				<input name='token' type='hidden' value='" . $result . "'>
+				<input name='RedirectURL' type='hidden' value='https://tanastyle.ir/Payment-Success'>
+				<input name='btn' type='submit' value='Send'>
+			</form>";
+    }
+
+    public function paymentSuccess()
+    {
+        $MerchantCode = "12780197";
+
+        if(isset($_POST['State']) && $_POST['State'] == "OK") {
+
+            $soapclient = new soapclient('https://verify.sep.ir/Payments/ReferencePayment.asmx?WSDL');
+            $res 		= $soapclient->VerifyTransaction($_POST['RefNum'], $MerchantCode);
+
+            if( $res <= 0 )
+            {
+                // Transaction Failed
+                echo "Transaction Failed";
+            } else {
+                // Transaction Successful
+                echo "Transaction Successful";
+                echo "Ref : {$_POST['RefNum']}<br />";
+                echo "Res : {$res}<br />";
+                return view('Customer.PaymentSuccess');
+            }
+        } else {
+            // Transaction Failed
+            echo "Transaction Failed";
+        }
     }
 
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------

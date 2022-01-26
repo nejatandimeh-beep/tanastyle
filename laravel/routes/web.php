@@ -419,8 +419,24 @@ Route::post('/Instagram-Request-PdId', 'Customer\Basic@requestPdId')->name('requ
 
 
 // *********************************************** ( Bank Routes ) *************************************************
-Route::get('/Payment-Success', 'Customer\Basic@paymentSuccess')->name('paymentSuccess');
+Route::post('/Payment-Success', 'Customer\Basic@paymentSuccess')->name('paymentSuccess');
 
+//Route::get('/samanTest', 'Customer\Basic@samanTest')->name('samanTest');
+
+Route::get('/route-clear', function() {
+    $exitCode = Artisan::call('route:clear');
+    echo 'route-clear: ok';
+});
+
+Route::get('/config-cache', function() {
+    $exitCode = Artisan::call('config:cache');
+    echo 'config-cache: ok';
+});
+
+Route::get('/cache-clear', function() {
+    $exitCode = Artisan::call('cache:clear');
+    echo 'cache-clear: ok';
+});
 
 
 

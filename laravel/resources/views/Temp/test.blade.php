@@ -1,39 +1,35 @@
-@extends('Layouts.IndexCustomer')
-@section('Content')
-    <script>
-        const hashFunc =(input)=>{
-            return '*'+input+'*';
-        }
-
-        class Block{
-            constructor(data,hash, lastHash) {
-                this.data=data;
-                this.hash=hash;
-                this.lastHash=lastHash;
-            }
-        }
-
-        class BlockChain{
-            constructor() {
-                const genesis=new Block('gen-data', 'gen-hash','gen-lastHash');
-                this.chain=[genesis];
-            }
-
-            addBlock(data){
-                const lastHash=this.chain[this.chain.length-1].hash;
-                const hash=hashFunc(data+lastHash);
-                const b=new Block(data, hash,lastHash);
-                this.chain.push(b);
-            }
-        }
-
-        const fooBlack=new Block('foo-data','foo-hash','foo-lastHash');
-
-        const fooBlackChain=new BlockChain();
-
-        fooBlackChain.addBlock('one');
-        fooBlackChain.addBlock('two');
-        fooBlackChain.addBlock('three');
-        console.log(fooBlackChain);
-    </script>
-@endsection
+<html>
+<head>
+</head>
+<body>
+<?php
+echo "<h4>IPG Sample PHP :</h4>";
+echo "Merchant ID :<br>";
+echo $MID="12780197";
+echo "<br>";
+echo "<br>ResNum :<br>";
+echo $ResNum="123456";
+echo "<br>";
+echo "<br>Amount :<br>";
+echo $Amount=1000;
+echo "<br>";
+echo "<br>RedirectURL :<br>";
+echo $RedirectURL="tanastyle/Payment-Success";
+echo "<br>";
+echo "<br>ResNum1 :<br>";
+echo $ResNum1="012345678901234567890123456789";
+?>
+<form action="https://sep.shaparak.ir/Payment.aspx" method="POST">
+    <input type="hidden" name="MID" value="<?php echo $MID?>">
+    <input type="hidden" name="ResNum" value="<?php echo $ResNum?>">
+    <input type="hidden" name="Amount" value="<?php echo $Amount?>">
+    <input type="hidden" name="RedirectURL" value="<?php echo $RedirectURL?>">
+    <input type="hidden" name="ResNum1" value="<?php echo $ResNum1?>">
+    <?php
+    echo "<br>";
+    echo "<br>";
+    ?>
+    <input type="Submit" name="paysubmit" value="Payment Request">
+</form>
+</body>
+</html>

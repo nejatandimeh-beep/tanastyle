@@ -12,6 +12,7 @@
         "ext-gd": "*",
         "ext-json": "*",
         "darryldecode/cart": "^4.2",
+        "econea/nusoap": "dev-master",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.3",
@@ -21,7 +22,9 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
-        "laravelcollective/html": "^6.1"
+        "laravelcollective/html": "^6.1",
+        "omalizadeh/laravel-multi-payment": "^2.3",
+        "ext-soap": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.0",
