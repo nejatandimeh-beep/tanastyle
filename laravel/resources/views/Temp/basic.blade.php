@@ -474,7 +474,7 @@ class Basic extends Controller
             ->first();
         $postPrice = 0;
         if ($noExist !== null) {
-            $price = $productInfo->FinalPrice + $postPrice;
+            $price = ($productInfo->FinalPrice + $postPrice)*$qty;
 
 // saman kish
 //            $client = new SoapClient('https://sep.shaparak.ir/Payments/InitPayment.asmx?WSDL');
@@ -502,21 +502,14 @@ class Basic extends Controller
 //            Session::put('price', $price);
 //            Session::put('productDetailId', $id);
 //            Session::put('productQty', $qty);
-//            $order = new zarinpal();
-//            $res = $order->pay($price,"nejat.andimeh@gmail.com","09144426149");
-//            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+            setcookie('price', $price, time() + (86400 * 30), "/order");
+            setcookie('productDetailId', $id, time() + (86400 * 30), "/order");
+            setcookie('productQty', $qty, time() + (86400 * 30), "/order");
+            setcookie('userId', Auth::user()->id, time() + (86400 * 30), "/order");
+            $order = new zarinpal();
+            $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
+            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
 // new zarinpal
-
-            $response = Http::post('https://api.zarinpal.com/pg/v4/payment/request.json', [
-
-                'merchant_id' => 'ccd4acab-a4dc-416d-9172-b066aa674e2b',
-                'amount' => '1000',
-                'callback_url'=>'https://tanastyle.ir/order',
-                'description'=>'فروش محصول',
-
-            ]);
-
-            return redirect()->to('https://www.zarinpal.com/pg/StartPay/' . $response["data"]["authority"]);
 
         } else {
             return redirect()->route('productDetail', [$noExist->ProductID, $noExist->Size, urlencode($noExist->Color)]);
@@ -526,50 +519,43 @@ class Basic extends Controller
     //zarinpal
     public function orderZarinpal(Request $request)
     {
-//        $MerchantID = 'ccd4acab-a4dc-416d-9172-b066aa674e2b';
-//        $Authority =$request->get('Authority') ;
-//        //ما در اینجا مبلغ مورد نظر را بصورت دستی نوشتیم اما در پروژه های واقعی باید از دیتابیس بخوانیم
+        if(!isset(Auth::user()->id))
+            Auth::loginUsingId($_COOKIE['userId']);
+        $MerchantID = 'ccd4acab-a4dc-416d-9172-b066aa674e2b';
+        $Authority =$request->get('Authority');
+        //ما در اینجا مبلغ مورد نظر را بصورت دستی نوشتیم اما در پروژه های واقعی باید از دیتابیس بخوانیم
 //        $Amount=Session::get('price');
 //        $id=Session::get('productDetailId');
 //        $qty=Session::get('productQty');
-//        $refNum=$Authority;
-//
-//        if ($request->get('Status') == 'OK') {
-//            $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
-//            $client->soap_defencoding = 'UTF-8';
-//            //در خط زیر یک درخواست به زرین پال ارسال می کنیم تا از صحت پرداخت کاربر مطمئن شویم
-//            $result = $client->call('PaymentVerification', [
-//                [
-//                    //این مقادیر را به سایت زرین پال برای دریافت تاییدیه نهایی ارسال می کنیم
-//                    'MerchantID'     => $MerchantID,
-//                    'Authority'      => $Authority,
-//                    'Amount'         => $Amount,
-//                ],
-//            ]);
-//            if ($result['Status'] == 100) {
-//                $new = $this->newOrder($id, $qty, 0);
-//                return view('Customer.PaymentStatus', compact( 'refNum'));
-//            } else {
-//                return view('Customer.PaymentError');
-//            }
-//        }
-//        else
-//        {
-//            return view('Customer.PaymentError');
-//        }
-        $Authority =$request->get('Authority') ;
-        $response = Http::post('https://api.zarinpal.com/pg/v4/payment/verify.json', [
+        $Amount=$_COOKIE['price'];
+        $id=$_COOKIE['productDetailId'];
+        $qty=$_COOKIE['productQty'];
 
-            'merchant_id' => 'ccd4acab-a4dc-416d-9172-b066aa674e2b',
-            'amount' => '1000',
-            'authority' => $Authority,
+        if ($request->get('Status') == 'OK') {
+            $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
+            $client->soap_defencoding = 'UTF-8';
 
-        ]);
-        $refNum=$Authority;
-        if ($response['data']['code'] == 100) {
-//                $new = $this->newOrder($id, $qty, 0);
-            return view('Customer.PaymentStatus', compact( 'refNum'));
-        } else {
+            //در خط زیر یک درخواست به زرین پال ارسال می کنیم تا از صحت پرداخت کاربر مطمئن شویم
+            $result = $client->call('PaymentVerification', [
+                [
+                    //این مقادیر را به سایت زرین پال برای دریافت تاییدیه نهایی ارسال می کنیم
+                    'MerchantID'     => $MerchantID,
+                    'Authority'      => $Authority,
+                    'Amount'         => $Amount,
+                ],
+            ]);
+
+            $refNum=$Authority;
+
+            if ($result['Status'] == 100) {
+                $new = $this->newOrder($id, $qty, 0);
+                return view('Customer.PaymentStatus', compact( 'refNum'));
+            } else {
+                return view('Customer.PaymentError');
+            }
+        }
+        else
+        {
             return view('Customer.PaymentError');
         }
     }

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Customer;
 
 use App\Http\Controllers\Controller;
+use App\lib\ZarinPal;
 use App\Picture;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
 use File;
@@ -463,13 +465,64 @@ class Basic extends Controller
             ->select('ID', 'Qty', 'Size', 'Color')
             ->where('ID', $id)
             ->first();
-
+        $productInfo = DB::table('product_detail as pd')
+            ->select('pd.ID', 'p.FinalPrice')
+            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
+            ->where('pd.ID', $id)
+            ->first();
+        $postPrice = 0;
         if ($noExist !== null) {
-            $this->payment();
-            $new = $this->newOrder($id, $qty, 0);
-            return redirect()->route('userProfile', 'deliveryStatus');
+            $price = ($productInfo->FinalPrice + $postPrice)*$qty;
+
+            setcookie('price', $price, time() + (43200), "/Confirmation");
+            setcookie('productDetailId', $id, time() + (43200), "/Confirmation");
+            setcookie('productQty', $qty, time() + (43200), "/Confirmation");
+            setcookie('userId', Auth::user()->id, time() + (43200), "/Confirmation");
+            $order = new zarinpal();
+            $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
+            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
+
         } else {
             return redirect()->route('productDetail', [$noExist->ProductID, $noExist->Size, urlencode($noExist->Color)]);
+        }
+    }
+
+    public function orderZarinpal(Request $request)
+    {
+        if(!isset(Auth::user()->id)){
+            Auth::loginUsingId($_COOKIE['userId'],true);
+        }
+        $MerchantID = 'ccd4acab-a4dc-416d-9172-b066aa674e2b';
+        $Authority =$request->get('Authority');
+        $Amount=$_COOKIE['price'];
+        $id=$_COOKIE['productDetailId'];
+        $qty=$_COOKIE['productQty'];
+
+        if ($request->get('Status') == 'OK') {
+            $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
+            $client->soap_defencoding = 'UTF-8';
+
+            $result = $client->call('PaymentVerification', [
+                [
+                    //این مقادیر را به سایت زرین پال برای دریافت تاییدیه نهایی ارسال می کنیم
+                    'MerchantID'     => $MerchantID,
+                    'Authority'      => $Authority,
+                    'Amount'         => $Amount,
+                ],
+            ]);
+
+            $refNum=$Authority;
+
+            if ($result['Status'] == 100) {
+                $new = $this->newOrder($id, $qty, 0);
+                return view('Customer.PaymentStatus', compact( 'refNum'));
+            } else {
+                return view('Customer.PaymentError');
+            }
+        }
+        else
+        {
+            return view('Customer.PaymentError');
         }
     }
 
@@ -1840,62 +1893,6 @@ class Basic extends Controller
     public function aboutMe()
     {
         return view('Customer.AboutMe');
-    }
-
-    public function payment($price,$orderNo)
-    {
-
-        $client = new SoapClient('https://sep.shaparak.ir/Payments/InitPayment.asmx?WSDL');
-//        $functions = $client->__getFunctions ();
-//        var_dump ($functions);
-
-        $result = $client->RequestToken(
-            '12780197',            /// MID
-            '1021',        /// ResNum
-            15000            /// TotalAmount
-            , 0            /// Optional
-            , 0            /// Optional
-            , 0            /// Optional
-            , 0            /// Optional
-            , 0            /// Optional
-            , 0            /// Optional
-            , '0'        /// Optional
-            , '0'        /// Optional
-            , 0            /// Optional
-            , 'https://tanastyle.ir/Payment-Success' //$RedirectURL	/// Optional
-        );
-
-        echo "<form action='https://sep.shaparak.ir/payment.aspx' method='POST'>
-				<input name='token' type='hidden' value='" . $result . "'>
-				<input name='RedirectURL' type='hidden' value='https://tanastyle.ir/Payment-Success'>
-				<input name='btn' type='submit' value='Send'>
-			</form>";
-    }
-
-    public function paymentSuccess()
-    {
-        $MerchantCode = "12780197";
-
-        if(isset($_POST['State']) && $_POST['State'] == "OK") {
-
-            $soapclient = new soapclient('https://verify.sep.ir/Payments/ReferencePayment.asmx?WSDL');
-            $res 		= $soapclient->VerifyTransaction($_POST['RefNum'], $MerchantCode);
-
-            if( $res <= 0 )
-            {
-                // Transaction Failed
-                echo "Transaction Failed";
-            } else {
-                // Transaction Successful
-                echo "Transaction Successful";
-                echo "Ref : {$_POST['RefNum']}<br />";
-                echo "Res : {$res}<br />";
-                return view('Customer.PaymentSuccess');
-            }
-        } else {
-            // Transaction Failed
-            echo "Transaction Failed";
-        }
     }
 
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------

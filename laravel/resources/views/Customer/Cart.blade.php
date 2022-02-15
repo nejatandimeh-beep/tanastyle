@@ -148,7 +148,7 @@
                                 </button>
                                 <h6 class="text-right m-0">فاکتور فروش به تاریخ <span id="cartDate"></span></h6>
                             </div>
-                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-40">
+                            <hr class="g-brd-gray-light-v4 g-mx-minus-20 g-mt-0 g-mb-15">
                         </div>
                         <div class="g-px-20">
                             <div style="direction: rtl" class="alert alert-warning text-right g-mr-5" role="alert">
@@ -236,12 +236,6 @@
                             </div>
                             <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
                                 <div class=" col-12 col-lg-3 g-px-0">
-                                    {{--ارزش افزوده--}}
-                                    <span style="direction: rtl"
-                                          class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">%9 ارزش افزوده:
-                                        <span id="valueAdded"></span>
-                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
-                                    </span>
                                     {{--هزینه پستی--}}
                                     <span
                                         class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
@@ -250,14 +244,14 @@
                                     </span>
                                     {{--مبلغ فاکتور--}}
                                     <span
-                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5  g-mt-15--lg g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
                                             id="orderPrice"></span>
                                                     <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                                 </span>
                                 </div>
 
                                 <span style="direction: rtl"
-                                      class="d-block g-color-main g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-start force-col-12">
+                                      class="d-block g-pt-10 g-color-main g-brd-top g-brd-gray-light-v3 g-font-size-16 g-font-weight-600 g-pr-0 text-right align-self-start force-col-12">
                                                 <span
                                                     class="u-icon-v3 u-icon-size--sm g-bg-primary align-middle g-ml-10 bigDevice">
                                                     <i class="icon-location-pin u-line-icon-pro g-color-white"></i>
@@ -268,7 +262,7 @@
                                         <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
                                         <span class="receiverStateCity g-font-size-16 g-font-weight-300"></span>
                                         <span id="addressID"
-                                              class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$sendAddress->Address}}<strong
+                                              class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg text-justify"> {{$sendAddress->Address}}<strong
                                                 class="g-color-gray-dark-v2 g-mr-5"> گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}} <strong
                                                 class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
                                     @else
@@ -281,8 +275,8 @@
                                 </span>
                             </div>
                             <div style="direction: rtl"
-                                 class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-20 g-mt-80--lg">
-                                <div class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg">
+                                 class="d-lg-flex col-12 justify-content-between align-items-center p-0 g-mt-60 g-mt-80--lg">
+                                <div style="visibility: hidden" class="col-12 col-lg-9 p-0 g-mt-40 g-mt-0--lg g-mb-15 g-mb-0--lg bigDevice">
                                     <div style="direction: rtl" class="btn-group justified-content">
                                         {{--                                        <form class="p-0 m-0" id="selectBankName">--}}
                                         <label class="u-check force-col-12">
@@ -323,7 +317,7 @@
                                     onclick="orderSubmit()"
                                     class="btn btn-xl btn-primary g-color-white g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12">
                                     <span class="pull-left">درگاه بانکی
-                                        <span id="payment-door" class="d-block g-font-size-11">ورود به درگاه ملت</span>
+                                        <span id="payment-door" class="d-block g-font-size-11">ورود به درگاه رفاه</span>
                                     </span>
                                     <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
                                 </a>

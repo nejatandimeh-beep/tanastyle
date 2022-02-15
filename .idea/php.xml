@@ -110,6 +110,7 @@
       <path value="$PROJECT_DIR$/laravel/vendor/omalizadeh/laravel-multi-payment" />
       <path value="$PROJECT_DIR$/laravel/vendor/econea/nusoap" />
       <path value="$PROJECT_DIR$/laravel/vendor/symfony/polyfill-php81" />
+      <path value="$PROJECT_DIR$/laravel/vendor/psr/http-client" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

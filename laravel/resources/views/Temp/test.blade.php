@@ -1,35 +1,14 @@
-<html>
-<head>
-</head>
-<body>
-<?php
-echo "<h4>IPG Sample PHP :</h4>";
-echo "Merchant ID :<br>";
-echo $MID="12780197";
-echo "<br>";
-echo "<br>ResNum :<br>";
-echo $ResNum="123456";
-echo "<br>";
-echo "<br>Amount :<br>";
-echo $Amount=1000;
-echo "<br>";
-echo "<br>RedirectURL :<br>";
-echo $RedirectURL="tanastyle/Payment-Success";
-echo "<br>";
-echo "<br>ResNum1 :<br>";
-echo $ResNum1="012345678901234567890123456789";
-?>
-<form action="https://sep.shaparak.ir/Payment.aspx" method="POST">
-    <input type="hidden" name="MID" value="<?php echo $MID?>">
-    <input type="hidden" name="ResNum" value="<?php echo $ResNum?>">
-    <input type="hidden" name="Amount" value="<?php echo $Amount?>">
-    <input type="hidden" name="RedirectURL" value="<?php echo $RedirectURL?>">
-    <input type="hidden" name="ResNum1" value="<?php echo $ResNum1?>">
-    <?php
-    echo "<br>";
-    echo "<br>";
-    ?>
-    <input type="Submit" name="paysubmit" value="Payment Request">
-</form>
-</body>
-</html>
+@extends('Layouts.app')
+@section('content')
+<h1 class="g-color-red">سلام دارا</h1>
+<h4 class="g-color-green">خوبی؟</h4>
+    <script>
+        x=4;
+        y=846;
+        x={'m1':4,'m2':6};
+        console.log(x.m2);
+        $('h1').on('click', function () {
+                $('h1').text(x.m2);
+        })
+    </script>
+@endsection

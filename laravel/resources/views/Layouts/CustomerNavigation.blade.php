@@ -22,7 +22,7 @@
 
                     <!-- Logo -->
                     <a href="{{ url('/') }}" class="navbar-brand">
-                        <img src="{{ asset('img/Logo/logo.svg') }}" alt="تانا استایل لوگو" width="120"
+                        <img src="{{ asset('img/Logo/logo.svg') }}" alt="فروشگاه پوشاک تانا استایل" width="120"
                              class="g-pt-7 g-pt-0--lg">
                     </a>
                     <!-- End Logo -->

@@ -2613,7 +2613,7 @@
                                 </div>
                             </div>
                             <div style="direction: rtl">
-                                <small class="text-muted g-font-size-12">لطفا تا پایان بارگذاری عکس، صفحه را ترک نفرمائید.</small><br>
+                                <p class="text-muted g-font-size-12 g-line-height-1_5">لطفا تا پایان بارگذاری عکس، صفحه را ترک نفرمائید.</p><br>
                             </div>
                         </div>
                         <div id="repeatColorMsg{{$i}}" class="d-none form-group g-mb-0 text-right col-lg-3">
@@ -2683,21 +2683,35 @@
             <div class="form-group g-mb-20 text-right">
                 <label id="lblUnitPrice" class="g-mb-10">قیمت پایه محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
-                    <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                        <i class="fa fa-i-cursor"></i>
-                    </div>
+                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice">تومان</span>
+                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-bg-gray-light-v5 g-font-size-16 forceBigDevice" type="text"
+                           id="unitPriceStatic"
+                           name="unitPrice"
+                           {{--                           pattern="\d*"--}}
+                           value="" readonly>
+                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice" id="lblSalePrice">با احتساب %9 ارزش افزوده</span>
                     <span class="input-group-addon g-bg-gray-light-v5">تومان</span>
                     <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
                            tabindex="6"
-                           name="unitPrice"
                            id="unitPrice"
-{{--                           pattern="\d*"--}}
-                           onkeypress="$('#lblUnitPrice').removeClass('g-color-red')"
+                           {{--                           pattern="\d*"--}}
+                           onkeypress="$('#lblUnitPrice').removeClass('g-color-red');"
                            value="">
                     <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">کمترین مقدار 10,000 تومان می
                         باشد.</b>
                     <input style="display: none" type="number" name="tempPrice" id="tempPrice"
                            value="">
+                </div>
+                <!-- unitPrice for Small Device -->
+                <div class="g-brd-primary--focus g-mb-10 smallFlex">
+                    <span style="width: 20%;" class="input-group-addon g-bg-gray-light-v5">تومان</span>
+                    <input  style="width: 40%;" class="form-control g-bg-gray-light-v5 form-control-md rounded-0 p-0 g-py-10 text-center g-font-size-16 forceSmallDevice" type="text"
+                           id="unitPriceStatic"
+                            placeholder="..."
+                           name="unitPrice"
+                           {{--                           pattern="\d*"--}}
+                           value="" readonly>
+                    <span style="width: 40%;" class="g-font-size-12 text-center p-0 input-group-addon g-bg-gray-light-v5">با 9% ارزش افزوده</span>
                 </div>
 
                 <div style="direction: rtl">
@@ -2732,7 +2746,7 @@
                 <div class="g-brd-primary--focus g-mb-10 smallFlex">
                     <span style="width: 20%;" class="input-group-addon g-bg-gray-light-v5" id="Stoman">تومان</span>
                     <span style="direction: rtl; width: 40%;"
-                          class="input-group-addon g-bg-gray-light-v5 g-color-primary"
+                          class="input-group-addon g-py-10 g-bg-gray-light-v5 g-color-primary"
                           tabindex="7"
                           id="SsalePrice">...</span>
                     <span style="width: 40%;" class="input-group-addon g-bg-gray-light-v5"

@@ -62,6 +62,7 @@
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/phpunit/phpunit" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/psr/container" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/psr/event-dispatcher" />
+      <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/psr/http-client" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/psr/http-message" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/psr/log" />
       <excludeFolder url="file://$MODULE_DIR$/laravel/vendor/psr/simple-cache" />

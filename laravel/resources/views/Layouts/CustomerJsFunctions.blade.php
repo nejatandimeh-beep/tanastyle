@@ -1374,7 +1374,7 @@
             $('#orderProductUnitPrice').text($('#productUnitPrice').text());
             $('#orderProductFinalPrice').text($('#productFinalPrice').text());
             $('#orderProductQtyPrice').text(orderPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $('#orderPrice').text((orderPrice+((orderPrice*9)/100) + 15000).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#orderPrice').text((orderPrice + 15000).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#orderDate').text(nowDate());
             $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }

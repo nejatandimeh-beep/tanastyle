@@ -753,7 +753,8 @@
 
             $(this).val(unitPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // add coma
             temp1 = unitPrice.replace(new RegExp(',', 'g'), ""); // remove coma
-            temp1 = parseInt(temp1);
+            temp1 = parseInt(temp1)+((temp1*9)/100);
+            $('#unitPriceStatic').val(temp1.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $("#tempPrice").val(temp1);
 
             if (!$('#addProductPage').length > 0) {
@@ -1041,9 +1042,11 @@
                 $('#removeWhenBD').remove();
                 if ($('#picModal').length > 0)
                     $('#picModal').removeClass('g-ml-minus-4');
+                $('.forceSmallDevice').remove();
             } else {
                 if ($('#mobile').length > 0)
                     $('#mobile').attr('pattern', '\d*');
+                $('.forceBigDevice').remove();
             }
 
             // Product Table Events Success Message

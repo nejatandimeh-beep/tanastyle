@@ -419,7 +419,7 @@ Route::post('/Instagram-Request-PdId', 'Customer\Basic@requestPdId')->name('requ
 
 
 // *********************************************** ( Bank Routes ) *************************************************
-Route::post('/Payment-Success', 'Customer\Basic@paymentSuccess')->name('paymentSuccess');
+Route::post('/Payment-Status', 'Customer\Basic@paymentStatus')->name('paymentStatus');
 
 //Route::get('/samanTest', 'Customer\Basic@samanTest')->name('samanTest');
 
@@ -438,5 +438,6 @@ Route::get('/cache-clear', function() {
     echo 'cache-clear: ok';
 });
 
-
+// -----------------------------[zarinpal]--------------------------------
+Route::get('/Confirmation','Customer\Basic@orderZarinpal');
 

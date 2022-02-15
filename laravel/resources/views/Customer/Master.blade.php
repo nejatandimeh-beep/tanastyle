@@ -7,7 +7,7 @@
             <input oninput="productSearch('productSearch',$(this).attr('value'))"
                    onclick="$('#productSearch').removeClass('d-none')"
                    style="direction:rtl; padding: 10px; outline: none; border:none; opacity:0.9; border-radius: 0"
-                   class="col-lg-9 col-11 g-font-size-16"
+                   class="col-lg-9 col-12 g-font-size-16"
                    type="text" placeholder="تایپ کن و بگرد..">
             <ul id="productSearch" class="d-none p-0 col-lg-9 col-11 m-auto outSideClick"></ul>
         </form>

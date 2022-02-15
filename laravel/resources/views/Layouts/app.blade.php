@@ -59,9 +59,10 @@
                 </ul>
 
                 <!-- Right Side Of Navbar -->
-                <ul class="navbar-nav ml-auto p-0" style="direction: rtl">
+                <ul id="customerNavigation" class="navbar-nav ml-auto p-0" style="direction: rtl">
                     <li class="nav-item">
-                        <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" id="homePage" href="{{ url('/') }}">صفحه
+                        <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" id="homePage"
+                           href="{{ url('/') }}">صفحه
                             نخست</a>
                     </li>
 
@@ -92,25 +93,25 @@
 </div>
 </body>
 <script>
-    $(".forceEnglishNumber").keypress(function(event){
+    $(".forceEnglishNumber").keypress(function (event) {
         let ew = event.which;
-        if(48 <= ew && ew <= 57)
+        if (48 <= ew && ew <= 57)
             return true;
         return false;
     });
 
-    $(document).on('ready',function () {
-        if($('#password').length>0){
-            let myInput=$('#password'),
+    $(document).on('ready', function () {
+        if ($('#password').length > 0) {
+            let myInput = $('#password'),
                 letter = $("#lowercase"),
                 capital = $("#uppercase"),
                 number = $("#number"),
                 length = $("#length");
 
-            myInput.on('keyup',function() {
+            myInput.on('keyup', function () {
                 // Validate lowercase letters
                 let lowerCaseLetters = /[a-z]/g;
-                if(myInput.val().match(lowerCaseLetters)) {
+                if (myInput.val().match(lowerCaseLetters)) {
                     letter.removeClass("g-bg-red");
                     letter.addClass("g-bg-primary");
                 } else {
@@ -120,7 +121,7 @@
 
                 // Validate capital letters
                 let upperCaseLetters = /[A-Z]/g;
-                if(myInput.val().match(upperCaseLetters)) {
+                if (myInput.val().match(upperCaseLetters)) {
                     capital.removeClass("g-bg-red");
                     capital.addClass("g-bg-primary");
                 } else {
@@ -130,7 +131,7 @@
 
                 // Validate numbers
                 let numbers = /[0-9]/g;
-                if(myInput.val().match(numbers)) {
+                if (myInput.val().match(numbers)) {
                     number.removeClass("g-bg-red");
                     number.addClass("g-bg-primary");
                 } else {
@@ -139,7 +140,7 @@
                 }
 
                 // Validate length
-                if(myInput.val().length >= 8) {
+                if (myInput.val().length >= 8) {
                     length.removeClass("g-bg-red");
                     length.addClass("g-bg-primary");
                 } else {
@@ -149,7 +150,7 @@
             });
         }
         //-------------------------
-        if($('#currentPage').text()==='/change-seller-password'){
+        if ($('#currentPage').text() === '/change-seller-password') {
             $('#homePage').hide();
         } else {
             $('#sellerProfile').hide();
@@ -157,19 +158,19 @@
     });
 
     function checkPass() {
-        let myInput=$('#password'),
+        let myInput = $('#password'),
             letter = $("#lowercase"),
             capital = $("#uppercase"),
             number = $("#number"),
             length = $("#length");
 
-        if (letter.hasClass('g-bg-red')||capital.hasClass('g-bg-red')||number.hasClass('g-bg-red')||length.hasClass('g-bg-red')) {
+        if (letter.hasClass('g-bg-red') || capital.hasClass('g-bg-red') || number.hasClass('g-bg-red') || length.hasClass('g-bg-red')) {
             alert('لطفا قواعد رمزگذاری را رعایت کنید.');
         } else {
-            if(myInput.val() === $('#password-confirm').val()) {
+            if (myInput.val() === $('#password-confirm').val()) {
                 $('#submitText').hide();
                 $('#waitingSubmit').show();
-                $('#save').prop('disabled',true);
+                $('#save').prop('disabled', true);
                 $('form').submit();
             } else {
                 alert('رمز و تکرار رمز یکسان نیستند.')
