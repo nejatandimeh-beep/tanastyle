@@ -58,7 +58,6 @@ class Basic extends Controller
             ->where('CustomerID', Auth::user()->id)
             ->orderBy('Status', 'DESC')
             ->get();
-
         // order
         $order = DB::table('product_order as po')
             ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID')
@@ -89,7 +88,6 @@ class Basic extends Controller
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
-
         $today = date('Y-m-d');
         $deliveryHowDay = array();
         $deliveryPersianDate = array();
@@ -355,7 +353,6 @@ class Basic extends Controller
             ->orderBy('pod.ID', 'DESC')
             ->get();
 
-
         $delivery = DB::table('product_delivery as delivery')
             ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'pd.SampleNumber')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'delivery.OrderDetailID')
@@ -444,18 +441,22 @@ class Basic extends Controller
                 ->where('ID', $productDetailID[$i])
                 ->where('Qty', '=', 0)
                 ->first();
+            $qty[$i] = $request->get('qty' . $i);
         }
-
-        if ($noExist !== null) {
-            for ($i = 0; $i <= $row - 1; $i++) {
-                $qty[$i] = $request->get('qty' . $i);
-                $new = $this->newOrder($productDetailID[$i], $qty[$i], $i);
-            }
+        $postPrice = 0;
+        $price=$request->get('allPrice')+$postPrice;
+        if ($noExist === null) {
+            setcookie('productRow', $row, time() + (43200), "/Confirmation");
+            setcookie('price', $price, time() + (43200), "/Confirmation");
+            setcookie('productDetailId',  json_encode($productDetailID), time() + (43200), "/Confirmation");
+            setcookie('productQty', json_encode($qty), time() + (43200), "/Confirmation");
+            setcookie('userId', Auth::user()->id, time() + (43200), "/Confirmation");
+            $order = new zarinpal();
+            $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
+            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
         } else {
             return redirect()->route('cart', 'noExist');
         }
-
-        return redirect()->route('userProfile', 'deliveryStatus');
     }
 
     public function bankingPortal($id, $qty)
@@ -471,12 +472,14 @@ class Basic extends Controller
             ->where('pd.ID', $id)
             ->first();
         $postPrice = 0;
+        $idTemp[0]=$id;
+        $qtyTemp[0]=$qty;
         if ($noExist !== null) {
             $price = ($productInfo->FinalPrice + $postPrice)*$qty;
-
+            setcookie('productRow', 1, time() + (43200), "/Confirmation");
             setcookie('price', $price, time() + (43200), "/Confirmation");
-            setcookie('productDetailId', $id, time() + (43200), "/Confirmation");
-            setcookie('productQty', $qty, time() + (43200), "/Confirmation");
+            setcookie('productDetailId', json_encode($idTemp), time() + (43200), "/Confirmation");
+            setcookie('productQty', json_encode($qtyTemp), time() + (43200), "/Confirmation");
             setcookie('userId', Auth::user()->id, time() + (43200), "/Confirmation");
             $order = new zarinpal();
             $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
@@ -494,9 +497,8 @@ class Basic extends Controller
         }
         $MerchantID = 'ccd4acab-a4dc-416d-9172-b066aa674e2b';
         $Authority =$request->get('Authority');
+        $row = $_COOKIE['productRow'];
         $Amount=$_COOKIE['price'];
-        $id=$_COOKIE['productDetailId'];
-        $qty=$_COOKIE['productQty'];
 
         if ($request->get('Status') == 'OK') {
             $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
@@ -512,11 +514,18 @@ class Basic extends Controller
             ]);
 
             $refNum=$Authority;
-
+            $id=json_decode($_COOKIE['productDetailId']);
+            $qty=json_decode($_COOKIE['productQty']);
             if ($result['Status'] == 100) {
-                $new = $this->newOrder($id, $qty, 0);
+                for ($i = 0; $i <= $row - 1; $i++) {
+                    $new = $this->newOrder((int)$id[$i], (int)$qty[$i], $i,$Authority);
+                }
                 return view('Customer.PaymentStatus', compact( 'refNum'));
             } else {
+                DB::table('payment_failed')
+                    ->insert([
+                        'Authority'=>$Authority,
+                    ]);
                 return view('Customer.PaymentError');
             }
         }
@@ -1915,7 +1924,7 @@ class Basic extends Controller
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
-    public function newOrder($id, $qty, $i)
+    public function newOrder($id, $qty, $i,$Authority)
     {
         $customerInfo = DB::table('customers as c')
             ->select('ca.*')
@@ -1938,6 +1947,7 @@ class Basic extends Controller
                 'AddressID' => $customerInfo->ID,
                 'Date' => $date,
                 'Time' => $time,
+                'Authority' => $Authority,
             ]);
         }
 

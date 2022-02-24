@@ -84,7 +84,7 @@ class RegisterController extends Controller
         $nationalId = $request->get('nationalId');
         $imgNumber = $request->get('imgNumber');
         $image = $request->get('imageUrl');
-        $path = 'img/imagesTemp/sellerProfileImage/' . $nationalId;
+        $path = public_path('img/imagesTemp/SellerProfileImage/') . $nationalId;
         File::makeDirectory($path, 0777, true, true);
         $image_parts = explode(";base64,", $image);
         $image_base64 = base64_decode($image_parts[1]);
@@ -97,11 +97,7 @@ class RegisterController extends Controller
     public function new(Request $request)
     {
         $nationalId = $request->get('nationalId');
-        $tempPath =  public_path('img\imagesTemp\sellerProfileImage\\') . $nationalId;
-        $path =  public_path('img\SellerProfileImage\\'). $nationalId;
-
-        $file = new Filesystem();
-        $file->moveDirectory($tempPath, $path,true);
+        $path =  'img/imagesTemp/SellerProfileImage/'. $nationalId . '/';
 
         DB::table('seller_new')
             ->insert([
@@ -124,7 +120,7 @@ class RegisterController extends Controller
                 'WorkPostalCode' => $request->get('workPostalCode'),
                 'ShopNumber' => $request->get('shopNumber'),
                 'CreditCard' => (string)$request->get('creditCard4') . (string)$request->get('creditCard3') . (string)$request->get('creditCard2') . (string)$request->get('creditCard1'),
-                'PicPath' => $path . '/',
+                'PicPath' => $path,
                 'Signature' => $request->get('signature'),
             ]);
 
@@ -138,6 +134,11 @@ class RegisterController extends Controller
 //            'email' => 'required|string|email|max:255|unique:sellers',
 //            'password' => 'required|string|min:8|confirmed',
 //        ]);
+        $nationalId = $request->get('nationalId');
+        $tempPath =  public_path('img\imagesTemp\SellerProfileImage\\') . $nationalId;
+        $path =  public_path('img\SellerProfileImage\\'). $nationalId;
+        $file = new Filesystem();
+        $file->moveDirectory($tempPath, $path,true);
 
         $name = $request['name'];
         $family = $request['family'];
@@ -146,7 +147,7 @@ class RegisterController extends Controller
         $seller = Seller::create([
             'name' => $name,
             'Family' => $family,
-            'NationalID' => $request['nationalId'],
+            'NationalID' => $nationalId,
             'Birthday' => $request['year'] . '/' . $request['mon'] . '/' . $request['day'],
             'Gender' => (int)$request['gender'],
             'Phone' => $request['prePhone'] . $request['phone'],
@@ -160,6 +161,7 @@ class RegisterController extends Controller
             'WorkPostalCode' => $request['workPostalCode'],
             'PicPath' => $request['userImage'],
             'PicPathCard' => $request['nationalityCardImage'],
+            'Signature'=>$request['signature'],
             'email' => $request['email'],
             'PasswordHint' => $password,
             'password' => Hash::make($password),

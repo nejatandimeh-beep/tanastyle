@@ -736,7 +736,7 @@
                                 error = 1;
                             }
                         }
-                        if (error === 0)
+                        if (error === 0){
                             if ($('#addressID').length > 0) {
                                 window.location = '/Banking-Portal/' + id + '/' + qty;
                             } else {
@@ -744,10 +744,12 @@
                                 $('.custombox-content #waitingIconSubmit').hide();
                                 alert('کاربر گرامی لیست آدرسهای شما خالیست.');
                             }
-                        else {
-                            msg = msg + ' موجودیشان تمام شده است.';
-                            alert(msg);
                         }
+                        else {
+                                msg = msg + ' موجودیشان تمام شده است.';
+                                alert(msg);
+                                location.reload();
+                            }
                     }
                 });
             } else {
@@ -1031,7 +1033,8 @@
                 allPrice = 0,
                 tempPrice = [],
                 val = [],
-                qty = [];
+                qty = [],
+                form=$('#cartOrderForm');
             $("#cartOrderForm").empty();
             $('#cartDate').text('( ' + nowDate() + ' )');
             if (row !== 0) {
@@ -1043,13 +1046,14 @@
                     price[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
                     allPrice = allPrice + price[i];
                     $('#rowNumber' + i).text(i);
-                    $('#cartOrderForm').append("<input name='productDetailID" + i + "' value=" + val[i] + ">");
-                    $('#cartOrderForm').append("<input name='qty" + i + "' value=" + qty[i] + ">");
+                    form.append("<input name='productDetailID" + i + "' value=" + val[i] + ">");
+                    form.append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
                 let valueAdded=(allPrice*9)/100;
                 $('#valueAdded').text(valueAdded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                allPrice += 15000+valueAdded;
-                $('#cartOrderForm').append("<input name='row' value=" + row + ">");
+                allPrice += valueAdded;
+                form.append("<input name='row' value=" + row + ">");
+                form.append("<input name='allPrice' value=" + allPrice + ">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             }
             if ($('#addressID').length > 0)

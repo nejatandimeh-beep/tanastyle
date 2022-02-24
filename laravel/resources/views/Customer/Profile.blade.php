@@ -1298,7 +1298,7 @@
                             </div>
                         @else
                             @foreach($order as $key => $row)
-                                <div class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
+                                <div class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-0 g-my-10">
                                     <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- Date -->
                                     <div
@@ -1662,7 +1662,7 @@
                         <span class="d-none">{{ $deliveryCounter=0 }}</span>
                         @foreach($delivery as $key => $row)
                             @if(($row->DeliveryStatus !== '5') && ($row->DeliveryStatus !== '-1'))
-                                <div class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
+                                <div class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-0 g-my-10">
                                 <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- deliveryStatus -->
                                     <div style="padding: 0 !important;"
@@ -1787,7 +1787,7 @@
                         <span class="d-none">{{ $returnCounter=0 }}</span>
                         @foreach($return as $key => $row)
                             <div
-                                class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
+                                class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-0 g-my-10">
                                 <article class="d-md-table w-100 g-bg-white g-mb-1">
                                     <!-- deliveryStatus -->
                                     <div style="padding: 0 !important;"
@@ -2095,7 +2095,7 @@
                         <div id="productLikeContainer">
                         @foreach($like as $key => $row)
                             <div  id="{{ 'likeRow'.$key }}"
-                                class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-15 g-mx-0--lg g-my-10">
+                                class="container g-pa-15 g-py-30--lg g-px-60--lg g-brd-around g-brd-gray-light-v4 g-mx-0 g-my-10">
                                 <article
                                          class="d-md-table w-100 g-bg-white g-mb-10 g-mb-0--lg">
                                     <!-- Article Image -->

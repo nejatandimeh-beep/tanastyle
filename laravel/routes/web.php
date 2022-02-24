@@ -438,6 +438,31 @@ Route::get('/cache-clear', function() {
     echo 'cache-clear: ok';
 });
 
+Route::get('/route-cache', function() {
+    $exitCode = Artisan::call('route:cache');
+    echo 'route:cache: ok';
+});
+
+Route::get('/config-clear', function() {
+    $exitCode = Artisan::call('config:clear');
+    echo 'config:clear: ok';
+});
+
+Route::get('/optimize', function() {
+    $exitCode = Artisan::call('optimize');
+    echo 'optimize: ok';
+});
+
+Route::get('/migrate', function() {
+    $exitCode = Artisan::call('migrate');
+    echo 'migrate: ok';
+});
+
+Route::get('/session-table', function() {
+    $exitCode = Artisan::call(' session:table');
+    echo 'table create: ok';
+});
+
 // -----------------------------[zarinpal]--------------------------------
 Route::get('/Confirmation','Customer\Basic@orderZarinpal');
 

@@ -60,13 +60,15 @@
                                 <div class="col-md-10 text-left">
                                     <div style="direction: ltr" class="d-flex col-12 p-0">
                                         <div>
-                                            <button style="direction: rtl" type="submit"
+                                            <button style="direction: rtl" type="submit" id="submitText"
                                                     onclick="$('#submitText').hide(); $('#waitingSubmit').show();"
                                                     onsubmit="$(this).prop('disabled',true)"
                                                     class="btn u-btn-primary rounded-0 g-font-size-16">
-                                                <span id="submitText">ورود</span>
-                                                <span id="waitingSubmit"
-                                                      style="display: none;"
+                                               ورود
+                                            </button>
+                                            <button id="waitingSubmit" style="display:none; direction: rtl" type="button" disabled="disabled"
+                                                    class="btn u-btn-primary rounded-0 g-font-size-16">
+                                                <span
                                                       class="m-0 g-color-white">منتظر بمانید..</span>
                                             </button>
                                         </div>

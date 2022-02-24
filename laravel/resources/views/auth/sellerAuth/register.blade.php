@@ -15,12 +15,6 @@
                 <h5 class="card-header text-right">ثبت نام در سامانه فروش</h5>
 
                 @if(session()->has('msg'))
-                    <div style="direction: rtl;" class="g-mt-40">
-                        <h3 class="g-color-primary text-center">با تشکر از ثبت نام شما در سامانه فروش تانا
-                            استایل</h3>
-                        <h6 class="text-center">درخواست شما در صف بررسی قرار گرفت. در صورت تایید اطلاعات، نتیجه را
-                            از طریق پیامک اطلاع رسانی خواهیم نمود.</h6>
-                    </div>
                     <svg id="checkMark" class="checkmark"
                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
                         <circle class="checkmark__circle" cx="26" cy="26" r="25"
@@ -28,6 +22,13 @@
                         <path class="checkmark__check" fill="none"
                               d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
                     </svg>
+
+                    <div style="direction: rtl;" class="g-mb-60">
+                        <h3 class="g-color-primary text-center">با تشکر از ثبت نام شما در سامانه فروش تانا
+                            استایل</h3>
+                        <h6 class="text-center">درخواست شما در صف بررسی قرار گرفت. در صورت تایید اطلاعات، نتیجه را
+                            از طریق پیامک اطلاع رسانی خواهیم نمود.</h6>
+                    </div>
                 @else
                     <div class="card-body">
                         <form action="{{route('sellerNew')}}" method="POST" style="direction: rtl" id="registerForm"
@@ -740,13 +741,14 @@
                                     <p class="g-mb-10">فروشنده عزیز برای ثبت نام در سامانه فروش تانا استایل لازم و
                                         ضروری است که موافقت خود را با قوانین تانا استایل اعلام کنید. برای اینکار
                                         ابتدا قوانین را مطالعه فرمایید و در صورت موافقت با قوانین کلید موافقم را
-                                        فشار دهید. کلید موافقم به منزله امضاء الکترونیکی شما خواهد بود.<a style="font-weight: bold" href="#" class="g-mr-5">مطالعه قوانین</a></p>
+                                        فشار دهید. کلید موافقم به منزله امضاء الکترونیکی شما خواهد بود.<a
+                                            style="font-weight: bold" href="#" class="g-mr-5">مطالعه قوانین</a></p>
                                     <div class="text-lg-left text-center">
                                         <div class="d-inline-block">
                                             <div style="cursor: pointer"
                                                  id="noAgree"
                                                  tabindex="22"
-                                                 onclick="$(this).addClass('d-none'); $('#agree').removeClass('d-none');"
+                                                 onclick="$(this).addClass('d-none'); $('#agree').removeClass('d-none'); imAgree($('#signature'));"
                                                  class="g-py-10 g-px-15 g-brd-red g-brd-around g-bg-white g-color-gray-dark-v5">
                                                 موافق تمامی قوانین هستم
                                             </div>
@@ -755,10 +757,11 @@
                                             <div style="cursor: pointer;"
                                                  id="agree"
                                                  tabindex="22"
-                                                 onclick="$(this).addClass('d-none'); $('#noAgree').removeClass('d-none');"
+                                                 onclick="$(this).addClass('d-none'); $('#noAgree').removeClass('d-none'); $('#signature').val('');"
                                                  class="d-none g-py-10 g-brd-white g-brd-around g-px-15 g-bg-primary g-color-white">
                                                 موافق تمامی قوانین هستم
                                             </div>
+                                            <input style="display: none" id="signature" name="signature" type="text" value="">
                                         </div>
                                     </div>
                                 </div>
@@ -799,7 +802,7 @@
     $(document).ready(function () {
         let $modal = $('#modal'),
             image = document.getElementById('sample_image'),
-            cropper, inputID,inputIdFinshed=[],counter=0;
+            cropper, inputID, inputIdFinshed = [], counter = 0;
         $('input[id^="pic"]').on('change', function (event) {
             if ($('#nationalId').val().length === 10) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
@@ -864,9 +867,9 @@
         });
 
         $('#imageUploadForm').on('submit', (function (e) {
-            $('#uploadingIcon'+inputID).removeClass('d-none');
-            $('#uploadingText'+inputID).removeClass('d-none');
-            $('#fileShow'+inputID).addClass('d-none');
+            $('#uploadingIcon' + inputID).removeClass('d-none');
+            $('#uploadingText' + inputID).removeClass('d-none');
+            $('#fileShow' + inputID).addClass('d-none');
             e.preventDefault();
             let formData = new FormData(this);
             $.ajax({
@@ -877,20 +880,33 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    inputIdFinshed[counter]=data;
+                    inputIdFinshed[counter] = data;
                     counter++;
                     console.log("success");
                     console.log(data);
                 }
             }).done(function () {
-                for (let i=0; i<=inputIdFinshed.length; i++){
-                    $('#uploadingIcon'+inputIdFinshed[i]).addClass('d-none');
-                    $('#uploadingText'+inputIdFinshed[i]).addClass('d-none');
-                    $('#fileShow'+inputIdFinshed[i]).removeClass('d-none');
+                for (let i = 0; i <= inputIdFinshed.length; i++) {
+                    $('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');
+                    $('#uploadingText' + inputIdFinshed[i]).addClass('d-none');
+                    $('#fileShow' + inputIdFinshed[i]).removeClass('d-none');
                 }
             })
         }));
     });
+
+    function imAgree(ele) {
+        let today = new Date(),
+            second = today.getSeconds(),
+            minute = today.getMinutes(),
+            hour = today.getHours(),
+            day = today.getDate(),
+            month = today.getMonth() + 1,
+            year = today.getFullYear();
+        today=year+'/'+month+'/'+day+' '+hour+':'+minute+':'+second;
+        console.log(today);
+        ele.val(today);
+    }
 
     function saveUserData() {
         if ($('#user-name').hasClass('g-brd-red') || $('#user-family').hasClass('g-brd-red') ||
@@ -905,13 +921,12 @@
             $('#workPostalCode').hasClass('g-brd-red') || $('#shopNumber').hasClass('g-brd-red') ||
             $('#fileShow11').hasClass('g-brd-red') || $('#fileShow12').hasClass('g-brd-red') ||
             !$('#uploadingText11').hasClass('d-none') || !$('#uploadingText12').hasClass('d-none') ||
-            $('#agree').hasClass('d-none')){
+            $('#agree').hasClass('d-none')) {
             alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و مجدداً تلاش کنید.');
-        }
-        else{
+        } else {
             $('#submitText').hide();
             $('#waitingSubmit').show();
-            $('#save').prop('disabled',true);
+            $('#save').prop('disabled', true);
             $('#registerForm').submit();
         }
     }

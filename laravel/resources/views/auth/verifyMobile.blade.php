@@ -33,14 +33,17 @@
 
                         <div style="direction: ltr" class="form-group row g-mb-60--lg g-mt-20">
                             <div class="col-md-10 text-left">
-                                <button type="submit"
+                                <button id="submitText"
+                                        type="submit"
                                         onclick="$('#submitText').hide(); $('#waitingSubmit').show();"
                                         onsubmit="$(this).prop('disabled',true)"
                                         class="btn u-btn-primary rounded-0 g-font-size-16">
-                                    <span id="submitText">ادامه</span>
-                                    <span id="waitingSubmit"
-                                          style="display: none"
-                                          class="m-0 g-color-white">منتظر بمانید..</span>
+                                    ادامه
+                                </button>
+                                <button id="waitingSubmit" style="display:none; direction: rtl" type="button" disabled="disabled"
+                                        class="btn u-btn-primary rounded-0 g-font-size-16">
+                                                <span
+                                                    class="m-0 g-color-white">منتظر بمانید..</span>
                                 </button>
                             </div>
                         </div>
