@@ -1032,7 +1032,7 @@
             let price = [],
                 allPrice = 0,
                 tempPrice = [],
-                val = [],
+                pdId = [],
                 qty = [],
                 form=$('#cartOrderForm');
             $("#cartOrderForm").empty();
@@ -1040,18 +1040,16 @@
             if (row !== 0) {
                 for (let i = 0; i <= row - 1; i++) {
                     qty[i] = $('#basketQty' + i).val();
-                    val[i] = $('#productDetailID' + i).text();
+                    pdId[i] = $('#productDetailID' + i).text();
                     $('#orderQty' + i).text(qty[i]);
                     tempPrice[i] = $('#productFinalPrice' + i).text().replace(/,/g, '');
                     price[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
                     allPrice = allPrice + price[i];
                     $('#rowNumber' + i).text(i);
-                    form.append("<input name='productDetailID" + i + "' value=" + val[i] + ">");
+                    form.append("<input name='productDetailID" + i + "' value=" + pdId[i] + ">");
                     form.append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
-                let valueAdded=(allPrice*9)/100;
-                $('#valueAdded').text(valueAdded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                allPrice += valueAdded;
+                allPrice += 15000;
                 form.append("<input name='row' value=" + row + ">");
                 form.append("<input name='allPrice' value=" + allPrice + ">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));

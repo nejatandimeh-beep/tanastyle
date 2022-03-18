@@ -1324,7 +1324,7 @@
                                     <div
                                         class="d-flex justify-content-between d-lg-table-cell align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4 table-cell-responsive">
                                         <div>
-                                            <h3 class="h6 d-inline-block d-lg-block g-font-weight-700 ">
+                                            <h3 class="h6 d-inline-block d-lg-block g-font-weight-700">
                                                 <span class="g-color-gray-dark-v2">شماره فاکتور</span>
                                             </h3>
                                             <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal">{{ $row->orderID.'/'.$row->orderDetailID }}</em>
@@ -1342,16 +1342,17 @@
 
                                     <div
                                          class="d-table-cell d-lg-none align-middle g-width-125--md text-center g-color-gray-dark-v5 g-mb-5 g-mb-0--lg">
-                                        <div>
+                                        <div class="d-flex">
                                             <span
-                                                class="d-block g-color-gray-dark-v3 g-mt-minus-7 g-mt-0--lg g-font-size-14">{{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
+                                                class="d-block g-color-gray-dark-v3 g-ml-5 g-font-size-14">
+                                                {{ (is_null($orderHowDay[$key])) ? $persianDate[$key][2] : $orderHowDay[$key]}}</span>
                                             {{ (!is_null($orderHowDay[$key])) ? '' :$persianDate[$key][1].' '.$persianDate[$key][0] }}
                                         </div>
                                     </div>
 
                                     <!-- Price -->
                                     <div
-                                        class="d-md-table-cell align-middle g-pb-5 g-pt-40 g-py-5--lg g-px-20--lg text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-pb-5 g-pt-15 g-py-5--lg g-px-20--lg text-left text-lg-right">
                                     <span
                                         class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-25">{{ number_format($row->FinalPrice * $row->Qty) }}</span>
                                         <span
@@ -1687,19 +1688,21 @@
                                     <!-- deliveryStatus -->
                                     <div
                                         class="d-block d-lg-none align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
-                                        <div class="g-px-20--lg g-px-10">
-                                            {{ $deliveryHint[$key]['text'] }}
-                                            <span
-                                                class="g-font-weight-600 g-line-height-1 g-font-size-18 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
+                                        <div class="d-flex justify-content-between d-lg-block g-px-20--lg g-px-0">
+                                            <div>
+                                                {{ $deliveryHint[$key]['text'] }}
+                                                <span
+                                                    class="g-font-weight-600 g-line-height-1 g-font-size-18 {{ ($row->DeliveryProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
                                                 {{ $deliveryHint[$key]['location'] }}</span>
+                                            </div>
+                                            <h3 class="h6 d-block m-0 g-font-weight-700 ">
+                                                {{$row->Brand}}
+                                            </h3>
                                         </div>
                                     </div>
 
                                     <!-- Article Content -->
-                                    <div class="d-md-table-cell align-middle g-px-20--lg g-px-10">
-                                        <h3 class="h6 d-block m-0 g-font-weight-700 ">
-                                            {{$row->Brand}}
-                                        </h3>
+                                    <div class="d-md-table-cell align-middle g-px-20--lg g-px-0">
                                         <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
                                             <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                             <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-14">{{ $row->Model }}</em>
@@ -1714,7 +1717,7 @@
 
                                     <!-- Date -->
                                     <div
-                                        class="d-md-table-cell align-middle g-pt-30 g-pt-0--lg g-px-20 text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-pt-15 g-pt-0--lg g-px-0 g-px-20--lg text-left text-lg-right">
                                         <span
                                             class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-14">{{ $deliveryPersianDate[$key][2].' '.$deliveryPersianDate[$key][1].' '.$deliveryPersianDate[$key][0] }}</span>
                                     </div>
@@ -1811,19 +1814,22 @@
 
                                     <div
                                         class="d-block d-lg-none align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4">
-                                        <div>
-                                            {{ $returnHint[$key]['text'] }}
-                                            <span
+                                        <div class="d-flex justify-content-between d-lg-block">
+                                            <div>
+                                                {{ $returnHint[$key]['text'] }}
+                                                <span
                                                 class="g-font-weight-700 g-line-height-1 g-font-size-20 {{ ($row->ReturnProblem === 1) ? 'g-color-red':'g-color-yellow' }}">
                                                 {{ $returnHint[$key]['location'] }}</span>
+                                            </div>
+
+                                            <h3 class="h6 d-block m-0 g-font-weight-700 ">
+                                                {{$row->Brand}}
+                                            </h3>
                                         </div>
                                     </div>
 
                                     <!-- Article Content -->
-                                    <div class="d-md-table-cell align-middle g-px-20--lg g-px-10">
-                                        <h3 class="h6 d-block m-0 g-font-weight-700 ">
-                                            {{$row->Brand}}
-                                        </h3>
+                                    <div class="d-md-table-cell align-middle g-px-20--lg g-px-0">
                                         <h3 class="h6 d-inline-block m-0 g-font-weight-700 ">
                                             <a class="g-color-gray-dark-v2" href="#">{{ $row->Name }}</a>
                                             <em class="d-inline-block g-color-gray-dark-v5 g-font-style-normal g-font-size-12">{{ $row->Model }}</em>
@@ -1838,13 +1844,13 @@
 
                                     <!-- Date -->
                                     <div
-                                        class="d-md-table-cell align-middle g-pt-15 g-pt-0--lg g-px-20 text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-pt-15 g-pt-0--lg g-px-0 g-px-20--lg text-left text-lg-right">
                                                     <span
                                                         class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-14">{{ $returnPersianDate[$key][2].' '.$returnPersianDate[$key][1].' '.$returnPersianDate[$key][0] }}</span>
                                     </div>
 
                                     <div
-                                        class="d-md-table-cell align-middle g-px-20 text-left text-lg-right">
+                                        class="d-md-table-cell align-middle g-px-0 g-px-20--lg text-left text-lg-right">
                                     <span
                                         class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-14">
                                         @switch($row->Reason)
@@ -1951,7 +1957,7 @@
                                             {{--کد دریافتی از اداره پست--}}
                                             <div class="form-group row g-mb-30 g-mb-15--lg">
                                                 <label
-                                                    class="col-sm-2 col-form-label align-self-center">شناسه رهگیری
+                                                    class="col-sm-2 col-form-label align-self-center">کد مرسوله
                                                     اداره
                                                     پست</label>
                                                 <div class="col-sm-10 force-col-12">
@@ -2004,11 +2010,11 @@
                                                    class="form-control g-brd-red returnFormValidate form-control-md rounded-0 g-bg-white g-font-size-16"
                                                    type="text"
                                                    name="returnReasonDetail"
-                                                   oninput="($(this).val().length > 15) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
+                                                   oninput="($(this).val().length > 1) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                    maxlength="300"
                                                    rows="4"
                                                    value=""
-                                                   placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید. بین 16 تا 300 کاراکتر"></textarea>
+                                                   placeholder="جهت سرعت بخشیدن به بررسی ایرادات لطفا توضیحاتی مختصر در مورد ایرادات مورد نظرتان قید کنید."></textarea>
                                                 </div>
                                             </div>
 

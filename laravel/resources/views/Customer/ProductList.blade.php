@@ -1319,7 +1319,7 @@
                                                 <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                     <img class="img-fluid w-100"
                                                          src="{{ $row->PicPath }}sample1.png"
-                                                         alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                         alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                 </a>
                                             </div>
                                             @if (file_exists(public_path($row->PicPath.'pic2.jpg')))
@@ -1327,7 +1327,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample2.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1337,7 +1337,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample3.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1347,7 +1347,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample4.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1357,7 +1357,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample5.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1367,7 +1367,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample6.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1377,7 +1377,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample7.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1387,7 +1387,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample8.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1397,7 +1397,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample9.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1407,7 +1407,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample10.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1417,7 +1417,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample11.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif
@@ -1427,7 +1427,7 @@
                                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample12.png"
-                                                             alt="لباس کیف کفش ورزشی و اکسسوری">
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                                     </a>
                                                 </div>
                                             @endif

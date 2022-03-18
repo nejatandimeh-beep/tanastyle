@@ -16,11 +16,11 @@
                 <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
             </div>
             <div class="g-py-15 g-pb-30">
-                <div class="row">
+                <div class="row col-12 col-lg-11 m-0 p-0">
                     <span id="cartCount" class="d-none">{{ (isset($data)) ?  count($data) : 0 }}</span>
                     @foreach($data as $key =>$row)
                         {{--    hidden input   --}}
-                        <div id="cartContainer{{$key}}" class="col-12 col-lg-3 g-mb-30">
+                        <div id="cartContainer{{$key}}" class="col-12 col-lg-3 g-mb-30 g-px-0 g-px-10--lg">
                             <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24">
                                 <div>
                                     <div class="text-center g-mb-5">
@@ -122,7 +122,7 @@
 
                 <div class="{{ isset($data[0]) ? '':'d-none' }} text-left g-ml-10">
                     <a onclick="$(document.body).addClass('me-position-fix');
-                           $(document.body).removeClass('me-position-normally'); cartOrder($('#cartCount').text())"
+                           $(document.body).removeClass('me-position-normally'); cartOrder(parseInt($('#cartCount').text()))"
                        id="orderSubmit"
                        href="#modal70"
                        data-modal-target="#modal70"
@@ -172,8 +172,8 @@
                                         <th class="text-center">سایز</th>
                                         <th class="text-center">تعداد</th>
                                         <th class="text-center">قیمت واحد</th>
-                                        <th class="text-center">با
-                                            تخفیف {{ isset($data[0]) ? $row->Discount.'%' : '' }}</th>
+                                        <th class="text-center">تخفیف</th>
+                                        <th class="text-center">قیمت نهایی</th>
                                         <th class="text-center">عکس</th>
                                     </tr>
                                     </thead>
@@ -215,6 +215,11 @@
                                             <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                                 {{ number_format($row->UnitPrice) }}
+                                                            </span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                            <span class="g-pa-5">
+                                                                %{{ $row->Discount }}
                                                             </span>
                                             </td>
                                             <td class="align-middle text-center">

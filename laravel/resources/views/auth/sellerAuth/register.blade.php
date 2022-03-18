@@ -961,6 +961,13 @@
         }
     }
 
+    function newConnection() {
+        if ($('#loginAlert').text() === 'login') {
+            window.location = '/Customer-Connection';
+        } else
+            customerLogin();
+    }
+
     // تابع انتخاب شهر به ازای هر استان
     function autoCity(state, city, type) {
         let s = [], i,

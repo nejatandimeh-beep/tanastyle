@@ -38,7 +38,7 @@
                             {{--زنانه--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="femaleCat">
-                                <a id="mega-menu-label-4" class="nav-link g-px-0" href="{{ route('productFemaleList') }}" aria-haspopup="true"
+                                <a id="mega-menu-label-4" class="nav-link g-px-0 g-color-primary--hover" href="{{ route('productFemaleList') }}" aria-haspopup="true"
                                    aria-expanded="false">پوشاک زنانه
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
@@ -741,7 +741,7 @@
                             {{--مردانه--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="maleCat">
-                                <a id="mega-menu-label-5" class="nav-link g-px-0" href="{{ route('productMaleList') }}" aria-haspopup="true"
+                                <a id="mega-menu-label-5" class="nav-link g-px-0 g-color-primary--hover" href="{{ route('productMaleList') }}" aria-haspopup="true"
                                    aria-expanded="false">پوشاک مردانه
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
@@ -1301,7 +1301,7 @@
                             {{--بچگانه--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="kidsCat">
-                                <a id="mega-menu-label-6" class="nav-link g-px-0" href="#" aria-haspopup="true"
+                                <a id="mega-menu-label-6" class="nav-link g-px-0 g-color-primary--hover" href="#" aria-haspopup="true"
                                    aria-expanded="false">پوشاک بچگانه
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
@@ -2442,7 +2442,7 @@
                             {{--فروش ویژه--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="spacialSale">
-                                <a id="mega-menu-label-2" class="nav-link g-px-0" href="#" aria-haspopup="true"
+                                <a id="mega-menu-label-2" class="nav-link g-px-0 g-color-primary--hover" href="#" aria-haspopup="true"
                                    aria-expanded="false">فروش ویژه
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 

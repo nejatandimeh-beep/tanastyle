@@ -2246,3 +2246,10 @@ class Basic extends Controller
 
     }
 }
+
+
+//
+//RewriteCond %{HTTPS} off
+//RewriteCond %{HTTP:X-Forwarded-SSL} !on
+//RewriteCond %{HTTP_HOST} ^tanastyle\.ir$
+//RewriteRule ^/?$ "https\:\/\/tanastyle\.ir\/" [R=301,L]

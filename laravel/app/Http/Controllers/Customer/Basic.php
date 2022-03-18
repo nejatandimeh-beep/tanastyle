@@ -29,6 +29,8 @@ class Basic extends Controller
 //            ->orderBy('pod.SellCount')
 //            ->take(10)
 //            ->get();
+//        return redirect()->route('login');
+
         $minDiscount = 1;
         $maxDiscount = 99;
 
@@ -47,10 +49,15 @@ class Basic extends Controller
     public function userProfile($location)
     {
         // user data
-        $customer = DB::table('customers')
-            ->select('*')
-            ->where('id', Auth::user()->id)
-            ->first();
+        try {
+            $customer = DB::table('customers')
+                ->select('*')
+                ->where('id', Auth::user()->id)
+                ->first();
+        } catch (\Exception $e) {
+            return redirect()->route('login');
+        }
+
 
         // address
         $address = DB::table('customer_address')
@@ -385,15 +392,20 @@ class Basic extends Controller
 
     public function cart()
     {
-        // گرفتن تمامی جزییات مربوط به محصول کلیک شده
-        $data = DB::table('product_cart as pc')
-            ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID')
-            ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pc.ProductDetailID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-            ->where('pc.CustomerID', Auth::user()->id)
-            ->orderBy('Date')
-            ->orderBy('Time')
-            ->get();
+        try {
+            // گرفتن تمامی جزییات مربوط به محصول کلیک شده
+            $data = DB::table('product_cart as pc')
+                ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID')
+                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pc.ProductDetailID')
+                ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
+                ->where('pc.CustomerID', Auth::user()->id)
+                ->orderBy('Date')
+                ->orderBy('Time')
+                ->get();
+        } catch (\Exception $e) {
+            return redirect()->route('login');
+        }
+
 
         $sendAddress = $this->checkAddress();
         return view('Customer.Cart', compact('sendAddress', 'data'));
@@ -443,7 +455,7 @@ class Basic extends Controller
                 ->first();
             $qty[$i] = $request->get('qty' . $i);
         }
-        $postPrice = 0;
+        $postPrice = 15000;
         $price=$request->get('allPrice')+$postPrice;
         if ($noExist === null) {
             setcookie('productRow', $row, time() + (43200), "/Confirmation");
@@ -471,7 +483,7 @@ class Basic extends Controller
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
             ->where('pd.ID', $id)
             ->first();
-        $postPrice = 0;
+        $postPrice = 15000;
         $idTemp[0]=$id;
         $qtyTemp[0]=$qty;
         if ($noExist !== null) {
@@ -1173,21 +1185,25 @@ class Basic extends Controller
 
     public function connection()
     {
-        $data = DB::table('customer_conversation as cc')
-            ->select('cc.*',
-                'ccd.QuestionDate as qDate',
-                'ccd.QuestionTime as qTime',
-                'ccd.AnswerDate as aDate',
-                'ccd.AnswerTime as aTime',
-                'ccd.Replay',
-                'ccd.ConversationID',
-                'ccd.ID as conversationDetailID')
-            ->leftJoin('customer_conversation_detail as ccd', 'ccd.ConversationID', '=', 'cc.ID')
-            ->where('cc.CustomerID', Auth::user()->id)
-            ->orderBy('cc.Status')
-            ->orderBy(DB::raw('IF(cc.Status=0 || cc.Status=1, cc.Priority, false)'), 'ASC')
-            ->orderBy('cc.ID', 'DESC')
-            ->get();
+        try {
+            $data = DB::table('customer_conversation as cc')
+                ->select('cc.*',
+                    'ccd.QuestionDate as qDate',
+                    'ccd.QuestionTime as qTime',
+                    'ccd.AnswerDate as aDate',
+                    'ccd.AnswerTime as aTime',
+                    'ccd.Replay',
+                    'ccd.ConversationID',
+                    'ccd.ID as conversationDetailID')
+                ->leftJoin('customer_conversation_detail as ccd', 'ccd.ConversationID', '=', 'cc.ID')
+                ->where('cc.CustomerID', Auth::user()->id)
+                ->orderBy('cc.Status')
+                ->orderBy(DB::raw('IF(cc.Status=0 || cc.Status=1, cc.Priority, false)'), 'ASC')
+                ->orderBy('cc.ID', 'DESC')
+                ->get();
+        } catch (\Exception $e) {
+            return redirect()->route('login');
+        }
 
         // Convert Date
         $persianDate = array();
