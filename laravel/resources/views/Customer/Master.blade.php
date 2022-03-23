@@ -12,178 +12,190 @@
             <ul id="productSearch" class="d-none p-0 col-lg-9 col-11 m-auto outSideClick"></ul>
         </form>
 </div>
-    <div class="container g-pt-80">
-        <div class="row m-0">
-            <div class="col-lg-4 g-mb-30">
-                <!-- Icon Blocks -->
-                <div class="text-center u-icon-block--hover">
-                    <span
-                        class="d-inline-block u-icon-v4 u-icon-v4-rounded-50x u-icon-size--xl u-icon-v4-bg-primary--hover g-color-white--hover g-mb-20">
-                      <span class="u-icon-v4-inner">
-                        <i class="icon-present g-mt-5 g-ml-5"></i>
-                      </span>
-                    </span>
-                    <h3 class="h5 g-color-black mb-3">کسب 3 امتیاز در تانا استایل</h3>
-                    <p class="g-color-gray-dark-v4">ارسال محصول برای همیشه رایگان</p>
-                </div>
-                <!-- End Icon Blocks -->
-            </div>
+<div id="productContainer" class="g-mb-50">
+{{--    <h1 class="d-block text-right g-brd-bottom g-brd-gray-light-v4 h5 g-pa-10 g-mx-30 g-mt-10">{{$title}}</h1>--}}
+    <div class="row col-12 g-pa-40 m-0">
+        @foreach($data as $key => $row)
+            <div id="productDiv" class="col-12 col-lg-3 g-mb-30">
+                <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
+                        class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
+                    <div>
+                        <div id="carousel-08-1"
+                             class="js-carousel text-center g-mb-5"
+                             data-infinite="1"
+                             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
+                             data-nav-for="#carousel-08-2">
+                            <div class="js-slide">
+                                <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                    <img class="img-fluid w-100"
+                                         src="{{ $row->PicPath }}sample1.png"
+                                         alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                </a>
+                            </div>
+                            @if (file_exists(public_path($row->PicPath.'pic2.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample2.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
 
-            <div class="col-lg-4 g-mb-30">
-                <!-- Icon Blocks -->
-                <div class="text-center u-icon-block--hover">
-                    <span
-                        class="d-inline-block u-icon-v4 u-icon-v4-rounded-50x u-icon-size--xl u-icon-v4-bg-primary--hover g-color-white--hover g-mb-20">
-                      <span class="u-icon-v4-inner">
-                        <i class="icon-present g-mt-5"></i>
-                      </span>
-                    </span>
-                    <h3 class="h5 g-color-black mb-3">کسب 15 امتیاز در تانا استایل</h3>
-                    <p class="g-color-gray-dark-v4">ورود به قرعه کشی یک سال خرید با تخفیف مازاد</p>
-                </div>
-                <!-- End Icon Blocks -->
-            </div>
+                            @if (file_exists(public_path($row->PicPath.'pic3.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample3.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
 
-            <div class="col-lg-4 g-mb-30">
-                <!-- Icon Blocks -->
-                <div class="text-center u-icon-block--hover">
-                    <span
-                        class="d-inline-block u-icon-v4 u-icon-v4-rounded-50x u-icon-size--xl u-icon-v4-bg-primary--hover g-color-white--hover g-mb-20">
-                      <span class="u-icon-v4-inner">
-                        <i class="icon-present g-mt-5"></i>
-                      </span>
-                    </span>
-                    <h3 class="h5 g-color-black mb-3">کسب 8 امتیاز در تانا استایل</h3>
-                    <p class="g-color-gray-dark-v4">یک خرید رایگان تا سقف محدود</p>
-                </div>
-                <!-- End Icon Blocks -->
+                            @if (file_exists(public_path($row->PicPath.'pic4.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample4.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if (file_exists(public_path($row->PicPath.'pic5.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample5.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if (file_exists(public_path($row->PicPath.'pic6.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample6.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if (file_exists(public_path($row->PicPath.'pic7.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample7.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if (file_exists(public_path($row->PicPath.'pic8.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample8.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if (file_exists(public_path($row->PicPath.'pic9.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample9.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if (file_exists(public_path($row->PicPath.'pic10.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample10.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if (file_exists(public_path($row->PicPath.'pic11.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample11.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+
+                            @if (file_exists(public_path($row->PicPath.'pic12.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample12.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <!-- مشخصات محصول -->
+                    <h4 class="h6 g-color-black text-left g-brd-top g-brd-gray-light-v4 g-ml-5 g-mt-5 g-pt-5">
+                        {{$row->Brand}}
+                    </h4>
+
+                    <div style="direction: rtl"
+                         class="media">
+                        <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                        <div class="d-flex justify-content-between col-12 p-0">
+                            <div class="d-flex flex-column">
+                                <h1 class="h6 g-color-black my-1">
+                                                    <span class="u-link-v5 g-color-black"
+                                                          tabindex="0">
+                                                        {{ $row->Name }}
+                                                        <span
+                                                            class="g-font-size-12 g-font-weight-300">{{ $row->Model }}</span>
+                                                    </span>
+                                </h1>
+                                <ul style="padding: 0"
+                                    class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
+                                    <li>
+                                        <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600">{{ $row->HintCat.' '.$row->Gender }}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a style="cursor: pointer"
+                               class="u-icon-v1 g-mt-minus-5 g-color-black g-color-primary--hover rounded-circle"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}"
+                               data-original-title="جزئیات محصول">
+                                <i class="icon-eye g-line-height-0_7"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div
+                        class="d-block g-color-black g-font-size-17 g-ml-10">
+                        <div style="direction: rtl" class="text-left">
+                            <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                {{  number_format($row->UnitPrice) }}
+                            </s>
+                            <span>{{  number_format($row->FinalPrice) }}</span>
+                            <span
+                                class="d-block g-color-gray-dark-v5 g-font-size-10">تومان</span>
+                        </div>
+                    </div>
+                </figure>
             </div>
-        </div>
+        @endforeach
     </div>
-    <div class="container g-pt-40 g-pb-70">
-        <div class="row g-mx-minus-10">
-            <div class="col-sm-6 col-md-4 g-mb-30">
-                <!-- Article -->
-                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
-                    <!-- Article Image -->
-                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productFemaleList') }}">
-                        <img class="w-100" src="img/Other/cat-female.jpg" alt="لباس زنانه تاناکورا مهاباد">
-                    </a>
-                    <!-- End Article Image -->
-
-                    <!-- Article Content -->
-                    <div class="g-bg-secondary g-pa-30">
-                        <h3 class="h4">
-                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productFemaleList') }}">پوشاک زنانه</a>
-                        </h3>
-
-                    </div>
-                    <!-- End Article Content -->
-                </article>
-                <!-- End Article -->
-            </div>
-            <div class="col-sm-6 col-md-4 g-mb-30">
-                <!-- Article -->
-                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
-                    <!-- Article Image -->
-                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productMaleList') }}">
-                    <img class="w-100" src="img/Other/cat-male.jpg" alt="لباس مردانه تاناکورا مهاباد">
-                    </a>
-                    <!-- End Article Image -->
-
-                    <!-- Article Content -->
-                    <div class="g-bg-secondary g-pa-30">
-                        <h3 class="h4">
-                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productMaleList') }}">پوشاک مردانه</a>
-                        </h3>
-
-                    </div>
-                    <!-- End Article Content -->
-                </article>
-                <!-- End Article -->
-            </div>
-            <div class="col-sm-6 col-md-4 g-mb-30">
-                <!-- Article -->
-                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
-                    <!-- Article Image -->
-                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productGirlList') }}">
-                    <img class="w-100" src="img/Other/cat-girl.jpg" alt="لباس دخترانه تاناکورا مهاباد">
-                    </a>
-                    <!-- End Article Image -->
-
-                    <!-- Article Content -->
-                    <div class="g-bg-secondary g-pa-30">
-                        <h3 class="h4">
-                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productGirlList') }}">پوشاک دخترانه</a>
-                        </h3>
-
-                    </div>
-                    <!-- End Article Content -->
-                </article>
-                <!-- End Article -->
-            </div>
-            <div class="col-sm-6 col-md-4 g-mb-30">
-                <!-- Article -->
-                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
-                    <!-- Article Image -->
-                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBoyList') }}">
-                    <img class="w-100" src="img/Other/cat-boy.jpg" alt="لباس پسرانه تاناکورا مهاباد">
-                    </a>
-                    <!-- End Article Image -->
-
-                    <!-- Article Content -->
-                    <div class="g-bg-secondary g-pa-30">
-                        <h3 class="h4">
-                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBoyList') }}">پوشاک پسرانه</a>
-                        </h3>
-
-                    </div>
-                    <!-- End Article Content -->
-                </article>
-                <!-- End Article -->
-            </div>
-            <div class="col-sm-6 col-md-4 g-mb-30">
-                <!-- Article -->
-                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
-                    <!-- Article Image -->
-                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyGirlList') }}">
-                    <img class="w-100" src="img/Other/cat-babyGirl.jpg" alt="لباس نوزادی دخترانه تاناکورا مهاباد">
-                    </a>
-                    <!-- End Article Image -->
-
-                    <!-- Article Content -->
-                    <div class="g-bg-secondary g-pa-30">
-                        <h3 class="h4">
-                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyGirlList') }}">پوشاک نوزادی دخترانه</a>
-                        </h3>
-
-                    </div>
-                    <!-- End Article Content -->
-                </article>
-                <!-- End Article -->
-            </div>
-            <div class="col-sm-6 col-md-4 g-mb-30">
-                <!-- Article -->
-                <article class="g-pos-rel g-rounded-4 g-brd-bottom g-brd-3 g-brd-gray-light-v4 g-brd-primary--hover text-center g-transition-0_3 g-transition--linear">
-                    <!-- Article Image -->
-                    <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyBoyList') }}">
-                    <img class="w-100" src="img/Other/cat-babyBoy.jpg" alt="لباس نوزادی پسرانه تاناکورا مهاباد">
-                    </a>
-                    <!-- End Article Image -->
-
-                    <!-- Article Content -->
-                    <div class="g-bg-secondary g-pa-30">
-                        <h3 class="h4">
-                            <a class="g-color-main g-color-primary--hover g-text-underline--none--hover" href="{{ route('productBabyBoyList') }}">پوشاک نوزادی پسرانه</a>
-                        </h3>
-
-                    </div>
-                    <!-- End Article Content -->
-                </article>
-                <!-- End Article -->
-            </div>
-        </div>
-    </div>
+</div>
+<div class="g-mt-40">
     <p style="direction: rtl" class="container g-color-gray-dark-v1 g-pr-0--lg g-font-size-16">تخفیفات ویژه</p>
     <!-- Products -->
     <div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
@@ -196,7 +208,7 @@
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
              data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">
-            @foreach($data as $key =>$row)
+            @foreach($discounts as $key =>$row)
                 <div class="js-slide g-mx-10">
                     <!-- Product -->
                     <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
@@ -263,4 +275,5 @@
         </div>
     </div>
     <!-- End Products -->
+</div>
 @endsection

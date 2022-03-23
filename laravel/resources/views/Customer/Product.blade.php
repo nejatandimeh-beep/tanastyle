@@ -14,16 +14,201 @@
     <span id="picPath" class="d-none">{{ $data->PicPath }}</span>
 
     <div class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4 modalBox">
+        <!-- smallDevice -->
+        <article class="row smallDevice">
+            <header style="direction: rtl" class="d-flex justify-content-between col-12">
+                <!-- Article Icons -->
+                <div style="width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis" class="align-self-center">
+                    <h1 id="productName"
+                        class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}</h1>
+                    <span id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
+                </div>
+                <div style="direction: ltr"
+                     class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
+                    <i class="{{ $rating>0 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                    <i class="{{ $rating>1 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                    <i class="{{ $rating>2 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                    <i class="{{ $rating>3 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                    <i class="{{ $rating>4 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                </div>
+            </header>
+            <hr class="g-brd-gray-light-v4 g-mt-10 g-mb-15">
+
+            {{--گالری--}}
+            <div id="productGallery" class="col-lg-5 g-mb-30">
+                <!-- Carousel Images -->
+                <div id="js-carousel-22" class="js-carousel g-mb-5" data-infinite="1" data-fade="1"
+                     data-nav-for="#js-carousel-22-nav">
+
+                    <div class="js-slide">
+                        <img id="img1" class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                    </div>
+
+                    @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
+                        <div class="js-slide">
+                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide">
+                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
+                        <div class="js-slide">
+                            <img id="img3" class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide">
+                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
+                        <div class="js-slide">
+                            <img id="img4" class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide">
+                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
+                        <div class="js-slide">
+                            <img id="img5" class="w-100" src="{{ $data->PicPath }}pic5.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic6jpg')))
+                        <div class="js-slide">
+                            <img id="img6" class="w-100" src="{{ $data->PicPath }}pic6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
+                        <div class="js-slide">
+                            <img id="img7" class="w-100" src="{{ $data->PicPath }}pic7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
+                        <div class="js-slide">
+                            <img id="img8" class="w-100" src="{{ $data->PicPath }}pic8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
+                        <div class="js-slide">
+                            <img id="img9" class="w-100" src="{{ $data->PicPath }}pic9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
+                        <div class="js-slide">
+                            <img id="img10" class="w-100" src="{{ $data->PicPath }}pic10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
+                        <div class="js-slide">
+                            <img id="img10" class="w-100" src="{{ $data->PicPath }}pic11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
+                        <div class="js-slide">
+                            <img id="img10" class="w-100" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                </div>
+                <!-- End Carousel Images -->
+
+                <!-- Carousel Nav -->
+                <div style="pointer-events: none" id="js-carousel-22-nav" class="js-carousel u-carousel-v11" data-infinite="1" data-center-mode="1"
+                     data-slides-show="3" data-is-thumbs="1" data-nav-for="#js-carousel-22">
+                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
+                        <img class="w-100"
+                             src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                    </div>
+                    @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                            <img class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3"
+                             id="pic2">
+                            <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic3">
+                            <img class="w-100" src="{{ $data->PicPath }}pic3.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3"
+                             id="pic2">
+                            <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic4">
+                            <img class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @else
+                        <div style="visibility: hidden" class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3"
+                             id="pic2">
+                            <img class="w-100" src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic5">
+                            <img class="w-100" src="{{ $data->PicPath }}pic5.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic6">
+                            <img class="w-100" src="{{ $data->PicPath }}pic6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic7">
+                            <img class="w-100" src="{{ $data->PicPath }}pic7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic8">
+                            <img class="w-100" src="{{ $data->PicPath }}pic8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic9">
+                            <img class="w-100" src="{{ $data->PicPath }}pic9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic10">
+                            <img class="w-100" src="{{ $data->PicPath }}pic10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic11">
+                            <img class="w-100" src="{{ $data->PicPath }}pic11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                    @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic12">
+                            <img class="w-100" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        </div>
+                    @endif
+                </div>
+                <!-- End Carousel Nav -->
+            </div>
+            <hr class="g-brd-gray-light-v4 g-mt-10 g-mb-15">
+        </article>
+        <!-- smallDevice -->
+
         <!-- Article -->
         <article class="row justify-content-between g-color-gray-dark-v5">
             {{--اطلاعات محصول--}}
             <div style="direction: rtl" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
-                <header class="d-flex justify-content-between">
+                <!-- bigDevice -->
+                <header class="d-flex justify-content-between bigDevice">
                     <!-- Article Icons -->
-                    <div class=" align-self-center">
+                    <div class="align-self-center">
                         <h1 id="productName"
                             class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}</h1>
-                        <span id="productModel" class="align-middle g-font-size-13">{{ $data->Model }}</span>
+                        <span id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
                     </div>
                     <div style="direction: ltr"
                          class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
@@ -35,7 +220,8 @@
                     </div>
                 </header>
 
-                <hr class="g-brd-gray-light-v4 g-mt-10 g-mb-15">
+                <hr class="g-brd-gray-light-v4 g-mt-10 g-mb-15 bigDevice">
+                <!-- bigDevice -->
 
                 {{--هدر--}}
                 <a style="cursor: pointer;" class="d-none float-left g-font-size-20 g-mr-10 fa fa-bookmark
@@ -49,7 +235,7 @@
                 </a>
                 <span id="likeHint"
                       class="{{ ($like === 'like') ? 'd-none':'' }} g-font-size-10 g-pt-5 float-left bigDevice">ذخیره کن</span>
-                <div class="g-mb-30">
+                <div class="g-mb-30 g-mt-minus-5">
                     @if($customerRate !== 0)
                         <small>شما قبلا امتیاز {{ $customerRate }} را ثبت کرده اید.</small>
                     @else
@@ -69,11 +255,18 @@
                     @endif
                 </div>
 
-                <h1 id="productName"
-                    class="d-inline-block h5 g-color-black mb-2">{{ $data->Brand }}</h1>
+                <div class="align-self-center">
+                    <h1 id="productName"
+                        class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Name }}</h1>
+                    <h1 id="productName"
+                        class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Model }}</h1>
+                    <h1 id="productName"
+                        class="d-inline-block h5 g-color-black mb-2">{{ $data->Brand }}</h1>
+                </div>
+
 
                 {{--توضیحات--}}
-                <pre class="g-mb-25 g-font-size-14 g-color-gray-dark-v4" id="productDetail">{{ $data->Detail }}</pre>
+                <pre class="g-mb-25 g-font-size-14" id="productDetail">{{ $data->Detail }}</pre>
 
                 <!-- قیمت -->
                 <div class="g-mb-30--lg g-mb-0 text-lg-right text-left">
@@ -575,7 +768,7 @@
             </div>
 
             {{--گالری--}}
-            <div id="productGallery" class="col-lg-5 g-mb-30 largeDevice">
+            <div id="productGallery" class="col-lg-5 g-mb-30 largeDevice bigDevice">
                 <!-- Carousel Images -->
                 <div id="js-carousel-11" class="js-carousel g-mb-5" data-infinite="1" data-fade="1"
                      data-nav-for="#js-carousel-11-nav">

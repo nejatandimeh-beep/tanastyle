@@ -34,7 +34,7 @@ class Basic extends Controller
         $minDiscount = 1;
         $maxDiscount = 99;
 
-        $data = DB::table('product as p')
+        $discounts = DB::table('product as p')
             ->select('*')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->orderBy('Discount', 'DESC')
@@ -43,7 +43,20 @@ class Basic extends Controller
             ->take(10)
             ->get();
 
-        return view('Customer.Master', compact('data'));
+        $data = DB::table('product')
+            ->select('*')
+            ->orderBy('RegDate')
+            ->paginate(10);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->orderBy('p.RegDate')
+            ->groupBy('p.ID')
+            ->paginate(10);
+
+        $title='';
+        return view('Customer.Master', compact('discounts','data','title','size'));
     }
 
     public function userProfile($location)
