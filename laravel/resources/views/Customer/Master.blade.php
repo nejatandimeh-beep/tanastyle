@@ -12,9 +12,9 @@
             <ul id="productSearch" class="d-none p-0 col-lg-9 col-11 m-auto outSideClick"></ul>
         </form>
 </div>
-<div id="productContainer" class="g-mb-50">
+<div id="productContainer" class="g-mb-50 g-mt-40 g-mt-0--lg">
 {{--    <h1 class="d-block text-right g-brd-bottom g-brd-gray-light-v4 h5 g-pa-10 g-mx-30 g-mt-10">{{$title}}</h1>--}}
-    <div class="row col-12 g-pa-40 m-0">
+    <div class="row col-12 g-pa-40--lg g-pa-0 m-0">
         @foreach($data as $key => $row)
             <div id="productDiv" class="col-12 col-lg-3 g-mb-30">
                 <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
@@ -137,6 +137,16 @@
                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                         <img class="img-fluid w-100"
                                              src="{{ $row->PicPath }}sample12.png"
+                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                    </a>
+                                </div>
+                            @endif
+                            
+                            @if (file_exists(public_path($row->PicPath.'pic13.jpg')))
+                                <div class="js-slide">
+                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                        <img class="img-fluid w-100"
+                                             src="{{ $row->PicPath }}sample13.png"
                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                     </a>
                                 </div>

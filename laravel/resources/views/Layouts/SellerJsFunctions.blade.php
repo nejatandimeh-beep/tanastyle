@@ -218,7 +218,7 @@
             $('.sizeDetailContainer').each(function (row) {
                 if (!$('#sizeDetail' + row).children(":first").hasClass('d-none')) {
                     if (row === 0)
-                        productDetail.val(productDetail.val() + '\n\n' + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '') + '\n');
+                        productDetail.val(productDetail.val() + '\n\n' + 'سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '') + '\n');
                     else
                         productDetail.val(productDetail.val() + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '') + '\n');
                     $(this).find('.sizeDetail').each(function () {
@@ -754,6 +754,10 @@
             $(this).val(unitPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // add coma
             temp1 = unitPrice.replace(new RegExp(',', 'g'), ""); // remove coma
             temp1 = parseInt(temp1)+((temp1*9)/100);
+            if (temp1 >= 10000) {
+                temp1 = temp1.toString().slice(0, -3) + "000";
+                temp1 = parseInt(temp1);
+            }
             $('#unitPriceStatic').val(temp1.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $("#tempPrice").val(temp1);
 
@@ -798,7 +802,10 @@
         });
 
         function salePrice(discount, unitPrice) {
-            return unitPrice - ((unitPrice * discount) / 100);
+            let temp1=unitPrice - ((unitPrice * discount) / 100);
+            temp1 = temp1.toString().slice(0, -3) + "000";
+            temp1 = parseInt(temp1);
+            return temp1;
         }
 
         // -------------------Calculate UintPrice Discount And Show in salePrice-----------------

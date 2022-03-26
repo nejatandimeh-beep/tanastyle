@@ -1431,6 +1431,17 @@
                                                     </a>
                                                 </div>
                                             @endif
+                                            
+                                            
+                                            @if (file_exists(public_path($row->PicPath.'pic13.jpg')))
+                                                <div class="js-slide">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                        <img class="img-fluid w-100"
+                                                             src="{{ $row->PicPath }}sample13.png"
+                                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
+                                                    </a>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
 

@@ -288,29 +288,31 @@
                 $(document.body).removeClass('me-position-fix');
                 $(document.body).addClass('me-position-normally');
                 if ($('#productGallery').length > 0 && $('#productGallery').hasClass('largeDevice')) {
-                    magnify("img1", 3);
+                    magnify("img1", 2);
                     if ($('#img2').length > 0)
-                        magnify("img2", 3);
+                        magnify("img2", 2);
                     if ($('#img3').length > 0)
-                        magnify("img3", 3);
+                        magnify("img3", 2);
                     if ($('#img4').length > 0)
-                        magnify("img4", 3);
+                        magnify("img4", 2);
                     if ($('#img5').length > 0)
-                        magnify("img5", 3);
+                        magnify("img5", 2);
                     if ($('#img6').length > 0)
-                        magnify("img6", 3);
+                        magnify("img6", 2);
                     if ($('#img7').length > 0)
-                        magnify("img7", 3);
+                        magnify("img7", 2);
                     if ($('#img8').length > 0)
-                        magnify("img8", 3);
+                        magnify("img8", 2);
                     if ($('#img9').length > 0)
-                        magnify("img9", 3);
+                        magnify("img9", 2);
                     if ($('#img10').length > 0)
-                        magnify("img10", 3);
+                        magnify("img10", 2);
                     if ($('#img11').length > 0)
-                        magnify("img11", 3);
+                        magnify("img11", 2);
                     if ($('#img12').length > 0)
-                        magnify("img12", 3);
+                        magnify("img12", 2);
+                    if ($('#img13').length > 0)
+                        magnify("img13", 2);
                 }
 
             }
