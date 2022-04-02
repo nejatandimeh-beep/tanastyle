@@ -12,19 +12,19 @@
             <ul id="productSearch" class="d-none p-0 col-lg-9 col-11 m-auto outSideClick"></ul>
         </form>
 </div>
-<div id="productContainer" class="g-mb-50 g-mt-40 g-mt-0--lg">
+<div id="productContainer" class="g-mb-50 g-mt-40 g-pt-40 g-mt-0--lg masterPage">
 {{--    <h1 class="d-block text-right g-brd-bottom g-brd-gray-light-v4 h5 g-pa-10 g-mx-30 g-mt-10">{{$title}}</h1>--}}
-    <div class="row col-12 g-pa-40--lg g-pa-0 m-0">
+    <div class="row col-12 g-px-40--lg g-pa-0 m-0">
         @foreach($data as $key => $row)
-            <div id="productDiv" class="col-12 col-lg-3 g-mb-30">
+            <div class="col-12 col-lg-3 g-mb-30">
                 <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
                     <div>
-                        <div id="carousel-08-1"
+                        <div id="carousel-08-{{10000+$key}}"
                              class="js-carousel text-center g-mb-5"
                              data-infinite="1"
                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
-                             data-nav-for="#carousel-08-2">
+                             data-nav-for="#carousel-08-{{10000+$key}}">
                             <div class="js-slide">
                                 <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
                                     <img class="img-fluid w-100"
@@ -141,7 +141,7 @@
                                     </a>
                                 </div>
                             @endif
-                            
+
                             @if (file_exists(public_path($row->PicPath.'pic13.jpg')))
                                 <div class="js-slide">
                                     <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
@@ -205,6 +205,7 @@
         @endforeach
     </div>
 </div>
+<div id="loadProduct" class="d-none loadProduct"></div>
 <div class="g-mt-40">
     <p style="direction: rtl" class="container g-color-gray-dark-v1 g-pr-0--lg g-font-size-16">تخفیفات ویژه</p>
     <!-- Products -->
@@ -223,11 +224,11 @@
                     <!-- Product -->
                     <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
                         <div>
-                            <div id="carousel-08-1"
+                            <div id="carousel-08-{{100000+$key}}"
                                  class="js-carousel text-center g-mb-5"
                                  data-infinite="1"
                                  data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
-                                 data-nav-for="#carousel-08-2">
+                                 data-nav-for="#carousel-08-{{100000+$key}}">
                                 <div class="js-slide">
                                     <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
                                         <img class="img-fluid w-100"

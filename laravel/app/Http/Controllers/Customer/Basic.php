@@ -30,6 +30,8 @@ class Basic extends Controller
 //            ->take(10)
 //            ->get();
 //        return redirect()->route('login');
+        session_start();
+        $_SESSION['listSkip']=0;
 
         $minDiscount = 1;
         $maxDiscount = 99;
@@ -40,23 +42,157 @@ class Basic extends Controller
             ->orderBy('Discount', 'DESC')
             ->orderBy('pd.VisitCounter', 'DESC')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
-            ->take(10)
+            ->take(5)
             ->get();
 
         $data = DB::table('product')
             ->select('*')
             ->orderBy('RegDate')
-            ->paginate(10);
+            ->take(4)
+            ->get();
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->orderBy('p.RegDate')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->take(4)
+            ->get();
 
         $title='';
         return view('Customer.Master', compact('discounts','data','title','size'));
+    }
+
+    public function productLoad()
+    {
+        session_start();
+        $_SESSION['listSkip'] = $_SESSION['listSkip']+4;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->orderBy('RegDate')
+            ->skip($_SESSION['listSkip'])
+            ->take(4)
+            ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->orderBy('p.RegDate')
+            ->groupBy('p.ID')
+            ->skip($_SESSION['listSkip'])
+            ->take(4)
+            ->get();
+
+        if(isset($size[0]->Color))
+            $products='<div class="row col-12 g-px-40--lg g-pa-0 m-0"> ';
+        else
+            return $products='null';
+
+        foreach($data as $key => $row){
+            $products = $products . '
+             <div class="col-12 col-lg-3 g-mb-30">
+                <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
+                        class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
+                    <div>
+                        <div id="carousel-08-'.$_SESSION['listSkip'].$key.'"
+                             class="js-carousel text-center g-mb-5 js-carousel-ajax"
+                             data-infinite="1"
+                             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
+                             data-nav-for="#carousel-08-'.$_SESSION['listSkip'].$key.'">
+                            <div class="js-slide">
+                                <a href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'">
+                                    <img class="img-fluid w-100"
+                                         src="'. $row->PicPath .'sample1.png"
+                                         alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
+                                </a>
+                            </div> ';
+            if (file_exists(public_path($row->PicPath.'pic2.jpg')))
+                $products = $products . $this->productImage('2',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic3.jpg')))
+                $products = $products . $this->productImage('3',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic4.jpg')))
+                $products = $products . $this->productImage('4',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic5.jpg')))
+                $products = $products . $this->productImage('5',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic6.jpg')))
+                $products = $products . $this->productImage('6',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic7.jpg')))
+                $products = $products . $this->productImage('7',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic8.jpg')))
+                $products = $products . $this->productImage('8',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic9.jpg')))
+                $products = $products . $this->productImage('9',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic10.jpg')))
+                $products = $products . $this->productImage('10',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic11.jpg')))
+                $products = $products . $this->productImage('11',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic12.jpg')))
+                $products = $products . $this->productImage('12',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic13.jpg')))
+                $products = $products . $this->productImage('13',$row,$size,$key);
+
+            // مشخصات محصول
+            $products = $products . '</div>
+                                        </div>
+                                        <h4 class="h6 g-color-black text-left g-brd-top g-brd-gray-light-v4 g-ml-5 g-mt-5 g-pt-5">'.$row->Brand.'</h4> ';
+            $products = $products . '<div style="direction: rtl"
+                         class="media">
+                        <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                        <div class="d-flex justify-content-between col-12 p-0">
+                            <div class="d-flex flex-column">
+                                <h1 class="h6 g-color-black my-1">
+                                                    <span class="u-link-v5 g-color-black"
+                                                          tabindex="0">
+                                                        '. $row->Name .'
+                                                        <span
+                                                            class="g-font-size-12 g-font-weight-300">'. $row->Model .'</span>
+                                                    </span>
+                                </h1>
+                                <ul style="padding: 0"
+                                    class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
+                                    <li>
+                                        <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600">'. $row->HintCat.' '.$row->Gender .'</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a style="cursor: pointer"
+                               class="u-icon-v1 g-mt-minus-5 g-color-black g-color-primary--hover rounded-circle"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'"
+                               data-original-title="جزئیات محصول">
+                                <i class="icon-eye g-line-height-0_7"></i>
+                            </a>
+                        </div></div>';
+
+            $products = $products .'<div
+                        class="d-block g-color-black g-font-size-17 g-ml-10">
+                        <div style="direction: rtl" class="text-left">
+                            <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                '.  number_format($row->UnitPrice) .'
+                            </s>
+                            <span>'.  number_format($row->FinalPrice) .'</span>
+                            <span
+                                class="d-block g-color-gray-dark-v5 g-font-size-10">تومان</span>
+                        </div>
+                    </div>
+                </figure>
+            </div>';
+        }
+
+        return $products.' </div>';
+    }
+
+    public function productImage($imageNo, $row, $size, $key)
+    {
+        return '<div class="js-slide">
+                     <a href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'">
+                        <img class="img-fluid w-100"
+                             src="'. $row->PicPath .'sample'.$imageNo.'.png"
+                             alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
+                    </a>
+                </div> ';
     }
 
     public function userProfile($location)

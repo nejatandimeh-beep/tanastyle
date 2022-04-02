@@ -281,7 +281,9 @@ class Add extends Controller
         $regDate = date('Y-m-d');
 
         // Calculate Final Price
-        $temp = $unitPrice - ($unitPrice * $discount) / 100;
+        $temp = (string)($unitPrice - ($unitPrice * $discount) / 100);
+        $temp = substr($temp, 0, -3).'000';
+        $temp=(int)$temp;
         $finalPrice = $temp;
         $genderCode = $gender;
         switch ($gender) {

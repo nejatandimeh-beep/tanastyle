@@ -1,10 +1,17 @@
 @section('CustomerJsFunction')
     <script>
-
         let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
+            stopLoadProduct = false,
             file_upload, file_type;
 
         $(document).ready(function () {
+            if ('.masterPage'.length > 0) {
+                if ('scrollRestoration' in history) {
+                    history.scrollRestoration = 'manual';
+                }
+                window.scrollTo(0, 0);
+            }
+
             if ($('.rtlPosition').length > 0)
                 $('.table-responsive').animate({scrollLeft: $('.rtlPosition').position().left}, 1);
 
@@ -245,9 +252,9 @@
 
         $(window).scroll(function (event) {
             if ($('.filterApply').length > 0) {
-
-                let st = $(this).scrollTop();
-                if (st - lastScrollTop > 500) {
+                let st = $(this).scrollTop(),
+                    scrollLocation = st - lastScrollTop;
+                if (scrollLocation > 500) {
                     filtering(0);
                 } else {
                     return true;
@@ -263,7 +270,48 @@
                 }
                 lastScrollTop = st;
             }
+
+            if ($('.masterPage').length > 0) {
+                if (stopLoadProduct === false)
+                    $('#loadProduct').removeClass('d-none');
+                let st = $(this).scrollTop(),
+                    scrollLocation = st - lastScrollTop;
+                if (scrollLocation > 300) {
+                    loadProduct();
+                } else {
+                    return true;
+                }
+                lastScrollTop = st;
+            }
         });
+
+        async function loadProduct() {
+            if (stopLoadProduct === false) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Customer-Product-Load',
+                    async: false,
+                    cache: false,
+                    success: function (data) {
+                        console.log(data);
+                        if (data !== 'null') {
+                            $('#productContainer').append(data);
+                            actionCarousel();
+                            $('#loadProduct').addClass('d-none');
+                        } else {
+                            $('#loadProduct').addClass('d-none');
+                            stopLoadProduct = true;
+                        }
+                    }
+                });
+                console.log(stopLoadProduct);
+            }
+        }
+
+        async function actionCarousel() {
+            await loadProduct();
+            $.HSCore.components.HSCarousel.init('[class*="js-carousel-ajax"]');
+        }
 
         $(document).bind("mouseup touchend", function (e) {
             let container = $(".outSideClick");
@@ -738,7 +786,7 @@
                                 error = 1;
                             }
                         }
-                        if (error === 0){
+                        if (error === 0) {
                             if ($('#addressID').length > 0) {
                                 window.location = '/Banking-Portal/' + id + '/' + qty;
                             } else {
@@ -746,12 +794,11 @@
                                 $('.custombox-content #waitingIconSubmit').hide();
                                 alert('کاربر گرامی لیست آدرسهای شما خالیست.');
                             }
+                        } else {
+                            msg = msg + ' موجودیشان تمام شده است.';
+                            alert(msg);
+                            location.reload();
                         }
-                        else {
-                                msg = msg + ' موجودیشان تمام شده است.';
-                                alert(msg);
-                                location.reload();
-                            }
                     }
                 });
             } else {
@@ -982,9 +1029,9 @@
         }
 
         function minPriceAllOff(ele) {
-            if(ele.val() !== '' && ele.val().replace(new RegExp(',', 'g'), "")>9999){
+            if (ele.val() !== '' && ele.val().replace(new RegExp(',', 'g'), "") > 9999) {
                 $('#lblPrice-min').hide();
-            } else{
+            } else {
                 $('#lblPrice-min').show();
             }
 
@@ -1001,7 +1048,7 @@
         function maxPriceAllOff(ele) {
             if ((parseInt(ele.val().replace(new RegExp(',', 'g'), "")) < 100000000)
                 && (parseInt($('#price-min').val().replace(new RegExp(',', 'g'), "")) > 9999)
-                && (parseInt($('#price-min').val().replace(new RegExp(',', 'g'), "")) < parseInt(ele.val().replace(new RegExp(',', 'g'), "")))){
+                && (parseInt($('#price-min').val().replace(new RegExp(',', 'g'), "")) < parseInt(ele.val().replace(new RegExp(',', 'g'), "")))) {
                 $('#priceFilterSubmit').attr('disabled', false);
                 $('#lblPrice-max').hide();
             } // برای برداشتن کوما از مبلغ
@@ -1036,7 +1083,7 @@
                 tempPrice = [],
                 pdId = [],
                 qty = [],
-                form=$('#cartOrderForm');
+                form = $('#cartOrderForm');
             $("#cartOrderForm").empty();
             $('#cartDate').text('( ' + nowDate() + ' )');
             if (row !== 0) {
@@ -2834,7 +2881,6 @@
             img.addEventListener("touchmove", moveMagnifier);
 
             function moveMagnifier(e) {
-                console.log('ok2');
                 let pos, x, y;
                 /*prevent any other actions that may occur when moving over the image*/
                 e.preventDefault();
@@ -2863,7 +2909,6 @@
             }
 
             function getCursorPos(e) {
-                console.log('ok3');
                 let a, x = 0, y = 0;
                 e = e || window.event;
                 /*get the x and y positions of the image:*/

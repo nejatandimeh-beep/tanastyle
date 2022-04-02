@@ -270,6 +270,7 @@ Route::get('/About-Me', 'Customer\Basic@aboutMe')->name('aboutMe');
 
 // -------------------[ Products Filter [ Ajax ] ]-----------------------
 Route::get('/Customer-Product-Custom-Filter/{gender}/{cat}/{size}/{priceMin}/{priceMax}/{color}/{filterChange}', 'Customer\Basic@productFilter');
+Route::get('/Customer-Product-Load', 'Customer\Basic@productLoad');
 
 
 // -------------------[ Cropper.js ]-----------------------

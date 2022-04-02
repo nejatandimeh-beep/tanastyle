@@ -59,47 +59,6 @@
                         slidesToShow: 1
                     }
                 }], true);
-
-                $('#js-carousel-2, #js-carousel-3, #js-carousel-6').slick('setOption', 'responsive', [{
-                    breakpoint: 1350,
-                    settings: {
-                        slidesToShow: 5
-                    }
-                }, {
-                    breakpoint: 1200,
-                    settings: {
-                        slidesToShow: 4
-                    }
-                }, {
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                }, {
-                    breakpoint: 670,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                }, {
-                    breakpoint: 500,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }], true);
-
-                $('#js-carousel-4, #js-carousel-5').slick('setOption', 'responsive', [{
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                }, {
-                    breakpoint: 554,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }], true);
             }
             // initialization of autonomous popups
             if($('.modalBox').length>0){
