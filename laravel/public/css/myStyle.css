@@ -835,8 +835,24 @@ body a{
 }
 
 .masterWallpaper{
+    position: relative;
     width:100%;
     height:500px;
-    background-size: cover;
-    background:url("/../img/Banners/landscape.jpg") no-repeat center center rgb(255, 255, 255)
+    background-size: contain !important;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    background:url("/../img/Banners/1920_791.png") no-repeat center center rgb(255, 255, 255)
+}
+.bannerText{
+    position: absolute;
+    top: 25%;
+    right: 10%;
+}
+
+.masterWallpaperMobile{
+    width:100%;
+    height:550px;
+    border-top: 1px solid #eee;
+    background-size: cover !important;
+    background:url("/../img/Banners/760_1242.jpg") no-repeat center center rgb(255, 255, 255)
 }

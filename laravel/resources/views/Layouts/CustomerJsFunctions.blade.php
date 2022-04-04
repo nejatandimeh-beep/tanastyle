@@ -248,6 +248,7 @@
                     $('#completeProfileHint').removeClass('d-none');
                 }
             }
+
         });
 
         $(window).scroll(function (event) {
@@ -274,6 +275,7 @@
             if ($('.masterPage').length > 0) {
                 if (stopLoadProduct === false)
                     $('#loadProduct').removeClass('d-none');
+
                 let st = $(this).scrollTop(),
                     scrollLocation = st - lastScrollTop;
                 if (scrollLocation > 300) {
@@ -285,32 +287,34 @@
             }
         });
 
-        async function loadProduct() {
+        function loadProduct() {
             if (stopLoadProduct === false) {
                 $.ajax({
                     type: 'GET',
                     url: '/Customer-Product-Load',
                     async: false,
                     cache: false,
+                    beforeSend: function (){
+                        $('[class*="js-carousel"]').each(function (){
+                            $(this).removeClass('js-carousel');
+                        });
+                    },
                     success: function (data) {
-                        console.log(data);
+                        // console.log(data);
                         if (data !== 'null') {
                             $('#productContainer').append(data);
-                            actionCarousel();
-                            $('#loadProduct').addClass('d-none');
+                            $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                            return true;
                         } else {
-                            $('#loadProduct').addClass('d-none');
                             stopLoadProduct = true;
+                            return false;
                         }
                     }
                 });
+
+                $('#loadProduct').addClass('d-none');
                 console.log(stopLoadProduct);
             }
-        }
-
-        async function actionCarousel() {
-            await loadProduct();
-            $.HSCore.components.HSCarousel.init('[class*="js-carousel-ajax"]');
         }
 
         $(document).bind("mouseup touchend", function (e) {

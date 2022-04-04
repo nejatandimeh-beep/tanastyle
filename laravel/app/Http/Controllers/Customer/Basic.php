@@ -45,28 +45,14 @@ class Basic extends Controller
             ->take(5)
             ->get();
 
-        $data = DB::table('product')
-            ->select('*')
-            ->orderBy('RegDate')
-            ->take(4)
-            ->get();
 
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->orderBy('p.RegDate')
-            ->groupBy('p.ID')
-            ->take(4)
-            ->get();
 
-        $title='';
-        return view('Customer.Master', compact('discounts','data','title','size'));
+        return view('Customer.Master', compact('discounts'));
     }
 
     public function productLoad()
     {
         session_start();
-        $_SESSION['listSkip'] = $_SESSION['listSkip']+4;
 
         $data = DB::table('product')
             ->select('*')
@@ -96,7 +82,7 @@ class Basic extends Controller
                         class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
                     <div>
                         <div id="carousel-08-'.$_SESSION['listSkip'].$key.'"
-                             class="js-carousel text-center g-mb-5 js-carousel-ajax"
+                             class="js-carousel text-center g-mb-5"
                              data-infinite="1"
                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
                              data-nav-for="#carousel-08-'.$_SESSION['listSkip'].$key.'">
@@ -180,6 +166,7 @@ class Basic extends Controller
                 </figure>
             </div>';
         }
+        $_SESSION['listSkip'] = $_SESSION['listSkip']+4;
 
         return $products.' </div>';
     }
