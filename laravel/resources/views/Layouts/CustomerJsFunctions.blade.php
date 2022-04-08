@@ -1,7 +1,7 @@
 @section('CustomerJsFunction')
     <script>
         let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
-            stopLoadProduct = false,
+            stopLoadProduct = false, successLoadProduct=true, deviceScroll=0,
             file_upload, file_type;
 
         $(document).ready(function () {
@@ -142,6 +142,7 @@
 
             let mq = window.matchMedia("(max-width: 900px)");
             if (mq.matches) {
+                deviceScroll=450;
                 $('#bigDevice').remove();
                 $('.bigDevice').remove();
                 $('#productGallery').removeClass('largeDevice');
@@ -177,6 +178,7 @@
                 });
 
             } else {
+                deviceScroll=150;
                 $('#smallDevice').remove();
                 $('.smallDevice').remove();
 
@@ -248,7 +250,6 @@
                     $('#completeProfileHint').removeClass('d-none');
                 }
             }
-
         });
 
         $(window).scroll(function (event) {
@@ -273,17 +274,30 @@
             }
 
             if ($('.masterPage').length > 0) {
-                if (stopLoadProduct === false)
-                    $('#loadProduct').removeClass('d-none');
 
                 let st = $(this).scrollTop(),
                     scrollLocation = st - lastScrollTop;
-                if (scrollLocation > 300) {
-                    loadProduct();
+
+                if (scrollLocation > deviceScroll)
+                    if (stopLoadProduct === false && successLoadProduct)
+                    $('#loadProduct').removeClass('d-none');
+
+
+                if (scrollLocation > deviceScroll && successLoadProduct) {
+                    successLoadProduct=false;
+                    $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
+                    for (let i = 0; i < 4; i++)
+                        loadProduct();
                 } else {
                     return true;
                 }
                 lastScrollTop = st;
+                if (stopLoadProduct === false)
+                    $('html, body').animate({scrollTop: $('.rowContainer:last-child').offset().top}, 1);
+                setTimeout(function () {
+                    successLoadProduct=true;
+                    $('#loadProduct').addClass('d-none');
+                },2000);
             }
         });
 
@@ -293,16 +307,15 @@
                     type: 'GET',
                     url: '/Customer-Product-Load',
                     async: false,
-                    cache: false,
-                    beforeSend: function (){
-                        $('[class*="js-carousel"]').each(function (){
+                    beforeSend: function () {
+                        $('[class*="js-carousel"]').each(function () {
                             $(this).removeClass('js-carousel');
                         });
                     },
                     success: function (data) {
                         // console.log(data);
                         if (data !== 'null') {
-                            $('#productContainer').append(data);
+                            $('.rowContainer:last-child').append(data);
                             $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
                             return true;
                         } else {
@@ -311,8 +324,6 @@
                         }
                     }
                 });
-
-                $('#loadProduct').addClass('d-none');
                 console.log(stopLoadProduct);
             }
         }
@@ -332,6 +343,13 @@
 
         $(window).on('pageshow', function () {
             $('#load').hide();
+
+            if ($('.masterPage').length > 0) {
+                $('#loadProduct').removeClass('d-none');
+                $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
+                for (let i = 0; i < 4; i++)
+                    loadProduct();
+            }
         });
 
         document.onreadystatechange = function () {

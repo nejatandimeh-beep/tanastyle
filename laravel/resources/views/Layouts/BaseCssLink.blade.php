@@ -18,7 +18,7 @@
     <link rel="icon" href="{{asset('img/Logo/browserIcon.png')}}" />
 
     <!--My Style-->
-    <link href="{{ asset('css/myStyle.css?v=1845io8') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css?v=sd23z11') }}" rel="stylesheet">
 <!--Unify Style-->
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">

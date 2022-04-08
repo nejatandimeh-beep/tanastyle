@@ -708,7 +708,7 @@
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ $rec->PicPath.$rec->SampleNumber }}.png" alt="">
+                                             src="{{ $rec->PicPath.$rec->SampleNumber }}.jpg" alt="">
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">

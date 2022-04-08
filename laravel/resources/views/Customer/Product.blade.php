@@ -977,7 +977,7 @@
                                 <div class="js-slide">
                                     <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
                                         <img class="img-fluid w-100"
-                                             src="{{ $row->PicPath.$row->SampleNumber.'.png' }}"
+                                             src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
                                              alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                                     </a>
                                 </div>

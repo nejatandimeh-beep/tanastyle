@@ -22,6 +22,7 @@ class Basic extends Controller
 {
     public function Master()
     {
+
 //        $data=DB::table('product as p')
 //            ->select('*')
 //            ->leftJoin('product_detail as pd','pd.ProductID','=','p.ID')
@@ -40,12 +41,10 @@ class Basic extends Controller
             ->select('*')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->orderBy('Discount', 'DESC')
-            ->orderBy('pd.VisitCounter', 'DESC')
+            ->orderBy('VisitCounter', 'DESC')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
             ->take(5)
             ->get();
-
-
 
         return view('Customer.Master', compact('discounts'));
     }
@@ -53,28 +52,28 @@ class Basic extends Controller
     public function productLoad()
     {
         session_start();
-
         $data = DB::table('product')
             ->select('*')
-            ->orderBy('RegDate')
+            ->orderBy('RegDate','DESC')
+            ->orderBy('VisitCounter','DESC')
             ->skip($_SESSION['listSkip'])
-            ->take(4)
+            ->take(1)
             ->get();
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->orderBy('p.RegDate')
+            ->orderBy('p.RegDate','DESC')
+            ->orderBy('p.VisitCounter','DESC')
             ->groupBy('p.ID')
             ->skip($_SESSION['listSkip'])
-            ->take(4)
+            ->take(1)
             ->get();
 
-        if(isset($size[0]->Color))
-            $products='<div class="row col-12 g-px-40--lg g-pa-0 m-0"> ';
-        else
+        if(!isset($size[0]->Color))
             return $products='null';
 
+        $products='';
         foreach($data as $key => $row){
             $products = $products . '
              <div class="col-12 col-lg-3 g-mb-30">
@@ -88,8 +87,8 @@ class Basic extends Controller
                              data-nav-for="#carousel-08-'.$_SESSION['listSkip'].$key.'">
                             <div class="js-slide">
                                 <a href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'">
-                                    <img class="img-fluid w-100"
-                                         src="'. $row->PicPath .'sample1.png"
+                                    <img class="img-fluid w-100" loading="lazy"
+                                         src="'. $row->PicPath .'sample1.jpg"
                                          alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
                                 </a>
                             </div> ';
@@ -166,9 +165,9 @@ class Basic extends Controller
                 </figure>
             </div>';
         }
-        $_SESSION['listSkip'] = $_SESSION['listSkip']+4;
+        $_SESSION['listSkip'] = $_SESSION['listSkip']+1;
 
-        return $products.' </div>';
+        return $products;
     }
 
     public function productImage($imageNo, $row, $size, $key)
@@ -176,7 +175,8 @@ class Basic extends Controller
         return '<div class="js-slide">
                      <a href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'">
                         <img class="img-fluid w-100"
-                             src="'. $row->PicPath .'sample'.$imageNo.'.png"
+                            loading="lazy"
+                             src="'. $row->PicPath .'sample'.$imageNo.'.jpg"
                              alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
                     </a>
                 </div> ';
@@ -969,9 +969,13 @@ class Basic extends Controller
             ->where('p.GenderCode', $data->GenderCode)
             ->where('p.CatCode', $data->CatCode)
             ->where('p.ID', '<>', $id)
-            ->orderBy('pd.VisitCounter', 'DESC')
+            ->orderBy('p.VisitCounter', 'DESC')
             ->take(10)
             ->get();
+
+        DB::table('product')
+            ->where('ID',$id)
+            ->increment('VisitCounter', 1);
 
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';

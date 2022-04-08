@@ -222,8 +222,8 @@ class Add extends Controller
         $white = imagecolorallocate($thumb, 255, 255, 255);
         imagefill($thumb, 0, 0, $white);
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-        $imageFullPath =$path . '/sample' . (int)($imgNumber+1)  . '.png';
-        imagepng($thumb,$imageFullPath);
+        $imageFullPath =$path . '/sample' . (int)($imgNumber+1)  . '.jpg';
+        imagejpeg($thumb,$imageFullPath,80);
 
         imagedestroy($thumb);
         imagedestroy($source);
@@ -341,7 +341,6 @@ class Add extends Controller
                     'Qty' => $imageColor[$i]['sizeQty'],
                     'PicNumber' => 'pic'.($i+1),
                     'SampleNumber' => 'sample'.($i+1),
-                    'VisitCounter' => 0,
                 ],
             ]);
         }
