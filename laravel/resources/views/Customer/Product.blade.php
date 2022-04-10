@@ -774,7 +774,6 @@
                         </button>
                     </div>
                 </footer>
-                <hr class="d-lg-none d-block g-brd-gray-light-v3 g-mt-6 g-mb-5">
             </div>
 
             {{--گالری--}}
@@ -952,7 +951,7 @@
     </div>
 
     <div class="container g-pb-100">
-        <div style="direction: rtl" class="g-brd-bottom g-brd-gray-light-v4 g-mt-30 g-mb-10">
+        <div style="direction: rtl" class="g-brd-bottom g-brd-gray-light-v4 g-mt-80 g-mb-10">
             <h6>محصولاتی که شاید بپسندید</h6>
         </div>
         <div id="js-carousel-1" class="js-carousel g-pb-100 g-mx-minus-10"

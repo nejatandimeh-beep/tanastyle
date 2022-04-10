@@ -178,7 +178,7 @@
                 });
 
             } else {
-                deviceScroll=150;
+                deviceScroll=100;
                 $('#smallDevice').remove();
                 $('.smallDevice').remove();
 
@@ -282,7 +282,6 @@
                     if (stopLoadProduct === false && successLoadProduct)
                     $('#loadProduct').removeClass('d-none');
 
-
                 if (scrollLocation > deviceScroll && successLoadProduct) {
                     successLoadProduct=false;
                     $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
@@ -292,8 +291,6 @@
                     return true;
                 }
                 lastScrollTop = st;
-                if (stopLoadProduct === false)
-                    $('html, body').animate({scrollTop: $('.rowContainer:last-child').offset().top}, 1);
                 setTimeout(function () {
                     successLoadProduct=true;
                     $('#loadProduct').addClass('d-none');
@@ -347,7 +344,7 @@
             if ($('.masterPage').length > 0) {
                 $('#loadProduct').removeClass('d-none');
                 $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
-                for (let i = 0; i < 4; i++)
+                for (let i = 0; i < 8; i++)
                     loadProduct();
             }
         });

@@ -87,7 +87,7 @@ class Basic extends Controller
                              data-nav-for="#carousel-08-'.$_SESSION['listSkip'].$key.'">
                             <div class="js-slide">
                                 <a href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'">
-                                    <img class="img-fluid w-100" loading="lazy"
+                                    <img class="img-fluid w-100" loading="eager"
                                          src="'. $row->PicPath .'sample1.jpg"
                                          alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
                                 </a>
