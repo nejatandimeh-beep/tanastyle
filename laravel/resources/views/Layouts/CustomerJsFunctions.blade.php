@@ -354,6 +354,7 @@
                         if (data !== 'null') {
                             $('.rowContainer:last-child').append(data);
                             $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                            window.scrollTo(0, lastScrollTop-200);
                             return true;
                         } else {
                             stopLoadProduct = true;
@@ -361,6 +362,7 @@
                         }
                     }
                 });
+                $('#loadProduct').addClass('d-none');
                 console.log(stopLoadProduct);
             }
         }
