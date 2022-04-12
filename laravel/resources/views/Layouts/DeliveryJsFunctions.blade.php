@@ -1,12 +1,5 @@
 @section('DeliveryJsFunctions')
     <script>
-        document.onreadystatechange = function () {
-            let state = document.readyState;
-            if (state === 'complete') {
-                document.getElementById('load').remove();
-            }
-        }
-
         if ($('#kiosk-panel').length > 0)
             window.setTimeout(function () {
                 window.location.reload();

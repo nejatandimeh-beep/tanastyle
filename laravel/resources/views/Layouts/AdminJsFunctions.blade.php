@@ -1,8 +1,5 @@
 @section('AdminJsFunction')
     <script>
-        jQuery(window).bind('beforeunload', function(){
-            $('#load').show();
-        });
         $(document).on('ready', function () {
             // Set Seller Navigation Date
             nowDate();
@@ -103,16 +100,18 @@
             });
         }
 
-        function customerSearch(nationalId) {
-            $.ajax({
-                type: 'GET',
-                url: "/Administrator-Customer-Search/" + nationalId,
-                success: function (data) {
-                    console.log(data);
-                    $('#customerNationalID').removeClass('d-none');
-                    $('#customerNationalID').html(data);
-                }
-            });
+        function customerSearch(mobile) {
+            if(mobile!==''){
+                $.ajax({
+                    type: 'GET',
+                    url: "/Administrator-Customer-Search/" + mobile,
+                    success: function (data) {
+                        console.log(data);
+                        $('#customersMobile').removeClass('d-none');
+                        $('#customersMobile').html(data);
+                    }
+                });
+            }
         }
 
         function trackingCodeSearch(trackingCode) {

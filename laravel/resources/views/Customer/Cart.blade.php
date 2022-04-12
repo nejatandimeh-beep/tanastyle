@@ -25,7 +25,7 @@
                                 <div>
                                     <div class="text-center g-mb-5">
                                         <div>
-                                            <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
+                                            <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                                 <img class="img-fluid w-100"
                                                      src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
                                                      alt="tanakora mahabad">

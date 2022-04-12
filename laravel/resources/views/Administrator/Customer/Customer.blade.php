@@ -28,12 +28,12 @@
                 <h4 class="g-mb-0 g-color-gray-light-v2 align-self-center">لیست خریداران</h4>
                 <div class="g-pl-0">
                     <div style="direction: ltr" class="input-group">
-                        <form class="revtp-searchform">
+                        <form style="position: relative" class="revtp-searchform">
                             <input oninput="customerSearch($(this).attr('value'))"
                                    onclick="customerSearch($(this).attr('value'))"
                                    style="direction:ltr; outline: none; font-family: Vazir, serif; opacity: 0.95; font-size: 16px;"
-                                   type="text" placeholder="..جستجو بر اساس کد ملی" maxlength="10">
-                            <ul style="direction: ltr" id="customerNationalID"
+                                   type="text" placeholder="..جستجو با شماره موبایل" maxlength="10">
+                            <ul style="direction: ltr; position: absolute" id="customersMobile"
                                 class="d-none ajaxDropDown p-0 outSideClick"></ul>
                         </form>
                     </div>
@@ -48,6 +48,7 @@
                         <th class="g-font-weight-600 g-color-white text-center">نام</th>
                         <th class="g-font-weight-600 g-color-white g-min-width-200 text-center">نام خانوادگی</th>
                         <th class="g-font-weight-600 g-color-white text-center">کد ملی</th>
+                        <th class="g-font-weight-600 g-color-white text-center">موبایل</th>
                         <th class="g-font-weight-600 g-color-white text-center">جزئیات</th>
                         <th class="g-font-weight-600 g-color-white text-center">تحویل محصول</th>
                         <th class="g-font-weight-600 g-color-white text-center">فاکتور حاوی اشتباه</th>
@@ -71,6 +72,10 @@
 
                             <td class="align-middle text-center g-color-gray-light-v2">
                                 {{$row->NationalID}}
+                            </td>
+
+                            <td class="align-middle text-center g-color-gray-light-v2">
+                                {{$row->Mobile}}
                             </td>
 
                             <td class="align-middle text-nowrap text-center">

@@ -1,6 +1,6 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <div class="container-fluid g-brd-top g-brd-gray-light-v4">
+    <div class="container-fluid g-brd-top g-brd-gray-light-v4 productDetail">
         <div style="direction: rtl" class="row">
 
             <!-- Filters -->
@@ -1316,7 +1316,7 @@
                                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
                                              data-nav-for="#carousel-08-2">
                                             <div class="js-slide">
-                                                <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                     <img class="img-fluid w-100"
                                                          src="{{ $row->PicPath }}sample1.jpg"
                                                          alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1324,7 +1324,7 @@
                                             </div>
                                             @if (file_exists(public_path($row->PicPath.'pic2.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample2.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1334,7 +1334,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic3.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample3.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1344,7 +1344,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic4.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample4.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1354,7 +1354,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic5.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample5.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1364,7 +1364,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic6.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample6.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1374,7 +1374,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic7.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample7.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1384,7 +1384,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic8.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample8.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1394,7 +1394,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic9.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample9.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1404,7 +1404,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic10.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample10.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1414,7 +1414,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic11.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample11.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1424,7 +1424,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic12.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample12.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1435,7 +1435,7 @@
 
                                             @if (file_exists(public_path($row->PicPath.'pic13.jpg')))
                                                 <div class="js-slide">
-                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}">
+                                                    <a href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}">
                                                         <img class="img-fluid w-100"
                                                              src="{{ $row->PicPath }}sample13.jpg"
                                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
@@ -1474,7 +1474,7 @@
                                                class="u-icon-v1 g-mt-minus-5 g-color-black g-color-primary--hover rounded-circle"
                                                data-toggle="tooltip"
                                                data-placement="top"
-                                               href="{{ route('productDetail',[$row->ID,$size[$key]->Size,$size[$key]->Color]) }}"
+                                               href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}"
                                                data-original-title="جزئیات محصول">
                                                 <i class="icon-eye g-line-height-0_7"></i>
                                             </a>

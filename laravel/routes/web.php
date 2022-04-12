@@ -194,7 +194,7 @@ Route::get('/Customer-Product-Search-List/{val}', 'Customer\Basic@productSearchL
 Route::get('/Customer-Product-/{gender}/{cat}/{catCode}/{title}', 'Customer\Basic@product')->name('menuProduct');
 
 // Customer Product Detail
-Route::get('/Product/{id}/{size}/{color}', 'Customer\Basic@productDetail')->name('productDetail');
+Route::get('/Product/{id}/{size}', 'Customer\Basic@productDetail')->name('productDetail');
 
 Route::get('/Customer-Product-Visit/{id}', 'Customer\Basic@productVisit')->name('productVisit');
 
@@ -271,6 +271,8 @@ Route::get('/About-Me', 'Customer\Basic@aboutMe')->name('aboutMe');
 // -------------------[ Products Filter [ Ajax ] ]-----------------------
 Route::get('/Customer-Product-Custom-Filter/{gender}/{cat}/{size}/{priceMin}/{priceMax}/{color}/{filterChange}', 'Customer\Basic@productFilter');
 Route::get('/Customer-Product-Load', 'Customer\Basic@productLoad');
+Route::get('/Customer-Spacial-Discounts', 'Customer\Basic@discounts');
+Route::get('/Customer-Similar-Products/{genderCode}/{catCode}/{productID}', 'Customer\Basic@discounts');
 
 
 // -------------------[ Cropper.js ]-----------------------
@@ -389,7 +391,7 @@ Route::get('/Administrator-Customer-Control/{id}/{tab}', 'Administrator\Customer
 
 Route::post('/Administrator-Customer-Update', 'Administrator\Customer@update')->name('updateCustomer');
 
-Route::get('/Administrator-Customer-Search/{nationalId}', 'Administrator\Customer@nationalIdSearch');
+Route::get('/Administrator-Customer-Search/{mobile}', 'Administrator\Customer@mobileSearch');
 
 Route::post('/Administrator-Customer-AddressUpdate', 'Administrator\Customer@addressUpdate')->name('adminAddressUpdate');
 

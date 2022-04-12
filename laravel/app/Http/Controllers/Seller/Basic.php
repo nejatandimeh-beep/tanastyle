@@ -262,7 +262,7 @@ class Basic extends Controller
                 try {
                     $token = '10'.(string)$row->requestID;
                     $token10=$data->Name.'('.$data->Brand.')';
-                    $token20=$data->ProductID.'/'.$data->Size.'/'.urlencode($data->Color);
+                    $token20=$data->ProductID.'/'.$data->Size;
 
                     $api_key = Config::get('kavenegar.apikey');
                     $var = new Kavenegar\KavenegarApi($api_key);

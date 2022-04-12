@@ -76,7 +76,7 @@
                                             @if (Route::has('password.request'))
                                                 <a class="btn btn-link g-py-5--lg g-py-0 align-middle"
                                                    href="{{ url('/request-customer-mobile','forget') }}">
-                                                    رمزتان را فراموش کرده اید؟
+                                                    ورود با رمز یکبار مصرف
                                                 </a>
                                             @endif
                                         </div>

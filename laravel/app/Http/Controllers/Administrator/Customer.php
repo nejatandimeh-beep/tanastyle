@@ -329,13 +329,12 @@ class Customer extends Controller
         return view('Administrator.Customer.OrderDetail', compact('data', 'falseProduct', 'persianDate','dataDetail'));
     }
 
-    public function nationalIdSearch($nationalId)
+    public function mobileSearch($mobile)
     {
         $output = '';
         $data = DB::table('customers')
-            ->select('NationalID', 'id')
-            ->where('NationalID', 'like', $nationalId . '%')
-            ->take(1)
+            ->select('Mobile', 'id')
+            ->where('Mobile', 'like', $mobile . '%')
             ->get();
 
         foreach ($data as $key => $row) {
@@ -344,7 +343,7 @@ class Customer extends Controller
                             <a  href="' . route('customerControlPanel',['id'=>$row->id,'tab'=>'all']) . '"
                                 style="text-decoration: none"
                                 class="col-12 p-0 text-left g-color-gray-dark-v3 g-color-primary--hover">
-                             ' . $row->NationalID . '
+                             ' . $row->Mobile . '
                             </a>
                         </li>';
         }

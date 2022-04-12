@@ -22,43 +22,9 @@
 
         $(document).on('ready', function () {
             // initialization of carousel
-            if($('.js-carousel').length>0){
+            if($('.productDetail').length>0){
                 $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
                 // initialization of carousels
-                let productImages = $('#js-carousel-sync-for'),
-                    productImagesNav = $('#js-carousel-sync-nav');
-
-                productImages.slick('slickSetOption', {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    asNavFor: '#js-carousel-sync-nav'
-                }, true);
-
-                productImagesNav.slick({
-                    slidesToShow: 3,
-                    slidesToScroll: 1,
-                    asNavFor: '#js-carousel-sync-for',
-                    dots: false,
-                    focusOnSelect: true,
-                    adaptiveHeight: true
-                });
-
-                $('#js-carousel-1, #js-carousel-7, #js-carousel-8').slick('setOption', 'responsive', [{
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: 3
-                    }
-                }, {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                }, {
-                    breakpoint: 554,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                }], true);
             }
             // initialization of autonomous popups
             if($('.modalBox').length>0){

@@ -13,7 +13,8 @@
 
                             <div class="form-group row">
                                 <label for="pdId"
-                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">شناسه محصول</label>
+                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">شناسه
+                                    محصول</label>
 
                                 <div class="col-md-6">
                                     <input id="pdId"
@@ -26,7 +27,7 @@
                                            autofocus>
 
                                     @if(session()->has('error'))
-                                    <span class="invalid-feedback" role="alert">
+                                        <span class="invalid-feedback" role="alert">
                                         <strong>شناسه وارد شده صحیح نمی باشد.</strong>
                                     </span>
                                     @endif
@@ -37,10 +38,7 @@
                                     <button type="button"
                                             onclick="
                                             if($('#pdId').val() !== ''){
-                                                if ($('#loginAlert').text() === 'login')
-                                                    $('form').submit();
-                                                else
-                                                    window.location = '/Login-Mode';
+                                               $('form').submit();
                                             } else alert('شناسه محصول الزامیست.')"
                                             class="btn u-btn-primary rounded-0 g-font-size-16">
                                         نمایش محصول

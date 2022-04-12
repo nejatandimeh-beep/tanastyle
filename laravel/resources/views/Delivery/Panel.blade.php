@@ -17,8 +17,7 @@
                                      alt="Image Description">
                                 <!-- Figure Image -->
                             @else
-                                <img src="{{ asset('img/DeliveryImg/'.$deliveryManActive->NationalID.'.png') }}"
-                                     id="uploaded_image"
+                                <img src="{{ asset('img/Other/user-add-icon.png') }}" id="uploaded_image"
                                      class="g-width-80 g-height-80 rounded-circle g-ml-15 g-brd-around g-brd-gray-light-v2">
                         @endif
                         <!-- Figure Info -->

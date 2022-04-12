@@ -1,7 +1,7 @@
 @section('CustomerJsFunction')
     <script>
         let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
-            stopLoadProduct = false, successLoadProduct=true, deviceScroll=0,
+            stopLoadProduct = false, successLoadProduct = true, deviceScroll = 0,
             file_upload, file_type;
 
         $(document).ready(function () {
@@ -142,7 +142,7 @@
 
             let mq = window.matchMedia("(max-width: 900px)");
             if (mq.matches) {
-                deviceScroll=450;
+                deviceScroll = 450;
                 $('#bigDevice').remove();
                 $('.bigDevice').remove();
                 $('#productGallery').removeClass('largeDevice');
@@ -178,7 +178,7 @@
                 });
 
             } else {
-                deviceScroll=100;
+                deviceScroll = 100;
                 $('#smallDevice').remove();
                 $('.smallDevice').remove();
 
@@ -280,10 +280,10 @@
 
                 if (scrollLocation > deviceScroll)
                     if (stopLoadProduct === false && successLoadProduct)
-                    $('#loadProduct').removeClass('d-none');
+                        $('#loadProduct').removeClass('d-none');
 
                 if (scrollLocation > deviceScroll && successLoadProduct) {
-                    successLoadProduct=false;
+                    successLoadProduct = false;
                     $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
                     for (let i = 0; i < 4; i++)
                         loadProduct();
@@ -291,10 +291,50 @@
                     return true;
                 }
                 lastScrollTop = st;
-                setTimeout(function () {
-                    successLoadProduct=true;
-                    $('#loadProduct').addClass('d-none');
-                },2000);
+                    successLoadProduct = true;
+
+                if (stopLoadProduct && $('#discountsContainer').hasClass('d-none')) {
+                    discounts();
+                    $('#js-carousel-1').slick('setOption', 'responsive', [{
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    }, {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    }, {
+                        breakpoint: 554,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }], true);
+                }
+            }
+
+            if ($('#productDetailContainer').length > 0) {
+                if (stopLoadProduct === false){
+                    stopLoadProduct = true;
+                    similarProducts();
+                    $('#js-carousel-1').slick('setOption', 'responsive', [{
+                        breakpoint: 992,
+                        settings: {
+                            slidesToShow: 3
+                        }
+                    }, {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2
+                        }
+                    }, {
+                        breakpoint: 554,
+                        settings: {
+                            slidesToShow: 1
+                        }
+                    }], true);
+                }
             }
         });
 
@@ -323,6 +363,56 @@
                 });
                 console.log(stopLoadProduct);
             }
+        }
+
+        function discounts() {
+            $.ajax({
+                type: 'GET',
+                url: '/Customer-Spacial-Discounts',
+                async: false,
+                beforeSend: function () {
+                    $('[class*="js-carousel"]').each(function () {
+                        $(this).removeClass('js-carousel');
+                    });
+                },
+                success: function (data) {
+                    // console.log(data);
+                    if (data !== 'null') {
+                        $('#discountsContainer').append(data);
+                        $('#discountsContainer').removeClass('d-none');
+                        $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                        return true;
+                    } else {
+                        stopLoadProduct = true;
+                        return false;
+                    }
+                }
+            });
+        }
+
+        function similarProducts() {
+            $.ajax({
+                type: 'GET',
+                url: '/Customer-Similar-Products/' + $('#genderCode').text() + '/' + $('#catCode').text() + '/' + $('#productID').text(),
+                async: false,
+                beforeSend: function () {
+                    $('[class*="js-carousel"]').each(function () {
+                        $(this).removeClass('js-carousel');
+                    });
+                },
+                success: function (data) {
+                    // console.log(data);
+                    if (data !== 'null') {
+                        $('#similarContainer').append(data);
+                        $('#similarContainer').removeClass('d-none');
+                        $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                        return true;
+                    } else {
+                        stopLoadProduct = true;
+                        return false;
+                    }
+                }
+            });
         }
 
         $(document).bind("mouseup touchend", function (e) {
@@ -1290,7 +1380,7 @@
                     $('#waitingIconColor').hide();
                     $('#waitingIconQty').hide();
                     $('#colorQtyContainer').show();
-                    let temp = '', firstColorSelect = false;
+                    let temp = '';
                     for (let i = 0; i < data.length; i++) {
                         if (data[i]['Color'] !== temp) {
                             $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
@@ -1303,14 +1393,7 @@
                         }
                         temp = data[i]['Color'];
                     }
-                    for (let i = 0; i < data.length; i++) {
-                        if ($('#color-' + data[i]["ID"]).val() === $('#firstColorInfo').text()) {
-                            $('#sizeInfo' + i + ' input').trigger('click');
-                            firstColorSelect = true;
-                        }
-                    }
-                    if (firstColorSelect === false)
-                        $('#sizeInfo' + 0 + ' input').trigger('click');
+                    $('#sizeInfo' + 0 + ' input').trigger('click');
                 }
             });
         }

@@ -73,8 +73,8 @@
           pagiClasses = $this.data('pagi-classes'),
           pagiHelper = $this.data('pagi-helper'),
           $pagiIcons = $this.data('pagi-icons'),
-          $prevMarkup = '<div style="color: #dddddd !important;" class="js-prev ' + arrowsClasses + ' ' + arrowLeftClasses + '"></div>',
-          $nextMarkup = '<div style="color: #dddddd !important;" class="js-next ' + arrowsClasses + ' ' + arrowRightClasses + '"></div>',
+          $prevMarkup = '<div class="js-prev ' + arrowsClasses + ' ' + arrowLeftClasses + '"></div>',
+          $nextMarkup = '<div class="js-next ' + arrowsClasses + ' ' + arrowRightClasses + '"></div>',
 
           //Setters
           setSlidesToShow = $this.data('slides-show'),

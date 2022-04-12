@@ -34,6 +34,11 @@ class Basic extends Controller
         session_start();
         $_SESSION['listSkip']=0;
 
+        return view('Customer.Master');
+    }
+
+    public function discounts()
+    {
         $minDiscount = 1;
         $maxDiscount = 99;
 
@@ -46,7 +51,174 @@ class Basic extends Controller
             ->take(5)
             ->get();
 
-        return view('Customer.Master', compact('discounts'));
+        $products = '<div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
+        <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
+             data-infinite="true"
+             data-slides-show="4"
+             data-autoplay="0"
+             data-speed="5000"
+             data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
+             data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
+             data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
+             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">';
+        foreach($discounts as $key =>$row){
+            $products=$products.'
+             <div class="js-slide g-mx-10">
+                    <!-- Product -->
+                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
+                        <div>
+                            <div id="carousel-08-'.($key+100000).'"
+                                 class="js-carousel text-center g-mb-5"
+                                 data-infinite="1"
+                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
+                                 data-nav-for="#carousel-08-'.($key+100000).'">
+                                <div class="js-slide">
+                                    <a href="'. route("productDetail",[$row->ProductID, $row->Size]).'">
+                                        <img class="img-fluid w-100" loading="lazy"
+                                             src="'.$row->PicPath.$row->SampleNumber.".jpg" .'"
+                                             alt="'.$row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand." ".$row->Size." ".$row->Color  .'">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- مشخصات محصول -->
+                        <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
+                            <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                            <div class="d-flex flex-column col-12 g-px-5">
+                                <h1 class="h6 g-color-black my-1 text-left">
+                                   '. $row->Brand .'
+                                </h1>
+                                <h4 class="h6 g-color-black my-1">
+                                    <span class="u-link-v5 g-color-black"
+                                          tabindex="0">
+                                        '. $row->Name .'
+                                        <span
+                                            class="g-font-size-12 g-font-weight-300"> '. $row->Model .'</span>
+                                        <span
+                                            class="g-font-size-12 g-font-weight-300"> '. $row->Gender .'</span>
+                                    </span>
+                                </h4>
+                                <div>
+                                    <span class="g-ml-5">سایز
+                                        <span class="g-color-primary">'. $row->Size .'</span>
+                                    </span>
+                                    <span>رنگ
+                                        <span class="g-color-primary">'. $row->Color .'</span>
+                                    </span>
+                                </div>
+                                <span>موجودی <span id="'. "cartQty".$key .'"
+                                                   class="g-color-primary">'.  $row->Qty .'</span> عدد</span>
+                            </div>
+                        </div>
+                        <div
+                            class="d-block g-color-black g-font-size-17 g-ml-5">
+                            <div style="direction: rtl" class="text-left">
+                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                    '. number_format($row->UnitPrice) .'
+                                </s>
+                                <span>'. number_format($row->FinalPrice) .'</span>
+                                <span
+                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                            </div>
+                        </div>
+                    </figure>
+                    <!-- End Product -->
+                </div>';
+        }
+
+        return $products.'</div>';
+    }
+
+    public function sameProduct($genderCode,$catCode,$productID)
+    {
+        $similarProduct = DB::table('product as p')
+            ->select('*')
+            ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('p.GenderCode', $genderCode)
+            ->where('p.CatCode', $catCode)
+            ->where('p.ID', '<>', $productID)
+            ->orderBy('p.VisitCounter', 'DESC')
+            ->take(5)
+            ->get();
+
+        $products = '<div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
+        <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
+             data-infinite="true"
+             data-slides-show="4"
+             data-autoplay="0"
+             data-speed="5000"
+             data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v1 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
+             data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
+             data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
+             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">';
+        foreach($similarProduct as $key =>$row){
+            $products=$products.'
+             <div class="js-slide g-mx-10">
+                    <!-- Product -->
+                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
+                        <div>
+                            <div id="carousel-08-'.($key+100000).'"
+                                 class="js-carousel text-center g-mb-5"
+                                 data-infinite="1"
+                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
+                                 data-nav-for="#carousel-08-'.($key+100000).'">
+                                <div class="js-slide">
+                                    <a href="'. route("productDetail",[$row->ProductID, $row->Size]).'">
+                                        <img class="img-fluid w-100" loading="lazy"
+                                             src="'.$row->PicPath.$row->SampleNumber.".jpg" .'"
+                                             alt="'.$row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand." ".$row->Size." ".$row->Color  .'">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- مشخصات محصول -->
+                        <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
+                            <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                            <div class="d-flex flex-column col-12 g-px-5">
+                                <h1 class="h6 g-color-black my-1 text-left">
+                                   '. $row->Brand .'
+                                </h1>
+                                <h4 class="h6 g-color-black my-1">
+                                    <span class="u-link-v5 g-color-black"
+                                          tabindex="0">
+                                        '. $row->Name .'
+                                        <span
+                                            class="g-font-size-12 g-font-weight-300"> '. $row->Model .'</span>
+                                        <span
+                                            class="g-font-size-12 g-font-weight-300"> '. $row->Gender .'</span>
+                                    </span>
+                                </h4>
+                                <div>
+                                    <span class="g-ml-5">سایز
+                                        <span class="g-color-primary">'. $row->Size .'</span>
+                                    </span>
+                                    <span>رنگ
+                                        <span class="g-color-primary">'. $row->Color .'</span>
+                                    </span>
+                                </div>
+                                <span>موجودی <span id="'. "cartQty".$key .'"
+                                                   class="g-color-primary">'.  $row->Qty .'</span> عدد</span>
+                            </div>
+                        </div>
+                        <div
+                            class="d-block g-color-black g-font-size-17 g-ml-5">
+                            <div style="direction: rtl" class="text-left">
+                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                    '. number_format($row->UnitPrice) .'
+                                </s>
+                                <span>'. number_format($row->FinalPrice) .'</span>
+                                <span
+                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                            </div>
+                        </div>
+                    </figure>
+                    <!-- End Product -->
+                </div>';
+        }
+
+        return $products.'</div>';
     }
 
     public function productLoad()
@@ -86,7 +258,7 @@ class Basic extends Controller
                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
                              data-nav-for="#carousel-08-'.$_SESSION['listSkip'].$key.'">
                             <div class="js-slide">
-                                <a href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'">
+                                <a href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'">
                                     <img class="img-fluid w-100" loading="eager"
                                          src="'. $row->PicPath .'sample1.jpg"
                                          alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
@@ -145,7 +317,7 @@ class Basic extends Controller
                                class="u-icon-v1 g-mt-minus-5 g-color-black g-color-primary--hover rounded-circle"
                                data-toggle="tooltip"
                                data-placement="top"
-                               href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'"
+                               href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'"
                                data-original-title="جزئیات محصول">
                                 <i class="icon-eye g-line-height-0_7"></i>
                             </a>
@@ -173,7 +345,7 @@ class Basic extends Controller
     public function productImage($imageNo, $row, $size, $key)
     {
         return '<div class="js-slide">
-                     <a href="'. route("productDetail",[$row->ID,$size[$key]->Size,$size[$key]->Color]) .'">
+                     <a href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'">
                         <img class="img-fluid w-100"
                             loading="lazy"
                              src="'. $row->PicPath .'sample'.$imageNo.'.jpg"
@@ -591,8 +763,7 @@ class Basic extends Controller
                 ->first();
             $qty[$i] = $request->get('qty' . $i);
         }
-        $postPrice = 15000;
-        $price=$request->get('allPrice')+$postPrice;
+        $price=$request->get('allPrice');
         if ($noExist === null) {
             setcookie('productRow', $row, time() + (43200), "/Confirmation");
             setcookie('price', $price, time() + (43200), "/Confirmation");
@@ -634,7 +805,7 @@ class Basic extends Controller
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
 
         } else {
-            return redirect()->route('productDetail', [$noExist->ProductID, $noExist->Size, urlencode($noExist->Color)]);
+            return redirect()->route('productDetail', [$noExist->ProductID, $noExist->Size]);
         }
     }
 
@@ -845,7 +1016,7 @@ class Basic extends Controller
         if ($productID === 'empty')
             return redirect()->route('userProfile', 'addressStatus');
         else {
-            return redirect()->route('productDetail', [$productID, $size, urlencode($color)]);
+            return redirect()->route('productDetail', [$productID, $size]);
         }
     }
 
@@ -857,9 +1028,8 @@ class Basic extends Controller
             ->delete();
     }
 
-    public function productDetail($id, $sizeInfo, $color)
+    public function productDetail($id, $sizeInfo)
     {
-        $colorInfo = urldecode($color);
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product')
             ->select('*')
@@ -963,23 +1133,13 @@ class Basic extends Controller
         } else
             $customerRate = 0;
 
-        $similarProduct = DB::table('product as p')
-            ->select('*')
-            ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('p.GenderCode', $data->GenderCode)
-            ->where('p.CatCode', $data->CatCode)
-            ->where('p.ID', '<>', $id)
-            ->orderBy('p.VisitCounter', 'DESC')
-            ->take(10)
-            ->get();
-
         DB::table('product')
             ->where('ID',$id)
             ->increment('VisitCounter', 1);
 
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo', 'colorInfo', 'similarProduct'));
+        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo'));
     }
 
     public function productVisit($id)
@@ -1515,7 +1675,7 @@ class Basic extends Controller
 
                  <div class="js-slide">
                     <a
-                        href="' . route('productDetail', [$row->ProductID, $row->Size, urlencode($row->Color)]) . '">
+                        href="' . route('productDetail', [$row->ProductID, $row->Size]) . '">
                         <img class="img-fluid w-100" src="' . $row->PicPath . $row->SampleNumber . '.png" alt="Image Description">
                     </a>
                  </div>
@@ -2073,7 +2233,7 @@ class Basic extends Controller
             ->first();
 
         if (isset($data->ID))
-            return redirect()->route('productDetail', [$data->ProductID, $data->Size, urlencode($data->Color)]);
+            return redirect()->route('productDetail', [$data->ProductID, $data->Size]);
         else
             return redirect()->route('instagram')->with('error', 'find');
 
