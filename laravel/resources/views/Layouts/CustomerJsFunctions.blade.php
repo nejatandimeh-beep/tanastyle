@@ -354,15 +354,14 @@
                         if (data !== 'null') {
                             $('.rowContainer:last-child').append(data);
                             $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
-                            window.scrollTo(0, lastScrollTop-200);
                             return true;
                         } else {
+                            $('#loadProduct').addClass('d-none');
                             stopLoadProduct = true;
                             return false;
                         }
                     }
                 });
-                $('#loadProduct').addClass('d-none');
                 console.log(stopLoadProduct);
             }
         }
@@ -666,6 +665,7 @@
                     $('#loadProduct').addClass('d-none');
                     $('#productTitle').text('نتایج فیلترها');
                     $('#productContainer').append(data);
+                    // $('nav').addClass('d-none');
                 }
             });
         }

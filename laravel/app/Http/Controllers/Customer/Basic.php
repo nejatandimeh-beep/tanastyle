@@ -259,7 +259,7 @@ class Basic extends Controller
                              data-nav-for="#carousel-08-'.$_SESSION['listSkip'].$key.'">
                             <div class="js-slide">
                                 <a href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'">
-                                    <img class="img-fluid w-100" loading="eager"
+                                    <img class="img-fluid w-100" loading="lazy" width="402" height="500"
                                          src="'. $row->PicPath .'sample1.jpg"
                                          alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
                                 </a>
@@ -966,10 +966,9 @@ class Basic extends Controller
         return redirect()->route('userProfile', 'addressStatus');
     }
 
-    public function attachAddress($location, $size, $color)
+    public function attachAddress($location, $size)
     {
 
-        Session::put('color', $color);
         Session::put('size', $size);
 
         return redirect()->route('userProfile', $location);
@@ -978,7 +977,6 @@ class Basic extends Controller
     public function addAddress(Request $request)
     {
         $size = Session::get('size');
-        $color = Session::get('color');
         $productID = $request->get('productIDFromBuy');
         $name = $request->get('receiver-name');
         $family = $request->get('receiver-family');
@@ -1676,7 +1674,7 @@ class Basic extends Controller
                  <div class="js-slide">
                     <a
                         href="' . route('productDetail', [$row->ProductID, $row->Size]) . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . $row->SampleNumber . '.png" alt="Image Description">
+                        <img class="img-fluid w-100" src="' . $row->PicPath . $row->SampleNumber . '.jpg" alt="Image Description">
                     </a>
                  </div>
             </div>
@@ -1740,14 +1738,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '0')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '0')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '0';
         $catCode = 'all';
@@ -1764,7 +1762,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '0')
             ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1772,7 +1770,7 @@ class Basic extends Controller
             ->where('GenderCode', '0')
             ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '0';
         $catCode = 'clothes';
@@ -1789,7 +1787,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '0')
             ->where('CatCode', 'e')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1797,7 +1795,7 @@ class Basic extends Controller
             ->where('GenderCode', '0')
             ->where('CatCode', 'e')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '0';
         $catCode = 'e';
@@ -1814,7 +1812,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '0')
             ->where('CatCode', 'f')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1822,7 +1820,7 @@ class Basic extends Controller
             ->where('GenderCode', '0')
             ->where('CatCode', 'f')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '0';
         $catCode = 'f';
@@ -1839,7 +1837,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '0')
             ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1847,7 +1845,7 @@ class Basic extends Controller
             ->where('GenderCode', '0')
             ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '0';
         $catCode = 'sports';
@@ -1864,7 +1862,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '0')
             ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1872,7 +1870,7 @@ class Basic extends Controller
             ->where('GenderCode', '0')
             ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '0';
         $catCode = 'rhinestone';
@@ -1888,14 +1886,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '1')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '1')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '1';
         $catCode = 'all';
@@ -1912,7 +1910,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '1')
             ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1920,7 +1918,7 @@ class Basic extends Controller
             ->where('GenderCode', '1')
             ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '1';
         $catCode = 'clothes';
@@ -1937,7 +1935,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '1')
             ->where('CatCode', 'e')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1945,7 +1943,7 @@ class Basic extends Controller
             ->where('GenderCode', '1')
             ->where('CatCode', 'e')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '1';
         $catCode = 'e';
@@ -1962,7 +1960,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '1')
             ->where('CatCode', 'f')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1970,7 +1968,7 @@ class Basic extends Controller
             ->where('GenderCode', '1')
             ->where('CatCode', 'f')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '1';
         $catCode = 'f';
@@ -1987,7 +1985,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '1')
             ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -1995,7 +1993,7 @@ class Basic extends Controller
             ->where('GenderCode', '1')
             ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '1';
         $catCode = 'sports';
@@ -2012,7 +2010,7 @@ class Basic extends Controller
             ->select('*')
             ->where('GenderCode', '1')
             ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -2020,7 +2018,7 @@ class Basic extends Controller
             ->where('GenderCode', '1')
             ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = '1';
         $catCode = 'rhinestone';
@@ -2035,7 +2033,7 @@ class Basic extends Controller
 
         $data = DB::table('product')
             ->select('*')
-            ->where('GenderCode', '2')
+            ->where('12', '2')
             ->paginate(10);
 
         $size = DB::table('product as p')
@@ -2043,7 +2041,7 @@ class Basic extends Controller
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '2')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
         $gender = '2';
         $catCode = 'all';
         $title = 'پوشاک دخترانه';
@@ -2058,14 +2056,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '3')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '3')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
         $gender = '3';
         $catCode = 'all';
         $title = 'پوشاک پسرانه';
@@ -2080,14 +2078,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '4')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '4')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
         $gender = '4';
         $catCode = 'all';
         $title = 'پوشاک نوزادی دخترانه';
@@ -2102,14 +2100,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->where('GenderCode', '5')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('GenderCode', '5')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
         $gender = '5';
         $catCode = 'all';
         $title = 'پوشاک نوزادی پسرانه';
@@ -2153,7 +2151,7 @@ class Basic extends Controller
             ->where('Name', 'like', '%' . $val . '%')
             ->orWhere('Model', 'like', '%' . $val . '%')
             ->orWhere('Brand', 'like', '%' . $val . '%')
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID')
@@ -2162,7 +2160,7 @@ class Basic extends Controller
             ->orWhere('Model', 'like', '%' . $val . '%')
             ->orWhere('Brand', 'like', '%' . $val . '%')
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = 'all';
         $catCode = 'all';
@@ -2178,14 +2176,14 @@ class Basic extends Controller
         $data = DB::table('product')
             ->select('*')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         $gender = 'all';
         $catCode = 'all';
@@ -2202,7 +2200,7 @@ class Basic extends Controller
             ->select('*')
             ->where('genderCode', $gender)
             ->where('Cat', $cat)
-            ->paginate(10);
+            ->paginate(12);
 
         $size = DB::table('product as p')
             ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
@@ -2210,7 +2208,7 @@ class Basic extends Controller
             ->where('genderCode', $gender)
             ->where('Cat', $cat)
             ->groupBy('p.ID')
-            ->paginate(10);
+            ->paginate(12);
 
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }

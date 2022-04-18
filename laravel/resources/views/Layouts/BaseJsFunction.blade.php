@@ -24,6 +24,24 @@
             // initialization of carousel
             if($('.productDetail').length>0){
                 $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+
+                let productImages = $('#js-carousel-sync-for'),
+                    productImagesNav = $('#js-carousel-sync-nav');
+
+                productImages.slick('slickSetOption', {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    asNavFor: '#js-carousel-sync-nav'
+                }, true);
+
+                productImagesNav.slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    asNavFor: '#js-carousel-sync-for',
+                    dots: false,
+                    focusOnSelect: true,
+                    adaptiveHeight: true
+                });
                 // initialization of carousels
             }
             // initialization of autonomous popups
