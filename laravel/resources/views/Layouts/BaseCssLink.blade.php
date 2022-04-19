@@ -15,7 +15,12 @@
     <meta name="_token" content="{{ csrf_token() }}">
     <title>TanaStyle</title>
 
-    <link rel="icon" href="{{asset('img/Logo/browserIcon.png')}}" />
+    <link rel="shortcut icon" href="{{asset('img/Logo/browserIcon.png')}}" />
+
+    <link rel="apple-touch-icon" href="{{asset('img/Logo/browserIcon.png')}}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/Logo/browserIcon.png')}}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('img/Logo/browserIcon.png')}}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('img/Logo/browserIcon.png')}}">
 
     <!--My Style-->
     <link href="{{ asset('css/myStyle.css?v=sd23z11') }}" rel="stylesheet">

@@ -1315,7 +1315,7 @@ class Basic extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('customer_vote as cv')
-                ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.name', 'c.Family','pd.SampleNumber')
+                ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.name', 'c.Family','pd.SampleNumber','p.Brand','p.Model')
                 ->leftjoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
                 ->leftjoin('product as p', 'p.ID', '=', 'pd.ProductID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'cv.CustomerID')
@@ -1328,7 +1328,7 @@ class Basic extends Controller
         if ($where2 === '') {
             if ($val === 'بدون') {
                 $data = DB::table('customer_vote as cv')
-                    ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.name', 'c.Family','pd.SampleNumber')
+                    ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.name', 'c.Family','pd.SampleNumber','p.Brand','p.Model')
                     ->leftjoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
                     ->leftjoin('product as p', 'p.ID', '=', 'pd.ProductID')
                     ->leftjoin('customers as c', 'c.ID', '=', 'cv.CustomerID')
@@ -1338,7 +1338,7 @@ class Basic extends Controller
 
             } else {
                 $data = DB::table('customer_vote as cv')
-                    ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.Name', 'c.Family','pd.SampleNumber')
+                    ->select('cv.*', 'p.Name as productName', 'p.PicPath', 'p.Gender', 'c.Name', 'c.Family','pd.SampleNumber','p.Brand','p.Model')
                     ->leftjoin('product_detail as pd', 'pd.ID', '=', 'cv.ProductDetailID')
                     ->leftjoin('product as p', 'p.ID', '=', 'pd.ProductID')
                     ->leftjoin('customers as c', 'c.ID', '=', 'cv.CustomerID')

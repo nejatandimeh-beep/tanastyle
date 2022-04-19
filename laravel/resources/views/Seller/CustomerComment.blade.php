@@ -260,12 +260,12 @@
                         @foreach($data as $key => $rec)
                             <tr>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->name.' '.$rec->Family }}</td>
-                                <td class="align-middle text-center text-nowrap">{{ $rec->productName }}</td>
+                                <td class="align-middle text-center text-nowrap">{{ $rec->productName.' '.$rec->Model }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->Brand}}</td>
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ $rec->PicPath.$rec->SampleNumber }}.png" alt="">
+                                             src="{{ $rec->PicPath.$rec->SampleNumber }}.jpg" alt="">
                                     </div>
                                 </td>
                                 <td class="align-middle text-center text-nowrap">

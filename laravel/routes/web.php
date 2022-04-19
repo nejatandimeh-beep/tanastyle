@@ -240,7 +240,7 @@ Route::post('/Customer-Profile-Update', 'Customer\Basic@profileUpdate')->name('p
 
 Route::get('/Customer-Address-Active/{id}', 'Customer\Basic@addressActive');
 
-Route::get('/Customer-Address-Attach/{location}/{size}/{color}', 'Customer\Basic@attachAddress')->name('attachAddress');
+Route::get('/Customer-Address-Attach/{location}/{size}', 'Customer\Basic@attachAddress')->name('attachAddress');
 
 Route::post('/Customer-Address-Add', 'Customer\Basic@addAddress')->name('addAddress');
 

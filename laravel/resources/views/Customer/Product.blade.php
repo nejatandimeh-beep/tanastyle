@@ -618,7 +618,7 @@
                                     </span>
                                     @if(!isset($sendAddress))
                                         <div class="align-self-center g-pt-35 g-pt-0--lg">
-                                            <a href="{{ (isset(Auth::user()->id)) ? route('attachAddress', ['location'=>'addAddress'.$data->ID, 'size'=>$sizeInfo,'color'=>$colorInfo]) : route('login') }}"
+                                            <a href="{{ (isset(Auth::user()->id)) ? route('attachAddress', ['location'=>'addAddress'.$data->ID, 'size'=>$sizeInfo]) : route('login') }}"
                                                id="addAddress"
                                                class="g-color-red g-color-primary--hover g-mt-0--lg g-mt-30 g-text-underline--none--hover">
                                                 افزودن آدرس<i class="icon-pencil g-mr-5 align-middle"></i>
