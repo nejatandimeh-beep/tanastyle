@@ -632,26 +632,26 @@
             $("#persianTime").html(currentTimeString);
         }
 
-        function incQty() {
-            let val = parseInt($('#qtyInput').val()), q;
-            if ((val < 20) && (val > 0)) {
+        function incQty(container,maxLen) {
+            let val = parseInt($('#'+container+' #qtyInput').val()), q;
+            if ((val < maxLen) && (val > 0)) {
                 q = val + 1;
-                $('#qtyInput').val(q);
+                $('#'+container+' #qtyInput').val(q);
             } else
-                $('#qtyPlus').prop('disabled', true);
+                $('#'+container+' #qtyPlus').prop('disabled', true);
         }
 
-        function decQty() {
-            let val = parseInt($('#qtyInput').val()), q;
-            if ((val < 20) && (val > 1)) {
+        function decQty(container,maxLen) {
+            let val = parseInt($('#'+container+' #qtyInput').val()), q;
+            if ((val > 1)) {
                 q = val - 1;
-                $('#qtyInput').val(q);
+                $('#'+container+' #qtyInput').val(q);
             } else
-                $('#qtyPlus').prop('disabled', true);
+                $('#'+container+' #qtyPlus').prop('disabled', true);
         }
 
-        function applyAddQty(id) {
-            let val = parseInt($('#qtyInput').val());
+        function applyAddQty(id,container) {
+            let val = parseInt($('#'+container+' #qtyInput').val());
             $.confirm({
                 title: 'حذف محصول',
                 content: 'آیا مطمئن هستید؟',
@@ -661,7 +661,24 @@
                     },
                     انصراف: function () {
                         $.alert('عملیات افزودن موجودی محصول لغو شد!');
-                        $('#modalLoginForm').modal('toggle');
+                        $('#modalAddQtyForm').modal('toggle');
+                    },
+                }
+            });
+        }
+
+        function applyDecQty(id,container) {
+            let val = parseInt($('#'+container+' #qtyInput').val());
+            $.confirm({
+                title: 'حذف محصول',
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        location.href = '/Seller-DecQty/' + id + '/' + val;
+                    },
+                    انصراف: function () {
+                        $.alert('عملیات افزودن موجودی محصول لغو شد!');
+                        $('#modalDecQtyForm').modal('toggle');
                     },
                 }
             });

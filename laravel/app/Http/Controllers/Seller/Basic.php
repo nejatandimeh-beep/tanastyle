@@ -285,6 +285,21 @@ class Basic extends Controller
 
         return $this->store();
     }
+
+    public function decQty($id, $val)
+    {
+        DB::table('product_detail')
+            ->where('ID', $id)
+            ->update([
+                'Qty' => DB::raw('Qty - ' . $val)
+            ]);
+
+        $this->qtyStatus['productIdChangeQty'] = $id;
+        $this->qtyStatus['alarmChangeQty'] = 1;
+
+        return $this->store();
+    }
+
 //    ---------> End Store
 
 //    ---------> Sale

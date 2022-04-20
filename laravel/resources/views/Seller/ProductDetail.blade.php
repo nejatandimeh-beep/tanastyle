@@ -226,7 +226,7 @@
                 </div>
                 <div class="text-left">
                     <!--افزودن موجودی محصول-->
-                    <div class="modal fade text-center" id="modalLoginForm" tabindex="-1" role="dialog"
+                    <div class="modal fade text-center" id="modalAddQtyForm" tabindex="-1" role="dialog"
                          aria-labelledby="myModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -246,10 +246,10 @@
                                     <p>به چه تعداد به موجودی قبل اضافه شود؟</p>
 
                                     <div style="direction: ltr" class="form-group row g-mb-25">
-                                        <div class="input-group justify-content-center">
+                                        <div id="incButton" class="input-group justify-content-center">
                                             <span style="cursor: pointer"
                                                   id="qtyPlus"
-                                                  onclick="decQty()"
+                                                  onclick="decQty('incButton',20)"
                                                   class="input-group-addon g-pa-15 col-3 g-brd-gray-dark-v5">
                                                 <i class="fa fa-minus"></i>
                                             </span>
@@ -261,7 +261,7 @@
                                                 readonly>
                                             <span style="cursor: pointer"
                                                   id="qtyPlus"
-                                                  onclick="incQty()"
+                                                  onclick="incQty('incButton',20)"
                                                   class="input-group-addon g-pa-15 col-3 g-brd-gray-dark-v5">
                                                   <i class="fa fa-plus"></i>
                                             </span>
@@ -269,7 +269,7 @@
                                     </div>
 
                                 </div>
-                                <a onclick="applyAddQty({{$dataDetail->ID}})"
+                                <a onclick="applyAddQty({{$dataDetail->ID}},'incButton')"
                                    class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white">
                                     ثبت موجودی جدید
                                 </a>
@@ -278,7 +278,62 @@
                     </div>
                     <a href="" class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15"
                        data-toggle="modal"
-                       data-target="#modalLoginForm">افزودن موجودی محصول</a>
+                       data-target="#modalAddQtyForm">افزودن موجودی محصول</a>
+
+                    <!--کاهش موجودی محصول-->
+                    <div class="modal fade text-center" id="modalDecQtyForm" tabindex="-1" role="dialog"
+                         aria-labelledby="myModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header g-pr-20 g-pl-20">
+                                    <h4>کاهش موجودی محصول</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <i class="fa fa-close"></i>
+                                    </button>
+                                </div>
+                                <div style="direction: rtl" class="modal-body mx-3">
+                                    <p style="text-align: justify;">فروشنده گرامی ضروریست مشخصات محصول موجود در
+                                        انبار با
+                                        مشخصات محصول در دستتان یکی باشد مانند
+                                        نام، جنسیت، مدل، برند، توضیحات، قیمت پایه، تخفیف، قیمت فروش، رنگ، سایز و
+                                        عکس</p>
+                                    <p>به چه تعداد موجودی محصول را کاهش می دهید؟</p>
+
+                                    <div style="direction: ltr" class="form-group row g-mb-25">
+                                        <div id="decButton" class="input-group justify-content-center">
+                                            <span style="cursor: pointer"
+                                                  id="qtyPlus"
+                                                  onclick="decQty('decButton',{{$dataDetail->Qty}})"
+                                                  class="input-group-addon g-pa-15 col-3 g-brd-gray-dark-v5">
+                                                <i class="fa fa-minus"></i>
+                                            </span>
+                                            <input
+                                                class="text-center form-control form-control-md rounded-0 col-4 g-pa-15 g-brd-gray-dark-v5 myInput g-font-size-20"
+                                                type="number"
+                                                value="1"
+                                                id="qtyInput"
+                                                readonly>
+                                            <span style="cursor: pointer"
+                                                  id="qtyPlus"
+                                                  onclick="incQty('decButton',{{$dataDetail->Qty}})"
+                                                  class="input-group-addon g-pa-15 col-3 g-brd-gray-dark-v5">
+                                                  <i class="fa fa-plus"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <a onclick="applyDecQty({{$dataDetail->ID}},'decButton')"
+                                   class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white">
+                                    ثبت موجودی جدید
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="" class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15"
+                       data-toggle="modal"
+                       data-target="#modalDecQtyForm">کاهش موجودی محصول</a>
 
                     <!--تغییر قیمت محصول-->
                     <div class="modal fade text-center" id="modalPrice" tabindex="-1" role="dialog"
@@ -330,10 +385,10 @@
                                     </div>
                                     <div>
                                           <span
-                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12">
+                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12">
                                               قیمت فروش با احتساب تخفیف
-                                              <span class="g-color-primary g-mr-5" id="finalPrice">---</span>
-                                              <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                              <span class="d-lg-inline-block d-block g-mt-10 g-color-primary g-mr-5" id="finalPrice">---</span>
+                                              <span class="g-font-size-12 g-font-weight-300 g-mt-10 g-mr-5">تومان</span>
                                           </span>
                                     </div>
                                 </div>
@@ -372,7 +427,7 @@
                                                       </span>
                                                     <span class="input-group-addon">درصد</span>
                                                     <input type="text"
-                                                           class="form-control form-control-md rounded-0"
+                                                           class="form-control form-control-md rounded-0 g-font-size-16"
                                                            autofocus
                                                            id="newDiscount"
                                                            pattern="\d*"
@@ -387,12 +442,12 @@
                                     </div>
                                     <div>
                                           <span
-                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12">
+                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12">
                                               قیمت فروش با احتساب تخفیف جدید
-                                              <span class="g-color-primary g-mr-5" id="newFinalPrice">---</span>
+                                              <span class="d-lg-inline-block d-block g-mt-10 g-color-primary g-mr-5" id="newFinalPrice">---</span>
                                                  <input style="display: none" type="number" name="tempNewFinalPrice" id="tempNewFinalPrice"
                                                         value="">
-                                              <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                              <span class="g-font-size-12 g-font-weight-300 g-mt-10 g-mr-5">تومان</span>
                                           </span>
                                     </div>
                                 </div>
@@ -402,6 +457,8 @@
                     <a href="" class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-15"
                        data-toggle="modal"
                        data-target="#modalDiscount">تغییر تخفیف محصول</a>
+
+                    <!--حذف یا گزارش اطلاعات اشتباه-->
                     @if (is_null($falseProduct) && (is_null($dataDetail->orderDetailID)))
                         <button type="button" class="btn btn-md u-btn-lightred rounded-0 force-col-12 g-mb-15 g-mr-1"
                                 onclick="confirmDelete({{$dataDetail->ID}})">

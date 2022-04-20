@@ -34,7 +34,7 @@
                                 class="fa fa-check-square g-color-primary g-font-size-25 g-ml-15"></span></h4>
                     </div>
                     <div class="modal-body text-right">
-                        <p style="direction: rtl"> افزودن موجودی به محصول با کد {{ Session::get('productId') }} با
+                        <p style="direction: rtl"> تغییر موجودی محصول با کد {{ Session::get('productId') }} با
                             موفقیت انجام شد. </p>
                     </div>
                 </div>

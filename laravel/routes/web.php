@@ -114,6 +114,8 @@ Route::get('/Seller-Product-Detail/{id}', 'Seller\Basic@productDetail')->name('s
 
 // Add Qty
 Route::get('/Seller-AddQty/{id}/{val}', 'Seller\Basic@addQty')->name('sellerAddQty');
+// Dec Qty
+Route::get('/Seller-DecQty/{id}/{val}', 'Seller\Basic@decQty')->name('sellerDecQty');
 
 // ------------Sale--------------
 
