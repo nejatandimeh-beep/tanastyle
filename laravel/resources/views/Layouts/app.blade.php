@@ -169,9 +169,9 @@
         } else {
             if (myInput.val() === $('#password-confirm').val()) {
                 $('#submitText').hide();
-                $('#waitingSubmit').show();
+                $('#waitingSubmit').hide();
                 $('#save').prop('disabled', true);
-                $('form').submit();
+                // $('form').submit();
             } else {
                 alert('رمز و تکرار رمز یکسان نیستند.')
             }

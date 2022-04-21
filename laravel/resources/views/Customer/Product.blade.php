@@ -323,6 +323,9 @@
                         class="d-inline-block h5 g-color-black mb-2">{{ $data->Brand }}</h1>
                     <h1
                         class="d-block h6 g-font-weight-300 g-color-black mb-2">فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</h1>
+
+                    <h1
+                        class="d-block h6 g-font-weight-300 g-color-black mb-2">کد محصول: <span id="detailID" class="g-font-weight-600"></span></h1>
                 </div>
 
 

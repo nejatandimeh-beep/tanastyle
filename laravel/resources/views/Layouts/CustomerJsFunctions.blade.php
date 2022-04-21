@@ -69,6 +69,7 @@
             $('#crop').on('click', function () {
                 $('#cropText').hide();
                 $('#waitingCrop').show();
+                $(this).prop('disabled',true);
                 let canvas = cropper.getCroppedCanvas({
                     width: 400,
                     height: 400
@@ -1428,6 +1429,7 @@
                 }
             }
             $('#orderProductImg').attr('src', $('#picPath').text() + '/' + picNumber + '.jpg');
+            $('#detailID').text($('#productDetailID').text());
             $('#' + picNumber).trigger('click');
         }
 

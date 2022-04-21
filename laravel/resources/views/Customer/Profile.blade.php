@@ -150,7 +150,7 @@
                             <span id="cropText">برش</span>
                             <i id="waitingCrop"
                                style="display: none"
-                               class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-white"></i>
+                               class="fa fa-spinner fa-spin g-px-10 m-0 g-font-size-20 g-color-white"></i>
                         </button>
                     </div>
                 </div>
