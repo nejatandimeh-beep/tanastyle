@@ -1325,9 +1325,8 @@
                                         class="d-flex justify-content-between d-lg-table-cell align-middle g-px-20--lg g-pt-15 g-pt-0--lg g-brd-top g-brd-top-none--lg g-brd-gray-light-v4 table-cell-responsive">
                                         <div>
                                             <h3 class="h6 d-inline-block d-lg-block g-font-weight-700">
-                                                <span class="g-color-gray-dark-v2">شماره فاکتور</span>
+                                                <span class="g-color-gray-dark-v2">شماره فاکتور {{ $row->orderID.'/'.$row->orderDetailID }}</span>
                                             </h3>
-                                            <em class="d-inline-block d-lg-block g-color-gray-dark-v5 g-font-style-normal">{{ $row->orderID.'/'.$row->orderDetailID }}</em>
                                         </div>
 
                                         <a href="{{ '#modal16'.$key }}"
@@ -1456,7 +1455,7 @@
                                                         </span>
                                                             </div>
                                                             <div
-                                                                class="d-flex flex-column col-12 col-lg-2 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
                                                                 <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
                                                                     با {{ $row->Discount }}% تخفیف
                                                                 </h6>
@@ -1471,6 +1470,15 @@
                                                                 </h6>
                                                                 <span class="g-pa-5--lg color-primary-smallDevice">
                                                               {{ $persianDate[$key][2].' '.$persianDate[$key][1].' '.$persianDate[$key][0] }}
+                                                            </span>
+                                                            </div>
+                                                            <div
+                                                                class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
+                                                                <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
+                                                                    فروشنده
+                                                                </h6>
+                                                                <span class="g-pa-5--lg color-primary-smallDevice">
+                                                              {{ $row->sellerName.' '.$row->sellerFamily }}
                                                             </span>
                                                             </div>
                                                             <div

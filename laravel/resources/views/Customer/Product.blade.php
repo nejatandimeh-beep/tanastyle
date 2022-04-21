@@ -314,13 +314,15 @@
                     @endif
                 </div>
 
-                <div class="align-self-center">
+                <div class="align-self-center g-mb-15">
                     <h1 id="productName"
                         class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Name }}</h1>
-                    <h1 id="productName"
+                    <h1
                         class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Model }}</h1>
-                    <h1 id="productName"
+                    <h1
                         class="d-inline-block h5 g-color-black mb-2">{{ $data->Brand }}</h1>
+                    <h1
+                        class="d-block h6 g-font-weight-300 g-color-black mb-2">فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</h1>
                 </div>
 
 

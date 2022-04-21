@@ -43,8 +43,9 @@ class Basic extends Controller
         $maxDiscount = 99;
 
         $discounts = DB::table('product as p')
-            ->select('*')
+            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->leftJoin('sellers as s','s.id','=','p.SellerID')
             ->orderBy('Discount', 'DESC')
             ->orderBy('VisitCounter', 'DESC')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
@@ -111,6 +112,7 @@ class Basic extends Controller
                                                    class="g-color-primary">'.  $row->Qty .'</span> عدد</span>
                             </div>
                         </div>
+                        <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
                         <div
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
@@ -133,8 +135,9 @@ class Basic extends Controller
     public function sameProduct($genderCode,$catCode,$productID)
     {
         $similarProduct = DB::table('product as p')
-            ->select('*')
+            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->leftJoin('sellers as s','s.id','=','p.SellerID')
             ->where('p.GenderCode', $genderCode)
             ->where('p.CatCode', $catCode)
             ->where('p.ID', '<>', $productID)
@@ -202,6 +205,7 @@ class Basic extends Controller
                                                    class="g-color-primary">'.  $row->Qty .'</span> عدد</span>
                             </div>
                         </div>
+                         <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
                         <div
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
@@ -224,10 +228,11 @@ class Basic extends Controller
     public function productLoad()
     {
         session_start();
-        $data = DB::table('product')
-            ->select('*')
-            ->orderBy('RegDate','DESC')
-            ->orderBy('VisitCounter','DESC')
+        $data = DB::table('product as p')
+            ->select('p.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->orderBy('p.RegDate','DESC')
+            ->orderBy('p.VisitCounter','DESC')
             ->skip($_SESSION['listSkip'])
             ->take(1)
             ->get();
@@ -323,7 +328,9 @@ class Basic extends Controller
                             </a>
                         </div></div>';
 
-            $products = $products .'<div
+            $products = $products .' <h1
+                        class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
+                    <div
                         class="d-block g-color-black g-font-size-17 g-ml-10">
                         <div style="direction: rtl" class="text-left">
                             <s class="g-color-lightred g-font-weight-500 g-font-size-13">
@@ -657,13 +664,14 @@ class Basic extends Controller
 
         // Get data after Database update
         $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber', 'ca.*')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber', 'ca.*','s.Name as sellerName','s.Family as sellerFamily')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
             ->leftJoin('product_detail as pd', function ($join) {
                 $join->on('pd.ID', '=', 'pod.ProductDetailID');
             })
+            ->leftJoin('sellers as s','s.id','=','p.SellerID')
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
@@ -703,9 +711,10 @@ class Basic extends Controller
         try {
             // گرفتن تمامی جزییات مربوط به محصول کلیک شده
             $data = DB::table('product_cart as pc')
-                ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID')
+                ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID','s.Name as sellerName','s.Family as sellerFamily')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pc.ProductDetailID')
                 ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
+                ->leftJoin('sellers as s','s.id','=','p.SellerID')
                 ->where('pc.CustomerID', Auth::user()->id)
                 ->orderBy('Date')
                 ->orderBy('Time')
@@ -1029,9 +1038,10 @@ class Basic extends Controller
     public function productDetail($id, $sizeInfo)
     {
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
-        $data = DB::table('product')
-            ->select('*')
-            ->where('ID', $id)
+        $data = DB::table('product as p')
+            ->select('p.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->where('p.ID', $id)
             ->first();
 
         // گرفتن تمامی جزییات مربوط به محصول کلیک شده
@@ -1638,8 +1648,9 @@ class Basic extends Controller
             $size[0] = 'empty';
 
         $data = DB::table('product as p')
-            ->select('p.*', 'pd.*')
+            ->select('p.*', 'pd.*','s.Name as sellerName','s.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
+            ->leftJoin('sellers as s','s.id','=','p.SellerID')
             ->whereIn('p.GenderCode', $gender)
             ->whereIn('p.CatCode', $cat)
 //            ->whereIn('pd.Size', $size)
@@ -1707,7 +1718,7 @@ class Basic extends Controller
                 </a>
             </div>
          </div>
-
+          <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
           <div
             class="d-block g-color-black g-font-size-17 g-ml-10">
                 <div style="direction: rtl" class="text-left">
@@ -2117,11 +2128,13 @@ class Basic extends Controller
     public function productSearch($val)
     {
         $output = '';
-        $data = DB::table('product')
-            ->select('Name', 'Model', 'Brand')
-            ->where('Name', 'like', '%' . $val . '%')
-            ->orWhere('Model', 'like', '%' . $val . '%')
-            ->orWhere('Brand', 'like', '%' . $val . '%')
+        $data = DB::table('product as p')
+            ->select('p.Name', 'p.Model', 'p.Brand','pd.ID')
+            ->leftJoin('product_detail as pd','pd.ProductID','=','p.ID')
+            ->where('p.Name', 'like', '%' . $val . '%')
+            ->orWhere('p.Model', 'like', '%' . $val . '%')
+            ->orWhere('p.Brand', 'like', '%' . $val . '%')
+            ->orWhere('pd.ID', 'like', '%' . $val . '%')
             ->groupBy('ID')
             ->take(15)
             ->get();

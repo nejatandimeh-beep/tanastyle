@@ -849,6 +849,16 @@ body a{
     border-top: 1px solid #eee;
     background:url("/../img/Banners/1920_791.png") no-repeat center center rgb(255, 255, 255)
 }
+
+.masterWallpaper2{
+    position: relative;
+    width:100%;
+    height:250px;
+    background-size: contain !important;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+}
+
 .bannerText{
     position: absolute;
     top: 25%;

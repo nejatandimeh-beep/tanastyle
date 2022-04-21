@@ -28,7 +28,7 @@
                                             <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                                 <img class="img-fluid w-100"
                                                      src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
-                                                     alt="tanakora mahabad">
+                                                     alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                             </a>
                                         </div>
                                     </div>
@@ -78,6 +78,8 @@
                                         </li>
                                     </ul>
                                 </div>
+                                <h1
+                                    class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: {{ $row->sellerName.' '.$row->sellerFamily }}</h1>
                                 <div
                                     class="d-block g-color-black g-font-size-17 g-ml-5">
                                     <div style="direction: rtl" class="text-left">
@@ -174,6 +176,7 @@
                                         <th class="text-center">قیمت واحد</th>
                                         <th class="text-center">تخفیف</th>
                                         <th class="text-center">قیمت نهایی</th>
+                                        <th class="text-center">فروشنده</th>
                                         <th class="text-center">عکس</th>
                                     </tr>
                                     </thead>
@@ -225,6 +228,11 @@
                                             <td class="align-middle text-center">
                                                             <span id="productFinalPrice{{$key}}" class="g-pa-5">
                                                                 {{ number_format($row->FinalPrice) }}
+                                                            </span>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                            <span class="g-pa-5">
+                                                                {{ $row->sellerName.' '.$row->sellerFamily }}
                                                             </span>
                                             </td>
                                             <td class="align-middle text-center">
