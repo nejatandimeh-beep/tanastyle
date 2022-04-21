@@ -5,21 +5,23 @@
 
             <!-- Filters -->
             <div style="display: none" id="filterDiv" class="col-md-3 flex-md-first g-brd-left--lg g-brd-gray-light-v4">
-                <div id="stickyDiv1" class="sticky-top g-z-index-1">
+                <div id="stickyDiv1" class="g-z-index-1">
                     <div>
                         <div class="g-pr-15--lg d-flex justify-content-between g-pb-10 g-pt-10">
                             <h5 class="m-0 g-mr-10 g-mr-0--lg align-self-center g-color-gray-dark-v1">فیلتر ها</h5>
-                            <button
-                                style="color:rgba(0,0,0,0.4);
+                            <div>
+                                <button
+                                    style="color:rgba(0,0,0,0.4);
                                 line-height: 0.65;
                                 background-color: transparent;
                                 cursor: pointer;
                                 border: none !important;
                                 outline:none !important;"
-                                onclick="closeSideBar()"
-                                class="font-smooth g-pt-5 g-font-size-35 g-color-gray-dark-v1 g-ml-minus-25 g-ml-0--lg"
-                                type="button">&times;
-                            </button>
+                                    onclick="closeSideBar()"
+                                    class="font-smooth g-pt-5 g-font-size-35 g-color-gray-dark-v1"
+                                    type="button">&times;
+                                </button>
+                            </div>
                         </div>
                         <hr style="z-index: 100 !important"
                             class="responsiveBorder g-mx-minus-15 g-mt-0 g-mb-0 sticky-top">
@@ -1252,7 +1254,7 @@
                     <!-- Filters -->
                     <div id="stickyDiv2" style="z-index: 100 !important;"
                          class="sticky-top g-bg-white-opacity-0_9 g-mb-15">
-                        <div class="d-flex g-py-10">
+                        <div class="d-flex g-py-12">
                             <h1 style="display: none" id="productTitle" class="h5 align-self-center g-color-gray-dark-v2 m-0 col-6 pr-0 bigDevice">{{$title}}</h1>
                             <div id="filterContent" class="d-flex col-10 justify-content-between g-px-0">
                                 <div style="display: block" id="smallFilterDiv"
@@ -1301,9 +1303,9 @@
 
                     <!-- ajax loader-->
                     <div id="loadProduct" class="d-none loadProduct"></div>
+                    <h1 style="display: none" id="productTitleSD" class="d-lg-none d-block h5 g-py-10 g-mt-10">{{$title}}</h1>
                     <!-- Products -->
                     <div id="productContainer" class="row g-mb-50">
-                        <h1 style="display: none" class="d-lg-none d-block h5 g-pa-10 g-mr-10 g-mt-10">{{$title}}</h1>
 
                         @foreach($data as $key => $row)
                             <div id="productDiv" class="col-12 col-lg-3 g-mb-30">

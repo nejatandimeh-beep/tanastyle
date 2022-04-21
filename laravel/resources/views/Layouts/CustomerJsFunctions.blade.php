@@ -663,6 +663,7 @@
                     // console.log(data);
                     $('#loadProduct').addClass('d-none');
                     $('#productTitle').text('نتایج فیلترها');
+                    $('#productTitleSD').text('نتایج فیلترها');
                     $('#productContainer').append(data);
                     // $('nav').addClass('d-none');
                 }
