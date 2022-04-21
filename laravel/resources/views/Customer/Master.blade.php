@@ -9,7 +9,7 @@
 </div>
 <div class="masterWallpaperMobile d-flex justify-content-center smallDevice"></div>
 <div class="g-py-5 g-brd-y g-brd-gray-light-v3 g-mb-40--lg">
-    <div class="masterWallpaper2 d-flex justify-content-center g-brd-y g-bg-gray-dark-v1 g-brd-gray-light-v5">
+    <div class="masterWallpaper2 d-flex justify-content-center g-brd-y g-bg-black g-brd-gray-light-v5">
         <form style="direction: rtl" class="align-self-center text-center">
             <h1 style="font-weight: bold" class="g-color-white g-font-size-50--md g-font-size-20">دنبال پوشاک خاصی می گردید؟</h1>
             <p style="font-family: Tahoma" class="g-color-primary">جستجوگر ما کمکتان میکند..</p>

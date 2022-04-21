@@ -234,7 +234,7 @@ class Basic extends Controller
             ->orderBy('p.RegDate','DESC')
             ->orderBy('p.VisitCounter','DESC')
             ->skip($_SESSION['listSkip'])
-            ->take(1)
+            ->take(12)
             ->get();
 
         $size = DB::table('product as p')
@@ -244,13 +244,13 @@ class Basic extends Controller
             ->orderBy('p.VisitCounter','DESC')
             ->groupBy('p.ID')
             ->skip($_SESSION['listSkip'])
-            ->take(1)
+            ->take(12)
             ->get();
 
         if(!isset($size[0]->Color))
             return $products='null';
 
-        $products='';
+        $products='<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer">';
         foreach($data as $key => $row){
             $products = $products . '
              <div class="col-12 col-lg-3 g-mb-30">
@@ -344,9 +344,9 @@ class Basic extends Controller
                 </figure>
             </div>';
         }
-        $_SESSION['listSkip'] = $_SESSION['listSkip']+1;
+        $_SESSION['listSkip'] = $_SESSION['listSkip']+12;
 
-        return $products;
+        return $products.'</div>';
     }
 
     public function productImage($imageNo, $row, $size, $key)

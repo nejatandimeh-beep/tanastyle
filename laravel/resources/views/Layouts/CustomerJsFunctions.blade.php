@@ -284,8 +284,6 @@
 
                 if (scrollLocation > deviceScroll && successLoadProduct) {
                     successLoadProduct = false;
-                    $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
-                    for (let i = 0; i < 4; i++)
                         loadProduct();
                 } else {
                     return true;
@@ -352,7 +350,7 @@
                     success: function (data) {
                         // console.log(data);
                         if (data !== 'null') {
-                            $('.rowContainer:last-child').append(data);
+                            $('#productContainer').append(data);
                             $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
                             return true;
                         } else {

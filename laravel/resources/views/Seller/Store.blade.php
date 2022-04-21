@@ -150,15 +150,15 @@
                 <h3 class="h6 g-color-black mb-3">تعداد محصولات به تفکیک جنسیت</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">زنانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $female }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">مردانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">مردانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $male }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">دخترانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">دخترانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $girl }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">پسرانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">پسرانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $boy }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">نوزادی دخترانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">نوزادی دخترانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyBoy }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">نوزادی پسرانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">نوزادی پسرانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyGirl }}</span>عدد</span>
             </div>
             <!-- End Icon Blocks -->

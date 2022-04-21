@@ -27,15 +27,15 @@
                 <h3 class="h6 g-color-black mb-3">واکنش مشتریان به تفکیک جنسیت</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">زنانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $female }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">مردانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">مردانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $male }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">دخترانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">دخترانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $girl }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">پسرانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">پسرانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $boy }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">نوزادی دخترانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">نوزادی دخترانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyBoy }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">نوزادی پسرانه<span
+                <span class="u-label g-bg-bluegray g-mb-5">نوزادی پسرانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyGirl }}</span>عدد</span>
             </div>
             <!-- End Icon Blocks -->
@@ -246,7 +246,7 @@
                     <table style="direction: rtl" class="table table-bordered u-table--v2">
                         <thead>
                         <tr>
-                            <th class="align-middle text-center text-nowrap focused rtlPosition">نام مشتری</th>
+                            <th class="align-middle text-center text-nowrap focused rtlPosition">کد محصول</th>
                             <th class="align-middle text-center text-nowrap">نام محصول</th>
                             <th class="align-middle text-center text-nowrap">برند</th>
                             <th class="align-middle text-center">عکس</th>
@@ -259,7 +259,7 @@
                         <tbody>
                         @foreach($data as $key => $rec)
                             <tr>
-                                <td class="align-middle text-center text-nowrap">{{ $rec->name.' '.$rec->Family }}</td>
+                                <td class="align-middle text-center text-nowrap">{{ $rec->productID.'/'.$rec->productDetailID}}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->productName.' '.$rec->Model }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->Brand}}</td>
                                 <td class="align-middle">

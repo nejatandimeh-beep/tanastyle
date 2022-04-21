@@ -853,10 +853,9 @@ body a{
 .masterWallpaper2{
     position: relative;
     width:100%;
-    height:250px;
+    height:300px;
     background-size: contain !important;
-    border-bottom: 1px solid #eee;
-    border-top: 1px solid #eee;
+    background: url("/../img/Other/adminWall3.jpg?v=6") repeat top center;
 }
 
 .bannerText{
