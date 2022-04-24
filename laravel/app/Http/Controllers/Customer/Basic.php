@@ -761,19 +761,29 @@ class Basic extends Controller
     {
         $row = $request->get('row');
         $productDetailID = [];
-        $noExist = null;
+        $stock = false;
         $qty = [];
-        for ($i = 0; $i <= $row - 1; $i++) {
+        for ($i = 0; $i < $row ; $i++) {
             $productDetailID[$i] = $request->get('productDetailID' . $i);
-            $noExist = DB::table('product_detail')
+            $data = DB::table('product_detail')
                 ->select('ID', 'Qty')
                 ->where('ID', $productDetailID[$i])
-                ->where('Qty', '=', 0)
                 ->first();
-            $qty[$i] = $request->get('qty' . $i);
+
+            $qty[$i] = (int)$request->get('qty' . $i);
+            if (($data->Qty) - ($qty[$i]) >= 0 ) {
+                $stock=true;
+            } else {
+                $stock=false;
+            }
+
+            DB::table('product_detail')
+                ->where('ID', $productDetailID[$i])
+                ->decrement('Qty', $qty[$i]);
         }
+
         $price=$request->get('allPrice');
-        if ($noExist === null) {
+        if ($stock) {
             setcookie('productRow', $row, time() + (43200), "/Confirmation");
             setcookie('price', $price, time() + (43200), "/Confirmation");
             setcookie('productDetailId',  json_encode($productDetailID), time() + (43200), "/Confirmation");
@@ -789,21 +799,29 @@ class Basic extends Controller
 
     public function bankingPortal($id, $qty)
     {
-        $noExist = null;
-        $noExist = DB::table('product_detail')
-            ->select('ID', 'Qty', 'Size', 'Color')
-            ->where('ID', $id)
-            ->first();
-        $productInfo = DB::table('product_detail as pd')
-            ->select('pd.ID', 'p.FinalPrice')
+        $stock = null;
+        $data = DB::table('product_detail as pd')
+            ->select('pd.ID', 'p.FinalPrice','pd.ID', 'pd.Qty', 'pd.Size', 'pd.Color')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
             ->where('pd.ID', $id)
             ->first();
+
+        if ((($data->Qty) - (int)$qty) >= 0 ) {
+            $stock=true;
+        } else {
+            $stock=false;
+        }
+
+        DB::table('product_detail')
+            ->where('ID', $id)
+            ->decrement('Qty', $qty);
+
         $postPrice = 15000;
         $idTemp[0]=$id;
         $qtyTemp[0]=$qty;
-        if ($noExist !== null) {
-            $price = ($productInfo->FinalPrice + $postPrice)*$qty;
+
+        if ($stock) {
+            $price = ($data->FinalPrice + $postPrice)*$qty;
             setcookie('productRow', 1, time() + (43200), "/Confirmation");
             setcookie('price', $price, time() + (43200), "/Confirmation");
             setcookie('productDetailId', json_encode($idTemp), time() + (43200), "/Confirmation");
@@ -814,7 +832,7 @@ class Basic extends Controller
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
 
         } else {
-            return redirect()->route('productDetail', [$noExist->ProductID, $noExist->Size]);
+            return redirect()->route('productDetail', [$data->ProductID, $data->Size]);
         }
     }
 
@@ -827,6 +845,8 @@ class Basic extends Controller
         $Authority =$request->get('Authority');
         $row = $_COOKIE['productRow'];
         $Amount=$_COOKIE['price'];
+        $id=json_decode($_COOKIE['productDetailId']);
+        $qty=json_decode($_COOKIE['productQty']);
 
         if ($request->get('Status') == 'OK') {
             $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
@@ -842,14 +862,17 @@ class Basic extends Controller
             ]);
 
             $refNum=$Authority;
-            $id=json_decode($_COOKIE['productDetailId']);
-            $qty=json_decode($_COOKIE['productQty']);
             if ($result['Status'] == 100) {
-                for ($i = 0; $i <= $row - 1; $i++) {
-                    $new = $this->newOrder((int)$id[$i], (int)$qty[$i], $i,$Authority);
-                }
+                    $new = $this->newOrder($id, $qty, $row,$Authority);
+
                 return view('Customer.PaymentStatus', compact( 'refNum'));
             } else {
+                for ($i = 0; $i < $row; $i++) {
+                    DB::table('product_detail')
+                        ->where('ID', (int)$id[$i])
+                        ->increment('Qty', (int)$qty[$i]);
+                }
+
                 DB::table('payment_failed')
                     ->insert([
                         'Authority'=>$Authority,
@@ -859,6 +882,11 @@ class Basic extends Controller
         }
         else
         {
+            for ($i = 0; $i < $row; $i++) {
+                DB::table('product_detail')
+                    ->where('ID', (int)$id[$i])
+                    ->increment('Qty', (int)$qty[$i]);
+            }
             return view('Customer.PaymentError');
         }
     }
@@ -2251,115 +2279,116 @@ class Basic extends Controller
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
-    public function newOrder($id, $qty, $i,$Authority)
+    public function newOrder($id, $qty, $rowOrder,$Authority)
     {
-        $customerInfo = DB::table('customers as c')
-            ->select('ca.*')
-            ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
-            ->where('c.id', Auth::user()->id)
-            ->first();
+        $orderID='';
+        $seller=[];
+        for ($i = 0; $i < $rowOrder; $i++) {
+            $customerInfo = DB::table('customers as c')
+                ->select('ca.*')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
+                ->where('c.id', Auth::user()->id)
+                ->first();
 
-        $productInfo = DB::table('product_detail as pd')
-            ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId', 'p.FinalPrice')
-            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-            ->where('pd.ID', $id)
-            ->first();
+            $productInfo = DB::table('product_detail as pd')
+                ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId', 'p.FinalPrice')
+                ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
+                ->where('pd.ID', (int)$id[$i])
+                ->first();
 
-        date_default_timezone_set('Asia/Tehran');
-        $date = date('Y-m-d');
-        $time = date('H:i:s');
-        if ($i === 0) {
-            DB::table('product_order')->insert([
-                'CustomerID' => Auth::user()->id,
-                'AddressID' => $customerInfo->ID,
-                'Date' => $date,
-                'Time' => $time,
-                'Authority' => $Authority,
+            date_default_timezone_set('Asia/Tehran');
+            $date = date('Y-m-d');
+            $time = date('H:i:s');
+            if ($i === 0) {
+                DB::table('product_order')->insert([
+                    'CustomerID' => Auth::user()->id,
+                    'AddressID' => $customerInfo->ID,
+                    'Date' => $date,
+                    'Time' => $time,
+                    'Authority' => $Authority,
+                ]);
+            }
+
+            $orderID = DB::table('product_order')
+                ->select('ID')
+                ->max('ID');
+
+            DB::table('product_order_detail')->insert([
+                'SellerID' => $productInfo->SellerID,
+                'ProductID' => $productInfo->ProductID,
+                'ProductDetailID' => (int)$id[$i],
+                'OrderID' => $orderID,
+                'Qty' => (int)$qty[$i],
+                'Size' => $productInfo->Size,
+                'Color' => $productInfo->Color,
+                'OrderBankCode' => '3#$ddf3e3continue3',
             ]);
-        }
 
-        $orderID = DB::table('product_order')
-            ->select('ID')
-            ->max('ID');
+            $orderDetailID = DB::table('product_order_detail')
+                ->select('ID')
+                ->max('ID');
 
-        DB::table('product_order_detail')->insert([
-            'SellerID' => $productInfo->SellerID,
-            'ProductID' => $productInfo->ProductID,
-            'ProductDetailID' => $id,
-            'OrderID' => $orderID,
-            'Qty' => $qty,
-            'Size' => $productInfo->Size,
-            'Color' => $productInfo->Color,
-            'OrderBankCode' => '3#$ddf3e3continue3',
-        ]);
-
-        $orderDetailID = DB::table('product_order_detail')
-            ->select('ID')
-            ->max('ID');
-
-        $deliveryMan = DB::table('delivery_men')
-            ->select('*')
-            ->get();
-
-        $data = DB::table('product_delivery')
-            ->select('DeliveryManID')
-            ->get();
-
-        if ($data->isEmpty() || $data->count() < 2) {
-            DB::table('product_delivery')->insert([
-                'OrderDetailID' => $orderDetailID,
-                'DeliveryManID' => $deliveryMan[0]->ID,
-            ]);
-        } else {
-            $data = DB::table('product_delivery')
-                ->select('DeliveryManID')
-                ->orderBy('id', 'desc')
-                ->take($deliveryMan->count() - 1)
+            $deliveryMan = DB::table('delivery_men')
+                ->select('*')
                 ->get();
 
-            $DeliveryManIDArr = array();
-            foreach ($data as $key => $row) {
-                $DeliveryManIDArr[$key] = $row->DeliveryManID;
-            }
+            $data = DB::table('product_delivery')
+                ->select('DeliveryManID')
+                ->get();
 
-            $deliveryManTurn = '';
-            foreach ($deliveryMan as $key => $row) {
-                if (in_array($row->ID, $DeliveryManIDArr, true))
-                    continue;
-                else {
-                    $deliveryManTurn = $row->ID;
-                    break;
+            if ($data->isEmpty() || $data->count() < 2) {
+                DB::table('product_delivery')->insert([
+                    'OrderDetailID' => $orderDetailID,
+                    'DeliveryManID' => $deliveryMan[0]->ID,
+                ]);
+            } else {
+                $data = DB::table('product_delivery')
+                    ->select('DeliveryManID')
+                    ->orderBy('id', 'desc')
+                    ->take($deliveryMan->count() - 1)
+                    ->get();
+
+                $DeliveryManIDArr = array();
+                foreach ($data as $key => $row) {
+                    $DeliveryManIDArr[$key] = $row->DeliveryManID;
                 }
+
+                $deliveryManTurn = '';
+                foreach ($deliveryMan as $key => $row) {
+                    if (in_array($row->ID, $DeliveryManIDArr, true))
+                        continue;
+                    else {
+                        $deliveryManTurn = $row->ID;
+                        break;
+                    }
+                }
+
+                DB::table('product_delivery')->insert([
+                    'OrderDetailID' => $orderDetailID,
+                    'DeliveryManID' => (int)$deliveryManTurn,
+                ]);
             }
 
-            DB::table('product_delivery')->insert([
-                'OrderDetailID' => $orderDetailID,
-                'DeliveryManID' => (int)$deliveryManTurn,
-            ]);
-        }
+            DB::table('product_cart')
+                ->where('CustomerID', Auth::user()->id)
+                ->where('ProductDetailID', (int)$id[$i])
+                ->delete();
 
-
-        DB::table('product_detail')
-            ->where('ID', $id)
-            ->decrement('Qty', $qty);
-
-        DB::table('product_cart')
-            ->where('ProductDetailID', $id)
-            ->delete();
-
-        $seller = DB::table('sellers')
-            ->select('id', 'Mobile', 'name', 'family')
+        $orderID.='/'.$orderDetailID.'-';
+        $seller[$i] = DB::table('sellers')
+            ->select('id', 'Mobile')
             ->where('id', $productInfo->SellerID)
             ->first();
 
+        }
+
+        $seller=array_unique($seller);
         //--------------
         try {
-            $token = $orderID . '/' . $orderDetailID;
+            $token = $orderID;
             $token2 = '';
             $token3 = '';
             Session::put('token', $token);
-//            Session::put('token2', $token2);
-//            Session::put('token', $token3);
 
             $api_key = Config::get('kavenegar.apikey');
             $var = new Kavenegar\KavenegarApi($api_key);
@@ -2376,28 +2405,29 @@ class Basic extends Controller
         }
         //--------------
 
-        //--------------
-        try {
-            $token = $seller->name . '~' . $seller->family;
-            $token2 = $productInfo->ProductID . '/' . $productInfo->productDetailId;
-            $token3 = $orderID . '/' . $orderDetailID;
-            Session::put('token10', $token);
-            Session::put('token', $token2);
-            Session::put('token2', $token3);
+        foreach ($seller as $rec){
+            try {
+                $token = $orderID;
+                $token2 = '';
+                $token3 = '';
 
-            $api_key = Config::get('kavenegar.apikey');
-            $var = new Kavenegar\KavenegarApi($api_key);
-            $template = "factorSmsSeller";
-            $type = "sms";
+                Session::put('token', $token2);
 
-            $result = $var->VerifyLookup($seller->Mobile, $token, $token2, $token3, $template, $type);
-        } catch (\Kavenegar\Exceptions\ApiException $e) {
-            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
-            echo $e->errorMessage();
-        } catch (\Kavenegar\Exceptions\HttpException $e) {
-            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-            echo $e->errorMessage();
+                $api_key = Config::get('kavenegar.apikey');
+                $var = new Kavenegar\KavenegarApi($api_key);
+                $template = "factorSmsSeller";
+                $type = "sms";
+
+                $result = $var->VerifyLookup($rec->Mobile, $token, $token2, $token3, $template, $type);
+            } catch (\Kavenegar\Exceptions\ApiException $e) {
+                // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            } catch (\Kavenegar\Exceptions\HttpException $e) {
+                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            }
         }
+        //--------------
         //--------------
 
         return true;

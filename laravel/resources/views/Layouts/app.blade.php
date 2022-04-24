@@ -171,7 +171,7 @@
                 $('#submitText').hide();
                 $('#waitingSubmit').hide();
                 $('#save').prop('disabled', true);
-                // $('form').submit();
+                $('form').submit();
             } else {
                 alert('رمز و تکرار رمز یکسان نیستند.')
             }

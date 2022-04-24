@@ -37,9 +37,6 @@
 
             if ($('#cardContainer').length > 0)
                 $('#cardContainer').css('height', $(window).height() - 100);
-
-            if ($('#customerContainer').length > 0)
-                $('#customerContainer').css('height', $(window).height());
         });
 
         $(document).mouseup(function (e) {

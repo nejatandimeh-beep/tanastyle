@@ -61,7 +61,6 @@ class Customer extends Controller
             ->leftJoin('product_delivery as pd' , 'pd.OrderDetailID','=','pod.ID')
             ->leftJoin('product_false as pf' , 'pf.ProductDetailID','=','pod.ProductDetailID')
             ->groupBy('c.id')
-            ->orderBy('pd.DeliveryProblem','DESC')
             ->get();
 
         return view('Administrator.Customer.Customer',compact('data','deliveryAlarm', 'falseAlarm','newSupport'));
