@@ -334,9 +334,14 @@
                                     </span>
                                     <i class="icon-finance-164 u-line-icon-pro float-right g-font-size-32 g-ml-20 align-self-center g-line-height-0 g-mt-5"></i>
                                 </a>
-
-                                <i id="waitingIconSubmit" style="display: none"
-                                   class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                <div style="display: none" id="waitingIconSubmit">
+                                    <button class="btn btn-xl btn-primary g-font-weight-600 g-letter-spacing-0_5 text-left rounded-0 force-col-12"
+                                            type="button"
+                                            disabled>
+                                        در حال اتصال به درگاه بانکی..
+                                        <i class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-white"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
