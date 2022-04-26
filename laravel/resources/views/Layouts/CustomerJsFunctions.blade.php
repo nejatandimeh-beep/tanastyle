@@ -1132,8 +1132,12 @@
                     type: 'GET',
                     url: "/Customer-Product-Search/" + val,
                     success: function (data) {
+                        console.log(data);
                         $('#' + id).removeClass('d-none');
                         $('#' + id).html(data);
+                        if ($('#' + id).hasClass('uniqueProduct')){
+                            $('#' + id).length=1;
+                        }
                     }
                 });
             else

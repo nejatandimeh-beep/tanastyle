@@ -2157,7 +2157,7 @@ class Basic extends Controller
     {
         $output = '';
         $data = DB::table('product as p')
-            ->select('p.Name', 'p.Model', 'p.Brand','pd.ID')
+            ->select('p.Name', 'p.Model', 'p.Brand','pd.ID','pd.Size','p.ID as ProductID')
             ->leftJoin('product_detail as pd','pd.ProductID','=','p.ID')
             ->where('p.Name', 'like', '%' . $val . '%')
             ->orWhere('p.Model', 'like', '%' . $val . '%')
@@ -2167,9 +2167,23 @@ class Basic extends Controller
             ->take(15)
             ->get();
 
-        foreach ($data as $key => $row) {
-            $result = $row->Name . ' ' . $row->Model . ' ' . $row->Brand;
+        if(count($data)===1){
+            $result = $data[0]->Name . ' ' . $data[0]->Model . ' ' . $data[0]->Brand;
             $output .= '<li style="border-radius: 0 !important;"
+                        class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover uniqueProduct">
+                            <a  href="' . route('productDetail', [$data[0]->ProductID, $data[0]->Size])  . '"
+                                style="text-decoration: none"
+                                class="col-12 p-0 text-right g-color-gray-dark-v3 g-color-primary--hover">
+                             ' . $result . '
+                            </a>
+                        </li>';
+
+            return $output;
+        } else {
+
+            foreach ($data as $key => $row) {
+                $result = $row->Name . ' ' . $row->Model . ' ' . $row->Brand;
+                $output .= '<li style="border-radius: 0 !important;"
                         class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
                             <a  href="' . route('productSearchList', [$row->Name]) . '"
                                 style="text-decoration: none"
@@ -2177,6 +2191,7 @@ class Basic extends Controller
                              ' . $result . '
                             </a>
                         </li>';
+            }
         }
 
         return $output;
