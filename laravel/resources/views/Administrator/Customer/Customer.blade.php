@@ -49,6 +49,7 @@
                         <th class="g-font-weight-600 g-color-white g-min-width-200 text-center">نام خانوادگی</th>
                         <th class="g-font-weight-600 g-color-white text-center">کد ملی</th>
                         <th class="g-font-weight-600 g-color-white text-center">موبایل</th>
+                        <th class="g-font-weight-600 g-color-white text-center">گیرنده</th>
                         <th class="g-font-weight-600 g-color-white text-center">جزئیات</th>
                         <th class="g-font-weight-600 g-color-white text-center">تحویل محصول</th>
                         <th class="g-font-weight-600 g-color-white text-center">فاکتور حاوی اشتباه</th>
@@ -63,19 +64,23 @@
                             </td>
 
                             <td class="align-middle text-nowrap text-center g-color-gray-light-v2">
-                                {{$row->name}}
+                                {{isset($row->name)?$row->name:'--'}}
                             </td>
 
                             <td class="align-middle text-center g-color-gray-light-v2">
-                                {{$row->Family}}
+                                {{isset($row->Family)?$row->Family:'--'}}
                             </td>
 
                             <td class="align-middle text-center g-color-gray-light-v2">
-                                {{$row->NationalID}}
+                                {{isset($row->NationalID)?$row->NationalID:'--'}}
                             </td>
 
                             <td class="align-middle text-center g-color-gray-light-v2">
-                                {{$row->Mobile}}
+                                {{$row->customerMobile}}
+                            </td>
+
+                            <td class="align-middle text-center g-color-gray-light-v2">
+                                {{isset($row->ReceiverName)?$row->ReceiverName.' '.$row->ReceiverFamily:'--'}}
                             </td>
 
                             <td class="align-middle text-nowrap text-center">

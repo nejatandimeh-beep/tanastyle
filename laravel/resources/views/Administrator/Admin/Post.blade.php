@@ -23,7 +23,7 @@
                                 <input oninput="trackingCodeSearch($(this).attr('value'))"
                                        onclick="trackingCodeSearch($(this).attr('value'))"
                                        style="direction:ltr; outline: none; font-family: Vazir, serif; opacity: 0.95; font-size: 16px;"
-                                       type="text" placeholder="..جستجو بر اساس کد ملی" maxlength="10">
+                                       type="text" placeholder="..جستجو بر اساس کد پیگیری">
                                 <ul style="direction: ltr" id="customerNationalID"
                                     class="d-none ajaxDropDown p-0 outSideClick"></ul>
                             </form>

@@ -109,6 +109,7 @@
                 signatureDiv.removeClass('d-inline-block');
                 signatureDiv.addClass('d-none');
                 waitingIcon.removeClass('d-none');
+                // window.location="/Destination-Final/" + orderDetailID + '/' + table + '/' + $('#destination' + key).text() + '/' + trackingCode;
                 $.ajax({
                     type: 'GET',
                     url: "/Destination-Final/" + orderDetailID + '/' + table + '/' + $('#destination' + key).text() + '/' + trackingCode,

@@ -55,11 +55,12 @@ class Customer extends Controller
         }
 
         $data = DB::table('customers as c')
-            ->select('*','pf.ID as pfID')
+            ->select('*','pf.ID as pfID','ca.ReceiverName','ca.ReceiverFamily','c.Mobile as customerMobile')
             ->leftJoin('product_order as po', 'po.CustomerID', '=', 'c.ID')
             ->leftJoin('product_order_detail as pod', 'pod.OrderId', '=', 'po.ID')
             ->leftJoin('product_delivery as pd' , 'pd.OrderDetailID','=','pod.ID')
             ->leftJoin('product_false as pf' , 'pf.ProductDetailID','=','pod.ProductDetailID')
+            ->leftJoin('customer_address as ca' , 'ca.CustomerID','=','c.id')
             ->groupBy('c.id')
             ->get();
 

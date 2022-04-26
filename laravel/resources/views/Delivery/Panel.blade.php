@@ -93,6 +93,8 @@
                                         <th class="g-brd-white-opacity-0_1">رنگ</th>
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
+                                        <th class="g-brd-white-opacity-0_1">گیرنده</th>
+                                        <th class="g-brd-white-opacity-0_1">موبایل</th>
                                         <th class="g-brd-white-opacity-0_1">مبداً</th>
                                         <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
@@ -129,6 +131,14 @@
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                 <span
                                                     class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->ReceiverName.' '.$row->ReceiverFamily}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->Mobile}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->DeliveryStatus === '0')
@@ -239,6 +249,8 @@
                                         <th class="g-brd-white-opacity-0_1">رنگ</th>
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
+                                        <th class="g-brd-white-opacity-0_1">گیرنده</th>
+                                        <th class="g-brd-white-opacity-0_1">موبایل</th>
                                         <th class="g-brd-white-opacity-0_1">مبداً</th>
                                         <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
@@ -274,6 +286,14 @@
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
                                                         class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->ReceiverName.' '.$row->ReceiverFamily}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->Mobile}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->ReturnStatus === '4')
@@ -373,6 +393,8 @@
                                         <th class="g-brd-white-opacity-0_1">رنگ</th>
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
+                                        <th class="g-brd-white-opacity-0_1">گیرنده</th>
+                                        <th class="g-brd-white-opacity-0_1">موبایل</th>
                                         <th class="g-brd-white-opacity-0_1">مقصد</th>
                                         <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
@@ -410,6 +432,14 @@
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
                                                         class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->ReceiverName.' '.$row->ReceiverFamily}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->Mobile}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->DeliveryStatus === '1')
@@ -493,7 +523,7 @@
                                                                     class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
                                                                     type="text"
                                                                     id="trackingCode{{$counter}}"
-                                                                    placeholder="کد رهگیری">
+                                                                    placeholder="کد پیگیری پست">
                                                             </div>
                                                         </div>
 

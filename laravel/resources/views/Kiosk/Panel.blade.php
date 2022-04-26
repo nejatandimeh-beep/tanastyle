@@ -125,6 +125,8 @@
                                         <th class="g-brd-white-opacity-0_1">رنگ</th>
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
+                                        <th class="g-brd-white-opacity-0_1">گیرنده</th>
+                                        <th class="g-brd-white-opacity-0_1">موبایل</th>
                                         <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
                                         <th class="g-brd-white-opacity-0_1">درخواست پیک</th>
@@ -157,6 +159,14 @@
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                 <span
                                                     class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->ReceiverName.' '.$row->ReceiverFamily}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->Mobile}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->DeliveryProblem === 0)
@@ -245,6 +255,8 @@
                                         <th class="g-brd-white-opacity-0_1">رنگ</th>
                                         <th class="g-brd-white-opacity-0_1">کد محصول</th>
                                         <th class="g-brd-white-opacity-0_1">کد فاکتور</th>
+                                        <th class="g-brd-white-opacity-0_1">گیرنده</th>
+                                        <th class="g-brd-white-opacity-0_1">موبایل</th>
                                         <th class="g-brd-white-opacity-0_1">وضعیت رسیدگی</th>
                                         <th class="g-brd-white-opacity-0_1">تصویر محصول</th>
                                         <th class="g-brd-white-opacity-0_1">درخواست پیک</th>
@@ -277,6 +289,14 @@
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
                                                         class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->ReceiverName.' '.$row->ReceiverFamily}}</span>
+                                                </td>
+                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                    <span
+                                                        class="g-color-white">{{$row->Mobile}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->ReturnProblem === 0)

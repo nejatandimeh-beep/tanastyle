@@ -9,7 +9,10 @@ use DateTime;
 use File;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
+use Kavenegar;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class Basic extends Controller
 {
@@ -74,23 +77,27 @@ class Basic extends Controller
     {
         if ($table === 'kiosk')
             $data = DB::table('product_delivery as pDel')
-                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath','c.id','ca.ReceiverName','ca.ReceiverFamily','ca.Mobile')
                 ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
                 ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
                 ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.KioskID', $id)
                 ->whereIn('pDel.DeliveryStatus', $where)
                 ->get();
         else
             $data = DB::table('product_delivery as pDel')
-                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath','c.id','ca.ReceiverName','ca.ReceiverFamily','ca.Mobile')
                 ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
                 ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
                 ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.DeliveryManID', $id)
                 ->whereIn('pDel.DeliveryStatus', $where)
                 ->get();
@@ -150,23 +157,31 @@ class Basic extends Controller
         }
         if ($table === 'kiosk')
             return $data = DB::table('product_delivery as pDel')
-                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath','c.id','ca.ReceiverName','ca.ReceiverFamily','ca.Mobile')
                 ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
                 ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.KioskID', $id)
                 ->whereIn('pDel.DeliveryStatus', $where)
+                ->groupBy('pod.ID')
                 ->get();
         else
             return $data = DB::table('product_delivery as pDel')
-                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath','c.id','ca.ReceiverName','ca.ReceiverFamily','ca.Mobile')
                 ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pDel.OrderDetailID')
+                ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
                 ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.DeliveryManID', $id)
                 ->whereIn('pDel.DeliveryStatus', $where)
+                ->groupBy('pod.ID')
                 ->get();
     }
 
@@ -174,25 +189,29 @@ class Basic extends Controller
     {
         if ($table === 'kiosk')
             $return = DB::table('product_return as pr')
-                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath','c.id','ca.ReceiverName','ca.ReceiverFamily','ca.Mobile')
                 ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
                 ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
                 ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
                 ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.KioskID', $id)
                 ->whereIn('pr.ReturnStatus', $where)
                 ->get();
         else
             $return = DB::table('product_return as pr')
-                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath','c.id','ca.ReceiverName','ca.ReceiverFamily','ca.Mobile')
                 ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
                 ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
                 ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
                 ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.DeliveryManID', $id)
                 ->whereIn('pr.ReturnStatus', $where)
                 ->get();
@@ -252,27 +271,33 @@ class Basic extends Controller
         }
         if ($table === 'kiosk')
             return $return = DB::table('product_return as pr')
-                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath','c.id','ca.ReceiverName','ca.ReceiverFamily','ca.Mobile')
                 ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
                 ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
                 ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
                 ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.KioskID', $id)
                 ->whereIn('pr.ReturnStatus', $where)
+                ->groupBy('pod.ID')
                 ->get();
         else
             return $return = DB::table('product_return as pr')
-                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath')
+                ->select('*', 's.PicPath as sellerPic', 'p.PicPath as productPicPath','c.id','ca.ReceiverName','ca.ReceiverFamily','ca.Mobile')
                 ->leftJoin('product_delivery as pDel', 'pDel.OrderDetailID', '=', 'pr.OrderDetailID')
                 ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
                 ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderId')
                 ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
+                ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.DeliveryManID', $id)
                 ->whereIn('pr.ReturnStatus', $where)
+                ->groupBy('pod.ID')
                 ->get();
 
     }
@@ -390,6 +415,14 @@ class Basic extends Controller
 
     public function destinationFinal($orderDetailID, $table,$destination,$trackingCode)
     {
+        $data=DB::table('product_order_detail as pod')
+            ->select('p.ID','p.Name','p.Model','p.Brand','pod.*','po.*','c.id','c.Mobile')
+            ->leftJoin('product as p','p.ID','=','pod.ProductID')
+            ->leftJoin('product_order as po','po.ID','=','pod.OrderId')
+            ->leftJoin('customers as c','c.ID','=','po.CustomerID')
+            ->where('pod.ID',$orderDetailID)
+            ->first();
+
         if ($table === 'delivery')
             DB::table('product_delivery')
                 ->where('OrderDetailID', $orderDetailID)
@@ -405,6 +438,26 @@ class Basic extends Controller
                 'ReturnStatus' => $destination,
                 'ReturnProblem' => 0,
             ]);
+
+        try {
+            $token10 = $data->Name.' '.$data->Model.' '.$data->Brand;
+            $token = $trackingCode;
+            $token2 = '';
+            $token3 = '';
+
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "postTrackingCode";
+            $type = "sms";
+
+            $result = $var->VerifyLookup($data->Mobile, $token, $token2, $token3, $template, $type,$token10);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
     }
 
     public function courierRequest($orderDetailID)
