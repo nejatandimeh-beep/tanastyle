@@ -1127,6 +1127,7 @@
 
         // ---------------------------------------------------My Function-----------------------------------------------
         function productSearch(id, val) {
+            console.log(val);
             if (val !== '')
                 $.ajax({
                     type: 'GET',
@@ -2973,7 +2974,7 @@
             img = document.getElementById(imgID);
             /*create magnifier glass:*/
             glass = document.createElement("DIV");
-            glass.setAttribute("class", "img-magnifier-glass magnifierDiv");
+            glass.setAttribute("class", "img-magnifier-glass magnifierDiv opacity-0");
             /*insert magnifier glass:*/
             img.parentElement.insertBefore(glass, img);
             /*set background properties for the magnifier glass:*/
@@ -3035,6 +3036,7 @@
 
         $('#js-carousel-11').on('mouseenter', function () {
             $('.magnifierDiv').removeClass('d-none');
+            $('.magnifierDiv').removeClass('opacity-0');
         });
 
         $('#js-carousel-11').on('mouseleave', function () {

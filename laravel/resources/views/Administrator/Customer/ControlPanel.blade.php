@@ -865,16 +865,18 @@
                                             <td class="align-middle text-nowrap text-center text-nowrap">{{ $rec->pDetailID }}</td>
                                             <td class="align-middle text-nowrap text-center text-nowrap">{{ $rec->Name }}</td>
 
-                                            @if($rec->Gender == '0')
+                                            @if($rec->Gender == 'زنانه')
                                                 <td class="align-middle text-center">زنانه</td>
-                                            @elseif($rec->Gender == '1')
+                                            @elseif($rec->Gender == 'مردانه')
                                                 <td class="align-middle text-center">مردانه</td>
-                                            @elseif($rec->Gender == '2')
-                                                <td class="align-middle text-center">بچگانه - نوزادی</td>
-                                            @elseif($rec->Gender == '3')
-                                                <td class="align-middle text-center">بچگانه - دخترانه</td>
+                                            @elseif($rec->Gender == 'دخترانه')
+                                                <td class="align-middle text-center">دخترانه</td>
+                                            @elseif($rec->Gender == 'پسرانه')
+                                                <td class="align-middle text-center">پسرانه</td>
+                                            @elseif($rec->Gender == 'نوزادی دخترانه')
+                                                <td class="align-middle text-center">نوزادی دخترانه</td>
                                             @else
-                                                <td class="align-middle text-center">...</td>
+                                                <td class="align-middle text-center">نوزادی پسرانه</td>
                                             @endif
 
                                             <td class="align-middle text-center">{{ $rec->Qty }}</td>

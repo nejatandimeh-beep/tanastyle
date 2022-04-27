@@ -23,7 +23,7 @@
     <link rel="apple-touch-icon" sizes="152x152" href="{{asset('img/Logo/browserIcon.png')}}">
 
     <!--My Style-->
-    <link href="{{ asset('css/myStyle.css?v=cd3se23') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css?v=sdw312') }}" rel="stylesheet">
 <!--Unify Style-->
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">

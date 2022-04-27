@@ -498,11 +498,10 @@ input[type=number] {
 
 .img-magnifier-glass {
     position: absolute;
-    border: 1px solid #72c02c;
     cursor: none;
     /*Set the size of the magnifier glass:*/
-    width: 150px;
-    height: 150px;
+    width: 300px;
+    height: 400px;
 }
 
 .me-position-fix {
