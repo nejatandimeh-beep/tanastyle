@@ -1035,13 +1035,24 @@
                                 $('#uploadingIcon' + inputID).removeClass('d-none');
                                 $('#uploadingText' + inputID).removeClass('d-none');
                                 $('#uploadingText' + inputID).addClass('d-inline-block');
-                            },
+                                $('#errorIcon' + inputID).addClass('d-none');
+                                $('#errorText' + inputID).addClass('d-none');
+                                $('#check' + inputID).addClass('d-none');
+                                },
                             success: function (data) {
                                 inputIdFinshed[counter] = data;
                                 counter++;
                                 console.log("success");
                                 console.log(inputIdFinshed);
-                            }
+                            },
+                            error: function(xhr, status, error) {
+                                console.log("error");
+                                $('#uploadingIcon' + inputID).addClass('d-none');
+                                $('#uploadingText' + inputID).addClass('d-none');
+                                $('#uploadingText' + inputID).removeClass('d-inline-block');
+                                $('#errorIcon' + inputID).removeClass('d-none');
+                                $('#errorText' + inputID).removeClass('d-none');
+                            },
                         }).done(function () {
                             for (let i = 0; i < inputIdFinshed.length; i++) {
                                 $('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');

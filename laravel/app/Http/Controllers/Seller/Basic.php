@@ -104,7 +104,6 @@ class Basic extends Controller
         $info = $this->storeTableLoad('', '', 'all', $sellerID);
 
 //      Set Data For Info Panel In Store Page
-        $sumFPrice = $info['sumFPrice'];
         $allQty = $info['allQty'];
         $female = $info['female'];
         $male = $info['male'];
@@ -112,6 +111,8 @@ class Basic extends Controller
         $boy = $info['boy'];
         $babyGirl = $info['babyGirl'];
         $babyBoy = $info['babyBoy'];
+        $sumFPrice = substr($info['sumFPrice'], 0, -3);
+        $sumFPrice.='000';
 
 //      Get Data From Store Table With Pagination
         $data = $this->storeTableLoad('', '', 'pagination', $sellerID);
@@ -316,7 +317,8 @@ class Basic extends Controller
         $todayOrder = $info['todayOrder'];
         $monthOrder = $info['monthOrder'];
         $allOrder = $info['allOrder'];
-        $totalSaleAmount = $info['totalSaleAmount'];
+        $totalSaleAmount = substr($info['totalSaleAmount'], 0, -3);
+        $totalSaleAmount.='000';
 
 //      Get Data From Sale Table With Pagination
         $data = $this->saleTableLoad('', '', 'pagination', $sellerID);
@@ -368,11 +370,16 @@ class Basic extends Controller
         $sellerID = Auth::guard('seller')->user()->id;
 
         $info = $this->amountTableLoad('', '', 'all', $sellerID);
-        $totalSaleAmount = $info['totalSaleAmount'];
-        $totalReceivedAmount = $info['totalReceivedAmount'];
-        $credit = $info['credit'];
+        $totalSaleAmount = substr($info['totalSaleAmount'], 0, -3);
+        $totalSaleAmount.='000';
+        $totalReceivedAmount = substr($info['totalReceivedAmount'], 0, -3);
+        $totalReceivedAmount.='000';
+        $credit = substr($info['credit'], 0, -3);
+        $credit.='000';
         $lastPaymentDate = $this->convertDateToPersian($info['lastPaymentDate']);
         $lastPaymentTime = $info['lastPaymentTime'];
+
+
 
         $data = $this->amountTableLoad('', '', 'pagination', $sellerID);
 

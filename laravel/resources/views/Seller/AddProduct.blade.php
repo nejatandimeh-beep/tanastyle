@@ -2592,6 +2592,14 @@
                                        class="d-none align-self-center g-bg-primary g-brd-around g-brd-primary
                                         g-pa-10 g-color-white"
                                        id="uploadingIcon{{$i}}"><i class="fa fa-spinner fa-spin"></i></span>
+                                <span style="cursor: default"
+                                      class="d-none align-self-center g-bg-lightred g-brd-around g-brd-lightred
+                                        g-pa-10 g-color-white"
+                                      id="errorIcon{{$i}}"><i class="fa fa-exclamation-circle"></i></span>
+                                <input style="direction: rtl" id="errorText{{$i}}"
+                                       class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
+                                       type="text"
+                                       placeholder="ناموفق" readonly="">
                                 <input style="direction: rtl" id="uploadingText{{$i}}"
                                        class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
                                        type="text"
@@ -2602,7 +2610,7 @@
                                        placeholder="فاقد تصویر" readonly="">
 
                                 <div class="input-group-btn">
-                                    <button class="btn btn-md u-btn-primary rounded-0" tabindex="8" type="submit">
+                                    <button id="{{ 'iconCamera'.$i }}" class="btn btn-md u-btn-primary rounded-0" tabindex="8" type="submit">
                                         <i class="icon-camera align-middle g-font-size-20"></i>
                                     </button>
                                     <input id="{{ 'pic'.$i }}"
@@ -2766,9 +2774,21 @@
             <div id="imgContainer" class="form-group  text-right">
                 <label class="g-mb-10" for="{{ 'fileShow11' }}" id="{{ 'img-file-label11' }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
+                       <span style="cursor: default"
+                             class="d-none align-self-center g-bg-primary g-brd-around g-brd-primary
+                                        g-pa-10 g-color-white"
+                             id="check11"><i class="fa fa-check"></i></span>
                     <span style="cursor: default"
                           class="d-none align-self-center g-mr-5 g-bg-primary g-pa-15 g-color-white"
                           id="uploadingIcon11"><i class="fa fa-spinner fa-spin"></i></span>
+                    <span style="cursor: default"
+                          class="d-none align-self-center g-bg-lightred g-brd-around g-brd-lightred
+                                        g-pa-10 g-color-white"
+                          id="errorIcon11"><i class="fa fa-exclamation-circle"></i></span>
+                    <input style="direction: rtl" id="errorText11"
+                           class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
+                           type="text"
+                           placeholder="ناموفق" readonly="">
                     <input style="direction: rtl" id="uploadingText11"
                            class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
                            type="text"
@@ -2789,9 +2809,21 @@
                 </div>
                 <label class="g-mb-10" for="{{ 'fileShow12' }}" id="{{ 'img-file-label12' }}">تصویر از نمایی دیگر</label>
                 <div class="input-group u-file-attach-v1 g-brd-gray-light-v2 g-mb-20">
+                       <span style="cursor: default"
+                             class="d-none align-self-center g-bg-primary g-brd-around g-brd-primary
+                                        g-pa-10 g-color-white"
+                             id="check12"><i class="fa fa-check"></i></span>
                    <span style="cursor: default"
                          class="d-none align-self-center g-mr-5 g-bg-primary g-pa-15 g-color-white"
                          id="uploadingIcon12"><i class="fa fa-spinner fa-spin"></i></span>
+                    <span style="cursor: default"
+                          class="d-none align-self-center g-bg-lightred g-brd-around g-brd-lightred
+                                        g-pa-10 g-color-white"
+                          id="errorIcon12"><i class="fa fa-exclamation-circle"></i></span>
+                    <input style="direction: rtl" id="errorText12"
+                           class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
+                           type="text"
+                           placeholder="ناموفق" readonly="">
                     <input style="direction: rtl" id="uploadingText12"
                            class="d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
                            type="text"
