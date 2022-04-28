@@ -762,37 +762,75 @@
 
             if ($('#addProductPage').length > 0) {
                 if ($("#unitPrice").val() === '') {
-                    $("#BsalePrice").text('---');
-                    $("#SsalePrice").text('---');
+                    $("#BsalePrice").text('...');
+                    $("#SsalePrice").text('...');
                     $("#discount").val('');
                 }
             }
 
             $(this).val(unitPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // add coma
             temp1 = unitPrice.replace(new RegExp(',', 'g'), ""); // remove coma
-            temp1 = parseInt(temp1)+((temp1*9)/100);
-            if (temp1 >= 10000) {
-                temp1 = temp1.toString().slice(0, -3) + "000";
-                temp1 = parseInt(temp1);
-            }
-            $('#unitPriceStatic').val(temp1.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $("#tempPrice").val(temp1);
+            $("#tempPrice").val(parseInt(temp1));
 
             if (!$('#addProductPage').length > 0) {
                 if (temp1 >= 10000) {
                     let calc = salePrice(discount, temp1);
-                    $('#finalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                    $('#BsalePrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#tempFinalPrice').val(calc);
-                    $('#newPriceBtn').prop('disabled', false);
+
+                    if($('.sellerProductDetail').length>0){
+                        let companyShare=0;
+                        if($('#seller').text()!=='2872282556')
+                            companyShare=10;
+                        calc=calc + (calc * (companyShare+9)) / 100;
+                        calc = calc.toString().slice(0, -3) + "000";
+                        $('#tempFinalPrice').val(calc);
+                        $('#newPriceBtn').prop('disabled', false);
+                        $('#newFinalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                    }
                 } else {
-                    $('#finalPrice').text('---');
+                    $('#newFinalPrice').text('...');
                     $('#tempFinalPrice').val('');
                     $('#newPriceBtn').prop('disabled', true);
                 }
             }
 
             $("#discount").val('');
+            $("#finalPrice").val('...');
             $("#BsalePrice").text('...');
+        });
+
+        // -------------------Calculate UintPrice Discount And Show in salePrice-----------------
+        $("#discount").on('input', function () {
+            if ($(this).val() === '0')
+                $(this).val('');
+
+            let discount = $(this).val(),
+                unitPrice = $('#tempPrice').val();
+
+            let companyShare=0;
+            if($('#seller').text()!=='2872282556')
+                companyShare=10;
+
+            if (unitPrice >= 10000) {
+                let calc = salePrice(discount, unitPrice), temp1;
+                $("#BsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                $("#SsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                $("#priceWithDiscount").val(calc);
+                temp1=calc + (calc * (companyShare+9)) / 100;
+                temp1 = temp1.toString().slice(0, -3) + "000";
+                $("#tempFinalPrice").val(temp1);
+                $("#finalPrice").val(temp1.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+            } else {
+                $("#BsalePrice").text('قیمت پایه باید بیشتر از 10000 تومان باشد.');
+                $("#SsalePrice").text('!!!');
+                $("#discount").val('');
+            }
+            if (discount === 0 || discount === ''){
+                $("#SsalePrice").text('...');
+                $("#BsalePrice").text('...');
+                $("#finalPrice").val('...');
+            }
         });
 
         $("#newDiscount").on('input', function () {
@@ -808,11 +846,16 @@
             temp1 = parseInt(currentPrice.replace(new RegExp(',', 'g'), "")); // remove coma
             if ($(this).val() >= 1 && $(this).val() <= 99) {
                 let calc = salePrice(discount, temp1);
-                $('#newFinalPrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                let companyShare=0;
+                if($('#seller').text()!=='2872282556')
+                    companyShare=10;
+                calc=calc + (calc * (companyShare+9)) / 100;
+                calc = calc.toString().slice(0, -3) + "000";
+                $('#newFinalPriceByNewDiscount').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $('#tempNewFinalPrice').val(calc);
                 $('#newDiscountBtn').prop('disabled', false);
             } else {
-                $('#newFinalPrice').text('---');
+                $('#newFinalPrice').text('...');
                 $('#tempNewFinalPrice').val('');
                 $('#newDiscountBtn').prop('disabled', true);
             }
@@ -824,28 +867,6 @@
             temp1 = parseInt(temp1);
             return temp1;
         }
-
-        // -------------------Calculate UintPrice Discount And Show in salePrice-----------------
-        $("#discount").on('input', function () {
-            if ($(this).val() === '0')
-                $(this).val('');
-
-            let discount = $(this).val(),
-                unitPrice = $('#tempPrice').val();
-
-            if (unitPrice >= 10000) {
-                let calc = salePrice(discount, unitPrice);
-                $("#BsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-                $("#SsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-            } else {
-                $("#BsalePrice").text('قیمت پایه باید بیشتر از 10000 تومان باشد.');
-                $("#SsalePrice").text('!!!');
-                $("#discount").val('');
-            }
-            if (discount === 0 || discount === '')
-                $("#BsalePrice").text('---');
-        });
-
         // ---------------------------------- Add Image Success Icon ----------------------------
         // Add FileName and Check Mark when Uploaded Image
         function addPathCheckMark(picID, filePathID, checkMarkID) {
@@ -900,13 +921,13 @@
             });
         }
 
-        function confirmNewPrice(id, unitPrice, finalPrice) {
+        function confirmNewPrice(id, unitPrice, finalPrice,discount) {
             $.confirm({
                 title: 'تغییر قیمت محصول',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        location.href = '/Seller-ChangePrice-Product/' + id + '/' + unitPrice + '/' + finalPrice;
+                        location.href = '/Seller-ChangePrice-Product/' + id + '/' + unitPrice + '/' + finalPrice+'/'+discount;
                     },
                     انصراف: function () {
                         $.alert('عملیات تغییر قیمت محصول لغو شد!');
@@ -915,13 +936,13 @@
             });
         }
 
-        function confirmNewDiscount(id, discount, finalPrice) {
+        function confirmNewDiscount(id, discount, finalPrice,unitPrice) {
             $.confirm({
                 title: 'تغییر قیمت محصول',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        location.href = '/Seller-ChangeDiscount-Product/' + id + '/' + discount + '/' + finalPrice;
+                        location.href = '/Seller-ChangeDiscount-Product/' + id + '/' + discount + '/' + finalPrice+'/'+unitPrice;
                     },
                     انصراف: function () {
                         $.alert('عملیات تغییر قیمت محصول لغو شد!');
@@ -940,7 +961,7 @@
             let today = new Date(),
                 year = today.getFullYear(),
                 month = today.getMonth() + 1,
-                day = today.getDay(),
+                day = today.getDate(),
                 currentHours = today.getHours(),
                 currentMinutes = today.getMinutes(),
                 currentSeconds = today.getSeconds(),
@@ -954,6 +975,8 @@
                 cropper, inputID, inputIdFinshed = [], counter = 0, file_upload, file_type,
                 folderName = createFolderName();
             $('#folderName2').val(createFolderName());
+            console.log($('#folderName2').val());
+
             $('input[id^="pic"]').on('change', function (event) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
                 $('#fileShow' + inputID).removeClass('g-color-red');

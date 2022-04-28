@@ -117,7 +117,7 @@ class Basic extends Controller
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    '. number_format($row->UnitPrice) .'
+                                    '. number_format($row->FinalPriceWithoutDiscount) .'
                                 </s>
                                 <span>'. number_format($row->FinalPrice) .'</span>
                                 <span
@@ -210,7 +210,7 @@ class Basic extends Controller
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    '. number_format($row->UnitPrice) .'
+                                    '. number_format($row->FinalPriceWithoutDiscount) .'
                                 </s>
                                 <span>'. number_format($row->FinalPrice) .'</span>
                                 <span
@@ -334,7 +334,7 @@ class Basic extends Controller
                         class="d-block g-color-black g-font-size-17 g-ml-10">
                         <div style="direction: rtl" class="text-left">
                             <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                '.  number_format($row->UnitPrice) .'
+                                '.  number_format($row->FinalPriceWithoutDiscount) .'
                             </s>
                             <span>'.  number_format($row->FinalPrice) .'</span>
                             <span
@@ -1751,7 +1751,7 @@ class Basic extends Controller
             class="d-block g-color-black g-font-size-17 g-ml-10">
                 <div style="direction: rtl" class="text-left">
                     <s class="g-color-lightred g-font-weight-500 g-font-size-13">' .
-                number_format($row->UnitPrice) . '
+                number_format($row->FinalPriceWithoutDiscount) . '
                     </s>
                     <span>' . number_format($row->FinalPrice) . '</span>
                     <span

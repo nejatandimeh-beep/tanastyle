@@ -277,14 +277,18 @@ class Add extends Controller
         $brand = $request->get('brand');
         $detail = $request->get('detail');
         $unitPrice = $request->get('tempPrice');
+        $priceWithDiscount = $request->get('priceWithDiscount');
+        $finalPrice = $request->get('tempFinalPrice');
+        if(Auth::guard('seller')->user()->NationalID===2872282556){
+            $companyShare=0;
+        } else {
+            $companyShare=10;
+        }
+        $priceWithoutDiscount = $unitPrice+($unitPrice*($companyShare+9)/100);
+        $priceWithoutDiscount = substr($priceWithoutDiscount, 0, -3);
+        $priceWithoutDiscount.='000';
         $discount = $request->get('discount');
         $regDate = date('Y-m-d');
-
-        // Calculate Final Price
-        $temp = (string)($unitPrice - ($unitPrice * $discount) / 100);
-        $temp = substr($temp, 0, -3).'000';
-        $temp=(int)$temp;
-        $finalPrice = $temp;
         $genderCode = $gender;
         switch ($gender) {
             case '0':
@@ -320,7 +324,9 @@ class Add extends Controller
                 'Detail' => $detail,
                 'UnitPrice' => $unitPrice,
                 'Discount' => $discount,
+                'PriceWithDiscount' => $priceWithDiscount,
                 'FinalPrice' => $finalPrice,
+                'FinalPriceWithoutDiscount' => $priceWithoutDiscount,
                 'PicPath' => $picPath,
                 'RegDate' => $regDate,
             ],

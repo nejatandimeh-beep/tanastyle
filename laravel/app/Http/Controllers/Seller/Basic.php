@@ -111,8 +111,7 @@ class Basic extends Controller
         $boy = $info['boy'];
         $babyGirl = $info['babyGirl'];
         $babyBoy = $info['babyBoy'];
-        $sumFPrice = substr($info['sumFPrice'], 0, -3);
-        $sumFPrice.='000';
+        $sumFPrice = $info['sumFPrice'];
 
 //      Get Data From Store Table With Pagination
         $data = $this->storeTableLoad('', '', 'pagination', $sellerID);
@@ -176,25 +175,43 @@ class Basic extends Controller
     }
 
 //  Change Product Price
-    public function changePriceProduct($id,$unitPrice,$finalPrice)
+    public function changePriceProduct($id,$unitPrice,$finalPrice,$discount)
     {
+        $priceWithDiscount=(int)$unitPrice-($unitPrice*$discount/100);
+        if(Auth::guard('seller')->user()->NationalID===2872282556){
+            $companyShare=0;
+        } else {
+            $companyShare=10;
+        }
+        $priceWithoutDiscount = $unitPrice+($unitPrice*($companyShare+9)/100);
         DB::table('product')
             ->where('ID',$id)
             ->update([
                 'UnitPrice'=>(int)$unitPrice,
-                'FinalPrice'=>(int)$finalPrice
+                'PriceWithDiscount'=>$priceWithDiscount,
+                'FinalPrice'=>(int)$finalPrice,
+                'FinalPriceWithoutDiscount'=>$priceWithoutDiscount,
             ]);
 
         return redirect('/Seller-Store')->with('changePrice', 'success');
     }
 
-    public function changeDiscountProduct($id,$discount,$finalPrice)
+    public function changeDiscountProduct($id,$discount,$finalPrice,$unitPrice)
     {
+        $priceWithDiscount=(int)$unitPrice-($unitPrice*$discount/100);
+        if(Auth::guard('seller')->user()->NationalID===2872282556){
+            $companyShare=0;
+        } else {
+            $companyShare=10;
+        }
+        $priceWithoutDiscount = $unitPrice+($unitPrice*($companyShare+9)/100);
         DB::table('product')
             ->where('ID',$id)
             ->update([
                 'Discount'=>(int)$discount,
-                'FinalPrice'=>(int)$finalPrice
+                'PriceWithDiscount'=>$priceWithDiscount,
+                'FinalPrice'=>(int)$finalPrice,
+                'FinalPriceWithoutDiscount'=>$priceWithoutDiscount,
             ]);
 
         return redirect('/Seller-Store')->with('changeDiscount', 'success');
@@ -317,8 +334,7 @@ class Basic extends Controller
         $todayOrder = $info['todayOrder'];
         $monthOrder = $info['monthOrder'];
         $allOrder = $info['allOrder'];
-        $totalSaleAmount = substr($info['totalSaleAmount'], 0, -3);
-        $totalSaleAmount.='000';
+        $totalSaleAmount = $info['totalSaleAmount'];
 
 //      Get Data From Sale Table With Pagination
         $data = $this->saleTableLoad('', '', 'pagination', $sellerID);
@@ -370,12 +386,9 @@ class Basic extends Controller
         $sellerID = Auth::guard('seller')->user()->id;
 
         $info = $this->amountTableLoad('', '', 'all', $sellerID);
-        $totalSaleAmount = substr($info['totalSaleAmount'], 0, -3);
-        $totalSaleAmount.='000';
-        $totalReceivedAmount = substr($info['totalReceivedAmount'], 0, -3);
-        $totalReceivedAmount.='000';
-        $credit = substr($info['credit'], 0, -3);
-        $credit.='000';
+        $totalSaleAmount = $info['totalSaleAmount'];
+        $totalReceivedAmount = $info['totalReceivedAmount'];
+        $credit = $info['credit'];
         $lastPaymentDate = $this->convertDateToPersian($info['lastPaymentDate']);
         $lastPaymentTime = $info['lastPaymentTime'];
 
@@ -988,7 +1001,7 @@ class Basic extends Controller
                 ->get();
 
             foreach ($data as $d) {
-                $generalInfo['sumFPrice'] += $d->Qty * $d->FinalPrice;
+                $generalInfo['sumFPrice'] += $d->Qty * $d->PriceWithDiscount;
                 $generalInfo['allQty'] += $d->Qty;
                 if ($d->Gender === 'زنانه')
                     $generalInfo['female'] += $d->Qty;
@@ -1079,7 +1092,7 @@ class Basic extends Controller
                 'totalSaleAmount' => 0);
 
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1099,7 +1112,7 @@ class Basic extends Controller
 
                 $generalInfo['allOrder'] += 1;
 
-                $generalInfo['totalSaleAmount'] += ($d->FinalPrice * $d->Qty);
+                $generalInfo['totalSaleAmount'] += ($d->PriceWithDiscount * $d->Qty);
             }
 
             return $generalInfo;
@@ -1107,7 +1120,7 @@ class Basic extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber','p.Brand')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber','p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')

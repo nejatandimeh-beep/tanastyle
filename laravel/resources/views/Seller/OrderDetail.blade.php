@@ -219,7 +219,7 @@
                            tabindex="1"
                            placeholder=""
                            disabled
-                           value="{{ number_format($data->FinalPrice) }}">
+                           value="{{ number_format($data->PriceWithDiscount) }}">
                     <span style="border-left: 1px solid #ccc"
                           class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
                 </div>
@@ -250,7 +250,7 @@
                         tabindex="1"
                         placeholder=""
                         disabled
-                        value="{{ number_format($data->FinalPrice * $data->Qty) }}">
+                        value="{{ number_format($data->PriceWithDiscount * $data->Qty) }}">
                     <span style="border-left: 1px solid #ccc"
                           class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
                 </div>

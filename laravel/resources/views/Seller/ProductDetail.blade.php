@@ -1,5 +1,6 @@
 @extends('Layouts.IndexSeller')
 @section('Content')
+    <span id="seller" class="d-none">{{Auth::guard('seller')->user()->NationalID}}</span>
     <!-- Info Panel -->
     <div style="direction: rtl; position: -webkit-sticky; position: sticky; top: 0; z-index: 100;"
          class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0">
@@ -8,7 +9,7 @@
         </h3>
     </div>
     <!-- End Info Panel -->
-    <div style="direction: rtl" class="container">
+    <div style="direction: rtl" class="container sellerProductDetail">
         <!-- Textual Inputs -->
         <form class="g-brd-around g-brd-gray-light-v4 g-pa-15 g-mb-17 g-mt-17">
             {{--        Header--}}
@@ -360,7 +361,7 @@
                                                 <p>قیمت جدید</p>
                                                 <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <button id="newPriceBtn" disabled class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewPrice({{$data->ID}},$('#tempPrice').val(),$('#tempFinalPrice').val())">بروز رسانی</button>
+                                                        <button id="newPriceBtn" disabled class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewPrice({{$data->ID}},$('#tempPrice').val(),$('#tempFinalPrice').val(),{{ $data->Discount }})">بروز رسانی</button>
                                                       </span>
                                                     <span class="input-group-addon">تومان</span>
                                                     <input class="form-control form-control-md rounded-0 text-left g-font-size-16"
@@ -370,7 +371,7 @@
                                                            id="unitPrice"
                                                            autofocus
                                                            {{--                           pattern="\d*"--}}
-                                                               placeholder="بالای 10,000"
+                                                               placeholder=""
                                                            value="">
                                                     <input style="display: none" type="number" name="tempPrice" id="tempPrice"
                                                            value="">
@@ -383,11 +384,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                          <span
-                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12">
-                                              قیمت فروش با احتساب تخفیف
-                                              <span class="d-lg-inline-block d-block g-mt-10 g-color-primary g-mr-5" id="finalPrice">---</span>
+                                    <div class="text-center">
+                                        <small class="g-font-size-12">با احتساب {{ $data->Discount }}% تخفیف و 5% سهم تانا استایل و 9% ارزش افزوده</small>
+                                        <span
+                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-13 g-py-15 g-px-15--lg g-px-5 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
+                                              قیمت فروش
+                                              <span class="d-lg-inline-block g-mt-10 g-color-primary g-mr-5 g-mb-10" id="newFinalPrice">...</span>
                                               <span class="g-font-size-12 g-font-weight-300 g-mt-10 g-mr-5">تومان</span>
                                           </span>
                                     </div>
@@ -423,7 +425,7 @@
                                                 <p>تخفیف جدید</p>
                                                 <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <button id="newDiscountBtn" disabled class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewDiscount({{$data->ID}},$('#newDiscount').val(),$('#tempNewFinalPrice').val())">بروز رسانی</button>
+                                                        <button id="newDiscountBtn" disabled class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewDiscount({{$data->ID}},$('#newDiscount').val(),$('#tempNewFinalPrice').val(),{{$data->UnitPrice}})">بروز رسانی</button>
                                                       </span>
                                                     <span class="input-group-addon">درصد</span>
                                                     <input type="text"
@@ -432,7 +434,7 @@
                                                            id="newDiscount"
                                                            pattern="\d*"
                                                            maxlength="2"
-                                                           placeholder="بین 1 تا 99">
+                                                           placeholder="99..1">
                                                 </div>
                                                 <div style="direction: rtl"  class=" g-mt-10">
                                                     <small class="text-muted g-font-size-12">قیمت پایه محصول <span class="g-color-primary g-font-weight-600">{{ number_format($data->UnitPrice) }}</span> تومان می باشد.</small>
@@ -440,11 +442,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div>
-                                          <span
-                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-my-20--lg text-center col-12">
-                                              قیمت فروش با احتساب تخفیف جدید
-                                              <span class="d-lg-inline-block d-block g-mt-10 g-color-primary g-mr-5" id="newFinalPrice">---</span>
+                                    <div class="text-center">
+                                        <small class="g-font-size-12">با احتساب تخفیف جدید و 5% سهم تانا استایل و 9% ارزش افزوده</small>
+                                        <span
+                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
+                                              قیمت فروش
+                                              <span class="d-lg-inline-block g-my-10 g-color-primary g-mr-5" id="newFinalPriceByNewDiscount">...</span>
                                                  <input style="display: none" type="number" name="tempNewFinalPrice" id="tempNewFinalPrice"
                                                         value="">
                                               <span class="g-font-size-12 g-font-weight-300 g-mt-10 g-mr-5">تومان</span>

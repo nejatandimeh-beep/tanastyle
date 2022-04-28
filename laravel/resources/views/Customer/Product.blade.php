@@ -337,7 +337,7 @@
                     <fieldset class="d-inline-block g-ml-60--lg col-12 col-lg-5 p-0">
                         <div class="d-inline-block amountLine">
                             <span id="productUnitPrice"
-                                  class="d-inline-block align-middle g-color-red g-font-size-20">{{ number_format($data->UnitPrice) }}</span>
+                                  class="d-inline-block align-middle g-color-red g-font-size-20">{{ number_format($data->FinalPriceWithoutDiscount) }}</span>
                             <span class="g-font-size-12 g-color-red g-mr-minus-5">تومان</span>
                         </div>
                         <span

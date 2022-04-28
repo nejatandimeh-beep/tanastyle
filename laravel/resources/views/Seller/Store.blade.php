@@ -425,12 +425,11 @@
                             <th class="align-middle text-center">نام</th>
                             <th class="align-middle text-center">برند</th>
                             <th class="align-middle text-center">جنسیت</th>
-                            <th class="align-middle text-center">سایز</th>
                             <th class="align-middle text-center">رنگ</th>
                             <th class="align-middle text-center">موجودی</th>
-                            <th class="align-middle text-center text-nowrap">قیمت فروش<span
-                                    class="g-font-size-10 g-mr-3">(تومان)</span>
-                            </th>
+                            <th class="align-middle text-center text-nowrap">قیمت پایه</th>
+                            <th class="align-middle text-center">تخفیف</th>
+                            <th class="align-middle text-center text-nowrap">قیمت با تخفیف</th>
                             <th class="align-middle text-center">عکس</th>
                             <th class="align-middle text-center">جزییات</th>
                             <th class="align-middle text-center">مشخصات</th>
@@ -458,10 +457,11 @@
                                     <td class="align-middle text-center">نوزادی پسرانه</td>
                                 @endif
 
-                                <td class="align-middle text-center">{{ $rec->Size }}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->Color }}</td>
                                 <td class="align-middle text-center">{{ $rec->Qty }}</td>
-                                <td class="align-middle text-center">{{ number_format($rec->FinalPrice) }}</td>
+                                <td class="align-middle text-center">{{ number_format($rec->UnitPrice) }}</td>
+                                <td class="align-middle text-center">%{{ $rec->Discount }}</td>
+                                <td class="align-middle text-center">{{ number_format($rec->PriceWithDiscount) }}</td>
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"

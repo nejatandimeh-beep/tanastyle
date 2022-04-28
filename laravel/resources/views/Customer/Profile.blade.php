@@ -1451,7 +1451,7 @@
                                                                     قیمت واحد
                                                                 </h6>
                                                                 <span class="g-pa-5--lg color-primary-smallDevice">
-                                                             {{ number_format($row->UnitPrice) }}
+                                                             {{ number_format($row->FinalPriceWithoutDiscount) }}
                                                         </span>
                                                             </div>
                                                             <div
@@ -2173,7 +2173,7 @@
                                         <div>
                                     <span class="g-color-red amountLine g-ml-10">
                                         <span
-                                            class="g-font-weight-700 g-line-height-0_7 g-font-size-15 text-right">{{ $row->UnitPrice }}</span>
+                                            class="g-font-weight-700 g-line-height-0_7 g-font-size-15 text-right">{{ $row->FinalPriceWithoutDiscount }}</span>
                                     </span>
                                             <span class="g-color-gray-dark-v1">
                                         <span

@@ -2,6 +2,7 @@
 
 @section('Content')
     <input id="folderName" name="folderName" type="text" class="d-none">
+    <span id="seller" class="d-none">{{Auth::guard('seller')->user()->NationalID}}</span>
     <!-- Info Panel -->
     <div style="direction: rtl;" id="addProductPage"
          class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0">
@@ -2666,7 +2667,7 @@
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
-                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='f'|| $catCode==='k'|| $catCode==='l'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                        <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='f'|| $catCode==='k'|| $catCode==='l'|| $name==='گردنبند'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه طول</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
@@ -2681,6 +2682,26 @@
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="">
                             <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
+                        <div id="sizeDetail{{$i}}" class="{{ $name==='النگو' || $name==='انگشتر' ?' parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه قطر</span>
+                            <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{ $name==='عینک' ? ' parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">فاصله دو دسته</span>
+                            <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{ $name==='عینک' ? ' parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه عدسی</span>
+                            <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
+                        <div id="sizeDetail{{$i}}" class="{{ $name==='عینک' ? ' parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
+                            <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه پل بینی</span>
+                            <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="">
+                            <span style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                        </div>
                     </div>
                     <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
                     <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
@@ -2691,36 +2712,36 @@
             <div class="form-group g-mb-20 text-right">
                 <label id="lblUnitPrice" class="g-mb-10">قیمت پایه محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
-                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice">تومان</span>
-                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-bg-gray-light-v5 g-font-size-16 forceBigDevice" type="text"
-                           id="unitPriceStatic"
-                           name="unitPrice"
-                           {{--                           pattern="\d*"--}}
-                           value="" readonly>
-                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice" id="lblSalePrice">با احتساب %9 ارزش افزوده</span>
                     <span class="input-group-addon g-bg-gray-light-v5">تومان</span>
+{{--                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-bg-gray-light-v5 g-font-size-16 forceBigDevice" type="text"--}}
+{{--                           id="unitPriceStatic"--}}
+{{--                           name="unitPrice"--}}
+{{--                           --}}{{--                           pattern="\d*"--}}
+{{--                           value="" readonly>--}}
                     <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
                            tabindex="6"
                            id="unitPrice"
                            {{--                           pattern="\d*"--}}
                            onkeypress="$('#lblUnitPrice').removeClass('g-color-red');"
                            value="">
+{{--                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice" id="lblSalePrice">{{Auth::guard('seller')->user()->NationalID===2872282556 ? 'با 9% ارزش افزوده':'با 9% ارزش افزوده و 5% سهم تانا استایل'}}</span>--}}
+{{--                    <span class="input-group-addon g-bg-gray-light-v5">تومان</span>--}}
                     <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">کمترین مقدار 10,000 تومان می
                         باشد.</b>
                     <input style="display: none" type="number" name="tempPrice" id="tempPrice"
                            value="">
                 </div>
                 <!-- unitPrice for Small Device -->
-                <div class="g-brd-primary--focus g-mb-10 smallFlex">
-                    <span style="width: 20%;" class="input-group-addon g-bg-gray-light-v5">تومان</span>
-                    <input  style="width: 40%;" class="form-control g-bg-gray-light-v5 form-control-md rounded-0 p-0 g-py-10 text-center g-font-size-16 forceSmallDevice" type="text"
-                           id="unitPriceStatic"
-                            placeholder="..."
-                           name="unitPrice"
-                           {{--                           pattern="\d*"--}}
-                           value="" readonly>
-                    <span style="width: 40%;" class="g-font-size-12 text-center p-0 input-group-addon g-bg-gray-light-v5">با 9% ارزش افزوده</span>
-                </div>
+{{--                <div class="g-brd-primary--focus g-mb-10 smallFlex">--}}
+{{--                    <span style="width: 20%;" class="input-group-addon g-bg-gray-light-v5">تومان</span>--}}
+{{--                    <input  style="width: 40%;" class="form-control g-bg-gray-light-v5 form-control-md rounded-0 p-0 g-py-10 text-center g-font-size-16 forceSmallDevice" type="text"--}}
+{{--                           id="unitPriceStatic"--}}
+{{--                            placeholder="..."--}}
+{{--                           name="unitPrice"--}}
+{{--                           --}}{{--                           pattern="\d*"--}}
+{{--                           value="" readonly>--}}
+{{--                    <span style="width: 40%;" class="g-font-size-12 text-center p-0 input-group-addon g-bg-gray-light-v5">با 9% ارزش افزوده</span>--}}
+{{--                </div>--}}
 
                 <div style="direction: rtl">
                     <small class="text-muted g-font-size-12">قیمت پایه، قیمتی است که بدون در نظر گرفتن تخفیف ذکر می
@@ -2736,9 +2757,9 @@
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <span class="input-group-addon g-bg-gray-light-v5 bigDevice" id="toman">تومان</span>
                     <span style="direction: rtl; width: 35%"
-                          class="input-group-addon g-bg-gray-light-v5 bigDevice g-color-primary"
+                          class="input-group-addon g-bg-gray-light-v5 bigDevice"
                           id="BsalePrice">...</span>
-                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice" id="lblSalePrice">قیمت فروش</span>
+                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice">قیمت با احتساب تخفیف</span>
                     <span class="input-group-addon g-bg-gray-light-v5">درصد</span>
                     <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
                            id="discount"
@@ -2748,7 +2769,9 @@
                            value=""
                            onkeypress="$('#lblDiscount').removeClass('g-color-red')"
                            maxlength="2">
-                    <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">قیمت پایه باید بیشتر از 10,000 تومان باشد. </b>
+                    <input style="display: none" type="number" name="priceWithDiscount" id="priceWithDiscount"
+                           value="">
+                    <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">تخفیف باید بین 1 تا 99 درصد باشد. </b>
                 </div>
                 <!-- Discount for Small Device -->
                 <div class="g-brd-primary--focus g-mb-10 smallFlex">
@@ -2758,13 +2781,46 @@
                           tabindex="7"
                           id="SsalePrice">...</span>
                     <span style="width: 40%;" class="input-group-addon g-bg-gray-light-v5"
-                          id="SlblSalePrice">قیمت فروش</span>
+                          id="SlblSalePrice">با تخفیف</span>
                 </div>
 
                 <div style="direction: rtl">
                     <small class="text-muted g-font-size-12">عددی را که در این قسمت قید می کنید بر اساس درصد محاسبه شده
-                        و از قیمت پایه کسر می گردد و عدد مانده به عنوان قیمت فروش به دید مشتری می رسد.</small><br>
+                        و از قیمت پایه کسر می گردد و عدد مانده به عنوان قیمت فروش شما ثبت می شود.</small><br>
                     <small class="text-muted g-font-size-12">تخفیف می تواند مشتریان را به خود جلب کند.</small>
+                </div>
+            </div>
+
+            <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
+            <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
+            <div class="form-group g-mb-20 text-right">
+                <label id="lblDiscount" class="g-mb-10">قیمت نهایی محصول</label>
+                <div class="input-group g-brd-primary--focus g-mb-10">
+                    <span class="input-group-addon g-bg-gray-light-v5" id="toman">تومان</span>
+                    <input class="form-control form-control-md rounded-0 text-center g-font-size-16 g-color-primary" type="text"
+                           id="finalPrice"
+                           tabindex="7"
+                           name="finalPrice"
+                           value="..."
+                           readonly>
+                    <input style="display: none" type="number" name="tempFinalPrice" id="tempFinalPrice"
+                           value="">
+                    <span class="input-group-addon g-bg-gray-light-v5 g-brd-right g-brd-gray-light-v3">قیمت فروش</span>
+                </div>
+                <!-- Discount for Small Device -->
+{{--                <div class="g-brd-primary--focus g-mb-10 smallFlex">--}}
+{{--                    <span style="width: 20%;" class="input-group-addon g-bg-gray-light-v5" id="Stoman">تومان</span>--}}
+{{--                    <span style="direction: rtl; width: 40%;"--}}
+{{--                          class="input-group-addon g-py-10 g-bg-gray-light-v5 g-color-primary"--}}
+{{--                          tabindex="7"--}}
+{{--                          id="SsalePrice">...</span>--}}
+{{--                    <span style="width: 40%;" class="input-group-addon g-bg-gray-light-v5"--}}
+{{--                          id="SlblSalePrice">قیمت فروش</span>--}}
+{{--                </div>--}}
+
+                <div style="direction: rtl">
+                    <small class="text-muted g-font-size-12">روش محاسبه قیمت نهایی فروش:</small><br>
+                    <small class="text-muted g-font-size-12">قیمت پایه منهای تخفیف به علاوه {{Auth::guard('seller')->user()->NationalID!==2872282556 ?'5% سهم تانا استایل و':''}} 9% ارزش افزوده</small>
                 </div>
             </div>
 
