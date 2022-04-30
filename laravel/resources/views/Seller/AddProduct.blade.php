@@ -2713,36 +2713,17 @@
                 <label id="lblUnitPrice" class="g-mb-10">قیمت پایه محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <span class="input-group-addon g-bg-gray-light-v5">تومان</span>
-{{--                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-bg-gray-light-v5 g-font-size-16 forceBigDevice" type="text"--}}
-{{--                           id="unitPriceStatic"--}}
-{{--                           name="unitPrice"--}}
-{{--                           --}}{{--                           pattern="\d*"--}}
-{{--                           value="" readonly>--}}
                     <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
                            tabindex="6"
                            id="unitPrice"
                            {{--                           pattern="\d*"--}}
                            onkeypress="$('#lblUnitPrice').removeClass('g-color-red');"
                            value="">
-{{--                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice" id="lblSalePrice">{{Auth::guard('seller')->user()->NationalID===2872282556 ? 'با 9% ارزش افزوده':'با 9% ارزش افزوده و 5% سهم تانا استایل'}}</span>--}}
-{{--                    <span class="input-group-addon g-bg-gray-light-v5">تومان</span>--}}
                     <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">کمترین مقدار 10,000 تومان می
                         باشد.</b>
                     <input style="display: none" type="number" name="tempPrice" id="tempPrice"
                            value="">
                 </div>
-                <!-- unitPrice for Small Device -->
-{{--                <div class="g-brd-primary--focus g-mb-10 smallFlex">--}}
-{{--                    <span style="width: 20%;" class="input-group-addon g-bg-gray-light-v5">تومان</span>--}}
-{{--                    <input  style="width: 40%;" class="form-control g-bg-gray-light-v5 form-control-md rounded-0 p-0 g-py-10 text-center g-font-size-16 forceSmallDevice" type="text"--}}
-{{--                           id="unitPriceStatic"--}}
-{{--                            placeholder="..."--}}
-{{--                           name="unitPrice"--}}
-{{--                           --}}{{--                           pattern="\d*"--}}
-{{--                           value="" readonly>--}}
-{{--                    <span style="width: 40%;" class="g-font-size-12 text-center p-0 input-group-addon g-bg-gray-light-v5">با 9% ارزش افزوده</span>--}}
-{{--                </div>--}}
-
                 <div style="direction: rtl">
                     <small class="text-muted g-font-size-12">قیمت پایه، قیمتی است که بدون در نظر گرفتن تخفیف ذکر می
                         شود.</small>
@@ -2753,13 +2734,13 @@
             <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
             <div class="form-group g-mb-20 text-right">
-                <label id="lblDiscount" class="g-mb-10">تخفیف قیمت محصول</label>
+                <label id="lblDiscount" class="g-mb-10">تخفیف</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <span class="input-group-addon g-bg-gray-light-v5 bigDevice" id="toman">تومان</span>
                     <span style="direction: rtl; width: 35%"
                           class="input-group-addon g-bg-gray-light-v5 bigDevice"
                           id="BsalePrice">...</span>
-                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice">قیمت با احتساب تخفیف</span>
+                    <span class="input-group-addon g-bg-gray-light-v5 bigDevice">سهم فروشنده</span>
                     <span class="input-group-addon g-bg-gray-light-v5">درصد</span>
                     <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
                            id="discount"
@@ -2781,19 +2762,53 @@
                           tabindex="7"
                           id="SsalePrice">...</span>
                     <span style="width: 40%;" class="input-group-addon g-bg-gray-light-v5"
-                          id="SlblSalePrice">با تخفیف</span>
+                          id="SlblSalePrice">سهم فروشنده</span>
                 </div>
 
                 <div style="direction: rtl">
                     <small class="text-muted g-font-size-12">عددی را که در این قسمت قید می کنید بر اساس درصد محاسبه شده
-                        و از قیمت پایه کسر می گردد و عدد مانده به عنوان قیمت فروش شما ثبت می شود.</small><br>
+                        و از قیمت پایه کسر می گردد و عدد مانده به عنوان سهم شما ثبت می شود.</small><br>
                     <small class="text-muted g-font-size-12">تخفیف می تواند مشتریان را به خود جلب کند.</small>
                 </div>
             </div>
 
             <hr class="g-brd-gray-light-v4 g-mx-minus-30 bigDevice">
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
-            <div class="form-group g-mb-20 text-right">
+
+            <!-- smallDevice -->
+            <div class="form-group g-mb-20 text-right smallDevices">
+                <label id="lblDiscount" class="g-mb-10">قیمت نهایی محصول</label>
+                <div class="input-group d-block g-brd-primary--focus g-mb-10">
+                    <span class="input-group-addon g-bg-gray-light-v5 g-brd-right g-brd-gray-light-v3">قیمت فروش بدون تخفیف</span>
+                    <input class="form-control g-brd-top-none g-brd-bottom-none w-100 form-control-md rounded-0 text-center g-font-size-16 g-color-orange" type="text"
+                           id="finalPriceWithoutDiscount"
+                           tabindex="7"
+                           value="..."
+                           readonly>
+                    <input style="display: none" type="number" name="tempFinalPriceWithoutDiscount" id="tempFinalPriceWithoutDiscount"
+                           value="">
+                    <span class="input-group-addon g-bg-gray-light-v5 g-brd-right g-brd-gray-light-v3">قیمت فروش با تخفیف</span>
+                    <input class="form-control g-brd-top-none g-brd-bottom-none w-100 form-control-md rounded-0 text-center g-font-size-16 g-color-primary" type="text"
+                           id="finalPrice"
+                           tabindex="7"
+                           name="finalPrice"
+                           value="..."
+                           readonly>
+                    <input style="display: none" type="number" name="tempFinalPrice" id="tempFinalPrice"
+                           value="">
+                    <span class="input-group-addon g-bg-gray-light-v5 g-brd-left g-brd-gray-light-v3" id="toman">تومان</span>
+                </div>
+                <div style="direction: rtl">
+                    <small class="d-block text-muted g-font-size-12">روش محاسبه قیمت فروش:</small>
+                    <small class="d-block text-muted g-font-size-12">تخفیف <small id="dis"></small></small>
+                    <small class="d-block text-muted g-font-size-12">سهم فروشنده <small id="sellerShare"></small></small>
+                    <small class="{{Auth::guard('seller')->user()->NationalID===2872282556 ?'d-none':'d-block'}} text-muted g-font-size-12">سهم تانا استایل <small id="companyShare"></small></small>
+                    <small class="d-block text-muted g-font-size-12">9% ارزش افزوده <small id="exValue"></small></small>
+                </div>
+            </div>
+
+            <!-- bigDevice -->
+            <div class="form-group g-mb-20 text-right bigDevices">
                 <label id="lblDiscount" class="g-mb-10">قیمت نهایی محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <span class="input-group-addon g-bg-gray-light-v5" id="toman">تومان</span>
@@ -2805,22 +2820,22 @@
                            readonly>
                     <input style="display: none" type="number" name="tempFinalPrice" id="tempFinalPrice"
                            value="">
-                    <span class="input-group-addon g-bg-gray-light-v5 g-brd-right g-brd-gray-light-v3">قیمت فروش</span>
+                    <span class="input-group-addon g-bg-gray-light-v5 g-brd-right g-brd-gray-light-v3">قیمت فروش با تخفیف</span>
+                    <input class="form-control form-control-md rounded-0 text-center g-font-size-16 g-color-orange" type="text"
+                           id="finalPriceWithoutDiscount"
+                           tabindex="7"
+                           value="..."
+                           readonly>
+                    <input style="display: none" type="number" name="tempFinalPriceWithoutDiscount" id="tempFinalPriceWithoutDiscount"
+                           value="">
+                    <span class="input-group-addon g-bg-gray-light-v5 g-brd-right g-brd-gray-light-v3">قیمت فروش بدون تخفیف</span>
                 </div>
-                <!-- Discount for Small Device -->
-{{--                <div class="g-brd-primary--focus g-mb-10 smallFlex">--}}
-{{--                    <span style="width: 20%;" class="input-group-addon g-bg-gray-light-v5" id="Stoman">تومان</span>--}}
-{{--                    <span style="direction: rtl; width: 40%;"--}}
-{{--                          class="input-group-addon g-py-10 g-bg-gray-light-v5 g-color-primary"--}}
-{{--                          tabindex="7"--}}
-{{--                          id="SsalePrice">...</span>--}}
-{{--                    <span style="width: 40%;" class="input-group-addon g-bg-gray-light-v5"--}}
-{{--                          id="SlblSalePrice">قیمت فروش</span>--}}
-{{--                </div>--}}
-
                 <div style="direction: rtl">
-                    <small class="text-muted g-font-size-12">روش محاسبه قیمت نهایی فروش:</small><br>
-                    <small class="text-muted g-font-size-12">قیمت پایه منهای تخفیف به علاوه {{Auth::guard('seller')->user()->NationalID!==2872282556 ?'5% سهم تانا استایل و':''}} 9% ارزش افزوده</small>
+                    <small class="d-block text-muted g-font-size-12">روش محاسبه قیمت فروش:</small>
+                    <small class="d-block text-muted g-font-size-12">تخفیف <small id="dis"></small></small>
+                    <small class="d-block text-muted g-font-size-12">سهم فروشنده <small id="sellerShare"></small></small>
+                    <small class="{{Auth::guard('seller')->user()->NationalID===2872282556 ?'d-none':'d-block'}} text-muted g-font-size-12">سهم تانا استایل <small id="companyShare"></small></small>
+                    <small class="d-block text-muted g-font-size-12">9% ارزش افزوده <small id="exValue"></small></small>
                 </div>
             </div>
 

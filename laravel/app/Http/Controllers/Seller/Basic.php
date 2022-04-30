@@ -177,19 +177,21 @@ class Basic extends Controller
 //  Change Product Price
     public function changePriceProduct($id,$unitPrice,$finalPrice,$discount)
     {
-        $priceWithDiscount=(int)$unitPrice-($unitPrice*$discount/100);
+        $priceWithDiscount=$unitPrice-($unitPrice*$discount/100);
         if(Auth::guard('seller')->user()->NationalID===2872282556){
             $companyShare=0;
         } else {
             $companyShare=10;
         }
-        $priceWithoutDiscount = $unitPrice+($unitPrice*($companyShare+9)/100);
+        $priceWithoutDiscount = $unitPrice+($finalPrice*($companyShare+9)/100);
+        $priceWithoutDiscount = substr($priceWithoutDiscount, 0, -3);
+        $priceWithoutDiscount.='000';
         DB::table('product')
             ->where('ID',$id)
             ->update([
-                'UnitPrice'=>(int)$unitPrice,
+                'UnitPrice'=>$unitPrice,
                 'PriceWithDiscount'=>$priceWithDiscount,
-                'FinalPrice'=>(int)$finalPrice,
+                'FinalPrice'=>$finalPrice,
                 'FinalPriceWithoutDiscount'=>$priceWithoutDiscount,
             ]);
 
@@ -198,19 +200,21 @@ class Basic extends Controller
 
     public function changeDiscountProduct($id,$discount,$finalPrice,$unitPrice)
     {
-        $priceWithDiscount=(int)$unitPrice-($unitPrice*$discount/100);
+        $priceWithDiscount=$unitPrice-($unitPrice*$discount/100);
         if(Auth::guard('seller')->user()->NationalID===2872282556){
             $companyShare=0;
         } else {
             $companyShare=10;
         }
-        $priceWithoutDiscount = $unitPrice+($unitPrice*($companyShare+9)/100);
+        $priceWithoutDiscount = $unitPrice+($finalPrice*($companyShare+9)/100);
+        $priceWithoutDiscount = substr($priceWithoutDiscount, 0, -3);
+        $priceWithoutDiscount.='000';
         DB::table('product')
             ->where('ID',$id)
             ->update([
-                'Discount'=>(int)$discount,
+                'Discount'=>$discount,
                 'PriceWithDiscount'=>$priceWithDiscount,
-                'FinalPrice'=>(int)$finalPrice,
+                'FinalPrice'=>$finalPrice,
                 'FinalPriceWithoutDiscount'=>$priceWithoutDiscount,
             ]);
 

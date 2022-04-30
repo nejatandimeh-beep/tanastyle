@@ -278,15 +278,9 @@ class Add extends Controller
         $detail = $request->get('detail');
         $unitPrice = $request->get('tempPrice');
         $priceWithDiscount = $request->get('priceWithDiscount');
+        $priceWithoutDiscount = $request->get('tempFinalPriceWithoutDiscount');
         $finalPrice = $request->get('tempFinalPrice');
-        if(Auth::guard('seller')->user()->NationalID===2872282556){
-            $companyShare=0;
-        } else {
-            $companyShare=10;
-        }
-        $priceWithoutDiscount = $unitPrice+($unitPrice*($companyShare+9)/100);
-        $priceWithoutDiscount = substr($priceWithoutDiscount, 0, -3);
-        $priceWithoutDiscount.='000';
+
         $discount = $request->get('discount');
         $regDate = date('Y-m-d');
         $genderCode = $gender;

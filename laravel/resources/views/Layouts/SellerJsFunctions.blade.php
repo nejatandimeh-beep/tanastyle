@@ -813,14 +813,26 @@
                 companyShare=10;
 
             if (unitPrice >= 10000) {
-                let calc = salePrice(discount, unitPrice), temp1;
+                let calc = salePrice(discount, unitPrice), finalPrice, exValue, tanastyle,fPriceWithoutDis, dis;
+                $("#sellerShare").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#BsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#SsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-                $("#priceWithDiscount").val(calc);
-                temp1=calc + (calc * (companyShare+9)) / 100;
-                temp1 = temp1.toString().slice(0, -3) + "000";
-                $("#tempFinalPrice").val(temp1);
-                $("#finalPrice").val(temp1.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                $("#priceWithDiscount").val((calc.toString().slice(0, -3) + "000"));
+                tanastyle=calc * (companyShare) / 100;
+                exValue=calc * (9) / 100;
+                finalPrice=calc + exValue+tanastyle;
+                fPriceWithoutDis=parseInt(unitPrice)+tanastyle+exValue;
+                dis=parseInt(unitPrice)-calc;
+                $("#companyShare").text((tanastyle.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                $("#exValue").text((exValue.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                $("#dis").text((dis.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                $("#uPrice").text(unitPrice.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                finalPrice = finalPrice.toString().slice(0, -3) + "000";
+                $("#tempFinalPrice").val(finalPrice);
+                $("#finalPrice").val(finalPrice.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                fPriceWithoutDis=fPriceWithoutDis.toString().slice(0, -3) + "000";
+                $("#tempFinalPriceWithoutDiscount").val(fPriceWithoutDis);
+                $("#finalPriceWithoutDiscount").val(fPriceWithoutDis.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
             } else {
                 $("#BsalePrice").text('قیمت پایه باید بیشتر از 10000 تومان باشد.');
                 $("#SsalePrice").text('!!!');
@@ -970,6 +982,14 @@
         }
 
         $(document).on('ready', function () {
+            let mq = window.matchMedia("(max-width: 900px)");
+            if (mq.matches) {
+                $('#bigDevices').remove();
+                $('.bigDevices').remove();
+            } else {
+                $('#smallDevices').remove();
+                $('.smallDevices').remove();
+            }
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
                 cropper, inputID, inputIdFinshed = [], counter = 0, file_upload, file_type,

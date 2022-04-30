@@ -385,7 +385,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <small class="g-font-size-12">با احتساب {{ $data->Discount }}% تخفیف و 5% سهم تانا استایل و 9% ارزش افزوده</small>
+                                        <small class="g-font-size-12">با احتساب {{ $data->Discount }}% تخفیف {{Auth::guard('seller')->user()->NationalID!==2872282556?' و سهم تانا استایل':''}} و 9% ارزش افزوده</small>
                                         <span
                                               class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-13 g-py-15 g-px-15--lg g-px-5 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
                                               قیمت فروش
@@ -434,7 +434,7 @@
                                                            id="newDiscount"
                                                            pattern="\d*"
                                                            maxlength="2"
-                                                           placeholder="99..1">
+                                                           placeholder="1..99">
                                                 </div>
                                                 <div style="direction: rtl"  class=" g-mt-10">
                                                     <small class="text-muted g-font-size-12">قیمت پایه محصول <span class="g-color-primary g-font-weight-600">{{ number_format($data->UnitPrice) }}</span> تومان می باشد.</small>
@@ -443,7 +443,7 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <small class="g-font-size-12">با احتساب تخفیف جدید و 5% سهم تانا استایل و 9% ارزش افزوده</small>
+                                        <small class="g-font-size-12">با احتساب تخفیف جدید{{Auth::guard('seller')->user()->NationalID!==2872282556?' و سهم تانا استایل':''}} و 9% ارزش افزوده</small>
                                         <span
                                               class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
                                               قیمت فروش
