@@ -459,9 +459,9 @@
 
                                 <td class="align-middle text-center text-nowrap">{{ $rec->Color }}</td>
                                 <td class="align-middle text-center">{{ $rec->Qty }}</td>
-                                <td class="align-middle text-center">{{ number_format($rec->UnitPrice) }}</td>
-                                <td class="align-middle text-center">%{{ $rec->Discount }}</td>
-                                <td class="align-middle text-center">{{ number_format($rec->PriceWithDiscount) }}</td>
+                                <td class="align-middle text-center"><s>{{ number_format($rec->UnitPrice) }}</s></td>
+                                <td class="align-middle text-center g-color-red">{{ $rec->Discount }}</td>
+                                <td class="align-middle text-center g-color-primary">{{ number_format($rec->PriceWithDiscount) }}</td>
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"

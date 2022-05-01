@@ -22,6 +22,7 @@
                                            type="number"
                                            class="form-control @error('mobile') is-invalid @enderror @if(session()->has('message')) is-invalid @endif input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md forceEnglishNumber"
                                            name="mobile"
+                                           pattern="\d*"
                                            placeholder="فقط اعداد انگلیسی"
                                            onKeyPress="if(this.value.length===11) return false;"
                                            value="{{ old('mobile') }}"

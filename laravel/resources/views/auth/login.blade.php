@@ -20,6 +20,7 @@
                                            id="mobile"
                                            type="text"
                                            class="form-control @error('mobile') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
+                                           pattern="\d*"
                                            name="mobile"
                                            value="{{ old('mobile') }}"
                                            required=""

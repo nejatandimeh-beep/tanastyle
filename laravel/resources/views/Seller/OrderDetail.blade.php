@@ -184,7 +184,7 @@
                          class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         قیمت پایه
                     </div>
-                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
                            type="text"
                            tabindex="1"
                            placeholder=""
@@ -199,7 +199,7 @@
                          class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         تخفیف
                     </div>
-                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16 g-color-red"
                            type="text"
                            tabindex="1"
                            placeholder=""
@@ -214,7 +214,7 @@
                          class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 g-brd-left-none rounded-0 w-50">
                         قیمت نهایی
                     </div>
-                    <input class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-center g-font-size-16"
+                    <input class="form-control form-control-md rounded-0 g-bg-gray-light-v5 text-center g-font-size-16 g-color-primary"
                            type="text"
                            tabindex="1"
                            placeholder=""

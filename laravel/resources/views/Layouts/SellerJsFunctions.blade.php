@@ -152,6 +152,8 @@
         }
 
         $('#addProductBtn').on('click', function (event) {
+            $('#unitPrice').val($('#unitPrice').val().replace(new RegExp(',', 'g'), ""));
+
             let r = checkRepeat('size0'),
                 err = '',
                 qty = $('#addProductSizeQty').val();
@@ -765,6 +767,7 @@
                     $("#BsalePrice").text('...');
                     $("#SsalePrice").text('...');
                     $("#discount").val('');
+                    $("#finalPriceWithoutDiscount").val('...');
                 }
             }
 

@@ -66,8 +66,8 @@
             </div>
         </div>
         <div style="direction: rtl">
+            <!-- محصولات در صف انتظار -->
             <div id="accordion-01" role="tablist" aria-multiselectable="true">
-                <!-- محصولات در صف انتظار -->
                 <div class="card g-mb-5 rounded-0">
                     <div id="accordion-01-heading-01" class="card-header" role="tab">
                         <h5 class="mb-0">
@@ -140,7 +140,7 @@
                                                     <span
                                                         class="g-color-white">{{$row->Mobile}}</span>
                                                 </td>
-                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                <td style="width: 200px" class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->DeliveryStatus === '0')
                                                         <span class="g-font-size-16 g-color-yellow">
                                                             {{$row->Address.' پلاک '.$row->ShopNumber}}
@@ -222,8 +222,8 @@
                 </div>
                 <!-- End Card -->
             </div>
+            <!-- برگشتی -->
             <div id="accordion-02" role="tablist" aria-multiselectable="true">
-                <!-- برگشتی -->
                 <div class="card g-mb-5 rounded-0">
                     <div id="accordion-02-heading-02" class="card-header" role="tab">
                         <h5 class="mb-0">
@@ -295,7 +295,7 @@
                                                     <span
                                                         class="g-color-white">{{$row->Mobile}}</span>
                                                 </td>
-                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                <td style="width: 200px" class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->ReturnStatus === '4')
                                                         <span class="g-font-size-16 g-color-yellow">
                                                             اداره پست مرکزی
@@ -368,8 +368,8 @@
                 </div>
                 <!-- End Card -->
             </div>
+            <!-- سبد من -->
             <div id="accordion-03" role="tablist" aria-multiselectable="true">
-                <!-- سبد من -->
                 <div class="card g-mb-5 rounded-0">
                     <div id="accordion-03-heading-03" class="card-header" role="tab">
                         <h5 class="mb-0">
@@ -441,7 +441,7 @@
                                                     <span
                                                         class="g-color-white">{{$row->Mobile}}</span>
                                                 </td>
-                                                <td class="g-brd-white-opacity-0_1 align-middle">
+                                                <td style="width: 200px" class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->DeliveryStatus === '1')
                                                         <span class="g-font-size-16 g-color-yellow">
                                                              کیوسک
