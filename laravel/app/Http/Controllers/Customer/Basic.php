@@ -784,11 +784,15 @@ class Basic extends Controller
 
         $price=$request->get('allPrice');
         if ($stock) {
-            setcookie('productRow', $row, time() + (43200), "/Confirmation");
-            setcookie('price', $price, time() + (43200), "/Confirmation");
-            setcookie('productDetailId',  json_encode($productDetailID), time() + (43200), "/Confirmation");
-            setcookie('productQty', json_encode($qty), time() + (43200), "/Confirmation");
-            setcookie('userId', Auth::user()->id, time() + (43200), "/Confirmation");
+            foreach ($productDetailID as $key => $row)
+            DB::table('product_order_temporary')
+                ->insert([
+                    'CustomerID'=> Auth::user()->id,
+                    'ProductDetailID'=> $row,
+                    'Qty'=> $qty[$key],
+                    'Price'=> $price,
+                ]);
+
             $order = new zarinpal();
             $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
@@ -816,17 +820,27 @@ class Basic extends Controller
             ->where('ID', $id)
             ->decrement('Qty', $qty);
 
-        $postPrice = 15000;
-        $idTemp[0]=$id;
-        $qtyTemp[0]=$qty;
+        session_start();
+        if(isset($_SESSION['stateCode'])) {
+           if( $_SESSION['stateCode']==='2' &&  $_SESSION['cityCode']==='36'){
+                $postPrice = 10000;
+            } else {
+                $postPrice = 15000;
+            }
+        } else {
+            $postPrice = 15000;
+        }
 
         if ($stock) {
-            $price = ($data->FinalPrice + $postPrice)*$qty;
-            setcookie('productRow', 1, time() + (43200), "/Confirmation");
-            setcookie('price', $price, time() + (43200), "/Confirmation");
-            setcookie('productDetailId', json_encode($idTemp), time() + (43200), "/Confirmation");
-            setcookie('productQty', json_encode($qtyTemp), time() + (43200), "/Confirmation");
-            setcookie('userId', Auth::user()->id, time() + (43200), "/Confirmation");
+            $price = ($data->FinalPrice * $qty )+$postPrice;
+            DB::table('product_order_temporary')
+                ->insert([
+                    'CustomerID'=> Auth::user()->id,
+                    'ProductDetailID'=> $id,
+                    'Qty'=> $qty,
+                    'Price'=> $price,
+                ]);
+
             $order = new zarinpal();
             $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
@@ -843,10 +857,11 @@ class Basic extends Controller
         }
         $MerchantID = 'ccd4acab-a4dc-416d-9172-b066aa674e2b';
         $Authority =$request->get('Authority');
-        $row = $_COOKIE['productRow'];
-        $Amount=$_COOKIE['price'];
-        $id=json_decode($_COOKIE['productDetailId']);
-        $qty=json_decode($_COOKIE['productQty']);
+
+        $data=DB::table('product_order_temporary')
+            ->select('*')
+            ->where('CustomerID',Auth::user()->id)
+            ->get();
 
         if ($request->get('Status') == 'OK') {
             $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
@@ -857,20 +872,20 @@ class Basic extends Controller
                     //این مقادیر را به سایت زرین پال برای دریافت تاییدیه نهایی ارسال می کنیم
                     'MerchantID'     => $MerchantID,
                     'Authority'      => $Authority,
-                    'Amount'         => $Amount,
+                    'Amount'         => $data[0]->Price,
                 ],
             ]);
 
             $refNum=$Authority;
             if ($result['Status'] == 100) {
-                    $new = $this->newOrder($id, $qty, $row,$Authority);
+                    $new = $this->newOrder($data,$Authority);
 
                 return view('Customer.PaymentStatus', compact( 'refNum'));
             } else {
-                for ($i = 0; $i < $row; $i++) {
+                foreach ($data as $row) {
                     DB::table('product_detail')
-                        ->where('ID', (int)$id[$i])
-                        ->increment('Qty', (int)$qty[$i]);
+                        ->where('ID', $row->ProcutDetailID)
+                        ->increment('Qty', $row->Qty);
                 }
 
                 DB::table('payment_failed')
@@ -882,10 +897,10 @@ class Basic extends Controller
         }
         else
         {
-            for ($i = 0; $i < $row; $i++) {
+            foreach ($data as $row) {
                 DB::table('product_detail')
-                    ->where('ID', (int)$id[$i])
-                    ->increment('Qty', (int)$qty[$i]);
+                    ->where('ID', $row->ProcutDetailID)
+                    ->increment('Qty', $row->Qty);
             }
             return view('Customer.PaymentError');
         }
@@ -1475,11 +1490,19 @@ class Basic extends Controller
 
     public function checkAddress()
     {
-        return DB::table('customer_address')
+        $result=DB::table('customer_address')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
             ->where('Status', 1)
             ->first();
+
+        if(isset($result)){
+               session_start();
+                $_SESSION['stateCode'] = $result->State;
+                $_SESSION['cityCode'] = $result->City;
+        }
+
+        return  $result;
     }
 
     public function customerVerify()
@@ -2294,11 +2317,11 @@ class Basic extends Controller
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
-    public function newOrder($id, $qty, $rowOrder,$Authority)
+    public function newOrder($data,$Authority)
     {
-        $orderID='';
         $seller=[];
-        for ($i = 0; $i < $rowOrder; $i++) {
+        $orderID='';
+        foreach ($data as $step => $record) {
             $customerInfo = DB::table('customers as c')
                 ->select('ca.*')
                 ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
@@ -2308,13 +2331,13 @@ class Basic extends Controller
             $productInfo = DB::table('product_detail as pd')
                 ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId', 'p.FinalPrice')
                 ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-                ->where('pd.ID', (int)$id[$i])
+                ->where('pd.ID', $record->ProductDetailID)
                 ->first();
 
             date_default_timezone_set('Asia/Tehran');
             $date = date('Y-m-d');
             $time = date('H:i:s');
-            if ($i === 0) {
+            if ($step === 0) {
                 DB::table('product_order')->insert([
                     'CustomerID' => Auth::user()->id,
                     'AddressID' => $customerInfo->ID,
@@ -2331,9 +2354,9 @@ class Basic extends Controller
             DB::table('product_order_detail')->insert([
                 'SellerID' => $productInfo->SellerID,
                 'ProductID' => $productInfo->ProductID,
-                'ProductDetailID' => (int)$id[$i],
+                'ProductDetailID' => $record->ProductDetailID,
                 'OrderID' => $orderID,
-                'Qty' => (int)$qty[$i],
+                'Qty' => $record->Qty,
                 'Size' => $productInfo->Size,
                 'Color' => $productInfo->Color,
                 'OrderBankCode' => '3#$ddf3e3continue3',
@@ -2347,24 +2370,24 @@ class Basic extends Controller
                 ->select('*')
                 ->get();
 
-            $data = DB::table('product_delivery')
+            $delivery = DB::table('product_delivery')
                 ->select('DeliveryManID')
                 ->get();
 
-            if ($data->isEmpty() || $data->count() < 2) {
+            if ($delivery->isEmpty() || $delivery->count() < 2) {
                 DB::table('product_delivery')->insert([
                     'OrderDetailID' => $orderDetailID,
                     'DeliveryManID' => $deliveryMan[0]->ID,
                 ]);
             } else {
-                $data = DB::table('product_delivery')
+                $delivery = DB::table('product_delivery')
                     ->select('DeliveryManID')
                     ->orderBy('id', 'desc')
                     ->take($deliveryMan->count() - 1)
                     ->get();
 
                 $DeliveryManIDArr = array();
-                foreach ($data as $key => $row) {
+                foreach ($delivery as $key => $row) {
                     $DeliveryManIDArr[$key] = $row->DeliveryManID;
                 }
 
@@ -2386,18 +2409,22 @@ class Basic extends Controller
 
             DB::table('product_cart')
                 ->where('CustomerID', Auth::user()->id)
-                ->where('ProductDetailID', (int)$id[$i])
+                ->where('ProductDetailID', $record->ProductDetailID)
                 ->delete();
 
-        $orderID.='/'.$orderDetailID.'-';
-        $seller[$i] = DB::table('sellers')
+        $seller[$step] = DB::table('sellers')
             ->select('id', 'Mobile')
             ->where('id', $productInfo->SellerID)
             ->first();
 
         }
 
-        $seller=array_unique($seller);
+        foreach ($data as $row){
+            DB::table('product_order_temporary')
+                ->where('ID', $row->ID)
+                ->delete();
+        }
+        $seller=array_map("unserialize", array_unique(array_map("serialize", $seller)));
         //--------------
         try {
             $token = $orderID;

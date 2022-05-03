@@ -1200,6 +1200,7 @@
                 tempPrice = [],
                 pdId = [],
                 qty = [],
+                postPrice = 0,
                 form = $('#cartOrderForm');
             $("#cartOrderForm").empty();
             $('#cartDate').text('( ' + nowDate() + ' )');
@@ -1215,7 +1216,8 @@
                     form.append("<input name='productDetailID" + i + "' value=" + pdId[i] + ">");
                     form.append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
-                allPrice += 15000;
+                postPrice=$('#postPrice').text().replace(new RegExp(',', 'g'), "");
+                allPrice += parseInt(postPrice);
                 form.append("<input name='row' value=" + row + ">");
                 form.append("<input name='allPrice' value=" + allPrice + ">");
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
@@ -1525,7 +1527,8 @@
 
         // پر کردن فرم فاکتور فروش در هنگام نمایش مودال
         function addOrderTable() {
-            let orderPrice = parseInt($('#productFinalPrice').text().replace(/[^0-9]/gi, '')) * parseInt($('#productQtyBought').val());
+            let orderPrice = parseInt($('#productFinalPrice').text().replace(/[^0-9]/gi, '')) * parseInt($('#productQtyBought').val()), postPrice=0;
+            postPrice=$('#postPrice').text().replace(new RegExp(',', 'g'), "");
             $('#orderID').text($('#productID').text() + '/' + $('#productDetailID').text());
             $('#orderProductID').text($('#productDetailID').text());
             $('#orderProductName').text($('#productName').text() + ' ' + $('#productModel').text());
@@ -1536,7 +1539,7 @@
             $('#orderProductUnitPrice').text($('#productUnitPrice').text());
             $('#orderProductFinalPrice').text($('#productFinalPrice').text());
             $('#orderProductQtyPrice').text(orderPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $('#orderPrice').text((orderPrice + 15000).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#orderPrice').text((orderPrice + parseInt(postPrice)).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#orderDate').text(nowDate());
             $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }

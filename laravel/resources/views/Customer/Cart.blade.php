@@ -252,7 +252,7 @@
                                     {{--هزینه پستی--}}
                                     <span
                                         class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
-                                        <span>15,000</span>
+                                        <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10,000':'15,000'}}</span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                     </span>
                                     {{--مبلغ فاکتور--}}

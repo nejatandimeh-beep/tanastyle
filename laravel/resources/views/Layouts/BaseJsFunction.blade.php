@@ -5,6 +5,11 @@
         // غیر فعال کردن کلید اینتر در ورودی فرمها جهت سابمیت فرم
         window.addEventListener('keydown',function(e){if(e.keyIdentifier=='U+000A'||e.keyIdentifier=='Enter'||e.keyCode==13){if(e.target.nodeName=='INPUT'&&e.target.type=='text'){e.preventDefault();return false;}}},true);
         $(window).on('load', function () {
+            if(!checkCookies()){
+                $('body').empty();
+                $('body').append('<div class="w-100 text-center"><img id="cookieDisabled" src="{{ asset("img/Other/cookieDisabled.jpg?4") }}" alt="فروشگاه پوشاک تانا استایل" class="g-pt-7 g-pt-0--lg"></div>');
+                console.log('cookie is disabled!');
+            }
             // initialization of HSMegaMenu component
             if ($('.customerNavigation').length > 0){
                 $.HSCore.components.HSHeader.init($('#js-header'));
@@ -52,6 +57,20 @@
                 $.HSCore.components.HSModalWindow.init('[data-modal-target]:not(.js-modal-markup)');
             }
         });
+
+        // check cookie
+        function checkCookies(){
+            if (navigator.cookieEnabled) return true;
+
+            // set and read cookie
+            document.cookie = "cookietest=1";
+            let ret = document.cookie.indexOf("cookietest=") != -1;
+
+            // delete cookie
+            document.cookie = "cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT";
+
+            return ret;
+        }
     </script>
     </html>
 @endsection
