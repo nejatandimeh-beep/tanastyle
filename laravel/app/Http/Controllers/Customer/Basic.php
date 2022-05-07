@@ -2310,7 +2310,7 @@ class Basic extends Controller
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
-    public function product($gender, $cat, $catCode, $title)
+    public function product($gender, $cat, $catCode)
     {
         session_start();
         $_SESSION['listSkip'] = 0;
@@ -2329,7 +2329,7 @@ class Basic extends Controller
             ->groupBy('p.ID')
             ->paginate(12);
 
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 
     public function aboutMe()

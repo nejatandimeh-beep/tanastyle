@@ -193,7 +193,7 @@ Route::get('/Customer-Product-BabyBoy-List', 'Customer\Basic@productBabyBoyList'
 
 Route::get('/Customer-Product-Search-List/{val}', 'Customer\Basic@productSearchList')->name('productSearchList');
 
-Route::get('/Customer-Product-/{gender}/{cat}/{catCode}/{title}', 'Customer\Basic@product')->name('menuProduct');
+Route::get('/Customer-Product-/{gender}/{cat}/{catCode}', 'Customer\Basic@product')->name('menuProduct');
 
 // Customer Product Detail
 Route::get('/Product/{id}/{size}', 'Customer\Basic@productDetail')->name('productDetail');

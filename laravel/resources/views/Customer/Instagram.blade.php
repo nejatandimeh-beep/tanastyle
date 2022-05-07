@@ -32,6 +32,9 @@
                                     </span>
                                     @endif
                                 </div>
+                                <div class="col-lg-10 col-12 text-left g-color-orange g-mt-10">
+                                    <small>شناسه با اعداد انگلیسی</small>
+                                </div>
                             </div>
                             <div class="form-group row g-mb-60--lg g-mt-20">
                                 <div class="col-md-10 text-left">
