@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Kavenegar;
 use nusoap_client;
+use Illuminate\Console\Scheduling\Schedule;
 use SoapClient;
 
 class Basic extends Controller
@@ -884,14 +885,22 @@ class Basic extends Controller
             } else {
                 foreach ($data as $row) {
                     DB::table('product_detail')
-                        ->where('ID', $row->ProcutDetailID)
+                        ->where('ID', $row->ProductDetailID)
                         ->increment('Qty', $row->Qty);
+
+                    DB::table('payment_failed')
+                        ->insert([
+                            'Authority'=>$Authority,
+                            'CustomerID'=>Auth::user()->id,
+                            'ProductDetailID'=>$row->ProductDetailID,
+                        ]);
                 }
 
-                DB::table('payment_failed')
-                    ->insert([
-                        'Authority'=>$Authority,
-                    ]);
+                DB::table('product_order_temporary')
+                    ->select('*')
+                    ->where('CustomerID',Auth::user()->id)
+                    ->delete();
+
                 return view('Customer.PaymentError');
             }
         }
@@ -899,9 +908,22 @@ class Basic extends Controller
         {
             foreach ($data as $row) {
                 DB::table('product_detail')
-                    ->where('ID', $row->ProcutDetailID)
+                    ->where('ID', $row->ProductDetailID)
                     ->increment('Qty', $row->Qty);
+
+                DB::table('payment_failed')
+                    ->insert([
+                        'CustomerID'=>Auth::user()->id,
+                        'ProductDetailID'=>$row->ProductDetailID,
+                        'Authority'=>$Authority,
+                    ]);
             }
+
+            DB::table('product_order_temporary')
+                ->select('*')
+                ->where('CustomerID',Auth::user()->id)
+                ->delete();
+
             return view('Customer.PaymentError');
         }
     }
@@ -1080,6 +1102,24 @@ class Basic extends Controller
 
     public function productDetail($id, $sizeInfo)
     {
+        if(isset(Auth::user()->id)){
+            $tempOrder=DB::table('product_order_temporary as pot')
+                ->select('*')
+                ->where('CustomerID',Auth::user()->id)
+                ->get();
+
+            foreach ($tempOrder as $row){
+                DB::table('product_detail')
+                    ->where('ID', $row->ProductDetailID)
+                    ->increment('Qty', $row->Qty);
+            }
+
+            DB::table('product_order_temporary')
+                ->select('*')
+                ->where('CustomerID',Auth::user()->id)
+                ->delete();
+        }
+
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product as p')
             ->select('p.*','s.Name as sellerName','s.Family as sellerFamily')
@@ -2416,7 +2456,6 @@ class Basic extends Controller
             ->select('id', 'Mobile')
             ->where('id', $productInfo->SellerID)
             ->first();
-
         }
 
         foreach ($data as $row){

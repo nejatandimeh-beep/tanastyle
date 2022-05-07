@@ -253,6 +253,16 @@
             }
         });
 
+        // check pressed browser back button
+        $(function() {
+            if(performance.navigation.type == 2) {
+                if(window.location.href.toLowerCase().indexOf("/product/")){
+                    location.reload();
+                    console.log('back');
+                }
+            }
+        });
+
         $(window).scroll(function (event) {
             if ($('.filterApply').length > 0) {
                 let st = $(this).scrollTop(),
@@ -435,7 +445,7 @@
             if ($('.masterPage').length > 0) {
                 $('#loadProduct').removeClass('d-none');
                 $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
-                for (let i = 0; i < 4; i++)
+                for (let i = 0; i < 3; i++)
                     loadProduct();
             }
         });

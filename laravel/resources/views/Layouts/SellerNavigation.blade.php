@@ -671,6 +671,11 @@
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">عینک</a>
                                                             </li>
                                                             <li>
+                                                                <a href="{{ route('AddProduct_askSize',['738','0']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">
+                                                                    بند عینک</a>
+                                                            </li>
+                                                            <li>
                                                                 <a href="{{ route('AddProduct_askSize',['731','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کراوات</a>
                                                             </li>

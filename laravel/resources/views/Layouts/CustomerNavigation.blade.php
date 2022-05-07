@@ -708,6 +708,9 @@
                                                                                       href="{{ route('menuProduct',['0','730','q','عینک زنانه']) }}">عینک</a>
                                                                 </li>
                                                                 <li class="g-mb-5"><a class="g-color-black"
+                                                                                      href="{{ route('menuProduct',['0','738','q','عینک زنانه']) }}">بند عینک</a>
+                                                                </li>
+                                                                <li class="g-mb-5"><a class="g-color-black"
                                                                                       href="{{ route('menuProduct',['0','731','q','کرائات زنانه']) }}">کراوات</a></li>
                                                                 <li class="g-mb-5"><a class="g-color-black"
                                                                                       href="{{ route('menuProduct',['0','732','q','پاپیون زنانه']) }}">پاپیون</a></li>

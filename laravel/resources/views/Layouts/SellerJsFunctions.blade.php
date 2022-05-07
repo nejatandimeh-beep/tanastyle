@@ -227,9 +227,10 @@
                         let titleElement = $(this).find('.title'),
                             title = titleElement.text(),
                             value = $(this).find('.value').val(),
+                            unitSize = ' '+$('#unitSize '+row).text()+' ',
                             detail = '';
                         if (!$(this).hasClass('d-none')) {
-                            detail = detail + title + ': ' + ' cm ' + value + '\n';
+                            detail = detail + title + ': ' + unitSize + value + '\n';
                             productDetail.val(productDetail.val() + detail)
                         }
                     });
