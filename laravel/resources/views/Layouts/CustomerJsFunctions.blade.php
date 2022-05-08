@@ -1250,11 +1250,7 @@
                 $('.custombox-content #popularPost').removeClass('d-block');
                 $('.custombox-content #popularPost').addClass('d-none');
                 $('#tempPostPrice').val('0');
-
-
-                let price=parseInt($('#allPrice').val()),
-                    postPrice=parseInt($('.custombox-content #postPrice').text().replace(new RegExp(',', 'g'), ""));
-                $('#allPrice').val((price-postPrice));
+                $('#allPrice').val($('#pureOrderPrice').text());
 
                 $('.custombox-content #orderPrice').text($('.custombox-content #pureOrderPrice').text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             } else {
@@ -1263,6 +1259,14 @@
                 $('.custombox-content #popularPost').addClass('d-block');
                 $('.custombox-content #popularPost').removeClass('d-none');
                 $('#tempPostPrice').val($('.custombox-content #postPrice').text().replace(new RegExp(',', 'g'), ""));
+
+                let price=parseInt($('.custombox-content #pureOrderPrice').text().replace(new RegExp(',', 'g'), "")),
+                    postPrice=parseInt($('.custombox-content #postPrice').text().replace(new RegExp(',', 'g'), ""));
+                $('.custombox-content #orderPrice').text((price+postPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+
+                if($('.cartContainer').length>0){
+                    $('#allPrice').val(price+postPrice);
+                }
             }
 
         }
