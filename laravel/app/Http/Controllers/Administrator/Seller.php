@@ -305,6 +305,7 @@ class Seller extends Controller
                 ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
                 ->where('p.SellerID', $sellerID)
+                ->groupBy('pDetailID')
                 ->paginate(10);
 
             return $data;

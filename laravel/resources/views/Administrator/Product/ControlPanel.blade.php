@@ -56,6 +56,7 @@
                                         <th class="align-middle text-center text-nowrap">تاریخ فروش</th>
                                         <th class="align-middle text-center text-nowrap">ساعت فروش</th>
                                         <th class="align-middle text-center text-nowrap">شماره فاکتور</th>
+                                        <th class="align-middle text-center text-nowrap">روس ارسال</th>
                                         <th class="align-middle text-center text-nowrap">عکس</th>
                                         <th class="align-middle text-center">وضعیت تحویل</th>
                                         <th class="align-middle text-center">پیغام سیستمی</th>
@@ -69,6 +70,7 @@
                                             <td class="align-middle text-center text-nowrap">{{ $deliverPersianDate[$key][0].'/'.$deliverPersianDate[$key][1].'/'.$deliverPersianDate[$key][2] }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $rec->Time }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $rec->OrderId.'/'.$rec->OrderDetailID }}</td>
+                                            <td class="align-middle text-center text-nowrap">{{ $rec->PostMethod }}</td>
                                             <td class="align-middle text-center text-nowrap">
                                                 <div class="media">
                                                     <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
@@ -562,6 +564,7 @@
                                         <th class="align-middle text-center text-nowrap">شماره فاکتور</th>
                                         <th class="align-middle text-center text-nowrap">موبایل خریدار</th>
 {{--                                        <th class="align-middle text-center text-nowrap">گیرنده</th>--}}
+                                        <th class="align-middle text-center">روش ارسال</th>
                                         <th class="align-middle text-center">عکس</th>
                                         <th class="align-middle text-center">جزییات</th>
                                         <th class="align-middle text-center">مشخصات</th>
@@ -594,6 +597,7 @@
                                             <td class="align-middle text-center">{{ $rec->orderID.'/'.$rec->orderDetailID }}</td>
                                             <td class="align-middle text-center">{{ $rec->customerMobile }}</td>
 {{--                                            <td class="align-middle text-center">{{ $rec->ReceiverName.' '.$rec->ReceiverFamily }}</td>--}}
+                                            <td class="align-middle text-center text-nowrap">{{ $rec->PostMethod }}</td>
                                             <td class="align-middle">
                                                 <div class="media">
                                                     <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
@@ -953,7 +957,7 @@
                                                     <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
                                                        data-toggle="tooltip"
                                                        data-placement="top" data-original-title="فروخته شد">
-                                                        <i class="icon-finance-202 u-line-icon-pro g-font-size-22 g-color-gray-light-v3 g-color-primary--hover"></i>
+                                                        <i class="fa fa-lock g-font-size-22 g-color-gray-light-v3 g-color-primary--hover"></i>
                                                     </a>
                                                 @endif
                                             </td>

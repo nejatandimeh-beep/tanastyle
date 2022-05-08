@@ -13,6 +13,7 @@
     <span id="picPath" class="d-none">{{ $data->PicPath }}</span>
     <span id="genderCode" class="d-none">{{ $data->GenderCode }}</span>
     <span id="catCode" class="d-none">{{ $data->CatCode }}</span>
+    <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10000':'15000'}}" class="d-none" id="tempPostPrice" type="text">
 
     <div id="productDetailContainer" class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4 modalBox productDetail">
         <!-- smallDevice -->
@@ -599,12 +600,27 @@
                             </div>
                             {{--آدرس و مبلغ فاکتور--}}
                             <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
-                                <div class=" col-12 col-lg-3 g-px-0">
+                                <div id="postContainer" class="col-12 col-lg-3 g-px-0">
+                                    <div class="btn-group text-center justified-content g-mt-15">
+                                        <label class="u-check col-5 p-0">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="radGroupBtn1_1" type="radio" onchange="postPriceFunc('tpax')">
+                                            <span class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked rounded-0">تیپاکس</span>
+                                        </label>
+                                        <label class="u-check col-6 p-0">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="radGroupBtn1_1" id="popularPostBtn" type="radio" checked="" onchange="postPriceFunc('popular')">
+                                            <span class="btn btn-md btn-block u-btn-outline-lightgray g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">پست معمولی</span>
+                                        </label>
+                                    </div>
                                     {{--هزینه پستی--}}
-                                    <span
-                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-15--lg text-center">هزینه پستی:
+                                    <span id="popularPost"
+                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
                                         <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10,000':'15,000'}}</span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                    </span>
+                                    <span  id="tPaxPost"
+                                        class="d-none u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
+                                        <span id="tpaxPrice" class="d-none">0</span>
+                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">پرداخت در محل</span>
                                     </span>
                                     {{--مبلغ فاکتور--}}
                                     <span
@@ -612,6 +628,9 @@
                                             id="orderPrice"></span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                     </span>
+                                    <span
+                                        class="d-none u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
+                                            id="pureOrderPrice"></span>
                                 </div>
 
                                 {{--آدرس--}}

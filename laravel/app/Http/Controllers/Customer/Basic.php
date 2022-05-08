@@ -802,8 +802,18 @@ class Basic extends Controller
         }
     }
 
-    public function bankingPortal($id, $qty)
+    public function bankingPortal($id, $qty,$postPrice)
     {
+        $postMethod='';
+
+        switch ($postPrice){
+            case '0':
+                $postMethod='TPax';
+                break;
+            default:
+                $postMethod='popular';
+        }
+
         $stock = null;
         $data = DB::table('product_detail as pd')
             ->select('pd.ID', 'p.FinalPrice','pd.ID', 'pd.Qty', 'pd.Size', 'pd.Color')
@@ -822,24 +832,17 @@ class Basic extends Controller
             ->decrement('Qty', $qty);
 
         session_start();
-        if(isset($_SESSION['stateCode'])) {
-           if( $_SESSION['stateCode']==='2' &&  $_SESSION['cityCode']==='36'){
-                $postPrice = 10000;
-            } else {
-                $postPrice = 15000;
-            }
-        } else {
-            $postPrice = 15000;
-        }
 
         if ($stock) {
-            $price = ($data->FinalPrice * $qty )+$postPrice;
+//            $price = ($data->FinalPrice * $qty )+$postPrice;
+            $price = 1000;
             DB::table('product_order_temporary')
                 ->insert([
                     'CustomerID'=> Auth::user()->id,
                     'ProductDetailID'=> $id,
                     'Qty'=> $qty,
                     'Price'=> $price,
+                    'PostMethod'=> $postMethod,
                 ]);
 
             $order = new zarinpal();
@@ -2384,6 +2387,7 @@ class Basic extends Controller
                     'Date' => $date,
                     'Time' => $time,
                     'Authority' => $Authority,
+                    'PostMethod' => $record->PostMethod,
                 ]);
             }
 

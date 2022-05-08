@@ -893,6 +893,7 @@
 
         // Bank Portal
         function bankingPortal(id, qty) {
+            let  postPrice=$('#tempPostPrice').val();
             $('.custombox-content #bankingPortalBtn').hide();
             $('.custombox-content #waitingIconSubmit').show();
             if ($('#loginAlert').text() === 'login') {
@@ -910,7 +911,7 @@
                         }
                         if (error === 0) {
                             if ($('#addressID').length > 0) {
-                                window.location = '/Banking-Portal/' + id + '/' + qty;
+                                window.location = '/Banking-Portal/' + id + '/' + qty+'/'+postPrice;
                             } else {
                                 $('.custombox-content #bankingPortalBtn').show();
                                 $('.custombox-content #waitingIconSubmit').hide();
@@ -1236,6 +1237,28 @@
                 $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }
 
+        function postPriceFunc(post) {
+            if(post==='tpax'){
+                $('.custombox-content #tPaxPost').removeClass('d-none');
+                $('.custombox-content #tPaxPost').addClass('d-block');
+                $('.custombox-content #popularPost').removeClass('d-block');
+                $('.custombox-content #popularPost').addClass('d-none');
+                $('#tempPostPrice').val('0');
+
+                $('.custombox-content #orderPrice').text($('.custombox-content #pureOrderPrice').text().toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            } else {
+                $('.custombox-content #tPaxPost').addClass('d-none');
+                $('.custombox-content #tPaxPost').removeClass('d-block');
+                $('.custombox-content #popularPost').addClass('d-block');
+                $('.custombox-content #popularPost').removeClass('d-none');
+                $('#tempPostPrice').val($('.custombox-content #postPrice').text().replace(new RegExp(',', 'g'), ""));
+
+                let price=parseInt($('.custombox-content #pureOrderPrice').text().replace(new RegExp(',', 'g'), "")),
+                    postPrice=parseInt($('.custombox-content #postPrice').text().replace(new RegExp(',', 'g'), ""));
+                $('.custombox-content #orderPrice').text((price+postPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            }
+
+        }
         function cartReset() {
             $('[id^="cartContainer"]').each(function (index) {
                 $(this).attr('id', 'cartContainer' + index);
@@ -1549,9 +1572,13 @@
             $('#orderProductUnitPrice').text($('#productUnitPrice').text());
             $('#orderProductFinalPrice').text($('#productFinalPrice').text());
             $('#orderProductQtyPrice').text(orderPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-            $('#orderPrice').text((orderPrice + parseInt(postPrice)).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+            $('#pureOrderPrice').text(orderPrice);
+            $('#orderPrice').text((orderPrice + parseInt($('#tempPostPrice').val())).toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#orderDate').text(nowDate());
             $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
+            setTimeout(function () {
+                $('.custombox-content #popularPostBtn').trigger('click');
+            },100)
         }
 
         // تابع اضافه کردن نظرات

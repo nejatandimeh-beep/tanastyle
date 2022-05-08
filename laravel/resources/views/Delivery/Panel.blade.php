@@ -449,7 +449,7 @@
                                                     @endif
                                                     @if($row->DeliveryStatus === '3')
                                                         <span class="g-font-size-16 g-color-yellow">
-                                                            اداره پست مرکزی
+                                                            {{$row->PostMethod}}
                                                         </span>
                                                     @endif
                                                 </td>
