@@ -720,10 +720,25 @@ class Basic extends Controller
                 ->orderBy('Date')
                 ->orderBy('Time')
                 ->get();
+
+            $tempOrder=DB::table('product_order_temporary as pot')
+                ->select('*')
+                ->where('CustomerID',Auth::user()->id)
+                ->get();
+
+            foreach ($tempOrder as $row){
+                DB::table('product_detail')
+                    ->where('ID', $row->ProductDetailID)
+                    ->increment('Qty', $row->Qty);
+            }
+
+            DB::table('product_order_temporary')
+                ->select('*')
+                ->where('CustomerID',Auth::user()->id)
+                ->delete();
         } catch (\Exception $e) {
             return redirect()->route('login');
         }
-
 
         $sendAddress = $this->checkAddress();
         return view('Customer.Cart', compact('sendAddress', 'data'));
@@ -805,7 +820,6 @@ class Basic extends Controller
     public function bankingPortal($id, $qty,$postPrice)
     {
         $postMethod='';
-
         switch ($postPrice){
             case '0':
                 $postMethod='TPax';
@@ -813,7 +827,6 @@ class Basic extends Controller
             default:
                 $postMethod='popular';
         }
-
         $stock = null;
         $data = DB::table('product_detail as pd')
             ->select('pd.ID', 'p.FinalPrice','pd.ID', 'pd.Qty', 'pd.Size', 'pd.Color')
@@ -834,8 +847,7 @@ class Basic extends Controller
         session_start();
 
         if ($stock) {
-//            $price = ($data->FinalPrice * $qty )+$postPrice;
-            $price = 1000;
+            $price = ($data->FinalPrice * $qty )+$postPrice;
             DB::table('product_order_temporary')
                 ->insert([
                     'CustomerID'=> Auth::user()->id,

@@ -631,6 +631,7 @@
                                     <span
                                         class="d-none u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
                                             id="pureOrderPrice"></span>
+                                    </span>
                                 </div>
 
                                 {{--آدرس--}}
