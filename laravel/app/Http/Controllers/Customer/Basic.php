@@ -510,7 +510,7 @@ class Basic extends Controller
                             'DeliveryProblem' => 0
                         ]);
                     $deliveryHint[$key]['text'] = 'در دست';
-                    $deliveryHint[$key]['location'] = 'پست';
+                    ($row->PostMethod === 'پست معمولی' ?$deliveryHint[$key]['location'] = 'پست':$deliveryHint[$key]['location'] = 'تیپاکس');
 
                     $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100) * (60 / 100));
                     if ($deliveryMin[$key] > 5040) {
@@ -822,10 +822,10 @@ class Basic extends Controller
         $postMethod='';
         switch ($postPrice){
             case '0':
-                $postMethod='TPax';
+                $postMethod='تیپاکس';
                 break;
             default:
-                $postMethod='popular';
+                $postMethod='پست معمولی';
         }
         $stock = null;
         $data = DB::table('product_detail as pd')

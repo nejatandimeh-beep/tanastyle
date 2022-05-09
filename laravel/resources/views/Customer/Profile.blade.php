@@ -1502,9 +1502,20 @@
                                                         </div>
                                                         <div class="d-lg-flex justify-content-between">
                                                             <div class=" col-12 col-lg-3 g-px-0">
+                                                                <div class="btn-group text-center justified-content g-mt-15">
+                                                                    <label class="u-check col-5 p-0">
+                                                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="radGroupBtn1_1" type="radio">
+                                                                        <span class="btn btn-md btn-block u-btn-outline-lightgray {{$row->PostMethod==='تیپاکس' ? 'g-color-white g-bg-primary': 'disabled'}} rounded-0">تیپاکس</span>
+                                                                    </label>
+                                                                    <label class="u-check col-6 p-0">
+                                                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="radGroupBtn1_1" id="popularPostBtn" type="radio">
+                                                                        <span class="btn btn-md btn-block u-btn-outline-lightgray {{$row->PostMethod==='پست معمولی' ? 'g-color-white g-bg-primary': 'disabled'}}  g-brd-left-none--md rounded-0">پست معمولی</span>
+                                                                    </label>
+                                                                </div>
+
                                                                 <span
                                                                     class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-15--lg text-center">هزینه پستی:
-                                                                    <span>15،000</span>
+                                                                    <span>{{$row->PostMethod==='تیپاکس' ? ' پرداخیت در محل': ($row->State === '2' && $row->City=== '36'?'10,000':'15,000') }}</span>
                                                                     <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                                                 </span>
                                                                 {{--مبلغ فاکتور--}}
