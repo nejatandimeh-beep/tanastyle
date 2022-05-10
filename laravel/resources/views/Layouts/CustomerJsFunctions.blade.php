@@ -1,5 +1,17 @@
 @section('CustomerJsFunction')
     <script>
+        window.addEventListener( "pageshow", function ( event ) {
+            let historyTraversal = event.persisted ||
+                ( typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+                // Handle page restore.
+                if($('.cartContainer').length>0 || $('#productDetailContainer').length>0){
+                    console.log('reload');
+                    window.location.reload();
+                }
+            }
+        });
         let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
             stopLoadProduct = false, successLoadProduct = true, deviceScroll = 0,
             file_upload, file_type;
@@ -16,7 +28,7 @@
             if ($('.masterPage').length > 0) {
                     $('#loadProduct').removeClass('d-none');
                     $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
-                    for (let i = 0; i < 3; i++)
+                    for (let i = 0; i < 2; i++)
                         loadProduct();
             }
 
