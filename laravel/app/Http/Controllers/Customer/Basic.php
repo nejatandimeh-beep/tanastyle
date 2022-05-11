@@ -2321,7 +2321,7 @@ class Basic extends Controller
 
         $gender = 'all';
         $catCode = 'all';
-        $title = 'قیمت بین ' . $minDiscount . ' تا ' . $maxDiscount;
+        $title = 'تخفیف بین ' . $minDiscount . ' تا ' . $maxDiscount.' درصد';
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
@@ -2343,6 +2343,8 @@ class Basic extends Controller
             ->where('Cat', $cat)
             ->groupBy('p.ID')
             ->paginate(12);
+
+        $_SESSION['title'] = isset($data[0])?$data[0]->Name.' '.$data[0]->Gender:'نتایج منوی انتخاب شده';
 
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }

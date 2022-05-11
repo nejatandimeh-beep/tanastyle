@@ -110,6 +110,8 @@ class Product extends Controller
                 ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
                 ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
+                ->orderby('pd.ID','DESC')
+                ->groupBy('pd.ID')
                 ->paginate(10);
 
             return $data;
@@ -160,6 +162,7 @@ class Product extends Controller
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
                 ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
+                ->orderby('pod.ID','DESC')
                 ->paginate(10);
 
             return $data;

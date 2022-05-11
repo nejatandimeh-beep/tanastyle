@@ -295,6 +295,7 @@ class Customer extends Controller
                 ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->where('po.CustomerID', $customerId)
+                ->orderby('pod.ID','DESC')
                 ->paginate(10);
 
             return $data;

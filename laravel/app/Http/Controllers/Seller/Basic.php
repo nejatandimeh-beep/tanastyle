@@ -1030,6 +1030,7 @@ class Basic extends Controller
                 ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
                 ->where('p.SellerID', $sellerID)
+                ->orderby('pd.ID','DESC')
                 ->groupBy('pd.ID')
                 ->paginate(10);
             return $data;
@@ -1043,6 +1044,8 @@ class Basic extends Controller
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
                 ->where('p.SellerID', $sellerID)
                 ->where($where, $val)
+                ->orderby('pd.ID','DESC')
+                ->groupBy('pd.ID')
                 ->paginate(10);
 
         } elseif ($where2 === 'In') {
@@ -1055,6 +1058,8 @@ class Basic extends Controller
                 ->whereIn('pd.ID', function ($q) {
                     $q->select('ProductDetailID')->from('product_false');
                 })
+                ->orderby('pd.ID','DESC')
+                ->groupBy('pd.ID')
                 ->paginate(10);
 
         } elseif ($where2 === 'NotIn') {
@@ -1067,6 +1072,8 @@ class Basic extends Controller
                 ->whereNotIn('pd.ID', function ($q) {
                     $q->select('ProductDetailID')->from('product_false');
                 })
+                ->orderby('pd.ID','DESC')
+                ->groupBy('pd.ID')
                 ->paginate(10);
         } elseif ($where2 === 'whereBetween') {
             $data = DB::table('product as p')
@@ -1076,6 +1083,8 @@ class Basic extends Controller
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
                 ->where('p.SellerID', $sellerID)
                 ->whereBetween('UnitPrice', [$where, $val]) // بخاطر حذف پارامترهای اضافی، کمترین مبلغ و بیشترین مبلغ را در این دو متغییر گنجانده ایم.
+                ->orderby('pd.ID','DESC')
+                ->groupBy('pd.ID')
                 ->paginate(10);
         }
 
@@ -1131,6 +1140,7 @@ class Basic extends Controller
                 ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->where('pod.SellerID', $sellerID)
+                ->orderby('pod.ID','DESC')
                 ->paginate(10);
 
             return $data;
@@ -1147,6 +1157,7 @@ class Basic extends Controller
                 ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->where('pod.SellerID', $sellerID)
                 ->where($where, $val)
+                ->orderby('pod.ID','DESC')
                 ->paginate(10);
 
         } elseif ($where2 === 'In') {
@@ -1161,6 +1172,7 @@ class Basic extends Controller
                 ->whereIn('pd.ID', function ($q) {
                     $q->select('ProductDetailID')->from('product_false');
                 })
+                ->orderby('pod.ID','DESC')
                 ->paginate(10);
 
         } elseif ($where2 === 'NotIn') {
@@ -1175,6 +1187,7 @@ class Basic extends Controller
                 ->whereNotIn('pd.ID', function ($q) {
                     $q->select('ProductDetailID')->from('product_false');
                 })
+                ->orderby('pod.ID','DESC')
                 ->paginate(10);
         } elseif ($where2 === 'whereRaw') {
             $data = DB::table('product_order_detail as pod')
@@ -1186,6 +1199,7 @@ class Basic extends Controller
                 ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->where('pod.SellerID', $sellerID)
                 ->whereRaw('(p.FinalPrice * pod.Qty) BETWEEN ? AND ?', [$where, $val]) // بخاطر حذف پارامترهای اضافی، کمترین مبلغ و بیشترین مبلغ را در این دو متغییر گنجانده ایم.
+                ->orderby('pod.ID','DESC')
                 ->paginate(10);
         } elseif ($where2 === 'whereBetween') {
             $data = DB::table('product_order_detail as pod')
@@ -1197,6 +1211,7 @@ class Basic extends Controller
                 ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
                 ->where('pod.SellerID', $sellerID)
                 ->whereBetween('Date', [$where, $val]) // بخاطر حذف پارامترهای اضافی، شروع تاریخ و پایان تاریخ را در این دو متغییر گنجانده ایم.
+                ->orderby('pod.ID','DESC')
                 ->paginate(10);
         }
 
