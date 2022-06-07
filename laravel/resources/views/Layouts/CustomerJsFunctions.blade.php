@@ -1101,6 +1101,10 @@
             }, 1);
         }
 
+        $('.radioBtn').on('change', function () {
+            $('#productListPagination').hide();
+            console.log('change radio')
+        })
         function allSwitchBtn(btn) {
             switch (btn) {
                 case 'gender-all':

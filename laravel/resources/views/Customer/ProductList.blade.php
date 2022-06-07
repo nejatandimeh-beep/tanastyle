@@ -64,7 +64,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>همه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="gender"
                                                                    id="gender-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
@@ -82,7 +82,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>زنانه </span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="gender"
                                                                    id="g-0"
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
@@ -99,7 +99,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>مردانه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="gender"
                                                                    id="g-1"
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
@@ -116,7 +116,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>دخترانه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="gender"
                                                                    id="g-2"
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
@@ -133,7 +133,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>پسرانه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="gender"
                                                                    id="g-3"
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
@@ -150,7 +150,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>نوزادی دخترانه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="gender"
                                                                    id="g-4"
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
@@ -167,7 +167,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>نوزادی پسرانه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="gender"
                                                                    id="g-5"
                                                                    onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
@@ -208,7 +208,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>همه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="cat-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
@@ -227,7 +227,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>لباس زیر</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="a"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -245,7 +245,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>لباس پایین تنه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="b"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -263,7 +263,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>لباس بالا تنه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="c"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -281,7 +281,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>لباس تمام تنه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="d"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -299,7 +299,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>کیف</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="e"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -317,7 +317,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>کفش</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="f"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -335,7 +335,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>لباس زیر ورزشی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="g"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -353,7 +353,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>لباس پایین تنه ورزشی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="h"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -371,7 +371,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>لباس بالا تنه ورزشی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="i"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -389,7 +389,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>لباس تمام تنه ورزشی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="j"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -407,7 +407,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>کیف ورزشی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="k"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -425,7 +425,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>کفش ورزشی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="l"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -443,7 +443,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>اکسسوری ورزشی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="m"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -461,7 +461,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>بدلیجات</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="n"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -479,7 +479,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>اکسسوری مو</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="o"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -497,7 +497,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>سرپوش</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="p"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -515,7 +515,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>سایر</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"
                                                                    id="q"
                                                                    onchange="$('#cat-all').prop('checked',false); checkAllIsOff('#filters-on-cat',$(this).attr('name'))"
@@ -557,7 +557,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>همه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="size"
                                                                    id="size-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
@@ -576,7 +576,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>XS</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="size"
                                                                    id="XS"
                                                                    onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
@@ -594,7 +594,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>S</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="size"
                                                                    id="S"
                                                                    onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
@@ -612,7 +612,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>M</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="size"
                                                                    id="M"
                                                                    onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
@@ -630,7 +630,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>L</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="size"
                                                                    id="L"
                                                                    onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
@@ -648,7 +648,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>xL</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="size"
                                                                    id="XL"
                                                                    onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
@@ -666,7 +666,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>xxL</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="size"
                                                                    id="XXL"
                                                                    onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
@@ -684,7 +684,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>xxxL</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="size"
                                                                    id="XXXL"
                                                                    onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
@@ -702,7 +702,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>Free</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="size"
                                                                    id="Free"
                                                                    onchange="$('#size-all').prop('checked',false); checkAllIsOff('#filters-on-size',$(this).attr('name'))"
@@ -744,7 +744,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>همه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="priceAll"
                                                                    id="price-all"
                                                                    onchange="priceAll()"
@@ -823,7 +823,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>همه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="color-all"
                                                                    onclick="allSwitchBtn($(this).attr('id'))"
@@ -848,7 +848,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای سفید</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-0"
                                                                    type="checkbox"
@@ -884,7 +884,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای قرمز</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-1"
                                                                    type="checkbox"
@@ -920,7 +920,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای صورتی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-2"
                                                                    type="checkbox"
@@ -956,7 +956,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای نارنجی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-3"
                                                                    type="checkbox"
@@ -992,7 +992,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای زرد</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-4"
                                                                    type="checkbox"
@@ -1028,7 +1028,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای سبز</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-5"
                                                                    type="checkbox"
@@ -1064,7 +1064,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای آبی</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-6"
                                                                    type="checkbox"
@@ -1100,7 +1100,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای بنفش</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-7"
                                                                    type="checkbox"
@@ -1136,7 +1136,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای قهوه ای</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-8"
                                                                    type="checkbox"
@@ -1172,7 +1172,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>خانواده رنگهای سیاه</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-9"
                                                                    type="checkbox"
@@ -1208,7 +1208,7 @@
                                                     <label class="d-flex align-items-center justify-content-between">
                                                         <span>رنگهای مالتی کالر</span>
                                                         <div class="u-check">
-                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn"
                                                                    name="color"
                                                                    id="c-10"
                                                                    type="checkbox"
@@ -1505,7 +1505,7 @@
                     <!-- End Products -->
 
                     {{-- Pagination --}}
-                    <div style="direction: ltr">
+                    <div id="productListPagination" style="direction: ltr">
                         {{ $data->links('General.Pagination', ['result' => $data]) }}
                     </div>
                 </div>
