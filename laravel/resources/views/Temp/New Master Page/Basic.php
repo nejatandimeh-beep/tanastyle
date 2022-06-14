@@ -23,73 +23,238 @@ class Basic extends Controller
 {
     public function Master()
     {
-        $glass = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->where('Cat', '730')
-            ->orWhere('Cat', '738')
-            ->inRandomOrder()
-            ->take(5)
-            ->get();
 
-        $earring = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->where('Cat', '700')
-            ->inRandomOrder()
-            ->take(5)
-            ->get();
-
-        $necklace = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->where('Cat', '701')
-            ->inRandomOrder()
-            ->take(5)
-            ->get();
-
-        $bracelet = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->where('Cat', '703')
-            ->inRandomOrder()
-            ->take(5)
-            ->get();
-
-//        $ring = DB::table('product as p')
-//            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-//            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-//            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-//            ->where('Cat', '704')
-//            ->inRandomOrder()
-//            ->take(5)
+//        $data=DB::table('product as p')
+//            ->select('*')
+//            ->leftJoin('product_detail as pd','pd.ProductID','=','p.ID')
+//            ->leftJoin('product_order_detail as pod','pod.ProductDetailID','=','pd.ID')
+//            ->orderBy('pod.SellCount')
+//            ->take(10)
 //            ->get();
+//        return redirect()->route('login');
+        session_start();
+        $_SESSION['listSkip']=0;
 
-//        $ankle = DB::table('product as p')
-//            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-//            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-//            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-//            ->where('Cat', '705')
-//            ->inRandomOrder()
-//            ->take(5)
-//            ->get();
+        return view('Customer.Master');
+    }
 
+    public function productLoad()
+    {
+        session_start();
+        $data = DB::table('product as p')
+            ->select('p.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->orderBy('p.RegDate','DESC')
+            ->orderBy('p.VisitCounter','DESC')
+            ->skip($_SESSION['listSkip'])
+            ->take(12)
+            ->get();
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->orderBy('p.RegDate','DESC')
+            ->orderBy('p.VisitCounter','DESC')
+            ->groupBy('p.ID')
+            ->skip($_SESSION['listSkip'])
+            ->take(12)
+            ->get();
+
+        if(!isset($size[0]->Color))
+            return $products='null';
+
+        $products='<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer">';
+        foreach($data as $key => $row){
+            $products = $products . '
+             <div class="col-12 col-lg-3 g-mb-30">
+                <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
+                        class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
+                    <div>
+                        <div id="carousel-08-'.$_SESSION['listSkip'].$key.'"
+                             class="js-carousel text-center g-mb-5"
+                             data-infinite="1"
+                             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
+                             data-nav-for="#carousel-08-'.$_SESSION['listSkip'].$key.'">
+                            <div class="js-slide">
+                                <a href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'">
+                                    <img class="img-fluid w-100" loading="lazy" width="402" height="500"
+                                         src="'. $row->PicPath .'sample1.jpg"
+                                         alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
+                                </a>
+                            </div> ';
+            if (file_exists(public_path($row->PicPath.'pic2.jpg')))
+                $products = $products . $this->productImage('2',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic3.jpg')))
+                $products = $products . $this->productImage('3',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic4.jpg')))
+                $products = $products . $this->productImage('4',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic5.jpg')))
+                $products = $products . $this->productImage('5',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic6.jpg')))
+                $products = $products . $this->productImage('6',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic7.jpg')))
+                $products = $products . $this->productImage('7',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic8.jpg')))
+                $products = $products . $this->productImage('8',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic9.jpg')))
+                $products = $products . $this->productImage('9',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic10.jpg')))
+                $products = $products . $this->productImage('10',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic11.jpg')))
+                $products = $products . $this->productImage('11',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic12.jpg')))
+                $products = $products . $this->productImage('12',$row,$size,$key);
+            if (file_exists(public_path($row->PicPath.'pic13.jpg')))
+                $products = $products . $this->productImage('13',$row,$size,$key);
+
+            // مشخصات محصول
+            $products = $products . '</div>
+                                        </div>
+                                        <h4 class="h6 g-color-black text-left g-brd-top g-brd-gray-light-v4 g-ml-5 g-mt-5 g-pt-5">'.$row->Brand.'</h4> ';
+            $products = $products . '<div style="direction: rtl"
+                         class="media">
+                        <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                        <div class="d-flex justify-content-between col-12 p-0">
+                            <div class="d-flex flex-column">
+                                <h1 class="h6 g-color-black my-1">
+                                                    <span class="u-link-v5 g-color-black"
+                                                          tabindex="0">
+                                                        '. $row->Name .'
+                                                        <span
+                                                            class="g-font-size-12 g-font-weight-300">'. $row->Model .'</span>
+                                                    </span>
+                                </h1>
+                                <ul style="padding: 0"
+                                    class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
+                                    <li>
+                                        <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600">'. $row->HintCat.' '.$row->Gender .'</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a style="cursor: pointer"
+                               class="u-icon-v1 g-mt-minus-5 g-color-black g-color-primary--hover rounded-circle"
+                               data-toggle="tooltip"
+                               data-placement="top"
+                               href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'"
+                               data-original-title="جزئیات محصول">
+                                <i class="icon-eye g-line-height-0_7"></i>
+                            </a>
+                        </div></div>';
+
+            $products = $products .' <h1
+                        class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
+                    <div
+                        class="d-block g-color-black g-font-size-17 g-ml-10">
+                        <div style="direction: rtl" class="text-left">
+                            <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                '.  number_format($row->FinalPriceWithoutDiscount) .'
+                            </s>
+                            <span>'.  number_format($row->FinalPrice) .'</span>
+                            <span
+                                class="d-block g-color-gray-dark-v5 g-font-size-10">تومان</span>
+                        </div>
+                    </div>
+                </figure>
+            </div>';
+        }
+        $_SESSION['listSkip'] = $_SESSION['listSkip']+12;
+
+        return $products.'</div>';
+    }
+
+    public function discounts()
+    {
         $minDiscount = 1;
         $maxDiscount = 99;
+
         $discounts = DB::table('product as p')
             ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->orderBy('Discount', 'DESC')
+            ->orderBy('VisitCounter', 'DESC')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
-            ->inRandomOrder()
             ->take(5)
             ->get();
 
-        return view('Customer.Master',compact('discounts','glass','earring','necklace','bracelet'));
+        $products = '<div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
+        <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
+             data-infinite="true"
+             data-slides-show="4"
+             data-autoplay="0"
+             data-speed="5000"
+             data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
+             data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
+             data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
+             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">';
+        foreach($discounts as $key =>$row){
+            $products=$products.'
+             <div class="js-slide g-mx-10">
+                    <!-- Product -->
+                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
+                        <div>
+                            <div id="carousel-08-'.($key+100000).'"
+                                 class="js-carousel text-center g-mb-5"
+                                 data-infinite="1"
+                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
+                                 data-nav-for="#carousel-08-'.($key+100000).'">
+                                <div class="js-slide">
+                                    <a href="'. route("productDetail",[$row->ProductID, $row->Size]).'">
+                                        <img class="img-fluid w-100" loading="lazy"
+                                             src="'.$row->PicPath.$row->SampleNumber.".jpg" .'"
+                                             alt="'.$row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand." ".$row->Size." ".$row->Color  .'">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- مشخصات محصول -->
+                        <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
+                            <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                            <div class="d-flex flex-column col-12 g-px-5">
+                                <h1 class="h6 g-color-black my-1 text-left">
+                                   '. $row->Brand .'
+                                </h1>
+                                <h4 class="h6 g-color-black my-1">
+                                    <span class="u-link-v5 g-color-black"
+                                          tabindex="0">
+                                        '. $row->Name .'
+                                        <span
+                                            class="g-font-size-12 g-font-weight-300"> '. $row->Model .'</span>
+                                        <span
+                                            class="g-font-size-12 g-font-weight-300"> '. $row->Gender .'</span>
+                                    </span>
+                                </h4>
+                                <div>
+                                    <span class="g-ml-5">سایز
+                                        <span class="g-color-primary">'. $row->Size .'</span>
+                                    </span>
+                                    <span>رنگ
+                                        <span class="g-color-primary">'. $row->Color .'</span>
+                                    </span>
+                                </div>
+                                <span>موجودی <span id="'. "cartQty".$key .'"
+                                                   class="g-color-primary">'.  $row->Qty .'</span> عدد</span>
+                            </div>
+                        </div>
+                        <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
+                        <div
+                            class="d-block g-color-black g-font-size-17 g-ml-5">
+                            <div style="direction: rtl" class="text-left">
+                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
+                                    '. number_format($row->FinalPriceWithoutDiscount) .'
+                                </s>
+                                <span>'. number_format($row->FinalPrice) .'</span>
+                                <span
+                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                            </div>
+                        </div>
+                    </figure>
+                    <!-- End Product -->
+                </div>';
+        }
+
+        return $products.'</div>';
     }
 
     public function sameProduct($genderCode,$catCode,$productID)
@@ -1682,67 +1847,6 @@ class Basic extends Controller
     }
 
 // ---------------------------------------------[Product List]----------------------------------------------------------
-    public function moreItem($cat)
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $category=[];
-        switch ($cat){
-            case '700':
-                $category[0]=$cat;
-                $gender = '0';
-                $catCode = 'q';
-                $title = 'گوشواره و اکسسوری گوش زنانه';
-                break;
-            case '701':
-                $category[0]=$cat;
-                $gender = '0';
-                $catCode = 'q';
-                $title = 'گردنبند و آویز رو لباسی';
-                break;
-            case '703':
-                $category[0]=$cat;
-                $gender = '0';
-                $catCode = 'q';
-                $title = 'دست بند و اکسسوری های دست';
-                break;
-            case '704':
-                $category[0]=$cat;
-                $gender = '0';
-                $catCode = 'q';
-                $title = 'انگشتر مجلسی و کژوال';
-                break;
-            case '705':
-                $category[0]=$cat;
-                $gender = '0';
-                $catCode = 'q';
-                $title = 'پا بند و اکسسوری های پا';
-                break;
-            case '730':
-                $category=['730','738'];
-                $gender = '0';
-                $catCode = 'q';
-                $title = 'عینک آفتابی و بند عینک زنانه';
-                break;
-            default:
-                $category[0]=$cat;
-        }
-        $data = DB::table('product')
-            ->select('*')
-            ->whereIn('Cat', $category)
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->whereIn('Cat', $category)
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
     public function productFemaleList()
     {
         session_start();

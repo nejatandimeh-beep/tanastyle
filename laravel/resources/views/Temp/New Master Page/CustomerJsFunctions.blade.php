@@ -13,26 +13,10 @@
             }
         });
         let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
-            file_upload, file_type, stopLoadProduct = false;
-        function carousel(ele){
-            $('#'+ele).slick('setOption', 'responsive', [{
-                breakpoint: 992,
-                settings: {
-                    slidesToShow: 1
-                }
-            }], true);
-        }
+            stopLoadProduct = false, successLoadProduct = true, deviceScroll = 0,
+            file_upload, file_type;
+
         $(document).ready(function () {
-            if($('.masterPage').length>0) {
-                $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
-                carousel('js-carousel-1');
-                carousel('js-carousel-2');
-                carousel('js-carousel-3');
-                carousel('js-carousel-4');
-                carousel('js-carousel-5');
-                carousel('js-carousel-6');
-                carousel('js-carousel-7');
-            }
             $('#load').hide();
             // if ('.masterPage'.length > 0) {
             //     if ('scrollRestoration' in history) {
@@ -40,6 +24,13 @@
             //     }
             //     window.scrollTo(0, 0);
             // }
+
+            if ($('.masterPage').length > 0) {
+                    $('#loadProduct').removeClass('d-none');
+                    $('#productContainer').append('<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer"></div>');
+                    for (let i = 0; i < 2; i++)
+                        loadProduct();
+            }
 
             if ($('.rtlPosition').length > 0)
                 $('.table-responsive').animate({scrollLeft: $('.rtlPosition').position().left}, 1);
@@ -291,6 +282,11 @@
         //     }
         // });
 
+        $(window).on('popstate', function(event) {
+            console.log('back button')
+            lastScrollTop=$(window).scrollTop();
+        });
+
         $(window).scroll(function (event) {
             if ($('.filterApply').length > 0) {
                 let st = $(this).scrollTop(),
@@ -310,6 +306,29 @@
                     })
                 }
                 lastScrollTop = st;
+            }
+
+            if ($('.masterPage').length > 0) {
+
+                let st = $(window).scrollTop(),
+                    scrollLocation = st - lastScrollTop;
+
+                if (scrollLocation > deviceScroll)
+                    if (stopLoadProduct === false && successLoadProduct)
+                        $('#loadProduct').removeClass('d-none');
+
+                if (scrollLocation > deviceScroll && successLoadProduct) {
+                    successLoadProduct = false;
+                        loadProduct();
+                } else {
+                    return true;
+                }
+                lastScrollTop = st;
+                successLoadProduct = true;
+
+                if (stopLoadProduct && $('#discountsContainer').hasClass('d-none')) {
+                    discounts();
+                }
             }
 
             if ($('#productDetailContainer').length > 0) {
@@ -335,6 +354,59 @@
                 }
             }
         });
+
+        function loadProduct() {
+            if (stopLoadProduct === false) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/Customer-Product-Load',
+                    async: false,
+                    beforeSend: function () {
+                        $('[class*="js-carousel"]').each(function () {
+                            $(this).removeClass('js-carousel');
+                        });
+                    },
+                    success: function (data) {
+                        // console.log(data);
+                        if (data !== 'null') {
+                            $('#productContainer').append(data);
+                            $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                            return true;
+                        } else {
+                            $('#loadProduct').addClass('d-none');
+                            stopLoadProduct = true;
+                            return false;
+                        }
+                    }
+                });
+                console.log(stopLoadProduct);
+            }
+        }
+
+        function discounts() {
+            $.ajax({
+                type: 'GET',
+                url: '/Customer-Spacial-Discounts',
+                async: false,
+                beforeSend: function () {
+                    $('[class*="js-carousel"]').each(function () {
+                        $(this).removeClass('js-carousel');
+                    });
+                },
+                success: function (data) {
+                    // console.log(data);
+                    if (data !== 'null') {
+                        $('#discountsContainer').append(data);
+                        $('#discountsContainer').removeClass('d-none');
+                        $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                        return true;
+                    } else {
+                        stopLoadProduct = true;
+                        return false;
+                    }
+                }
+            });
+        }
 
         function similarProducts() {
             $.ajax({
@@ -374,6 +446,7 @@
             if (!$('.masterPage').length)
                 loaderShow();
         });
+
 
         document.onreadystatechange = function () {
             let state = document.readyState;

@@ -301,6 +301,10 @@
     .g-ml-60-lg--minus-10 {
         margin-left: -10px !important;
     }
+
+    .onlySmallFullOpacity {
+        opacity: 1 !important;
+    }
 }
 
 .g-ml-60-lg--minus-10 {
@@ -617,6 +621,10 @@ body a{
     color: #72c02c !important;
 }
 
+.customLinkHover:hover {
+    text-decoration: none;
+}
+
 .preview {
     overflow: hidden;
     width: 200px;
@@ -852,9 +860,17 @@ body a{
 .masterWallpaper2{
     position: relative;
     width:100%;
-    height:300px;
-    background-size: contain !important;
-    background: url("/../img/Other/adminWall3.jpg?v=6") repeat top center;
+    height:400px;
+    background-size: cover !important;
+    background: url("/../img/Other/adminWall3.jpg?v=12") repeat top center;
+}
+
+.moreItem{
+    position: relative;
+    width:100%;
+    height:465px;
+    background-size: cover !important;
+    background: url("/../img/Other/moreItem.jpg?v=11") repeat top center;
 }
 
 .bannerText{
@@ -869,4 +885,12 @@ body a{
     border-top: 1px solid #eee;
     background-size: cover !important;
     background:url("/../img/Banners/760_1242.jpg") no-repeat center center rgb(255, 255, 255)
+}
+
+.productListPagination .u-pagination-v1-1--active {
+    color: white !important;
+}
+
+.onlySmallFullOpacity {
+    opacity: 0;
 }

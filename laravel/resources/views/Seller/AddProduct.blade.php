@@ -2685,7 +2685,7 @@
                         <div id="sizeDetail{{$i}}" class="{{ $name==='النگو' || $name==='انگشتر' ?' parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه قطر</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="" pattern="\d*">
-                            <span id="unitSize{{$i}}" style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span id="unitSize{{$i}}" style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ $name==='عینک' ? ' parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">فاصله دو دسته</span>

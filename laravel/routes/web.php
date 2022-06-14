@@ -159,6 +159,8 @@ Route::get('/Seller-Search-Product-Date/{id}/{startDate}/{endDate}', 'Seller\Bas
 Route::get('/', 'Customer\Basic@Master')->name('Master');
 
 //-------------------[ Customer Product List ]-----------------------
+Route::get('/Customer-Product-More/{cat}', 'Customer\Basic@moreItem')->name('moreItem');
+
 Route::get('/Customer-Product-Female-List', 'Customer\Basic@productFemaleList')->name('productFemaleList');
 
 Route::get('/Customer-Product-Female-Clothes-List', 'Customer\Basic@productFemaleClothesList')->name('productFemaleClothesList');

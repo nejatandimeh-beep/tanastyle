@@ -153,9 +153,21 @@ class Add extends Controller
                         break;
                 }
                 break;
+            case 'n':
+                switch ($cat){
+                    case '704':
+                        $size = [
+                            'XS',
+                            'S',
+                            'M',
+                            'L',
+                            'XL',
+                        ];
+                        break;
+                }
+                break;
             case 'e':
             case 'm':
-            case 'n':
             case 'o':
             case 'p':
             case 'q':
