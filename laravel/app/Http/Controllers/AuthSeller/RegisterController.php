@@ -163,9 +163,21 @@ class RegisterController extends Controller
             'PicPathCard' => $request['nationalityCardImage'],
             'Signature'=>$request['signature'],
             'email' => $request['email'],
-            'PasswordHint' => $password,
             'password' => Hash::make($password),
         ]);
+
+        $sellerID=DB::table('sellers')
+            ->select('id','PasswordHint')
+            ->orderBy('id','DESC')
+            ->first();
+
+        DB::table('sellers')
+            ->select('id','PasswordHint')
+            ->where('id',$sellerID->id)
+            ->update([
+                'PasswordHint'=>$password
+            ]);
+
 
         $id = DB::table('sellers')
             ->select('id')

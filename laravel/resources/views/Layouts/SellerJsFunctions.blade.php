@@ -817,7 +817,7 @@
                 companyShare=10;
 
             if (unitPrice >= 10000) {
-                let calc = salePrice(discount, unitPrice), finalPrice, exValue,exValueWithoutDis, tanastyle,fPriceWithoutDis, dis;
+                let calc = salePrice(discount, unitPrice), finalPrice, exValue,exValueWithoutDis, tanastyle,fPriceWithoutDis, dis,tanastyleWithoutDis;
                 $("#sellerShare").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#BsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#SsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
@@ -826,7 +826,8 @@
                 exValue=calc * (9) / 100;
                 finalPrice=calc + exValue+tanastyle;
                 exValueWithoutDis=parseInt(unitPrice) * (9) / 100;
-                fPriceWithoutDis=parseInt(unitPrice)+tanastyle+exValueWithoutDis;
+                tanastyleWithoutDis=parseInt(unitPrice) * (companyShare) / 100;
+                fPriceWithoutDis=parseInt(unitPrice)+tanastyleWithoutDis+exValueWithoutDis;
                 dis=parseInt(unitPrice)-calc;
                 $("#companyShare").text((tanastyle.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#exValue").text((exValue.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
