@@ -109,7 +109,7 @@
                 <label for="example-text-input" class="col-sm-2 col-form-label">قیمت فروش</label>
                 <div class="input-group col-sm-10 force-col-12">
                     <input class="form-control form-control-md rounded-0 g-color-primary" type="text"
-                           value="{{ number_format($data->FinalPrice) }}"
+                           value="{{  number_format($data->FinalPrice) }}"
                            id="example-text-input" readonly>
                     <span style="border-left: 1px solid lightgrey"
                           class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">تومان</span>

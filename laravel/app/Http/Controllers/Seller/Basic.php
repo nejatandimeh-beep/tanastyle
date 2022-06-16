@@ -183,7 +183,7 @@ class Basic extends Controller
         } else {
             $companyShare=10;
         }
-        $priceWithoutDiscount = $unitPrice+($finalPrice*($companyShare+9)/100);
+        $priceWithoutDiscount = $unitPrice+($unitPrice*($companyShare+9)/100);
         $priceWithoutDiscount = substr($priceWithoutDiscount, 0, -3);
         $priceWithoutDiscount.='000';
         DB::table('product')
@@ -206,7 +206,7 @@ class Basic extends Controller
         } else {
             $companyShare=10;
         }
-        $priceWithoutDiscount = $unitPrice+($finalPrice*($companyShare+9)/100);
+        $priceWithoutDiscount = $unitPrice+($unitPrice*($companyShare+9)/100);
         $priceWithoutDiscount = substr($priceWithoutDiscount, 0, -3);
         $priceWithoutDiscount.='000';
         DB::table('product')

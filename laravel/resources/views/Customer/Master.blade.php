@@ -147,7 +147,7 @@
                                  data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                                  data-nav-for="#carousel-08-{{$key}}">
                                 <div class="js-slide">
-                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
+                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                         <img class="img-fluid w-100" loading="lazy"
                                              src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color  }}">
@@ -189,9 +189,9 @@
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    {{  number_format($row->UnitPrice) }}
+                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
                                 </s>
-                                <span>{{  number_format($row->FinalPrice) }}</span>
+                                <span>{{ number_format($row->FinalPrice) }}</span>
                                 <span
                                     class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
                             </div>
@@ -299,7 +299,7 @@
                                  data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                                  data-nav-for="#carousel-08-{{$key}}">
                                 <div class="js-slide">
-                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
+                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                         <img class="img-fluid w-100" loading="lazy"
                                              src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color  }}">
@@ -341,9 +341,9 @@
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    {{  number_format($row->UnitPrice) }}
+                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
                                 </s>
-                                <span>{{  number_format($row->FinalPrice) }}</span>
+                                <span>{{  number_format($row->UnitPrice) }}</span>
                                 <span
                                     class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
                             </div>
@@ -455,7 +455,7 @@
                                  data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                                  data-nav-for="#carousel-08-{{$key}}">
                                 <div class="js-slide">
-                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
+                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                         <img class="img-fluid w-100" loading="lazy"
                                              src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color  }}">
@@ -497,7 +497,7 @@
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    {{  number_format($row->UnitPrice) }}
+                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
                                 </s>
                                 <span>{{  number_format($row->FinalPrice) }}</span>
                                 <span
@@ -607,7 +607,7 @@
                                  data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                                  data-nav-for="#carousel-08-{{$key}}">
                                 <div class="js-slide">
-                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
+                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                         <img class="img-fluid w-100" loading="lazy"
                                              src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color  }}">
@@ -649,9 +649,9 @@
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    {{  number_format($row->UnitPrice) }}
+                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
                                 </s>
-                                <span>{{  number_format($row->FinalPrice) }}</span>
+                                <span>{{ number_format($row->FinalPrice) }}</span>
                                 <span
                                     class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
                             </div>
@@ -753,7 +753,7 @@
 {{--                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"--}}
 {{--                                 data-nav-for="#carousel-08-{{$key}}">--}}
 {{--                                <div class="js-slide">--}}
-{{--                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">--}}
+{{--                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">--}}
 {{--                                        <img class="img-fluid w-100" loading="lazy"--}}
 {{--                                             src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"--}}
 {{--                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color  }}">--}}
@@ -795,9 +795,9 @@
 {{--                            class="d-block g-color-black g-font-size-17 g-ml-5">--}}
 {{--                            <div style="direction: rtl" class="text-left">--}}
 {{--                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">--}}
-{{--                                    {{  number_format($row->UnitPrice) }}--}}
+{{--                                    {{  number_format($row->FinalPriceWithoutDiscount) }}--}}
 {{--                                </s>--}}
-{{--                                <span>{{  number_format($row->FinalPrice) }}</span>--}}
+{{--                                <span>{{ number_format($row->FinalPrice) }}</span>--}}
 {{--                                <span--}}
 {{--                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>--}}
 {{--                            </div>--}}
@@ -908,7 +908,7 @@
 {{--                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"--}}
 {{--                                 data-nav-for="#carousel-08-{{$key}}">--}}
 {{--                                <div class="js-slide">--}}
-{{--                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">--}}
+{{--                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">--}}
 {{--                                        <img class="img-fluid w-100" loading="lazy"--}}
 {{--                                             src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"--}}
 {{--                                             alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color  }}">--}}
@@ -950,9 +950,9 @@
 {{--                            class="d-block g-color-black g-font-size-17 g-ml-5">--}}
 {{--                            <div style="direction: rtl" class="text-left">--}}
 {{--                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">--}}
-{{--                                    {{  number_format($row->UnitPrice) }}--}}
+{{--                                    {{ number_format($row->FinalPriceWithoutDiscount)  }}--}}
 {{--                                </s>--}}
-{{--                                <span>{{  number_format($row->FinalPrice) }}</span>--}}
+{{--                                <span>{{ number_format($row->FinalPrice) }}</span>--}}
 {{--                                <span--}}
 {{--                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>--}}
 {{--                            </div>--}}
@@ -1014,7 +1014,7 @@
                                  data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                                  data-nav-for="#carousel-08-{{$key}}">
                                 <div class="js-slide">
-                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size, $row->Color]) }}">
+                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                         <img class="img-fluid w-100" loading="lazy"
                                              src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
                                              alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color  }}">
@@ -1056,7 +1056,7 @@
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    {{  number_format($row->UnitPrice) }}
+                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
                                 </s>
                                 <span>{{  number_format($row->FinalPrice) }}</span>
                                 <span

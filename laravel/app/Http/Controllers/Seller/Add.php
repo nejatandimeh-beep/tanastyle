@@ -164,6 +164,9 @@ class Add extends Controller
                             'XL',
                         ];
                         break;
+                    default:
+                        $size=['Free'];
+
                 }
                 break;
             case 'e':
