@@ -1135,6 +1135,7 @@
         }
 
         function cartOrder(row) {
+            console.log(row);
             let price = [],
                 allPrice = 0,
                 tempPrice = [],
@@ -1153,7 +1154,7 @@
                     tempPrice[i] = $('#productFinalPrice' + i).text().replace(/,/g, '');
                     price[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
                     allPrice = allPrice + price[i];
-                    $('#rowNumber' + i).text(i);
+                    $('#rowNumber' + i).text(i+1);
                     form.append("<input name='productDetailID" + i + "' value=" + pdId[i] + ">");
                     form.append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
@@ -1252,6 +1253,10 @@
             $('[id^="productDetailID"]').each(function (index) {
                 $(this).attr('id', 'productDetailID' + index);
             });
+
+            $('[id^="orderRow"]').each(function (index) {
+                $(this).attr('id', 'orderRow' + index);
+            });
         }
 
         function addToCart(id) {
@@ -1282,7 +1287,8 @@
                     $('#orderRow' + key).remove();
                     $('#cartContainer' + key).remove();
                     $('#basketNum').text(parseInt($('#basketNum').text()) - 1);
-                    if (data === '0') {
+                    console.log('cartCount',data);
+                    if (data == 0) {
                         $('#orderSubmit').addClass('d-none');
                         $('#cartEmptyAlert').removeClass('d-none');
                     } else cartReset();

@@ -24,9 +24,9 @@ class Basic extends Controller
     public function Master()
     {
         $glass = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '730')
             ->orWhere('Cat', '738')
             ->inRandomOrder()
@@ -34,27 +34,27 @@ class Basic extends Controller
             ->get();
 
         $earring = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '700')
             ->inRandomOrder()
             ->take(5)
             ->get();
 
         $necklace = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '701')
             ->inRandomOrder()
             ->take(5)
             ->get();
 
         $bracelet = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '703')
             ->inRandomOrder()
             ->take(5)
@@ -81,23 +81,23 @@ class Basic extends Controller
         $minDiscount = 1;
         $maxDiscount = 99;
         $discounts = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
             ->inRandomOrder()
             ->take(5)
             ->get();
 
-        return view('Customer.Master',compact('discounts','glass','earring','necklace','bracelet'));
+        return view('Customer.Master', compact('discounts', 'glass', 'earring', 'necklace', 'bracelet'));
     }
 
-    public function sameProduct($genderCode,$catCode,$productID)
+    public function sameProduct($genderCode, $catCode, $productID)
     {
         $similarProduct = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('p.GenderCode', $genderCode)
             ->where('p.CatCode', $catCode)
             ->where('p.ID', '<>', $productID)
@@ -115,22 +115,22 @@ class Basic extends Controller
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
              data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">';
-        foreach($similarProduct as $key =>$row){
-            $products=$products.'
+        foreach ($similarProduct as $key => $row) {
+            $products = $products . '
              <div class="js-slide g-mx-10">
                     <!-- Product -->
                     <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
                         <div>
-                            <div id="carousel-08-'.($key+100000).'"
+                            <div id="carousel-08-' . ($key + 100000) . '"
                                  class="js-carousel text-center g-mb-5"
                                  data-infinite="1"
                                  data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
-                                 data-nav-for="#carousel-08-'.($key+100000).'">
+                                 data-nav-for="#carousel-08-' . ($key + 100000) . '">
                                 <div class="js-slide">
-                                    <a href="'. route("productDetail",[$row->ProductID, $row->Size]).'">
+                                    <a href="' . route("productDetail", [$row->ProductID, $row->Size]) . '">
                                         <img class="img-fluid w-100" loading="lazy"
-                                             src="'.$row->PicPath.$row->SampleNumber.".jpg" .'"
-                                             alt="'.$row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand." ".$row->Size." ".$row->Color  .'">
+                                             src="' . $row->PicPath . $row->SampleNumber . ".jpg" . '"
+                                             alt="' . $row->Name . " " . $row->Model . " " . $row->Gender . " " . $row->Brand . " " . $row->Size . " " . $row->Color . '">
                                     </a>
                                 </div>
                             </div>
@@ -141,38 +141,38 @@ class Basic extends Controller
                             <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
                             <div class="d-flex flex-column col-12 g-px-5">
                                 <h1 class="h6 g-color-black my-1 text-left">
-                                   '. $row->Brand .'
+                                   ' . $row->Brand . '
                                 </h1>
                                 <h4 class="h6 g-color-black my-1">
                                     <span class="u-link-v5 g-color-black"
                                           tabindex="0">
-                                        '. $row->Name .'
+                                        ' . $row->Name . '
                                         <span
-                                            class="g-font-size-12 g-font-weight-300"> '. $row->Model .'</span>
+                                            class="g-font-size-12 g-font-weight-300"> ' . $row->Model . '</span>
                                         <span
-                                            class="g-font-size-12 g-font-weight-300"> '. $row->Gender .'</span>
+                                            class="g-font-size-12 g-font-weight-300"> ' . $row->Gender . '</span>
                                     </span>
                                 </h4>
                                 <div>
                                     <span class="g-ml-5">سایز
-                                        <span class="g-color-primary">'. $row->Size .'</span>
+                                        <span class="g-color-primary">' . $row->Size . '</span>
                                     </span>
                                     <span>رنگ
-                                        <span class="g-color-primary">'. $row->Color .'</span>
+                                        <span class="g-color-primary">' . $row->Color . '</span>
                                     </span>
                                 </div>
-                                <span>موجودی <span id="'. "cartQty".$key .'"
-                                                   class="g-color-primary">'.  $row->Qty .'</span> عدد</span>
+                                <span>موجودی <span id="' . "cartQty" . $key . '"
+                                                   class="g-color-primary">' . $row->Qty . '</span> عدد</span>
                             </div>
                         </div>
-                         <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
+                         <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: ' . $row->sellerName . ' ' . $row->sellerFamily . '</h1>
                         <div
                             class="d-block g-color-black g-font-size-17 g-ml-5">
                             <div style="direction: rtl" class="text-left">
                                 <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    '. number_format($row->FinalPriceWithoutDiscount) .'
+                                    ' . number_format($row->FinalPriceWithoutDiscount) . '
                                 </s>
-                                <span>'. number_format($row->FinalPrice) .'</span>
+                                <span>' . number_format($row->FinalPrice) . '</span>
                                 <span
                                     class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
                             </div>
@@ -182,17 +182,17 @@ class Basic extends Controller
                 </div>';
         }
 
-        return $products.'</div>';
+        return $products . '</div>';
     }
 
     public function productImage($imageNo, $row, $size, $key)
     {
         return '<div class="js-slide">
-                     <a href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'">
+                     <a href="' . route("productDetail", [$row->ID, $size[$key]->Size]) . '">
                         <img class="img-fluid w-100"
                             loading="lazy"
-                             src="'. $row->PicPath .'sample'.$imageNo.'.jpg"
-                             alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
+                             src="' . $row->PicPath . 'sample' . $imageNo . '.jpg"
+                             alt="' . $row->Name . " " . $row->Model . " " . $row->Gender . " " . $row->Brand . '">
                     </a>
                 </div> ';
     }
@@ -345,7 +345,7 @@ class Basic extends Controller
                             'DeliveryProblem' => 0
                         ]);
                     $deliveryHint[$key]['text'] = 'در دست';
-                    ($row->PostMethod === 'پست معمولی' ?$deliveryHint[$key]['location'] = 'پست':$deliveryHint[$key]['location'] = 'تیپاکس');
+                    ($row->PostMethod === 'پست معمولی' ? $deliveryHint[$key]['location'] = 'پست' : $deliveryHint[$key]['location'] = 'تیپاکس');
 
                     $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100) * (60 / 100));
                     if ($deliveryMin[$key] > 5040) {
@@ -500,14 +500,14 @@ class Basic extends Controller
 
         // Get data after Database update
         $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber', 'ca.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber', 'ca.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
             ->leftJoin('product_detail as pd', function ($join) {
                 $join->on('pd.ID', '=', 'pod.ProductDetailID');
             })
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->get();
@@ -547,21 +547,21 @@ class Basic extends Controller
         try {
             // گرفتن تمامی جزییات مربوط به محصول کلیک شده
             $data = DB::table('product_cart as pc')
-                ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID','s.Name as sellerName','s.Family as sellerFamily')
+                ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID', 's.Name as sellerName', 's.Family as sellerFamily')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pc.ProductDetailID')
                 ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-                ->leftJoin('sellers as s','s.id','=','p.SellerID')
+                ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
                 ->where('pc.CustomerID', Auth::user()->id)
                 ->orderBy('Date')
                 ->orderBy('Time')
                 ->get();
 
-            $tempOrder=DB::table('product_order_temporary as pot')
+            $tempOrder = DB::table('product_order_temporary as pot')
                 ->select('*')
-                ->where('CustomerID',Auth::user()->id)
+                ->where('CustomerID', Auth::user()->id)
                 ->get();
 
-            foreach ($tempOrder as $row){
+            foreach ($tempOrder as $row) {
                 DB::table('product_detail')
                     ->where('ID', $row->ProductDetailID)
                     ->increment('Qty', $row->Qty);
@@ -569,7 +569,7 @@ class Basic extends Controller
 
             DB::table('product_order_temporary')
                 ->select('*')
-                ->where('CustomerID',Auth::user()->id)
+                ->where('CustomerID', Auth::user()->id)
                 ->delete();
         } catch (\Exception $e) {
             return redirect()->route('login');
@@ -602,9 +602,12 @@ class Basic extends Controller
     public function cartDelete($id)
     {
         DB::table('product_cart')
+            ->where('CustomerID', Auth::user()->id)
             ->where('ProductDetailID', $id)
             ->delete();
-        $cartCount = DB::table('product_cart')->get();
+        $cartCount = DB::table('product_cart')
+            ->where('CustomerID', Auth::user()->id)
+            ->get();
         return count($cartCount);
     }
 
@@ -614,7 +617,7 @@ class Basic extends Controller
         $productDetailID = [];
         $stock = false;
         $qty = [];
-        for ($i = 0; $i < $row ; $i++) {
+        for ($i = 0; $i < $row; $i++) {
             $productDetailID[$i] = $request->get('productDetailID' . $i);
             $data = DB::table('product_detail')
                 ->select('ID', 'Qty')
@@ -622,10 +625,10 @@ class Basic extends Controller
                 ->first();
 
             $qty[$i] = (int)$request->get('qty' . $i);
-            if (($data->Qty) - ($qty[$i]) >= 0 ) {
-                $stock=true;
+            if (($data->Qty) - ($qty[$i]) >= 0) {
+                $stock = true;
             } else {
-                $stock=false;
+                $stock = false;
             }
 
             DB::table('product_detail')
@@ -633,46 +636,46 @@ class Basic extends Controller
                 ->decrement('Qty', $qty[$i]);
         }
 
-        $price=$request->get('allPrice');
+        $price = $request->get('allPrice');
         if ($stock) {
             foreach ($productDetailID as $key => $row)
-            DB::table('product_order_temporary')
-                ->insert([
-                    'CustomerID'=> Auth::user()->id,
-                    'ProductDetailID'=> $row,
-                    'Qty'=> $qty[$key],
-                    'Price'=> $price,
-                ]);
+                DB::table('product_order_temporary')
+                    ->insert([
+                        'CustomerID' => Auth::user()->id,
+                        'ProductDetailID' => $row,
+                        'Qty' => $qty[$key],
+                        'Price' => $price,
+                    ]);
 
             $order = new zarinpal();
-            $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
+            $res = $order->pay($price, Auth::user()->email, Auth::user()->Mobile);
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
         } else {
             return redirect()->route('cart', 'noExist');
         }
     }
 
-    public function bankingPortal($id, $qty,$postPrice)
+    public function bankingPortal($id, $qty, $postPrice)
     {
-        $postMethod='';
-        switch ($postPrice){
+        $postMethod = '';
+        switch ($postPrice) {
             case '0':
-                $postMethod='تیپاکس';
+                $postMethod = 'تیپاکس';
                 break;
             default:
-                $postMethod='پست معمولی';
+                $postMethod = 'پست معمولی';
         }
         $stock = null;
         $data = DB::table('product_detail as pd')
-            ->select('pd.ID', 'p.FinalPrice','pd.ID', 'pd.Qty', 'pd.Size', 'pd.Color')
+            ->select('pd.ID', 'p.FinalPrice', 'pd.ID', 'pd.Qty', 'pd.Size', 'pd.Color')
             ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
             ->where('pd.ID', $id)
             ->first();
 
-        if ((($data->Qty) - (int)$qty) >= 0 ) {
-            $stock=true;
+        if ((($data->Qty) - (int)$qty) >= 0) {
+            $stock = true;
         } else {
-            $stock=false;
+            $stock = false;
         }
 
         DB::table('product_detail')
@@ -682,18 +685,18 @@ class Basic extends Controller
         session_start();
 
         if ($stock) {
-            $price = ($data->FinalPrice * $qty )+$postPrice;
+            $price = ($data->FinalPrice * $qty) + $postPrice;
             DB::table('product_order_temporary')
                 ->insert([
-                    'CustomerID'=> Auth::user()->id,
-                    'ProductDetailID'=> $id,
-                    'Qty'=> $qty,
-                    'Price'=> $price,
-                    'PostMethod'=> $postMethod,
+                    'CustomerID' => Auth::user()->id,
+                    'ProductDetailID' => $id,
+                    'Qty' => $qty,
+                    'Price' => $price,
+                    'PostMethod' => $postMethod,
                 ]);
 
             $order = new zarinpal();
-            $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
+            $res = $order->pay($price, Auth::user()->email, Auth::user()->Mobile);
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
 
         } else {
@@ -703,15 +706,15 @@ class Basic extends Controller
 
     public function orderZarinpal(Request $request)
     {
-        if(!isset(Auth::user()->id)){
-            Auth::loginUsingId($_COOKIE['userId'],true);
+        if (!isset(Auth::user()->id)) {
+            Auth::loginUsingId($_COOKIE['userId'], true);
         }
         $MerchantID = 'ccd4acab-a4dc-416d-9172-b066aa674e2b';
-        $Authority =$request->get('Authority');
+        $Authority = $request->get('Authority');
 
-        $data=DB::table('product_order_temporary')
+        $data = DB::table('product_order_temporary')
             ->select('*')
-            ->where('CustomerID',Auth::user()->id)
+            ->where('CustomerID', Auth::user()->id)
             ->get();
 
         if ($request->get('Status') == 'OK') {
@@ -721,17 +724,17 @@ class Basic extends Controller
             $result = $client->call('PaymentVerification', [
                 [
                     //این مقادیر را به سایت زرین پال برای دریافت تاییدیه نهایی ارسال می کنیم
-                    'MerchantID'     => $MerchantID,
-                    'Authority'      => $Authority,
-                    'Amount'         => $data[0]->Price,
+                    'MerchantID' => $MerchantID,
+                    'Authority' => $Authority,
+                    'Amount' => $data[0]->Price,
                 ],
             ]);
 
-            $refNum=$Authority;
+            $refNum = $Authority;
             if ($result['Status'] == 100) {
-                    $new = $this->newOrder($data,$Authority);
+                $new = $this->newOrder($data, $Authority);
 
-                return view('Customer.PaymentStatus', compact( 'refNum'));
+                return view('Customer.PaymentStatus', compact('refNum'));
             } else {
                 foreach ($data as $row) {
                     DB::table('product_detail')
@@ -740,22 +743,20 @@ class Basic extends Controller
 
                     DB::table('payment_failed')
                         ->insert([
-                            'Authority'=>$Authority,
-                            'CustomerID'=>Auth::user()->id,
-                            'ProductDetailID'=>$row->ProductDetailID,
+                            'Authority' => $Authority,
+                            'CustomerID' => Auth::user()->id,
+                            'ProductDetailID' => $row->ProductDetailID,
                         ]);
                 }
 
                 DB::table('product_order_temporary')
                     ->select('*')
-                    ->where('CustomerID',Auth::user()->id)
+                    ->where('CustomerID', Auth::user()->id)
                     ->delete();
 
                 return view('Customer.PaymentError');
             }
-        }
-        else
-        {
+        } else {
             foreach ($data as $row) {
                 DB::table('product_detail')
                     ->where('ID', $row->ProductDetailID)
@@ -763,15 +764,15 @@ class Basic extends Controller
 
                 DB::table('payment_failed')
                     ->insert([
-                        'CustomerID'=>Auth::user()->id,
-                        'ProductDetailID'=>$row->ProductDetailID,
-                        'Authority'=>$Authority,
+                        'CustomerID' => Auth::user()->id,
+                        'ProductDetailID' => $row->ProductDetailID,
+                        'Authority' => $Authority,
                     ]);
             }
 
             DB::table('product_order_temporary')
                 ->select('*')
-                ->where('CustomerID',Auth::user()->id)
+                ->where('CustomerID', Auth::user()->id)
                 ->delete();
 
             return view('Customer.PaymentError');
@@ -952,13 +953,13 @@ class Basic extends Controller
 
     public function productDetail($id, $sizeInfo)
     {
-        if(isset(Auth::user()->id)){
-            $tempOrder=DB::table('product_order_temporary as pot')
+        if (isset(Auth::user()->id)) {
+            $tempOrder = DB::table('product_order_temporary as pot')
                 ->select('*')
-                ->where('CustomerID',Auth::user()->id)
+                ->where('CustomerID', Auth::user()->id)
                 ->get();
 
-            foreach ($tempOrder as $row){
+            foreach ($tempOrder as $row) {
                 DB::table('product_detail')
                     ->where('ID', $row->ProductDetailID)
                     ->increment('Qty', $row->Qty);
@@ -966,14 +967,14 @@ class Basic extends Controller
 
             DB::table('product_order_temporary')
                 ->select('*')
-                ->where('CustomerID',Auth::user()->id)
+                ->where('CustomerID', Auth::user()->id)
                 ->delete();
         }
 
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product as p')
-            ->select('p.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->select('p.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('p.ID', $id)
             ->first();
 
@@ -1075,7 +1076,7 @@ class Basic extends Controller
             $customerRate = 0;
 
         DB::table('product')
-            ->where('ID',$id)
+            ->where('ID', $id)
             ->increment('VisitCounter', 1);
 
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
@@ -1380,19 +1381,19 @@ class Basic extends Controller
 
     public function checkAddress()
     {
-        $result=DB::table('customer_address')
+        $result = DB::table('customer_address')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
             ->where('Status', 1)
             ->first();
 
-        if(isset($result)){
-               session_start();
-                $_SESSION['stateCode'] = $result->State;
-                $_SESSION['cityCode'] = $result->City;
+        if (isset($result)) {
+            session_start();
+            $_SESSION['stateCode'] = $result->State;
+            $_SESSION['cityCode'] = $result->City;
         }
 
-        return  $result;
+        return $result;
     }
 
     public function customerVerify()
@@ -1589,9 +1590,9 @@ class Basic extends Controller
             $size[0] = 'empty';
 
         $data = DB::table('product as p')
-            ->select('p.*', 'pd.*','s.Name as sellerName','s.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->whereIn('p.GenderCode', $gender)
             ->whereIn('p.CatCode', $cat)
 //            ->whereIn('pd.Size', $size)
@@ -1659,7 +1660,7 @@ class Basic extends Controller
                 </a>
             </div>
          </div>
-          <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
+          <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: ' . $row->sellerName . ' ' . $row->sellerFamily . '</h1>
           <div
             class="d-block g-color-black g-font-size-17 g-ml-10">
                 <div style="direction: rtl" class="text-left">
@@ -1687,46 +1688,46 @@ class Basic extends Controller
         session_start();
         $_SESSION['listSkip'] = 0;
 
-        $category=[];
-        switch ($cat){
+        $category = [];
+        switch ($cat) {
             case '700':
-                $category[0]=$cat;
+                $category[0] = $cat;
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'گوشواره و اکسسوری گوش زنانه';
                 break;
             case '701':
-                $category[0]=$cat;
+                $category[0] = $cat;
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'گردنبند و آویز رو لباسی';
                 break;
             case '703':
-                $category[0]=$cat;
+                $category[0] = $cat;
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'دست بند و اکسسوری های دست';
                 break;
             case '704':
-                $category[0]=$cat;
+                $category[0] = $cat;
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'انگشتر مجلسی و کژوال';
                 break;
             case '705':
-                $category[0]=$cat;
+                $category[0] = $cat;
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'پا بند و اکسسوری های پا';
                 break;
             case '730':
-                $category=['730','738'];
+                $category = ['730', '738'];
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'عینک آفتابی و بند عینک زنانه';
                 break;
             default:
-                $category[0]=$cat;
+                $category[0] = $cat;
         }
         $data = DB::table('product')
             ->select('*')
@@ -2131,8 +2132,8 @@ class Basic extends Controller
     {
         $output = '';
         $data = DB::table('product as p')
-            ->select('p.Name', 'p.Model', 'p.Brand','pd.ID','pd.Size','p.ID as ProductID')
-            ->leftJoin('product_detail as pd','pd.ProductID','=','p.ID')
+            ->select('p.Name', 'p.Model', 'p.Brand', 'pd.ID', 'pd.Size', 'p.ID as ProductID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->where('p.Name', 'like', '%' . $val . '%')
             ->orWhere('p.Model', 'like', '%' . $val . '%')
             ->orWhere('p.Brand', 'like', '%' . $val . '%')
@@ -2141,11 +2142,11 @@ class Basic extends Controller
             ->take(15)
             ->get();
 
-        if(count($data)===1){
+        if (count($data) === 1) {
             $result = $data[0]->Name . ' ' . $data[0]->Model . ' ' . $data[0]->Brand;
             $output .= '<li style="border-radius: 0 !important;"
                         class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover uniqueProduct">
-                            <a  href="' . route('productDetail', [$data[0]->ProductID, $data[0]->Size])  . '"
+                            <a  href="' . route('productDetail', [$data[0]->ProductID, $data[0]->Size]) . '"
                                 style="text-decoration: none"
                                 class="col-12 p-0 text-right g-color-gray-dark-v3 g-color-primary--hover">
                              ' . $result . '
@@ -2217,7 +2218,7 @@ class Basic extends Controller
 
         $gender = 'all';
         $catCode = 'all';
-        $title = 'تخفیف بین ' . $minDiscount . ' تا ' . $maxDiscount.' درصد';
+        $title = 'تخفیف بین ' . $minDiscount . ' تا ' . $maxDiscount . ' درصد';
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
@@ -2240,7 +2241,7 @@ class Basic extends Controller
             ->groupBy('p.ID')
             ->paginate(12);
 
-        $_SESSION['title'] = isset($data[0])?$data[0]->Name.' '.$data[0]->Gender:'نتایج منوی انتخاب شده';
+        $_SESSION['title'] = isset($data[0]) ? $data[0]->Name . ' ' . $data[0]->Gender : 'نتایج منوی انتخاب شده';
 
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
@@ -2270,10 +2271,10 @@ class Basic extends Controller
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
-    public function newOrder($data,$Authority)
+    public function newOrder($data, $Authority)
     {
-        $seller=[];
-        $orderID='';
+        $seller = [];
+        $orderID = '';
         foreach ($data as $step => $record) {
             $customerInfo = DB::table('customers as c')
                 ->select('ca.*')
@@ -2366,18 +2367,18 @@ class Basic extends Controller
                 ->where('ProductDetailID', $record->ProductDetailID)
                 ->delete();
 
-        $seller[$step] = DB::table('sellers')
-            ->select('id', 'Mobile')
-            ->where('id', $productInfo->SellerID)
-            ->first();
+            $seller[$step] = DB::table('sellers')
+                ->select('id', 'Mobile')
+                ->where('id', $productInfo->SellerID)
+                ->first();
         }
 
-        foreach ($data as $row){
+        foreach ($data as $row) {
             DB::table('product_order_temporary')
                 ->where('ID', $row->ID)
                 ->delete();
         }
-        $seller=array_map("unserialize", array_unique(array_map("serialize", $seller)));
+        $seller = array_map("unserialize", array_unique(array_map("serialize", $seller)));
         //--------------
         try {
             $token = $orderID;
@@ -2400,7 +2401,7 @@ class Basic extends Controller
         }
         //--------------
 
-        foreach ($seller as $rec){
+        foreach ($seller as $rec) {
             try {
                 $token = $orderID;
                 $token2 = '';
