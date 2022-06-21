@@ -21,9 +21,11 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/Logo/browserIcon.png')}}">
     <link rel="apple-touch-icon" sizes="120x120" href="{{asset('img/Logo/browserIcon.png')}}">
     <link rel="apple-touch-icon" sizes="152x152" href="{{asset('img/Logo/browserIcon.png')}}">
-
+    <link rel="stylesheet" href="{{asset('assets/vendor/dzsparallaxer/dzsparallaxer.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/dzsparallaxer/dzsscroller/scroller.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/vendor/dzsparallaxer/advancedscroller/plugin.css')}}">
     <!--My Style-->
-    <link href="{{ asset('css/myStyle.css?v=dlfn00932') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css?v=dsv3wfs3e3') }}" rel="stylesheet">
 <!--Unify Style-->
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">

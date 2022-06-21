@@ -1,6 +1,6 @@
 @section('SellerNavigation')
     <body class="u-body--header-side-static-right">
-    <div id="load" class="load"></div>
+{{--    <div id="load" class="load"></div>--}}
     <!-- Sidebar Navigation -->
     <div id="js-header" class="u-header u-header--side"
          data-header-position="right"

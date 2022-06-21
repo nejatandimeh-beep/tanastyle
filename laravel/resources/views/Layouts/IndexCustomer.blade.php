@@ -18,6 +18,9 @@
         <script src="{{ asset('assets/js/components/hs.carousel.js') }}"></script>
         <script src="{{ asset('assets/vendor/revolution-slider/revolution/js/extensions/revolution.extension.carousel.min.js') }}"></script>
         <script src="{{ asset('assets/vendor/slick-carousel/slick/slick.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dzsparallaxer/dzsparallaxer.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dzsparallaxer/dzsscroller/scroller.js') }}"></script>
+    <script src="{{ asset('assets/vendor/dzsparallaxer/advancedscroller/plugin.js') }}"></script>
     @break
     @case(strpos($_SERVER['REQUEST_URI'],'/Product'))
         <!--تخفیفات ویژه-->

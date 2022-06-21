@@ -33,7 +33,9 @@
                 carousel('js-carousel-6');
                 carousel('js-carousel-7');
             }
-            $('#load').hide();
+            setTimeout(function () {
+                $('.load').hide();
+            }, 500)
             // if ('.masterPage'.length > 0) {
             //     if ('scrollRestoration' in history) {
             //         history.scrollRestoration = 'manual';

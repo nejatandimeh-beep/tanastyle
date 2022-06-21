@@ -613,7 +613,7 @@
                                     class="g-font-size-10 g-mr-3">(تومان)</span>
                             </th>
                             <th class="align-middle text-center text-nowrap">شماره کارت</th>
-                            <th class="align-middle text-center text-nowrap">کد تراکنش</th>
+                            <th class="align-middle text-center text-nowrap">کد پیگیری تراکنش</th>
                             <th class="align-middle text-center">توضیحات</th>
                         </tr>
                         </thead>

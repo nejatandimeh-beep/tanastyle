@@ -305,6 +305,10 @@
     .onlySmallFullOpacity {
         opacity: 1 !important;
     }
+
+    .height_445{
+        height: 445px;
+    }
 }
 
 .g-ml-60-lg--minus-10 {
@@ -583,9 +587,9 @@ input[type=number] {
 .load{
     width:100%;
     height:100%;
-    position:fixed;
+    position:absolute;
     z-index:9999;
-    background:url("/../img/Other/loader.png") no-repeat center center rgb(255, 255, 255)
+    background: url("/../img/Other/loader.png?v=4") no-repeat 50% 50% rgb(255, 255, 255);
 }
 
 .loadProduct{
@@ -847,44 +851,12 @@ body a{
     display: none;
 }
 
-.masterWallpaper{
-    position: relative;
-    width:100%;
-    height:500px;
-    background-size: contain !important;
-    border-bottom: 1px solid #eee;
-    border-top: 1px solid #eee;
-    background:url("/../img/Banners/1920_791.png") no-repeat center center rgb(255, 255, 255)
-}
-
-.masterWallpaper2{
-    position: relative;
-    width:100%;
-    height:400px;
-    background-size: cover !important;
-    background: url("/../img/Other/adminWall3.jpg?v=12") repeat top center;
-}
-
 .moreItem{
     position: relative;
     width:100%;
     height:465px;
     background-size: cover !important;
     background: url("/../img/Other/moreItem.jpg?v=11") repeat top center;
-}
-
-.bannerText{
-    position: absolute;
-    top: 25%;
-    right: 10%;
-}
-
-.masterWallpaperMobile{
-    width:100%;
-    height:550px;
-    border-top: 1px solid #eee;
-    background-size: cover !important;
-    background:url("/../img/Banners/760_1242.jpg") no-repeat center center rgb(255, 255, 255)
 }
 
 .productListPagination .u-pagination-v1-1--active {

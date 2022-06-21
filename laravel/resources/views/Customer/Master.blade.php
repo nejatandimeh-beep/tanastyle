@@ -1,30 +1,35 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-<div class="masterWallpaper d-flex justify-content-center bigDevice masterPage">
-    <div class="bannerText">
-        <h1 class="g-color-primary g-font-size-120 g-font-weight-600 m-0">تانا استایل</h1>
-        <h1 class="g-color-gray-dark-v1 text-right g-font-size-30 g-mt-minus-30">استایلی خاص و متفاوت</h1>
-        <h1 class="g-color-gray-dark-v1 g-font-size-30 text-right">خریدی<span class="g-color-primary g-mr-10"> آسان</span>، <span class="g-color-primary">سریع</span> و <span class="g-color-primary"> مطمئن</span></h1>
+<section class="dzsparallaxer auto-init height-is-based-on-content use-loading mode-scroll loaded dzsprx-readyall masterPage" data-options="{direction: &quot;reverse&quot;, settings_mode_oneelement_max_offset: &quot;150&quot;}">
+    <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background-image: url('{{asset("img/Banners/1920_791.jpg")}}'); transform: translate3d(0px, -83.849px, 0px);"></div>
+
+    <!-- Promo Block Content -->
+    <div class="g-bg-cover g-bg-pos-top-center g-bg-img-hero g-bg-bluegray-opacity-0_3--after g-py-150">
+        <div class="container text-center g-z-index-1">
+            <h1 class="d-none h1 g-color-white g-font-weight-600 g-mb-15">فروشگاه آنلاین پوشاک استوک و تاناکورا tanakora mahabad estok بدلیجات عینک زنانه</h1>
+            <h2 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">تانا استایل
+                <span class="g-color-white">استایلی خاص و متفاوت</span></h2>
+
+            <h2 class="g-color-primary g-font-weight-600 g-mb-15 smallDevice">تانا استایل
+                <span class="g-color-white">استایلی خاص و متفاوت</span></h2>
+            <h4 class="g-color-white g-font-weight-600 g-mb-30">خریدی آسان، سریع و مطمئن</h4>
+            <!-- Promo Blocks - Form -->
+            <form style="direction: rtl" class="align-self-center text-center">
+                <input oninput="productSearch('productSearch',$(this).attr('value'))"
+                       onclick="$('#productSearch').removeClass('d-none')"
+                       style="direction:rtl; padding: 10px; outline: none; border:none; opacity:0.9; border-radius: 0"
+                       class="col-lg-6 col-12 g-font-size-16"
+                       type="text" placeholder="تایپ کن و بگرد..">
+                <ul id="productSearch" class="d-none p-0 col-lg-9 col-11 m-auto outSideClick"></ul>
+            </form>
+            <!-- End Promo Blocks - Form -->
+        </div>
     </div>
-</div>
-<div class="masterWallpaperMobile d-flex justify-content-center smallDevice"></div>
-<div class="g-py-5 g-brd-y g-brd-gray-light-v3 g-mb-40--lg">
-    <div class="masterWallpaper2 d-flex justify-content-center g-brd-y g-bg-black g-brd-gray-light-v5">
-        <form style="direction: rtl" class="align-self-center text-center">
-            <h1 style="font-weight: bold" class="g-color-white g-font-size-50--md g-font-size-20">دنبال پوشاک خاصی می گردید؟</h1>
-            <p style="font-family: Tahoma" class="g-color-primary">جستجوگر ما کمکتان میکند..</p>
-            <input oninput="productSearch('productSearch',$(this).attr('value'))"
-                   onclick="$('#productSearch').removeClass('d-none')"
-                   style="direction:rtl; padding: 10px; outline: none; border:none; opacity:0.9; border-radius: 0"
-                   class="col-lg-9 col-12 g-font-size-16"
-                   type="text" placeholder="تایپ کن و بگرد..">
-            <ul id="productSearch" class="d-none p-0 col-lg-9 col-11 m-auto outSideClick"></ul>
-        </form>
-    </div>
-</div>
-<div class="container g-pt-40">
+    <!-- End Promo Block Content -->
+</section>
+<div class="container g-py-80">
     <div class="row m-0">
-        <div class="col-lg-4 g-mb-30">
+        <div class="col-lg-4 g-mb-0--lg g-mb-30">
             <!-- Icon Blocks -->
             <div class="text-center u-icon-block--hover">
                     <span
@@ -39,7 +44,7 @@
             <!-- End Icon Blocks -->
         </div>
 
-        <div class="col-lg-4 g-mb-30">
+        <div class="col-lg-4 g-mb-0--lg g-mb-30">
             <!-- Icon Blocks -->
             <div class="text-center u-icon-block--hover">
                     <span
@@ -54,7 +59,7 @@
             <!-- End Icon Blocks -->
         </div>
 
-        <div class="col-lg-4 g-mb-30">
+        <div class="col-lg-4 g-mb-0--lg g-mb-30">
             <!-- Icon Blocks -->
             <div class="text-center u-icon-block--hover">
                     <span
@@ -76,9 +81,9 @@
     <div class="d-flex align-items-stretch g-px-10--lg">
         <div class="col-lg-5 g-px-0 g-px-10--lg">
             <!-- Article -->
-            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-25--lg" data-bg-img-src="{{asset('img/Other/sunglass/topWall.jpg')}}" style="background-image: url({{asset('img/Other/sunglass/topWall.jpg')}});">
+            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-25--lg height_445" data-bg-img-src="{{asset('img/Other/sunglass/topWall.jpg')}}" style="background-image: url({{asset('img/Other/sunglass/topWall.jpg')}});">
                 <div class="g-flex-middle-item g-z-index-1 g-width-300 onlySmallFullOpacity">
-                    <h3 class="g-color-white g-font-weight-700 text-uppercase g-letter-spacing-3 g-mb-15">عینک آفتابی و بند عینک</h3>
+                    <h3 class="g-color-white g-font-weight-700 text-uppercase  g-mb-15">عینک آفتابی و بند عینک</h3>
                     <div class="g-line-height-2 g-mb-20">
                         <p style="direction: rtl" class="g-color-white-opacity-0_9 text-left">محافظ اشعه uv400 خورشید
                             عدسی مخصوص هوای ابری و آفتابی (cat.1)،
@@ -95,8 +100,8 @@
             <!-- Article -->
             <article class="d-none d-lg-block text-uppercase text-center g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-color-white g-py-75 g-px-50" data-bg-img-src="{{asset('img/Other/sunglass/bottomWall.jpg')}}" style="background-image: url({{asset('img/Other/sunglass/bottomWall.jpg')}});">
                 <div style="visibility: hidden" class="g-flex-middle-item g-z-index-1">
-                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">Examples of branding projects</span>
-                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">Branding work</h3>
+                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">تاناکورا مهاباد پیرانشهر بانه پوشاک لباس استوک لباس تاناکورا</span>
+                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</h3>
                     <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>
                 </div>
             </article>
@@ -118,7 +123,7 @@
                             دارای بارکد آنلاین فروشگاهی
                         </p>
                     </div>
-                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>
+                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>
                 </div>
             </article>
             <!-- End Article -->
@@ -127,6 +132,8 @@
     <!-- End Banners -->
 
     <div class="container g-px-0--lg">
+        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
         <div id="js-carousel-1" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
@@ -230,9 +237,9 @@
     <div class="d-flex align-items-stretch g-px-10--lg">
         <div class="col-lg-5 g-px-0 g-px-10--lg">
             <!-- Article -->
-            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-25--lg" data-bg-img-src="{{asset('img/Other/earring/topWall.jpg')}}" style="background-image: url({{asset('img/Other/earring/topWall.jpg')}});">
+            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-25--lg height_445" data-bg-img-src="{{asset('img/Other/earring/topWall.jpg')}}" style="background-image: url({{asset('img/Other/earring/topWall.jpg')}});">
                 <div class="g-flex-middle-item g-z-index-1 g-width-300 onlySmallFullOpacity">
-                    <h3 class="g-color-white g-font-weight-700 text-uppercase g-letter-spacing-3 g-mb-15">گوشواره و اکسسوری گوش</h3>
+                    <h3 class="g-color-white g-font-weight-700 text-uppercase  g-mb-15">گوشواره و اکسسوری گوش</h3>
                     <div class="g-line-height-2 g-mb-20">
                         <p style="direction: rtl" class="g-color-white-opacity-0_9 text-left">گوشواره های ترکیبی خاص و تمام منجوق کاری شده
                             آنتی آلرژی،
@@ -248,9 +255,9 @@
             <!-- Article -->
             <article class="d-none d-lg-block text-uppercase text-center g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-color-white g-py-75 g-px-50" data-bg-img-src="{{asset('img/Other/earring/bottomWall.jpg')}}" style="background-image: url({{asset('img/Other/earring/bottomWall.jpg')}});">
                 <div style="visibility: hidden" class="g-flex-middle-item g-z-index-1">
-                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">Examples of branding projects</span>
-                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">Branding work</h3>
-                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>
+                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">تاناکورا مهاباد پیرانشهر بانه پوشاک لباس استوک لباس تاناکورا</span>
+                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</h3>
+                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>
                 </div>
             </article>
             <!-- End Article -->
@@ -270,7 +277,7 @@
                             بارکد آنلاین فروشگاهی،
                         </p>
                     </div>
-                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>
+                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>
                 </div>
             </article>
             <!-- End Article -->
@@ -279,6 +286,8 @@
     <!-- End Banners -->
 
     <div class="container g-px-0--lg">
+        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
         <div id="js-carousel-2" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
@@ -382,9 +391,9 @@
     <div class="d-flex align-items-stretch g-px-10--lg">
         <div class="col-lg-5 g-px-0 g-px-10--lg">
             <!-- Article -->
-            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-25--lg" data-bg-img-src="{{asset('img/Other/necklace/topWall.jpg')}}" style="background-image: url({{asset('img/Other/necklace/topWall.jpg')}});">
+            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-25--lg height_445" data-bg-img-src="{{asset('img/Other/necklace/topWall.jpg')}}" style="background-image: url({{asset('img/Other/necklace/topWall.jpg')}});">
                 <div class="g-flex-middle-item g-z-index-1 g-width-300 onlySmallFullOpacity">
-                    <h3 class="g-color-white g-font-weight-700 text-uppercase g-letter-spacing-3 g-mb-15">گردنبند و آویز رو لباسی</h3>
+                    <h3 class="g-color-white g-font-weight-700 text-uppercase  g-mb-15">گردنبند و آویز رو لباسی</h3>
                     <div class="g-line-height-2 g-mb-20">
                         <p style="direction: rtl" class="g-color-white-opacity-0_9 text-left">استيل و مشتقات استیل،
                             با روكش و آبكارى طلا و نقره،
@@ -403,9 +412,9 @@
             <!-- Article -->
             <article class="d-none d-lg-block text-uppercase text-center g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-color-white g-py-75 g-px-50" data-bg-img-src="{{asset('img/Other/necklace/bottomWall.jpg')}}" style="background-image: url({{asset('img/Other/necklace/bottomWall.jpg')}});">
                 <div style="visibility: hidden" class="g-flex-middle-item g-z-index-1">
-                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">Examples of branding projects</span>
-                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">Branding work</h3>
-                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>
+                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">تاناکورا مهاباد پیرانشهر بانه پوشاک لباس استوک لباس تاناکورا</span>
+                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</h3>
+                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>
                 </div>
             </article>
             <!-- End Article -->
@@ -426,7 +435,7 @@
                             انتى باكتريال،
                             بارکد آنلاین فروشگاهی</p>
                     </div>
-                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>
+                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>
                 </div>
             </article>
             <!-- End Article -->
@@ -435,6 +444,8 @@
     <!-- End Banners -->
 
     <div class="container g-px-0--lg">
+        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
         <div id="js-carousel-3" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
@@ -538,9 +549,9 @@
     <div class="d-flex align-items-stretch g-px-10--lg">
         <div class="col-lg-5 g-px-0 g-px-10--lg">
             <!-- Article -->
-            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-30--lg" data-bg-img-src="{{asset('img/Other/bracelet/topWall.jpg')}}" style="background-image: url({{asset('img/Other/bracelet/topWall.jpg')}});">
+            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-30--lg height_445" data-bg-img-src="{{asset('img/Other/bracelet/topWall.jpg')}}" style="background-image: url({{asset('img/Other/bracelet/topWall.jpg')}});">
                 <div class="g-flex-middle-item g-z-index-1 g-width-300 onlySmallFullOpacity">
-                    <h3 class="g-color-white g-font-weight-700 text-uppercase g-letter-spacing-3 g-mb-15">دستبند و اکسسوری های دست</h3>
+                    <h3 class="g-color-white g-font-weight-700 text-uppercase  g-mb-15">دستبند و اکسسوری های دست</h3>
                     <div class="g-line-height-2 g-mb-20">
                         <p style="direction: rtl" class="g-color-white-opacity-0_9 text-left">با نگين های زيركنيا
                             و مرواريدهای پرورشى،
@@ -557,9 +568,9 @@
             <!-- Article -->
             <article class="d-none d-lg-block text-uppercase text-center g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-color-white g-py-75 g-px-50" data-bg-img-src="{{asset('img/Other/bracelet/bottomWall.jpg')}}" style="background-image: url({{asset('img/Other/bracelet/bottomWall.jpg')}});">
                 <div style="visibility: hidden" class="g-flex-middle-item g-z-index-1">
-                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">Examples of branding projects</span>
-                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">Branding work</h3>
-                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>
+                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">تاناکورا مهاباد پیرانشهر بانه پوشاک لباس استوک لباس تاناکورا</span>
+                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</h3>
+                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>
                 </div>
             </article>
             <!-- End Article -->
@@ -578,7 +589,7 @@
                             انتى باکتریال،
                             بارکد آنلاین فروشگاهی</p>
                     </div>
-                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>
+                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>
                 </div>
             </article>
             <!-- End Article -->
@@ -587,6 +598,8 @@
     <!-- End Banners -->
 
     <div class="container g-px-0--lg">
+        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
         <div id="js-carousel-5" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
@@ -690,9 +703,9 @@
 {{--    <div class="d-flex align-items-stretch g-px-10--lg">--}}
 {{--        <div class="col-lg-5 g-px-0 g-px-10--lg">--}}
 {{--            <!-- Article -->--}}
-{{--            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-25--lg" data-bg-img-src="{{asset('img/Other/ring.jpg')}}" style="background-image: url({{asset('img/Other/ring.jpg')}});">--}}
+{{--            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-25--lg height_445" data-bg-img-src="{{asset('img/Other/ring.jpg')}}" style="background-image: url({{asset('img/Other/ring.jpg')}});">--}}
 {{--                <div class="g-flex-middle-item g-z-index-1 g-width-300">--}}
-{{--                    <h3 class="g-color-white g-font-weight-700 text-uppercase g-letter-spacing-3 g-mb-15">Project planner</h3>--}}
+{{--                    <h3 class="g-color-white g-font-weight-700 text-uppercase g-letter-spacing-1 g-mb-15">Project planner</h3>--}}
 {{--                    <div class="g-line-height-2 g-mb-20">--}}
 {{--                        <p class="g-color-white-opacity-0_9">Fusce dolor libero, efficitur et lobortis at, faucibus nec nunc. Proin fermentum eget.</p>--}}
 {{--                    </div>--}}
@@ -704,9 +717,9 @@
 {{--            <!-- Article -->--}}
 {{--            <article class="d-none d-lg-block text-uppercase text-center g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-color-white g-py-75 g-px-50" data-bg-img-src="{{asset('img/Other/ring.jpg')}}" style="background-image: url({{asset('img/Other/ring.jpg')}});">--}}
 {{--                <div class="g-flex-middle-item g-z-index-1">--}}
-{{--                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">Examples of branding projects</span>--}}
-{{--                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">Branding work</h3>--}}
-{{--                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>--}}
+{{--                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">تاناکورا مهاباد پیرانشهر بانه پوشاک لباس استوک لباس تاناکورا</span>--}}
+{{--                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</h3>--}}
+{{--                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>--}}
 {{--                </div>--}}
 {{--            </article>--}}
 {{--            <!-- End Article -->--}}
@@ -721,7 +734,7 @@
 {{--                    <div class="g-line-height-2 g-mb-35">--}}
 {{--                        <p class="g-color-white-opacity-0_9">This is where we sit down, grab a cup of coffee and dial in the details. Understanding the task at hand and ironing out the wrinkles is key.</p>--}}
 {{--                    </div>--}}
-{{--                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>--}}
+{{--                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>--}}
 {{--                </div>--}}
 {{--            </article>--}}
 {{--            <!-- End Article -->--}}
@@ -733,6 +746,8 @@
 {{--        <h1 style="direction: rtl" class="h5 container g-color-gray-dark-v1 g-mb-0 g-pa-10 g-pr-15 g-mt-20 g-mb-40">انواع انگشتر مجلسی و کژوال</h1>--}}
 {{--    </div>--}}
 {{--    <div class="container g-px-0--lg">--}}
+{{--<div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>--}}
+
 {{--        <div id="js-carousel-4" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"--}}
 {{--             data-infinite="true"--}}
 {{--             data-slides-show="4"--}}
@@ -836,9 +851,9 @@
 {{--    <div class="d-flex align-items-stretch g-px-10--lg">--}}
 {{--        <div class="col-lg-5 g-px-0 g-px-10--lg">--}}
 {{--            <!-- Article -->--}}
-{{--            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-20--lg" data-bg-img-src="{{asset('img/Other/ankle/topWall.jpg?V=6')}}" style="background-image: url({{asset('img/Other/ankle/topWall.jpg?V=6')}});">--}}
+{{--            <article class="g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-py-75 g-px-50 g-mb-20--lg height_445" data-bg-img-src="{{asset('img/Other/ankle/topWall.jpg?V=6')}}" style="background-image: url({{asset('img/Other/ankle/topWall.jpg?V=6')}});">--}}
 {{--                <div class="g-flex-middle-item g-z-index-1 g-width-300 onlySmallFullOpacity">--}}
-{{--                    <h3 class="g-color-white g-font-weight-700 text-uppercase g-letter-spacing-3 g-mb-15">پابند و اکسسوری پا</h3>--}}
+{{--                    <h3 class="g-color-white g-font-weight-700 text-uppercase  g-mb-15">پابند و اکسسوری پا</h3>--}}
 {{--                    <div class="g-line-height-2 g-mb-20">--}}
 {{--                        <p style="direction: rtl" class="g-color-white-opacity-0_9 text-left">با نگین های مخراج کاری شده،--}}
 {{--                            روكش و آبكارى قوى طلا،--}}
@@ -856,9 +871,9 @@
 {{--            <!-- Article -->--}}
 {{--            <article class="d-none d-lg-block text-uppercase text-center g-flex-middle g-bg-cover g-bg-size-cover g-bg-black-opacity-0_3--after g-color-white g-py-75 g-px-50" data-bg-img-src="{{asset('img/Other/ankle/bottomWall.jpg?V=6')}}" style="background-image: url({{asset('img/Other/ankle/bottomWall.jpg?V=6')}});">--}}
 {{--                <div style="visibility: hidden" class="g-flex-middle-item g-z-index-1">--}}
-{{--                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">Examples of branding projects</span>--}}
-{{--                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">Branding work</h3>--}}
-{{--                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>--}}
+{{--                    <span class="d-inline-block g-brd-bottom g-brd-2 g-brd-primary g-font-weight-700 g-font-size-16 g-letter-spacing-1 g-pb-8 g-mb-20">تاناکورا مهاباد پیرانشهر بانه پوشاک لباس استوک لباس تاناکورا</span>--}}
+{{--                    <h3 class="h2 g-font-weight-700 g-letter-spacing-3 g-mb-35">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</h3>--}}
+{{--                    <a class="btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>--}}
 {{--                </div>--}}
 {{--            </article>--}}
 {{--            <!-- End Article -->--}}
@@ -879,7 +894,7 @@
 {{--                            بارکد آنلاین فروشگاهی--}}
 {{--                        </p>--}}
 {{--                    </div>--}}
-{{--                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">Learn More</a>--}}
+{{--                    <a class="d-none btn btn-md u-btn-outline-white g-font-weight-600 g-font-size-11 text-uppercase" href="#">عینک بدلیجات کلاه کتانی ورزشی کفش اسپورت کیف برند اورجینا اصل</a>--}}
 {{--                </div>--}}
 {{--            </article>--}}
 {{--            <!-- End Article -->--}}
@@ -888,6 +903,8 @@
 {{--    <!-- End Banners -->--}}
 
 {{--    <div class="container g-px-0--lg">--}}
+<div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
 {{--        <div id="js-carousel-6" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"--}}
 {{--             data-infinite="true"--}}
 {{--             data-slides-show="4"--}}
@@ -994,6 +1011,8 @@
         <h1 style="direction: rtl" class="h5 container g-color-gray-dark-v1 g-mb-0 g-pa-10 g-pr-15">تخفیفات ویژه امروز</h1>
     </div>
     <div class="container g-mb-100 g-px-0--lg g-pt-15">
+        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
         <div id="js-carousel-7" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
              data-infinite="true"
              data-slides-show="4"

@@ -6,9 +6,9 @@
             loaderShow();
         });
 
-        $(window).on('pageshow', function () {
-            $('#load').hide();
-        });
+        // $(window).on('pageshow', function () {
+        //     $('#load').hide();
+        // });
 
         // document.onreadystatechange = function () {
         //     if (state === 'complete') {
@@ -222,12 +222,12 @@
                     if (row === 0)
                         productDetail.val(productDetail.val() + '\n\n' + 'سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '') + '\n');
                     else
-                        productDetail.val(productDetail.val() + 'جزئیات سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '') + '\n');
+                        productDetail.val(productDetail.val() + 'سایز ' + $('#size' + row).val() + ' رنگ ' + $('#color' + row).val().replace(/\d+/g, '') + '\n');
                     $(this).find('.sizeDetail').each(function () {
                         let titleElement = $(this).find('.title'),
                             title = titleElement.text(),
                             value = $(this).find('.value').val(),
-                            unitSize = ' '+$('#unitSize '+row).text()+' ',
+                            unitSize = ' '+$(this).find('.unitSize').text()+' ',
                             detail = '';
                         if (!$(this).hasClass('d-none')) {
                             detail = detail + title + ': ' + unitSize + value + '\n';
