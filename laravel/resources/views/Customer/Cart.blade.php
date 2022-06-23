@@ -28,7 +28,7 @@
                                         <div>
                                             <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                                 <img class="img-fluid w-100"
-                                                     src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
+                                                     src="{{ file_exists(public_path($row->PicPath.$row->SampleNumber.'.jpg'))?$row->PicPath.$row->SampleNumber:$row->PicPath.'sample1' }}.jpg"
                                                      alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand }}">
                                             </a>
                                         </div>
@@ -239,7 +239,7 @@
                                             <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                               <img class="g-width-64 g-height-80"
-                                                                   src="{{ $row->PicPath.$row->PicNumber }}.jpg"
+                                                                   src="{{ file_exists(public_path($row->PicPath.$row->SampleNumber.'.jpg'))?$row->PicPath.$row->SampleNumber:$row->PicPath.'sample1' }}.jpg"
                                                                    alt="تاناکورا مهاباد">
                                                             </span>
                                             </td>

@@ -1315,7 +1315,7 @@
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
+                                        <img class="img-fluid" src="{{ file_exists(public_path($row->PicPath.$row->SampleNumber.'.jpg'))?$row->PicPath.$row->SampleNumber:$row->PicPath.'sample1' }}.jpg"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
@@ -1699,7 +1699,7 @@
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
+                                        <img class="img-fluid" src="{{ file_exists(public_path($row->PicPath.$row->SampleNumber.'.jpg'))?$row->PicPath.$row->SampleNumber:$row->PicPath.'sample1' }}.jpg"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
@@ -1826,7 +1826,7 @@
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
+                                        <img class="img-fluid" src="{{ file_exists(public_path($row->PicPath.$row->SampleNumber.'.jpg'))?$row->PicPath.$row->SampleNumber:$row->PicPath.'sample1' }}.jpg"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->
@@ -2127,7 +2127,7 @@
                                     <a class="d-md-table-cell align-middle g-width-110"
                                        href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}"
                                        title="کد محصول {{ $row->ProductDetailID }}">
-                                        <img class="img-fluid" src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
+                                        <img class="img-fluid" src="{{ file_exists(public_path($row->PicPath.$row->SampleNumber.'.jpg'))?$row->PicPath.$row->SampleNumber:$row->PicPath.'sample1' }}.jpg"
                                              alt="Image Description">
                                     </a>
                                     <!-- End Article Image -->

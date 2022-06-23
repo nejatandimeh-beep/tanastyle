@@ -260,7 +260,7 @@
                 <div style="direction: ltr" class="col-sm-10 text-left p-0">
                     <div class="col-sm-3 g-mb-10">
                         <img class="img-fluid img-thumbnail g-rounded-1"
-                             src="{{ $data->PicPath.$data->SampleNumber }}.jpg"
+                             src="{{ file_exists(public_path($data->PicPath.$data->SampleNumber.'.jpg'))?$data->PicPath.$data->SampleNumber:$data->PicPath.'sample1' }}.jpg"
                              alt="Image Description">
                     </div>
                 </div>

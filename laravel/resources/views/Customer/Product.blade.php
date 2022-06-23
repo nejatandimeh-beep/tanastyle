@@ -13,6 +13,7 @@
     <span id="picPath" class="d-none">{{ $data->PicPath }}</span>
     <span id="genderCode" class="d-none">{{ $data->GenderCode }}</span>
     <span id="catCode" class="d-none">{{ $data->CatCode }}</span>
+    <span id="cat" class="d-none">{{ $data->Cat }}</span>
     <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10000':'25000'}}" class="d-none" id="tempPostPrice" type="text">
 
     <div style="position: relative" id="productDetailContainer" class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4 modalBox productDetail">
@@ -124,132 +125,132 @@
                      data-slides-show="3"
                      data-is-thumbs="1"
                      data-nav-for="#js-carousel-22">
-                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
+                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample1">
                         <img class="w-100" loading="lazy"
-                             src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                             src="{{ $data->PicPath }}sample1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                     </div>
                     @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample2">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic3">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic3.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample3">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample3.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic4">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample4">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic5">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic5.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample5">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample5.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic6">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample6">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic7">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample7">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic8">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample8">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic9">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample9">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic10">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample10">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic11">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample11">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic12">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample12">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                        @if (file_exists(public_path($data->PicPath.'pic13.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic13">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample13">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
-                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
+                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample1">
                         <img class="w-100" loading="lazy"
-                             src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                             src="{{ $data->PicPath }}sample1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                     </div>
                     @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample2">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic3">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic3.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample3">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample3.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic4">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample4">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic5">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic5.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample5">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample5.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic6">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample6">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic7">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample7">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic8">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample8">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic9">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample9">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic10">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample10">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic11">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample11">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic12">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample12">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic13.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic13">
-                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample13">
+                            <img class="w-100" loading="lazy" src="{{ $data->PicPath }}sample13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                 </div>
@@ -941,131 +942,131 @@
                      data-slides-show="3"
                      data-is-thumbs="1"
                      data-nav-for="#js-carousel-11">
-                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
+                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample1">
                         <img class="w-100" loading="lazy"
                              src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                     </div>
                     @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample2">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic3">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample3">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic3.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic4">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample4">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic5">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample5">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic5.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic6">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample6">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic7">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample7">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic8">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample8">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic9">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample9">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic10">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample10">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic11">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample11">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic12">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample12">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                         @if (file_exists(public_path($data->PicPath.'pic13.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic13">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample13">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
-                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic1">
+                    <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample1">
                         <img class="w-100" loading="lazy"
                              src="{{ $data->PicPath }}pic1.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                     </div>
                     @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic2">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample2">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic3.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic3">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample3">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic3.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic4">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample4">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic5.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic5">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample5">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic5.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic6.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic6">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample6">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic7">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample7">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic8">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample8">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic9">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample9">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic10">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample10">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic11">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample11">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic12">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample12">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic13.jpg')))
-                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="pic13">
+                        <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample13">
                             <img class="w-100" loading="lazy" src="{{ $data->PicPath }}pic13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif

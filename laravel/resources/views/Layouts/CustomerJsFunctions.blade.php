@@ -1,12 +1,12 @@
 @section('CustomerJsFunction')
     <script>
-        window.addEventListener( "pageshow", function ( event ) {
+        window.addEventListener("pageshow", function (event) {
             let historyTraversal = event.persisted ||
-                ( typeof window.performance != "undefined" &&
-                    window.performance.navigation.type === 2 );
-            if ( historyTraversal ) {
+                (typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2);
+            if (historyTraversal) {
                 // Handle page restore.
-                if($('.cartContainer').length>0 || $('#productDetailContainer').length>0){
+                if ($('.cartContainer').length > 0 || $('#productDetailContainer').length > 0) {
                     console.log('reload');
                     window.location.reload();
                 }
@@ -14,16 +14,18 @@
         });
         let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
             file_upload, file_type, stopLoadProduct = false;
-        function carousel(ele){
-            $('#'+ele).slick('setOption', 'responsive', [{
+
+        function carousel(ele) {
+            $('#' + ele).slick('setOption', 'responsive', [{
                 breakpoint: 992,
                 settings: {
                     slidesToShow: 1
                 }
             }], true);
         }
+
         $(document).ready(function () {
-            if($('.masterPage').length>0) {
+            if ($('.masterPage').length > 0) {
                 $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
                 carousel('js-carousel-1');
                 carousel('js-carousel-2');
@@ -100,7 +102,7 @@
             $('#crop').on('click', function () {
                 $('#cropText').hide();
                 $('#waitingCrop').show();
-                $(this).prop('disabled',true);
+                $(this).prop('disabled', true);
                 let canvas = cropper.getCroppedCanvas({
                     width: 400,
                     height: 400
@@ -341,7 +343,7 @@
         function similarProducts() {
             $.ajax({
                 type: 'GET',
-                url: '/Customer-Similar-Products/' + $('#genderCode').text() + '/' + $('#catCode').text() + '/' + $('#productID').text(),
+                url: '/Customer-Similar-Products/' + $('#genderCode').text() + '/' + $('#catCode').text() + '/' + $('#productID').text()+'/'+$('#cat').text(),
                 async: false,
                 beforeSend: function () {
                     $('[class*="js-carousel"]').each(function () {
@@ -349,7 +351,7 @@
                     });
                 },
                 success: function (data) {
-                    // console.log(data);
+                    console.log(data);
                     if (data !== 'null') {
                         $('#similarContainer').append(data);
                         $('#similarContainer').removeClass('d-none');
@@ -465,122 +467,122 @@
             $('input[name="color"]:checked').each(function () {
                 color.push($(this).attr('id').replace(/[^0-9]/gi, ''));
             });
+
+            $('input[name="gender"]').on('change', function () {
+                $('#noProduct').hide();
+                gender = [];
+                $('#loadProduct').removeClass('d-none');
+                $('#filters-on').removeClass('d-none');
+                $('#filters-on-label').removeClass('d-none');
+                $('#filters-on-gender').empty();
+                $('#filters-on-gender').removeClass('d-none');
+
+                $('input[name="gender"]:checked').each(function () {
+                    let id = $(this).attr('id'), filterDiv = $('#filters-on-gender');
+                    gender.push(id.replace(/[^0-9]/gi, ''));
+                    if (id === 'gender-all') {
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">جنسیت: همه</span>');
+                        gender.push(0, 1, 2, 3, 4, 5);
+                        return false;
+                    } else {
+                        $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
+                        $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
+                    }
+                });
+                // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+                lastScrollTop = $(window).scrollTop();
+                filtering(1);
+
+                if (!$('#lineBreak').length)
+                    $('#noProduct').show();
+            });
+
+            $('input[name="category"]').on('change', function () {
+                $('#noProduct').hide();
+                category = []
+                $('#loadProduct').removeClass('d-none');
+                $('#filters-on').removeClass('d-none');
+                $('#filters-on-label').removeClass('d-none');
+                $('#filters-on-cat').empty();
+                $('#filters-on-cat').removeClass('d-none');
+
+                $('input[name="category"]:checked').each(function () {
+                    let id = $(this).attr('id'), filterDiv = $('#filters-on-cat');
+                    category.push(id);
+                    if (id === 'cat-all') {
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">طبقه بندی: همه</span>');
+                        category.push('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q');
+                        return false;
+                    } else {
+                        $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
+                        $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
+                    }
+                });
+
+                // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+                lastScrollTop = $(window).scrollTop();
+                filtering(1);
+                if (!$('#lineBreak').length)
+                    $('#noProduct').show();
+            });
+
+            $('input[name="size"]').on('change', function () {
+                $('#noProduct').hide();
+                size = [];
+                $('#loadProduct').removeClass('d-none');
+                $('#filters-on').removeClass('d-none');
+                $('#filters-on-label').removeClass('d-none');
+                $('#filters-on-size').empty();
+                $('#filters-on-size').removeClass('d-none');
+
+                $('input[name="size"]:checked').each(function () {
+                    let id = $(this).attr('id'), filterDiv = $('#filters-on-size');
+                    size.push(id);
+                    if (id === 'size-all') {
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">سایز: همه</span>');
+                        size.push('XS', 'S', 'L', 'M', 'XL', 'XXL', 'XXXL', 'Free');
+                        return false;
+                    } else {
+                        $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
+                        $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
+                    }
+                });
+                // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+                lastScrollTop = $(window).scrollTop();
+                filtering(1);
+                if (!$('#lineBreak').length)
+                    $('#noProduct').show();
+            });
+
+            $('input[name="color"]').on('change', function () {
+                $('#noProduct').hide();
+                color = [];
+                $('#filters-on').removeClass('d-none');
+                $('#filters-on-label').removeClass('d-none');
+                $('#filters-on-color').empty();
+                $('#filters-on-color').removeClass('d-none');
+                $('#loadProduct').removeClass('d-none');
+
+                $('input[name="color"]:checked').each(function () {
+                    let id = $(this).attr('id'), filterDiv = $('#filters-on-color');
+                    color.push(id.replace(/[^0-9]/gi, ''));
+                    if (id === 'color-all') {
+                        $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">رنگ: همه</span>');
+                        color.push(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+                        return false;
+                    } else {
+                        $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
+                        $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
+                    }
+                });
+
+                // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
+                lastScrollTop = $(window).scrollTop();
+                filtering(1);
+                if (!$('#lineBreak').length)
+                    $('#noProduct').show();
+            });
         }
-
-        $('input[name="gender"]').on('change', function () {
-            $('#noProduct').hide();
-            gender = [];
-            $('#loadProduct').removeClass('d-none');
-            $('#filters-on').removeClass('d-none');
-            $('#filters-on-label').removeClass('d-none');
-            $('#filters-on-gender').empty();
-            $('#filters-on-gender').removeClass('d-none');
-
-            $('input[name="gender"]:checked').each(function () {
-                let id = $(this).attr('id'), filterDiv = $('#filters-on-gender');
-                gender.push(id.replace(/[^0-9]/gi, ''));
-                if (id === 'gender-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">جنسیت: همه</span>');
-                    gender.push(0, 1, 2, 3, 4, 5);
-                    return false;
-                } else {
-                    $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
-                    $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
-                }
-            });
-            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
-            lastScrollTop = $(window).scrollTop();
-            filtering(1);
-
-            if (!$('#lineBreak').length)
-                $('#noProduct').show();
-        });
-
-        $('input[name="category"]').on('change', function () {
-            $('#noProduct').hide();
-            category = []
-            $('#loadProduct').removeClass('d-none');
-            $('#filters-on').removeClass('d-none');
-            $('#filters-on-label').removeClass('d-none');
-            $('#filters-on-cat').empty();
-            $('#filters-on-cat').removeClass('d-none');
-
-            $('input[name="category"]:checked').each(function () {
-                let id = $(this).attr('id'), filterDiv = $('#filters-on-cat');
-                category.push(id);
-                if (id === 'cat-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">طبقه بندی: همه</span>');
-                    category.push('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q');
-                    return false;
-                } else {
-                    $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
-                    $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
-                }
-            });
-
-            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
-            lastScrollTop = $(window).scrollTop();
-            filtering(1);
-            if (!$('#lineBreak').length)
-                $('#noProduct').show();
-        });
-
-        $('input[name="size"]').on('change', function () {
-            $('#noProduct').hide();
-            size = [];
-            $('#loadProduct').removeClass('d-none');
-            $('#filters-on').removeClass('d-none');
-            $('#filters-on-label').removeClass('d-none');
-            $('#filters-on-size').empty();
-            $('#filters-on-size').removeClass('d-none');
-
-            $('input[name="size"]:checked').each(function () {
-                let id = $(this).attr('id'), filterDiv = $('#filters-on-size');
-                size.push(id);
-                if (id === 'size-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">سایز: همه</span>');
-                    size.push('XS', 'S', 'L', 'M', 'XL', 'XXL', 'XXXL', 'Free');
-                    return false;
-                } else {
-                    $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
-                    $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
-                }
-            });
-            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
-            lastScrollTop = $(window).scrollTop();
-            filtering(1);
-            if (!$('#lineBreak').length)
-                $('#noProduct').show();
-        });
-
-        $('input[name="color"]').on('change', function () {
-            $('#noProduct').hide();
-            color = [];
-            $('#filters-on').removeClass('d-none');
-            $('#filters-on-label').removeClass('d-none');
-            $('#filters-on-color').empty();
-            $('#filters-on-color').removeClass('d-none');
-            $('#loadProduct').removeClass('d-none');
-
-            $('input[name="color"]:checked').each(function () {
-                let id = $(this).attr('id'), filterDiv = $('#filters-on-color');
-                color.push(id.replace(/[^0-9]/gi, ''));
-                if (id === 'color-all') {
-                    $(filterDiv).append('<span class="btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5">رنگ: همه</span>');
-                    color.push(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-                    return false;
-                } else {
-                    $(filterDiv).append($(this).parent().closest('.form-group').find('span').clone());
-                    $(filterDiv).find('span').addClass('btn cursor-default btn-sm u-btn-outline-primary u-btn-hover-v2-1 g-font-weight-600 g-letter-spacing-0_5 g-brd-2 rounded-0 g-mr-5 g-mb-5');
-                }
-            });
-
-            // $('html, body').animate({scrollTop: $('#contentDiv').offset().top}, 1000);
-            lastScrollTop = $(window).scrollTop();
-            filtering(1);
-            if (!$('#lineBreak').length)
-                $('#noProduct').show();
-        });
 
         function filtering(filterChange) {
             console.log('gender=' + gender, '\n category=' + category, '\n size=' + size, '\n priceMin=' + priceMin, '\n priceMax=' + priceMax, '\n color=' + color);
@@ -820,7 +822,7 @@
 
         // Bank Portal
         function bankingPortal(id, qty) {
-            let  postPrice=$('#tempPostPrice').val();
+            let postPrice = $('#tempPostPrice').val();
             $('.custombox-content #bankingPortalBtn').hide();
             $('.custombox-content #waitingIconSubmit').show();
             if ($('#loginAlert').text() === 'login') {
@@ -838,7 +840,7 @@
                         }
                         if (error === 0) {
                             if ($('#addressID').length > 0) {
-                                window.location = '/Banking-Portal/' + id + '/' + qty+'/'+postPrice;
+                                window.location = '/Banking-Portal/' + id + '/' + qty + '/' + postPrice;
                             } else {
                                 $('.custombox-content #bankingPortalBtn').show();
                                 $('.custombox-content #waitingIconSubmit').hide();
@@ -1034,6 +1036,7 @@
             $('#productListPagination').hide();
             console.log('change radio')
         })
+
         function allSwitchBtn(btn) {
             switch (btn) {
                 case 'gender-all':
@@ -1078,8 +1081,8 @@
                         console.log(data);
                         $('#' + id).removeClass('d-none');
                         $('#' + id).html(data);
-                        if ($('#' + id).hasClass('uniqueProduct')){
-                            $('#' + id).length=1;
+                        if ($('#' + id).hasClass('uniqueProduct')) {
+                            $('#' + id).length = 1;
                         }
                     }
                 });
@@ -1156,12 +1159,12 @@
                     tempPrice[i] = $('#productFinalPrice' + i).text().replace(/,/g, '');
                     price[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
                     allPrice = allPrice + price[i];
-                    $('#rowNumber' + i).text(i+1);
+                    $('#rowNumber' + i).text(i + 1);
                     form.append("<input name='productDetailID" + i + "' value=" + pdId[i] + ">");
                     form.append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
-                orderPrice=allPrice;
-                postPrice=$('#postPrice').text().replace(new RegExp(',', 'g'), "");
+                orderPrice = allPrice;
+                postPrice = $('#postPrice').text().replace(new RegExp(',', 'g'), "");
                 allPrice += parseInt(postPrice);
                 form.append("<input name='row' value=" + row + ">");
                 form.append("<input id='allPrice' name='allPrice' value=" + allPrice + ">");
@@ -1169,14 +1172,14 @@
                 $('#orderPrice').text(allPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 setTimeout(function () {
                     $('.custombox-content #popularPostBtn').trigger('click');
-                },100)
+                }, 100)
             }
             if ($('#addressID').length > 0)
                 $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
         }
 
         function postPriceFunc(post) {
-            if(post==='tpax'){
+            if (post === 'tpax') {
                 $('.custombox-content #tPaxPost').removeClass('d-none');
                 $('.custombox-content #tPaxPost').addClass('d-block');
                 $('.custombox-content #popularPost').removeClass('d-block');
@@ -1192,12 +1195,12 @@
                 $('.custombox-content #popularPost').removeClass('d-none');
                 $('#tempPostPrice').val($('.custombox-content #postPrice').text().replace(new RegExp(',', 'g'), ""));
 
-                let price=parseInt($('.custombox-content #pureOrderPrice').text().replace(new RegExp(',', 'g'), "")),
-                    postPrice=parseInt($('.custombox-content #postPrice').text().replace(new RegExp(',', 'g'), ""));
-                $('.custombox-content #orderPrice').text((price+postPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                let price = parseInt($('.custombox-content #pureOrderPrice').text().replace(new RegExp(',', 'g'), "")),
+                    postPrice = parseInt($('.custombox-content #postPrice').text().replace(new RegExp(',', 'g'), ""));
+                $('.custombox-content #orderPrice').text((price + postPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
 
-                if($('.cartContainer').length>0){
-                    $('#allPrice').val(price+postPrice);
+                if ($('.cartContainer').length > 0) {
+                    $('#allPrice').val(price + postPrice);
                 }
             }
 
@@ -1289,7 +1292,7 @@
                     $('#orderRow' + key).remove();
                     $('#cartContainer' + key).remove();
                     $('#basketNum').text(parseInt($('#basketNum').text()) - 1);
-                    console.log('cartCount',data);
+                    console.log('cartCount', data);
                     if (data == 0) {
                         $('#orderSubmit').addClass('d-none');
                         $('#cartEmptyAlert').removeClass('d-none');
@@ -1377,7 +1380,7 @@
                         if (data[i]['Color'] !== temp) {
                             $('#colorContainer').append($("#sizeInfo").clone(true).removeClass('d-none').addClass('d-inline-block').prop('id', 'sizeInfo' + i));
                             $('#sizeInfo' + i + ' input').attr('id', 'color-' + data[i]["ID"]);
-                            $('#sizeInfo' + i + ' input').attr('onclick', 'addQty(' + data[i]["ID"] + ',' + data[i]["Qty"] + ',"' + data[i]["PicNumber"] + '")');
+                            $('#sizeInfo' + i + ' input').attr('onclick', 'addQty(' + data[i]["ID"] + ',' + data[i]["Qty"] + ',"' + data[i]["SampleNumber"] + '")');
                             $('#sizeInfo' + i + ' input').val(data[i]['Color']);
                             $('#sizeInfo' + i + ' label').attr('for', 'color-' + data[i]["ID"]);
                             $('#sizeInfo' + i + ' label').text(data[i]['Color']);
@@ -1417,8 +1420,12 @@
                     $('#callMeExist').show();
                 }
             }
-            $('#orderProductImg').attr('src', $('#picPath').text() + '/' + picNumber + '.jpg');
+            $('#orderProductImg').attr('src', $('#picPath').text() + picNumber + '.jpg');
+            $('#orderProductImg').error(function () {
+                $('#orderProductImg').attr('src', $('#picPath').text() + 'sample1.jpg');
+            });
             $('#detailID').text($('#productDetailID').text());
+            console.log(picNumber);
             $('#' + picNumber).trigger('click');
         }
 
@@ -1509,8 +1516,9 @@
 
         // پر کردن فرم فاکتور فروش در هنگام نمایش مودال
         function addOrderTable() {
-            let orderPrice = parseInt($('#productFinalPrice').text().replace(/[^0-9]/gi, '')) * parseInt($('#productQtyBought').val()), postPrice=0;
-            postPrice=$('#postPrice').text().replace(new RegExp(',', 'g'), "");
+            let orderPrice = parseInt($('#productFinalPrice').text().replace(/[^0-9]/gi, '')) * parseInt($('#productQtyBought').val()),
+                postPrice = 0;
+            postPrice = $('#postPrice').text().replace(new RegExp(',', 'g'), "");
             $('#orderID').text($('#productID').text() + '/' + $('#productDetailID').text());
             $('#orderProductID').text($('#productDetailID').text());
             $('#orderProductName').text($('#productName').text() + ' ' + $('#productModel').text());
@@ -1527,7 +1535,7 @@
             $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
             setTimeout(function () {
                 $('.custombox-content #popularPostBtn').trigger('click');
-            },100)
+            }, 100)
         }
 
         // تابع اضافه کردن نظرات

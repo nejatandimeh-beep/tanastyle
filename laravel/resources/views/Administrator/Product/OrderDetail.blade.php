@@ -254,6 +254,16 @@
                                           class="input-group-addon g-color-gray-light-v1  g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-right-none g-width-100 bigDevice">تومان</span>
                                 </div>
                             </div>
+                            <div class="form-group row g-mb-25">
+                                <label for="example-text-input" class="col-sm-2 col-form-label">تصاویر</label>
+                                <div style="direction: ltr" class="col-sm-10 text-left p-0">
+                                    <div class="col-sm-3 g-mb-10">
+                                        <img class="img-fluid img-thumbnail g-rounded-1"
+                                             src="{{ file_exists(public_path($data->PicPath.$data->SampleNumber.'.jpg'))?$data->PicPath.$data->SampleNumber:$data->PicPath.'sample1' }}.jpg"
+                                             alt="Image Description">
+                                    </div>
+                                </div>
+                            </div>
                         </form>
 
                         @if (isset($data->falseProduct))

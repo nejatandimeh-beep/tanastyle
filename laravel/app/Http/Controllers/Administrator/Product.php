@@ -27,9 +27,10 @@ class Product extends Controller
         $saleTable = $this->saleTableLoad('pagination');
 
         $delivery = DB::table('product_delivery as pd')
-            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*')
+            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*','pdd.SampleNumber')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->get();
 
@@ -78,7 +79,7 @@ class Product extends Controller
                 'avgRating' => '0');
 
             $data = DB::table('product as p')
-                ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.PicNumber')
+                ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.SampleNumber')
                 ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
                 ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
@@ -106,7 +107,7 @@ class Product extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('product as p')
-                ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.PicNumber')
+                ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.SampleNumber')
                 ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
                 ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
@@ -129,7 +130,7 @@ class Product extends Controller
                 'totalSaleAmount' => 0);
 
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.PicNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
                 ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
@@ -156,7 +157,7 @@ class Product extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID','c.Mobile as customerMobile', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.PicNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID','c.Mobile as customerMobile', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID','pd.SampleNumber')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')

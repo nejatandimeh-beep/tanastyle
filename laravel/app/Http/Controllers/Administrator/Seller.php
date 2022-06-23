@@ -150,10 +150,11 @@ class Seller extends Controller
         $lastPaymentDate = $this->convertDateToPersian($amountSum['lastPaymentDate']);
 
         $delivery = DB::table('product_delivery as pd')
-            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath', 'pd.*')
+            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath', 'pd.*','pdd.SampleNumber')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->where('p.SellerID', $id)
             ->where('pd.DeliveryStatus', 0)
             ->get();
@@ -271,7 +272,7 @@ class Seller extends Controller
                 'avgRating' => '0');
 
             $data = DB::table('product as p')
-                ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.PicNumber')
+                ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.SampleNumber')
                 ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
                 ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
@@ -300,7 +301,7 @@ class Seller extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('product as p')
-                ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.PicNumber')
+                ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.SampleNumber')
                 ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
                 ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
                 ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
@@ -324,7 +325,7 @@ class Seller extends Controller
                 'totalSaleAmount' => 0);
 
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.PicNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -344,7 +345,7 @@ class Seller extends Controller
 
                 $generalInfo['allOrder'] += 1;
 
-                $generalInfo['totalSaleAmount'] += ($d->FinalPrice * $d->Qty);
+                $generalInfo['totalSaleAmount'] += ($d->PriceWithDiscount * $d->Qty);
             }
 
             return $generalInfo;
@@ -352,7 +353,7 @@ class Seller extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID','c.Mobile as customerMobile', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.PicNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID','c.Mobile as customerMobile', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -594,9 +595,10 @@ class Seller extends Controller
 
         // Get Product Data
         $data = DB::table('product_order_detail as pod')
-            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct')
+            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct','pdd.SampleNumber')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
             ->where('pod.ID', $id)
             ->first();
@@ -716,11 +718,12 @@ class Seller extends Controller
         $mon=$date[1];
         $day=$date[2];
         $sellerId = $request->get('sellerId');
+        $transactionCode = $request->get('transactionCode');
         DB::table('seller_amount_received')
             ->insert([
                 'SellerID' => $sellerId,
                 'Amount' => $request->get('amount'),
-                'TransactionCode' => '---',
+                'TransactionCode' => $transactionCode,
                 'Date' => $year.'-'.$mon.'-'.$day,
                 'Time' => $request->get('hour').':'.$request->get('minute').':'.$request->get('second'),
                 'Detail' => $request->get('detail'),

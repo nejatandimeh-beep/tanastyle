@@ -92,16 +92,17 @@ class Basic extends Controller
         return view('Customer.Master', compact('discounts', 'glass', 'earring', 'necklace', 'bracelet'));
     }
 
-    public function sameProduct($genderCode, $catCode, $productID)
+    public function sameProduct($genderCode, $catCode, $productID,$cat)
     {
         $similarProduct = DB::table('product as p')
             ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
-            ->where('p.GenderCode', $genderCode)
+            ->where('p.Cat', $cat)
             ->where('p.CatCode', $catCode)
+            ->where('p.GenderCode', $genderCode)
             ->where('p.ID', '<>', $productID)
-            ->orderBy('p.VisitCounter', 'DESC')
+            ->inRandomOrder()
             ->take(5)
             ->get();
 
@@ -1340,7 +1341,7 @@ class Basic extends Controller
     public function sizeInfo($id, $size)
     {
         return DB::table('product_detail')
-            ->select('ID', 'Color', 'Qty', 'HexCode', 'PicNumber')
+            ->select('ID', 'Color', 'Qty', 'HexCode', 'PicNumber','SampleNumber')
             ->where('ProductID', $id)
             ->where('Size', $size)
             ->get();

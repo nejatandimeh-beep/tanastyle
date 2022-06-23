@@ -710,7 +710,7 @@
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ $rec->PicPath.$rec->SampleNumber }}.jpg" alt="">
+                                             src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg" alt="">
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">

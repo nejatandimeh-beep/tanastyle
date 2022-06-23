@@ -421,7 +421,7 @@
                                             <td class="align-middle text-center text-nowrap">
                                                 <div class="media">
                                                     <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
-                                                         src="{{ $rec->PicPath }}pic1.jpg" alt="">
+                                                         src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg" alt="">
                                                 </div>
                                             </td>
                                             @if ($deliveryStatus[$key] > 540)
@@ -917,6 +917,12 @@
                             <div style="direction: rtl" class="d-flex g-pb-20 g-pt-10 g-px-20 g-pb-20 g-mb-10">
                                 <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
                                 <span style="border-right: 1px solid lightgrey; width: 30%"
+                                      class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">کد تراکنش</span>
+                                    <input class="form-control form-control-md rounded-0 text-center" type="text"
+                                           value="--" name="transactionCode">
+                                </div>
+                                <div class="input-group col-sm-4 force-col-12 g-mb-5 g-px-5">
+                                <span style="border-right: 1px solid lightgrey; width: 30%"
                                       class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">توضیحات</span>
                                     <input class="form-control form-control-md rounded-0 text-center" type="text"
                                            value="--" name="detail">
@@ -1381,7 +1387,7 @@
                                             <td class="align-middle">
                                                 <div class="media">
                                                     <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
-                                                         src="{{ $rec->PicPath.$rec->PicNumber }}.jpg" alt="">
+                                                         src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg" alt="">
                                                 </div>
                                             </td>
                                             <td class="align-middle text-center">
@@ -1697,7 +1703,7 @@
                                             <td class="align-middle">
                                                 <div class="media">
                                                     <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"
-                                                         src="{{ $rec->PicPath.$rec->PicNumber }}.jpg"
+                                                         src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg"
                                                          alt="Image Description">
                                                 </div>
                                             </td>

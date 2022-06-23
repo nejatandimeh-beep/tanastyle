@@ -276,7 +276,7 @@ Route::get('/About-Me', 'Customer\Basic@aboutMe')->name('aboutMe');
 Route::get('/Customer-Product-Custom-Filter/{gender}/{cat}/{size}/{priceMin}/{priceMax}/{color}/{filterChange}', 'Customer\Basic@productFilter');
 Route::get('/Customer-Product-Load', 'Customer\Basic@productLoad');
 Route::get('/Customer-Spacial-Discounts', 'Customer\Basic@discounts');
-Route::get('/Customer-Similar-Products/{genderCode}/{catCode}/{productID}', 'Customer\Basic@sameProduct');
+Route::get('/Customer-Similar-Products/{genderCode}/{catCode}/{productID}/{cat}', 'Customer\Basic@sameProduct');
 
 
 // -------------------[ Cropper.js ]-----------------------

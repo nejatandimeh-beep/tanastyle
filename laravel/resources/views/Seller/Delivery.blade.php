@@ -65,7 +65,7 @@
                                 <td class="align-middle text-center text-nowrap">
                                     <div class="media">
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ $rec->PicPath }}sample1.jpg" alt="">
+                                             src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg" alt="">
                                     </div>
                                 </td>
                                 @if ($deliveryStatus[$key] > 540)

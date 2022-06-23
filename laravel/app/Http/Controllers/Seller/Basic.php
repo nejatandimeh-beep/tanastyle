@@ -445,14 +445,14 @@ class Basic extends Controller
 //            ->get();
 
         $data = DB::table('product_delivery as pd')
-            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*','p.Brand')
+            ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*','p.Brand','pdd.SampleNumber','pdd.ID')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('p.SellerID', $sellerID)
             ->where('pd.DeliveryStatus', '0')
             ->get();
-
 
         $today = date('Y-m-d');
         $persianDate = array();
