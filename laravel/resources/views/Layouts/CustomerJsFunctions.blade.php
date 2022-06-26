@@ -27,6 +27,7 @@
         $(document).ready(function () {
             if ($('.masterPage').length > 0) {
                 $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                carousel('js-carousel-0');
                 carousel('js-carousel-1');
                 carousel('js-carousel-2');
                 carousel('js-carousel-3');

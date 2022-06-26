@@ -23,6 +23,15 @@ class Basic extends Controller
 {
     public function Master()
     {
+        $newProduct = DB::table('product as p')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->orderBy('p.ID', 'DESC')
+            ->groupBy('p.ID')
+            ->take(10)
+            ->get();
+
         $glass = DB::table('product as p')
             ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
@@ -60,24 +69,6 @@ class Basic extends Controller
             ->take(5)
             ->get();
 
-//        $ring = DB::table('product as p')
-//            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-//            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-//            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-//            ->where('Cat', '704')
-//            ->inRandomOrder()
-//            ->take(5)
-//            ->get();
-
-//        $ankle = DB::table('product as p')
-//            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-//            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-//            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-//            ->where('Cat', '705')
-//            ->inRandomOrder()
-//            ->take(5)
-//            ->get();
-
         $minDiscount = 1;
         $maxDiscount = 99;
         $discounts = DB::table('product as p')
@@ -89,7 +80,7 @@ class Basic extends Controller
             ->take(5)
             ->get();
 
-        return view('Customer.Master', compact('discounts', 'glass', 'earring', 'necklace', 'bracelet'));
+        return view('Customer.Master', compact('discounts', 'glass', 'earring', 'necklace', 'bracelet','newProduct'));
     }
 
     public function sameProduct($genderCode, $catCode, $productID,$cat)
