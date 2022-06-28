@@ -29,7 +29,7 @@ class Basic extends Controller
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->orderBy('p.ID', 'DESC')
             ->groupBy('p.ID')
-            ->take(10)
+            ->take(5)
             ->get();
 
         $glass = DB::table('product as p')
@@ -1718,6 +1718,25 @@ class Basic extends Controller
                 $catCode = 'q';
                 $title = 'عینک آفتابی و بند عینک زنانه';
                 break;
+            case 'newProduct':
+                $category = ['all'];
+                $gender = 'all';
+                $catCode = 'all';
+                $title = 'تاز ه ترین های تانا استایل';
+                $data = DB::table('product')
+                    ->select('*')
+                    ->orderBy('ID','DESC')
+                    ->groupBy('ID')
+                    ->paginate(12);
+
+                $size = DB::table('product as p')
+                    ->select('pd.Size', 'pd.Color', 'p.ID')
+                    ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+                    ->orderBy('ID','DESC')
+                    ->groupBy('p.ID')
+                    ->paginate(12);
+
+                return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
             default:
                 $category[0] = $cat;
         }

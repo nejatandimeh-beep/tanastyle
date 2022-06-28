@@ -77,7 +77,7 @@
 </div>
 <div id="newProductContainer">
     <div>
-        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_7--after mode-scroll">
+        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_5--after mode-scroll">
             <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background-image: url({{asset('img/Other/newProduct/bigWall.jpg?v=873')}}); transform: translate3d(0px, -76.6067px, 0px);"></div>
 
             <div class="container g-z-index-1 g-py-120">
@@ -114,12 +114,12 @@
     </div>
 
     <div class="container g-px-0--lg">
-        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
 
         <div id="js-carousel-0" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
-             data-autoplay="1"
+             data-autoplay="0"
              data-speed="5000"
              data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
@@ -199,7 +199,7 @@
                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                              data-nav-for="#carousel-08-{{$key+1}}">
                             <div class="js-slide">
-                                <a href="{{ route('moreItem','730') }}" class="customLinkHover">
+                                <a href="{{ route('moreItem','newProduct') }}" class="customLinkHover">
                                     <div class="moreItem">
                                         <span style="position: absolute; left:45px; text-shadow: 0 0 5px navy;" class="h1 g-color-white g-top-50x">بیشتر ببینید</span>
                                     </div>
@@ -216,7 +216,7 @@
 </div>
 <div id="sunGlassContainer">
     <div>
-        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_7--after mode-scroll">
+        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_5--after mode-scroll">
             <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background-image: url({{asset('img/Other/sunglass/bigWall.jpg?v=873')}}); transform: translate3d(0px, -76.6067px, 0px);"></div>
 
             <div class="container g-z-index-1 g-py-120">
@@ -252,12 +252,12 @@
     </div>
 
     <div class="container g-px-0--lg">
-        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
 
         <div id="js-carousel-1" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
-             data-autoplay="1"
+             data-autoplay="0"
              data-speed="5000"
              data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
@@ -354,7 +354,7 @@
 </div>
 <div id="earringContainer">
     <div>
-        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_7--after mode-scroll">
+        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_5--after mode-scroll">
             <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background-image: url({{asset('img/Other/earring/bigWall.jpg?v=873')}}); transform: translate3d(0px, -76.6067px, 0px);"></div>
 
             <div class="container g-z-index-1 g-py-120">
@@ -390,12 +390,12 @@
     </div>
 
     <div class="container g-px-0--lg">
-        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
 
         <div id="js-carousel-2" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
-             data-autoplay="1"
+             data-autoplay="0"
              data-speed="5000"
              data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
@@ -492,7 +492,7 @@
 </div>
 <div id="necklaceContainer">
     <div>
-        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_7--after mode-scroll">
+        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_5--after mode-scroll">
             <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background-image: url({{asset('img/Other/necklace/bigWall.jpg?v=873')}}); transform: translate3d(0px, -76.6067px, 0px);"></div>
 
             <div class="container g-z-index-1 g-py-120">
@@ -528,12 +528,12 @@
     </div>
 
     <div class="container g-px-0--lg">
-        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
 
         <div id="js-carousel-3" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
-             data-autoplay="1"
+             data-autoplay="0"
              data-speed="5000"
              data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
@@ -630,7 +630,7 @@
 </div>
 <div id="braceletContainer">
     <div>
-        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_7--after mode-scroll">
+        <div class="dzsparallaxer auto-init height-is-based-on-content use-loading g-bg-cover g-bg-black-opacity-0_5--after mode-scroll">
             <div class="divimage dzsparallaxer--target w-100" style="height: 140%; background-image: url({{asset('img/Other/bracelet/bigWall.jpg?v=873')}}); transform: translate3d(0px, -76.6067px, 0px);"></div>
 
             <div class="container g-z-index-1 g-py-120">
@@ -666,12 +666,12 @@
     </div>
 
     <div class="container g-px-0--lg">
-        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
 
         <div id="js-carousel-5" class="js-carousel g-mb-15--lg g-mb-60 g-mx-minus-10 g-py-60--lg g-pt-20 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
-             data-autoplay="1"
+             data-autoplay="0"
              data-speed="5000"
              data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
@@ -774,12 +774,12 @@
         <h1 style="direction: rtl" class="h5 container g-color-gray-dark-v1 g-mb-0 g-pa-10 g-pr-15">تخفیفات ویژه امروز</h1>
     </div>
     <div class="container g-mb-100 g-px-0--lg g-pt-15">
-        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
+
 
         <div id="js-carousel-7" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
              data-infinite="true"
              data-slides-show="4"
-             data-autoplay="1"
+             data-autoplay="0"
              data-speed="5000"
              data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"

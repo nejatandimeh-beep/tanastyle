@@ -36,9 +36,11 @@
                 carousel('js-carousel-6');
                 carousel('js-carousel-7');
             }
-            setTimeout(function () {
-                $('.load').hide();
-            }, 500)
+
+            if ($('.productDetail').length > 0) {
+                carousel('js-carousel-1');
+            }
+
             // if ('.masterPage'.length > 0) {
             //     if ('scrollRestoration' in history) {
             //         history.scrollRestoration = 'manual';

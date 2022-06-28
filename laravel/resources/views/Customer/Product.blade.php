@@ -17,7 +17,6 @@
     <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10000':'25000'}}" class="d-none" id="tempPostPrice" type="text">
 
     <div style="position: relative" id="productDetailContainer" class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4 modalBox productDetail">
-        <div style="left: 0; background-position: 50% 20% !important;" id="load" class="load"></div>
         <!-- smallDevice -->
         <article class="row smallDevice">
             <header style="direction: rtl" class="d-flex justify-content-between col-12">
