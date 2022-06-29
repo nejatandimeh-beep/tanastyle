@@ -1,5 +1,8 @@
 @section('CustomerJsFunction')
     <script>
+        let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
+            file_upload, file_type, stopLoadProduct = false;
+
         window.addEventListener("pageshow", function (event) {
             let historyTraversal = event.persisted ||
                 (typeof window.performance != "undefined" &&
@@ -9,11 +12,10 @@
                 if ($('.cartContainer').length > 0 || $('#productDetailContainer').length > 0) {
                     console.log('reload');
                     window.location.reload();
+                    backButnClicked= true;
                 }
             }
         });
-        let lastScrollTop = 0, gender = [], category = [], size = [], priceMin = 9999, priceMax = 100000000, color = [],
-            file_upload, file_type, stopLoadProduct = false;
 
         function carousel(ele) {
             $('#' + ele).slick('setOption', 'responsive', [{
@@ -38,15 +40,13 @@
             }
 
             if ($('.productDetail').length > 0) {
+                if ('scrollRestoration' in history) {
+                    history.scrollRestoration = 'manual';
+                }
+                window.scrollTo(0, 0);
+                $('.load').remove();
                 carousel('js-carousel-1');
             }
-
-            // if ('.masterPage'.length > 0) {
-            //     if ('scrollRestoration' in history) {
-            //         history.scrollRestoration = 'manual';
-            //     }
-            //     window.scrollTo(0, 0);
-            // }
 
             if ($('.rtlPosition').length > 0)
                 $('.table-responsive').animate({scrollLeft: $('.rtlPosition').position().left}, 1);
@@ -179,7 +179,6 @@
 
             let mq = window.matchMedia("(max-width: 900px)");
             if (mq.matches) {
-                deviceScroll = 450;
                 $('#bigDevice').remove();
                 $('.bigDevice').remove();
                 $('#productGallery').removeClass('largeDevice');
@@ -215,7 +214,6 @@
                 });
 
             } else {
-                deviceScroll = 1000;
                 $('#smallDevice').remove();
                 $('.smallDevice').remove();
 

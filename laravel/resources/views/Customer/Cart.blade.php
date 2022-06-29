@@ -5,7 +5,7 @@
     <div style="direction: rtl" class="container-fluid modalBox cartContainer">
         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
 
-        <div class="breadCrumbs">
+        <div>
             <div class="g-mt-0--lg">
                 <div class="g-pr-5 d-flex g-py-15">
                     <i class="icon-basket g-pl-5 g-font-size-20 g-font-weight-500"></i>

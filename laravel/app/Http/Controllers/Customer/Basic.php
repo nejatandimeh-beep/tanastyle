@@ -38,6 +38,7 @@ class Basic extends Controller
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '730')
             ->orWhere('Cat', '738')
+            ->groupBy('p.ID')
             ->inRandomOrder()
             ->take(5)
             ->get();
@@ -47,6 +48,7 @@ class Basic extends Controller
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '700')
+            ->groupBy('p.ID')
             ->inRandomOrder()
             ->take(5)
             ->get();
@@ -56,6 +58,7 @@ class Basic extends Controller
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '701')
+            ->groupBy('p.ID')
             ->inRandomOrder()
             ->take(5)
             ->get();
@@ -65,6 +68,7 @@ class Basic extends Controller
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '703')
+            ->groupBy('p.ID')
             ->inRandomOrder()
             ->take(5)
             ->get();
@@ -77,6 +81,7 @@ class Basic extends Controller
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
             ->inRandomOrder()
+            ->groupBy('p.ID')
             ->take(5)
             ->get();
 
@@ -961,7 +966,27 @@ class Basic extends Controller
                 ->select('*')
                 ->where('CustomerID', Auth::user()->id)
                 ->delete();
-        }
+        } else {
+            $orderTemporary= DB::table('product_order_temporary')
+                ->select('*')
+                ->get();
+
+            foreach ($orderTemporary as $key => $row){
+                $orderTime = explode(" ",$row->Time);
+                $deleteItem=$this->dateLenToNow($orderTime[0],$orderTime[1]);
+
+                if($deleteItem>15){
+                    DB::table('product_detail')
+                        ->where('ID', $row->ProductDetailID)
+                        ->increment('Qty', $row->Qty);
+
+                    DB::table('product_order_temporary')
+                        ->select('ID')
+                        ->where('ID', $row->ID)
+                        ->delete();
+                }
+            }
+    }
 
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product as p')

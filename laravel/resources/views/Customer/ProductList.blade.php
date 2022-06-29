@@ -1,6 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <div class="container-fluid g-brd-top g-brd-gray-light-v4 productDetail">
+        <div style="left: 0; background-position: 50% 5% !important; height: 2000px" id="load" class="load"></div>
 
         <div style="direction: rtl" class="row">
 
