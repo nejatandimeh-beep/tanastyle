@@ -3,6 +3,7 @@
     {{--    Seller Functions--}}
     <script>
         $(window).bind('beforeunload', function () {
+            window.scrollTo(0, 0);
             loaderShow();
         });
 
@@ -205,7 +206,7 @@
             $('#errorMsg').addClass('d-none');
         });
 
-        $('form').on('submit', function () {
+        $('#addProductForm').on('submit', function () {
             $('#addProductBtnCaption').text('لطفا منتظر بمانید..');
             $('#addProductBtn').prop('disabled',true);
 
@@ -250,6 +251,7 @@
                 url: "/Seller-Search-Product",
                 data: {'pname': q, 'id': id},
                 success: function (data) {
+                    console.log(data)
                     $('#' + id).html(data);
                 }
             });
@@ -259,6 +261,7 @@
         function ClickSearch(filterID, value) {
             switch (filterID) {
                 case 'storeName':
+                case 'storeCode':
                 case 'saleName':
                     $('#' + filterID).html("");
                     break;
@@ -283,10 +286,21 @@
             keyUpSearch('storeName', query);
         });
 
+        $('#storeProduct_Code').on('keyup', function () {
+            let query = $(this).val();
+            keyUpSearch('storeCode', query);
+        });
+
         // Store -> Name Product Click Search
         $('#storeName').on('click', 'li', function () {
             let value = $(this).text();
             ClickSearch('storeName', value);
+        });
+
+        $('#storeCode').on('click', 'li', function () {
+            let value = $(this).text();
+            console.log(value)
+            ClickSearch('storeCode', value);
         });
 
         // Store -> Gender Product Click Search

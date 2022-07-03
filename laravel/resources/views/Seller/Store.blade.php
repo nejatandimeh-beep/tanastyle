@@ -209,6 +209,22 @@
                                         <div class="input-group g-brd-primary--focus g-mb-10">
                                             <input style="direction: rtl"
                                                    class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 pl-0 text-right g-font-size-16"
+                                                   type="text" name="productSearchCode" id="storeProduct_Code"
+                                                   placeholder="{{ (!isset($valName)) ? 'همه' : $valName }}"
+                                                   value="">
+                                            <div
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0 w-50">
+                                                براساس کد
+                                            </div>
+                                        </div>
+                                        <ul id="storeCode" class="ajaxDropDown"></ul>
+                                    </div>
+
+                                    {{--                    Name Filter--}}
+                                    <div class="form-group g-mb-10 text-right col-lg-6 mx-auto">
+                                        <div class="input-group g-brd-primary--focus g-mb-10">
+                                            <input style="direction: rtl"
+                                                   class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 pl-0 text-right g-font-size-16"
                                                    type="text" name="productSearch" id="storeProduct_search"
                                                    placeholder="{{ (!isset($valName)) ? 'همه' : $valName }}"
                                                    value="">
@@ -341,7 +357,7 @@
                                         class="g-brd-around g-brd-gray-light-v2 rounded-0 g-pt-6 text-center g-mb-5 g-mr-15 g-ml-15 smallDevice w-100">
                                         <label style="direction: rtl" class="g-color-gray-light-v1 align-self-center">مشخصات</label>
                                     </div>
-                                    <div class="btn-group justified-content text-center col-lg-6 mx-auto g-mb-20">
+                                    <div class="btn-group justified-content text-center col-lg-6 g-mb-20">
                                         <label class="u-check m-0">
                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="mistak"
                                                    type="radio" id="false" onclick="trueInfo('storeInfoStatus')"

@@ -19,7 +19,7 @@
         </h3>
 
         <!-- Text Input Tooltips -->
-        <form action="{{ route('SaveProduct')}}" method="post" enctype='multipart/form-data'
+        <form id="addProductForm" action="{{ route('SaveProduct')}}" method="post" enctype='multipart/form-data'
               class="g-brd-around g-brd-gray-light-v4 g-pa-30--lg g-mb-30 smallDevicePadding-20">
         @csrf
         <!-- Hidden Input-->
@@ -2674,7 +2674,7 @@
                         <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='f'|| $catCode==='k'|| $catCode==='l'|| $name==='گردنبند'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه طول</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 g-mb-0--lg p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه عرض</span>

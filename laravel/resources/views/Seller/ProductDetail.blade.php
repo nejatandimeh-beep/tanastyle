@@ -326,8 +326,12 @@
 
                                 </div>
                                 <a onclick="applyDecQty({{$dataDetail->ID}},'decButton')"
-                                   class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white">
+                                   class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white{{($dataDetail->Qty > 0) ? '' : ' d-none'}}">
                                     ثبت موجودی جدید
+                                </a>
+                                <a
+                                   class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white{{($dataDetail->Qty > 0) ? ' d-none' : ''}}">
+                                    موجودی محصول صفر است
                                 </a>
                             </div>
                         </div>
