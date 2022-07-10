@@ -363,14 +363,14 @@
                                                    type="radio" id="false" onclick="trueInfo('storeInfoStatus')"
                                                 {{ (isset($valStatus)) ? (($valStatus == 'مشخصات اشتباه') ? ' checked=""' : '') : '' }}>
                                             <span
-                                                class="btn btn-lg btn-block u-btn-outline-lightgray g-font-size-16 g-color-white--checked g-bg-primary--checked rounded-0">مشخصات اشتباه</span>
+                                                class="btn btn-lg btn-block g-brd-gray-light-v1 g-font-size-16 g-color-white--checked g-bg-primary--checked rounded-0">مشخصات اشتباه</span>
                                         </label>
                                         <label class="u-check m-0">
                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="mistak"
                                                    type="radio" id="true" onclick="trueInfo('storeInfoStatus')"
                                                 {{ (isset($valStatus)) ? (($valStatus == 'مشخصات صحیح') ? ' checked=""' : '') : '' }}>
                                             <span
-                                                class="btn btn-lg btn-block u-btn-outline-lightgray g-font-size-16 g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">مشخصات صحیح</span>
+                                                class="btn btn-lg btn-block g-brd-gray-light-v1 g-font-size-16 g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">مشخصات صحیح</span>
                                         </label>
                                     </div>
 

@@ -667,11 +667,16 @@ class Basic extends Controller
                     ->where('Name', 'like', '%' . $name . '%')
                     ->groupby('Name')
                     ->get();
+            } elseif ($id == 'saleCode') {
+                $data = DB::table('product_order')
+                    ->where('ID', 'like', '%' . $name . '%')
+                    ->groupby('ID')
+                    ->get();
             } elseif ($id == 'storeCode') {
                 $data = DB::table('product_detail as pd')
                     ->select('pd.ID as detailID')
                     ->leftjoin('product as p', 'p.ID', '=', 'pd.ProductID')
-                    ->where('pd.ID', $name)
+                    ->where('pd.ID', 'like', '%' . $name . '%')
                     ->get();
             } elseif ($id == 'amountCode') {
                 $data = DB::table('seller_amount_received')
@@ -684,12 +689,17 @@ class Basic extends Controller
             if (count($data) > 0) {
                 if (($id === 'storeName') || ($id === 'saleName')) {
                     foreach ($data as $row) {
-                        $output .= '<li class="list-group-item">' . $row->Name . ' ' . $row->Model . '</li>';
+                        $output .= '<li class="list-group-item">' . $row->Name . '</li>';
                     }
                     $output .= '</ul>';
                 } elseif ($id === 'storeCode') {
                     foreach ($data as $row) {
                         $output .= '<li class="list-group-item">' . $row->detailID . '</li>';
+                    }
+                    $output .= '</ul>';
+                }  elseif ($id === 'saleCode') {
+                    foreach ($data as $row) {
+                        $output .= '<li class="list-group-item">' . $row->ID . '</li>';
                     }
                     $output .= '</ul>';
                 } else {
@@ -803,6 +813,18 @@ class Basic extends Controller
 //----------Sale -> Filters
             case 'saleName':
                 $data = $this->saleTableLoad('p.Name', '', $val, $sellerID);
+                $valName = $val;
+
+                // Convert Date
+                foreach ($data as $key => $rec) {
+                    $d = $rec->Date;
+                    $persianDate[$key] = $this->convertDateToPersian($d);
+                }
+
+                return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valName'));
+
+            case 'saleCode':
+                $data = $this->saleTableLoad('po.ID', '', $val, $sellerID);
                 $valName = $val;
 
                 // Convert Date
@@ -1153,7 +1175,7 @@ class Basic extends Controller
                 'totalSaleAmount' => 0);
 
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1181,7 +1203,7 @@ class Basic extends Controller
 
         if ($val === 'pagination') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1197,7 +1219,7 @@ class Basic extends Controller
         if ($where2 === '') {
 
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1210,7 +1232,7 @@ class Basic extends Controller
 
         } elseif ($where2 === 'In') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1225,7 +1247,7 @@ class Basic extends Controller
 
         } elseif ($where2 === 'NotIn') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1239,7 +1261,7 @@ class Basic extends Controller
                 ->paginate(10);
         } elseif ($where2 === 'whereRaw') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')
@@ -1251,7 +1273,7 @@ class Basic extends Controller
                 ->paginate(10);
         } elseif ($where2 === 'whereBetween') {
             $data = DB::table('product_order_detail as pod')
-                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.FinalPrice as FinalPrice', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
+                ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'c.ID as customerID', 'p.Gender as Gender', 'p.Name as Name', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'fp.id as fpID', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand')
                 ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
                 ->leftjoin('customers as c', 'c.ID', '=', 'po.CustomerID')
                 ->leftjoin('product_false as fp', 'fp.ProductDetailID', '=', 'pod.ProductDetailID')

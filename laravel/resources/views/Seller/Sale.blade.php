@@ -580,15 +580,31 @@
                                         </div>
                                     </div>
 
+                                    {{--                order no--}}
+                                    <div class="form-group g-mb-10 text-right col-lg-6 mx-auto">
+                                        <div class="input-group g-brd-primary--focus g-mb-10">
+                                            <input style="direction: rtl"
+                                                   class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 pl-0 text-right g-font-size-16"
+                                                   type="text" name="saleSearchCode" id="saleProduct_Code"
+                                                   placeholder="{{ (!isset($valName)) ? 'همه' : $valName }}"
+                                                   value="">
+                                            <div
+                                                class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0 w-50">
+                                                براساس شماره فاکتور
+                                            </div>
+                                        </div>
+                                        <ul id="saleCode" class="ajaxDropDown"></ul>
+                                    </div>
+
                                     {{--                    Data Mistake Filters--}}
-                                    <div class="btn-group justified-content text-center col-lg-6 mx-auto g-mb-20">
+                                    <div class="btn-group justified-content text-center col-lg-6 g-mb-20">
                                         <label class="u-check m-0"
                                                tabindex="11">
                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="mistak"
                                                    type="radio" id="false" onclick="trueInfo('saleInfoStatus')"
                                                 {{ (isset($valStatus)) ? (($valStatus == 'مشخصات اشتباه') ? ' checked=""' : '') : '' }}>
                                             <span
-                                                class="btn btn-lg btn-block u-btn-outline-lightgray g-font-size-16 g-color-white--checked g-bg-primary--checked rounded-0">مشخصات اشتباه</span>
+                                                class="btn btn-lg btn-block g-brd-gray-light-v1 g-font-size-16 g-color-white--checked g-bg-primary--checked rounded-0">مشخصات اشتباه</span>
                                         </label>
                                         <label class="u-check m-0"
                                                tabindex="12">
@@ -596,10 +612,9 @@
                                                    type="radio" id="true" onclick="trueInfo('saleInfoStatus')"
                                                 {{ (isset($valStatus)) ? (($valStatus == 'مشخصات صحیح') ? ' checked=""' : '') : '' }}>
                                             <span
-                                                class="btn btn-lg btn-block u-btn-outline-lightgray g-font-size-16 g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">مشخصات صحیح</span>
+                                                class="btn btn-lg btn-block g-brd-gray-light-v1 g-font-size-16 g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">مشخصات صحیح</span>
                                         </label>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -635,7 +650,6 @@
                        class="fa fa-close g-font-size-18 g-pl-3 g-color-red--hover"></a>
                     <span class="g-font-size-13 g-mr-5">فیلتر <span
                             class="g-bg-primary g-color-white g-pr-3 g-pl-3">
-                            {{ (isset($valName)) ? $valName : '' }}
                             {{ (isset($valName)) ? $valName : '' }}
                             {{ (isset($val) && $val == 0) ? 'زنانه' : '' }}
                             {{ (isset($val) && $val == 1) ? 'مردانه' : '' }}

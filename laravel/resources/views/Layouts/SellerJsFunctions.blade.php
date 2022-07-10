@@ -263,6 +263,7 @@
                 case 'storeName':
                 case 'storeCode':
                 case 'saleName':
+                case 'saleCode':
                     $('#' + filterID).html("");
                     break;
                 case 'amountCode':
@@ -317,10 +318,21 @@
             keyUpSearch('saleName', query);
         });
 
+        $('#saleProduct_Code').on('keyup', function () {
+            let query = $(this).val();
+            keyUpSearch('saleCode', query);
+        });
+
         // Sale -> Name Product Click Search
         $('#saleName').on('click', 'li', function () {
             let value = $(this).text();
             ClickSearch('saleName', value);
+        });
+
+        $('#saleCode').on('click', 'li', function () {
+            let value = $(this).text();
+            console.log(value)
+            ClickSearch('saleCode', value);
         });
 
         // Sale -> Gender Product Click Search
