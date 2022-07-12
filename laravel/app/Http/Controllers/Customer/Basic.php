@@ -98,6 +98,7 @@ class Basic extends Controller
             ->where('p.CatCode', $catCode)
             ->where('p.GenderCode', $genderCode)
             ->where('p.ID', '<>', $productID)
+            ->groupBy('p.ID')
             ->inRandomOrder()
             ->take(5)
             ->get();
@@ -2287,6 +2288,11 @@ class Basic extends Controller
         return view('Customer.AboutMe');
     }
 
+// ----------------------------------------------[ Regulation ]---------------------------------------------------------
+    public function regulation()
+    {
+        return view('Customer.Regulation');
+    }
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------
     public function instagram()
     {

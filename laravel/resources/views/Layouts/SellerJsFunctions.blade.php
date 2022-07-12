@@ -2,10 +2,10 @@
 
     {{--    Seller Functions--}}
     <script>
-        $(window).bind('beforeunload', function () {
-            window.scrollTo(0, 0);
-            loaderShow();
-        });
+        // $(window).bind('beforeunload', function () {
+        //     window.scrollTo(0, 0);
+        //     loaderShow();
+        // });
 
         // $(window).on('pageshow', function () {
         //     $('#load').hide();

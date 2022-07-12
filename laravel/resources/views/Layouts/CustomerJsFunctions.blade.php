@@ -181,6 +181,9 @@
             if (mq.matches) {
                 $('#bigDevice').remove();
                 $('.bigDevice').remove();
+                if($('.regulation').length>0){
+                    $('.regulation').removeClass('row');
+                }
                 $('#productGallery').removeClass('largeDevice');
 
                 // تنظیم منوی فیلترها در صفحه نمایش محصولات برای نمایشگرهای کوچک و بزرگ

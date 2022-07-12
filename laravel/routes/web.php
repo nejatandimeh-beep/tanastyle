@@ -286,6 +286,9 @@ Route::get('/email-test', function () {
     return view('vendor.mail.html.test');
 });
 
+//------------------[ Regulation ]-----------------------------
+Route::get('/Customer-Regulation', 'Customer\Basic@regulation')->name('regulation');
+
 // *********************************************** ( Delivery Routes ) *************************************************
 Route::get('/Delivery-Personal', 'Delivery\Basic@deliveryPersonal')->name('deliveryPersonal');
 

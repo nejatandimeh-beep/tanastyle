@@ -202,13 +202,13 @@ class Product extends Controller
 
         // Get Product Data
         $data = DB::table('product_order_detail as pod')
-            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct')
+            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'p.*', 'pf.ID as falseProduct','pdd.SampleNumber')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
             ->where('pod.ID', $id)
             ->first();
-
         // Get Product False State
         $falseProduct = DB::table('product_false')
             ->where('ProductDetailID', $data->ProductDetailID)
