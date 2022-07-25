@@ -1014,6 +1014,47 @@
         }
 
         $(document).on('ready', function () {
+            if($('#regulationTab').length>0){
+                let tab=$('#regulationTab').text();
+                switch (tab) {
+                    case 'returnProduct':
+                        setTimeout(function () {
+                            $('#returnProduct').trigger('click')
+                        }, 100);
+                        break;
+                    case 'falseProduct':
+                        setTimeout(function () {
+                            $('#falseProduct').trigger('click')
+                        }, 100);
+                        break;
+                    case 'emptyProduct':
+                        setTimeout(function () {
+                            $('#emptyProduct').trigger('click')
+                        }, 100);
+                        break;
+                    case 'deliveryProduct':
+                        setTimeout(function () {
+                            $('#deliveryProduct').trigger('click')
+                        }, 100);
+                        break;
+                    case 'sellerCheckout':
+                        setTimeout(function () {
+                            $('#sellerCheckout').trigger('click')
+                        }, 100);
+                        break;
+                    case 'offlineSelling':
+                        setTimeout(function () {
+                            $('#offlineSelling').trigger('click')
+                        }, 100);
+                        break;
+                    case 'commission':
+                        setTimeout(function () {
+                            $('#commission').trigger('click')
+                        }, 100);
+                        break;
+                    default:
+                }
+            }
             let mq = window.matchMedia("(max-width: 900px)");
             if (mq.matches) {
                 $('#bigDevices').remove();

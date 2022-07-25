@@ -645,6 +645,18 @@ class Basic extends Controller
         return redirect('/Seller-AdminConnection')->with('status', 'success');
     }
 
+    // ----------------------------------------------[ Regulation ]---------------------------------------------------------
+    public function regulation($tab)
+    {
+        $signature=DB::table('sellers')
+            ->select('id','Signature')
+            ->where('id',Auth::guard('seller')->user()->id)
+            ->first();
+        $date=explode(' ',$signature->Signature);
+        $signature = $this->convertDateToPersian($date[0]);
+        return view('Seller.Regulation',compact('signature','tab'));
+    }
+
 //  --------------------------------------------------Ajax Functions--------------------------------------------------
 
 //  AJAX Live Search

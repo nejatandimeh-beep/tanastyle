@@ -34,11 +34,8 @@
     <!-- End Info Panel -->
 
     <div style="direction: rtl">
-        <!-- Welcome Seller Block -->
-        <div class="g-mt-30">
-
         <!-- Description Divs-->
-        <div class="g-mb-30 g-mt-30 g-pa-10">
+        <div class="g-my-100 g-pa-10">
             <!-- Gray Colored Blockquotes -->
             <blockquote
                 class="blockquote blockquote-reverse g-bg-gray-light-v5 g-brd-primary g-font-size-16 g-pa-40 g-mb-30 text-right">

@@ -173,8 +173,7 @@
                         class="form-control form-control-md g-color-darkblue rounded-0 g-bg-gray-light-v5 text-right g-font-size-16 text-truncate"
                         type="text"
                         tabindex="1"
-                        placeholder=""
-                        disabled>
+                        placeholder="">
                         {{ $data->Detail }}
                     </textarea>
                 </div>

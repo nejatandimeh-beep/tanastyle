@@ -3,59 +3,34 @@
     <footer class="g-bg-black-opacity-0_9 g-color-white-opacity-0_8 text-center g-pt-60 g-pb-40">
         <!-- Footer Content -->
         <div class="container">
-            <div class="rowSeller">
+            <div class="row">
                 <!-- Footer Content -->
                 <div class="col-sm-6 col-lg g-mb-30 g-mb-0--lg">
                     <h2 class="h6 g-color-primary text-uppercase g-font-weight-600 g-mb-20">قوانین و ضوابط</h2>
                     <ul class="list-unstyled mb-0 px-0">
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">اضافه کردن کالا</a>
+                            <a class="g-color-white-opacity-0_8" href="{{route('sellerRegulation','regulation')}}">شرایط استفاده</a>
                         </li>
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">کالای سالم</a>
+                            <a class="g-color-white-opacity-0_8" href="{{route('sellerRegulation','returnProduct')}}">شرایط برگشت محصول</a>
                         </li>
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">تحویل کلا</a>
-                        </li>
-                        <li>
-                            <a class="g-color-white-opacity-0_8" href="#">مبادلات پولی</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- End Footer Content -->
-
-                <!-- Footer Content -->
-                <div class="col-sm-6 col-lg g-mb-30 g-mb-0--lg">
-                    <h2 class="h6 g-color-primary text-uppercase g-font-weight-600 g-mb-20">فرآیند فروش</h2>
-                    <ul class="list-unstyled mb-0 px-0">
-                        <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">سفارش مشتری</a>
+                            <a class="g-color-white-opacity-0_8" href="{{route('sellerRegulation','falseProduct')}}">ثبت مشخصات اشتباه برای محصول</a>
                         </li>
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">تحویل کالا به تانا استای</a>
-                        </li>
-                        <li>
-                            <a class="g-color-white-opacity-0_8" href="#">رسید وجه</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- End Footer Content -->
-
-                <!-- Footer Content -->
-                <div class="col-sm-6 col-lg">
-                    <h2 class="h6 g-color-primary text-uppercase g-font-weight-600 g-mb-20">قراردادهای موجود</h2>
-                    <ul class="list-unstyled mb-0 px-0">
-                        <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">کالای سالم</a>
+                            <a class="g-color-white-opacity-0_8" href="{{route('sellerRegulation','emptyProduct')}}">ثبت محصول ناموجود</a>
                         </li>
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">ارجاع کالا</a>
+                            <a class="g-color-white-opacity-0_8" href="{{route('sellerRegulation','deliveryProduct')}}">تحویل به موقع</a>
                         </li>
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">زمان تحویل</a>
+                            <a class="g-color-white-opacity-0_8" href="{{route('sellerRegulation','sellerCheckout')}}">تسویه حساب با فروشنده</a>
                         </li>
-                        <li>
-                            <a class="g-color-white-opacity-0_8" href="#">انبار ایستا</a>
+                        <li class="g-mb-8">
+                            <a class="g-color-white-opacity-0_8" href="{{route('sellerRegulation','offlineSelling')}}">فروش آفلاین</a>
+                        </li>
+                        <li class="g-mb-8">
+                            <a class="g-color-white-opacity-0_8" href="{{route('sellerRegulation','commission')}}">بهای کمسیون و ارزش افزوده</a>
                         </li>
                     </ul>
                 </div>
@@ -66,16 +41,31 @@
                     <h2 class="h6 g-color-primary text-uppercase g-font-weight-600 g-mb-20">راهنمای پنل فروشنده</h2>
                     <ul class="list-unstyled mb-0 px-0">
                         <li class="g-mb-8">
+                            <a class="g-color-white-opacity-0_8" href="#">صفحه اصلی</a>
+                        </li>
+                        <li class="g-mb-8">
+                            <a class="g-color-white-opacity-0_8" href="#">اطلاعات کاربری</a>
+                        </li>
+                        <li class="g-mb-8">
+                            <a class="g-color-white-opacity-0_8" href="#">ارتباط با مرکز</a>
+                        </li>
+                        <li class="g-mb-8">
                             <a class="g-color-white-opacity-0_8" href="#">اضافه کردن محصول</a>
                         </li>
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">موجودی انبار و لیست فروش</a>
+                            <a class="g-color-white-opacity-0_8" href="#">انبار من</a>
                         </li>
                         <li class="g-mb-8">
-                            <a class="g-color-white-opacity-0_8" href="#">وضعیت مالی</a>
+                            <a class="g-color-white-opacity-0_8" href="#">فروش های من</a>
+                        </li>
+                        <li class="g-mb-8">
+                            <a class="g-color-white-opacity-0_8" href="#">تحویل محصول</a>
+                        </li>
+                        <li class="g-mb-8">
+                            <a class="g-color-white-opacity-0_8" href="#">مبالغ دریافتی</a>
                         </li>
                         <li>
-                            <a class="g-color-white-opacity-0_8" href="#">رده بندی محصولات</a>
+                            <a class="g-color-white-opacity-0_8" href="#">واکنش مشتریان</a>
                         </li>
                     </ul>
                 </div>

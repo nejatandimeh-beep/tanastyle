@@ -150,6 +150,8 @@ Route::get('/Seller-Search-Product-Price/{id}/{valMin}/{valMax}', 'Seller\Basic@
 // Search Product Date
 Route::get('/Seller-Search-Product-Date/{id}/{startDate}/{endDate}', 'Seller\Basic@searchDate');
 
+//------------------[ Regulation ]-----------------------------
+Route::get('/Seller-Regulation/{tab}', 'Seller\Basic@regulation')->name('sellerRegulation');
 // ----------------------------------------------End Seller Links-------------------------------------------------------
 
 

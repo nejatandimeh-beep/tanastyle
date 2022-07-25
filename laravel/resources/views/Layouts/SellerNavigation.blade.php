@@ -2186,7 +2186,7 @@
                         </a>
                         <!-- End Logo -->
                         <!-- Time And Date -->
-                        <div class="text-center hidden-lg-down">
+                        <div class="text-center hidden-lg-down g-color-gray-light-v3">
                             <p class="mb-0" id="persianDate"></p>
                             <p class="mb-0" id="persianTime"></p>
                         </div>

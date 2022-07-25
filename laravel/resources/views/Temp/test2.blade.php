@@ -1,2582 +1,287 @@
-<?php
-
-namespace App\Http\Controllers\Customer;
-
-use App\Http\Controllers\Controller;
-use App\lib\ZarinPal;
-use App\Picture;
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Auth;
-use DateTime;
-use File;
-use Hekmatinasser\Verta\Facades\Verta;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
-use Kavenegar;
-use nusoap_client;
-use SoapClient;
-
-class Basic extends Controller
-{
-    public function Master()
-    {
-
-//        $data=DB::table('product as p')
-//            ->select('*')
-//            ->leftJoin('product_detail as pd','pd.ProductID','=','p.ID')
-//            ->leftJoin('product_order_detail as pod','pod.ProductDetailID','=','pd.ID')
-//            ->orderBy('pod.SellCount')
-//            ->take(10)
-//            ->get();
-//        return redirect()->route('login');
-        session_start();
-        $_SESSION['listSkip']=0;
-
-        return view('Customer.Master');
-    }
-
-    public function discounts()
-    {
-        $minDiscount = 1;
-        $maxDiscount = 99;
-
-        $discounts = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->orderBy('Discount', 'DESC')
-            ->orderBy('VisitCounter', 'DESC')
-            ->whereBetween('Discount', [$minDiscount, $maxDiscount])
-            ->take(5)
-            ->get();
-
-        $products = '<div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
-        <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
-             data-infinite="true"
-             data-slides-show="4"
-             data-autoplay="0"
-             data-speed="5000"
-             data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v5 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
-             data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
-             data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
-             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">';
-        foreach($discounts as $key =>$row){
-            $products=$products.'
-             <div class="js-slide g-mx-10">
-                    <!-- Product -->
-                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
-                        <div>
-                            <div id="carousel-08-'.($key+100000).'"
-                                 class="js-carousel text-center g-mb-5"
-                                 data-infinite="1"
-                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
-                                 data-nav-for="#carousel-08-'.($key+100000).'">
-                                <div class="js-slide">
-                                    <a href="'. route("productDetail",[$row->ProductID, $row->Size]).'">
-                                        <img class="img-fluid w-100" loading="lazy"
-                                             src="'.$row->PicPath.$row->SampleNumber.".jpg" .'"
-                                             alt="'.$row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand." ".$row->Size." ".$row->Color  .'">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- مشخصات محصول -->
-                        <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
-                            <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
-                            <div class="d-flex flex-column col-12 g-px-5">
-                                <h1 class="h6 g-color-black my-1 text-left">
-                                   '. $row->Brand .'
-                                </h1>
-                                <h4 class="h6 g-color-black my-1">
-                                    <span class="u-link-v5 g-color-black"
-                                          tabindex="0">
-                                        '. $row->Name .'
-                                        <span
-                                            class="g-font-size-12 g-font-weight-300"> '. $row->Model .'</span>
-                                        <span
-                                            class="g-font-size-12 g-font-weight-300"> '. $row->Gender .'</span>
-                                    </span>
-                                </h4>
-                                <div>
-                                    <span class="g-ml-5">سایز
-                                        <span class="g-color-primary">'. $row->Size .'</span>
-                                    </span>
-                                    <span>رنگ
-                                        <span class="g-color-primary">'. $row->Color .'</span>
-                                    </span>
-                                </div>
-                                <span>موجودی <span id="'. "cartQty".$key .'"
-                                                   class="g-color-primary">'.  $row->Qty .'</span> عدد</span>
-                            </div>
-                        </div>
-                        <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
-                        <div
-                            class="d-block g-color-black g-font-size-17 g-ml-5">
-                            <div style="direction: rtl" class="text-left">
-                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    '. number_format($row->FinalPriceWithoutDiscount) .'
-                                </s>
-                                <span>'. number_format($row->FinalPrice) .'</span>
-                                <span
-                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
-                            </div>
-                        </div>
-                    </figure>
-                    <!-- End Product -->
-                </div>';
-        }
-
-        return $products.'</div>';
-    }
-
-    public function sameProduct($genderCode,$catCode,$productID)
-    {
-        $similarProduct = DB::table('product as p')
-            ->select('p.*','pd.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->where('p.GenderCode', $genderCode)
-            ->where('p.CatCode', $catCode)
-            ->where('p.ID', '<>', $productID)
-            ->orderBy('p.VisitCounter', 'DESC')
-            ->take(5)
-            ->get();
-
-        $products = '<div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
-        <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
-             data-infinite="true"
-             data-slides-show="4"
-             data-autoplay="0"
-             data-speed="5000"
-             data-arrows-classes="u-arrow-v1 g-pos-abs g-bottom-0 g-width-45 g-height-45 g-color-gray-dark-v1 g-bg-secondary g-color-white--hover g-bg-primary--hover rounded"
-             data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
-             data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
-             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">';
-        foreach($similarProduct as $key =>$row){
-            $products=$products.'
-             <div class="js-slide g-mx-10">
-                    <!-- Product -->
-                    <figure style="direction: ltr;" class="g-px-10 g-pt-10 productFrame u-shadow-v24 g-pb-15">
-                        <div>
-                            <div id="carousel-08-'.($key+100000).'"
-                                 class="js-carousel text-center g-mb-5"
-                                 data-infinite="1"
-                                 data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
-                                 data-nav-for="#carousel-08-'.($key+100000).'">
-                                <div class="js-slide">
-                                    <a href="'. route("productDetail",[$row->ProductID, $row->Size]).'">
-                                        <img class="img-fluid w-100" loading="lazy"
-                                             src="'.$row->PicPath.$row->SampleNumber.".jpg" .'"
-                                             alt="'.$row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand." ".$row->Size." ".$row->Color  .'">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- مشخصات محصول -->
-                        <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
-                            <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
-                            <div class="d-flex flex-column col-12 g-px-5">
-                                <h1 class="h6 g-color-black my-1 text-left">
-                                   '. $row->Brand .'
-                                </h1>
-                                <h4 class="h6 g-color-black my-1">
-                                    <span class="u-link-v5 g-color-black"
-                                          tabindex="0">
-                                        '. $row->Name .'
-                                        <span
-                                            class="g-font-size-12 g-font-weight-300"> '. $row->Model .'</span>
-                                        <span
-                                            class="g-font-size-12 g-font-weight-300"> '. $row->Gender .'</span>
-                                    </span>
-                                </h4>
-                                <div>
-                                    <span class="g-ml-5">سایز
-                                        <span class="g-color-primary">'. $row->Size .'</span>
-                                    </span>
-                                    <span>رنگ
-                                        <span class="g-color-primary">'. $row->Color .'</span>
-                                    </span>
-                                </div>
-                                <span>موجودی <span id="'. "cartQty".$key .'"
-                                                   class="g-color-primary">'.  $row->Qty .'</span> عدد</span>
-                            </div>
-                        </div>
-                         <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
-                        <div
-                            class="d-block g-color-black g-font-size-17 g-ml-5">
-                            <div style="direction: rtl" class="text-left">
-                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    '. number_format($row->FinalPriceWithoutDiscount) .'
-                                </s>
-                                <span>'. number_format($row->FinalPrice) .'</span>
-                                <span
-                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
-                            </div>
-                        </div>
-                    </figure>
-                    <!-- End Product -->
-                </div>';
-        }
-
-        return $products.'</div>';
-    }
-
-    public function productLoad()
-    {
-        session_start();
-        $data = DB::table('product as p')
-            ->select('p.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->orderBy('p.RegDate','DESC')
-            ->orderBy('p.VisitCounter','DESC')
-            ->skip($_SESSION['listSkip'])
-            ->take(12)
-            ->get();
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->orderBy('p.RegDate','DESC')
-            ->orderBy('p.VisitCounter','DESC')
-            ->groupBy('p.ID')
-            ->skip($_SESSION['listSkip'])
-            ->take(12)
-            ->get();
-
-        if(!isset($size[0]->Color))
-            return $products='null';
-
-        $products='<div class="row col-12 g-px-40--lg g-pa-0 m-0 rowContainer">';
-        foreach($data as $key => $row){
-            $products = $products . '
-             <div class="col-12 col-lg-3 g-mb-30">
-                <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
-                        class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
-                    <div>
-                        <div id="carousel-08-'.$_SESSION['listSkip'].$key.'"
-                             class="js-carousel text-center g-mb-5"
-                             data-infinite="1"
-                             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-mt-15 text-center"
-                             data-nav-for="#carousel-08-'.$_SESSION['listSkip'].$key.'">
-                            <div class="js-slide">
-                                <a href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'">
-                                    <img class="img-fluid w-100" loading="lazy" width="402" height="500"
-                                         src="'. $row->PicPath .'sample1.jpg"
-                                         alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
-                                </a>
-                            </div> ';
-            if (file_exists(public_path($row->PicPath.'pic2.jpg')))
-                $products = $products . $this->productImage('2',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic3.jpg')))
-                $products = $products . $this->productImage('3',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic4.jpg')))
-                $products = $products . $this->productImage('4',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic5.jpg')))
-                $products = $products . $this->productImage('5',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic6.jpg')))
-                $products = $products . $this->productImage('6',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic7.jpg')))
-                $products = $products . $this->productImage('7',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic8.jpg')))
-                $products = $products . $this->productImage('8',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic9.jpg')))
-                $products = $products . $this->productImage('9',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic10.jpg')))
-                $products = $products . $this->productImage('10',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic11.jpg')))
-                $products = $products . $this->productImage('11',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic12.jpg')))
-                $products = $products . $this->productImage('12',$row,$size,$key);
-            if (file_exists(public_path($row->PicPath.'pic13.jpg')))
-                $products = $products . $this->productImage('13',$row,$size,$key);
-
-            // مشخصات محصول
-            $products = $products . '</div>
-                                        </div>
-                                        <h4 class="h6 g-color-black text-left g-brd-top g-brd-gray-light-v4 g-ml-5 g-mt-5 g-pt-5">'.$row->Brand.'</h4> ';
-            $products = $products . '<div style="direction: rtl"
-                         class="media">
-                        <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
-                        <div class="d-flex justify-content-between col-12 p-0">
-                            <div class="d-flex flex-column">
-                                <h1 class="h6 g-color-black my-1">
-                                                    <span class="u-link-v5 g-color-black"
-                                                          tabindex="0">
-                                                        '. $row->Name .'
-                                                        <span
-                                                            class="g-font-size-12 g-font-weight-300">'. $row->Model .'</span>
-                                                    </span>
-                                </h1>
-                                <ul style="padding: 0"
-                                    class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
-                                    <li>
-                                        <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600">'. $row->HintCat.' '.$row->Gender .'</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <a style="cursor: pointer"
-                               class="u-icon-v1 g-mt-minus-5 g-color-black g-color-primary--hover rounded-circle"
-                               data-toggle="tooltip"
-                               data-placement="top"
-                               href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'"
-                               data-original-title="جزئیات محصول">
-                                <i class="icon-eye g-line-height-0_7"></i>
-                            </a>
-                        </div></div>';
-
-            $products = $products .' <h1
-                        class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
-                    <div
-                        class="d-block g-color-black g-font-size-17 g-ml-10">
-                        <div style="direction: rtl" class="text-left">
-                            <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                '.  number_format($row->FinalPriceWithoutDiscount) .'
-                            </s>
-                            <span>'.  number_format($row->FinalPrice) .'</span>
-                            <span
-                                class="d-block g-color-gray-dark-v5 g-font-size-10">تومان</span>
-                        </div>
-                    </div>
-                </figure>
-            </div>';
-        }
-        $_SESSION['listSkip'] = $_SESSION['listSkip']+12;
-
-        return $products.'</div>';
-    }
-
-    public function productImage($imageNo, $row, $size, $key)
-    {
-        return '<div class="js-slide">
-                     <a href="'. route("productDetail",[$row->ID,$size[$key]->Size]) .'">
-                        <img class="img-fluid w-100"
-                            loading="lazy"
-                             src="'. $row->PicPath .'sample'.$imageNo.'.jpg"
-                             alt="'. $row->Name." ".$row->Model." ".$row->Gender." ".$row->Brand .'">
-                    </a>
-                </div> ';
-    }
-
-    public function userProfile($location)
-    {
-        // user data
-        try {
-            $customer = DB::table('customers')
-                ->select('*')
-                ->where('id', Auth::user()->id)
-                ->first();
-        } catch (\Exception $e) {
-            return redirect()->route('login');
-        }
-
-
-        // address
-        $address = DB::table('customer_address')
-            ->select('*')
-            ->where('CustomerID', Auth::user()->id)
-            ->orderBy('Status', 'DESC')
-            ->get();
-        // order
-        $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID')
-            ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('pod.ID', 'DESC')
-            ->get();
-
-        $orderHowDay = array();
-        $persianDate = array();
-        foreach ($order as $key => $row) {
-            $d = $row->Date;
-            $persianDate[$key] = $this->convertDateToPersian($d);
-            $persianDate[$key][1] = $this->month($persianDate[$key][1]);
-            $orderMinuets[$key] = $this->dateLenToNow($row->Date, '00:00:00');
-            $orderHowDay[$key] = null;
-            if ($orderMinuets[$key] < 11520) {
-                $orderHowDay[$key] = $this->howDays($orderMinuets[$key]);
-            }
-        }
-
-        $delivery = DB::table('product_delivery as delivery')
-            ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID')
-            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'delivery.OrderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('pod.ID', 'DESC')
-            ->get();
-        $today = date('Y-m-d');
-        $deliveryHowDay = array();
-        $deliveryPersianDate = array();
-        $deliveryTime = array();
-        $deliveryMin = array();
-        $deliveryHint = array();
-        foreach ($delivery as $key => $row) {
-            $d = $row->Date;
-            $deliveryPersianDate[$key] = $this->convertDateToPersian($d); //get persian date
-            $deliveryPersianDate[$key][1] = $this->month($deliveryPersianDate[$key][1]); // get month name
-            $rowDate = strtotime($row->Date . ' ' . $row->Time);
-            $orderDate = date('Y-m-d', $rowDate);
-            $reservation = date('Y-m-d', strtotime($row->Date . ' + 1 days'));
-
-            if (($orderDate < $today))
-                $deliveryMin[$key] = $this->dateLenToNow($reservation, '08:00:00'); // get len past date to now by min
-            else
-                $deliveryMin[$key] = 0; // get len past date to now by min
-            switch ($row->DeliveryStatus) {
-                case '0':
-                    $deliveryHint[$key]['text'] = 'در دست';
-                    $deliveryHint[$key]['location'] = 'فروشنده';
-                    $deliveryTime[$key] = 0;
-                    if ($deliveryMin[$key] > 540) {
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryProblem' => 1
-                            ]);
-                    } else {
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryProblem' => 0
-                            ]);
-                    }
-                    break;
-                case '1':
-                    $deliveryHint[$key]['text'] = 'در دست';
-                    $deliveryHint[$key]['location'] = 'پیک';
-                    $deliveryTime[$key] = 10;
-                    if ($deliveryMin[$key] > 600) {
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryProblem' => 1
-                            ]);
-                    } else {
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryProblem' => 0
-                            ]);
-                    }
-                    break;
-                case '2':
-                case '22':
-                    $deliveryHint[$key]['text'] = 'در دست';
-                    $deliveryHint[$key]['location'] = 'بسته بندی';
-                    $deliveryTime[$key] = 20;
-                    if ($deliveryMin[$key] > 1560) {
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryProblem' => 1
-                            ]);
-                    } else {
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryProblem' => 0
-                            ]);
-                    }
-                    break;
-                case '3':
-                    $deliveryHint[$key]['text'] = 'در دست';
-                    $deliveryHint[$key]['location'] = 'پیک';
-                    $deliveryTime[$key] = 30;
-                    if ($deliveryMin[$key] > 1800) {
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryProblem' => 1
-                            ]);
-                    } else {
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryProblem' => 0
-                            ]);
-                    }
-                    break;
-                case '4':
-                    DB::table('product_delivery')
-                        ->where('OrderDetailID', $row->orderDetailID)
-                        ->update([
-                            'DeliveryProblem' => 0
-                        ]);
-                    $deliveryHint[$key]['text'] = 'در دست';
-                    $deliveryHint[$key]['location'] = 'پست';
-
-                    $deliveryTime[$key] = 40 + round(($deliveryMin[$key] / 7200 * 100) * (60 / 100));
-                    if ($deliveryMin[$key] > 5040) {
-                        $deliveryHint[$key]['text'] = 'تحویل با';
-                        $deliveryHint[$key]['location'] = 'موفقیت';
-                        DB::table('product_delivery')
-                            ->where('OrderDetailID', $row->orderDetailID)
-                            ->update([
-                                'DeliveryStatus' => '5',
-                            ]);
-                    }
-                    break;
-                case '5':
-                    $deliveryTime[$key] = 101;
-                    break;
-                case '-1':
-                    $deliveryTime[$key] = 101;
-                    $deliveryHint[$key]['text'] = '';
-                    $deliveryHint[$key]['location'] = 'بازگشتی';
-                    break;
-                default:
-            }
-
-            $deliveryHowDay[$key] = null;
-            if ($deliveryMin[$key] < 11520) {
-                $deliveryHowDay[$key] = $this->howDays($deliveryMin[$key]);
-            }
-        }
-
-        // return
-        $return = DB::table('product_return as pr')
-            ->select('*', 'pr.Date as returnDate')
-            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('pr.Date', 'DESC')
-            ->get();
-
-        $returnHowDay = array();
-        $returnPersianDate = array();
-        $returnTime = array();
-        $returnMin = array();
-        $returnHint = array();
-        foreach ($return as $key => $row) {
-            $d = $row->returnDate;
-            $returnPersianDate[$key] = $this->convertDateToPersian($d); //get persian date
-            $returnPersianDate[$key][1] = $this->month($returnPersianDate[$key][1]); // get month name
-            $rowDate = strtotime($row->returnDate);
-            date_default_timezone_set('Asia/Tehran');
-            $returnDate = date('Y-m-d', $rowDate);
-            if (($returnDate < $today))
-                $returnMin[$key] = $this->dateLenToNow($row->returnDate, '08:00:00'); // get len past date to now by min
-            else
-                $returnMin[$key] = 0; // get len past date to now by min
-
-            $returnHowDay[$key] = null;
-            if ($returnMin[$key] < 11520) {
-                $returnHowDay[$key] = $this->howDays($returnMin[$key]);
-            }
-            switch ($row->ReturnStatus) {
-                case '4':
-                    $returnHint[$key]['text'] = 'در دست';
-                    $returnHint[$key]['location'] = 'پست';
-                    $returnTime[$key] = round(($returnMin[$key] / 3240 * 100) * 50 / 100);
-                    // تا سه روز بعد از بازگشت و ساعت 14 روز سوم خطایی رخ نمی دهد.
-                    if ($returnMin[$key] > 3240) {
-                        $returnTime[$key] = 50;
-                        DB::table('product_return')
-                            ->where('OrderDetailID', $row->OrderDetailID)
-                            ->update([
-                                'ReturnProblem' => 1
-                            ]);
-                    }
-                    break;
-                case '3':
-                    $returnHint[$key]['text'] = 'در دست';
-                    $returnHint[$key]['location'] = 'پیک';
-                    $returnTime[$key] = 60;
-                    if ($returnMin[$key] > 3420) {
-                        DB::table('product_return')
-                            ->where('OrderDetailID', $row->OrderDetailID)
-                            ->update([
-                                'ReturnProblem' => 1
-                            ]);
-                    } else {
-                        DB::table('product_return')
-                            ->where('OrderDetailID', $row->OrderDetailID)
-                            ->update([
-                                'ReturnProblem' => 0
-                            ]);
-                    }
-                    break;
-                case '2':
-                case '22':
-                    $returnHint[$key]['text'] = 'در دست';
-                    $returnHint[$key]['location'] = 'بررسی ایرادات';
-                    $returnTime[$key] = 70;
-                    if ($returnMin[$key] > 4440) {
-                        DB::table('product_return')
-                            ->where('OrderDetailID', $row->OrderDetailID)
-                            ->update([
-                                'ReturnProblem' => 1
-                            ]);
-                    } else {
-                        DB::table('product_return')
-                            ->where('OrderDetailID', $row->OrderDetailID)
-                            ->update([
-                                'ReturnProblem' => 0
-                            ]);
-                    }
-                    break;
-                case '1':
-                    $returnHint[$key]['text'] = 'در دست';
-                    $returnHint[$key]['location'] = 'پیک';
-                    $returnTime[$key] = 80;
-                    if ($returnMin[$key] > 4860) {
-                        DB::table('product_return')
-                            ->where('OrderDetailID', $row->OrderDetailID)
-                            ->update([
-                                'ReturnProblem' => 1
-                            ]);
-                    } else {
-                        DB::table('product_return')
-                            ->where('OrderDetailID', $row->OrderDetailID)
-                            ->update([
-                                'ReturnProblem' => 0
-                            ]);
-                    }
-                    break;
-                case '0':
-                    $returnHint[$key]['text'] = 'بازگشت محصول';
-                    $returnHint[$key]['location'] = 'و عودت وجه';
-                    $returnTime[$key] = 100;
-                    DB::table('product_return')
-                        ->where('OrderDetailID', $row->OrderDetailID)
-                        ->update([
-                            'ReturnProblem' => 0
-                        ]);
-                    break;
-                default:
-            }
-        }
-
-        $like = DB::table('customer_vote as cv')
-            ->select('*', 'p.ID as ProductID')
-            ->leftJoin('product_detail as pd', 'pd.ID', 'cv.ProductDetailID')
-            ->leftJoin('product as p', 'p.ID', 'pd.ProductID')
-            ->where('cv.CustomerID', Auth::user()->id)
-            ->where('cv.Like', '<>', 0)
-            ->get();
-
-        // Get data after Database update
-        $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber', 'ca.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
-            ->leftJoin('product_detail as pd', function ($join) {
-                $join->on('pd.ID', '=', 'pod.ProductDetailID');
-            })
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('pod.ID', 'DESC')
-            ->get();
-
-        $delivery = DB::table('product_delivery as delivery')
-            ->select('delivery.*', 'po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'pd.SampleNumber')
-            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'delivery.OrderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', function ($join) {
-                $join->on('pd.ID', '=', 'pod.ProductDetailID');
-            })
-            ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('pod.ID', 'DESC')
-            ->get();
-
-        $return = DB::table('product_return as pr')
-            ->select('*', 'pr.Date as returnDate')
-            ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
-            ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
-            ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->leftJoin('product_detail as pd', function ($join) {
-                $join->on('pd.ID', '=', 'pod.ProductDetailID');
-            })
-            ->where('po.CustomerID', Auth::user()->id)
-            ->orderBy('pr.Date', 'DESC')
-            ->get();
-
-        return view('Customer.Profile', compact('location', 'customer', 'address',
-            'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryHowDay', 'deliveryPersianDate',
-            'deliveryMin', 'deliveryTime', 'deliveryHint', 'return', 'returnHowDay', 'returnPersianDate',
-            'returnMin', 'returnTime', 'returnHint', 'like'));
-    }
-
-    public function cart()
-    {
-        try {
-            // گرفتن تمامی جزییات مربوط به محصول کلیک شده
-            $data = DB::table('product_cart as pc')
-                ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID','s.Name as sellerName','s.Family as sellerFamily')
-                ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pc.ProductDetailID')
-                ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-                ->leftJoin('sellers as s','s.id','=','p.SellerID')
-                ->where('pc.CustomerID', Auth::user()->id)
-                ->orderBy('Date')
-                ->orderBy('Time')
-                ->get();
-        } catch (\Exception $e) {
-            return redirect()->route('login');
-        }
-
-
-        $sendAddress = $this->checkAddress();
-        return view('Customer.Cart', compact('sendAddress', 'data'));
-    }
-
-    public function cartCount()
-    {
-        $data = DB::table('product_cart')
-            ->select('CustomerID')
-            ->where('CustomerID', auth::user()->id)
-            ->get();
-
-        return $data->count();
-    }
-
-    public function cartAdd($id)
-    {
-        DB::table('product_cart')->insert([
-            'CustomerID' => Auth::user()->id,
-            'ProductDetailID' => $id,
-            'Date' => date('Y-m-d'),
-            'Time' => date('H:i:s')
-        ]);
-    }
-
-    public function cartDelete($id)
-    {
-        DB::table('product_cart')
-            ->where('ProductDetailID', $id)
-            ->delete();
-        $cartCount = DB::table('product_cart')->get();
-        return count($cartCount);
-    }
-
-    public function cartSubmit(Request $request)
-    {
-        $row = $request->get('row');
-        $productDetailID = [];
-        $stock = false;
-        $qty = [];
-        for ($i = 0; $i < $row ; $i++) {
-            $productDetailID[$i] = $request->get('productDetailID' . $i);
-            $data = DB::table('product_detail')
-                ->select('ID', 'Qty')
-                ->where('ID', $productDetailID[$i])
-                ->first();
-
-            $qty[$i] = (int)$request->get('qty' . $i);
-            if (($data->Qty) - ($qty[$i]) >= 0 ) {
-                $stock=true;
-            } else {
-                $stock=false;
-            }
-
-            DB::table('product_detail')
-                ->where('ID', $productDetailID[$i])
-                ->decrement('Qty', $qty[$i]);
-        }
-
-        $price=1000;
-        if ($stock) {
-            foreach ($productDetailID as $key => $row)
-                DB::table('product_order_temporary')
-                    ->insert([
-                        'CustomerID'=> Auth::user()->id,
-                        'ProductDetailID'=> $row,
-                        'Qty'=> $qty[$key],
-                        'Price'=> $price,
-                    ]);
-
-            $order = new zarinpal();
-            $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
-            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
-        } else {
-            return redirect()->route('cart', 'noExist');
-        }
-    }
-
-    public function bankingPortal($id, $qty)
-    {
-        $stock = null;
-        $data = DB::table('product_detail as pd')
-            ->select('pd.ID', 'p.FinalPrice','pd.ID', 'pd.Qty', 'pd.Size', 'pd.Color')
-            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-            ->where('pd.ID', $id)
-            ->first();
-
-        if ((($data->Qty) - (int)$qty) >= 0 ) {
-            $stock=true;
-        } else {
-            $stock=false;
-        }
-
-        DB::table('product_detail')
-            ->where('ID', $id)
-            ->decrement('Qty', $qty);
-
-        session_start();
-        if(isset($_SESSION['stateCode'])) {
-            if( $_SESSION['stateCode']==='2' &&  $_SESSION['cityCode']==='36'){
-                $postPrice = 10000;
-            } else {
-                $postPrice = 15000;
-            }
-        } else {
-            $postPrice = 15000;
-        }
-
-        if ($stock) {
-            $price = ($data->FinalPrice * $qty )+$postPrice;
-            DB::table('product_order_temporary')
-                ->insert([
-                    'CustomerID'=> Auth::user()->id,
-                    'ProductDetailID'=> $id,
-                    'Qty'=> $qty,
-                    'Price'=> $price,
-                ]);
-
-            $order = new zarinpal();
-            $res = $order->pay($price,Auth::user()->email,Auth::user()->Mobile);
-            return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
-
-        } else {
-            return redirect()->route('productDetail', [$data->ProductID, $data->Size]);
-        }
-    }
-
-    public function orderZarinpal(Request $request)
-    {
-        if(!isset(Auth::user()->id)){
-            Auth::loginUsingId($_COOKIE['userId'],true);
-        }
-        $MerchantID = 'ccd4acab-a4dc-416d-9172-b066aa674e2b';
-        $Authority =$request->get('Authority');
-
-        $data=DB::table('product_order_temporary')
-            ->select('*')
-            ->where('CustomerID',Auth::user()->id)
-            ->get();
-
-        if ($request->get('Status') == 'OK') {
-            $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
-            $client->soap_defencoding = 'UTF-8';
-
-            $result = $client->call('PaymentVerification', [
-                [
-                    //این مقادیر را به سایت زرین پال برای دریافت تاییدیه نهایی ارسال می کنیم
-                    'MerchantID'     => $MerchantID,
-                    'Authority'      => $Authority,
-                    'Amount'         => $data[0]->Price,
-                ],
-            ]);
-
-            $refNum=$Authority;
-            if ($result['Status'] == 100) {
-                $new = $this->newOrder($data,$Authority);
-
-                return view('Customer.PaymentStatus', compact( 'refNum'));
-            } else {
-                foreach ($data as $row) {
-                    DB::table('product_detail')
-                        ->where('ID', $row->ProcutDetailID)
-                        ->increment('Qty', $row->Qty);
-                }
-
-                DB::table('payment_failed')
-                    ->insert([
-                        'Authority'=>$Authority,
-                    ]);
-                return view('Customer.PaymentError');
-            }
-        }
-        else
-        {
-            foreach ($data as $row) {
-                DB::table('product_detail')
-                    ->where('ID', $row->ProcutDetailID)
-                    ->increment('Qty', $row->Qty);
-            }
-            return view('Customer.PaymentError');
-        }
-    }
-
-    public function checkCartNumber()
-    {
-        $data = DB::table('product_cart')
-            ->where('CustomerID', Auth::user()->id)
-            ->get();
-
-        return array($data->count(), $data);
-    }
-
-    public function cartCheck($id)
-    {
-        $exist = DB::table('product_cart')
-            ->where('ProductDetailID', $id)
-            ->where('CustomerID', Auth::user()->id)
-            ->first();
-        if ($exist === null)
-            return 'empty';
-        else
-            return 'exist';
-    }
-
-    public function cartQtyCheck($pdID)
-    {
-        $pdID = json_decode($pdID);
-        // گرفتن تمامی جزییات مربوط به محصول کلیک شده
-        return DB::table('product_detail')
-            ->select('ID', 'Qty')
-            ->whereIn('ID', $pdID)
-            ->get();
-    }
-
-    public function profileUpdate(Request $request)
-    {
-        $name = $request->get('name');
-        $family = $request->get('family');
-        $nationalId = $request->get('nationalId');
-        $day = $request->get('day');
-        $mon = $request->get('mon');
-        $year = $request->get('year');
-        $gender = $request->get('gender');
-        $prePhone = $request->get('prePhone');
-        $phone = $request->get('phone');
-        $state = $request->get('state');
-        $city = $request->get('city');
-
-        DB::table('customers')
-            ->where('id', Auth::user()->id)
-            ->update([
-                'name' => $name,
-                'Family' => $family,
-                'NationalID' => $nationalId,
-                'BirthdayD' => $day,
-                'BirthdayM' => $mon,
-                'BirthdayY' => $year,
-                'Gender' => $gender,
-                'Phone' => $phone,
-                'PrePhone' => $prePhone,
-                'State' => $state,
-                'City' => $city,
-            ]);
-
-        return redirect()->route('userProfile', 'personData');
-    }
-
-    public function addressActive($id)
-    {
-        DB::table('customer_address')
-            ->where('ID', $id)
-            ->update([
-                'Status' => 1
-            ]);
-
-        DB::table('customer_address')
-            ->where('CustomerID', Auth::user()->id)
-            ->where('ID', '<>', $id)
-            ->update([
-                'Status' => 0
-            ]);
-
-        return redirect()->route('userProfile', 'addressStatus');
-    }
-
-    public function addressUpdate(Request $request)
-    {
-        $id = $request->get('receiver-id');
-        $name = $request->get('receiver-name');
-        $family = $request->get('receiver-family');
-        $postalCode = $request->get('receiver-postalCode');
-        $prePhone = $request->get('receiver-prePhone');
-        $phone = $request->get('receiver-phone');
-        $mobile = $request->get('receiver-mobile');
-        $state = $request->get('receiver-state');
-        $city = $request->get('receiver-city');
-        $address = $request->get('receiver-address');
-
-        DB::table('customer_address')
-            ->where('ID', $id)
-            ->update([
-                'ReceiverName' => $name,
-                'ReceiverFamily' => $family,
-                'PostalCode' => $postalCode,
-                'PrePhone' => $prePhone,
-                'Phone' => $phone,
-                'Mobile' => $mobile,
-                'State' => $state,
-                'City' => $city,
-                'Address' => $address,
-            ]);
-
-        return redirect()->route('userProfile', 'addressStatus');
-    }
-
-    public function attachAddress($location, $size)
-    {
-
-        Session::put('size', $size);
-
-        return redirect()->route('userProfile', $location);
-    }
-
-    public function addAddress(Request $request)
-    {
-        $size = Session::get('size');
-        $productID = $request->get('productIDFromBuy');
-        $name = $request->get('receiver-name');
-        $family = $request->get('receiver-family');
-        $postalCode = $request->get('receiver-postalCode');
-        $prePhone = $request->get('receiver-prePhone');
-        $phone = $request->get('receiver-phone');
-        $mobile = $request->get('receiver-mobile');
-        $state = $request->get('receiver-state');
-        $city = $request->get('receiver-city');
-        $address = $request->get('receiver-address');
-
-        ($prePhone === null) ? $prePhone = '000' : true;
-        ($phone === null) ? $phone = '00000000' : true;
-
-        DB::table('customer_address')
-            ->where('CustomerID', Auth::user()->id)
-            ->update([
-                'Status' => 0,
-            ]);
-
-        DB::table('customer_address')->insert([
-            'CustomerID' => Auth::user()->id,
-            'ReceiverName' => $name,
-            'ReceiverFamily' => $family,
-            'PostalCode' => $postalCode,
-            'PrePhone' => $prePhone,
-            'Phone' => $phone,
-            'Mobile' => $mobile,
-            'State' => $state,
-            'City' => $city,
-            'Address' => $address,
-            'Status' => 1,
-        ]);
-
-        if ($productID === 'empty')
-            return redirect()->route('userProfile', 'addressStatus');
-        else {
-            return redirect()->route('productDetail', [$productID, $size]);
-        }
-    }
-
-    public function addressDelete($id)
-    {
-        DB::table('customer_address')
-            ->select('ID')
-            ->where('ID', $id)
-            ->delete();
-    }
-
-    public function productDetail($id, $sizeInfo)
-    {
-        // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
-        $data = DB::table('product as p')
-            ->select('p.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->where('p.ID', $id)
-            ->first();
-
-        // گرفتن تمامی جزییات مربوط به محصول کلیک شده
-        $detail = DB::table('product as p')
-            ->select('p.*', 'pd.*', 'pd.ID as detailID')
-            ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
-            ->where('pd.ProductID', $id)
-            ->orderBy('Size')
-            ->get();
-
-        // سازمندهی کردن جزییات مربوط به محصول(سایز)
-        $size = array();
-        $temp = '';
-        $i = 0;
-        foreach ($detail as $key => $info) {
-            if ($info->Size !== $temp) {
-                $size[$i]['pdId'] = $info->detailID;
-                $size[$i]['size'] = $info->Size;
-                $i++;
-            }
-            $temp = $info->Size;
-        }
-
-        // سازمندهی کردن جزییات مربوط به محصول(rating، comment)
-        $rating_tbl = DB::table('customer_vote as cv')
-            ->select('*')
-            ->where('ProductID', $id)
-            ->get();
-
-        // rating & comment
-        $rating = 0;
-        $ratingCount = 0;
-        foreach ($rating_tbl as $key => $row) {
-            $rating += $row->Rating;
-            if ($row->Rating !== 0)
-                $ratingCount++;
-        }
-        if ($rating !== 0)
-            $rating = round($rating / $ratingCount);
-
-        $comments = DB::table('customer_comment as cc')
-            ->select('c.name', 'c.Family', 'cc.*', 'cc.ID as ccID', 'c.PicPath', 'c.id')
-            ->leftJoin('customers as c', 'cc.CustomerID', '=', 'c.id')
-            ->where('cc.ProductID', $id)
-            ->get();
-
-        $commentVote = null;
-        $voteID = null;
-        $sendAddress = null;
-
-        if (isset(Auth::user()->id)) {
-            $commentVote = DB::table('customer_comment_like as ccl')
-                ->select('ccl.*', 'cc.ID')
-                ->leftJoin('customer_comment as cc', 'cc.ID', '=', 'ccl.CommentID')
-                ->where('ccl.CustomerID', Auth::user()->id)
-                ->get();
-
-            $voteID = DB::table('customer_vote as cv')
-                ->select('cv.ID', 'cv.CustomerID', 'c.id')
-                ->leftJoin('customers as c', 'cv.CustomerID', '=', 'c.id')
-                ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'cv.ProductID')
-                ->where('cv.CustomerID', Auth::user()->id)
-                ->where('pd.ProductID', $id)
-                ->first();
-
-            $sendAddress = $this->checkAddress();
-        }
-
-        // بدست آوردن زمان کامنت به صورت فارسی و زمان سپری شده از کامنت
-        $commentsMinuets = array();
-        $commentsHowDay = array();
-        $PersianDate = array();
-        foreach ($comments as $key => $row) {
-            $d = $row->Date;
-            $PersianDate[$key] = $this->convertDateToPersian($d);
-            $commentsMinuets[$key] = $this->dateLenToNow($row->Date, $row->Time);
-            $commentsHowDay[$key] = null;
-            if ($commentsMinuets[$key] < 11520) {
-                $commentsHowDay[$key] = $this->howDays($commentsMinuets[$key]);
-            }
-        }
-
-        if (isset(Auth::user()->id)) {
-            // گرفتن اطلاعات مربوط به کاربر جاری در جدول کاستومر کامنت
-            $rating_tbl2 = DB::table('customer_vote as cv')
-                ->select('*')
-                ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'cv.ProductID')
-                ->where('CustomerID', Auth::user()->id)
-                ->where('pd.ProductID', $id)
-                ->first();
-
-            // بررسی اینکه کاربر جاری نمره داده است یا نه؟
-            if (isset($rating_tbl2->Rating))
-                $customerRate = ($rating_tbl2->Rating !== null) ? $rating_tbl2->Rating : 0;
-            else
-                $customerRate = 0;
-        } else
-            $customerRate = 0;
-
-        DB::table('product')
-            ->where('ID',$id)
-            ->increment('VisitCounter', 1);
-
-        // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
-        $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo'));
-    }
-
-    public function productVisit($id)
-    {
-        DB::table('product_detail')
-            ->where('ID', $id)
-            ->update([
-                'visitCounter' => DB::raw('visitCounter + 1'),
-            ]);
-        return 'Visit: Success';
-    }
-
-    public function returnProduct(Request $request)
-    {
-        // Upload Images
-        date_default_timezone_set('Asia/Tehran');
-        $folderName = 'r-' . date("Y.m.d-H.i.s");
-        $picPath = public_path('/img/return/') . $folderName;
-        File::makeDirectory($picPath, 0777, true, true);
-        $image = $request->file('returnPic');
-        $source = '';
-        switch ($image->getMimeType()) {
-            case 'image/jpeg':
-            case 'image/jpg':
-                $source = imagecreatefromjpeg($image);
-                break;
-            case 'image/png':
-                $source = imagecreatefrompng($image);
-                break;
-            case 'image/gif':
-                $source = imagecreatefromgif($image);
-                break;
-        }
-        $imageFullPath = $picPath . '/pic.jpg';
-        imagejpeg($source, $imageFullPath);
-
-        // Compilation Pic Path
-        $picPath = $picPath . '/';
-
-        $poID = $request->get('orderIDFromReturn');
-        $podID = $request->get('orderDetailIDFromReturn');
-        $postCode = $request->get('returnPostCode');
-        $reason = $request->get('returnReason');
-        $reasonDetail = $request->get('returnReasonDetail');
-        $card = $request->get('returnCard');
-        $date = date('Y-m-d');
-        $time = date('H:i:s');
-
-        DB::table('product_return')->insert([
-            'OrderDetailID' => $podID,
-            'PostCode' => $postCode,
-            'Reason' => $reason,
-            'ReasonDetail' => $reasonDetail,
-            'CreditCard' => $card,
-            'ReturnPicPath' => $picPath,
-            'Date' => $date,
-            'Time' => $time,
-        ]);
-
-        DB::table('product_delivery')
-            ->where('OrderDetailID', $podID)
-            ->update([
-                'DeliveryStatus' => '-1',
-            ]);
-
-        return redirect()->route('userProfile', 'returnProduct');
-    }
-
-    public function likeProduct($id, $idDetail, $val)
-    {
-        $data = DB::table('customer_vote')
-            ->where('CustomerID', Auth::user()->id)
-            ->where('ProductID', $id)
-            ->first();
-
-        $val = ($val === 'true') ? 1 : 0;
-        if (isset($data)) {
-            DB::table('customer_vote')
-                ->where('CustomerID', Auth::user()->id)
-                ->where('ProductID', $id)
-                ->update([
-                    'Like' => $val,
-                    'ProductDetailID' => $idDetail
-                ]);
-        } else {
-            DB::table('customer_vote')->insert([
-                [
-                    'CustomerID' => Auth::user()->id,
-                    'ProductID' => $id,
-                    'ProductDetailID' => $idDetail,
-                    'Like' => $val,
-                    'Rating' => 0,
-                ],
-            ]);
-        }
-        $voteID = DB::table('customer_vote')
-            ->select('*')
-            ->where('CustomerID', Auth::user()->id)
-            ->where('ProductID', $id)
-            ->first();
-        return $voteID->ID;
-    }
-
-    public function ratingProduct($id, $idDetail, $val)
-    {
-        $data = DB::table('customer_vote')
-            ->select('CustomerID', 'ProductID')
-            ->where('CustomerID', Auth::user()->id)
-            ->where('ProductID', $id)
-            ->first();
-
-        if (isset($data)) {
-            DB::table('customer_vote')
-                ->where('CustomerID', Auth::user()->id)
-                ->where('ProductID', $id)
-                ->update([
-                    'Rating' => $val,
-                    'ProductDetailID' => $idDetail
-                ]);
-        } else {
-            DB::table('customer_vote')->insert([
-                [
-                    'CustomerID' => Auth::user()->id,
-                    'ProductID' => $id,
-                    'ProductDetailID' => $idDetail,
-                    'Like' => 0,
-                    'Rating' => $val,
-                ],
-            ]);
-        }
-
-        $voteID = DB::table('customer_vote')
-            ->select('*')
-            ->where('CustomerID', Auth::user()->id)
-            ->where('ProductID', $id)
-            ->first();
-
-        return $voteID->ID;
-    }
-
-    public function productNewComment($id, $val)
-    {
-        date_default_timezone_set('Asia/Tehran');
-        $date = date('Y-m-d');
-        $time = date('H:i:s');
-        DB::table('customer_comment')->insert([
-            [
-                'CustomerID' => Auth::user()->id,
-                'ProductID' => $id,
-                'Comment' => $val,
-                'Like' => 0,
-                'Unlike' => 0,
-                'Date' => $date,
-                'Time' => $time,
-            ],
-        ]);
-
-        return $id;
-    }
-
-    public function likeComment($id, $val)
-    {
-        $d = DB::table('customer_comment as cc')
-            ->select('cc.*', 'ccl.*')
-            ->leftJoin('customer_comment_like as ccl', 'ccl.CommentID', '=', 'cc.ID')
-            ->where('cc.ID', $id)
-            ->where('ccl.CustomerID', Auth::user()->id)
-            ->first();
-
-        $value = (($val === '1') || ($val === '-1')) ? '1' : '0';
-        if (isset($d)) {
-            DB::table('customer_comment_like')
-                ->where('CommentID', $id)
-                ->where('CustomerID', Auth::user()->id)
-                ->update([
-                    'CommentVote' => $value
-                ]);
-        } else {
-            DB::table('customer_comment_like')->insert([
-                [
-                    'CustomerID' => Auth::user()->id,
-                    'CommentID' => $id,
-                    'CommentVote' => '1',
-                ],
-            ]);
-        }
-
-        switch ($val) {
-            case '0';
-                DB::table('customer_comment')
-                    ->where('ID', $id)
-                    ->decrement('Like', 1);
-                break;
-
-            case '1':
-                DB::table('customer_comment')
-                    ->where('ID', $id)
-                    ->increment('Like', 1);
-                break;
-
-            case '-1':
-                DB::table('customer_comment')
-                    ->where('ID', $id)
-                    ->decrement('Unlike', 1);
-                break;
-        }
-    }
-
-    public function unLikeComment($id, $val)
-    {
-        $d = DB::table('customer_comment as cc')
-            ->select('cc.*', 'ccl.*')
-            ->leftJoin('customer_comment_like as ccl', 'ccl.CommentID', '=', 'cc.ID')
-            ->where('cc.ID', $id)
-            ->where('ccl.CustomerID', Auth::user()->id)
-            ->first();
-
-        $value = (($val === '1') || ($val === '-1')) ? '-1' : '0';
-        if (isset($d)) {
-            DB::table('customer_comment_like')
-                ->where('CommentID', $id)
-                ->update([
-                    'CommentVote' => $value
-                ]);
-        } else {
-            DB::table('customer_comment_like')->insert([
-                [
-                    'CustomerID' => Auth::user()->id,
-                    'CommentID' => $id,
-                    'CommentVote' => '-1',
-                ],
-            ]);
-        }
-
-        switch ($val) {
-            case '0';
-                DB::table('customer_comment')
-                    ->where('ID', $id)
-                    ->decrement('Unlike', 1);
-                break;
-
-            case '1':
-                DB::table('customer_comment')
-                    ->where('ID', $id)
-                    ->increment('Unlike', 1);
-                break;
-
-            case '-1':
-                DB::table('customer_comment')
-                    ->where('ID', $id)
-                    ->decrement('Like', 1);
-                break;
-        }
-    }
-
-    public function sizeInfo($id, $size)
-    {
-        return DB::table('product_detail')
-            ->select('ID', 'Color', 'Qty', 'HexCode', 'PicNumber')
-            ->where('ProductID', $id)
-            ->where('Size', $size)
-            ->get();
-    }
-
-    public function productCallMeExist($id)
-    {
-        DB::table('customer_call_product_exist')->insert([
-            [
-                'CustomerID' => Auth::user()->id,
-                'ProductDetailID' => $id,
-            ],
-        ]);
-    }
-
-    public function CheckCallCustomer($id)
-    {
-        $data = DB::table('customer_call_product_exist')
-            ->select('*')
-            ->where('CustomerID', Auth::user()->id)
-            ->where('ProductDetailID', $id)
-            ->first();
-
-        if (isset($data))
-            return 'called';
-        else
-            return 'noCall';
-    }
-
-    public function removeCallCustomer($id)
-    {
-        DB::table('customer_call_product_exist')
-            ->select('*')
-            ->where('CustomerID', Auth::user()->id)
-            ->where('ProductDetailID', $id)
-            ->delete();
-    }
-
-    public function checkAddress()
-    {
-        $result=DB::table('customer_address')
-            ->select('*')
-            ->where('CustomerID', Auth::user()->id)
-            ->where('Status', 1)
-            ->first();
-
-        if(isset($result)){
-            session_start();
-            $_SESSION['stateCode'] = $result->State;
-            $_SESSION['cityCode'] = $result->City;
-        }
-
-        return  $result;
-    }
-
-    public function customerVerify()
-    {
-        return redirect()->route('Master');
-    }
-
-    public function uploadImage(Request $request)
-    {
-        $image = $request->file('imageUrl');
-
-//        return $image;
-        $folderPath = public_path('img/CustomerProfileImage/');
-        $imageName = Auth::user()->id . '.png';
-        $imageFullPath = $folderPath . $imageName;
-
-        $source = '';
-        switch ($image->getMimeType()) {
-            case 'image/jpeg':
-            case 'image/jpg':
-                $source = imagecreatefromjpeg($image);
-                break;
-            case 'image/png':
-                $source = imagecreatefrompng($image);
-                break;
-            case 'image/gif':
-                $source = imagecreatefromgif($image);
-                break;
-        }
-        imagejpeg($source, $imageFullPath);
-
-        DB::table('customers')
-            ->where('id', Auth::user()->id)
-            ->update([
-                'PicPath' => 'img/CustomerProfileImage/' . $imageName,
-            ]);
-        return true;
-    }
-
-    public function connection()
-    {
-        try {
-            $data = DB::table('customer_conversation as cc')
-                ->select('cc.*',
-                    'ccd.QuestionDate as qDate',
-                    'ccd.QuestionTime as qTime',
-                    'ccd.AnswerDate as aDate',
-                    'ccd.AnswerTime as aTime',
-                    'ccd.Replay',
-                    'ccd.ConversationID',
-                    'ccd.ID as conversationDetailID')
-                ->leftJoin('customer_conversation_detail as ccd', 'ccd.ConversationID', '=', 'cc.ID')
-                ->where('cc.CustomerID', Auth::user()->id)
-                ->orderBy('cc.Status')
-                ->orderBy(DB::raw('IF(cc.Status=0 || cc.Status=1, cc.Priority, false)'), 'ASC')
-                ->orderBy('cc.ID', 'DESC')
-                ->get();
-        } catch (\Exception $e) {
-            return redirect()->route('login');
-        }
-
-        // Convert Date
-        $persianDate = array();
-        foreach ($data as $key => $rec) {
-            $d = $rec->Date;
-            $persianDate[$key] = $this->convertDateToPersian($d);
-        }
-
-        return view('Customer.Conversation', compact('data', 'persianDate'));
-    }
-
-    public function connectionDetail($id, $status)
-    {
-        $data = DB::table('customer_conversation_detail as ccd')
-            ->select('ccd.*', 'cc.Subject', 'cc.Status', 'cc.ID as ConversationID', 'cc.CustomerID', 'c.Name', 'c.Family')
-            ->leftJoin('customer_conversation as cc', 'cc.ID', '=', 'ccd.ConversationID')
-            ->leftJoin('customers as c', 'c.ID', '=', 'cc.CustomerID')
-            ->where('ccd.ConversationID', $id)
-            ->paginate(10);
-
-        if ($status === '0') {
-            foreach ($data as $key => $rec)
-                if ($rec->Replay !== 0) {
-                    DB::table('customer_conversation')
-                        ->where('ID', $id)
-                        ->update(['Status' => 2]);
-                } else {
-                    DB::table('customer_conversation')
-                        ->where('ID', $id)
-                        ->update(['Status' => 2]);
-                }
-        }
-
-        $questionMinuets = array();
-        $answerMinuets = array();
-        $questionHowDay = array();
-        $answerHowDay = array();
-        foreach ($data as $key => $rec) {
-            $d = $rec->QuestionDate;
-            $qPersianDate[$key] = $this->convertDateToPersian($d);
-            $d = $rec->AnswerDate;
-            $aPersianDate[$key] = $this->convertDateToPersian($d);
-            $questionMinuets[$key] = $this->dateLenToNow($rec->QuestionDate, $rec->QuestionTime);
-            $answerMinuets[$key] = $this->dateLenToNow($rec->AnswerDate, $rec->AnswerTime);
-            $questionHowDay[$key] = null;
-            $answerHowDay[$key] = null;
-            if (($questionMinuets[$key] < 11520) || ($answerMinuets[$key] < 11520)) {
-                $questionHowDay[$key] = $this->howDays($questionMinuets[$key]);
-                $answerHowDay[$key] = $this->howDays($answerMinuets[$key]);
-            }
-        }
-
-        $title = $data[0]->Subject;
-
-        return view('Customer.ConversationDetail', compact('data', 'answerHowDay', 'questionHowDay', 'qPersianDate', 'aPersianDate', 'title'));
-    }
-
-    public function connectionNew(Request $request)
-    {
-        $title = $request->get('title');
-        $priority = $request->get('priority');
-        $section = $request->get('section');
-
-        return view('Customer.ConversationDetail', compact('title', 'priority', 'section'));
-    }
-
-    public function connectionNewMsg(Request $request)
-    {
-
-        date_default_timezone_set('Asia/Tehran');
-        $date = date('Y-m-d');
-        $time = date('H:i:s');
-        $customerID = Auth::user()->id;
-        $question = $request->get('question');
-        $title = $request->get('title');
-
-        if (isset($title)) {
-            $priority = $request->get('priority');
-            $section = $request->get('section');
-            // Insert Data to Conversation
-            DB::table('customer_conversation')->insert([
-                [
-                    'CustomerID' => $customerID,
-                    'Subject' => $title,
-                    'Section' => $section,
-                    'priority' => $priority,
-                    'Status' => 1,
-                    'Date' => $date,
-                    'Time' => $time,
-                ],
-            ]);
-
-            $conversationID = DB::table('customer_conversation')
-                ->select('ID')
-                ->latest('ID')
-                ->first();
-
-            $conversationID = $conversationID->ID;
-        } else {
-            $conversationID = $request->get('conversationID');
-        }
-        DB::table('customer_conversation')
-            ->where('ID', $conversationID)
-            ->update(['Status' => 1]);
-
-        // Insert Data to Conversation_detail
-        DB::table('customer_conversation_detail')->insert([
-            [
-                'ConversationID' => $conversationID,
-                'Question' => $question,
-                'Answer' => '',
-                'QuestionDate' => $date,
-                'QuestionTime' => $time,
-                'Replay' => 0,
-            ],
-        ]);
-
-        return redirect('/Customer-Connection')->with('status', 'success');
-    }
-
-// ------------------------------------------[ Products Filter ]--------------------------------------------------------
-    public function productFilter($gender, $cat, $size, $priceMin, $priceMax, $color, $filterChange)
-    {
-        session_start();
-        if ($filterChange == 1)
-            $_SESSION['listSkip'] = 0;
-
-        $gender = json_decode($gender);
-        $cat = json_decode($cat);
-        $size = json_decode($size);
-        $color = json_decode($color);
-
-        if (!isset($size[0]))
-            $size[0] = 'empty';
-
-        $data = DB::table('product as p')
-            ->select('p.*', 'pd.*','s.Name as sellerName','s.Family as sellerFamily')
-            ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->whereIn('p.GenderCode', $gender)
-            ->whereIn('p.CatCode', $cat)
-//            ->whereIn('pd.Size', $size)
-            ->Where(function ($query) use ($size) {
-                for ($i = 0; $i < count($size); $i++) {
-                    $query->orwhere('pd.Size', 'like', $size[$i] . '%');
-                }
-            })
-            ->whereIn('pd.ColorCode', $color)
-            ->whereBetween('p.FinalPrice', [$priceMin, $priceMax])
-            ->orderBy('p.GenderCode')
-            ->orderBy('p.CatCode')
-//            ->groupBy('p.ID')
-            ->skip($_SESSION['listSkip'])
-            ->take(10)
-            ->get();
-
-        $_SESSION['listSkip'] += 10;
-
-        $products = '';
-        foreach ($data as $key => $row) {
-            $products = $products . '<div class="col-12 col-lg-4 g-mb-30 filterApply">
-    <figure style="direction: ltr; border-bottom: 2px solid #72c02c"
-                    class="g-px-10 g-pt-10 g-pb-20 productFrame u-shadow-v24">
-        <div>
-            <div id="carousel-08-1"
-             class="js-carousel text-center g-mb-5"
-             data-infinite="1"
-             data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
-             data-nav-for="#carousel-08-2">
-
-                 <div class="js-slide">
-                    <a
-                        href="' . route('productDetail', [$row->ProductID, $row->Size]) . '">
-                        <img class="img-fluid w-100" src="' . $row->PicPath . $row->SampleNumber . '.jpg" alt="Image Description">
-                    </a>
-                 </div>
-            </div>
-        </div>
-         <div style="direction: rtl" class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
-             <div class="d-flex justify-content-between col-12 p-0">
-                <div class="d-flex flex-column">
-                    <h4 class="h6 g-color-black my-1">
-                        <span class="u-link-v5 g-color-black" tabindex="0">' . $row->Name . '
-                            <span class="g-font-size-12 g-font-weight-300">' . $row->Model . '</span>
-                        </span>
-                    </h4>
-                    <ul style="padding: 0"
-                        class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
-                        <li>
-                            <span class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600 g-mb-5">' . $row->Size . ' ' . $row->Color . '</span>
-                        </li>
-                        <li>
-                            <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600">' . $row->HintCat . ' ' . $row->Gender . '</a>
-                        </li>
-                    </ul>
-                </div>
-                <a style="cursor: pointer"
-                   class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
-                   data-toggle="tooltip"
-                   data-placement="top"
-                   href="https://tanastyle/Product/' . $row->ID . '"
-                   data-original-title="جزئیات محصول">
-                   <i class="icon-eye g-line-height-0_7"></i>
-                </a>
-            </div>
-         </div>
-          <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: '. $row->sellerName.' '.$row->sellerFamily .'</h1>
-          <div
-            class="d-block g-color-black g-font-size-17 g-ml-10">
-                <div style="direction: rtl" class="text-left">
-                    <s class="g-color-lightred g-font-weight-500 g-font-size-13">' .
-                number_format($row->FinalPriceWithoutDiscount) . '
-                    </s>
-                    <span>' . number_format($row->FinalPrice) . '</span>
-                    <span
-                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
-                </div>
-          </div>
-    </figure>
-</div>
-
-<span id="lineBreak" class="d-none">break</span>
-
-';
-        }
-        return $products;
-    }
-
-// ---------------------------------------------[Product List]----------------------------------------------------------
-    public function productFemaleList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '0')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '0';
-        $catCode = 'all';
-        $title = 'پوشاک زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productFemaleClothesList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '0';
-        $catCode = 'clothes';
-        $title = 'لباس زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productFemaleBagsList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '0')
-            ->where('CatCode', 'e')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->where('CatCode', 'e')
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '0';
-        $catCode = 'e';
-        $title = 'کیف زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productFemaleShoesList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '0')
-            ->where('CatCode', 'f')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->where('CatCode', 'f')
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '0';
-        $catCode = 'f';
-        $title = 'کفش زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productFemaleSportsList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '0';
-        $catCode = 'sports';
-        $title = 'پوشاک ورزشی زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productFemaleRhinestoneList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '0';
-        $catCode = 'rhinestone';
-        $title = 'بدلیجات زنانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productMaleList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '1')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '1';
-        $catCode = 'all';
-        $title = 'پوشاک مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productMaleClothesList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '1';
-        $catCode = 'clothes';
-        $title = 'لباس مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productMaleBagsList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '1')
-            ->where('CatCode', 'e')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->where('CatCode', 'e')
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '1';
-        $catCode = 'e';
-        $title = 'کیف مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productMaleShoesList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '1')
-            ->where('CatCode', 'f')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->where('CatCode', 'f')
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '1';
-        $catCode = 'f';
-        $title = 'کفش مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productMaleSportsList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '1';
-        $catCode = 'sports';
-        $title = 'پوشاک ورزشی مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productMaleRhinestoneList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = '1';
-        $catCode = 'rhinestone';
-        $title = 'بدلیجات مردانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productGirlList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('12', '2')
-            ->paginate(10);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '2')
-            ->groupBy('p.ID')
-            ->paginate(12);
-        $gender = '2';
-        $catCode = 'all';
-        $title = 'پوشاک دخترانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productBoyList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '3')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '3')
-            ->groupBy('p.ID')
-            ->paginate(12);
-        $gender = '3';
-        $catCode = 'all';
-        $title = 'پوشاک پسرانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productBabyGirlList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '4')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '4')
-            ->groupBy('p.ID')
-            ->paginate(12);
-        $gender = '4';
-        $catCode = 'all';
-        $title = 'پوشاک نوزادی دخترانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productBabyBoyList()
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('GenderCode', '5')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '5')
-            ->groupBy('p.ID')
-            ->paginate(12);
-        $gender = '5';
-        $catCode = 'all';
-        $title = 'پوشاک نوزادی پسرانه';
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function productSearch($val)
-    {
-        $output = '';
-        $data = DB::table('product as p')
-            ->select('p.Name', 'p.Model', 'p.Brand','pd.ID','pd.Size','p.ID as ProductID')
-            ->leftJoin('product_detail as pd','pd.ProductID','=','p.ID')
-            ->where('p.Name', 'like', '%' . $val . '%')
-            ->orWhere('p.Model', 'like', '%' . $val . '%')
-            ->orWhere('p.Brand', 'like', '%' . $val . '%')
-            ->orWhere('pd.ID', 'like', '%' . $val . '%')
-            ->groupBy('ID')
-            ->take(15)
-            ->get();
-
-        if(count($data)===1){
-            $result = $data[0]->Name . ' ' . $data[0]->Model . ' ' . $data[0]->Brand;
-            $output .= '<li style="border-radius: 0 !important;"
-                        class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover uniqueProduct">
-                            <a  href="' . route('productDetail', [$data[0]->ProductID, $data[0]->Size])  . '"
-                                style="text-decoration: none"
-                                class="col-12 p-0 text-right g-color-gray-dark-v3 g-color-primary--hover">
-                             ' . $result . '
-                            </a>
-                        </li>';
-
-            return $output;
-        } else {
-
-            foreach ($data as $key => $row) {
-                $result = $row->Name . ' ' . $row->Model . ' ' . $row->Brand;
-                $output .= '<li style="border-radius: 0 !important;"
-                        class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
-                            <a  href="' . route('productSearchList', [$row->Name]) . '"
-                                style="text-decoration: none"
-                                class="col-12 p-0 text-right g-color-gray-dark-v3 g-color-primary--hover">
-                             ' . $result . '
-                            </a>
-                        </li>';
-            }
-        }
-
-        return $output;
-    }
-
-    public function productSearchList($val)
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('Name', 'like', '%' . $val . '%')
-            ->orWhere('Model', 'like', '%' . $val . '%')
-            ->orWhere('Brand', 'like', '%' . $val . '%')
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('Name', 'like', '%' . $val . '%')
-            ->orWhere('Model', 'like', '%' . $val . '%')
-            ->orWhere('Brand', 'like', '%' . $val . '%')
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = 'all';
-        $catCode = 'all';
-        $title = $data[0]->Name . ' ' . $data[0]->Gender;
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function spacialSelling($minDiscount, $maxDiscount)
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->whereBetween('Discount', [$minDiscount, $maxDiscount])
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->whereBetween('Discount', [$minDiscount, $maxDiscount])
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        $gender = 'all';
-        $catCode = 'all';
-        $title = 'قیمت بین ' . $minDiscount . ' تا ' . $maxDiscount;
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function product($gender, $cat, $catCode, $title)
-    {
-        session_start();
-        $_SESSION['listSkip'] = 0;
-
-        $data = DB::table('product')
-            ->select('*')
-            ->where('genderCode', $gender)
-            ->where('Cat', $cat)
-            ->paginate(12);
-
-        $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('genderCode', $gender)
-            ->where('Cat', $cat)
-            ->groupBy('p.ID')
-            ->paginate(12);
-
-        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
-    }
-
-    public function aboutMe()
-    {
-        return view('Customer.AboutMe');
-    }
-
-// ----------------------------------------------[ Instagram ]----------------------------------------------------------
-    public function instagram()
-    {
-        return view('Customer.Instagram');
-    }
-
-    public function requestPdId(Request $request)
-    {
-        $data = DB::table('product_detail')
-            ->where('ID', $request->get('pdId'))
-            ->first();
-
-        if (isset($data->ID))
-            return redirect()->route('productDetail', [$data->ProductID, $data->Size]);
-        else
-            return redirect()->route('instagram')->with('error', 'find');
-
-    }
-
-// --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
-    public function newOrder($data,$Authority)
-    {
-        $seller=[];
-        $orderID='';
-        foreach ($data as $step => $record) {
-            $customerInfo = DB::table('customers as c')
-                ->select('ca.*')
-                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
-                ->where('c.id', Auth::user()->id)
-                ->first();
-
-            $productInfo = DB::table('product_detail as pd')
-                ->select('pd.*', 'p.SellerID', 'p.ID', 'pd.ID as productDetailId', 'p.FinalPrice')
-                ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
-                ->where('pd.ID', $record->ProductDetailID)
-                ->first();
-
-            date_default_timezone_set('Asia/Tehran');
-            $date = date('Y-m-d');
-            $time = date('H:i:s');
-            if ($step === 0) {
-                DB::table('product_order')->insert([
-                    'CustomerID' => Auth::user()->id,
-                    'AddressID' => $customerInfo->ID,
-                    'Date' => $date,
-                    'Time' => $time,
-                    'Authority' => $Authority,
-                ]);
-            }
-
-            $orderID = DB::table('product_order')
-                ->select('ID')
-                ->max('ID');
-
-            DB::table('product_order_detail')->insert([
-                'SellerID' => $productInfo->SellerID,
-                'ProductID' => $productInfo->ProductID,
-                'ProductDetailID' => $record->ProductDetailID,
-                'OrderID' => $orderID,
-                'Qty' => $record->Qty,
-                'Size' => $productInfo->Size,
-                'Color' => $productInfo->Color,
-                'OrderBankCode' => '3#$ddf3e3continue3',
-            ]);
-
-            $orderDetailID = DB::table('product_order_detail')
-                ->select('ID')
-                ->max('ID');
-
-            $deliveryMan = DB::table('delivery_men')
-                ->select('*')
-                ->get();
-
-            $delivery = DB::table('product_delivery')
-                ->select('DeliveryManID')
-                ->get();
-
-            if ($delivery->isEmpty() || $delivery->count() < 2) {
-                DB::table('product_delivery')->insert([
-                    'OrderDetailID' => $orderDetailID,
-                    'DeliveryManID' => $deliveryMan[0]->ID,
-                ]);
-            } else {
-                $delivery = DB::table('product_delivery')
-                    ->select('DeliveryManID')
-                    ->orderBy('id', 'desc')
-                    ->take($deliveryMan->count() - 1)
-                    ->get();
-
-                $DeliveryManIDArr = array();
-                foreach ($delivery as $key => $row) {
-                    $DeliveryManIDArr[$key] = $row->DeliveryManID;
-                }
-
-                $deliveryManTurn = '';
-                foreach ($deliveryMan as $key => $row) {
-                    if (in_array($row->ID, $DeliveryManIDArr, true))
-                        continue;
-                    else {
-                        $deliveryManTurn = $row->ID;
-                        break;
-                    }
-                }
-
-                DB::table('product_delivery')->insert([
-                    'OrderDetailID' => $orderDetailID,
-                    'DeliveryManID' => (int)$deliveryManTurn,
-                ]);
-            }
-
-            DB::table('product_cart')
-                ->where('CustomerID', Auth::user()->id)
-                ->where('ProductDetailID', $record->ProductDetailID)
-                ->delete();
-
-            $seller[$step] = DB::table('sellers')
-                ->select('id', 'Mobile')
-                ->where('id', $productInfo->SellerID)
-                ->first();
-
-        }
-
-        foreach ($data as $row){
-            DB::table('product_order_temporary')
-                ->where('ID', $row->ID)
-                ->delete();
-        }
-        $seller=array_map("unserialize", array_unique(array_map("serialize", $seller)));
-        //--------------
-        try {
-            $token = $orderID;
-            $token2 = '';
-            $token3 = '';
-            Session::put('token', $token);
-
-            $api_key = Config::get('kavenegar.apikey');
-            $var = new Kavenegar\KavenegarApi($api_key);
-            $template = "factorSmsCustomer";
-            $type = "sms";
-
-            $result = $var->VerifyLookup(Auth::user()->Mobile, $token, $token2, $token3, $template, $type);
-        } catch (\Kavenegar\Exceptions\ApiException $e) {
-            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
-            echo $e->errorMessage();
-        } catch (\Kavenegar\Exceptions\HttpException $e) {
-            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-            echo $e->errorMessage();
-        }
-        //--------------
-
-        foreach ($seller as $rec){
-            try {
-                $token = $orderID;
-                $token2 = '';
-                $token3 = '';
-
-                Session::put('token', $token2);
-
-                $api_key = Config::get('kavenegar.apikey');
-                $var = new Kavenegar\KavenegarApi($api_key);
-                $template = "factorSmsSeller";
-                $type = "sms";
-
-                $result = $var->VerifyLookup($rec->Mobile, $token, $token2, $token3, $template, $type);
-            } catch (\Kavenegar\Exceptions\ApiException $e) {
-                // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
-                echo $e->errorMessage();
-            } catch (\Kavenegar\Exceptions\HttpException $e) {
-                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
-                echo $e->errorMessage();
-            }
-        }
-        //--------------
-        //--------------
-
-        return true;
-    }
-
-    //  Convert Date to Iranian Calender
-    public function convertDateToPersian($d)
-    {
-        if ($d === 0)
-            return 0;
-        else
-            $da = new DateTime($d);
-
-        $day = $da->format('d');
-        $mon = $da->format('m');
-        $year = $da->format('Y');
-
-        // Convert Date to Iranian
-        return Verta::getJalali($year, $mon, $day);
-    }
-
-    //  Minutes Passed of Spacial Time
-    public function dateLenToNow($date, $time)
-    {
-        $orderDateTime = $date . ' ' . $time;
-        $today = new DateTime('Asia/Tehran');
-        $result = $today->format('Y-m-d H:i:s');
-        $datetime1 = strtotime($orderDateTime);
-        $datetime2 = strtotime($result);
-        $interval = abs($datetime2 - $datetime1);
-        $minutes = round($interval / 60);
-
-        return (int)$minutes;
-    }
-
-    //    how past Days of Current Days
-    public function howDays($day)
-    {
-        switch (true) {
-            case  ($day < 55):
-                return 'لحضاتی پیش';
-                break;
-            case  (($day > 55) && ($day < 65)):
-                return 'یک ساعت پیش';
-                break;
-            case  (($day > 65) && ($day < 130)):
-                return 'دو ساعت پیش';
-                break;
-            case  (($day > 130) && ($day < 1440)):
-                return 'امروز';
-                break;
-            case  (($day > 1440) && ($day < 2880)):
-                return 'یک روز پیش';
-                break;
-            case  (($day > 2880) && ($day < 4320)):
-                return 'دو روز پیش';
-                break;
-            case  (($day > 4320) && ($day < 5760)):
-                return 'سه روز پیش';
-                break;
-            case  (($day > 5760) && ($day < 7200)):
-                return 'چهار روز پیش';
-                break;
-            case  (($day > 7200) && ($day < 8640)):
-                return 'پنج روز پیش';
-                break;
-            case  (($day > 8640) && ($day < 10080)):
-                return 'شش روز پیش';
-                break;
-            case  (($day > 10080) && ($day < 11520)):
-                return 'یک هفته پیش';
-                break;
-            default :
-                break;
-        }
-    }
-
-    public function month($mon)
-    {
-        switch ($mon) {
-            case 1:
-                return 'فروردین';
-            case 2:
-                return 'اردیبهشت';
-            case 3:
-                return 'خرداد';
-            case 4:
-                return 'تیر';
-            case 5:
-                return 'مرداد';
-            case 6:
-                return 'شهریور';
-            case 7:
-                return 'مهر';
-            case 8:
-                return 'آبان';
-            case 9:
-                return 'آذر';
-            case 10:
-                return 'دی';
-            case 11:
-                return 'بهمن';
-            case 12:
-                return 'اسفند';
-            default:
-                return false;
-        }
-
-    }
-}
+فروشنده عزیز،
+در راستای اجرای بهینه قرارداد فی مابین و تسهیل ارائه خدمات بهتر به مشتریان، قرارداد همکاری با دیجی‌کالا به صورت الکترونیک در اختیار شما قرار گرفته و در صورت مطالعه و تایید شما، از لحاظ قانونی الزام آور می باشد.
+
+دیجی‌کالا حق تغییر مفاد قرارداد را در هر زمانی داشته و این تغییرات و همچنین اطلاعیه ها و ابلاغیه ها توسط دیجی‌کالا در پنل فروشندگان اعلام می شود که به منزله ی ابلاغ به فروشنده می باشد. فروشندگان متعهد هستند تمامی اطلاعیه ها را با دقت مطالعه نموده و طبق آن عمل نمایند. تغییرات به طور خودکار روی پنل اختصاصی فروشنده قرار گرفته و به منزله ی اصلاحیه و الحاقیه قرارداد محسوب شده و فروشنده متعهد به رعایت مقررات به روز شده می باشد و نیاز به هیچگونه تشریفات دیگری جهت امضا و ابلاغ نمی باشد.
+
+لطفا توجه فرمایید که عدم پذیرش قرارداد همکاری به منزله عدم تمایل شما به همکاری با دیجی‌کالا تلقی شده و تا زمان پذیرش قرارداد امکان استفاده از پنل فروشندگان برای شما میسر نمی باشد.
+
+مقدمه
+
+شرکت نوآوران فن آوازه در راستای رسالت خود در جهت حمایت از بنگاههای اقتصادی کوچک، توسعه کارآفرینی و بهبود فضای کسب و کار مجازی، در تاریخ 1401/04/25  مطابق مواد 10 و 219  قانون مدنی، بر اساس تعامل مشترک و حسن نیت و مفاد ذیل اقدام به انعقاد قرارداد می نماید.
+
+ماده 1. طرفین قرارداد
+
+شرکت نوآوران فن آوازه (سهامی خاص) به شماره ثبت 433845 و شناسه ملی 10320845857 و نشانی اینترنتی www.digikala.com ، با نمایندگی جناب آقای سعید محمدی (به موجب صورتجلسه هیات مدیره شرکت نوآوران فن آوازه  و اعطای حق امضای قراردادها به نائب رئیس هیئت مدیره) که از این پس در این قرارداد به اختصار «دیجی‌کالا» نامیده می‏شود و
+
+طرف دوم:
+
+آقا/خانم: یونس اندیمه
+
+شماره شناسنامه:  6452
+
+کد ملی: 2872282556
+
+به نشانی: مجتمع تاناکورا خرده، کوچه گلستان، کوچه ساحل طبقه اول پلاک 1142
+
+کدپستی: 5915946263
+
+شماره تماس: 044-42340241
+
+نشانی الکترونیکی: nejat.andimeh@gmail.com
+
+که از این پس در این قرارداد «فروشنده» نامیده می‏شود.
+
+اقامتگاه قانونی و قراردادی فروشنده این قرارداد همان است که در مقدمه این قرارداد ذکر شده است و درصورتی که فروشنده نشانی خود به شرح فوق را تغییر دهد، باید حداقل 10 روز پیش از تغییر مراتب را کتباً به  طرف دیگر اطلاع دهد و تا آن زمان نشانی سابق واجد اعتبار است. اقامتگاه قانونی و قراردادی شرکت نوآوران فن آوازه همان است که در روزنامه رسمی آخرین تغییرات آن شرکت درج گردیده است. طرف مقابل موظف می باشد به هنگام ارسال هرگونه مکاتبه و یا مراوده ای، آخرین تغییرات روزنامه رسمی شرکت  نوآوران فن آوازه را ملاحظه نماید و آن آدرس را به عنوان اقامتگاه قانونی شرکت نوآوران فن آوازه لحاظ نماید.
+
+ماده 2. تعاریف
+
+2-1- کالای معیوب: عبارت است از هر گونه کالا یا هر بخش یا جزیی از آن که دارای ایراد، نقص، صدمه و یا دارای گارانتی غیر معتبر یا حسب مورد فاقد گارانتی، گواهی، مجوز یا پروانه هایی که قانونا جهت فروش آن کالا الزامی است باشد.
+
+2-2- کالای تقلبی یا غیراصل:
+
+کالاهای ذیل، کالای تقلبی یا غیراصل محسوب می شوند:
+
+کالایی که با برند یا مدل اصلی آن کالا از نظر نام متشابه اما از نظر اصالت متفاوت است و یا هرگونه کالایی که از نظر جعبه، بسته بندی، جنس، کیفیت و غیره با کالای اصلی که توسط مراکز مورد تایید که کالاهای اصل را به  فروش می رسانند (مانند سایت اصلی برند یا شرکت های وارد کننده ی قانونی) مغایرت داشته باشد و همچنین در سایت دیجی‌کالا در عنوان یا تصاویر کالای نمایش داده شده، برند اصلی کالا ذکر شده ولی کالای فروخته شده با نمونه ی اصلی کالا مغایرت داشته باشد؛
+
+کالاهایی که در آنها شماره سریال، مدل، برچسب یا سایر نشان‏های شناسایی و یا مشخصات کالا، قطعات و اجزای آنها و یا بسته ­بندی یا هرگونه نوشته‏ای در روی آنها بطور غیرمجاز از جانب تولیدکننده، توزیع­ کننده یا فروشنده کالا و یا هر شخص دیگر، محو، تغییر، جایگزین و یا به هر شکلی دستکاری شده باشند؛
+
+کالاهای مغایر با مقررات قوانین و مقررات و ضوابط و استانداردهای دولتی،عمومی و صنفی به ویژه مقررات بهداشتی؛
+
+کالاهای ناقض حقوق اشخاص ثالث از جمله حقوق مالکیت فکری.
+
+2-3- کالای قاچاق: کالایی است که دارای مدارک و مستندات رسمی قابل ارائه دال بر ورود و ترخیص آن از مبادی قانونی و گمرک رسمی کشور نبوده یا هر کالایی که وفق قوانین و مقررات جاری کشور از جمله تبصره ماده 19 قانون مالیات بر ارزش افزوده، قاچاق محسوب شود.
+
+2-4- بازار آنلاین و بازار آفلاین: بازار آنلاین بازاری است که در آن کالا در بستر اینترنت و به صورت برخط (آنلاین)، عرضه می شود و به فروش می­رسد. بازار آفلاین بازاری است که در آن، کالا مستقل از اینترنت و به  صورت سنتی در فروشگاه ها و مراکز توزیع عرضه می شود و به فروش می­رسد.
+
+2-5- پنل سلر سنتر (Seller Center Panel): فضای مجازی با درگاه اختصاصی هر فروشنده است که از سوی دیجی‌کالا به فروشنده برای عرضه و فروش کالا تخصیص داده می شود.
+
+2-6- درگاه اینترنتی: وب سایت دیجی‌کالا به آدرسwww.digikala.com  می باشد.
+
+2-7- گارانتی معتبر: گارانتی معتبر آن است که توسط سازمان حمایت از حقوق مصرف کنندگان شناسایی شده و دارای مجوزهای قانونی مربوطه باشد.
+
+2-8- پنل DKMS: پنل پروموشن یا Digikala Marketing Solution، فضای مجازی با درگاه اختصاصی هر فروشنده است که از سوی دیجی‌کالا به فروشنده برای ساخت یا شرکت در پروموشن تخصیص داده می شود.
+
+2-9- دیجی‌کالا: شرکت نوآوران فن آوازه (سهامی خاص) به شماره ثبت 433845 و شناسه ملی 10320845857و نشانی اینترنتی www.digikala.com.
+
+2-10- فروشنده: هر شخصی است که با تایید این قرارداد به شرح پیوست نسبت به فروش محصولات و کالاهای خود از طریق درگاه اینترنتی اقدام می نمایید.
+
+2-11- قرارداد: قرارداد همکاری منعقده بین دیجی‌کالا و فروشنده، بر اساس شرایط این قرارداد حاضر و به شرح پیوست است.
+
+ماده 3. موضوع قرارداد
+
+عبارت است از واسطه گری در فروش محصولات و کالاهای فروشنده به خریداران از طریق در اختیار قرار دادن درگاه اینترنتی.
+
+ماده 4. مدت قرارداد
+
+از تاریخ 1401/04/25 تا 1401/12/29 (تا پایان سال جاری) می باشد.
+
+تبصره 1: این قرارداد در پایان مدت برای مدت مشابه بصورت خود به خود به مدت یک سال تمدید خواهد شد مگر اینکه یکی از طرفین حداقل یک هفته قبل از انقضاء مدت عدم تمایل خود را نسبت به تمدید به طرف دیگر اعلام نماید. در صورت عدم اعتبار یا اتمام گواهی ارزش افزوده در زمان مشخص و مقرر تمدید نشده و فروشنده امکان فروش از طریق پنل را نداشته و به تشخیص دیجی‌کالا پرداخت های فروشنده متوقف خواهد شد.
+
+ماده 5. کمیسیون و هزینه های فروش
+
+5-1- کمیسیون دیجی‌کالا: درصدی از بهای فروش کالا است که بابت عرضه کالا در درگاه اینترنتی دیجی‌کالا و به شرح مندرج در جدول کمیسیون ها در پنل فروشنده به دیجی‌کالا تعلق می گیرد. نظر به اینکه درصد مذکور پیش از درج کالا در پنل برای فروشنده قابل رویت است، فروشنده با ثبت و یا درج کالا در پنل، درصد مذکور را نیز به عنوان حق الزحمه و کمسیون دیجی‌کالا تائید می کند و می پذیرد. دیجی‌کالا می تواند نسبت به وصول کمیسیون خود از محل مطالبات فروشنده به همراه مالیات بر ارزش افزوده متعلقه اقدام نماید.
+
+5-2- هزینه های جانبی مربوط به خدمات تبلیغاتی، تولید محتوا و تصویربرداری برای کالا، استفاده از پنل مخصوص مشتریان، هزینه های مرجوعی، هزینه چاپ لیبل در انبارهای دیجی‌کالا (در صورت ارسال محموله بدون لیبل یا با لیبل ناخوانا به انبار)، همچنین جریمه ها (بر اساس ضوابط کاری دیجی‌کالا به شرح مندرج در این قرارداد و نیز ضوابط مندرج در پنل سلر سنتر) و هزینه های جانبی مربوط به همه مراحل بسته بندی، ارسال کالا به انبار دیجی‌کالا (از قبیل بیمه، حمل و سایر هزینه های مربوطه)، انبار داری و ارسال کالا برای مشتری (بر اساس ضوابط کاری دیجی‌کالا)، به شرح مندرج در جدول هزینه ها به همراه مالیات بر ارزش افزوده متعلقه به عهده فروشنده بوده و از فروشنده دریافت خواهد شد.
+
+تبصره 2: امکان تغییر کمیسیون، هزینه ها و جریمه ها در هر زمان توسط دیجی‌کالا در پنل سلر سنتر وجود دارد و فروشنده قادر به مشاهده سوابق تغییرات آن خواهد بود. تغییرات در کمیسیون، هزینه ها و جریمه ها دو روز قبل از اعمال از طریق پنل سلر سنتر یا ایمیل به اطلاع فروشنده خواهد رسید و ادامه روند فروش توسط فروشنده پس از اعمال تغییرات به منزله پذیرش شرایط جدید است و درحکم اصلاحیه این قرارداد است که خود به خود با ادامه روند فروش مورد توافق طرفین قرار گرفته است و نیاز به تشریفات امضا و ابلاغ جداگانه ای برای لازم الاجرا بودن ندارد.
+
+تبصره 3: فروشنده متعهد شد جهت آگاهی از هرگونه تغییرات، هر روز پنل سلر سنتر خود را مشاهده کند و دیجی‌کالا هیچگونه مسئولیتی نسبت به ادعای عدم آگاهی فروشنده از تغییرات نداشته و فروشنده ملزم به تبعیت از تغییرات است. هرگونه اصلاحیه یا الحاقیه یا تغییر از جمله تغییرات در هزینه ها و جریمه ها، در پنل فروشنده قرار خواهد گرفت و اطلاعیه از طریق پنل یا پست الکترونیک فروشنده به نشانی مندرج در پنل ارسال خواهد شد. تغییرات فوق ظرف دو روز از تاریخ ارسال اطلاعیه و تغییرات پنل لازم الاجرا خواهد بود مگر اینکه فروشنده ظرف مهلت مذکور عدم موافقت خود را اعلام نموده باشد، که در اینصورت  قرارداد فسخ خواهد شد.
+
+ماده 6. نحوه اجرای قرارداد
+
+6-1- قراردادها متناسب با مدت مندرج در آن به صورت اتوماتیک تمدید می شود. در صورت عدم تمایل هریک از طرفین مبنی بر تمدید اتوماتیک قرارداد، مراتب باید از یک هفته قبل از انقضا به صورت کتبی به طرف دیگر اعلام گردد. در صورت عدم اعتبار گواهی ارزش افزوده قرارداد تمدید نشده و فروشنده امکان فروش از طریق پنل را نداشته و به تشخیص دیجی‌کالا پرداخت های فروشنده متوقف خواهد شد.
+
+6-2- سفارشات خرید مشتری، با توجه به موجودی اختصاص داده شده توسط فروشنده در پنل سلر سنتر، برای وی قابل  رؤیت است و فروشنده موظف است سفارشات ثبت شده را با توجه به ضوابط و زمان تعیین شده در پنل خود، به صورت محموله آماده، در لفاف مناسبی بسته بندی کرده و به انبار دیجی‌کالا یا نشانی مشتری در صورت تأیید دیجی‌کالا در پنل، ارسال نماید. نشانی انبار دیجی‌کالا به فروشنده اعلام خواهد شد و در صورتیکه نشانی اعلام شده تغییر یابد دیجی‌کالا به فروشنده اعلام خواهد کرد و فروشنده مکلف به تبعیت از تغییرات بعدی است.
+
+6-3- نگهداری کالای مشتریان در انبار دیجی‌کالا به صورت امانی بوده و غیر از تعدی یا تفریط، مسئولیتی متوجه دیجی‌کالا نمی باشد. هزینه نگهداری وفق جدول مندرج در پنل محاسبه و از فروشنده دریافت می شود. دیجی‌کالا می­تواند کلیه مطالبات خود ناشی از این بند یا سایر مفاد این قرارداد را راساً از محل مطالبات فروشنده کسر نماید و یا طبق تبصره 9 ماده 10 عمل نماید. در هر صورت حق مطالبه مابقی و یا کلیه ی هزینه ها و مطالبات دیجی‌کالا از طریق مراجع قضایی برای دیجی‌کالا وجود دارد.
+
+6-4- این قرارداد حق انحصاری جهت فروش برای فروشندگان ایجاد نمی نماید و هیچ گونه اعتراضی نسبت به فروش کالا و نیز بهای کالاهای در حال فروش توسط فروشندگان دیگر، قابل استماع نمی باشد.
+
+6-5- وجه ناشی از فروش کالا توسط خریدار به حساب دیجی‌کالا واریز می­شود و مسئولیت صدور فاکتور فروش و سند برگشت از فروش برای مشتری مطابق بخشنامه سازمان امور مالیاتی و رای دفتر فنی و اعتراضات مودیان بر عهده دیجی‌کالا است که دیجی‌کالا مطابق رای دفتر فنی و اعتراضات مودیان برای کالای فروش رفته به نیابت از فروشنده، فاکتور فروش موضوع قانون مالیات های مستقیم را صادر و برای مشتری ارسال می نماید و نیز صورت حساب خدمات ارائه شده از سوی دیجی‌کالا به فروشنده، توسط دیجی‌کالا به نام فروشنده صادر می شود. دیجی‌کالا درآمدهای حاصل از ارائه خدمات خود به فروشنده و قراردادهای منعقده با فروشنده را جهت رعایت مفاد مواد 169 و 169 مکرر قانون مالیات های مستقیم، به سازمان امور مالیاتی گزارش خواهد کرد. در صورتی که فروشنده به اطلاعات طرف حساب جهت صدور فاکتور نیاز داشته باشد، باید از ابتدای سال مالی 1398 فاکتورهای خود را به نام نوآوران فن آوازه و بابت سال مالی 97 به نام نوآوران بازار مجازی ایرانیان صادر کند.
+
+6-6- با تایید این قرارداد فروشنده به شرکت نوآوران فن آوازه (دیجی‌کالا) مخیرا وکالت می دهد که جهت رضایتمندی خریداران، نیابتا از طرف فروشنده اقدام به صدور فاکتور در خصوص اقلامی که توسط فروشنده در فضای مجازی مذکور به فروش می رسد نماید. لازم به ذکر است که فروشنده کلیه ی مسئولیت های ناشی از صدور فاکتور مذکور و فروش کالا بر روی وبسایت شرکت نوآوران فن آوازه (دیجی‌کالا) را بر عهده داشته و در صورت لزوم، متعهد به حضور و پاسخگویی در مراجع اداری و قضایی بوده و همچنین ضامن جبران خسارات وارده به اشخاص ثالث و دیجی‌کالا می باشد و شرکت دیجی‌کالا در خصوص موارد فوق فاقد هرگونه مسئولیتی می باشد.
+
+6-7- قیمت کالاها با توجه به رعایت استانداردهای قیمت گذاری (با توجه به قوانین و مقرارات اعلامی از طرف سازمانهای نظارتی و یا لیست قیمت مصوب مورد تایید اتحادیه ها و یا سازمان های مرتبط و همچنین قوانین قیمت گذاری دیجی‌کالا) در پنل سلر سنتر و در پنل DKMS، توسط و به مسئولیت فروشنده تعیین می شود. لذا مسئولیت پاسخگویی به مراجع رسمی و اشخاص ثالث از جمله مشتری در خصوص قیمت تعیین شده، بر عهده فروشنده است. به موجب این قرارداد، فروشنده به عنوان شرط ضمن عقد اعلام می نمایند که نسبت به فروش کالاهای خود در درگاه اینترنتی دیجی‌کالا کلیه خیارات از جمله غبن ولو فاحش یا افحش را از خود سلب و ساقط نمودند.
+
+6-8- در صورتی که فروشنده مشمول مالیات بر ارزش افزوده بوده و دارای گواهینامه مالیات بر ارزش افزوده بارگذاری شده در پنل باشد، متعهد است در صورت پایان تاریخ اعتبار گواهینامه مذکور، نسبت به تمدید آن و بارگذاری نسخه معتبر در پنل اقدام نماید. درصورت عدم بارگذاری گواهینامه مالیات بر ارزش افزوده معتبر تا قبل از پایان تاریخ اعتبار گواهینامه قبلی، پرداخت های فروشنده از تاریخ پایان اعتبار گواهینامه مسدود خواهد شد تا زمانی که فروشنده گواهینامه معتبر در پنل بارگذاری کند. لازم به ذکر است که فروشنده ای که مشمول مالیات بر ارزش افزوده باشد، پس از اتمام اعتبار گواهینامه مالیات بر ارزش افزوده همچنان مشمول مالیات ارزش افزوده بوده و با تمدید گواهینامه، تاریخ آغاز گواهی جدید از تاریخ مشمولیت شخص حقیقی یا حقوقی خواهد بود. در صورت عدم تمدید گواهینامه مالیات بر ارزش افزوده و لغو قرارداد از سمت فروشنده یا دیجی‌کالا، 9 درصد مالیات بر ارزش افزوده از حساب فروشنده کسر شده و مابقی پس از کسر وجوه التزام و خسارات به ایشان پرداخت خواهد شد.
+
+6-9- در صورت اشتباه فروشنده و درج قیمت به بهای پایین­­تر از قیمت واقعی، وی متعهد است کالا را با همان قیمت درج شده تحویل مشتری نماید و در صورت استنکاف، مشمول وجه التزام و ضمانت اجرای مذکور در ماده 9 در خصوص عرضه کالای ناموجود می­شود. درهر حال پاسخگویی به خریدار در مراجع رسمی به عهده فروشنده است.
+
+6-10- فروشنده اظهار می ­نماید که با عرضه کالا در پنل اختصاصی خود در درگاه اینترنتی دیجی‌کالا، حقوق مالکیت فکری یا سایر حقوق و امتیازات مکتسبه متعلق به هیچ شخص حقیقی و حقوقی دیگری را نقض نکرده است و در صورت کشف خلاف این موضوع، کلیه مسئولیت های حقوقی و کیفری بر عهده وی خواهد بود و باید کلیه خسارات وارده به دیجی‌کالا را در این خصوص جبران نماید.
+
+6-11- نام تجاری فروشنده جهت درج در سایت، نام تجاری اعلامی از طرف فروشنده در پنل او می­باشد و فروشنده در این راستا اظهار می نماید مالکیت مادی و معنوی نام تجاری مذکور متعلق به شخص حقیقی و حقوقی دیگری نیست و در صورت کشف خلاف این موضوع، کلیه مسئولیت های حقوقی و کیفری بر عهده فروشنده خواهد بود. در صورتی که فروشنده ظرف مدت 3 روز از اعلام دیجی‌کالا مبنی بر مراجعه جهت پاسخگویی به مراجع مربوطه مراجعه ننماید، موظف به پرداخت وجه التزام روزانه (طبق ماده 9) به دیجی‌کالا می باشد.
+
+ماده 7. تعهدات و حقوق فروشنده
+
+7-1- فروشنده متعهد است مدارک درخواست شده در خصوص احراز هویت و مدارک موثق و معتبر ثبتی و نیز گواهینامه­های صنفی، حرفه ای، بهداشتی (در صورت لزوم)، استاندارد و سایر مدارک به شرح پنل را بارگذاری و در صورت لزوم آن­ها را به روزرسانی نماید. عدم بارگذاری یا به روزرسانی اسناد به طور صحیح، علاوه بر ایجاد حق فسخ برای دیجی‌کالا (پس از اخطار رفع نقص) این حق را برای دیجی‌کالا ایجاد می­کند که کلیه پرداخت ها را تا زمان رفع نواقص مدارک معلق و دسترسی فروشنده را به پنل سلر سنتر قطع نماید.
+
+7-2- فروشنده حقیقی می­تواند همزمان با انعقاد این قرارداد، شخصی را به عنوان نماینده خود جهت ارتباط و هماهنگی با دیجی‌کالا معرفی نماید.
+
+7-3- فروشنده حقوقی موظف است همزمان با انعقاد این قرارداد، شخصی را به عنوان نماینده خود جهت ارتباط و هماهنگی با دیجی‌کالا معرفی نماید.
+
+7-4- فروشنده متعهد به رعایت تمامی اصول و مقررات قانون رقابت و شرایط خاص صنفی مرتبط با فعالیت خود می باشد.
+
+7-5- فروشنده موظف است مشخصات محصولات و توضیحات لازم جهت معرفی کالا، نحوه پشتیبانی پس از فروش و سایر موارد لازم را در درگاه اینترنتی براساس شرایط اعلامی دیجی‌کالا ارائه نماید. فروشنده مسئولیت صحت اطلاعات و تضمین اصالت و کیفیت خدمات را شخصاً بر عهده دارد و بدین وسلیه متعهد گردید در قبال تخلفات خود علاوه بر حضور در مراجع رسمی و پاسخگویی، دیجی‌کالا را در قبال مسئولیت و هزینه هرگونه دعوای طرح شده توسط ثالث مصون نماید.
+
+7-6- فروشنده متعهد می­شود که کالاهای مورد درخواست مشتری را بدون وقفه و در موعد مقرر ارسال نماید، و به هیچ دلیلی اعم از نوسانات نرخ ارز، عدم موجودی، اشتباه در مشخصات و غیره از تحویل آن استنکاف نورزد. در غیر این صورت دیجی‌کالا ­می تواند بنا به تشخیص خود، خسارات ناشی از تأخیر در اجرای تعهدات را (براساس ماده 9) از فروشنده مطالبه و یا از محل مطالبات وی کسر و برداشت نماید. علاوه بر این دیجی‌کالا می تواند اقدام به قطع همکاری کند. قطع همکاری نافی حقوق قراردادی دیجی‌کالا درخصوص محاسبه و کسر جرائم و تاخیرات از محل مطالبات و تضامین فروشنده نمی­باشد.
+
+7-7- از آنجا که طبق مقررات قانون تجارت الکترونیک، فروشنده متعهد به رعایت مهلت هفت روزه جهت انصراف مشتری و استرداد کالا می­باشد، فروشنده با تایید تعهدات ناشی از مقررات موصوف و سایر مقررات مربوط به این نوع تجارت، متعهد می­باشد کالاهای مرجوعی را بپذیرد. مسئولیت هرگونه تخلف از این مقررات با فروشنده بوده و فروشنده متعهد به پاسخگویی به دعاوی می­باشد. حتی اگر مشتریان به هر دلیل دعاوی خود را در خصوص عدم رعایت موازین قانونی علیه دیجی‌کالا طرح کنند و تحت هر شرایطی دیجی‌کالا به دلیل عملکرد مرتبط با فروشنده منفرداً یا متضامناً محکوم گردید، فروشنده موظف است علاوه بر حضور در مراجع رسمی و پاسخگویی دیجی‌کالا را درخصوص موضوعات قضائی و هزینه­ها و خسارات آن مصون نماید و این هزینه­ها را مسترد نماید.
+
+7-8- فروشنده در صورت اعلام مشتری مبنی بر عیب، کاستی یا نقص کالا، متعهد به اجرای صحیح تعهدات و پاسخگویی به مشتری و جلب رضایت وی بر اساس نظر دیجی‌کالا است و در صورت درخواست مشتری نسبت به جایگزین کردن یا رفع نقص آن، ظرف مدت 2 روز کاری اقدام نماید. چنانچه فروشنده ظرف مدت مذکور اقدام لازم را معمول نداشته یا مشتری با پس دادن کالا تقاضای استرداد وجه را داشته باشد، دیجی‌کالا نسبت به عودت وجه به مشتری اقدام می نماید و فروشنده بدینوسیله حق هرگونه اعتراض نسبت به استرداد وجه به مشتری و عدم استرداد کالا از سوی خریدار را از خود سلب و ساقط می­نماید. فروشنده می­پذیرد هزینه ناشی از استرداد کالاهای معیوب یا ناقص توسط مشتری، از مطالبات فروشنده کسر و توسط دیجی‌کالا برداشت خواهد شد.
+
+7-9- فروشنده اعلام و اقرار می نماید مالک قانونی کالاهای معرفی شده بوده و مالک قطعی آنها است و در خصوص شکایات اشخاص ثالث نسبت به کالاهای اضافه شده در وب سایت را شخصا به عهده گرفته و کلیه مسئولیت های قضایی و قانونی و پاسخگویی به مشتری و سایر اشخاص و مراجع ذی صلاح را بر عهده می گیرد. فروشنده ضمن تضمین موارد فوق، بدینوسیله می­پذیرد که در صورت تخلف، دیجی‌کالا می­تواند ضمن قطع فوری دسترسی فروشنده به پنل، نسبت به فسخ  قرارداد اقدام نماید و فروشنده حق هرگونه اعتراضی را از خود سلب و ساقط می نماید.
+
+7-10- فروشنده متعهد می شود که هیچ گونه کالای تقلبی یا غیراصل را به عنوان کالای اصل در سایت درج نکرده و تحویل مشتری ندهد. در غیر این صورت فروشنده موظف است مطابق ماده 9، هرگونه وجه التزام عدم انجام تعهد را به دیجی‌کالا پرداخت نماید و در این صورت، دیجی‌کالا می­تواند ضمن قطع فوری دسترسی فروشنده به پنل، نسبت به فسخ قرارداد اقدام نماید و فروشنده بدینوسیله حق هرگونه اعتراضی را از خود سلب و ساقط می نماید.
+
+7-11- فروشنده تضمین می‏کند که اولاً تنوع، تعداد، قیمت، کیفیت، مشخصات و عملکرد معمول کالاها به ترتیب اعلام شده در وب سایت اینترنتی است و کالاها با اطلاعات انتشار یافته در مورد آن ها کاملاً تطبیق دارد، ثانیاً کلیه کالاها به صورت سالم و بدن عیب وایراد تحویل داده خواهد شد، ثالثاً، کالاهای فروخته شده به هیچ عنوان کالاهای دست دوم (ریپک یا غیرآکبند)، مرجوعی (ریفرش) و یا مجددا فروخته شده نمی باشد. فروشنده مسئول جبران خسارات وارده و دعوای طرح شده از سوی مشتریان در خصوص موارد مذکور در این بند خواهد بود و مسئولیتی در این خصوص متوجه دیجی‌کالا نخواهد بود.
+
+7-12- فروشنده متعهد است نظر دیجی‌کالا را در مورد کاستی ها و نقایص بسته ­ها پذیرفته و اقدامات لازم را در خصوص رفع نقص ظرف مدت 24 ساعت به عمل آورد. در صورت عدم رفع نقص، فروشنده متعهد به جبران خسارات وارده به دیجی‌کالا و مشتری ( براساس ماده 9) حسب اعلام دیجی‌کالا و پرداخت خسارات ناشی از تأخیر در انجام تعهد است.
+
+7-13- فروشنده مطابق بخشنامه سازمان امور مالیاتی (موجود در پنل) نیازی به صدور صورتحساب فروش موضوع آئین نامه اجرایی ماده 95 قانون مالیات های مستقیم ندارد و فروش های صورت پذیرفته توسط دیجی‌کالا به نیابت از خود را در سامانه معاملات فصلی به نام نوآوران فن آوازه ارسال خواهد نمود.
+
+7-14- فروشنده موظف است در خصوص کالاهای ملزم به داشتن گارانتی، کالا را با گارانتی مجاز در پنل عرضه نماید. تاریخ شروع گارانتی از زمان صدور فاکتور توسط دیجی‌کالا آغاز می شود و فروشنده موظف است اعتبار گارانتی را از زمان فروش کالا محاسبه کند. در غیر اینصورت مسئولیت پاسخگویی به ادعاهای اشخاص ثالث (اعم از مشتری و سایر اشخاص و مراجع) را بر عهده دارد.
+
+7-15- فروشنده اعلام و اظهار می دارد که در زمان انعقاد این قرارداد، مشمول هیچ ممنوعیت قانونی برای انعقاد  قرارداد نمی­باشد و چنانچه در هر زمانی به هر دلیلی مشمول ممنوعیت قرار گرفت، متعهد به اعلام ممنوعیت قانونی خود جهت اخذ تصمیم مقتضی به دیجی‌کالا می باشد. در صورت عدم اعلام ممنوعیت، فروشنده مسئول عواقب قانونی آن و جبران خسارات وارده به اشخاص ثالث و دیجی‌کالا خواهد بود و دیجی‌کالا هیچ مسئولیتی نداشته و نخواهد داشت.
+
+7-16- اگر در جریان تحویل، قبول، استفاده یا دسترسی به کالاها، خسارت مالی یا آسیب و جراحات شخصی ناشی از تقصیر یا عدم مراقبت در تولید، بسته بندی یا تحویل کالا رخ دهد از جمله مواردی چون استاندارد پایین، معیوب یا مضر بودن اجزای تشکیل دهنده ی کالا، آلودگی کالا یا هرگونه قصور و تقصیر از ناحیه فروشنده، فروشنده در مقابل دیجی‌کالا، کارکنان و نمایندگان وی و خریدار و اشخاص ثالث مسئول جبران کلیه خسارات وارده خواهد بود.
+
+7-17- فروشنده متعهد است صرفاً کالاهای موجود در انبار را در پنل فروشنده اعلام نماید. معرفی کالای غیر موجود در پنل سلر سنتر به عنوان کالای موجود ممنوع بوده و فروشنده مسئول جبران خسارات وارده به دیجی‌کالا و مشتری و پاسخگویی حقوقی و کیفری در مقابل مراجع قضایی و قانونی خواهد بود. در این حالت دیجی‌کالا بنا به تشخیص خود علاوه بر اخذ وجه التزام قراردادی مندرج در ماده 9، راساً نسبت به قطع پنل فروشنده به فوریت اقدام خواهد نمود.
+
+7-18- فروشنده متعهد به حفظ محرمانگی نام کاربری و رمز عبور پنل سلر سنتر بوده و برای جلوگیری از هرگونه سوء استفاده احتمالی، کلیه اقدامات لازم از جمله تغییر رمز عبور در دوره­های متعارف و عدم افشای آن به اشخاص ثالث را مبذول خواهد داشت. بدیهی است مسئولیت هرگونه سهل انگاری در حفظ نام کاربری و رمز عبور، مسئولیت­های ناشی از استفاده از رمز عبور و به طور کل، کلیه ی فعالیت­هایی که تحت حساب کاربری و یا رمز عبور انجام می­پذیرد بر عهده فروشنده می­باشد. در صورت بروز هر گونه مشکل یا تخلف یا سوء استفاده اشخاص ثالث، فروشنده مسئول و پاسخگوی نهادها و مراجع ذیربط و جبران هرگونه خسارت احتمالی وارده است و باید در اسرع وقت نسبت به تغییر رمز عبور اقدام نماید. فروشنده موظف است هرگونه مشکل احتمالی را سریعاً به دیجی‌کالا اعلام نماید و جهت حل و فصل آن همکاری لازم را داشته باشد. در غیر اینصورت مسئولیت هرگونه سوء استفاده از پنل یا خسارات ناشی از آن بر عهده فروشنده است.
+
+7-19- فروشنده متعهد است مقررات لازم الاجرا علی الخصوص قانون تجارت الکترونیک و نظامات مختص این قانون (از جمله ارائه کالاهای سالم به مشتری، حفظ مهلت هفت روزه انصراف، ارائه اطلاعات دقیق و جامع در مورد کالای عرضه  شده در فضای مجازی) و قوانین و مقررات مالیاتی، صنفی، جرائم رایانه ای و مجازات اسلامی و نیز قوانین و مقررات تعزیرات و امور گمرکی و صادرات و واردات و مبارزه با قاچاق را رعایت نماید و همچنین تأیید می نماید که مجوزهای قانونی و توانایی های لازم را برای این فعالیت ها دارا می باشد. فروشنده ضمن آگاهی به این موضوع حق خود در خصوص هرگونه ادعای جبران خسارات را سلب و ساقط می نماید.
+
+7-20- فروشنده موظف است در درج محتوای کالا در پنل خود، کلیه ی مقررات و شئون اخلاقی، اسلامی و قانونی را رعایت نموده و بدینوسیله مسئولیت هرگونه پاسخگویی در این خصوص به مراجع ذی صلاح یا اشخاص ثالث را می­پذیرد.
+
+7-21- در صورت تخلف از هر یک از تعهدات مندرج در این قرارداد، فروشنده باید خسارات وارده به دیجی‌کالا را جبران نماید و با تایید این قرارداد می پذیرد در صورت بروز تخلف و عدم رعایت مفاد این قرارداد، دیجی‌کالا می­تواند به تشخیص خود راساً نسبت به قطع پنل اقدام نماید.
+
+7-22- مطالبات فروشنده خواه ناشی از این قرارداد، خواه ناشی از هر منشا دیگر، نزد دیجی‌کالا از جمله تضامین می­باشد و دیجی‌کالا می­تواند هر یک از مطالبات خویش، هزینه ها و خسارات را راسا از محل مطالبات وی یا هر یک از تضامین نزد خود وصول نماید.
+
+7-23- فروشنده حق واگذاری جزئی و کلی حقوق و تعهدات خود را به  موجب این قرارداد به اشخاص ثالث بدون موافقت کتبی و قبلی طرف دیگر، تحت هیچ عنوانی اعم از نمایندگی، وکالت، صلح حقوق و سایر عناوین نخواهد داشت و دیجی‌کالا حق واگذاری را برای خود محفوظ می دارد.
+
+7-24- فروشنده موظف است کالاهای خود را با برچسب گذاری صحیح تحویل دیجی‌کالا نماید. درصورتیکه کالا بدون برچسب مذکور به انبار دیجی‌کالا ارسال شود، کالا دریافت نخواهد شد و به هزینه فروشنده عودت می گردد. چنانچه کالا توسط شخصی به غیر از فروشنده (پست/پیک)، بدون برچسب گذاری صحیح  و مشخص بودن نام و نشانی فروشنده به هر علت به انبار دیجی‌کالا وارد شود، دیجی‌کالا مسئولیتی درقبال این نوع کالاهای بدون مشخصات و برچسب صحیح نخواهد داشت. پس از اعلام به فروشنده در صورت قابل شناسایی بودن، فروشنده موظف است کالاهای مذکور را به هزینه خود استرداد نماید و تا حداکثر 24 ساعت پس از اعلام دیجی‌کالا، کالای جدید با برچسب گذاری صحیح را به انبار دیجی‌کالا ارسال نماید.
+
+7-25- فروشنده نسبت به کالاهای عودت شده از سوی مشتریان، کالاهایی که شامل قوانین برگشت محصول هستند (از جمله معیوب و یا مغایر بودن مشخصات وب سایت و محصول) موظف به استرداد آن می باشد و اقدامات لازم نسبت به تحویل کالا از انبار دیجی‌کالا را ظرف مدت 5 روز پس از اعلام دیجی‌کالا به ایشان از طریق پنل یا پیامک (به شماره تماس اعلام شده از سوی فروشنده در این قرارداد) یا ایمیل (اعلام شده از سوی فروشنده در این قرارداد)، انجام دهد. تا زمانی که فروشنده نسبت به استرداد کالاهای فوق الذکر اقدام نماید، دیجی کالا پرداخت کلیه صورتحساب های فروشنده را متوقف خواهد نمود. در صورت مراجعه فروشنده ظرف مهلت مقرر جهت استرداد کالاهای مذکور، ابتدا هزینه های خسارات و وجوه التزام راسا توسط دیجی‌کالا از مطالبات فروشنده کسر و برداشت می شود و سپس کالا به ایشان عودت می گردد. اگر فروشنده مشمول خدمات ارسال دیجی‌کالا باشد، کالا توسط دیجی‌کالا به ایشان ارسال می شود در غیر اینصورت باید شخصا برای دریافت کالا مراجعه نماید.
+
+7-26- درصورت تکرار نقض تعهد به مدت سه بار، دیجی‌کالا می تواند ضمن قطع دسترسی فروشنده به پنل حسب صلاحدید نسبت به فسخ قرارداد اقدام نماید. فسخ قرارداد مانع از مطالبه وجوه التزام و خسارات نخواهد شد.
+
+7-27- در صورتی که فروشنده ظرف مدت 14 روز از اخطار دیجی کالا نسبت به استرداد کالاهای به شرح زیر اقدام ننماید:
+
+• کالاهای بدون برچسب صحیح،
+
+• کالاهایی که فروشنده تقاضای استرداد آن از انبار را نموده است،
+
+• کالاهای عودت شده از سوی مشتریان،
+
+• کالاهای معیوب،
+
+• کالاهایی که در اثنای همکاری فروش آن ها ممنوع و غیر قانونی شده است،
+
+• یا کالاهایی که به هر علت با توجه به مفاد این قرارداد، موظف به استرداد آن می باشد،
+
+دیجی‌کالا مسئولیتی جهت نگهداری این نوع کالاها نخواهد داشت و دیجی‌کالا عدم استرداد کالاها ظرف مدت یاد شده را به منزله اعراض فروشنده از مالکیت کالاهای فوق الذکر تلقی نموده لذا به موجب امضای این قرارداد از سوی فروشنده، ضمن قبول مالکیت دیجی کالا نسبت به آن کالاها، دیجی کالا مخیر است تا کالاهای باقی مانده را امحا نماید. در این صورت فروشنده هیچگونه ادعایی نسبت به کالا یا ارزش کالا اعراض شده نخواهد داشت. همچنین دیجی کالا مستحق دریافت هزینه­های انبارداری و امحاء و سایر مطالبات خود بوده و می­تواند وجوه مربوطه را از محل سایر تضامین دریافت نماید. همچنین حق مطالبه قانونی این هزینه­ها از طریق مراجع ذی­صلاح به قوت خود باقی است. ادعای فروشنده مبنی بر عدم اطلاع از اخطار مسموع نبوده و ملاک، ارسال اخطار از سوی دیجی کالا به طرق یاد شده خواهد بود.
+
+7-28- فروشنده متعهد به فراگرفتن نحوه کارکرد پنل فروشنده آموزش و توجیه در خصوص نحوه استفاده از درگاه اینترنتی می باشد. متعاقباً فروشنده با استفاده از پنل اعلام و اقرار می نماید که آموزش های لازم را فراگرفته و مسئولیت پنل را شخصاً برعهده دارد و نمی تواند به ادعای ناآگاهی یا عدم اطلاع رسانی، ادعایی را علیه دیجی‌کالا طرح نماید.
+
+ماده 8. تعهدات و حقوق دیجی‌کالا
+
+8-1- دیجی‌کالا به عنوان واسطه فضای مجازی کسب و کار و خدمات دهنده در خصوص امور جانبی و امین در نگهداری وجوه پرداختی حاصل از فروش، همکاری لازم را با فروشنده در راستای عرضه کالاهای موضوع قرارداد در درگاه اینترنتی (معرفی، توصیف و عکس گذاری، ارسال آنها به مشتریان بالقوه و سایر خدمات به شرح مقرر در پنل فروشنده) با اخذ هزینه­های مربوط مبذول خواهد داشت.
+
+8-2- طراحی درگاه اینترنتی، تعیین جایگاه کالا، نحوه معرفی، شیوه نمایش و تبلیغ کالا درصورت درخواست فروشنده در قبال دریافت هزینه های مربوطه به شرح جدول هزینه ها و جریمه ها مندرج در پنل فروشنده بر عهده دیجی‌کالا خواهد بود.
+
+8-3- کلیه مطالب و تصاویر مندرج در درگاه اینترنتی در خصوص محصولات و کالاها، تحت کپی رایت و مالکیت فکری دیجی‌کالا است. همچنین هرگونه بهره برداری، استناد و استفاده تجاری از آن ها، حتی برای مالک کالا، ممنوع بوده و دیجی‌کالا حق خود را برای پیگیری قانونی نقض این موارد محفوظ می دارد. عکس ها و مطالب تولیدی توسط فروشنده مشمول این مورد نخواهد شد.
+
+8-4- دیجی‌کالا اقدامات و هماهنگی لازم را جهت آموزش و توجیه فروشنده یا نمایندگان ایشان در خصوص نحوه استفاده از درگاه اینترنتی انجام خواهد داد و فروشنده متعهد به حضور در جلسات اجباری می باشد، در غیر این صورت دیجی‌کالا می تواند با تشخیص انحصاری خود پنل فروشنده را به دلیل عدم حضور در جلسات آموزشی متوقف نماید و فروشنده حق هیچگونه اعتراضی در این خصوص نخواهد داشت. متعاقباً فروشنده با استفاده از پنل، اعلام و اقرار می­نماید که آموزش­های لازم را فراگرفته و مسئولیت پنل را برعهده دارد و نمی­تواند به ادعای ناآگاهی یا عدم اطلاع رسانی، ادعایی را علیه دیجی‌کالا طرح نماید.
+
+8-5- وجوه ناشی از فروش کالا پس از کسر کمیسیون، هزینه ها و مطالبات قراردادی و تأیید واحد مالی دیجی‌کالا، طبق زمان بندی مشخص شده در پنل سلر سنتر به فروشنده پرداخت می شود.
+
+تبصره 4: اگر روز پرداخت مصادف با پنجشنبه باشد، پرداخت در روز قبل یعنی چهارشنبه انجام خواهد شد. اگر روز پرداخت مصادف با جمعه یا تعطیلات رسمی باشد، پرداخت در روز کاری بعدی انجام خواهد شد.
+
+تبصره 5: کمیسیون، هزینه ­ها و مطالبات قراردادی دیجی‌کالا همراه مالیات بر ارزش افزوده آنها محاسبه و از فروشنده دریافت خواهد شد.
+
+تبصره 6: فروشنده موظف به معرفی شماره حساب با کد شبا منطبق با نام خود، به دیجی‌کالا می باشد. وجوه فوق الذکر صرفا به شماره حسابی که کد شبای آن به نام فروشنده است واریز خواهد شد. در صورت عدم اعلام فروشنده و یا عدم تطابق نام فروشنده و صاحب کد شبا، دیجی‌کالا مسئولیتی در تاخیر و یا عدم پرداخت وجوه ندارد.
+
+تبصره 7: دیجی‌کالا مسئولیت و تعهدی در خصوص تکالیف قانونی و مالیاتی فروشنده از جمله مالیات بر درآمد و ارزش افزوده کالا ندارد. تشخیص شمول یا عدم شمول کالاها و همچنین مشمولیت یا عدم مشمولیت فروشنده، بر عهده فروشنده است. در صورتی که فروشنده مشمول ثبت نام در نظام مالیات بر ارزش افزوده نیست، چه کالای فروخته شده توسط او مشمول مالیات بر ارزش افزوده و چه معاف باشد، حق اعمال مبلغ مالیات بر ارزش افزوده در صورتحاسبهای مشتریان را ندارد. در صورتی که فروشنده مشمول ثبت نام در نظام مالیات بر ارزش افزوده باشد، در صورت ثبت نام، تنها برای کالاهای مشمول مالیات بر ارزش افزوده می تواند مبلغ مالیات بر ارزش افزوده را به بها کالاها اضافه کند و حق افزودن مبلغ مالیات بر ارزش افزوده به بها کالاهای معاف را نخواهد داشت. در صورتی که فروشنده مشمول ثبت نام در نظام مالیات بر ارزش افزوده باشد و ثبت نام نکرده باشد، به هیچ وجه حق حق اعمال مبلغ مالیات بر ارزش افزوده در صورتحاسبهای مشتریان را ندارد. در صورت عدم رعایت موارد فوق و در صورت عدم رعایت هر یک از تعهدات قانونی و مالیاتی از سوی فروشنده و همچنین در صورتی که مشمولیت کالاها مورد اعتراض خریداران قرار گیرد و یا در رسیدگی های بعدی سازمان امور مالیاتی، از بابت عدم رعایت موارد قانونی از جمله موارد فوق توسط فروشنده، برای دیجی کالا مبلغ مالیات و یا جرایمی در نظر گرفته شود و یا به هر نحو دیگر، خساراتی متوجه دیجی کالا شود، دیجی‌کالا محق می ﺑاشد که مبالغ یاد شده و خسارات وارده به خود و یا اشخاص ثالث را ﺑر حسب تشخیص خود از محل مطالبات احتمالی فروشنده یا تضامین وی راساً و ﺑدون نیاز به مراجعه به مراجع قانونی و در صورت عدم تکافو از طریق مراجعه به مراجع قضایی، وصول نماید. همچنین فروشنده مکلف به ارائه فهرست معاملات در سامانه 169 قانون مالیات های مستقیم، به نحوی که قبلا به اطلاع وی رسیده است می باشد و مکلف به ارائه اطلاعات ارسالی به دیجی کالا با کد رجوع می باشد.
+
+8-6- دیجی‌کالا در راستای ارائه هرگونه خدمات به فروشندگان، هزینه های مربوطه را مطابق با جدول کمیسیون و هزینه ها مندرج در پنل فروشندگان، در ازای صدور فاکتور از فروشنده دریافت می نماید. فاکتور دیجی‌کالا می تواند به صورت الکترونیک روی پنل باشد و فروشنده ظرف 5 روز کاری پس از صدور فاکتور مهلت دارد تا مراتب اعتراض خود را اعلام نماید. بدیهی است در صورت اعتراض موارد توسط دیجی‌کالا بررسی و در صورت صلاحدید در فاکتور بعدی اصلاح می گردد.
+
+8-7- دیجی‌کالا می تواند حقوق و تعهدات خود ناشی از این قرارداد را به اشخاص ثالث منتقل کند.
+
+8-8- دیجی‌کالا حق تغییر «شرایط قرارداد» را در هر زمانی داشته و این تغییرات و همچنین اطلاعیه ها و ابلاغیه ها توسط دیجی‌کالا در پنل اختصاصی فروشنده اعلام می شود که به منزله ی ابلاغ به «فروشنده» می باشد. «فروشندگان» متعهد هستند تمامی اطلاعیه ها را با دقت مطالعه نموده و طبق آن عمل نمایند. تغییرات به طور خودکار روی پنل اختصاصی فروشنده قرار گرفته و به منزله ی اصلاحیه و الحاقیه این قرارداد  محسوب شده و «فروشنده» متعهد به رعایت مقررات به روز شده می باشد و نیاز به هیچگونه تشریفات دیگری جهت امضا و ابلاغ نمی باشد.
+
+ماده 9. وجه التزام
+
+درصورتی که فروشنده هریک از تعهدات قراردادی خود را در موعد مقرر یا به طور صحیح انجام ندهد یا اقدامات وی به هر دلیل منجر به ورود خدشه به اعتبار یا شهرت دیجی‌کالا گردد، دیجی‌کالا حق دارد وجوه التزام به شرح ذیل را با توجه به جدول موجود در پنل سلر سنتر محاسبه و از فروشنده  مطالبه یا راساً از مطالبات فروشنده کسر کند:
+
+الف- وجه التزام قیمت گذاری و فروش هرگونه کالا با قیمتی بالاتر از “قیمت مصرف کننده” مندرج بر روی کالا
+
+ب- وجه التزام فروش کالای غیر اصل و کالای بدون گارانتی
+
+پ- وجه التزام فروش کالای قاچاق، ممنوعه، غیر بهداشتی مضر
+
+ت- وجه التزام لغو سفارش مشتری توسط فروشنده به دلایلی از قبیل عدم موجودی کالا در انبار فروشنده، تاخیر در تامین و ارسال کالا از سمت فروشنده، اشتباه در قیمت گذاری و سایر دلایل به تشخیص دیجی‌کالا،
+
+ث- وجه التزام تاخیر در ارسال کالا (از تاریخ مقرر در پنل برای تحویل به انبار)،
+
+ج- وجه التزام مغایرت کالا و محموله ارسالی با سفارش ثبت شده و محموله ثبت شده در پنل، در هنگام ورود به انبار،
+
+چ- وجه التزام مرجوعی کالا توسط مشتری به دلایلی از قبیل مغایرت محتوایی، معیوب بودن کالا، کالای تقلبی یا غیراصل و سایر دلایل به تشخیص دیجی‌کالا،
+
+ح- وجه التزام تاخیر در بازپس گیری و تعیین تکلیف کالا توسط فروشنده به دلایلی از قبیل معیوب بودن، ناقص بودن، مسترد شدن از طرف خریدار یا به هر دلیل به تشخیص دیجی‌کالا مشمول بازپس گیری از انبار شدند.
+
+تبصره 8: وجوه التزام مذکور با الزام فروشنده به انجام تعهد اصلی قابل جمع بوده و بدل آن نمیباشد.
+
+ماده 10. موارد فسخ قرارداد
+
+10-1-هر یک از طرفین می تواند در صورت انحلال یا ورشکستگی طرف مقابل قرارداد را فسخ و مراتب را اعلام نماید.
+
+10-2- دیجی‌کالا می تواند در موارد زیر بنا به تشخیص خود و بدون نیاز به مراجعه به مرجع حل و فصل اختلاف، ضمن قطع فوری دسترسی فروشنده به پنل، قرارداد را فورا فسخ نماید. فسخ قرارداد مانع از مطالبه خسارات و وجوه التزام از سوی دیجی‌کالا نمی باشد.
+
+10-2-1- درصورت نقض تعهدات فروشنده طبق این قرارداد و عدم رفع آن ظرف مدت 10 روز از تاریخ ارسال اخطار کتبی الکترونیکی در پنل یا از طریق ایمیل؛
+
+10-2-2-درصورتی که مشخص شود فروشنده در صدد تطمیع، اغوا یا ارائه هرگونه پیشنهاد نامشروع به هریک از کارکنان دیجی‌کالا بر آمده است؛
+
+10-2-3-واگذاری قرارداد به شخص ثالث از سوی فروشنده.
+
+10-3- علاوه بر موارد مذکور در فوق، دیجی‌کالا می تواند در صورت عدم تمایل به ادامه با طرف مقابل، راساً و بدون نیاز به مراجعه به مرجع حل اختلاف در طول مدت قرارداد، ضمن قطع فوری پنل، رابطه قراردادی خود با فروشنده را بدون هرگونه مسئولیت درخصوص پرداخت خسارات تحت هر عنوان، فسخ کند. در این موارد، فروشنده اعلام و اقرار نمود که دیجی‌کالا حق دارد طبق صلاحدید خود عمل نموده و خساراتی تحت هر عنوان، قابل ادعا از سوی فروشنده نمی باشد.
+
+تبصره 9: در صورت فسخ یا  خاتمه قرارداد، کالاهای باقی مانده در انبار دیجی‌کالا بعد از تسویه حساب، با ارائه صورتحساب و رسید کتبی به فروشنده مسترد خواهد شد. چنانچه ظرف پنج روز از تاریخ خاتمه قرارداد، فروشنده مطالبات دیجی‌کالا بابت خسارات، وجوه التزام و یا سایر مطالبات را تسویه ننماید، فروشنده با تایید قرارداد این اختیار را به دیجی‌کالا می دهد تا کالای موجود در انبار به نفع خود ضبط نموده و مطالبات خود را از محل آن برداشت کند.
+
+ماده 11. قوه قاهره (فورس ماژور)
+
+چنانچه به دلیل بروز حوادث غیر مترقبه از قبیل جنگ، شورش، سیل، زلزله، حریق و نظایر آن، ایفای تعهدات از ناحیه یکی از طرفین غیرممکن گردد، قرارداد به حالت تعلیق درآمده و اگر این وضعیت بیش از سه ماه ادامه یابد و طرفین در مورد آن توافقی ننمایند، هر طرف حق فسخ قرارداد را خواهد داشت.
+
+تبصره 10: طرف مدعی قوه قاهره باید گواهی از مراجع ذیربط اخذ و به طرف مقابل ارائه نماید.
+
+ماده 12. اسقاط حق
+
+اسقاط هر یک از حقوق توسط دیجی‌کالا تنها زمانی واجد اثر است که به شکل کتبی به فروشنده ابلاغ شود.
+
+ماده 13. رازداری
+
+هریک از طرفین باید اطلاعات مندرج در پنل، به ویژه اطلاعات مشتریان را محرمانه تلقی و کلیه اقدامات مقتضی برای تضمین حفظ محرمانگی آن به  وسیله کارکنان خود را نیز اتخاذ نمایند. این تعهد تا پنج سال از تاریخ خاتمه قرارداد معتبر است. بدیهی است ارائه اطلاعات به موجب حکم قانونی یا دستور مقامات، از شمول این ماده مستثنی است. دیجی‌کالا حق دارد به صلاحدید خود خسارات ناشی از نقض این تعهد را محاسبه نموده و از مطالبات فروشنده کسر نماید.
+
+ماده 14. واگذاری
+
+فروشنده حق واگذاری جزئی و کلی حقوق و تعهدات خود را به  موجب این قرارداد به اشخاص ثالث بدون موافقت کتبی و قبلی طرف دیگر، تحت هیچ عنوانی اعم از نمایندگی، وکالت، صلح حقوق و سایر عناوین، نخواهد داشت.
+
+ماده 15. قانون حاکم و نحوۀ حل اختلاف
+
+قرارداد تابع قوانین جمهوری اسلامی ایران می باشد و با توجه به محل انعقاد قرارداد، کلیه اختلافات و دعاوی ناشی از آن و یا راجع به آن به مراجع صالح قضایی جمهوری اسلامی ایران در شهر تهران ارجاع خواهد شد.
+
+این قرارداد در 15 ماده با تایید قرارداد مورد تایید قرار می گیرد و فروشنده با تایید این قرارداد متعهد بدان خواهد بود
+
+
+محصولات ارایه شده در وب‌سایت، یا توسط دیجی‌کالا از شرکت‌های معتبر و واردکنندگان رسمی و قانونی خریداری و عرضه می‌شود و یا برخی فروشندگان با دیجی‌کالا همکاری می‌کنند و محصولات خود را به‌واسطه این فروشگاه اینترنتی، به صورت آنلاین به فروش می‌رسانند. منظور از کالای فروشندگان، گروه دوم است و فروشنده، شخصی حقیقی یا حقوقی است که محصول خود را در وب‌سایت دیجی‌کالا عرضه کرده، به فروش می رساند. همچنین اعتبار فروشنده‌ها توسط دیجی‌کالا بررسی و مدارک مورد نیاز از ایشان اخذ می‌شود.
+- مسئولیت‌های مربوط به کیفیت، قیمت، محتوا، شرایط و همچنین خدمات پس از فروش محصول بر عهده فروشندگان است.
+- فاکتور کالاهایی که توسط فروشندگان در سایت عرضه می‌شود، در صورت درخواست خریدار توسط فروشنده ارسال می‌شود.
+- خریداران حداکثر تا 2 روز بعد از ثبت سفارش و قطعی شدن آن، فرصت دارند درخواست ارسال فاکتور را ثبت کنند.
+- سفارش‌هایی که دارای حداقل یک کالا از فروشندگان باشند و تا ساعت 16 هر روز کاری نهایی شوند ، حداقل 1 روز کاری بعد (طبق زمان تحویل اعلام‌شده در سایت) در تهران و شهرستان‌ها، ارسال خواهند شد.
+- 1 روز کاری فاصله زمانی تحویل برای کالاهای فروشندگان، به معنای این است که در صورت خرید کالای فروشندگان ، شروع پردازش سفارش حداکثر 1 روز پس از زمان سفارش‌گذاری در دیجی‌کالا است.
+- منظور از ۱ روز کاری، زمان آماده‌سازی و ارسال کالا به انبار دیجی‌کالا توسط فروشنده است، که امکان دارد این زمان بسته به نوع کالا تغییر یابد.
+- در صورت بروز تاخیر در پردازش سفارش شما، این موضوع از طریق پیامک به شما اطلاع رسانی شده و دیجی­کالا تلاش خواهد کرد محصول/محصولات مورد نظر شما را ظرف ۲۴ ساعت تامین کند، درصورت عدم تامین کالا بعد از ۲۴ ساعت، اقلام در انتظار تامین سفارش شما بصورت سیستمی لغو خواهد شد.
+- در شرایط خاص مثل فروش شگفت‌انگیز، احتمال لغو شدن سفارش مربوط به محصولات فروشندگان به دلایلی مانند اتمام موجودی کالا وجود دارد و دیجی‌کالا مجاز است بدون اطلاع قبلی نسبت به توقف سفارش‌‏گیری جدید، اقدام و فروش را متوقف کند.
+- در صورتی‌که دیجی‌کالا تخفیف به شرط خرید تا سقف خاصی را اعلام کرد (Discount Voucher)، میزان خرید از کالاهای فروشندگان محاسبه نمی‌شود و این کالاها مشمول استفاده از این تخفیف‌ها نمی‌شوند.
+- نحوه برگشت از فروش کالاهای فروشندگان طبق رویه دیجی‌کالا است، با این تفاوت که فروشنده مسئولیت هرگونه عدم مطابقت را به عهده می‌گیرد.
+- به کالاهای فروشندگان تخفیف سازمانی تعلق نمی‌گیرد.
+- خدمات پس ‌از‌ فروش دیجی‌کالا تنها درصورتی درخواست مشتری مبنی بر بازگرداندن کالای فروشندگان را می‌پذیرد که لیبل بارکد نارنجی رنگ که روی کالا نصب شده است، جدا نشده باشد.
