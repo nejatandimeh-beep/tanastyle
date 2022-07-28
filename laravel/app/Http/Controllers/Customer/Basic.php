@@ -207,14 +207,23 @@ class Basic extends Controller
             return redirect()->route('login');
         }
 
-
         // address
         $address = DB::table('customer_address')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
             ->orderBy('Status', 'DESC')
             ->get();
+
         // order
+        $mainOrder=DB::table('product_order as po')
+            ->select('po.ID as orderID','po.PostMethod','po.PostPrice','po.OrderPrice','pod.ID','pod.ProductID','pd.*')
+            ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
+            ->leftJoin('product_delivery as pd', 'pd.OrderDetailID', '=', 'pod.ID')
+            ->where('po.CustomerID', Auth::user()->id)
+            ->orderBy('pod.ID', 'DESC')
+            ->groupBy('po.ID')
+            ->get();
+
         $order = DB::table('product_order as po')
             ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
@@ -537,7 +546,7 @@ class Basic extends Controller
         return view('Customer.Profile', compact('location', 'customer', 'address',
             'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryHowDay', 'deliveryPersianDate',
             'deliveryMin', 'deliveryTime', 'deliveryHint', 'return', 'returnHowDay', 'returnPersianDate',
-            'returnMin', 'returnTime', 'returnHint', 'like'));
+            'returnMin', 'returnTime', 'returnHint', 'like','mainOrder'));
     }
 
     public function cart()
@@ -574,7 +583,10 @@ class Basic extends Controller
         }
 
         $sendAddress = $this->checkAddress();
-        return view('Customer.Cart', compact('sendAddress', 'data'));
+        $postPriceCost=DB::table('post_price')
+            ->first();
+
+        return view('Customer.Cart', compact('sendAddress', 'data','postPriceCost'));
     }
 
     public function cartCount()
@@ -635,6 +647,7 @@ class Basic extends Controller
         }
 
         $price = $request->get('allPrice');
+        $postPrice = (int)$request->get('postPrice');
         if ($stock) {
             foreach ($productDetailID as $key => $row)
                 DB::table('product_order_temporary')
@@ -643,6 +656,7 @@ class Basic extends Controller
                         'ProductDetailID' => $row,
                         'Qty' => $qty[$key],
                         'Price' => $price,
+                        'PostPrice' => $postPrice,
                     ]);
 
             $order = new zarinpal();
@@ -691,6 +705,7 @@ class Basic extends Controller
                     'Qty' => $qty,
                     'Price' => $price,
                     'PostMethod' => $postMethod,
+                    'PostPrice' => $postPrice,
                 ]);
 
             $order = new zarinpal();
@@ -1097,9 +1112,12 @@ class Basic extends Controller
             ->where('ID', $id)
             ->increment('VisitCounter', 1);
 
+        $postPriceCost=DB::table('post_price')
+            ->first();
+
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo'));
+        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo','postPriceCost'));
     }
 
     public function productVisit($id)
@@ -2341,6 +2359,8 @@ class Basic extends Controller
                     'Time' => $time,
                     'Authority' => $Authority,
                     'PostMethod' => $record->PostMethod,
+                    'PostPrice' => $record->PostPrice,
+                    'OrderPrice' => ($record->Price)-($record->PostPrice),
                 ]);
             }
 

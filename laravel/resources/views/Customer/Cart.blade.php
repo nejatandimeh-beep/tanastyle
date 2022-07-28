@@ -1,6 +1,6 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10000':'25000'}}" class="d-none" id="tempPostPrice" type="text">
+    <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}" class="d-none" id="tempPostPrice" type="text">
     <!-- سبد خرید -->
     <div style="direction: rtl" class="container-fluid modalBox cartContainer">
         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
@@ -120,6 +120,7 @@
                 </div>
 
                 <form id="finalCartOrderForm" action="{{route('cartSubmit')}}" method="POST" class="d-none">@csrf
+                    <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}" class="d-none" id="tempPostPrice" type="text">
                     <div id="cartOrderForm"></div>
                 </form>
 
@@ -264,7 +265,7 @@
                                         {{--هزینه پستی--}}
                                         <span id="popularPost"
                                             class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
-                                            <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10,000':'25,000'}}</span>
+                                            <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}</span>
                                             <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                         </span>
                                         <span  id="tPaxPost"

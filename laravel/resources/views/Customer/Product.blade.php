@@ -14,7 +14,7 @@
     <span id="genderCode" class="d-none">{{ $data->GenderCode }}</span>
     <span id="catCode" class="d-none">{{ $data->CatCode }}</span>
     <span id="cat" class="d-none">{{ $data->Cat }}</span>
-    <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10000':'25000'}}" class="d-none" id="tempPostPrice" type="text">
+    <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}" class="d-none" id="tempPostPrice" type="text">
 
     <div style="position: relative" id="productDetailContainer" class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4 modalBox productDetail">
         <div style="left: 0; background-position: 50% 5% !important; height: 2000px" id="load" class="load"></div>
@@ -616,7 +616,7 @@
                                     {{--هزینه پستی--}}
                                     <span id="popularPost"
                                         class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
-                                        <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?'10,000':'25,000'}}</span>
+                                        <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?number_format($postPriceCost->Mahabad):number_format($postPriceCost->OtherCity)}}</span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                     </span>
                                     <span  id="tPaxPost"
