@@ -15,7 +15,7 @@
 
             <!-- Icon Blocks -->
             <div
-                class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
+                class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
                 <h3 class="h6 g-color-black mb-3">فاکتورهای فروش امروز</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $todayOrder }}</span>عدد </span>
@@ -24,16 +24,7 @@
 
             <!-- Icon Blocks -->
             <div
-                class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
-                <h3 class="h6 g-color-black mb-3">فاکتورهای فروش در طول یک ماه</h3>
-                <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
-                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $monthOrder }}</span>عدد </span>
-            </div>
-            <!-- End Icon Blocks -->
-
-            <!-- Icon Blocks -->
-            <div
-                class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
+                class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
                 <h3 class="h6 g-color-black mb-3">تعداد کل فاکتورهای فروش</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $allOrder }}</span>عدد </span>
@@ -42,7 +33,7 @@
 
             <!-- Icon Blocks -->
             <div
-                class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
+                class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
                 <h3 class="h6 g-color-black mb-3">کل درآمد حاصل از فاکتورهای فروش</h3>
                 <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($totalSaleAmount) }}</span>تومان </span>

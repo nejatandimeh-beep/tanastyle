@@ -202,7 +202,7 @@
             }
         });
 
-        $('form').on('change', function () {
+        $('#addProductForm').on('change', function () {
             $('#errorMsg').addClass('d-none');
         });
 
@@ -231,7 +231,9 @@
                             unitSize = ' '+$(this).find('.unitSize').text()+' ',
                             detail = '';
                         if (!$(this).hasClass('d-none')) {
-                            detail = detail + title + ': ' + unitSize + value + '\n';
+                            if( $(this).find('.sizeDetailInput').val() !==''){
+                                detail = detail + title + ': ' + unitSize + value + '\n';
+                            }
                             productDetail.val(productDetail.val() + detail)
                         }
                     });

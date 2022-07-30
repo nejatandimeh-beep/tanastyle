@@ -169,6 +169,24 @@ class Add extends Controller
 
                 }
                 break;
+            case 'c':
+                $size = [
+                    'XS-35',
+                    'XS-36',
+                    'S-37',
+                    'M-38',
+                    'M-39',
+                    'L-40',
+                    'L-41',
+                    'L-42',
+                    'XL-43',
+                    'XXL-44',
+                    'XXL-45',
+                    'XXXL-46',
+                    'XXXL-47',
+                    'FreeSize',
+                ];
+                break;
             case 'e':
             case 'm':
             case 'o':
