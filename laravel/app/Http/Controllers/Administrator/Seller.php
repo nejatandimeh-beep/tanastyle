@@ -55,16 +55,14 @@ class Seller extends Controller
         $mobile = $request->get('mobile');
         //--------------
         try {
-            $token = $request->get('name');
-            $token2 = $request->get('family');
-            $token3= '';
+            $token = $request->get('name').'-'.$request->get('family');
 
             $api_key = Config::get('kavenegar.apikey');
             $var = new Kavenegar\KavenegarApi($api_key);
             $template = "reject";
             $type = "sms";
 
-            $result = $var->VerifyLookup($mobile, $token, $token2, $token3, $template, $type);
+            $result = $var->VerifyLookup($mobile, $token, null, null, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();

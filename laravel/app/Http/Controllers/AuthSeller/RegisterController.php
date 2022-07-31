@@ -120,6 +120,7 @@ class RegisterController extends Controller
                 'WorkPostalCode' => $request->get('workPostalCode'),
                 'ShopNumber' => $request->get('shopNumber'),
                 'CreditCard' => (string)$request->get('creditCard4') . (string)$request->get('creditCard3') . (string)$request->get('creditCard2') . (string)$request->get('creditCard1'),
+                'ShabaNo' => (string)$request->get('shabaNo'),
                 'PicPath' => $path,
                 'Signature' => $request->get('signature'),
             ]);
@@ -188,6 +189,7 @@ class RegisterController extends Controller
             ->insert([
                 'SellerID' => $id->id,
                 'CardNumber' => $request['creditCard1'] . '-' . $request['creditCard2'] . '-' . $request['creditCard3'] . '-' . $request['creditCard4'],
+                'ShabaNo' => $request['ShabaNo'],
                 'Status' => 1,
                 'Wrong' => 0,
             ]);

@@ -554,6 +554,33 @@
                                     </div>
                                 </div>
 
+                                {{--شماره شبای کارت بانکی--}}
+                                <div class="form-group row g-mb-15">
+                                    <label class="col-sm-3 col-form-label align-self-center text-right"
+                                           for="fileShow11"
+                                           id="img-file-label11">
+                                        شماره شبای کارت وارد شده
+                                    </label>
+                                    <div dir="ltr" class="col-sm-9 force-col-12">
+                                        <div
+                                            class="align-self-center g-color-white text-center text-lg-right">
+
+                                            <div style="display: flex" class="d-custom-block">
+                                                <span class="g-pa-10 g-brd-around g-brd-gray-light-v1 g-color-black">IR</span>
+                                                <input style="direction: rtl;"
+                                                       class="need form-control form-control-md rounded-0 pl-2 pr-0 text-left g-font-size-16 responsive-width g-brd-left-none"
+                                                       type="text"
+                                                       tabindex="35"
+                                                       placeholder="معمولا 24 رقم"
+                                                       id="shabaNo"
+                                                       name="shabaNo"
+                                                       value="{{$data->ShabaNo}}"
+                                                       onblur="if($(this).val() !== '') {$(this).removeClass('g-brd-red'); $(this).addClass('g-brd-primary');} else {$(this).removeClass('g-brd-primary'); $(this).addClass('g-brd-red');}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {{--تصویر چهره--}}
                                 <div class="form-group row justify-content-center">
                                     <label class="col-sm-3 col-form-label align-self-center text-right">تصویر
@@ -620,6 +647,7 @@
                                                             <i class="fa" data-check-icon=""></i>
                                                         </div>
                                                         نام صحیح نمی باشد.
+                                                        <input name="name" type="hidden" value="نام صحیح نمی باشد.">
                                                     </label>
                                                     <label class="d-block u-check g-pr-25">
                                                         <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
@@ -737,6 +765,15 @@
                                                             <i class="fa" data-check-icon=""></i>
                                                         </div>
                                                         شماره کارت بانکی صحیح نمی باشد.
+                                                    </label>
+                                                    <label class="d-block u-check g-pr-25">
+                                                        <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
+                                                               type="checkbox">
+                                                        <div
+                                                            class="u-check-icon-checkbox-v4 g-absolute-centered--y g-right-0">
+                                                            <i class="fa" data-check-icon=""></i>
+                                                        </div>
+                                                        شماره شبای کارت بانکی صحیح نمی باشد.
                                                     </label>
                                                     <label class="d-block u-check g-pr-25">
                                                         <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
