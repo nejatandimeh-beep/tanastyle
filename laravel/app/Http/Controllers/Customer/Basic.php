@@ -2307,9 +2307,9 @@ class Basic extends Controller
     }
 
 // ----------------------------------------------[ Regulation ]---------------------------------------------------------
-    public function regulation()
+    public function regulation($tab)
     {
-        return view('Customer.Regulation');
+        return view('Customer.Regulation',compact('tab'));
     }
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------
     public function instagram()

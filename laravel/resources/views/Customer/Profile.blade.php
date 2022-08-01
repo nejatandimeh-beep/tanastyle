@@ -1367,8 +1367,7 @@
                                                         <div class="g-mt-minus-10 g-mx-minus-5">
                                                             <div class="text-left g-mt-15 g-mt-0--lg">
                                                                 <a href="{{ '#modal16'.$key }}"
-                                                                   onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');
-                                                                    $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));"
+                                                                   onclick="$('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));"
                                                                    data-modal-target="{{ '#modal16'.$key }}"
                                                                    data-modal-effect="slidetogether"
                                                                    class="d-lg-flex justify-content-end g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pt-10 bigDevice">
@@ -1382,7 +1381,7 @@
                                                                         <div class="d-flex justify-content-between g-pt-15 g-pb-8">
                                                                             <button style="outline: none" type="button"
                                                                                     class="close"
-                                                                                    onclick="Custombox.modal.close(); $(document.body).addClass('me-position-normally'); $(document.body).removeClass('me-position-fix');">
+                                                                                    onclick="Custombox.modal.close();">
                                                                                 <span aria-hidden="true">×</span>
                                                                             </button>
                                                                             <h6 class="text-right m-0">فاکتور فروش به
@@ -1506,7 +1505,7 @@
 
                                                                         <div class="col-12 g-px-0">
                                                                         @if(($delivery[$key]->DeliveryStatus==='5'))
-                                                                            @if(($deliveryMin[$key] < 10200))
+                                                                            @if(($deliveryMin[$key] < 36000))
                                                                                 <div style="direction: rtl"
                                                                                      class="g-mt-15 g-mt-5--lg text-right">
                                                                                     <div
@@ -1886,13 +1885,10 @@
                                         class="g-color-gray-dark-v2 g-font-weight-700 g-line-height-0_7 g-font-size-14">
                                         @switch($row->Reason)
                                             @case('1')
-                                            عدم شباهت محصول
+                                            دارای ایراد
                                             @break
                                             @case('2')
-                                            عدم سلامت محصول
-                                            @break
-                                            @case('3')
-                                            عدم تطابق برند
+                                            مغایرت مشخصات
                                             @break
                                         @endswitch
                                     </span>
@@ -1943,6 +1939,8 @@
                             </div>
                         @endif
                     </div>
+
+                    <!-- مودال برگشت محصول-->
                     <div style="direction: rtl" class="g-mx-80--lg g-mt-40 g-mb-25 g-px-10">
                         <div class="text-left">
                             <a href="#returnModal"
@@ -1977,7 +1975,7 @@
                                              class="container g-px-30 g-px-60--lg text-right g-py-0">
                                             <p style="text-align: justify;" class="g-pb-15 g-mb-0 g-mb-20--lg"><span
                                                     class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>
-                                                لطفا قبل از برگشت محصول، <a href="#"
+                                                لطفا قبل از برگشت محصول، <a href="{{route('regulation','returnRegulation')}}"
                                                                             class="alert-link">قوانین برگشت محصول</a> را
                                                 مطالعه
                                                 بفرمایید. لازم به ذکر است عودت وجه به دلیل طی شدن فرآیند مسیر برگشتی 5
@@ -2022,11 +2020,9 @@
                                                                 id="returnReason" name="returnReason">
                                                             <option value="0">انتخاب کنید..
                                                             </option>
-                                                            <option value="1">محصول تحویلی، شباهتی با محصول درون سایت
-                                                                ندارد
+                                                            <option value="1"> به علت ایراد، زدگی، پارگی، کهنگی، یا نقص در ظاهر
                                                             </option>
-                                                            <option value="2">برند محصول تحویلی مطابق محصول درون سایت
-                                                                نیست
+                                                            <option value="2">به علت مغاییرت مشخصات با محصول دریافتی(سایز، رنگ، برند، عدم اصالت)
                                                             </option>
                                                         </select>
                                                     </div>

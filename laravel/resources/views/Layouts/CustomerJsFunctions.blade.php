@@ -27,6 +27,16 @@
         }
 
         $(document).ready(function () {
+            if(('.regulation').length>0){
+                switch ($('#regulationTab').text()) {
+                    case 'returnRegulation':
+                        setTimeout(function () {
+                            $('#returnProduct').trigger('click');
+                        }, 100);
+                        break;
+                    default:
+                }
+            }
             if ($('.masterPage').length > 0) {
                 $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
                 carousel('js-carousel-0');

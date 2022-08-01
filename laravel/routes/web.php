@@ -289,7 +289,7 @@ Route::get('/email-test', function () {
 });
 
 //------------------[ Regulation ]-----------------------------
-Route::get('/Customer-Regulation', 'Customer\Basic@regulation')->name('regulation');
+Route::get('/Customer-Regulation/{tab}', 'Customer\Basic@regulation')->name('regulation');
 
 // *********************************************** ( Delivery Routes ) *************************************************
 Route::get('/Delivery-Personal', 'Delivery\Basic@deliveryPersonal')->name('deliveryPersonal');

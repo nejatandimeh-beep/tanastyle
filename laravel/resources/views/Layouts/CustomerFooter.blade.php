@@ -87,7 +87,7 @@
                             </div>
 
                             <div class="col-md-6 col-lg-6 g-bg-primary-dark-v2 g-py-60">
-                                <a href="{{route('regulation')}}">
+                                <a href="{{route('regulation','regular')}}">
                                     <div class="g-bg-white d-inline-block g-px-15 g-pt-10 g-pb-55">
                                         <img referrerpolicy="origin"
                                              src="{{asset('img/Other/regulation.png')}}"

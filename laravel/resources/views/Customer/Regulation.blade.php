@@ -1,5 +1,6 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
+    <span id="regulationTab" class="d-none">{{$tab}}</span>
     <div style="direction: rtl" class="row g-brd-top g-brd-gray-light-v3 g-pt-40 g-mb-100 regulation">
         <div class="col-md-3 bigDevice">
             <!-Nav tabs -->

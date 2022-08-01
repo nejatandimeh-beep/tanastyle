@@ -647,7 +647,6 @@
                                                             <i class="fa" data-check-icon=""></i>
                                                         </div>
                                                         نام صحیح نمی باشد.
-                                                        <input name="name" type="hidden" value="نام صحیح نمی باشد.">
                                                     </label>
                                                     <label class="d-block u-check g-pr-25">
                                                         <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0"
@@ -810,7 +809,7 @@
                         <input type="hidden" name="id" value="{{$data->ID}}">
                         <input type="hidden" name="name" value="{{$data->Name}}">
                         <input type="hidden" name="family" value="{{$data->Family}}">
-                        <input type="hidden" name="family" value="{{$data->Mobile}}">
+                        <input type="hidden" name="mobile" value="{{$data->Mobile}}">
                     </form>
                 </div>
             </div>
