@@ -24,7 +24,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "laravelcollective/html": "^6.1",
-        "omalizadeh/laravel-multi-payment": "^2.3"
+        "omalizadeh/laravel-multi-payment": "^2.3",
+        "spatie/laravel-sitemap": "5.8"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

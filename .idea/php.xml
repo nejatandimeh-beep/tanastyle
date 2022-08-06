@@ -111,6 +111,17 @@
       <path value="$PROJECT_DIR$/laravel/vendor/econea/nusoap" />
       <path value="$PROJECT_DIR$/laravel/vendor/symfony/polyfill-php81" />
       <path value="$PROJECT_DIR$/laravel/vendor/psr/http-client" />
+      <path value="$PROJECT_DIR$/laravel/vendor/nicmart/tree" />
+      <path value="$PROJECT_DIR$/laravel/vendor/tightenco/collect" />
+      <path value="$PROJECT_DIR$/laravel/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/laravel/vendor/league/glide" />
+      <path value="$PROJECT_DIR$/laravel/vendor/spatie/browsershot" />
+      <path value="$PROJECT_DIR$/laravel/vendor/spatie/crawler" />
+      <path value="$PROJECT_DIR$/laravel/vendor/spatie/image" />
+      <path value="$PROJECT_DIR$/laravel/vendor/spatie/image-optimizer" />
+      <path value="$PROJECT_DIR$/laravel/vendor/spatie/laravel-sitemap" />
+      <path value="$PROJECT_DIR$/laravel/vendor/spatie/robots-txt" />
+      <path value="$PROJECT_DIR$/laravel/vendor/spatie/temporary-directory" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

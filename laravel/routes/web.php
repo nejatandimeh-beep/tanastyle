@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SitemapXmlController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -7,6 +8,9 @@ use Illuminate\Support\Facades\Session;
 Route::get('/test', function () {
     return view('Temp/test');
 });
+
+// site map
+Route::get('/Site-Map', 'SitemapController@index')->name('sitemap');
 
 // ******************************************** ( Customer Routes ) ******************************************************
 // Customer Login Links

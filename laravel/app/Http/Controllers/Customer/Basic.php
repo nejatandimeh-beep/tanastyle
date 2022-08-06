@@ -48,16 +48,7 @@ class Basic extends Controller
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '700')
-            ->groupBy('p.ID')
-            ->inRandomOrder()
-            ->take(5)
-            ->get();
-
-        $necklace = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
-            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
-            ->where('Cat', '701')
+            ->orWhere('Cat', '701')
             ->groupBy('p.ID')
             ->inRandomOrder()
             ->take(5)
@@ -68,6 +59,17 @@ class Basic extends Controller
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '703')
+            ->orWhere('Cat', '705')
+            ->groupBy('p.ID')
+            ->inRandomOrder()
+            ->take(5)
+            ->get();
+
+        $dress = DB::table('product as p')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('Cat', '24')
             ->groupBy('p.ID')
             ->inRandomOrder()
             ->take(5)
@@ -85,7 +87,7 @@ class Basic extends Controller
             ->take(5)
             ->get();
 
-        return view('Customer.Master', compact('discounts', 'glass', 'earring', 'necklace', 'bracelet','newProduct'));
+        return view('Customer.Master', compact('discounts', 'glass', 'earring','dress', 'bracelet','newProduct'));
     }
 
     public function sameProduct($genderCode, $catCode, $productID,$cat)
@@ -2102,7 +2104,7 @@ class Basic extends Controller
 
         $data = DB::table('product')
             ->select('*')
-            ->where('12', '2')
+            ->where('GenderCode', '2')
             ->paginate(10);
 
         $size = DB::table('product as p')
@@ -2111,6 +2113,7 @@ class Basic extends Controller
             ->where('GenderCode', '2')
             ->groupBy('p.ID')
             ->paginate(12);
+
         $gender = '2';
         $catCode = 'all';
         $title = 'پوشاک دخترانه';
