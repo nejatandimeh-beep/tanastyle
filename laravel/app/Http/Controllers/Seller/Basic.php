@@ -415,6 +415,34 @@ class Basic extends Controller
     }
 //    ---------> End Sale
 
+
+    //  Return Product
+    public function return()
+    {
+        $sellerID = Auth::guard('seller')->user()->id;
+
+        $data = DB::table('product_return as pr')
+            ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'p.Gender as Gender', 'p.Name as Name'
+                , 'p.PriceWithDiscount', 'p.PriceWithDiscount', 'p.PicPath as PicPath',  'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand','pr.*','pr.Date as returnDate')
+            ->leftjoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+            ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+            ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->where('pod.SellerID', $sellerID)
+            ->orderby('returnDate', 'ASC')
+            ->paginate(10);
+
+        //      Convert Date
+        $persianDate = array();
+        $returnPersianDate = array();
+        foreach ($data as $key => $rec) {
+            $returnPersianDate[$key] = $this->convertDateToPersian($rec->Date);
+            $persianDate[$key] = $this->convertDateToPersian($rec->returnDate);
+        }
+
+        return view('Seller.ReturnProduct', compact('data','persianDate','returnPersianDate'));
+    }
+
 //  Amount Received
     public function amountReceived()
     {

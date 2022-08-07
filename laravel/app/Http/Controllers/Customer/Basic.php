@@ -1185,6 +1185,49 @@ class Basic extends Controller
                 'DeliveryStatus' => '-1',
             ]);
 
+        $seller=DB::table('product_order_detail as pod')
+            ->select('pod.ID','pod.SellerID','s.id','s.Mobile')
+            ->leftJoin('sellers as s','s.id','=','pod.SellerID')
+            ->where('pod.ID',$podID)
+            ->first();
+
+        try {
+            $token = $podID;
+            $token2 = $reason;
+
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "sellerReturnProduct";
+            $type = "sms";
+
+            $result = $var->VerifyLookup($seller->Mobile, $token, $token2, null, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
+
+        try {
+            $token = $podID;
+            $token2 = $reason;
+            $token3 = $seller->Mobile;
+
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "returnProduct";
+            $type = "sms";
+
+            $result = $var->VerifyLookup('09144426149', $token, $token2, $token3, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
+
         return redirect()->route('userProfile', 'returnProduct');
     }
 

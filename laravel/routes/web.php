@@ -126,6 +126,9 @@ Route::get('/Seller-DecQty/{id}/{val}', 'Seller\Basic@decQty')->name('sellerDecQ
 // sale
 Route::get('/Seller-Sale', 'Seller\Basic@sale')->name('sale');
 
+// sale
+Route::get('/Seller-Return-Product', 'Seller\Basic@return')->name('sellerReturn');
+
 // Order Detail
 Route::get('/Seller-Order-Detail/{addressId}/{id}', 'Seller\Basic@orderDetail')->name('sellerOrderDetail');
 

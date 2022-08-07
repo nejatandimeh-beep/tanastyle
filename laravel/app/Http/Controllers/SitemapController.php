@@ -11,7 +11,7 @@ class SitemapController extends Controller
 {
     public function index()
     {
-        SitemapGenerator::create('https://example.com')
+        SitemapGenerator::create('https://tanastyle.ir')
             ->getSitemap()
             ->add(Url::create('/Customer-Product-Female-List')
                 ->setLastModificationDate(Carbon::yesterday())

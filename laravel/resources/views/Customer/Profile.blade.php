@@ -1333,7 +1333,6 @@
                                                         </div>
 
                                                         <a href="{{ '#modal16'.$key }}"
-                                                           onclick="$(document.body).addClass('me-position-fix'); $(document.body).removeClass('me-position-normally');"
                                                            data-modal-target="{{ '#modal16'.$key }}"
                                                            data-modal-effect="slidetogether"
                                                            class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pt-0 smallDevice">
@@ -1994,7 +1993,7 @@
                                                         id="returnPostCode"
                                                         class="form-control g-brd-red returnFormValidate form-control-md rounded-0 g-bg-white g-font-size-16 focusInput"
                                                         name="returnPostCode"
-                                                        oninput="($(this).val().length>24) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
+                                                        oninput="($(this).val().length>23) ? $(this).removeClass('g-brd-red'):$(this).addClass('g-brd-red')"
                                                         maxlength="100"
                                                         type="text"
                                                         value=""

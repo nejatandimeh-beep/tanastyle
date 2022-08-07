@@ -105,7 +105,7 @@
             </div>
         @else
             <div style="direction: rtl" class="row">
-                <div class="col-lg-12 g-mt-15">
+                <div class="col-lg-12 g-pb-15 g-mt-40">
                     <!-- Border Alert -->
                     <div class="alert fade show g-brd-around g-brd-gray-light-v3 rounded-0 g-pt-100--lg g-pb-100--lg d-flex justify-content-center" role="alert">
                         <div class="media">

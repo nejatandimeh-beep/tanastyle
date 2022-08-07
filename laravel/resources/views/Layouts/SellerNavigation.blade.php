@@ -2161,6 +2161,11 @@
                                     <a href="{{ route('sale') }}" class="nav-link">فروش های من</a>
                                 </li>
 
+                                <!-- return List Page Link -->
+                                <li class="nav-item g-my-3">
+                                    <a href="{{ route('sellerReturn') }}" class="nav-link">محصولات برگشتی</a>
+                                </li>
+
                                 <!-- Rate Page Link -->
                                 <li class="nav-item g-my-3">
                                     <a href="{{ route('productDelivery') }}" class="nav-link">تحویل محصول</a>
