@@ -263,7 +263,9 @@
         <!-- Article -->
         <article class="row justify-content-between g-color-gray-dark-v5">
             {{--اطلاعات محصول--}}
-            <div style="direction: rtl" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
+            <div style="direction: rtl; position: relative" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
+
+                <div class="magnifier-preview g-z-index-4" id="preview2" style="position:absolute; width: 445px; height: 556px"></div>
                 <!-- bigDevice -->
                 <header class="d-flex justify-content-between bigDevice">
                     <!-- Article Icons -->
@@ -934,8 +936,6 @@
                         </div>
                     @endif
                 </div>
-                <!-- End Carousel Images -->
-
                 <!-- Carousel Nav -->
                 <div id="js-carousel-11-nav"
                      class="js-carousel u-carousel-v11"

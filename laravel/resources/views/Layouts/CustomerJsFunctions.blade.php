@@ -433,12 +433,25 @@
             let evt = new Event(),
                 m = new Magnifier(evt);
 
+            // m.attach({
+            //     thumb: '#'+src,
+            //     large: $('#'+src).attr('src'),
+            //     mode: 'inside',
+            //     zoom: zoomNum,
+            //     zoomable: true
+            // });
+            // m.attach({
+            //     thumb: '#'+src,
+            //     large: $('#'+src).attr('src'),
+            //     largeWrapper: 'preview',
+            //     zoom: 3
+            // });
             m.attach({
                 thumb: '#'+src,
                 large: $('#'+src).attr('src'),
-                mode: 'inside',
-                zoom: zoomNum,
-                zoomable: true
+                largeWrapper: 'preview2',
+                zoom: 2,
+                zoomable: true,
             });
         }
 
