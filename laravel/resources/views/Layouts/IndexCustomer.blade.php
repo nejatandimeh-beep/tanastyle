@@ -34,7 +34,7 @@
         <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
         <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/Event.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('js/Magnifier.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/Magnifier.js?v=3') }}"></script>
     @break
     @case(strpos($_SERVER['REQUEST_URI'],'/Customer-Product'))
     <!--تخفیفات ویژه-->

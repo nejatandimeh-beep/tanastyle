@@ -398,34 +398,11 @@
             if (state === 'complete') {
                 $(document.body).removeClass('me-position-fix');
                 $(document.body).addClass('me-position-normally');
-                if ($('#productGallery').length > 0 && $('#productGallery').hasClass('largeDevice')) {
-                    magnify("img1", 2);
-                    if ($('#img2').length > 0)
-                        magnify("img2", 2);
-                    if ($('#img3').length > 0)
-                        magnify("img3", 2);
-                    if ($('#img4').length > 0)
-                        magnify("img4", 2);
-                    if ($('#img5').length > 0)
-                        magnify("img5", 2);
-                    if ($('#img6').length > 0)
-                        magnify("img6", 2);
-                    if ($('#img7').length > 0)
-                        magnify("img7", 2);
-                    if ($('#img8').length > 0)
-                        magnify("img8", 2);
-                    if ($('#img9').length > 0)
-                        magnify("img9", 2);
-                    if ($('#img10').length > 0)
-                        magnify("img10", 2);
-                    if ($('#img11').length > 0)
-                        magnify("img11", 2);
-                    if ($('#img12').length > 0)
-                        magnify("img12", 2);
-                    if ($('#img13').length > 0)
-                        magnify("img13", 2);
-                }
-
+                setTimeout(function () {
+                    if ($('#productGallery').length > 0 && $('#productGallery').hasClass('largeDevice')) {
+                        magnify("img", 2);
+                    }
+                }, 300)
             }
         }
 
@@ -437,7 +414,7 @@
             //     thumb: '#'+src,
             //     large: $('#'+src).attr('src'),
             //     mode: 'inside',
-            //     zoom: zoomNum,
+            //     zoom: 2,
             //     zoomable: true
             // });
             // m.attach({
@@ -447,10 +424,9 @@
             //     zoom: 3
             // });
             m.attach({
-                thumb: '#'+src,
-                large: $('#'+src).attr('src'),
-                largeWrapper: 'preview2',
-                zoom: 2,
+                thumb: '.'+src,
+                largeWrapper: 'preview',
+                zoom: zoomNum,
                 zoomable: true,
             });
         }
@@ -1347,18 +1323,15 @@
                     type: 'GET',
                     url: "/Customer-Cart-Check/" + id,
                     success: function (data) {
-                        if (data === 'empty') {
-                            $('#addToBasketBtn').removeClass('d-none');
-                            $('#buy').removeClass('d-none');
-                        } else {
-                            $('#attachToBasket').removeClass('d-none');
-                            $('#buy').removeClass('d-none');
-                        }
+                        $('#addToBasketBtn').removeClass('d-none');
+                        $('#buy').removeClass('d-none');
                         $('#waitingCheckCart').addClass('d-none');
                     }
                 });
-            } else
+            } else{
                 $('#addToBasketBtn').removeClass('d-none');
+                $('#buy').removeClass('d-none');
+            }
         }
 
         function orderSubmit() {

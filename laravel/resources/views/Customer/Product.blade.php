@@ -265,7 +265,8 @@
             {{--اطلاعات محصول--}}
             <div style="direction: rtl; position: relative" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
 
-                <div class="magnifier-preview g-z-index-4" id="preview2" style="position:absolute; width: 445px; height: 556px"></div>
+                <div class="magnifier-preview g-z-index-4" id="preview" style="position:absolute; width: 445px; height: 556px"></div>
+
                 <!-- bigDevice -->
                 <header class="d-flex justify-content-between bigDevice">
                     <!-- Article Icons -->
@@ -867,14 +868,14 @@
                      data-nav-for="#js-carousel-11-nav">
 
                     <div class="js-slide">
-                        <img id="img1" class="w-100"
+                        <img id="img1" class="w-100 img"
                              src="{{ $data->PicPath }}pic1.jpg"
                              alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                     </div>
 
                     @if (file_exists(public_path($data->PicPath.'pic2.jpg')))
                         <div class="js-slide">
-                            <img id="img2" class="w-100" src="{{ $data->PicPath }}pic2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img2" class="w-100 img" src="{{ $data->PicPath }}pic2.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
 
                     @endif
@@ -886,7 +887,7 @@
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic4.jpg')))
                         <div class="js-slide">
-                            <img id="img4" class="w-100" src="{{ $data->PicPath }}pic4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img4" class="w-100 img" src="{{ $data->PicPath }}pic4.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
 
                     @endif
@@ -897,42 +898,42 @@
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic6jpg')))
                         <div class="js-slide">
-                            <img id="img6" class="w-100" src="{{ $data->PicPath }}pic6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img6" class="w-100 img" src="{{ $data->PicPath }}pic6.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic7.jpg')))
                         <div class="js-slide">
-                            <img id="img7" class="w-100" src="{{ $data->PicPath }}pic7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img7" class="w-100 img" src="{{ $data->PicPath }}pic7.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic8.jpg')))
                         <div class="js-slide">
-                            <img id="img8" class="w-100" src="{{ $data->PicPath }}pic8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img8" class="w-100 img" src="{{ $data->PicPath }}pic8.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic9.jpg')))
                         <div class="js-slide">
-                            <img id="img9" class="w-100" src="{{ $data->PicPath }}pic9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img9" class="w-100 img" src="{{ $data->PicPath }}pic9.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic10.jpg')))
                         <div class="js-slide">
-                            <img id="img10" class="w-100" src="{{ $data->PicPath }}pic10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img10" class="w-100 img" src="{{ $data->PicPath }}pic10.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic11.jpg')))
                         <div class="js-slide">
-                            <img id="img11" class="w-100" src="{{ $data->PicPath }}pic11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img11" class="w-100 img" src="{{ $data->PicPath }}pic11.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic12.jpg')))
                         <div class="js-slide">
-                            <img id="img12" class="w-100" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img12" class="w-100 img" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                     @if (file_exists(public_path($data->PicPath.'pic13.jpg')))
                         <div class="js-slide">
-                            <img id="img13" class="w-100" src="{{ $data->PicPath }}pic13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
+                            <img id="img13" class="w-100 img" src="{{ $data->PicPath }}pic13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
                 </div>

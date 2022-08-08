@@ -169,7 +169,7 @@ var Magnifier = function (evt, options) {
             } else if (data[idx].status === 2) {
                 lens.className = 'magnifier-lens hidden';
                 lens.removeChild(lens.childNodes[0]);
-                lens.style.background = 'url(' + thumb.src + ') no-repeat 0 0 scroll';
+                // lens.style.background = 'url(' + thumb.src + ') no-repeat 0 0 scroll';
 
                 large.id = idx + '-large';
                 large.style.width = data[idx].largeW + 'px';

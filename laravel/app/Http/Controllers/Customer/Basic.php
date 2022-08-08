@@ -105,6 +105,18 @@ class Basic extends Controller
             ->take(5)
             ->get();
 
+        if(count($similarProduct)===0){
+            $similarProduct = DB::table('product as p')
+                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+                ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+                ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+                ->where('p.GenderCode', $genderCode)
+                ->groupBy('p.ID')
+                ->inRandomOrder()
+                ->take(5)
+                ->get();
+        }
+
         $products = '<div class="container g-mb-100 g-brd-around g-brd-gray-light-v4 g-pt-15">
         <div id="js-carousel-1" class="js-carousel g-mb-15 g-mx-minus-10 g-pb-60"
              data-infinite="true"

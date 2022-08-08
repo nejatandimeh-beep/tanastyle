@@ -515,7 +515,7 @@
                                             <li class="my-2">
                                                 <div class="form-group">
                                                     <label class="d-flex align-items-center justify-content-between">
-                                                        <span>سایر</span>
+                                                        <span>سایر طبقه بندی ها</span>
                                                         <div class="u-check">
                                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                    name="category"

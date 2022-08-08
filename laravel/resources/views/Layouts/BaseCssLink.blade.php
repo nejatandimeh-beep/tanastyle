@@ -29,7 +29,7 @@
 <!--Unify Style-->
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/magnifier.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/magnifier.css?v=2') }}">
 
     <!-- CSS Implementing Plugins -->
 {{--    <link rel="stylesheet" href="{{ asset('assets/vendor/icon-awesome/css/font-awesome.min.css') }}">--}}
