@@ -132,5 +132,6 @@
     <orderEntry type="library" name="recorder" level="application" />
     <orderEntry type="library" name="jquery.form" level="application" />
     <orderEntry type="library" name="jquery-3.5.1" level="application" />
+    <orderEntry type="library" name="clipboard" level="application" />
   </component>
 </module>

@@ -209,8 +209,8 @@
                                         <div class="input-group g-brd-primary--focus g-mb-10">
                                             <input style="direction: rtl"
                                                    class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 pl-0 text-right g-font-size-16"
-                                                   type="text" name="productSearchCode" id="storeProduct_Code"
-                                                   placeholder="{{ (!isset($valName)) ? 'همه' : $valName }}"
+                                                   type="text" name="productSearchCode" id="storeProduct_Code" pattern="\d*"
+                                                   placeholder="{{ (!isset($valName)) ? 'اعداد انگلیسی' : $valName }}"
                                                    value="">
                                             <div
                                                 class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0 w-50">

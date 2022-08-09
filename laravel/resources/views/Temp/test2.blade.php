@@ -3,4 +3,3 @@ php artisan vendor:publish
 بعد از اجرای دستور فوق گزینه 13 انتخاب شود.
 گزینه زیر
 [13] Provider: Spatie\Sitemap\SitemapServiceProvider
-

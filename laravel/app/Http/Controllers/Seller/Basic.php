@@ -781,7 +781,7 @@ class Basic extends Controller
         if (($id === 'saleName') || ('saleGender') || ('saleInfoStatus')) {
             $info = $this->saleTableLoad('', '', 'all', $sellerID);
             $todayOrder = $info['todayOrder'];
-            $monthOrder = $info['monthOrder'];
+
             $allOrder = $info['allOrder'];
             $totalSaleAmount = $info['totalSaleAmount'];
         }
@@ -860,7 +860,7 @@ class Basic extends Controller
                     $persianDate[$key] = $this->convertDateToPersian($d);
                 }
 
-                return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valName'));
+                return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valName'));
 
             case 'saleCode':
                 $data = $this->saleTableLoad('po.ID', '', $val, $sellerID);
@@ -872,7 +872,7 @@ class Basic extends Controller
                     $persianDate[$key] = $this->convertDateToPersian($d);
                 }
 
-                return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valName'));
+                return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valName'));
 
             case 'saleGender':
                 $data = $this->saleTableLoad('p.GenderCode', '', $val, $sellerID);
@@ -883,7 +883,7 @@ class Basic extends Controller
                     $persianDate[$key] = $this->convertDateToPersian($d);
                 }
 
-                return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'val'));
+                return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'val'));
 
             case 'saleInfoStatus':
 
@@ -898,7 +898,7 @@ class Basic extends Controller
                         $persianDate[$key] = $this->convertDateToPersian($d);
                     }
 
-                    return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valStatus'));
+                    return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valStatus'));
                 } elseif ($val == 'true') {
 
                     $data = $this->saleTableLoad('', 'NotIn', $val, $sellerID);
@@ -910,7 +910,7 @@ class Basic extends Controller
                         $persianDate[$key] = $this->convertDateToPersian($d);
                     }
 
-                    return view('Seller.sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valStatus'));
+                    return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valStatus'));
                 }
                 break;
 
@@ -976,7 +976,7 @@ class Basic extends Controller
             case 'sale':
                 $info = $this->saleTableLoad('', '', 'all', $sellerID);
                 $todayOrder = $info['todayOrder'];
-                $monthOrder = $info['monthOrder'];
+
                 $allOrder = $info['allOrder'];
                 $totalSaleAmount = $info['totalSaleAmount'];
 
@@ -993,7 +993,7 @@ class Basic extends Controller
                     $persianDate[$key] = $this->convertDateToPersian($d);
                 }
 
-                return view('Seller.Sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valPrice', 'valMin', 'valMax'));
+                return view('Seller.Sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valPrice', 'valMin', 'valMax'));
 
 //----------AmountReceived -> Price Filter
             case 'amount':
@@ -1048,7 +1048,7 @@ class Basic extends Controller
         if ($id === 'sale') {
             $info = $this->saleTableLoad('', '', 'all', $sellerID);
             $todayOrder = $info['todayOrder'];
-            $monthOrder = $info['monthOrder'];
+
             $allOrder = $info['allOrder'];
             $totalSaleAmount = $info['totalSaleAmount'];
 
@@ -1061,7 +1061,7 @@ class Basic extends Controller
             }
 
             return view('Seller.Sale',
-                compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'filterDate', 'a', 'b'));
+                compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'filterDate', 'a', 'b'));
 
         } elseif ($id === 'amountReceived') {
             $info = $this->amountTableLoad('', '', 'all', $sellerID);

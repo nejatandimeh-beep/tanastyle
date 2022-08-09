@@ -17,6 +17,20 @@
             }
         });
 
+        function copy(textToCopy){
+            $('#preview').hide();
+            navigator.clipboard.writeText(textToCopy).then(
+                function() {
+                    /* clipboard successfully set */
+                    window.alert('متن کپی شد.')
+                },
+                function() {
+                    /* clipboard write failed */
+                    window.alert('ناموفق')
+                }
+            )
+        }
+
         function carousel(ele) {
             $('#' + ele).slick('setOption', 'responsive', [{
                 breakpoint: 992,
@@ -428,6 +442,16 @@
                 largeWrapper: 'preview',
                 zoom: zoomNum,
                 zoomable: true,
+                onthumbenter: function () {
+                    $('#preview').show();
+                },
+                // onthumbmove: function () {
+                // },
+                onthumbleave: function () {
+                    $('#preview').hide();
+                },
+                // onzoom: function (data) {
+                // }
             });
         }
 

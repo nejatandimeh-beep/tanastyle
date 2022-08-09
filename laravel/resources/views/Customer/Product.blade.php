@@ -15,6 +15,14 @@
     <span id="catCode" class="d-none">{{ $data->CatCode }}</span>
     <span id="cat" class="d-none">{{ $data->Cat }}</span>
     <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}" class="d-none" id="tempPostPrice" type="text">
+    <pre style="direction: rtl" id="textCopy" class="d-none text-right">
+        <p>{{ $data->Brand }}</p>
+        <p>{{ $data->Name }} {{ $data->Model }}</p>
+        <p>فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</p>
+        <p>{{ $data->Detail }}</p>
+        <p>قیمت: {{ number_format($data->FinalPriceWithoutDiscount) }}</p>
+        <p>با {{ $data->Discount.'%' }} تخفیف خرید از وب سایت: {{ number_format($data->FinalPrice) }}</p>
+    </pre>
 
     <div style="position: relative" id="productDetailContainer" class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4 modalBox productDetail">
         <div style="left: 0; background-position: 50% 5% !important; height: 2000px" id="load" class="load"></div>
@@ -397,7 +405,7 @@
 
                 {{--تعداد--}}
                 <div class="d-lg-flex">
-                    <fieldset class="g-ml-60-lg--minus-10 col-lg-5 p-0 g-mb-60--lg g-mb-30">
+                    <fieldset class="g-ml-60-lg--minus-10 col-lg-5 p-0 g-mb-60--lg g-mb-30" onclick="copy($('#textCopy').text())">
                         <legend class="h6 g-color-main g-mb-15 d-lg-none">موجودی محصول</legend>
                         <div class="align-self-center g-width-70 g-pt-30--lg g-pt-0">
                             <span class="u-icon-v4 u-icon-v4-rounded-0 u-icon-slide-down--hover">
