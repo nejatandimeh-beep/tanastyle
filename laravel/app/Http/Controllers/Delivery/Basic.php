@@ -181,7 +181,7 @@ class Basic extends Controller
                 ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
                 ->where('pDel.DeliveryManID', $id)
                 ->whereIn('pDel.DeliveryStatus', $where)
-                ->groupBy('pod.ID')
+                ->groupBy('po.ID')
                 ->get();
     }
 
@@ -413,44 +413,44 @@ class Basic extends Controller
                 ]);
     }
 
-    public function destinationFinal($orderDetailID, $table,$destination,$trackingCode)
+    public function destinationFinal($orderID, $table,$destination,$trackingCode)
     {
         $data=DB::table('product_order_detail as pod')
-            ->select('p.ID','p.Name','p.Model','p.Brand','pod.*','po.*','c.id','c.Mobile')
+            ->select('p.ID','p.Name','p.Model','p.Brand','pod.*','po.*','c.id','c.Mobile','pod.ID as OrderDetailID')
             ->leftJoin('product as p','p.ID','=','pod.ProductID')
             ->leftJoin('product_order as po','po.ID','=','pod.OrderId')
             ->leftJoin('customers as c','c.ID','=','po.CustomerID')
-            ->where('pod.ID',$orderDetailID)
-            ->first();
+            ->where('pod.OrderId',$orderID)
+            ->get();
 
-        if ($table === 'delivery')
-            DB::table('product_delivery')
-                ->where('OrderDetailID', $orderDetailID)
+        foreach ($data as $key => $row){
+            if ($table === 'delivery')
+                DB::table('product_delivery')
+                    ->where('OrderDetailID', $row->OrderDetailID)
+                    ->update([
+                        'DeliveryStatus' => $destination,
+                        'DeliveryProblem' => 0,
+                        'TrackingCode' => $trackingCode,
+                    ]);
+
+            DB::table('product_return')
+                ->where('OrderDetailID', $row->OrderDetailID)
                 ->update([
-                    'DeliveryStatus' => $destination,
-                    'DeliveryProblem' => 0,
-                    'TrackingCode' => $trackingCode,
+                    'ReturnStatus' => $destination,
+                    'ReturnProblem' => 0,
                 ]);
-
-        DB::table('product_return')
-            ->where('OrderDetailID', $orderDetailID)
-            ->update([
-                'ReturnStatus' => $destination,
-                'ReturnProblem' => 0,
-            ]);
+        }
 
         try {
-            $token10 = $data->Name.' '.$data->Model.' '.$data->Brand;
             $token = $trackingCode;
-            $token2 = '';
-            $token3 = '';
+            $token2 = $orderID;
 
             $api_key = Config::get('kavenegar.apikey');
             $var = new Kavenegar\KavenegarApi($api_key);
             $template = "postTrackingCode";
             $type = "sms";
 
-            $result = $var->VerifyLookup($data->Mobile, $token, $token2, $token3, $template, $type,$token10);
+            $result = $var->VerifyLookup($data[0]->Mobile, $token, $token2, null, $template, $type);
         } catch (\Kavenegar\Exceptions\ApiException $e) {
             // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
             echo $e->errorMessage();

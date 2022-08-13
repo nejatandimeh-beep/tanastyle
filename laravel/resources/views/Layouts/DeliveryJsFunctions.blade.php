@@ -100,7 +100,7 @@
 
         }
 
-        function destinationFinal(orderDetailID, key, table) {
+        function destinationFinal(orderID, key, table) {
             let signatureDiv = $('#postSignatureDiv' + key),
                 waitingIcon = $('#postWaitingIconTd' + key),
                 trackingCode = $('#trackingCode' + key).val();
@@ -112,9 +112,10 @@
                 // window.location="/Destination-Final/" + orderDetailID + '/' + table + '/' + $('#destination' + key).text() + '/' + trackingCode;
                 $.ajax({
                     type: 'GET',
-                    url: "/Destination-Final/" + orderDetailID + '/' + table + '/' + $('#destination' + key).text() + '/' + trackingCode,
+                    url: "/Destination-Final/" + orderID + '/' + table + '/' + $('#destination' + key).text() + '/' + trackingCode,
                     async: false,
                     success: function (data) {
+                        console.log(data);
                         waitingIcon.remove();
                         $('#postCheckMark' + key).removeClass('d-none');
                         setTimeout(function () {

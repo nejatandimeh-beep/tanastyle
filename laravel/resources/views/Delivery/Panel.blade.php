@@ -130,7 +130,7 @@
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                 <span
-                                                    class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                    class="g-color-white">{{$row->OrderId}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
@@ -285,7 +285,7 @@
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
-                                                        class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                        class="g-color-white">{{$row->OrderId}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
@@ -431,7 +431,7 @@
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
-                                                        class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                        class="g-color-white">{{$row->OrderId}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
@@ -514,7 +514,7 @@
                                                             <div class="input-group justify-content-center">
                                                                 <div class="input-group-btn">
                                                                     <button class="btn u-btn-primary rounded-0"
-                                                                            onclick="destinationFinal({{$row->OrderDetailID}}, {{$counter}},'delivery')"
+                                                                            onclick="destinationFinal({{$row->OrderId}}, {{$counter}},'delivery')"
                                                                             type="button"><i
                                                                             class="fa fa-check align-middle g-font-size-16"></i>
                                                                     </button>
@@ -569,7 +569,7 @@
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <span
-                                                        class="g-color-white">{{$row->OrderId.'/'.$row->OrderDetailID}}</span>
+                                                        class="g-color-white">{{$row->OrderId}}</span>
                                                 </td>
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     @if($row->ReturnStatus === '1')
