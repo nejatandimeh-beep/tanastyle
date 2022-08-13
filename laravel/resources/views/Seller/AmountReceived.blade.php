@@ -101,6 +101,11 @@
                                                 <option
                                                     value="{{ (!isset($a)) ? '1398' : $a->y }}">{{ (!isset($a)) ? 'سال' : $a->y }}</option>
                                                 <option value="1399">1399</option>
+                                                <option value="1399">1400</option>
+                                                <option value="1399">1401</option>
+                                                <option value="1399">1402</option>
+                                                <option value="1399">1043</option>
+                                                <option value="1399">1404</option>
                                             </select>
 
                                             <select
@@ -195,6 +200,13 @@
                                                 <option
                                                     value="{{ (!isset($b)) ? '1398' : $b->y }}">{{ (!isset($b)) ? 'سال' : $b->y }}</option>
                                                 <option value="1399">1399</option>
+                                                <option value="1399">1400</option>
+                                                <option value="1399">1401</option>
+                                                <option value="1399">1402</option>
+                                                <option value="1399">1403</option>
+                                                <option value="1399">1044</option>
+                                                <option value="1399">1045</option>
+                                                <option value="1399">1046</option>
                                             </select>
 
                                             <select
@@ -279,6 +291,12 @@
                                                 <option
                                                     value="{{ (!isset($a)) ? '1398' : $a->y }}">{{ (!isset($a)) ? 'سال' : $a->y }}</option>
                                                 <option value="1399">1399</option>
+                                                <option value="1399">1400</option>
+                                                <option value="1399">1401</option>
+                                                <option value="1399">1402</option>
+                                                <option value="1399">1403</option>
+                                                <option value="1399">1404</option>
+                                                <option value="1399">1405</option>
                                             </select>
 
                                             <select
@@ -354,6 +372,12 @@
                                                 <option
                                                     value="{{ (!isset($b)) ? '1398' : $b->y }}">{{ (!isset($b)) ? 'سال' : $b->y }}</option>
                                                 <option value="1399">1399</option>
+                                                <option value="1399">1400</option>
+                                                <option value="1399">1401</option>
+                                                <option value="1399">1402</option>
+                                                <option value="1399">1403</option>
+                                                <option value="1399">1404</option>
+                                                <option value="1399">1405</option>
                                             </select>
 
                                             <select
@@ -556,7 +580,6 @@
                 </div>
             </div>
             <!-- End Card -->
-
         </div>
 
         {{-- Table --}}
@@ -607,7 +630,7 @@
                     <table style="direction: rtl" class="table table-bordered u-table--v2">
                         <thead>
                         <tr>
-                            <th class="align-middle text-center text-nowrap focused rtlPosition">تاریخ واریز</th>
+                            <th class="align-middle text-center text-nowrap focused">تاریخ واریز</th>
                             <th class="align-middle text-center text-nowrap">ساعت واریز</th>
                             <th class="align-middle text-center text-nowrap">مبلغ واریز<span
                                     class="g-font-size-10 g-mr-3">(تومان)</span>

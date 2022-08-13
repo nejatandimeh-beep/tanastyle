@@ -43,9 +43,11 @@ class Customer extends Controller
         $j = 0;
         foreach ($data as $key => $row) {
             if ($row->DeliveryProblem === 1 && $row->id !== $deliveryTemp) {
-                $deliveryAlarm[$i] = $row->id;
-                $deliveryTemp = $row->id;
-                $i++;
+                if ($row->DeliveryStatus !== '-1') {
+                    $deliveryAlarm[$i] = $row->id;
+                    $deliveryTemp = $row->id;
+                    $i++;
+                }
             }
             if (isset($row->pfID) && $row->id !== $falseTemp) {
                 $falseAlarm[$j] = $row->id;
@@ -63,6 +65,8 @@ class Customer extends Controller
             ->leftJoin('customer_address as ca' , 'ca.CustomerID','=','c.id')
             ->groupBy('c.id')
             ->get();
+        $deliveryAlarm = array_map("unserialize", array_unique(array_map("serialize", $deliveryAlarm)));
+        $falseAlarm = array_map("unserialize", array_unique(array_map("serialize", $falseAlarm)));
 
         return view('Administrator.Customer.Customer',compact('data','deliveryAlarm', 'falseAlarm','newSupport'));
     }
@@ -178,9 +182,6 @@ class Customer extends Controller
             ->orderBy('Status', 'DESC')
             ->get();
 
-        $saleSum = $this->saleTableLoad( 'all', $id);
-        $saleTable = $this->saleTableLoad('pagination', $id);
-
         $delivery = DB::table('product_delivery as pd')
             ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*','pdd.SampleNumber')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
@@ -213,15 +214,6 @@ class Customer extends Controller
             ->get()
             ->count();
 
-        $persianDate = array();
-        $pf='';
-        foreach ($saleTable as $key => $rec) {
-            $d = $rec->Date;
-            $persianDate[$key] = $this->convertDateToPersian($d);
-            if(isset($rec->fpID))
-                $pf='error';
-        }
-
         $today = date('Y-m-d');
         $deliverPersianDate = array();
         $deliveryStatus = array();
@@ -246,8 +238,8 @@ class Customer extends Controller
         }
 
         return view('Administrator.Customer.ControlPanel', compact('customerInfo', 'address',
-            'tab','persianDate','saleSum','saleTable','delivery','deliverPersianDate',
-            'deliveryStatus','delivery','support','supportPersianDate','newSupport','pf'));
+            'tab','delivery','deliverPersianDate',
+            'deliveryStatus','delivery','support','supportPersianDate','newSupport'));
     }
 
     public function saleTableLoad($val, $customerId)
@@ -469,6 +461,28 @@ class Customer extends Controller
             ]);
 
         return redirect()->route('adminCustomerConnectionDetail', ['id' => $conversationID, 'status' => '0']);
+    }
+
+    public function sale($id)
+    {
+        $customerInfo = DB::table('customers')
+            ->select('*')
+            ->where('id', $id)
+            ->first();
+
+        $saleSum = $this->saleTableLoad( 'all', $id);
+        $saleTable = $this->saleTableLoad('pagination', $id);
+
+        $persianDate = array();
+        $pf='';
+        foreach ($saleTable as $key => $rec) {
+            $d = $rec->Date;
+            $persianDate[$key] = $this->convertDateToPersian($d);
+            if(isset($rec->fpID))
+                $pf='error';
+        }
+
+        return view('Administrator.Customer.Sale',compact('customerInfo','saleSum', 'saleTable', 'persianDate','pf'));
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------

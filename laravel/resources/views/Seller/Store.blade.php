@@ -358,7 +358,7 @@
                                         <label style="direction: rtl" class="g-color-gray-light-v1 align-self-center">مشخصات</label>
                                     </div>
                                     <div class="btn-group justified-content text-center col-lg-6 g-mb-20">
-                                        <label class="u-check m-0">
+                                        <label class="u-check m-0 g-mb-5">
                                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="mistak"
                                                    type="radio" id="false" onclick="trueInfo('storeInfoStatus')"
                                                 {{ (isset($valStatus)) ? (($valStatus == 'مشخصات اشتباه') ? ' checked=""' : '') : '' }}>
@@ -437,7 +437,7 @@
                     <table style="direction: rtl" class="table table-bordered u-table--v2">
                         <thead>
                         <tr>
-                            <th class="align-middle text-center focused rtlPosition">کد محصول</th>
+                            <th class="align-middle text-center focused">کد محصول</th>
                             <th class="align-middle text-center">نام</th>
                             <th class="align-middle text-center">برند</th>
                             <th class="align-middle text-center">جنسیت</th>

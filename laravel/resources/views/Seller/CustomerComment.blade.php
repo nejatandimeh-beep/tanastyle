@@ -246,7 +246,7 @@
                     <table style="direction: rtl" class="table table-bordered u-table--v2">
                         <thead>
                         <tr>
-                            <th class="align-middle text-center text-nowrap focused rtlPosition">کد محصول</th>
+                            <th class="align-middle text-center text-nowrap focused">کد محصول</th>
                             <th class="align-middle text-center text-nowrap">نام محصول</th>
                             <th class="align-middle text-center text-nowrap">برند</th>
                             <th class="align-middle text-center">عکس</th>

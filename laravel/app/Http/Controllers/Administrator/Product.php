@@ -18,30 +18,15 @@ class Product extends Controller
         $this->middleware('IsAdmin');
     }
 
-    public function allProduct()
+    public function delivery()
     {
-        $storeSum = $this->storeTableLoad('all');
-        $storeTable = $this->storeTableLoad('pagination');
-
-        $saleSum = $this->saleTableLoad( 'all');
-        $saleTable = $this->saleTableLoad('pagination');
-
         $delivery = DB::table('product_delivery as pd')
             ->select('pod.*', 'po.*', 'p.Name', 'p.PicPath','pd.*','pdd.SampleNumber')
             ->leftJoin('product_order_detail as pod', 'pod.ID', '=', 'pd.OrderDetailID')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->get();
-
-        $persianDate = array();
-        $pf='';
-        foreach ($saleTable as $key => $rec) {
-            $d = $rec->Date;
-            $persianDate[$key] = $this->convertDateToPersian($d);
-            if(isset($rec->fpID))
-                $pf='error';
-        }
+            ->paginate(10);
 
         $today = date('Y-m-d');
         $deliverPersianDate = array();
@@ -60,8 +45,7 @@ class Product extends Controller
             $deliverPersianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Administrator.Product.ControlPanel',compact('storeSum','storeTable','saleSum','saleTable'
-            ,'persianDate','pf','delivery','deliveryStatus','deliverPersianDate'));
+        return view('Administrator.Product.Delivery',compact('delivery','deliveryStatus','deliverPersianDate'));
     }
 
     public function storeTableLoad($val)
@@ -219,6 +203,28 @@ class Product extends Controller
         $persianDate = $this->convertDateToPersian($d);
 
         return view('Administrator.Product.OrderDetail', compact('data', 'falseProduct', 'persianDate','dataDetail'));
+    }
+
+    public function store()
+    {
+        $storeSum = $this->storeTableLoad('all');
+        $storeTable = $this->storeTableLoad('pagination');
+        return view('Administrator.Product.Store',compact('storeSum','storeTable'));
+    }
+
+    public function sale()
+    {
+        $saleSum = $this->saleTableLoad( 'all');
+        $saleTable = $this->saleTableLoad('pagination');
+        $persianDate = array();
+        $pf='';
+        foreach ($saleTable as $key => $rec) {
+            $d = $rec->Date;
+            $persianDate[$key] = $this->convertDateToPersian($d);
+            if(isset($rec->fpID))
+                $pf='error';
+        }
+        return view('Administrator.Product.Sale',compact('saleSum','saleTable','persianDate','pf'));
     }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
 

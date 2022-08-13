@@ -672,7 +672,7 @@
                     <table style="direction: rtl" class="table table-bordered u-table--v2">
                         <thead>
                         <tr>
-                            <th class="align-middle text-center focused rtlPosition">کد محصول</th>
+                            <th class="align-middle text-center focused">کد محصول</th>
                             <th class="align-middle text-center">نام</th>
                             <th class="align-middle text-center">برند</th>
                             <th class="align-middle text-center">جنسیت</th>

@@ -383,10 +383,14 @@ Route::post('/Administrator-Seller-AmountPay', 'Administrator\Seller@amountPay')
 
 Route::get('/Administrator-Seller-Support', 'Administrator\Seller@support')->name('support');
 
+Route::get('/Administrator-Seller-store/{id}', 'Administrator\Seller@store')->name('adminSellerStore');
+
+Route::get('/Administrator-Seller-sale/{id}', 'Administrator\Seller@sale')->name('adminSellerSale');
+
 //-----------------------------[seller][filtering]
 
 // -------------------------[Product]
-Route::get('/Administrator-Product-List', 'Administrator\Product@allProduct')->name('adminProductList');
+Route::get('/Administrator-Product-List', 'Administrator\Product@delivery')->name('adminProductDelivery');
 
 Route::get('/Administrator-Product-Detail/{id}', 'Administrator\Product@productDetail')->name('adminProductDetail');
 
@@ -397,6 +401,10 @@ Route::get('/Administrator-Product-Delete/{id}/{sellerId}', 'Administrator\Selle
 Route::get('/Administrator-Product-False/{id}/{sellerId}', 'Administrator\Seller@productFalse')->name('adminProductFalse');
 
 Route::get('/Administrator-Product-OrderDetail/{addressId}/{id}', 'Administrator\Product@orderDetail')->name('adminProductOrderDetail');
+
+Route::get('/Administrator-Product-Store', 'Administrator\Product@store')->name('adminProductStore');
+
+Route::get('/Administrator-Product-Sale', 'Administrator\Product@sale')->name('adminProductSale');
 
 // -------------------------[Customer]
 Route::get('/Administrator-Customer-List', 'Administrator\Customer@customer')->name('customerList');
@@ -420,6 +428,9 @@ Route::get('/Administrator-Customer-OrderDetail/{addressId}/{id}', 'Administrato
 Route::get('/Administrator-Customer-ConnectionDetail/{id}/{status}', 'Administrator\Customer@connectionDetail')->name('adminCustomerConnectionDetail');
 
 Route::post('/Administrator-Customer-Connection-NewMsg', 'Administrator\Customer@connectionNewMsg')->name('adminCustomerConnectionNewMsg');
+
+Route::get('/Administrator-Customer-Sale/{id}', 'Administrator\Customer@sale')->name('adminCustomerSale');
+
 // -------------------------[Delivery]
 Route::get('/Administrator-Delivery-Panel/{id}', 'Administrator\Admin@adminDeliveryPanel')->name('adminDeliveryPanel');
 

@@ -274,98 +274,98 @@
             <div style="direction: rtl; position: relative" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
 
                 <div class="magnifier-preview g-z-index-4" id="preview" style="position:absolute; width: 445px; height: 556px"></div>
-
-                <!-- bigDevice -->
-                <header class="d-flex justify-content-between bigDevice">
-                    <!-- Article Icons -->
-                    <div class="align-self-center">
-                        <h1 id="productName"
-                            class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}</h1>
-                        <span id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
-                    </div>
-                    <div style="direction: ltr"
-                         class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
-                        <i class="{{ $rating>0 ? 'fa fa-star':'fa fa-star-o'}}"></i>
-                        <i class="{{ $rating>1 ? 'fa fa-star':'fa fa-star-o'}}"></i>
-                        <i class="{{ $rating>2 ? 'fa fa-star':'fa fa-star-o'}}"></i>
-                        <i class="{{ $rating>3 ? 'fa fa-star':'fa fa-star-o'}}"></i>
-                        <i class="{{ $rating>4 ? 'fa fa-star':'fa fa-star-o'}}"></i>
-                    </div>
-                </header>
-
-                <hr class="g-brd-gray-light-v4 g-mt-10 g-mb-15 bigDevice">
-                <!-- bigDevice -->
-
-                {{--هدر--}}
-                <a style="cursor: pointer;" class="d-none float-left g-font-size-20 g-mr-10 fa fa-bookmark
-                   g-line-height-1 g-color-primary g-text-underline--none--hover text-left"
-                   id="customerLike">
-                </a>
-                <a style="cursor: pointer"
-                   class="d-none float-left g-font-size-20 g-mr-10 fa fa-bookmark
-                   g-line-height-1 g-color-gray-dark-v5 g-color-primary--hover g-text-underline--none--hover text-left"
-                   id="customerUnlike">
-                </a>
-                <span id="likeHint"
-                      class="{{ ($like === 'like') ? 'd-none':'' }} g-font-size-10 g-pt-5 float-left bigDevice">ذخیره کن</span>
-                <div class="g-mb-30 g-mt-minus-5">
-                    @if($customerRate !== 0)
-                        <small>شما قبلا امتیاز {{ $customerRate }} را ثبت کرده اید.</small>
-                    @else
-                        <span class="g-color-gray-dark-v5">
-                            <span>امتیاز دهید</span>
-                            <div style="direction: ltr"
-                                 class="d-inline-block g-color-primary g-mr-5 g-font-size-17 stars">
-                                <span class="ratingContainer">
-                                    <a style="cursor: pointer" class="star-1 g-text-underline--none--hover">1</a>
-                                    <a style="cursor: pointer" class="star-2 g-text-underline--none--hover">2</a>
-                                    <a style="cursor: pointer" class="star-3 g-text-underline--none--hover">3</a>
-                                    <a style="cursor: pointer" class="star-4 g-text-underline--none--hover">4</a>
-                                    <a style="cursor: pointer" class="star-5 g-text-underline--none--hover">5</a>
-                                </span>
-                            </div>
-                        </span>
-                    @endif
-                </div>
-
-                <div class="align-self-center g-mb-15">
-                    <h1 id="productName"
-                        class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Name }}</h1>
-                    <h1
-                        class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Model }}</h1>
-                    <h1
-                        class="d-inline-block h5 g-color-black mb-2">{{ $data->Brand }}</h1>
-                    <h1
-                        class="d-block h6 g-font-weight-300 g-color-black mb-2">فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</h1>
-
-                    <h1
-                        class="d-block h6 g-font-weight-300 g-color-black mb-2">کد محصول: <span id="detailID" class="g-font-weight-600"></span></h1>
-                </div>
-
-
-                {{--توضیحات--}}
-                <pre class="g-mb-25 g-font-size-14" id="productDetail">{{ $data->Detail }}</pre>
-
-                <!-- قیمت -->
-                <div class="g-mb-30--lg g-mb-0 text-lg-right text-left">
-                    <fieldset class="d-inline-block g-ml-60--lg col-12 col-lg-5 p-0">
-                        <div class="d-inline-block amountLine">
-                            <span id="productUnitPrice"
-                                  class="d-inline-block align-middle g-color-red g-font-size-20">{{ number_format($data->FinalPriceWithoutDiscount) }}</span>
-                            <span class="g-font-size-12 g-color-red g-mr-minus-5">تومان</span>
+                <div style="min-height: 556px">
+                    <!-- bigDevice -->
+                    <header class="d-flex justify-content-between bigDevice">
+                        <!-- Article Icons -->
+                        <div class="align-self-center">
+                            <h1 id="productName"
+                                class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}</h1>
+                            <span id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
                         </div>
-                        <span
-                            class="d-inline-block align-middle g-bg-red g-color-white g-font-size-12 g-py-3 g-px-8">{{$data->Discount}} درصد</span>
-                    </fieldset>
-                    <fieldset class="d-inline-block col-12 col-lg-5 p-0">
-                        <span id="productFinalPrice"
-                              class="d-inline-block align-middle g-color-primary g-font-size-25">{{ number_format($data->FinalPrice) }}</span>
-                        <span class="g-font-size-14">تومان</span>
-                    </fieldset>
-                </div>
+                        <div style="direction: ltr"
+                             class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
+                            <i class="{{ $rating>0 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                            <i class="{{ $rating>1 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                            <i class="{{ $rating>2 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                            <i class="{{ $rating>3 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                            <i class="{{ $rating>4 ? 'fa fa-star':'fa fa-star-o'}}"></i>
+                        </div>
+                    </header>
 
+                    <hr class="g-brd-gray-light-v4 g-mt-10 g-mb-15 bigDevice">
+                    <!-- bigDevice -->
+
+                    {{--هدر--}}
+                    <a style="cursor: pointer;" class="d-none float-left g-font-size-20 g-mr-10 fa fa-bookmark
+                       g-line-height-1 g-color-primary g-text-underline--none--hover text-left"
+                       id="customerLike">
+                    </a>
+                    <a style="cursor: pointer"
+                       class="d-none float-left g-font-size-20 g-mr-10 fa fa-bookmark
+                       g-line-height-1 g-color-gray-dark-v5 g-color-primary--hover g-text-underline--none--hover text-left"
+                       id="customerUnlike">
+                    </a>
+                    <span id="likeHint"
+                          class="{{ ($like === 'like') ? 'd-none':'' }} g-font-size-10 g-pt-5 float-left bigDevice">ذخیره کن</span>
+                    <div class="g-mb-30 g-mt-minus-5">
+                        @if($customerRate !== 0)
+                            <small>شما قبلا امتیاز {{ $customerRate }} را ثبت کرده اید.</small>
+                        @else
+                            <span class="g-color-gray-dark-v5">
+                                <span>امتیاز دهید</span>
+                                <div style="direction: ltr"
+                                     class="d-inline-block g-color-primary g-mr-5 g-font-size-17 stars">
+                                    <span class="ratingContainer">
+                                        <a style="cursor: pointer" class="star-1 g-text-underline--none--hover">1</a>
+                                        <a style="cursor: pointer" class="star-2 g-text-underline--none--hover">2</a>
+                                        <a style="cursor: pointer" class="star-3 g-text-underline--none--hover">3</a>
+                                        <a style="cursor: pointer" class="star-4 g-text-underline--none--hover">4</a>
+                                        <a style="cursor: pointer" class="star-5 g-text-underline--none--hover">5</a>
+                                    </span>
+                                </div>
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="align-self-center g-mb-15">
+                        <h1 id="productName"
+                            class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Name }}</h1>
+                        <h1
+                            class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Model }}</h1>
+                        <h1
+                            class="d-inline-block h5 g-color-black mb-2">{{ $data->Brand }}</h1>
+                        <h1
+                            class="d-block h6 g-font-weight-300 g-color-black mb-2">فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</h1>
+
+                        <h1
+                            class="d-block h6 g-font-weight-300 g-color-black mb-2">کد محصول: <span id="detailID" class="g-font-weight-600"></span></h1>
+                    </div>
+
+
+                    {{--توضیحات--}}
+                    <pre class="g-mb-25 g-font-size-14" id="productDetail">{{ $data->Detail }}</pre>
+
+                    <!-- قیمت -->
+                    <div class="g-mb-30--lg g-mb-0 text-lg-right text-left">
+                        <fieldset class="d-inline-block g-ml-60--lg col-12 col-lg-5 p-0">
+                            <div class="d-inline-block amountLine">
+                                <span id="productUnitPrice"
+                                      class="d-inline-block align-middle g-color-red g-font-size-20">{{ number_format($data->FinalPriceWithoutDiscount) }}</span>
+                                <span class="g-font-size-12 g-color-red g-mr-minus-5">تومان</span>
+                            </div>
+                            <span
+                                class="d-inline-block align-middle g-bg-red g-color-white g-font-size-12 g-py-3 g-px-8">{{$data->Discount}} درصد</span>
+                        </fieldset>
+                        <fieldset class="d-inline-block col-12 col-lg-5 p-0">
+                            <span id="productFinalPrice"
+                                  class="d-inline-block align-middle g-color-primary g-font-size-25">{{ number_format($data->FinalPrice) }}</span>
+                            <span class="g-font-size-14">تومان</span>
+                        </fieldset>
+                    </div>
+                </div>
                 {{--سایز و رنگ--}}
-                <div class="d-lg-flex justify-content-start g-mb-30">
+                <div class="d-lg-flex justify-content-start g-mb-20">
                     <!-- Article Size -->
                     <fieldset class="g-ml-60--lg col-12 col-lg-5 p-0">
                         <legend class="h6 g-color-main g-mb-15">سایز</legend>

@@ -42,7 +42,7 @@
                     <table style="direction: rtl" class="table table-bordered u-table--v2">
                         <thead>
                         <tr>
-                            <th class="align-middle text-center text-nowrap focused rtlPosition">نام محصول</th>
+                            <th class="align-middle text-center text-nowrap focused">نام محصول</th>
                             <th class="align-middle text-center text-nowrap">برند</th>
                             <th class="align-middle text-center text-nowrap">تاریخ فروش</th>
                             <th class="align-middle text-center text-nowrap">ساعت فروش</th>

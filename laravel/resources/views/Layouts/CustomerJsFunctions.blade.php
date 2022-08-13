@@ -379,7 +379,6 @@
                     });
                 },
                 success: function (data) {
-                    console.log(data);
                     if (data !== 'null') {
                         $('#similarContainer').append(data);
                         $('#similarContainer').removeClass('d-none');
@@ -1310,7 +1309,6 @@
                 type: 'GET',
                 url: "/Customer-Cart-Add/" + id,
                 success: function (data) {
-                    console.log(data);
                     $('#waitingCheckCart').addClass('d-none');
                     $('#attachToBasket').removeClass('d-none');
 
@@ -1347,8 +1345,13 @@
                     type: 'GET',
                     url: "/Customer-Cart-Check/" + id,
                     success: function (data) {
-                        $('#addToBasketBtn').removeClass('d-none');
-                        $('#buy').removeClass('d-none');
+                        if (data === 'empty') {
+                            $('#addToBasketBtn').removeClass('d-none');
+                            $('#buy').removeClass('d-none');
+                        } else {
+                            $('#attachToBasket').removeClass('d-none');
+                            $('#buy').removeClass('d-none');
+                        }
                         $('#waitingCheckCart').addClass('d-none');
                     }
                 });

@@ -20,14 +20,23 @@
             if ($('#cardActive').length > 0)
                 $('#sellerCard').trigger('click');
 
-            if ($('#store').length > 0)
-                $('#sellerStore').trigger('click');
+            if ($('#user').length > 0)
+                $('#sellerInfo').trigger('click');
 
-            if ($('#sale').length > 0)
-                $('#sellerOrder').trigger('click');
+            if ($('#customerUser').length > 0)
+                $('#customerInfo').trigger('click');
+
+            if ($('#delivery').length > 0)
+                $('#sellerDelivery').trigger('click');
 
             if ($('#support').length > 0)
                 $('#sellerSupport').trigger('click');
+
+            if ($('#cusSupport').length > 0)
+                $('#customerSupport').trigger('click');
+
+            if ($('#cusDelivery').length > 0)
+                $('#customerDelivery').trigger('click');
 
             if ($('#amountReceived').length > 0)
                 $('#sellerAmount').trigger('click');
