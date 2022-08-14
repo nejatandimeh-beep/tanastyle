@@ -1465,6 +1465,7 @@
                 $('#orderProductImg').attr('src', $('#picPath').text() + 'sample1.jpg');
             });
             $('#detailID').text($('#productDetailID').text());
+            $('#preDetailID').text($('#productDetailID').text());
             console.log(picNumber);
             $('#' + picNumber).trigger('click');
         }

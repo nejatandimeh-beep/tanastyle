@@ -16,12 +16,13 @@
     <span id="cat" class="d-none">{{ $data->Cat }}</span>
     <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}" class="d-none" id="tempPostPrice" type="text">
     <pre style="direction: rtl" id="textCopy" class="d-none text-right">
-        <p>{{ $data->Brand }}</p>
-        <p>{{ $data->Name }} {{ $data->Model }}</p>
-        <p>فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</p>
-        <p>{{ $data->Detail }}</p>
-        <p>قیمت: {{ number_format($data->FinalPriceWithoutDiscount) }}</p>
-        <p>با {{ $data->Discount.'%' }} تخفیف خرید از وب سایت: {{ number_format($data->FinalPrice) }}</p>
+<p>برند {{ $data->Brand }}</p>
+<p>{{ $data->Name }} {{ $data->Model }}</p>
+<p>کد محصول: <span id="preDetailID" class="g-font-weight-600"></span></p>
+<p>فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</p>
+<p>{{ $data->Detail }}</p>
+<p>قیمت: {{ number_format($data->FinalPriceWithoutDiscount) }}</p>
+<p>با {{ $data->Discount.'%' }} تخفیف خرید از وب سایت: {{ number_format($data->FinalPrice) }}</p>
     </pre>
 
     <div style="position: relative" id="productDetailContainer" class="container g-mb-50--lg g-pt-10 g-brd-top g-brd-gray-light-v4 modalBox productDetail">
@@ -611,7 +612,7 @@
                                     </span>
                                 </div>
                             </div>
-                            {{--آدرس و مبلغ فاکتور--}}
+                            <!--آدرس و مبلغ فاکتور-->
                             <div style="direction: ltr" class="d-lg-flex col-12 justify-content-between p-0 text-right">
                                 <div id="postContainer" class="col-12 col-lg-3 g-px-0">
                                     <div class="btn-group text-center justified-content g-mt-15">

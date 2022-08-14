@@ -5,7 +5,7 @@
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{route('adminProductList')}}">فاکتورهای فروش</a>
+                   href="{{route('adminProductSale')}}">فاکتورهای فروش</a>
             </li>
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1"
