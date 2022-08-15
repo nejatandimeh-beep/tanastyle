@@ -15,6 +15,12 @@
                 </a>
             </li>
 
+            <!--محصولات برگشتی-->
+            <li class="nav-item">
+                <a id="sellerOrder" class="nav-link g-mb-minus-1" href="{{route('adminCustomerReturn',$customerInfo->id)}}">
+                    محصولات برگشتی</a>
+            </li>
+
             <!--تحویل محصول-->
             <li class="nav-item">
                 <a id="customerDelivery" class="nav-link g-mb-minus-1" href="{{route('customerControlPanel',['id'=>$customerInfo->id,'tab'=>'delivery'])}}">

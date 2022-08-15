@@ -26,6 +26,8 @@ class Product extends Controller
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->where('pd.DeliveryStatus','<=','4')
+            ->where('pd.DeliveryStatus','<>','-1')
             ->paginate(10);
 
         $today = date('Y-m-d');
@@ -225,6 +227,29 @@ class Product extends Controller
                 $pf='error';
         }
         return view('Administrator.Product.Sale',compact('saleSum','saleTable','persianDate','pf'));
+    }
+
+    public function return()
+    {
+        $data = DB::table('product_return as pr')
+            ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'p.Gender as Gender', 'p.Name as Name'
+                , 'p.PriceWithDiscount', 'p.PriceWithDiscount', 'p.PicPath as PicPath',  'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand','pr.*','pr.Date as returnDate')
+            ->leftjoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+            ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+            ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->orderby('returnDate', 'ASC')
+            ->paginate(10);
+
+        //      Convert Date
+        $persianDate = array();
+        $returnPersianDate = array();
+        foreach ($data as $key => $rec) {
+            $returnPersianDate[$key] = $this->convertDateToPersian($rec->Date);
+            $persianDate[$key] = $this->convertDateToPersian($rec->returnDate);
+        }
+
+        return view('Administrator.Product.ReturnProduct', compact('data','persianDate','returnPersianDate'));
     }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
 

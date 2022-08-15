@@ -387,6 +387,8 @@ Route::get('/Administrator-Seller-store/{id}', 'Administrator\Seller@store')->na
 
 Route::get('/Administrator-Seller-sale/{id}', 'Administrator\Seller@sale')->name('adminSellerSale');
 
+Route::get('/Administrator-Seller-Return/{id}', 'Administrator\Seller@return')->name('adminSellerReturn');
+
 //-----------------------------[seller][filtering]
 
 // -------------------------[Product]
@@ -405,6 +407,8 @@ Route::get('/Administrator-Product-OrderDetail/{addressId}/{id}', 'Administrator
 Route::get('/Administrator-Product-Store', 'Administrator\Product@store')->name('adminProductStore');
 
 Route::get('/Administrator-Product-Sale', 'Administrator\Product@sale')->name('adminProductSale');
+
+Route::get('/Administrator-Product-Return', 'Administrator\Product@return')->name('adminProductReturn');
 
 // -------------------------[Customer]
 Route::get('/Administrator-Customer-List', 'Administrator\Customer@customer')->name('customerList');
@@ -430,6 +434,8 @@ Route::get('/Administrator-Customer-ConnectionDetail/{id}/{status}', 'Administra
 Route::post('/Administrator-Customer-Connection-NewMsg', 'Administrator\Customer@connectionNewMsg')->name('adminCustomerConnectionNewMsg');
 
 Route::get('/Administrator-Customer-Sale/{id}', 'Administrator\Customer@sale')->name('adminCustomerSale');
+
+Route::get('/Administrator-Customer-Return/{id}', 'Administrator\Customer@return')->name('adminCustomerReturn');
 
 // -------------------------[Delivery]
 Route::get('/Administrator-Delivery-Panel/{id}', 'Administrator\Admin@adminDeliveryPanel')->name('adminDeliveryPanel');

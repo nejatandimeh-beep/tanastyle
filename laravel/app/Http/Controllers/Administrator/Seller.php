@@ -638,6 +638,7 @@ class Seller extends Controller
 
     public function controlPanel($id, $tab)
     {
+
         $sellerInfo = DB::table('sellers')
             ->select('*')
             ->where('id', $id)
@@ -718,6 +719,36 @@ class Seller extends Controller
             'tab', 'amountSum', 'amountTable', 'lastPaymentDate', 'delivery', 'deliverPersianDate',
             'deliveryStatus', 'delivery', 'support', 'supportPersianDate', 'amountPersianDate', 'newSupport'));
     }
+
+    public function return($id)
+    {
+        $sellerInfo = DB::table('sellers')
+            ->select('*')
+            ->where('id', $id)
+            ->first();
+
+        $data = DB::table('product_return as pr')
+            ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'p.Gender as Gender', 'p.Name as Name'
+                , 'p.PriceWithDiscount', 'p.PriceWithDiscount', 'p.PicPath as PicPath',  'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand','pr.*','pr.Date as returnDate')
+            ->leftjoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+            ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+            ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->where('pod.SellerID', $id)
+            ->orderby('returnDate', 'ASC')
+            ->paginate(10);
+
+        //      Convert Date
+        $persianDate = array();
+        $returnPersianDate = array();
+        foreach ($data as $key => $rec) {
+            $returnPersianDate[$key] = $this->convertDateToPersian($rec->Date);
+            $persianDate[$key] = $this->convertDateToPersian($rec->returnDate);
+        }
+
+        return view('Administrator.Seller.ReturnProduct', compact('data','persianDate','returnPersianDate','sellerInfo'));
+    }
+
 
 //--------------------------------------------[new function]------------------------------------------------------
     public function store($id)

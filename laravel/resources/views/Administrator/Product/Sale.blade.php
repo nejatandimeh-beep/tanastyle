@@ -4,10 +4,19 @@
         <!-- Nav tabs -->
         <ul class="nav nav-fill u-nav-v4-1 u-nav-light" role="tablist" data-target="nav-4-1-primary-hor-fill"
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
+            <!--محصولات برگشتی-->
+            <li class="nav-item">
+                <a id="sellerOrder" class="nav-link g-mb-minus-1" href="{{route('adminProductReturn')}}">
+                    <span id="deliveryAlarm" class="d-none g-mr-10">
+                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
+                    </span>
+                    محصولات برگشتی
+                </a>
+            </li>
             <!--تحویل محصول-->
             <li class="nav-item">
                 <a id="sellerDelivery" class="nav-link g-mb-minus-1" href="{{route('adminProductDelivery')}}">
-                    <span id="deliveryAlarm" class="d-none g-mr-10">
+                    <span class="d-none g-mr-10">
                         <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
                     </span>
                     تحویل محصول

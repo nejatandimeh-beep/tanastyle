@@ -16,6 +16,16 @@
                 </a>
             </li>
 
+            <!--محصولات برگشتی-->
+            <li class="nav-item">
+                <a id="sellerOrder" class="nav-link g-mb-minus-1" href="{{route('adminSellerReturn',$sellerInfo->id)}}">
+                    <span id="deliveryAlarm" class="d-none g-mr-10">
+                        <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
+                    </span>
+                    محصولات برگشتی
+                </a>
+            </li>
+
             <!--تحویل محصول-->
             <li class="nav-item">
                 <a id="sellerDelivery" class="nav-link g-mb-minus-1" href="{{route('sellerControlPanel',['id'=>$sellerInfo->id,'tab'=>'delivery'])}}">

@@ -10,8 +10,8 @@
             <h2 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">تانا استایل
                 <span class="g-color-white">استایلی خاص و متفاوت</span></h2>
 
-            <h2 class="g-color-primary g-font-weight-600 g-mb-15 smallDevice">تانا استایل
-                <span class="g-color-white">استایلی خاص و متفاوت</span></h2>
+            <h3 class="g-color-primary g-font-weight-600 g-mb-15 smallDevice">تانا استایل
+                <span class="g-color-white">استایلی خاص و متفاوت</span></h3>
             <h4 class="g-color-white g-font-weight-600 g-mb-30">خریدی آسان، سریع و مطمئن</h4>
             <!-- Promo Blocks - Form -->
             <form style="direction: rtl" class="align-self-center text-center">

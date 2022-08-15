@@ -189,6 +189,8 @@ class Customer extends Controller
             ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', $id)
+            ->where('pd.DeliveryStatus','<=','4')
+            ->where('pd.DeliveryStatus','<>','-1')
             ->get();
 
         $support = DB::table('customer_conversation as cc')
@@ -484,6 +486,36 @@ class Customer extends Controller
 
         return view('Administrator.Customer.Sale',compact('customerInfo','saleSum', 'saleTable', 'persianDate','pf'));
     }
+
+    public function return($customerID)
+    {
+        $customerInfo = DB::table('customers')
+            ->select('*')
+            ->where('id', $customerID)
+            ->first();
+
+        $data = DB::table('product_return as pr')
+            ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'p.Gender as Gender', 'p.Name as Name'
+                , 'p.PriceWithDiscount', 'p.PriceWithDiscount', 'p.PicPath as PicPath',  'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand','pr.*','pr.Date as returnDate')
+            ->leftjoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
+            ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
+            ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
+            ->leftjoin('product as p', 'p.ID', '=', 'pod.ProductID')
+            ->where('po.CustomerID', $customerID)
+            ->orderby('returnDate', 'ASC')
+            ->paginate(10);
+
+        //      Convert Date
+        $persianDate = array();
+        $returnPersianDate = array();
+        foreach ($data as $key => $rec) {
+            $returnPersianDate[$key] = $this->convertDateToPersian($rec->Date);
+            $persianDate[$key] = $this->convertDateToPersian($rec->returnDate);
+        }
+
+        return view('Administrator.Customer.ReturnProduct', compact('data','persianDate','returnPersianDate','customerInfo'));
+    }
+
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
 
