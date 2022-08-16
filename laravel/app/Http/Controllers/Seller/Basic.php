@@ -178,11 +178,11 @@ class Basic extends Controller
                 'Qty' => 0
             ]);
 
-        $data=Db::table('product_detail as pd')
-            ->select('pd.ID','pd.ProductID','p.ID','p.SellerID','s.id','s.Mobile')
-            ->leftJoin('product as p','p.ID','=','pd.ProductID')
-            ->leftJoin('sellers as s','s.id','=','p.SellerID')
-            ->where('pd.ID',$id)
+        $data = Db::table('product_detail as pd')
+            ->select('pd.ID', 'pd.ProductID', 'p.ID', 'p.SellerID', 's.id', 's.Mobile')
+            ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('pd.ID', $id)
             ->first();
 
         try {
@@ -423,7 +423,7 @@ class Basic extends Controller
 
         $data = DB::table('product_return as pr')
             ->select('pod.*', 'po.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'p.Gender as Gender', 'p.Name as Name'
-                , 'p.PriceWithDiscount', 'p.PriceWithDiscount', 'p.PicPath as PicPath',  'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand','pr.*','pr.Date as returnDate')
+                , 'p.PriceWithDiscount', 'p.PriceWithDiscount', 'p.PicPath as PicPath', 'pd.ID as pDetailID', 'pd.SampleNumber', 'p.Brand', 'pr.*', 'pr.Date as returnDate')
             ->leftjoin('product_order_detail as pod', 'pod.ID', '=', 'pr.OrderDetailID')
             ->leftjoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftjoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
@@ -440,7 +440,7 @@ class Basic extends Controller
             $persianDate[$key] = $this->convertDateToPersian($rec->returnDate);
         }
 
-        return view('Seller.ReturnProduct', compact('data','persianDate','returnPersianDate'));
+        return view('Seller.ReturnProduct', compact('data', 'persianDate', 'returnPersianDate'));
     }
 
 //  Amount Received
@@ -675,13 +675,13 @@ class Basic extends Controller
     // ----------------------------------------------[ Regulation ]---------------------------------------------------------
     public function regulation($tab)
     {
-        $signature=DB::table('sellers')
-            ->select('id','Signature')
-            ->where('id',Auth::guard('seller')->user()->id)
+        $signature = DB::table('sellers')
+            ->select('id', 'Signature')
+            ->where('id', Auth::guard('seller')->user()->id)
             ->first();
-        $date=explode(' ',$signature->Signature);
+        $date = explode(' ', $signature->Signature);
         $signature = $this->convertDateToPersian($date[0]);
-        return view('Seller.Regulation',compact('signature','tab'));
+        return view('Seller.Regulation', compact('signature', 'tab'));
     }
 
 //  --------------------------------------------------Ajax Functions--------------------------------------------------
@@ -736,7 +736,7 @@ class Basic extends Controller
                         $output .= '<li class="list-group-item">' . $row->detailID . '</li>';
                     }
                     $output .= '</ul>';
-                }  elseif ($id === 'saleCode') {
+                } elseif ($id === 'saleCode') {
                     foreach ($data as $row) {
                         $output .= '<li class="list-group-item">' . $row->ID . '</li>';
                     }
@@ -774,7 +774,6 @@ class Basic extends Controller
             $boy = $info['boy'];
             $babyGirl = $info['babyGirl'];
             $babyBoy = $info['babyBoy'];
-            $avgRating = $info['avgRating'];
         }
 
 //      Get all data for sale Filter
@@ -1086,6 +1085,37 @@ class Basic extends Controller
         return 0;
     }
 
+// Sort Visit
+    public function visit($direction)
+    {
+        $sellerID = Auth::guard('seller')->user()->id;
+        $info = $this->storeTableLoad('', '', 'all', $sellerID);
+        $sumFPrice = $info['sumFPrice'];
+        $allQty = $info['allQty'];
+        $female = $info['female'];
+        $male = $info['male'];
+        $girl = $info['girl'];
+        $boy = $info['boy'];
+        $babyGirl = $info['babyGirl'];
+        $babyBoy = $info['babyBoy'];
+        $data = DB::table('product as p')
+            ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.SampleNumber')
+            ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
+            ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
+            ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
+            ->where('p.SellerID', $sellerID)
+            ->orderby('p.VisitCounter', $direction)
+            ->groupBy('pd.ID')
+            ->paginate(10);
+
+        if ($direction === 'DESC')
+            $valName = 'پر بازدیدترین ها';
+        else
+            $valName = 'کم بازدیدترین ها';
+
+        return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl', 'boy', 'babyGirl', 'babyBoy', 'valName'));
+
+    }
 //  --------------------------------------------------Get Data Functions------------------------------------------------
 
 //  Store Data Load Whit Conditions

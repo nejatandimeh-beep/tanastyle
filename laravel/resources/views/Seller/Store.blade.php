@@ -373,6 +373,28 @@
                                                 class="btn btn-lg btn-block g-brd-gray-light-v1 g-font-size-16 g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">مشخصات صحیح</span>
                                         </label>
                                     </div>
+                                    <div
+                                        class="g-brd-around g-brd-gray-light-v2 rounded-0 g-pt-6 text-center g-mb-5 g-mr-15 g-ml-15 smallDevice w-100">
+                                        <label style="direction: rtl" class="g-color-gray-light-v1 align-self-center">مشخصات</label>
+                                    </div>
+
+                                    {{--                    visit Filters--}}
+                                    <div class="btn-group justified-content text-center col-lg-6 g-mb-20">
+                                        <label class="u-check m-0 g-mb-5">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="visit"
+                                                   type="radio" id="false" onclick="visitSort('DESC')"
+                                                {{ (isset($valName) && (($valName == 'پر بازدیدترین ها')) ? ' checked=""' : '') }}>
+                                            <span
+                                                class="btn btn-lg btn-block g-brd-gray-light-v1 g-font-size-16 g-color-white--checked g-bg-primary--checked rounded-0">پر بازدیدترین ها</span>
+                                        </label>
+                                        <label class="u-check m-0">
+                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="visit"
+                                                   type="radio" id="true" onclick="visitSort('ASC')"
+                                                {{ (isset($valName) && (($valName == 'کم بازدیدترین ها')) ? ' checked=""' : '') }}>
+                                            <span
+                                                class="btn btn-lg btn-block g-brd-gray-light-v1 g-font-size-16 g-color-white--checked g-bg-primary--checked g-brd-left-none--md rounded-0">کم بازدیدترین ها</span>
+                                        </label>
+                                    </div>
 
                                 </div>
                             </div>
@@ -445,8 +467,9 @@
                             <th class="align-middle text-center">موجودی</th>
                             <th class="align-middle text-center text-nowrap">قیمت پایه</th>
                             <th class="align-middle text-center">تخفیف</th>
-                            <th class="align-middle text-center text-nowrap">قیمت با تخفیف</th>
+                            <th class="align-middle text-center text-nowrap">با تخفیف</th>
                             <th class="align-middle text-center">عکس</th>
+                            <th class="align-middle text-center">بازدید</th>
                             <th class="align-middle text-center">جزییات</th>
                             <th class="align-middle text-center">مشخصات</th>
                             <th class="align-middle text-center">حذف</th>
@@ -484,6 +507,7 @@
                                              src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg" alt="Image Description">
                                     </div>
                                 </td>
+                                <td class="align-middle text-center g-color-gray-dark-v1">{{ number_format($rec->VisitCounter) }}</td>
                                 <td class="align-middle text-center">
                                     <a
                                         href="{{ route('sellerProductDetail',['id'=>$rec->pDetailID]) }}"

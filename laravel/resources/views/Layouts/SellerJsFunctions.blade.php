@@ -442,6 +442,11 @@
             window.location = '/Seller-Search-Product/' + page + '/' + status;
         }
 
+        // Public -> Visit Sort
+        function visitSort(direction) {
+            window.location = '/Seller-Visit-Sort/' + direction;
+        }
+
         // Public -> Product Rating
         function productRating(page, val) {
             if (val === '') {

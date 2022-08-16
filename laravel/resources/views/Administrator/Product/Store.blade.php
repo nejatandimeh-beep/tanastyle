@@ -276,6 +276,7 @@
                                         </th>
                                         <th class="align-middle text-center">عکس</th>
                                         <th class="align-middle text-center">جزییات</th>
+                                        <th class="align-middle text-center">بازدید</th>
                                         <th class="align-middle text-center">مشخصات</th>
                                         <th class="align-middle text-center">تغییرات</th>
                                     </tr>
@@ -325,6 +326,7 @@
                                                     <i class="fa fa-eye g-font-size-18"></i>
                                                 </a>
                                             </td>
+                                            <td class="align-middle text-center g-color-gray-light-v3">{{ number_format($rec->VisitCounter) }}</td>
                                             <td class="align-middle text-center">
                                                 @if (isset($rec->fpID))
                                                     <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
