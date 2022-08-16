@@ -473,7 +473,7 @@
                              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center"
                              data-nav-for="#carousel-08-{{$key+1}}">
                             <div class="js-slide">
-                                <a href="{{ route('moreItem','703') }}" class="customLinkHover">
+                                <a href="{{ route('moreItem','24') }}" class="customLinkHover">
                                     <div class="moreItem">
                                         <span style="position: absolute; left:45px; text-shadow: 0 0 5px navy;" class="h1 g-color-white g-top-50x">بیشتر ببینید</span>
                                     </div>

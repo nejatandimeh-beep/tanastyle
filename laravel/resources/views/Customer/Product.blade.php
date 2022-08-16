@@ -16,8 +16,8 @@
     <span id="cat" class="d-none">{{ $data->Cat }}</span>
     <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}" class="d-none" id="tempPostPrice" type="text">
     <pre style="direction: rtl" id="textCopy" class="d-none text-right">
-<p>برند {{ $data->Brand }}</p>
 <p>{{ $data->Name }} {{ $data->Model }}</p>
+<p>برند {{ $data->Brand }}</p>
 <p>کد محصول: <span id="preDetailID" class="g-font-weight-600"></span></p>
 <p>فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</p>
 <p>{{ $data->Detail }}</p>

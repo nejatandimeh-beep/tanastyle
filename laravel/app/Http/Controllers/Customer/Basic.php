@@ -1776,39 +1776,42 @@ class Basic extends Controller
     }
 
 // ---------------------------------------------[Product List]----------------------------------------------------------
-    public function moreItem($cat)
+    public function moreItem($num)
     {
+        $cat[0]=$num;
         session_start();
         $_SESSION['listSkip'] = 0;
-
+        $gender='';
+        $catCode='';
+        $title='';
         $category = [];
-        switch ($cat) {
+        switch ($cat[0]) {
             case '700':
-                $category[0] = $cat;
+                $category[0] = ['700','701'];
                 $gender = '0';
                 $catCode = 'q';
-                $title = 'گوشواره و اکسسوری گوش زنانه';
+                $title = 'گوشواره و گردنبند زنانه';
                 break;
             case '701':
-                $category[0] = $cat;
+                $category[0] = $cat[0];
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'گردنبند و آویز رو لباسی';
                 break;
             case '703':
-                $category[0] = $cat;
+                $category[0] = ['703','705'];
                 $gender = '0';
                 $catCode = 'q';
-                $title = 'دست بند و اکسسوری های دست';
+                $title = 'دست بند و پابند زنانه';
                 break;
             case '704':
-                $category[0] = $cat;
+                $category[0] = $cat[0];
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'انگشتر مجلسی و کژوال';
                 break;
             case '705':
-                $category[0] = $cat;
+                $category[0] = $cat[0];
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'پا بند و اکسسوری های پا';
@@ -1818,6 +1821,13 @@ class Basic extends Controller
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'عینک آفتابی و بند عینک زنانه';
+                break;
+            case '24':
+                $category = $cat;
+                $gender = '0';
+                $catCode = 'c';
+                $title = 'پیراهن زنانه';
+
                 break;
             case 'newProduct':
                 $category = ['all'];
@@ -1839,7 +1849,7 @@ class Basic extends Controller
 
                 return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
             default:
-                $category[0] = $cat;
+                $category[0] = $cat[0];
         }
         $data = DB::table('product')
             ->select('*')
@@ -1852,7 +1862,6 @@ class Basic extends Controller
             ->whereIn('Cat', $category)
             ->groupBy('p.ID')
             ->paginate(12);
-
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
