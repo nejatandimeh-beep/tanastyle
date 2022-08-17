@@ -65,7 +65,7 @@
 
                         <!-- Icon Blocks -->
                         <div
-                            class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
+                            class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
 
                             <h3 class="h6 g-color-white mb-3">فاکتورهای فروش امروز</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
@@ -74,18 +74,18 @@
                         <!-- End Icon Blocks -->
 
                         <!-- Icon Blocks -->
-                        <div
-                            class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
+{{--                        <div--}}
+{{--                            class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">--}}
 
-                            <h3 class="h6 g-color-white mb-3">فاکتورهای فروش در طول یک ماه</h3>
-                            <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
-                                    class="g-mr-5 g-ml-5 g-color-aqua">{{ $saleSum['monthOrder'] }}</span>عدد </span>
-                        </div>
+{{--                            <h3 class="h6 g-color-white mb-3">فاکتورهای فروش در طول یک ماه</h3>--}}
+{{--                            <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span--}}
+{{--                                    class="g-mr-5 g-ml-5 g-color-aqua">{{ $saleSum['monthOrder'] }}</span>عدد </span>--}}
+{{--                        </div>--}}
                         <!-- End Icon Blocks -->
 
                         <!-- Icon Blocks -->
                         <div
-                            class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
+                            class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
 
                             <h3 class="h6 g-color-white mb-3">تعداد کل فاکتورهای فروش</h3>
                             <span class="u-label g-bg-bluegray g-mb-5">برابر است با<span
@@ -95,7 +95,7 @@
 
                         <!-- Icon Blocks -->
                         <div
-                            class="col-lg-3 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
+                            class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
                             <h3 class="h6 g-color-white mb-3">کل درآمد حاصل از فاکتورهای فروش</h3>
                             <span class="u-label g-bg-bluegray g-mr-5 g-mb-5">برابر است با<span
                                     class="g-mr-5 g-ml-5 g-color-aqua">{{ number_format($saleSum['totalSaleAmount']) }}</span>تومان </span>
@@ -463,6 +463,8 @@
                                         <th class="align-middle text-center text-nowrap">مبلغ فاکتور<span
                                                 class="g-font-size-10 g-mr-3">(تومان)</span>
                                         </th>
+                                        <th class="align-middle text-center">هزینه پستی</th>
+                                        <th class="align-middle text-center">مجموع</th>
                                         <th class="align-middle text-center">تاریخ</th>
                                         <th class="align-middle text-center text-nowrap">شماره فاکتور</th>
                                         <th class="align-middle text-center">روش ارسال</th>
@@ -494,6 +496,8 @@
 
                                             <td class="align-middle text-center">{{ $rec->Qty }}</td>
                                             <td class="align-middle text-center">{{ number_format($rec->FinalPrice * $rec->Qty) }}</td>
+                                            <td class="align-middle text-center text-nowrap">{{ number_format($rec->PostPrice) }}</td>
+                                            <td class="align-middle text-center text-nowrap">{{ number_format($rec->FinalPrice * $rec->Qty+$rec->PostPrice) }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}</td>
                                             <td class="align-middle text-center">{{ $rec->orderID.'/'.$rec->orderDetailID }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $rec->PostMethod }}</td>

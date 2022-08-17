@@ -26,7 +26,7 @@ class Product extends Controller
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
-            ->where('pd.DeliveryStatus','<=','4')
+            ->where('pd.DeliveryStatus','<','4')
             ->where('pd.DeliveryStatus','<>','-1')
             ->paginate(10);
 

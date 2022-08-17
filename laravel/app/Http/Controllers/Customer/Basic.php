@@ -87,10 +87,10 @@ class Basic extends Controller
             ->take(5)
             ->get();
 
-        return view('Customer.Master', compact('discounts', 'glass', 'earring','dress', 'bracelet','newProduct'));
+        return view('Customer.Master', compact('discounts', 'glass', 'earring', 'dress', 'bracelet', 'newProduct'));
     }
 
-    public function sameProduct($genderCode, $catCode, $productID,$cat)
+    public function sameProduct($genderCode, $catCode, $productID, $cat)
     {
         $similarProduct = DB::table('product as p')
             ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
@@ -105,7 +105,7 @@ class Basic extends Controller
             ->take(5)
             ->get();
 
-        if(count($similarProduct)===0){
+        if (count($similarProduct) === 0) {
             $similarProduct = DB::table('product as p')
                 ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
                 ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
@@ -229,8 +229,8 @@ class Basic extends Controller
             ->get();
 
         // order
-        $mainOrder=DB::table('product_order as po')
-            ->select('po.ID as orderID','po.PostMethod','po.PostPrice','po.OrderPrice','pod.ID','pod.ProductID','pd.*')
+        $mainOrder = DB::table('product_order as po')
+            ->select('po.ID as orderID', 'po.PostMethod', 'po.PostPrice', 'po.OrderPrice', 'pod.ID', 'pod.ProductID', 'pd.*')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product_delivery as pd', 'pd.OrderDetailID', '=', 'pod.ID')
             ->where('po.CustomerID', Auth::user()->id)
@@ -560,7 +560,7 @@ class Basic extends Controller
         return view('Customer.Profile', compact('location', 'customer', 'address',
             'order', 'persianDate', 'orderHowDay', 'delivery', 'deliveryHowDay', 'deliveryPersianDate',
             'deliveryMin', 'deliveryTime', 'deliveryHint', 'return', 'returnHowDay', 'returnPersianDate',
-            'returnMin', 'returnTime', 'returnHint', 'like','mainOrder'));
+            'returnMin', 'returnTime', 'returnHint', 'like', 'mainOrder'));
     }
 
     public function cart()
@@ -597,10 +597,10 @@ class Basic extends Controller
         }
 
         $sendAddress = $this->checkAddress();
-        $postPriceCost=DB::table('post_price')
+        $postPriceCost = DB::table('post_price')
             ->first();
 
-        return view('Customer.Cart', compact('sendAddress', 'data','postPriceCost'));
+        return view('Customer.Cart', compact('sendAddress', 'data', 'postPriceCost'));
     }
 
     public function cartCount()
@@ -930,6 +930,7 @@ class Basic extends Controller
     {
         $size = Session::get('size');
         $productID = $request->get('productIDFromBuy');
+        $location = $request->get('location');
         $name = $request->get('receiver-name');
         $family = $request->get('receiver-family');
         $postalCode = $request->get('receiver-postalCode');
@@ -966,7 +967,10 @@ class Basic extends Controller
         if ($productID === 'empty')
             return redirect()->route('userProfile', 'addressStatus');
         else {
-            return redirect()->route('productDetail', [$productID, $size]);
+            if ($location === 'addAddressCart')
+                return redirect()->route('cart');
+            else
+                return redirect()->route('productDetail', [$productID, $size]);
         }
     }
 
@@ -997,15 +1001,15 @@ class Basic extends Controller
                 ->where('CustomerID', Auth::user()->id)
                 ->delete();
         } else {
-            $orderTemporary= DB::table('product_order_temporary')
+            $orderTemporary = DB::table('product_order_temporary')
                 ->select('*')
                 ->get();
 
-            foreach ($orderTemporary as $key => $row){
-                $orderTime = explode(" ",$row->Time);
-                $deleteItem=$this->dateLenToNow($orderTime[0],$orderTime[1]);
+            foreach ($orderTemporary as $key => $row) {
+                $orderTime = explode(" ", $row->Time);
+                $deleteItem = $this->dateLenToNow($orderTime[0], $orderTime[1]);
 
-                if($deleteItem>15){
+                if ($deleteItem > 15) {
                     DB::table('product_detail')
                         ->where('ID', $row->ProductDetailID)
                         ->increment('Qty', $row->Qty);
@@ -1016,7 +1020,7 @@ class Basic extends Controller
                         ->delete();
                 }
             }
-    }
+        }
 
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product as p')
@@ -1126,12 +1130,12 @@ class Basic extends Controller
             ->where('ID', $id)
             ->increment('VisitCounter', 1);
 
-        $postPriceCost=DB::table('post_price')
+        $postPriceCost = DB::table('post_price')
             ->first();
 
         // بررسی اینکه کاربر جاری لایک کرده است  یا نه؟
         $like = (isset($rating_tbl2) && ($rating_tbl2->Like === 1)) ? 'like' : 'noLike';
-        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo','postPriceCost'));
+        return view('Customer.Product', compact('sendAddress', 'data', 'size', 'voteID', 'rating', 'like', 'customerRate', 'comments', 'commentVote', 'commentsHowDay', 'PersianDate', 'sizeInfo', 'postPriceCost'));
     }
 
     public function productVisit($id)
@@ -1197,10 +1201,10 @@ class Basic extends Controller
                 'DeliveryStatus' => '-1',
             ]);
 
-        $seller=DB::table('product_order_detail as pod')
-            ->select('pod.ID','pod.SellerID','s.id','s.Mobile')
-            ->leftJoin('sellers as s','s.id','=','pod.SellerID')
-            ->where('pod.ID',$podID)
+        $seller = DB::table('product_order_detail as pod')
+            ->select('pod.ID', 'pod.SellerID', 's.id', 's.Mobile')
+            ->leftJoin('sellers as s', 's.id', '=', 'pod.SellerID')
+            ->where('pod.ID', $podID)
             ->first();
 
         try {
@@ -1433,7 +1437,7 @@ class Basic extends Controller
     public function sizeInfo($id, $size)
     {
         return DB::table('product_detail')
-            ->select('ID', 'Color', 'Qty', 'HexCode', 'PicNumber','SampleNumber')
+            ->select('ID', 'Color', 'Qty', 'HexCode', 'PicNumber', 'SampleNumber')
             ->where('ProductID', $id)
             ->where('Size', $size)
             ->get();
@@ -1778,16 +1782,16 @@ class Basic extends Controller
 // ---------------------------------------------[Product List]----------------------------------------------------------
     public function moreItem($num)
     {
-        $cat[0]=$num;
+        $cat[0] = $num;
         session_start();
         $_SESSION['listSkip'] = 0;
-        $gender='';
-        $catCode='';
-        $title='';
+        $gender = '';
+        $catCode = '';
+        $title = '';
         $category = [];
         switch ($cat[0]) {
             case '700':
-                $category[0] = ['700','701'];
+                $category[0] = ['700', '701'];
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'گوشواره و گردنبند زنانه';
@@ -1799,7 +1803,7 @@ class Basic extends Controller
                 $title = 'گردنبند و آویز رو لباسی';
                 break;
             case '703':
-                $category[0] = ['703','705'];
+                $category[0] = ['703', '705'];
                 $gender = '0';
                 $catCode = 'q';
                 $title = 'دست بند و پابند زنانه';
@@ -1836,14 +1840,14 @@ class Basic extends Controller
                 $title = 'تاز ه ترین های تانا استایل';
                 $data = DB::table('product')
                     ->select('*')
-                    ->orderBy('ID','DESC')
+                    ->orderBy('ID', 'DESC')
                     ->groupBy('ID')
                     ->paginate(12);
 
                 $size = DB::table('product as p')
                     ->select('pd.Size', 'pd.Color', 'p.ID')
                     ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-                    ->orderBy('ID','DESC')
+                    ->orderBy('ID', 'DESC')
                     ->groupBy('p.ID')
                     ->paginate(12);
 
@@ -2376,8 +2380,9 @@ class Basic extends Controller
 // ----------------------------------------------[ Regulation ]---------------------------------------------------------
     public function regulation($tab)
     {
-        return view('Customer.Regulation',compact('tab'));
+        return view('Customer.Regulation', compact('tab'));
     }
+
 // ----------------------------------------------[ Instagram ]----------------------------------------------------------
     public function instagram()
     {
@@ -2427,7 +2432,7 @@ class Basic extends Controller
                     'Authority' => $Authority,
                     'PostMethod' => $record->PostMethod,
                     'PostPrice' => $record->PostPrice,
-                    'OrderPrice' => ($record->Price)-($record->PostPrice),
+                    'OrderPrice' => ($record->Price) - ($record->PostPrice),
                 ]);
             }
 

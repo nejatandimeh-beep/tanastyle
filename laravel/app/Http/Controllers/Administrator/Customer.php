@@ -189,7 +189,7 @@ class Customer extends Controller
             ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->where('po.CustomerID', $id)
-            ->where('pd.DeliveryStatus','<=','4')
+            ->where('pd.DeliveryStatus','<','4')
             ->where('pd.DeliveryStatus','<>','-1')
             ->get();
 

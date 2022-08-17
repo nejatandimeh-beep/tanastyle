@@ -1535,6 +1535,13 @@
                     $('#submitAddress').text('ثبت آدرس جدید و ادامه خرید');
                     $('#productIDFromBuy').val($('#pageLocation').text().replace(/[^0-9]/gi, ''));
                     break;
+                case 'addAddressCart':
+                    setTimeout(function () {
+                        $("#newAddressLink").trigger("click");
+                    }, 1);
+                    $('#submitAddress').text('ثبت آدرس جدید و برگشت به سبد');
+                    $('#productIDFromBuy').val($('#pageLocation').text().replace(/[^0-9]/gi, ''));
+                    break;
                 case 'deliveryStatus':
                     $("#filter-user-delivery").trigger("click");
                     break;

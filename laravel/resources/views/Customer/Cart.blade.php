@@ -265,7 +265,7 @@
                                         {{--هزینه پستی--}}
                                         <span id="popularPost"
                                             class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
-                                            <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}</span>
+                                            <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?number_format($postPriceCost->Mahabad):number_format($postPriceCost->OtherCity)}}</span>
                                             <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                         </span>
                                         <span  id="tPaxPost"
@@ -302,7 +302,7 @@
                                                 class="g-color-gray-dark-v2 g-mr-5"> گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}} <strong
                                                 class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
                                     @else
-                                        <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', 'navigation') : route('login') }}"
+                                        <a href="{{ (isset(Auth::user()->id)) ? route('userProfile', 'addAddressCart') : route('login') }}"
                                            id="addAddress"
                                            class="g-color-red g-color-primary--hover g-mt-0--lg g-mt-30 g-text-underline--none--hover">
                                                         افزودن آدرس<i class="icon-pencil g-mr-5 align-middle"></i>

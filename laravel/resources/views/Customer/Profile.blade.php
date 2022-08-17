@@ -1055,6 +1055,7 @@
                                  style="display: none; overflow-y: auto; height: 100% !important; -webkit-overflow-scrolling: touch; max-height: 100% !important; width: 100%">
                                 <form id="addAddress" action="{{route('addAddress')}}" method="POST">
                                     @csrf
+                                    <input name="location" class="d-none" value="{{ $location }}" type="text">
                                     <input id="productIDFromBuy" name="productIDFromBuy" class="d-none" value="empty">
                                     <div class="sticky-top g-bg-white g-px-20">
                                         <div class="d-flex justify-content-between g-pt-15 g-pb-8">
@@ -1069,7 +1070,7 @@
                                     <div style="direction: rtl; overflow-y: auto"
                                          class="g-px-20 g-px-60--lg text-right g-py-0">
                                         <p style="text-align: justify;" class="g-pb-15 g-mb-0 g-mb-20--lg"><span
-                                                class="g-font-weight-600 g-ml-10">{{ Auth::user()->name }} عزیز</span>آدرس
+                                                class="g-font-weight-600 g-ml-10">خریدار عزیز</span>آدرس
                                             جدید بصورت خودکار فعال خواهد شد و از این پس محصولات به این آدرس ارسال
                                             می گردد. (می توانید در هر زمان از طریق منوی آدرس ها آدرس دیگری را فعال
                                             کنید). </p>
