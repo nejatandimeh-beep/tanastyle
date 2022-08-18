@@ -14,7 +14,10 @@ class Seller extends Authenticatable
 
 
     protected $fillable = [
-        'name','email', 'password','Family','NationalID','Birthday','Gender','Phone','Mobile','State','City','Address','ShopNumber','HomeAddress','HomePostalCode','WorkPostalCode','PicPath','Signature','PicPathCard'
+        'name','email', 'password','Family','NationalID',
+        'Birthday','Gender','Phone','Mobile','State','City',
+        'Address','ShopNumber','HomeAddress','HomePostalCode',
+        'WorkPostalCode','PicPath','Signature','PicPathCard','status'
     ];
 
 

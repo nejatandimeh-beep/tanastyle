@@ -26,7 +26,11 @@
                                            required=""
                                            autocomplete="mobile"
                                            autofocus="">
-
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">
+                                            {{ session('error') }}
+                                        </div>
+                                    @endif
                                     @error('mobile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>شماره موبایل یا رمز ورود اشتباه است</strong>
