@@ -5,12 +5,11 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
 // Test Pages
-Route::get('/test', function () {
-    return view('Temp/test');
-});
+Route::get('/test', 'Customer\Basic@test')->name('test');
+
 
 // site map
-Route::get('/Site-Map', 'SitemapController@index')->name('sitemap');
+Route::get('/SiteMap', 'SitemapController@index')->name('sitemap');
 
 // ******************************************** ( Customer Routes ) ******************************************************
 // Customer Login Links

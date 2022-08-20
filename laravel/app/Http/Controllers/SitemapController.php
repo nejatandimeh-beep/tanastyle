@@ -11,8 +11,8 @@ class SitemapController extends Controller
 {
     public function index()
     {
-        SitemapGenerator::create('https://tanastyle.ir')
-            ->writeToFile(public_path('SiteMap/sitemap.xml'));
+        SitemapGenerator::create('https://www.tanastyle.ir')
+            ->writeToFile(public_path('Mapping/sitemap.xml'));
         echo 'site map created :)';
 //
 //        SitemapGenerator::create('https://example.com')

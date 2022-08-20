@@ -443,7 +443,6 @@
                                         <th class="align-middle text-center text-nowrap">مبلغ فاکتور<span
                                                 class="g-font-size-10 g-mr-3">(تومان)</span>
                                         </th>
-                                        <th class="align-middle text-center">مجموع</th>
                                         <th class="align-middle text-center">تاریخ</th>
                                         <th class="align-middle text-center text-nowrap">شماره فاکتور</th>
                                         <th class="align-middle text-center text-nowrap">موبایل خریدار</th>
@@ -477,7 +476,6 @@
 
                                             <td class="align-middle text-center">{{ $rec->Qty }}</td>
                                             <td class="align-middle text-center">{{ number_format($rec->FinalPrice * $rec->Qty) }}</td>
-                                            <td class="align-middle text-center text-nowrap">{{ number_format($rec->PostPrice) }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}</td>
                                             <td class="align-middle text-center">{{ $rec->orderID.'/'.$rec->orderDetailID }}</td>
                                             <td class="align-middle text-center">{{ $rec->customerMobile }}</td>

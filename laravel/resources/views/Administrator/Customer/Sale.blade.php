@@ -56,12 +56,12 @@
         <!-- End Nav tabs -->
 
         <!-- Tab panes -->
-        <div id="nav-4-1-primary-hor-fill" class="tab-content g-pt-40">
+        <div id="nav-4-1-primary-hor-fill" class="tab-content g-pt-40 g-mb-150">
             <!--فاکتور-->
             <div class="tab-pane fade show active" id="nav-4-1-primary-hor-fill--4" role="tabpanel">
                 <div style="padding-bottom: 120px" class="container">
                     {{-- Total Info--}}
-                    <div class="rowSeller g-mt-30 g-mb-20 g-mr-0 g-ml-0">
+                    <div class="rowSeller g-mt-30 g-mb-20 g-mr-0 g-ml-0 opacity-0">
 
                         <!-- Icon Blocks -->
                         <div
@@ -463,7 +463,6 @@
                                         <th class="align-middle text-center text-nowrap">مبلغ فاکتور<span
                                                 class="g-font-size-10 g-mr-3">(تومان)</span>
                                         </th>
-                                        <th class="align-middle text-center">مجموع</th>
                                         <th class="align-middle text-center">تاریخ</th>
                                         <th class="align-middle text-center text-nowrap">شماره فاکتور</th>
                                         <th class="align-middle text-center">روش ارسال</th>
@@ -495,7 +494,6 @@
 
                                             <td class="align-middle text-center">{{ $rec->Qty }}</td>
                                             <td class="align-middle text-center">{{ number_format($rec->FinalPrice * $rec->Qty) }}</td>
-                                            <td class="align-middle text-center text-nowrap">{{ number_format($rec->PostPrice) }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}</td>
                                             <td class="align-middle text-center">{{ $rec->orderID.'/'.$rec->orderDetailID }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $rec->PostMethod }}</td>

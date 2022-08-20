@@ -673,6 +673,7 @@ class Basic extends Controller
                         'PostPrice' => $postPrice,
                     ]);
 
+            setcookie('userId', Auth::user()->id, time() + (86400 * 30), "/Confirmation");
             $order = new zarinpal();
             $res = $order->pay($price, Auth::user()->email, Auth::user()->Mobile);
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
@@ -722,6 +723,7 @@ class Basic extends Controller
                     'PostPrice' => $postPrice,
                 ]);
 
+            setcookie('userId', Auth::user()->id, time() + (86400 * 30), "/Confirmation");
             $order = new zarinpal();
             $res = $order->pay($price, Auth::user()->email, Auth::user()->Mobile);
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
@@ -2666,5 +2668,10 @@ class Basic extends Controller
                 return false;
         }
 
+    }
+
+    public function test()
+    {
+        return view('Temp/test');
     }
 }
