@@ -679,6 +679,7 @@ class Basic extends Controller
                         'Price' => $price,
                         'PostMethod' => $postMethod,
                         'PostPrice' => $postPrice,
+                        'BuyMethod' => 'سبد',
                     ]);
 
             setcookie('userId', Auth::user()->id, time() + (86400 * 30), "/Confirmation");
@@ -728,6 +729,7 @@ class Basic extends Controller
                     'Price' => $price,
                     'PostMethod' => $postMethod,
                     'PostPrice' => $postPrice,
+                    'BuyMethod' => 'مستقیم',
                 ]);
 
             setcookie('userId', Auth::user()->id, time() + (86400 * 30), "/Confirmation");
@@ -2442,6 +2444,7 @@ class Basic extends Controller
                     'PostMethod' => $record->PostMethod,
                     'PostPrice' => $record->PostPrice,
                     'OrderPrice' => ($record->Price) - ($record->PostPrice),
+                    'BuyMethod' => $record->BuyMethod,
                 ]);
             }
 

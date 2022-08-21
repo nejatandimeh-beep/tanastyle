@@ -1588,8 +1588,8 @@
 
                                             <span
                                                 class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mt-15--lg text-center">هزینه پستی:
-                                                <span>{{$mainRow->PostMethod==='تیپاکس' ? ' پرداخیت در محل': ($mainRow->PostPrice) }}</span>
-                                                <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                                <span>{{$mainRow->PostMethod==='تیپاکس' ? ' پرداخت در محل': ($mainRow->PostPrice) }}</span>
+                                                <span class="{{$mainRow->PostMethod==='تیپاکس' ? 'd-none': '' }} g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                             </span>
                                             {{--مبلغ فاکتور--}}
                                             <span
