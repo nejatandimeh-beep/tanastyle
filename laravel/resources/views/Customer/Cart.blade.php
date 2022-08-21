@@ -1,6 +1,5 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <input name="postPrice" value="{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?$postPriceCost->Mahabad:$postPriceCost->OtherCity}}" class="d-none" id="tempPostPrice" type="text">
     <!-- سبد خرید -->
     <div style="direction: rtl" class="container-fluid modalBox cartContainer">
         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">

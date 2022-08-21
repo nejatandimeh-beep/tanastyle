@@ -577,7 +577,7 @@ class Basic extends Controller
                 ->orderBy('Time')
                 ->get();
 
-            $tempOrder = DB::table('product_order_temporary as pot')
+            $tempOrder = DB::table('product_order_temporary2 as pot')
                 ->select('*')
                 ->where('CustomerID', Auth::user()->id)
                 ->get();
@@ -588,7 +588,7 @@ class Basic extends Controller
                     ->increment('Qty', $row->Qty);
             }
 
-            DB::table('product_order_temporary')
+            DB::table('product_order_temporary2')
                 ->select('*')
                 ->where('CustomerID', Auth::user()->id)
                 ->delete();
@@ -662,14 +662,22 @@ class Basic extends Controller
 
         $price = $request->get('allPrice');
         $postPrice = (int)$request->get('postPrice');
+        switch ($postPrice) {
+            case 0:
+                $postMethod = 'تیپاکس';
+                break;
+            default:
+                $postMethod = 'پست معمولی';
+        }
         if ($stock) {
             foreach ($productDetailID as $key => $row)
-                DB::table('product_order_temporary')
+                DB::table('product_order_temporary2')
                     ->insert([
                         'CustomerID' => Auth::user()->id,
                         'ProductDetailID' => $row,
                         'Qty' => $qty[$key],
                         'Price' => $price,
+                        'PostMethod' => $postMethod,
                         'PostPrice' => $postPrice,
                     ]);
 
@@ -684,7 +692,6 @@ class Basic extends Controller
 
     public function bankingPortal($id, $qty, $postPrice)
     {
-        $postMethod = '';
         switch ($postPrice) {
             case '0':
                 $postMethod = 'تیپاکس';
@@ -713,7 +720,7 @@ class Basic extends Controller
 
         if ($stock) {
             $price = ($data->FinalPrice * $qty) + $postPrice;
-            DB::table('product_order_temporary')
+            DB::table('product_order_temporary2')
                 ->insert([
                     'CustomerID' => Auth::user()->id,
                     'ProductDetailID' => $id,
@@ -741,7 +748,7 @@ class Basic extends Controller
         $MerchantID = 'ccd4acab-a4dc-416d-9172-b066aa674e2b';
         $Authority = $request->get('Authority');
 
-        $data = DB::table('product_order_temporary')
+        $data = DB::table('product_order_temporary2')
             ->select('*')
             ->where('CustomerID', Auth::user()->id)
             ->get();
@@ -778,7 +785,7 @@ class Basic extends Controller
                         ]);
                 }
 
-                DB::table('product_order_temporary')
+                DB::table('product_order_temporary2')
                     ->select('*')
                     ->where('CustomerID', Auth::user()->id)
                     ->delete();
@@ -799,7 +806,7 @@ class Basic extends Controller
                     ]);
             }
 
-            DB::table('product_order_temporary')
+            DB::table('product_order_temporary2')
                 ->select('*')
                 ->where('CustomerID', Auth::user()->id)
                 ->delete();
@@ -987,7 +994,7 @@ class Basic extends Controller
     public function productDetail($id, $sizeInfo)
     {
         if (isset(Auth::user()->id)) {
-            $tempOrder = DB::table('product_order_temporary as pot')
+            $tempOrder = DB::table('product_order_temporary2 as pot')
                 ->select('*')
                 ->where('CustomerID', Auth::user()->id)
                 ->get();
@@ -998,12 +1005,12 @@ class Basic extends Controller
                     ->increment('Qty', $row->Qty);
             }
 
-            DB::table('product_order_temporary')
+            DB::table('product_order_temporary2')
                 ->select('*')
                 ->where('CustomerID', Auth::user()->id)
                 ->delete();
         } else {
-            $orderTemporary = DB::table('product_order_temporary')
+            $orderTemporary = DB::table('product_order_temporary2')
                 ->select('*')
                 ->get();
 
@@ -1016,7 +1023,7 @@ class Basic extends Controller
                         ->where('ID', $row->ProductDetailID)
                         ->increment('Qty', $row->Qty);
 
-                    DB::table('product_order_temporary')
+                    DB::table('product_order_temporary2')
                         ->select('ID')
                         ->where('ID', $row->ID)
                         ->delete();
@@ -2510,7 +2517,7 @@ class Basic extends Controller
         }
 
         foreach ($data as $row) {
-            DB::table('product_order_temporary')
+            DB::table('product_order_temporary2')
                 ->where('ID', $row->ID)
                 ->delete();
         }
