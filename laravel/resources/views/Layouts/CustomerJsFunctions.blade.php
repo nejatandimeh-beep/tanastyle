@@ -12,7 +12,6 @@
                 if ($('.cartContainer').length > 0 || $('#productDetailContainer').length > 0) {
                     console.log('reload');
                     window.location.reload();
-                    backButnClicked= true;
                 }
             }
         });
@@ -861,7 +860,10 @@
 
         // Bank Portal
         function bankingPortal(id, qty) {
-            let postPrice = $('#tempPostPrice').val();
+            let postPrice = $('#tempPostPrice').val(),
+                FinalPriceWithoutDiscount = $('#FinalPriceWithoutDiscount').text(),
+                discount = $('#productDiscount').text(),
+                finalPrice = $('#finalPrice').text();
             $('.custombox-content #bankingPortalBtn').hide();
             $('.custombox-content #waitingIconSubmit').show();
             if ($('#loginAlert').text() === 'login') {
@@ -879,7 +881,7 @@
                         }
                         if (error === 0) {
                             if ($('#addressID').length > 0) {
-                                window.location = '/Banking-Portal/' + id + '/' + qty + '/' + postPrice;
+                                window.location = '/Banking-Portal/' + id + '/' + qty + '/' + postPrice+'/'+FinalPriceWithoutDiscount+'/'+discount+'/'+finalPrice;
                             } else {
                                 $('.custombox-content #bankingPortalBtn').show();
                                 $('.custombox-content #waitingIconSubmit').hide();
@@ -1180,13 +1182,15 @@
 
         function cartOrder(row) {
             console.log(row);
-            let price = [],
-                allPrice = 0,
+            let allPrice = 0,
                 tempPrice = [],
                 pdId = [],
                 qty = [],
                 postPrice = 0,
                 orderPrice = 0,
+                FinalPriceWithoutDiscount = [],
+                discount = [],
+                productFinalPrice = [],
                 form = $('#cartOrderForm');
             $("#cartOrderForm").empty();
             $('#cartDate').text('( ' + nowDate() + ' )');
@@ -1194,12 +1198,17 @@
                 for (let i = 0; i <= row - 1; i++) {
                     qty[i] = $('#basketQty' + i).val();
                     pdId[i] = $('#productDetailID' + i).text();
+                    FinalPriceWithoutDiscount[i] = $('#FinalPriceWithoutDiscount' + i).text();
+                    discount[i] = $('#discount' + i).text();
                     $('#orderQty' + i).text(qty[i]);
                     tempPrice[i] = $('#productFinalPrice' + i).text().replace(/,/g, '');
-                    price[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
-                    allPrice = allPrice + price[i];
+                    productFinalPrice[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
+                    allPrice = allPrice + productFinalPrice[i];
                     $('#rowNumber' + i).text(i + 1);
                     form.append("<input name='productDetailID" + i + "' value=" + pdId[i] + ">");
+                    form.append("<input name='discount" + i + "' value=" + discount[i] + ">");
+                    form.append("<input name='FinalPriceWithoutDiscount" + i + "' value=" + FinalPriceWithoutDiscount[i] + ">");
+                    form.append("<input name='productFinalPrice" + i + "' value=" + tempPrice[i] + ">");
                     form.append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
                 orderPrice = allPrice;

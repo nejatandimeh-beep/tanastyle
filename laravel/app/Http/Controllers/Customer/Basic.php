@@ -521,7 +521,9 @@ class Basic extends Controller
 
         // Get data after Database update
         $order = DB::table('product_order as po')
-            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'pd.SampleNumber', 'ca.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('po.*', 'pod.*', 'p.*', 'pod.ID as orderDetailID', 'po.ID as orderID',
+                'pd.SampleNumber', 'ca.*', 's.Name as sellerName', 's.Family as sellerFamily',
+                'pod.Discount as orderDiscount')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
@@ -605,6 +607,44 @@ class Basic extends Controller
 
     public function cartCount()
     {
+        if (isset(Auth::user()->id)) {
+            $tempOrder = DB::table('product_order_temporary2 as pot')
+                ->select('*')
+                ->where('CustomerID', Auth::user()->id)
+                ->get();
+
+            foreach ($tempOrder as $row) {
+                DB::table('product_detail')
+                    ->where('ID', $row->ProductDetailID)
+                    ->increment('Qty', $row->Qty);
+            }
+
+            DB::table('product_order_temporary2')
+                ->select('*')
+                ->where('CustomerID', Auth::user()->id)
+                ->delete();
+        } else {
+            $orderTemporary = DB::table('product_order_temporary2')
+                ->select('*')
+                ->get();
+
+            foreach ($orderTemporary as $key => $row) {
+                $orderTime = explode(" ", $row->Time);
+                $deleteItem = $this->dateLenToNow($orderTime[0], $orderTime[1]);
+
+                if ($deleteItem > 15) {
+                    DB::table('product_detail')
+                        ->where('ID', $row->ProductDetailID)
+                        ->increment('Qty', $row->Qty);
+
+                    DB::table('product_order_temporary2')
+                        ->select('ID')
+                        ->where('ID', $row->ID)
+                        ->delete();
+                }
+            }
+        }
+
         $data = DB::table('product_cart')
             ->select('CustomerID')
             ->where('CustomerID', auth::user()->id)
@@ -641,8 +681,14 @@ class Basic extends Controller
         $productDetailID = [];
         $stock = false;
         $qty = [];
+        $discount = [];
+        $FinalPriceWithoutDiscount=[];
+        $finalPrice=[];
         for ($i = 0; $i < $row; $i++) {
             $productDetailID[$i] = $request->get('productDetailID' . $i);
+            $discount[$i] = preg_replace('/\D/', '', $request->get('discount' . $i));
+            $FinalPriceWithoutDiscount[$i] = preg_replace('/\D/', '', $request->get('FinalPriceWithoutDiscount' . $i));
+            $finalPrice[$i] = preg_replace('/\D/', '',$request->get('productFinalPrice' . $i));
             $data = DB::table('product_detail')
                 ->select('ID', 'Qty')
                 ->where('ID', $productDetailID[$i])
@@ -660,7 +706,7 @@ class Basic extends Controller
                 ->decrement('Qty', $qty[$i]);
         }
 
-        $price = $request->get('allPrice');
+        $orderPrice = $request->get('allPrice');
         $postPrice = (int)$request->get('postPrice');
         switch ($postPrice) {
             case 0:
@@ -676,22 +722,25 @@ class Basic extends Controller
                         'CustomerID' => Auth::user()->id,
                         'ProductDetailID' => $row,
                         'Qty' => $qty[$key],
-                        'Price' => $price,
+                        'OrderPrice' => $orderPrice,
                         'PostMethod' => $postMethod,
                         'PostPrice' => $postPrice,
+                        'OrderDetailPrice' => (int)$FinalPriceWithoutDiscount[$key],
+                        'Discount' => (int)$discount[$key],
+                        'OrderDetailFinalPrice' => (int)$finalPrice[$key],
                         'BuyMethod' => 'سبد',
                     ]);
 
             setcookie('userId', Auth::user()->id, time() + (86400 * 30), "/Confirmation");
             $order = new zarinpal();
-            $res = $order->pay($price, Auth::user()->email, Auth::user()->Mobile);
+            $res = $order->pay((int)$orderPrice, Auth::user()->email, Auth::user()->Mobile);
             return redirect('https://www.zarinpal.com/pg/StartPay/' . $res);
         } else {
             return redirect()->route('cart', 'noExist');
         }
     }
 
-    public function bankingPortal($id, $qty, $postPrice)
+    public function bankingPortal($id, $qty, $postPrice,$FinalPriceWithoutDiscount,$discount,$finalPrice)
     {
         switch ($postPrice) {
             case '0':
@@ -727,8 +776,12 @@ class Basic extends Controller
                     'ProductDetailID' => $id,
                     'Qty' => $qty,
                     'Price' => $price,
+                    'OrderPrice' => (int)$finalPrice,
                     'PostMethod' => $postMethod,
                     'PostPrice' => $postPrice,
+                    'OrderDetailPrice' => (int)$FinalPriceWithoutDiscount,
+                    'Discount' => (int)$discount,
+                    'OrderDetailFinalPrice' => (int)$finalPrice,
                     'BuyMethod' => 'مستقیم',
                 ]);
 
@@ -764,7 +817,7 @@ class Basic extends Controller
                     //این مقادیر را به سایت زرین پال برای دریافت تاییدیه نهایی ارسال می کنیم
                     'MerchantID' => $MerchantID,
                     'Authority' => $Authority,
-                    'Amount' => $data[0]->Price,
+                    'Amount' => $data[0]->OrderPrice,
                 ],
             ]);
 
@@ -2443,7 +2496,7 @@ class Basic extends Controller
                     'Authority' => $Authority,
                     'PostMethod' => $record->PostMethod,
                     'PostPrice' => $record->PostPrice,
-                    'OrderPrice' => ($record->Price) - ($record->PostPrice),
+                    'OrderPrice' => $record->OrderPrice,
                     'BuyMethod' => $record->BuyMethod,
                 ]);
             }
@@ -2460,7 +2513,10 @@ class Basic extends Controller
                 'Qty' => $record->Qty,
                 'Size' => $productInfo->Size,
                 'Color' => $productInfo->Color,
-                'OrderBankCode' => '3#$ddf3e3continue3',
+                'OrderBankCode' => $Authority,
+                'OrderDetailPrice' => $record->OrderDetailPrice,
+                'Discount' => $record->Discount,
+                'OrderDetailFinalPrice' => $record->OrderDetailFinalPrice,
             ]);
 
             $orderDetailID = DB::table('product_order_detail')
@@ -2519,6 +2575,7 @@ class Basic extends Controller
                 ->first();
         }
 
+        // remove order temporary records
         foreach ($data as $row) {
             DB::table('product_order_temporary2')
                 ->where('ID', $row->ID)

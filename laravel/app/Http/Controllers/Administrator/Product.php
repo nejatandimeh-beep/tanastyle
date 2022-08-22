@@ -128,14 +128,13 @@ class Product extends Controller
                 $createOrder = $d->Date; // Get Order Table Column Date and Convert String Date To Object Date
                 $date = new DateTime($createOrder);
                 $today = new DateTime();
-                $dateOrder = $date->diff($today)->format("%d");
-
+                $dateOrder = $date->diff($today)->format("%y%m%d");
                 if ($dateOrder == 0) $generalInfo['todayOrder'] += 1;
                 if (($dateOrder == 0) || ($dateOrder < 30)) $generalInfo['monthOrder'] += 1;
 
                 $generalInfo['allOrder'] += 1;
 
-                $generalInfo['totalSaleAmount'] += ($d->FinalPrice * $d->Qty);
+                $generalInfo['totalSaleAmount'] += ($d->OrderDetailFinalPrice * $d->Qty);
             }
 
             return $generalInfo;

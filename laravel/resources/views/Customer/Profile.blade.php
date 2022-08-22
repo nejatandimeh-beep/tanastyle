@@ -1453,16 +1453,16 @@
                                                                                     قیمت واحد
                                                                                 </h6>
                                                                                 <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                                     {{ number_format($row->FinalPriceWithoutDiscount) }}
+                                                                                     {{ number_format($row->OrderDetailPrice) }}
                                                                                 </span>
                                                                             </div>
                                                                             <div
                                                                                 class="d-flex flex-column col-12 col-lg-1 text-center g-py-10 g-py-0--lg g-px-20 g-px-0--lg">
                                                                                 <h6 class="g-brd-bottom g-brd-gray-light-v4 g-mb-10 g-pb-5">
-                                                                                    با {{ $row->Discount }}% تخفیف
+                                                                                    با {{ $row->orderDiscount }}% تخفیف
                                                                                 </h6>
                                                                                 <span class="g-pa-5--lg color-primary-smallDevice">
-                                                                                      {{ number_format($row->FinalPrice) }}
+                                                                                      {{ number_format($row->OrderDetailFinalPrice) }}
                                                                                 </span>
                                                                             </div>
                                                                             <div

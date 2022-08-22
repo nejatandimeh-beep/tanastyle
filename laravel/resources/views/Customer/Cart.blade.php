@@ -217,12 +217,12 @@
                                                 <span id="orderQty{{$key}}" class="g-pa-5"></span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                            <span class="g-pa-5">
+                                                            <span class="g-pa-5" id="FinalPriceWithoutDiscount{{$key}}">
                                                                 {{ number_format($row->FinalPriceWithoutDiscount) }}
                                                             </span>
                                             </td>
                                             <td class="align-middle text-center">
-                                                            <span class="g-pa-5">
+                                                            <span class="g-pa-5" id="discount{{$key}}">
                                                                 %{{ $row->Discount }}
                                                             </span>
                                             </td>

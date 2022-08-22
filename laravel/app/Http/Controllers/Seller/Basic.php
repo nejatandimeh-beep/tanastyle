@@ -368,6 +368,7 @@ class Basic extends Controller
 
 //      Set Data For Info Panel In Sale Page
         $todayOrder = $info['todayOrder'];
+        $monthOrder = $info['monthOrder'];
         $allOrder = $info['allOrder'];
         $totalSaleAmount = $info['totalSaleAmount'];
 
@@ -381,7 +382,7 @@ class Basic extends Controller
             $persianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Seller.Sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate'));
+        return view('Seller.Sale', compact('data', 'todayOrder','monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate'));
     }
 
 //  Order Detail
@@ -1239,6 +1240,7 @@ class Basic extends Controller
 
             $generalInfo = array(
                 'todayOrder' => 0,
+                'monthOrder' => 0,
                 'allOrder' => 0,
                 'totalSaleAmount' => 0);
 
@@ -1256,14 +1258,15 @@ class Basic extends Controller
                 $createOrder = $d->Date; // Get Order Table Column Date and Convert String Date To Object Date
                 $date = new DateTime($createOrder);
                 $today = new DateTime();
-                $dateOrder = $date->diff($today)->format("%d");
+                $dateOrder = $date->diff($today)->format("%y%m%d");
 
                 if ($dateOrder == 0)
                     $generalInfo['todayOrder'] += 1;
+                if (($dateOrder == 0) || ($dateOrder < 30)) $generalInfo['monthOrder'] += 1;
 
                 $generalInfo['allOrder'] += 1;
 
-                $generalInfo['totalSaleAmount'] += ($d->PriceWithDiscount * $d->Qty);
+                $generalInfo['totalSaleAmount'] += ($d->OrderDetailFinalPrice * $d->Qty);
             }
 
             return $generalInfo;

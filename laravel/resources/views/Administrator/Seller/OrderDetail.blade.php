@@ -5,7 +5,7 @@
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{route('sellerControlPanel',['id'=>$data->SellerID,'tab'=>'sale'])}}">فاکتورهای فروش</a>
+                   href="{{route('adminSellerSale',$data->SellerID)}}">فاکتورهای فروش</a>
             </li>
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1"
@@ -188,7 +188,7 @@
                                            tabindex="1"
                                            placeholder=""
                                            disabled
-                                           value="{{ number_format($data->UnitPrice) }}">
+                                           value="{{ number_format($data->OrderDetailPrice) }}">
                                     <span style="border-left: 1px solid #ccc"
                                           class="input-group-addon g-color-gray-light-v1  g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-right-none g-width-100 bigDevice">تومان</span>
                                 </div>
@@ -218,7 +218,7 @@
                                            tabindex="1"
                                            placeholder=""
                                            disabled
-                                           value="{{ number_format($data->FinalPrice) }}">
+                                           value="{{ number_format($data->OrderDetailFinalPrice) }}">
                                     <span style="border-left: 1px solid #ccc"
                                           class="input-group-addon g-color-gray-light-v1  g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-right-none g-width-100 bigDevice">تومان</span>
                                 </div>
@@ -249,7 +249,7 @@
                                         tabindex="1"
                                         placeholder=""
                                         disabled
-                                        value="{{ number_format($data->FinalPrice * $data->Qty) }}">
+                                        value="{{ number_format($data->OrderDetailFinalPrice * $data->Qty) }}">
                                     <span style="border-left: 1px solid #ccc"
                                           class="input-group-addon g-color-gray-light-v1  g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-right-none g-width-100 bigDevice">تومان</span>
                                 </div>

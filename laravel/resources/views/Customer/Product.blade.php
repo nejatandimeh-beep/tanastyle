@@ -5,7 +5,9 @@
     <span id="productID" class="d-none">{{ $data->ID }}</span>
     <span id="productDetailID" class="d-none"></span>
     <span id="productPage" class="d-none"></span>
+    <span id="FinalPriceWithoutDiscount" class="d-none">{{ $data->FinalPriceWithoutDiscount }}</span>
     <span id="productDiscount" class="d-none">{{ $data->Discount }}</span>
+    <span id="finalPrice" class="d-none">{{ $data->FinalPrice }}</span>
     <span id="checkLike" class="d-none">{{ $like }}</span>
     <span id="voteID" class="d-none">{{ isset($voteID) ? $voteID->ID: 'null'}}</span>
     <span id="CommentID" class="d-none"></span>

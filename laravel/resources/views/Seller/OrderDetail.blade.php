@@ -188,7 +188,7 @@
                            tabindex="1"
                            placeholder=""
                            disabled
-                           value="{{ number_format($data->UnitPrice) }}">
+                           value="{{ number_format($data->OrderDetailPrice) }}">
                     <span style="border-left: 1px solid #ccc"
                           class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
                 </div>
@@ -218,7 +218,7 @@
                            tabindex="1"
                            placeholder=""
                            disabled
-                           value="{{ number_format($data->PriceWithDiscount) }}">
+                           value="{{ number_format($data->OrderDetailFinalPrice) }}">
                     <span style="border-left: 1px solid #ccc"
                           class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
                 </div>
@@ -249,7 +249,7 @@
                         tabindex="1"
                         placeholder=""
                         disabled
-                        value="{{ number_format($data->PriceWithDiscount * $data->Qty) }}">
+                        value="{{ number_format($data->OrderDetailFinalPrice * $data->Qty) }}">
                     <span style="border-left: 1px solid #ccc"
                           class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
                 </div>

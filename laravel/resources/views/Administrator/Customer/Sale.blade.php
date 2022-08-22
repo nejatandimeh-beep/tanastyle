@@ -493,7 +493,7 @@
                                             @endif
 
                                             <td class="align-middle text-center">{{ $rec->Qty }}</td>
-                                            <td class="align-middle text-center">{{ number_format($rec->FinalPrice * $rec->Qty) }}</td>
+                                            <td class="align-middle text-center">{{ number_format($rec->OrderDetailFinalPrice * $rec->Qty) }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}</td>
                                             <td class="align-middle text-center">{{ $rec->orderID.'/'.$rec->orderDetailID }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $rec->PostMethod }}</td>
