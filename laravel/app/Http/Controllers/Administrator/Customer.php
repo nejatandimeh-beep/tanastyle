@@ -306,11 +306,12 @@ class Customer extends Controller
 
         // Get Product Data
         $data = DB::table('product_order_detail as pod')
-            ->select('pod.*', 'pod.ID as orderDetailID', 'po.*', 'p.*', 'pf.ID as falseProduct','pdd.SampleNumber')
+            ->select('pod.*', 'pod.ID as orderDetailID', 'po.*', 'p.*', 'pf.ID as falseProduct','pdd.SampleNumber','ca.*')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('product_detail as pdd', 'pdd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
+            ->leftjoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
             ->where('pod.ID', $id)
             ->first();
 

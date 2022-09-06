@@ -214,7 +214,7 @@ Route::get('/Product/{id}/{size}', 'Customer\Basic@productDetail')->name('produc
 Route::get('/Customer-Product-Visit/{id}', 'Customer\Basic@productVisit')->name('productVisit');
 
 // Banking portal
-Route::get('/Banking-Portal/{id}/{qty}/{postPrice}/{FinalPriceWithoutDiscount}/{discount}/{finalPrice}', 'Customer\Basic@bankingPortal')->name('bankingPortal');
+Route::get('/Banking-Portal/{id}/{qty}/{postPrice}/{FinalPriceWithoutDiscount}/{discount}/{finalPrice}/{unitPrice}', 'Customer\Basic@bankingPortal')->name('bankingPortal');
 
 Route::get('/Customer-Verify', 'Customer\Basic@customerVerify')->name('customerVerify');
 

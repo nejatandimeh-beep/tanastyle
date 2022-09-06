@@ -230,9 +230,10 @@ class Basic extends Controller
 
         // order
         $mainOrder = DB::table('product_order as po')
-            ->select('po.ID as orderID', 'po.PostMethod', 'po.PostPrice', 'po.OrderPrice', 'pod.ID', 'pod.ProductID', 'pd.*')
+            ->select('po.ID as orderID', 'po.PostMethod', 'po.PostPrice', 'po.OrderPrice', 'pod.ID', 'pod.ProductID', 'pd.*','ca.*')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product_delivery as pd', 'pd.OrderDetailID', '=', 'pod.ID')
+            ->leftJoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
             ->where('po.CustomerID', Auth::user()->id)
             ->orderBy('pod.ID', 'DESC')
             ->groupBy('po.ID')
@@ -684,11 +685,13 @@ class Basic extends Controller
         $discount = [];
         $FinalPriceWithoutDiscount=[];
         $finalPrice=[];
+        $unitPrice=[];
         for ($i = 0; $i < $row; $i++) {
             $productDetailID[$i] = $request->get('productDetailID' . $i);
             $discount[$i] = preg_replace('/\D/', '', $request->get('discount' . $i));
             $FinalPriceWithoutDiscount[$i] = preg_replace('/\D/', '', $request->get('FinalPriceWithoutDiscount' . $i));
             $finalPrice[$i] = preg_replace('/\D/', '',$request->get('productFinalPrice' . $i));
+            $unitPrice[$i] = $request->get('unitPrice' . $i);
             $data = DB::table('product_detail')
                 ->select('ID', 'Qty')
                 ->where('ID', $productDetailID[$i])
@@ -722,9 +725,10 @@ class Basic extends Controller
                         'CustomerID' => Auth::user()->id,
                         'ProductDetailID' => $row,
                         'Qty' => $qty[$key],
-                        'OrderPrice' => $orderPrice,
+                        'OrderPrice' => (int)$orderPrice,
                         'PostMethod' => $postMethod,
                         'PostPrice' => $postPrice,
+                        'UnitPrice' => (int)$unitPrice[$key],
                         'OrderDetailPrice' => (int)$FinalPriceWithoutDiscount[$key],
                         'Discount' => (int)$discount[$key],
                         'OrderDetailFinalPrice' => (int)$finalPrice[$key],
@@ -740,7 +744,7 @@ class Basic extends Controller
         }
     }
 
-    public function bankingPortal($id, $qty, $postPrice,$FinalPriceWithoutDiscount,$discount,$finalPrice)
+    public function bankingPortal($id, $qty, $postPrice,$FinalPriceWithoutDiscount,$discount,$finalPrice,$unitPrice)
     {
         switch ($postPrice) {
             case '0':
@@ -779,6 +783,7 @@ class Basic extends Controller
                     'OrderPrice' => (int)$finalPrice,
                     'PostMethod' => $postMethod,
                     'PostPrice' => $postPrice,
+                    'UnitPrice' => (int)$unitPrice,
                     'OrderDetailPrice' => (int)$FinalPriceWithoutDiscount,
                     'Discount' => (int)$discount,
                     'OrderDetailFinalPrice' => (int)$finalPrice,
@@ -2474,8 +2479,10 @@ class Basic extends Controller
         foreach ($data as $step => $record) {
             $customerInfo = DB::table('customers as c')
                 ->select('ca.*')
-                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
-                ->where('c.id', Auth::user()->id)
+                ->leftJoin('customer_address as ca',function ($join) {
+                    $join->on('ca.CustomerID', '=' , 'c.id') ;
+                    $join->where('ca.Status','=',1) ;
+                }) ->where('c.id', Auth::user()->id)
                 ->first();
 
             $productInfo = DB::table('product_detail as pd')
@@ -2514,7 +2521,8 @@ class Basic extends Controller
                 'Size' => $productInfo->Size,
                 'Color' => $productInfo->Color,
                 'OrderBankCode' => $Authority,
-                'OrderDetailPrice' => $record->OrderDetailPrice,
+                'UnitPrice' => (int)$record->UnitPrice,
+                'OrderDetailPrice' => (int)$record->OrderDetailPrice,
                 'Discount' => $record->Discount,
                 'OrderDetailFinalPrice' => $record->OrderDetailFinalPrice,
             ]);

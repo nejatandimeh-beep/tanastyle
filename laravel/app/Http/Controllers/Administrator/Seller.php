@@ -178,13 +178,15 @@ class Seller extends Controller
             $data = DB::table('product as p')
                 ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.SampleNumber')
                 ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
-                ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
-                ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
+                ->leftJoin('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID')
                 ->where('p.SellerID', $sellerID)
+                ->groupBy('pd.ID')
                 ->get();
 
             foreach ($data as $d) {
-                $generalInfo['sumFPrice'] += $d->Qty * $d->FinalPrice;
+                echo  $d->PriceWithDiscount.'   ';
+                $generalInfo['sumFPrice'] += $d->Qty * $d->PriceWithDiscount;
                 $generalInfo['allQty'] += $d->Qty;
                 if ($d->Gender === 'زنانه')
                     $generalInfo['female'] += $d->Qty;
@@ -249,7 +251,7 @@ class Seller extends Controller
 
                 $generalInfo['allOrder'] += 1;
 
-                $generalInfo['totalSaleAmount'] += ($d->OrderDetailFinalPrice * $d->Qty);
+                $generalInfo['totalSaleAmount'] += ($d->UnitPrice-($d->UnitPrice * $d->Discount/100)) * $d->Qty;
             }
 
             return $generalInfo;
@@ -775,13 +777,17 @@ class Seller extends Controller
         $saleTable = $this->saleTableLoad('pagination', $id);
         $persianDate = array();
         $pf = '';
+        $orderDetail=[];
         foreach ($saleTable as $key => $rec) {
+            $orderDetail[$key]=(string)(($rec->UnitPrice-($rec->UnitPrice * $rec->Discount/100)) * $rec->Qty);
+            $orderDetail[$key]=substr($orderDetail[$key], 0, -3);
+            $orderDetail[$key]=$orderDetail[$key].'000';
             $d = $rec->Date;
             $persianDate[$key] = $this->convertDateToPersian($d);
             if (isset($rec->fpID))
                 $pf = 'error';
         }
-        return view('Administrator.Seller.Sale',compact('sellerInfo','saleSum', 'saleTable', 'persianDate','pf'));
+        return view('Administrator.Seller.Sale',compact('sellerInfo','saleSum', 'saleTable', 'persianDate','pf','orderDetail'));
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------

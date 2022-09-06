@@ -231,6 +231,11 @@
                                                                 {{ number_format($row->FinalPrice) }}
                                                             </span>
                                             </td>
+                                            <td class="align-middle text-center d-none">
+                                                            <span id="unitPrice{{$key}}" class="g-pa-5">
+                                                                {{ $row->UnitPrice }}
+                                                            </span>
+                                            </td>
                                             <td class="align-middle text-center">
                                                             <span class="g-pa-5">
                                                                 {{ $row->sellerName.' '.$row->sellerFamily }}

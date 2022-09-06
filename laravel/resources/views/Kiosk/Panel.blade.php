@@ -186,7 +186,7 @@
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <img
                                                         class="d-flex g-width-60 g-height-60 g-my-10 mx-auto g-bg-white"
-                                                        src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
+                                                        src="{{ file_exists(public_path($row->productPicPath.$row->SampleNumber.'.jpg'))?$row->productPicPath.$row->SampleNumber:$row->productPicPath.'sample1' }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
                                                 <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">
@@ -316,7 +316,7 @@
                                                 <td class="g-brd-white-opacity-0_1 align-middle">
                                                     <img
                                                         class="d-flex g-width-60 g-height-60 g-my-10 mx-auto g-bg-white"
-                                                        src="{{ $row->productPicPath.$row->PicNumber }}.jpg"
+                                                        src="{{ file_exists(public_path($row->productPicPath.$row->SampleNumber.'.jpg'))?$row->productPicPath.$row->SampleNumber:$row->productPicPath.'sample1' }}.jpg"
                                                         title="{{ $row->Color }}" alt="Image Description">
                                                 </td>
                                                 <td style="direction: ltr" class="g-brd-white-opacity-0_1 align-middle">

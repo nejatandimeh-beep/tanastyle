@@ -440,7 +440,10 @@
                                         <th class="align-middle text-center">نام</th>
                                         <th class="align-middle text-center">جنسیت</th>
                                         <th class="align-middle text-center">تعداد</th>
-                                        <th class="align-middle text-center text-nowrap">مبلغ فاکتور<span
+                                        <th class="align-middle text-center text-nowrap">واحد<span
+                                                class="g-font-size-10 g-mr-3">(تومان)</span>
+                                        </th>
+                                        <th class="align-middle text-center text-nowrap">مبلغ درگاه<span
                                                 class="g-font-size-10 g-mr-3">(تومان)</span>
                                         </th>
                                         <th class="align-middle text-center">تاریخ</th>
@@ -475,7 +478,8 @@
                                             @endif
 
                                             <td class="align-middle text-center">{{ $rec->Qty }}</td>
-                                            <td class="align-middle text-center">{{ number_format($rec->OrderDetailFinalPrice * $rec->Qty) }}</td>
+                                            <td class="align-middle text-center">{{ number_format($rec->OrderDetailFinalPrice) }}</td>
+                                            <td class="align-middle text-center g-color-primary">{{ number_format($rec->OrderDetailFinalPrice * $rec->Qty) }}</td>
                                             <td class="align-middle text-center text-nowrap">{{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}</td>
                                             <td class="align-middle text-center">{{ $rec->orderID.'/'.$rec->orderDetailID }}</td>
                                             <td class="align-middle text-center">{{ $rec->customerMobile }}</td>

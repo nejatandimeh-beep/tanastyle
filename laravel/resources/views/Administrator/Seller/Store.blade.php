@@ -300,9 +300,10 @@
                                         <th class="align-middle text-center">سایز</th>
                                         <th class="align-middle text-center">رنگ</th>
                                         <th class="align-middle text-center">موجودی</th>
-                                        <th class="align-middle text-center text-nowrap">قیمت فروش<span
-                                                class="g-font-size-10 g-mr-3">(تومان)</span>
-                                        </th>
+                                        <th class="align-middle text-center text-nowrap">قیمت پایه</th>
+                                        <th class="align-middle text-center">تخفیف</th>
+                                        <th class="align-middle text-center text-nowrap">سهم فروشنده</th>
+                                        <th class="align-middle text-center text-nowrap">مبلغ درگاه</th>
                                         <th class="align-middle text-center">عکس</th>
                                         <th class="align-middle text-center">جزییات</th>
                                         <th class="align-middle text-center">مشخصات</th>
@@ -337,7 +338,10 @@
                                             <td class="align-middle text-center g-color-gray-light-v3">{{ $rec->Size }}</td>
                                             <td class="align-middle text-center text-nowrap g-color-gray-light-v3">{{ $rec->Color }}</td>
                                             <td class="align-middle text-center g-color-gray-light-v3">{{ $rec->Qty }}</td>
-                                            <td class="align-middle text-center g-color-gray-light-v3">{{ number_format($rec->FinalPrice) }}</td>
+                                            <td class="align-middle text-center"><s>{{ number_format($rec->UnitPrice) }}</s></td>
+                                            <td class="align-middle text-center g-color-red">{{ $rec->Discount }}</td>
+                                            <td class="align-middle text-center g-color-primary">{{ number_format($rec->PriceWithDiscount) }}</td>
+                                            <td class="align-middle text-center g-color-primary">{{ number_format($rec->FinalPrice) }}</td>
                                             <td class="align-middle">
                                                 <div class="media">
                                                     <img class="d-flex g-width-60 g-height-60 g-rounded-3 mx-auto"

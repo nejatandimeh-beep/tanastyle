@@ -1069,7 +1069,7 @@
                                     </div>
                                     <div style="direction: rtl; overflow-y: auto"
                                          class="g-px-20 g-px-60--lg text-right g-py-0">
-                                        <p style="text-align: justify;" class="g-pb-15 g-mb-0 g-mb-20--lg"><span
+                                        <p style="text-align: justify;" class="g-pb-15 g-mb-0 g-mb-20--lg g-color-red"><span
                                                 class="g-font-weight-600 g-ml-10">خریدار عزیز</span>آدرس
                                             جدید بصورت خودکار فعال خواهد شد و از این پس محصولات به این آدرس ارسال
                                             می گردد. (می توانید در هر زمان از طریق منوی آدرس ها آدرس دیگری را فعال
@@ -1605,13 +1605,13 @@
                                                     class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 g-pt-0--lg text-right">
                                                     <h5 class="d-lg-inline-block d-block g-color-gray-dark-v2">آدرس
                                                         ارسال:</h5>
-                                                    <span id="receiverState" class="d-none">{{ $row->State }}</span>
-                                                    <span id="receiverCity" class="d-none">{{ $row->City }}</span>
+                                                    <span id="receiverState" class="d-none">{{ $mainRow->State }}</span>
+                                                    <span id="receiverCity" class="d-none">{{ $mainRow->City }}</span>
                                                     <span class="receiverStateCity"></span>
                                                     <span id="addressID"
-                                                          class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$row->Address}}
-                                                        <strong class="g-color-gray-dark-v2 g-mr-5">گیرنده:</strong> {{$row->ReceiverName.' '.$row->ReceiverFamily}}
-                                                        <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$row->Mobile}}
+                                                          class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$mainRow->Address}}
+                                                        <strong class="g-color-gray-dark-v2 g-mr-5">گیرنده:</strong> {{$mainRow->ReceiverName.' '.$mainRow->ReceiverFamily}}
+                                                        <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$mainRow->Mobile}}
                                                     </span>
                                                 </div>
                                             </div>

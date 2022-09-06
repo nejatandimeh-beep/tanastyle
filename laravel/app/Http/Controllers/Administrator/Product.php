@@ -67,8 +67,9 @@ class Product extends Controller
             $data = DB::table('product as p')
                 ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.SampleNumber')
                 ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
-                ->join('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID', 'left outer')
-                ->join('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID', 'left outer')
+                ->leftJoin('product_order_detail as pod', 'pd.ID', '=', 'pod.ProductDetailID')
+                ->leftJoin('product_false as fp', 'pd.ID', '=', 'fp.ProductDetailID')
+                ->groupBy('pd.ID')
                 ->get();
 
             foreach ($data as $d) {

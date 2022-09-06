@@ -377,12 +377,16 @@ class Basic extends Controller
 
 //      Convert Date
         $persianDate = array();
+        $orderDetail=[];
         foreach ($data as $key => $rec) {
+            $orderDetail[$key]=(string)(($rec->UnitPrice-($rec->UnitPrice * $rec->Discount/100)) * $rec->Qty);
+            $orderDetail[$key]=substr($orderDetail[$key], 0, -3);
+            $orderDetail[$key]=$orderDetail[$key].'000';
             $d = $rec->Date;
             $persianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Seller.Sale', compact('data', 'todayOrder','monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate'));
+        return view('Seller.Sale', compact('data', 'todayOrder', 'monthOrder', 'allOrder', 'totalSaleAmount', 'persianDate','orderDetail'));
     }
 
 //  Order Detail
@@ -781,6 +785,7 @@ class Basic extends Controller
         if (($id === 'saleName') || ('saleGender') || ('saleInfoStatus')) {
             $info = $this->saleTableLoad('', '', 'all', $sellerID);
             $todayOrder = $info['todayOrder'];
+            $monthOrder = $info['monthOrder'];
 
             $allOrder = $info['allOrder'];
             $totalSaleAmount = $info['totalSaleAmount'];
@@ -860,7 +865,7 @@ class Basic extends Controller
                     $persianDate[$key] = $this->convertDateToPersian($d);
                 }
 
-                return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valName'));
+                return view('Seller.Sale', compact('data', 'todayOrder', 'allOrder', 'monthOrder', 'totalSaleAmount', 'persianDate', 'valName'));
 
             case 'saleCode':
                 $data = $this->saleTableLoad('po.ID', '', $val, $sellerID);
@@ -872,7 +877,7 @@ class Basic extends Controller
                     $persianDate[$key] = $this->convertDateToPersian($d);
                 }
 
-                return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valName'));
+                return view('Seller.Sale', compact('data', 'todayOrder', 'allOrder', 'monthOrder', 'totalSaleAmount', 'persianDate', 'valName'));
 
             case 'saleGender':
                 $data = $this->saleTableLoad('p.GenderCode', '', $val, $sellerID);
@@ -883,7 +888,7 @@ class Basic extends Controller
                     $persianDate[$key] = $this->convertDateToPersian($d);
                 }
 
-                return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'val'));
+                return view('Seller.Sale', compact('data', 'todayOrder', 'allOrder', 'monthOrder', 'totalSaleAmount', 'persianDate', 'val'));
 
             case 'saleInfoStatus':
 
@@ -898,7 +903,7 @@ class Basic extends Controller
                         $persianDate[$key] = $this->convertDateToPersian($d);
                     }
 
-                    return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valStatus'));
+                    return view('Seller.Sale', compact('data', 'todayOrder', 'allOrder', 'monthOrder', 'totalSaleAmount', 'persianDate', 'valStatus'));
                 } elseif ($val == 'true') {
 
                     $data = $this->saleTableLoad('', 'NotIn', $val, $sellerID);
@@ -910,7 +915,7 @@ class Basic extends Controller
                         $persianDate[$key] = $this->convertDateToPersian($d);
                     }
 
-                    return view('Seller.sale', compact('data', 'todayOrder', 'allOrder', 'totalSaleAmount', 'persianDate', 'valStatus'));
+                    return view('Seller.Sale', compact('data', 'todayOrder', 'allOrder', 'monthOrder', 'totalSaleAmount', 'persianDate', 'valStatus'));
                 }
                 break;
 
@@ -1266,7 +1271,7 @@ class Basic extends Controller
 
                 $generalInfo['allOrder'] += 1;
 
-                $generalInfo['totalSaleAmount'] += ($d->OrderDetailFinalPrice * $d->Qty);
+                $generalInfo['totalSaleAmount'] += ($d->UnitPrice-($d->UnitPrice * $d->Discount/100)) * $d->Qty;
             }
 
             return $generalInfo;

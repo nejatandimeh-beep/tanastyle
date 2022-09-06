@@ -46,6 +46,10 @@
 
             if ($('#cardContainer').length > 0)
                 $('#cardContainer').css('height', $(window).height() - 100);
+
+            if($('.orderDetail').length>0){
+                $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
+            }
         });
 
         $(document).mouseup(function (e) {

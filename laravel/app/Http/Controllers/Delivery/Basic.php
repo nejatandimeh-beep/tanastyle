@@ -97,7 +97,11 @@ class Basic extends Controller
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
                 ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
-                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
+//                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
+                ->leftJoin('customer_address as ca',function ($join) {
+                    $join->on('ca.CustomerID', '=' , 'c.id') ;
+                    $join->where('ca.Status','=',1) ;
+                })
                 ->where('pDel.DeliveryManID', $id)
                 ->whereIn('pDel.DeliveryStatus', $where)
                 ->get();
@@ -178,8 +182,11 @@ class Basic extends Controller
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
                 ->leftJoin('sellers as s', 'pod.SellerID', '=', 's.ID')
                 ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
-                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
-                ->where('pDel.DeliveryManID', $id)
+//                ->leftJoin('customer_address as ca', 'ca.CustomerID', '=', 'c.id')
+                ->leftJoin('customer_address as ca',function ($join) {
+                    $join->on('ca.CustomerID', '=' , 'c.id') ;
+                    $join->where('ca.Status','=',1) ;
+                })->where('pDel.DeliveryManID', $id)
                 ->whereIn('pDel.DeliveryStatus', $where)
                 ->groupBy('po.ID')
                 ->get();

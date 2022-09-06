@@ -17,7 +17,6 @@
         });
 
         function copy(textToCopy){
-            $('#preview').hide();
             navigator.clipboard.writeText(textToCopy).then(
                 function() {
                     /* clipboard successfully set */
@@ -451,6 +450,8 @@
                 // onzoom: function (data) {
                 // }
             });
+
+            $('#preview').hide();
         }
 
         function loaderShow() {
@@ -726,8 +727,11 @@
         $('.ratingContainer a').on('click', function () {
             if ($('#loginAlert').text() === 'login')
                 addVote($(this).text(), 'ratingProduct');
-            else
-                alert('تا زمانیکه داخل نشوید نمره شما ثبت نمی گردد.');
+            else{
+                if (confirm('تا زمانیکه داخل نشوید نمره شما ثبت نمی گردد.')) {
+                    window.location = '/Login-Mode';
+                }
+            }
         });
 
         // input unlike
@@ -737,8 +741,11 @@
                 $('#customerUnlike').removeClass('d-none');
                 $('#likeHint').removeClass('d-none');
                 addVote('false', 'likeProduct');
-            } else
-                alert('تا زمانیکه داخل نشوید محصول به لیست علاقه مندیهایتان افزوده نمی شود.');
+            } else {
+                if (confirm('تا زمانیکه داخل نشوید محصول به لیست علاقه مندیهایتان افزوده نمی شود.')) {
+                    window.location = '/Login-Mode';
+                }
+            }
         });
 
         // input like
@@ -748,8 +755,11 @@
                 $('#likeHint').addClass('d-none');
                 $('#customerLike').removeClass('d-none');
                 addVote('true', 'likeProduct');
-            } else
-                alert('تا زمانیکه داخل نشوید محصول به لیست علاقه مندیهایتان افزوده نمی شود.');
+            } else{
+                if (confirm('تا زمانیکه داخل نشوید محصول به لیست علاقه مندیهایتان افزوده نمی شود.')) {
+                    window.location = '/Login-Mode';
+                }
+            }
         });
 
         // send comment
@@ -862,6 +872,7 @@
         function bankingPortal(id, qty) {
             let postPrice = $('#tempPostPrice').val(),
                 FinalPriceWithoutDiscount = $('#FinalPriceWithoutDiscount').text(),
+                unitPrice = $('#unitPrice').text(),
                 discount = $('#productDiscount').text(),
                 finalPrice = $('#finalPrice').text();
             $('.custombox-content #bankingPortalBtn').hide();
@@ -881,7 +892,7 @@
                         }
                         if (error === 0) {
                             if ($('#addressID').length > 0) {
-                                window.location = '/Banking-Portal/' + id + '/' + qty + '/' + postPrice+'/'+FinalPriceWithoutDiscount+'/'+discount+'/'+finalPrice;
+                                window.location = '/Banking-Portal/' + id + '/' + qty + '/' + postPrice+'/'+FinalPriceWithoutDiscount+'/'+discount+'/'+finalPrice+'/'+unitPrice;
                             } else {
                                 $('.custombox-content #bankingPortalBtn').show();
                                 $('.custombox-content #waitingIconSubmit').hide();
@@ -896,7 +907,7 @@
                 });
             } else {
                 alert('ابتدا لطفا وارد حساب کاربری خود شوید.');
-                window.location = '/login';
+                window.location = '/Login-Mode';
             }
         }
 
@@ -1191,6 +1202,7 @@
                 FinalPriceWithoutDiscount = [],
                 discount = [],
                 productFinalPrice = [],
+                unitPrice = [],
                 form = $('#cartOrderForm');
             $("#cartOrderForm").empty();
             $('#cartDate').text('( ' + nowDate() + ' )');
@@ -1203,12 +1215,14 @@
                     $('#orderQty' + i).text(qty[i]);
                     tempPrice[i] = $('#productFinalPrice' + i).text().replace(/,/g, '');
                     productFinalPrice[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
+                    unitPrice[i] =  $('#unitPrice' + i).text();
                     allPrice = allPrice + productFinalPrice[i];
                     $('#rowNumber' + i).text(i + 1);
                     form.append("<input name='productDetailID" + i + "' value=" + pdId[i] + ">");
                     form.append("<input name='discount" + i + "' value=" + discount[i] + ">");
                     form.append("<input name='FinalPriceWithoutDiscount" + i + "' value=" + FinalPriceWithoutDiscount[i] + ">");
                     form.append("<input name='productFinalPrice" + i + "' value=" + tempPrice[i] + ">");
+                    form.append("<input name='unitPrice" + i + "' value=" + unitPrice[i] + ">");
                     form.append("<input name='qty" + i + "' value=" + qty[i] + ">");
                 }
                 orderPrice = allPrice;
