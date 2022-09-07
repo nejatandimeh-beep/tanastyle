@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{asset('assets/vendor/dzsparallaxer/dzsscroller/scroller.css')}}">
     <link rel="stylesheet" href="{{asset('assets/vendor/dzsparallaxer/advancedscroller/plugin.css')}}">
     <!--My Style-->
-    <link href="{{ asset('css/myStyle.css?v=dsv3wfs3e3') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css?v=dsv3wfs1we13e3') }}" rel="stylesheet">
 <!--Unify Style-->
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">

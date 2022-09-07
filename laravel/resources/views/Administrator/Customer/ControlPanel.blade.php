@@ -60,7 +60,7 @@
 
     <div class="g-bg-gray-dark-v2 g-color-white g-px-15 g-py-30">
         <!-- Nav tabs -->
-        <ul class="nav nav-fill u-nav-v4-1 u-nav-light" role="tablist" data-target="nav-4-1-primary-hor-fill"
+        <ul class="nav nav-fill u-nav-v4-1 u-nav-light adminPanelResponsive" role="tablist" data-target="nav-4-1-primary-hor-fill"
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('customerList')}}">خریداران</a>
@@ -334,7 +334,7 @@
 
             <!--محصولات نحویلی-->
             <div class="tab-pane fade" id="nav-4-1-primary-hor-fill--2" role="tabpanel">
-                <div style="padding-bottom: 300px;" class="container g-pt-60">
+                <div style="padding-bottom: 300px;" class="container g-pt-60--lg">
                     @if ($delivery->count()!==0)
                         {{-- Table --}}
                         <div class="g-pb-15">

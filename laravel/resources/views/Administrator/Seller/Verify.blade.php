@@ -1,7 +1,7 @@
 @extends('Layouts.IndexAdmin')
 @section('Content')
 
-    <div style="direction: rtl" class="g-bg-gray-dark-v2 d-flex">
+    <div style="direction: rtl" class="g-bg-gray-dark-v2 d-lg-flex">
         <div class="col-12 col-lg-3 g-brd-left g-brd-white-opacity-0_8 text-center g-pt-20 g-pb-40">
             <span class="d-block g-font-size-25 g-color-pink g-mb-15 g-pb-20 g-brd-bottom g-brd-white-opacity-0_8">پنل فروشندگان</span>
             <a href="{{route('sellerVerify')}}" class="d-block btn btn-md u-btn-darkgray active rounded-0 g-mb-15">تایید هویت فروشندگان</a>
@@ -27,7 +27,7 @@
         <div class="col-12 col-lg-9 g-pt-25 g-pb-40">
             <h4 class="g-mb-25 g-color-gray-light-v2">صف انتظار</h4>
             <!--Basic Table-->
-            <div class="table-responsive">
+            <div class="table-responsive p-1">
                 <table class="table table-bordered u-table--v2">
                     <thead class="text-uppercase g-letter-spacing-1">
                     <tr>

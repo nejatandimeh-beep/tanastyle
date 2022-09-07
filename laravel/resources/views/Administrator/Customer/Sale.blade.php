@@ -2,7 +2,7 @@
 @section('Content')
     <div class="g-bg-gray-dark-v2 g-color-white g-px-15 g-py-30">
         <!-- Nav tabs -->
-        <ul class="nav nav-fill u-nav-v4-1 u-nav-light" role="tablist" data-target="nav-4-1-primary-hor-fill"
+        <ul class="nav nav-fill u-nav-v4-1 u-nav-light adminPanelResponsive" role="tablist" data-target="nav-4-1-primary-hor-fill"
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('customerList')}}">خریداران</a>
@@ -61,7 +61,7 @@
             <div class="tab-pane fade show active" id="nav-4-1-primary-hor-fill--4" role="tabpanel">
                 <div style="padding-bottom: 120px" class="container">
                     {{-- Total Info--}}
-                    <div class="rowSeller g-mt-30 g-mb-20 g-mr-0 g-ml-0 opacity-0">
+                    <div class="rowSeller g-mt-30 g-mb-20 g-mr-0 g-ml-0 opacity-0-bigDevice">
 
                         <!-- Icon Blocks -->
                         <div

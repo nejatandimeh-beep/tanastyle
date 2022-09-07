@@ -399,11 +399,17 @@ class Basic extends Controller
 
         // Get Product Data
         $data = DB::table('product_order_detail as pod')
-            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'po.Time', 'p.*', 'pf.ID as falseProduct', 'pd.SampleNumber')
+            ->select('pod.*', 'pod.ID as orderDetailID', 'po.ID as orderID', 'po.Date', 'po.Time','po.AddressID','po.CustomerID'
+                , 'p.*', 'pf.ID as falseProduct', 'pd.SampleNumber','ca.*','c.id')
             ->leftJoin('product_order as po', 'po.ID', '=', 'pod.OrderID')
             ->leftJoin('product as p', 'p.ID', '=', 'pod.ProductID')
             ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pod.ProductDetailID')
             ->leftJoin('product_false as pf', 'pf.ProductDetailID', '=', 'pod.ProductDetailID')
+            ->leftJoin('customers as c', 'c.id', '=', 'po.CustomerID')
+            ->leftJoin('customer_address as ca', function ($join) {
+                $join->on('ca.CustomerID', '=', 'c.id')
+                ->where('ca.Status', 1);
+            })
             ->where('pod.ID', $id)
             ->first();
 

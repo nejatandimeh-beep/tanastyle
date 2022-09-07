@@ -2,7 +2,7 @@
 @section('Content')
     <!-- Info Panel -->
     <div style="direction: rtl; position: -webkit-sticky; position: sticky; top: 0; z-index: 100;"
-         class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0">
+         class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0 orderDetail">
         <h3 class="card-header h5 g-color-white-opacity-0_9">
             <i class="fa fa-list-alt g-font-size-default g-ml-5"></i>فروشهای من (جزئیات فروش محصول)
         </h3>
@@ -252,6 +252,24 @@
                         value="{{ number_format($data->OrderDetailFinalPrice * $data->Qty) }}">
                     <span style="border-left: 1px solid #ccc"
                           class="input-group-addon g-color-gray-dark-v3 g-bg-gray-light-v5 g-brd-right-none g-width-100 bigDevice">تومان</span>
+                </div>
+                <div class="input-group col-lg-12 g-mb-10 {{Auth::guard('seller')->user()->id == 35 ? '' : 'd-none'}}">
+                    <div style="direction: rtl" id="addressContainer" class="text-right g-mt-15">
+                        <div
+                            class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 g-pt-0--lg text-right">
+                            <h5 class="d-lg-inline-block d-block">آدرس
+                                ارسال:</h5>
+                            <span id="receiverState" class="d-none">{{ $data->State }}</span>
+                            <span id="receiverCity" class="d-none">{{ $data->City }}</span>
+                            <span class="receiverStateCity g-color-orange"></span>
+                            <span id="addressID"
+                                  class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 g-color-orange"> {{$data->Address}}
+                                                        <strong class="g-mr-5 g-color-black">گیرنده:</strong> {{$data->ReceiverName.' '.$data->ReceiverFamily}}
+                                                        <strong class="g-mr-5 g-color-black">شماره تماس:</strong> {{$data->Mobile}}
+                                                        <strong class="g-mr-5 g-color-black">کد پستی:</strong> {{$data->PostalCode}}
+                                                    </span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="form-group row g-mb-25">

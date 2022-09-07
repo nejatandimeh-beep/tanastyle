@@ -194,6 +194,12 @@
 }
 
 @media screen and (max-width: 900px) {
+    .opacity-0-bigDevice{
+        display: none !important;
+    }
+    .adminPanelResponsive{
+        display: block !important;
+    }
     .SubMenuScroll {
         height: auto !important;
     }
@@ -309,6 +315,10 @@
     .height_445{
         height: 445px;
     }
+}
+
+.opacity-0-bigDevice{
+    opacity: 0;
 }
 
 .g-ml-60-lg--minus-10 {

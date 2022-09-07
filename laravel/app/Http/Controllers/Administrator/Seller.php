@@ -185,7 +185,6 @@ class Seller extends Controller
                 ->get();
 
             foreach ($data as $d) {
-                echo  $d->PriceWithDiscount.'   ';
                 $generalInfo['sumFPrice'] += $d->Qty * $d->PriceWithDiscount;
                 $generalInfo['allQty'] += $d->Qty;
                 if ($d->Gender === 'زنانه')

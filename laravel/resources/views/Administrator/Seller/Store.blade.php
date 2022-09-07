@@ -2,7 +2,7 @@
 @section('Content')
     <div class="g-bg-gray-dark-v2 g-color-white g-px-15 g-py-30">
         <!-- Nav tabs -->
-        <ul class="nav nav-fill u-nav-v4-1 u-nav-light" role="tablist" data-target="nav-4-1-primary-hor-fill"
+        <ul class="nav nav-fill u-nav-v4-1 u-nav-light adminPanelResponsive" role="tablist" data-target="nav-4-1-primary-hor-fill"
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('sellerList')}}">فروشندگان</a>
