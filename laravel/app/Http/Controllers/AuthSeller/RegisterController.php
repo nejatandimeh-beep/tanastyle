@@ -189,7 +189,7 @@ class RegisterController extends Controller
             ->insert([
                 'SellerID' => $id->id,
                 'CardNumber' => $request['creditCard1'] . '-' . $request['creditCard2'] . '-' . $request['creditCard3'] . '-' . $request['creditCard4'],
-                'ShabaNo' => $request['ShabaNo'],
+                'ShabaNo' => $request['shabaNo'],
                 'Status' => 1,
                 'Wrong' => 0,
             ]);

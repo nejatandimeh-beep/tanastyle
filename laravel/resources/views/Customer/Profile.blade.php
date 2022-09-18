@@ -1367,7 +1367,6 @@
                                                         <div class="g-mt-minus-10 g-mx-minus-5">
                                                             <div class="text-left g-mt-15 g-mt-0--lg">
                                                                 <a href="{{ '#modal16'.$key }}"
-                                                                   onclick="$('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));"
                                                                    data-modal-target="{{ '#modal16'.$key }}"
                                                                    data-modal-effect="slidetogether"
                                                                    class="d-lg-flex justify-content-end g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5 g-pt-10 bigDevice">
@@ -1605,9 +1604,9 @@
                                                     class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 g-pt-0--lg text-right">
                                                     <h5 class="d-lg-inline-block d-block g-color-gray-dark-v2">آدرس
                                                         ارسال:</h5>
-                                                    <span id="receiverState" class="d-none">{{ $mainRow->State }}</span>
-                                                    <span id="receiverCity" class="d-none">{{ $mainRow->City }}</span>
-                                                    <span class="receiverStateCity"></span>
+                                                    <span id="receiverState2" class="d-none">{{ $mainRow->State }}</span>
+                                                    <span id="receiverCity2" class="d-none">{{ $mainRow->City }}</span>
+                                                    <span class="receiverStateCity2"></span>
                                                     <span id="addressID"
                                                           class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-justify"> {{$mainRow->Address}}
                                                         <strong class="g-color-gray-dark-v2 g-mr-5">گیرنده:</strong> {{$mainRow->ReceiverName.' '.$mainRow->ReceiverFamily}}

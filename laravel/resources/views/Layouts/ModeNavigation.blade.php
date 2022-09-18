@@ -2495,32 +2495,32 @@
 
                             <!--مد-->
                             <!--big device-->
-{{--                            <li class="bigDevice hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"--}}
-{{--                                data-animation-out="fadeOut" data-position="right" id="spacialSale">--}}
-{{--                                <a id="mega-menu-label-2" class="nav-link g-px-0 g-color-primary--hover" href="#" aria-haspopup="true"--}}
-{{--                                   aria-expanded="false">مد--}}
-{{--                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>--}}
+                            <li class="bigDevice hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
+                                data-animation-out="fadeOut" data-position="right" id="spacialSale">
+                                <a id="mega-menu-label-2" class="nav-link g-px-0 g-color-primary--hover" href="#" aria-haspopup="true"
+                                   aria-expanded="false">مد
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
-{{--                                <!-- Mega Menu -->--}}
-{{--                                <div--}}
-{{--                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-mb-25 g-pa-30 g-mt-17 g-mt-7--lg--scrolling animated hs-position-right fadeOut"--}}
-{{--                                    aria-labelledby="mega-menu-label-2" style="display: none;">--}}
-{{--                                    <div class="row align-items-stretch text-left">--}}
-{{--                                        <div class="col-12 g-mb-30 g-mb-0--md">--}}
-{{--                                            <article class="u-block-hover">--}}
-{{--                                                <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"--}}
-{{--                                                     src="{{ asset('img/Other/modeBig.jpg?v=445')}}" alt="تخفیف برنز تاناکورا">--}}
-{{--                                                <div class="g-pos-abs g-top-35x g-right-15x custom-bottom">--}}
-{{--                                                    <h2 class="mb-0 g-color-black">جدیدترین های مد زنانه</h2>--}}
-{{--                                                    <span class="d-block g-color-black">با استناد به منابع معتبر جهان</span>--}}
-{{--                                                </div>--}}
-{{--                                                <a class="u-link-v2" href="{{route('womenTrend')}}"></a>--}}
-{{--                                            </article>--}}
-{{--                                        </div>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <!-- End Mega Menu -->--}}
-{{--                            </li>--}}
+                                <!-- Mega Menu -->
+                                <div
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-mb-25 g-pa-30 g-mt-17 g-mt-7--lg--scrolling animated hs-position-right fadeOut"
+                                    aria-labelledby="mega-menu-label-2" style="display: none;">
+                                    <div class="row align-items-stretch text-left">
+                                        <div class="col-12 g-mb-30 g-mb-0--md">
+                                            <article class="u-block-hover">
+                                                <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
+                                                     src="{{ asset('img/Other/modeBig.jpg?v=445')}}" alt="تخفیف برنز تاناکورا">
+                                                <div class="g-pos-abs g-top-35x g-right-15x custom-bottom">
+                                                    <h2 class="mb-0 g-color-black">جدیدترین های مد زنانه</h2>
+                                                    <span class="d-block g-color-black">با استناد به منابع معتبر جهان</span>
+                                                </div>
+                                                <a class="u-link-v2" href="{{route('spacialSelling',[15, 25])}}"></a>
+                                            </article>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Mega Menu -->
+                            </li>
 
                             <!--small device-->
                             <li class="smallDevice hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
@@ -2542,7 +2542,7 @@
                                                     <h2 class="h4 mb-0 g-color-black">جدیدترین های مد زنانه</h2>
                                                     <span class="d-block g-color-black">با استناد به منابع معتبر جهان</span>
                                                 </div>
-                                                <a class="u-link-v2" href="{{route('womenTrend')}}"></a>
+                                                <a class="u-link-v2" href="{{route('spacialSelling',[15, 25])}}"></a>
                                             </article>
                                         </div>
                                     </div>

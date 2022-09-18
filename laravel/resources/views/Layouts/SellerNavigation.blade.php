@@ -705,6 +705,10 @@
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">چتر</a>
                                                             </li>
                                                             <li>
+                                                                <a href="{{ route('AddProduct_askSize',['739','0']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بافتنی</a>
+                                                            </li>
+                                                            <li>
                                                                 <a href="{{ route('AddProduct_askSize',['737','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست
                                                                     هدیه</a>
@@ -1232,6 +1236,10 @@
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">چتر</a>
                                                             </li>
                                                             <li>
+                                                                <a href="{{ route('AddProduct_askSize',['727','1']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بافتنی</a>
+                                                            </li>
+                                                            <li>
                                                                 <a href="{{ route('AddProduct_askSize',['726','1']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ست هدیه</a>
                                                             </li>
@@ -1549,6 +1557,10 @@
                                                                 <a href="{{ route('AddProduct_askSize',['710','2']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">چتر</a>
                                                             </li>
+                                                            <li>
+                                                                <a href="{{ route('AddProduct_askSize',['711','2']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بافتنی</a>
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <!-- End Girl Accessory -->
@@ -1803,6 +1815,10 @@
                                                                 <a href="{{ route('AddProduct_askSize',['77','3']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">چتر</a>
                                                             </li>
+                                                            <li>
+                                                                <a href="{{ route('AddProduct_askSize',['78','3']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بافتنی</a>
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <!-- End Boy Accessory -->
@@ -1990,6 +2006,10 @@
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کیسه
                                                                     خواب</a>
                                                             </li>
+                                                            <li>
+                                                                <a href="{{ route('AddProduct_askSize',['59','4']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بافتنی</a>
+                                                            </li>
                                                         </ul>
                                                     </li>
                                                     <!-- End Baby Accessory -->
@@ -2144,6 +2164,10 @@
                                                                 <a href="{{ route('AddProduct_askSize',['57','5']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کیسه
                                                                     خواب</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{{ route('AddProduct_askSize',['58','5']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">بافتنی</a>
                                                             </li>
                                                         </ul>
                                                     </li>

@@ -504,3 +504,6 @@ Route::get('/session-table', function() {
 // -----------------------------[zarinpal]--------------------------------
 Route::get('/Confirmation','Customer\Basic@orderZarinpal');
 
+//MODE
+// ---------------------------------------------------------------------------------------------------------------------
+Route::get('/Mode-Women-Trend', 'Mode\Basic@womenTrend')->name('womenTrend');
