@@ -32,15 +32,17 @@
         <div style="left: 0; background-position: 50% 5% !important; height: 2000px" id="load" class="load"></div>
         <!-- smallDevice -->
         <article class="row smallDevice">
-            <header style="direction: rtl" class="d-flex justify-content-between col-12">
+            <header style="direction: rtl" class="d-flex justify-content-between col-12 g-py-5">
                 <!-- Article Icons -->
-                <div style="width: 160px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis" class="align-self-center">
-                    <h1 id="productName"
-                        class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}</h1>
-                    <span id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
+                <div style="line-height: 0" class="align-self-center col-8 p-0">
+                    <h1 style="text-overflow: ellipsis; overflow: hidden; width: 100%; white-space: nowrap;"
+                        class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}
+                        <span id="productGender" class="align-self-center g-font-size-13">{{ $data->Gender }}</span>
+                        <span id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span></h1>
+
                 </div>
-                <div style="direction: ltr"
-                     class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
+                <div style="direction: ltr; line-height: 0"
+                     class="col-4 g-color-primary g-font-size-18 p-0 align-self-center">
                     <i class="{{ $rating>0 ? 'fa fa-star':'fa fa-star-o'}}"></i>
                     <i class="{{ $rating>1 ? 'fa fa-star':'fa fa-star-o'}}"></i>
                     <i class="{{ $rating>2 ? 'fa fa-star':'fa fa-star-o'}}"></i>
@@ -121,7 +123,7 @@
                             <img id="img10" class="w-100" src="{{ $data->PicPath }}pic12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
-                     @if (file_exists(public_path($data->PicPath.'pic13.jpg')))
+                    @if (file_exists(public_path($data->PicPath.'pic13.jpg')))
                         <div class="js-slide">
                             <img id="img10" class="w-100" src="{{ $data->PicPath }}pic13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
@@ -196,7 +198,7 @@
                             <img class="w-100" src="{{ $data->PicPath }}sample12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
-                       @if (file_exists(public_path($data->PicPath.'sample13.jpg')))
+                    @if (file_exists(public_path($data->PicPath.'sample13.jpg')))
                         <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample13">
                             <img class="w-100" src="{{ $data->PicPath }}sample13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
@@ -277,15 +279,17 @@
             {{--اطلاعات محصول--}}
             <div style="direction: rtl; position: relative" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
 
-                <div class="magnifier-preview g-z-index-4" id="preview" style="position:absolute; width: 445px; height: 556px"></div>
+                <div class="magnifier-preview g-z-index-4" onclick="$('#productName').removeAttr('style')" id="preview" style="position:absolute; width: 445px; height: 556px"></div>
                 <div style="min-height: 556px">
                     <!-- bigDevice -->
                     <header class="d-flex justify-content-between bigDevice">
                         <!-- Article Icons -->
                         <div class="align-self-center">
-                            <h1 id="productName"
-                                class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}</h1>
-                            <span id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
+                            <h1
+                                class="d-flex g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}
+                                <span id="productGender" class="align-self-center g-font-size-13 g-mx-5">{{ $data->Gender }}</span>
+                                <span style="text-overflow: ellipsis; overflow: hidden; width: 200px;" id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
+                            </h1>
                         </div>
                         <div style="direction: ltr"
                              class="d-inline-block g-color-primary g-font-size-18 g-mt-5 g-mr-5 align-self-center">
@@ -333,12 +337,16 @@
                     </div>
 
                     <div class="align-self-center g-mb-15">
-                        <h1 id="productName"
-                            class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Name }}</h1>
-                        <h1
-                            class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0 smallDevice">{{ $data->Model }}</h1>
-                        <h1
-                            class="d-inline-block h5 g-color-black mb-2">{{ $data->Brand }}</h1>
+                        <h1 id="productName" style="text-overflow: ellipsis; overflow: hidden; width: 100%; white-space: nowrap;"
+                            onclick="$(this).removeAttr('style')"
+                            class="g-font-size-14 g-font-size-18--lg g-color-black mb-2">
+                            {{ $data->Name }}
+                            <span
+                                class="g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Model }}</span>
+                            <span
+                                class="h5 g-color-black mb-2">{{ $data->Brand }}</span>
+                        </h1>
+
                         <h1
                             class="d-block h6 g-font-weight-300 g-color-black mb-2">فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</h1>
 
@@ -346,9 +354,9 @@
                             class="d-block h6 g-font-weight-300 g-color-black mb-2">کد محصول: <span id="detailID" class="g-font-weight-600"></span></h1>
                     </div>
 
-
                     {{--توضیحات--}}
-                    <pre class="g-mb-25 g-font-size-14" id="productDetail">{{ $data->Detail }}</pre>
+                    <pre style="word-wrap: break-word; white-space: pre-line;"
+                         class="g-mb-25 g-font-size-14" id="productDetail">{{ $data->Detail }}</pre>
 
                     <!-- قیمت -->
                     <div class="g-mb-30--lg g-mb-0 text-lg-right text-left">
@@ -534,8 +542,7 @@
                                         نام محصول
                                     </h6>
                                     <span id="orderProductName"
-                                          class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"><span
-                                            id="productModel"></span></span>
+                                          class="g-py-5 g-px-5 g-pt-40--lg color-primary-smallDevice"></span>
                                 </div>
                                 {{--رنگ--}}
                                 <div
@@ -630,12 +637,12 @@
                                     </div>
                                     {{--هزینه پستی--}}
                                     <span id="popularPost"
-                                        class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
+                                          class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
                                         <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?number_format($postPriceCost->Mahabad):number_format($postPriceCost->OtherCity)}}</span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
                                     </span>
                                     <span  id="tPaxPost"
-                                        class="d-none u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
+                                           class="d-none u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
                                         <span id="tpaxPrice" class="d-none">0</span>
                                         <span class="g-font-size-12 g-font-weight-300 g-mr-5">پرداخت در محل</span>
                                     </span>
@@ -1016,7 +1023,7 @@
                             <img class="w-100" src="{{ $data->PicPath }}sample12.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>
                     @endif
-                        @if (file_exists(public_path($data->PicPath.'sample13.jpg')))
+                    @if (file_exists(public_path($data->PicPath.'sample13.jpg')))
                         <div class="js-slide g-cursor-pointer g-transition-0_3 g-mx-3" id="sample13">
                             <img class="w-100" src="{{ $data->PicPath }}sample13.jpg" alt="{{ $data->Name.' '.$data->Model.' '.$data->Gender.' '.$data->Brand }}">
                         </div>

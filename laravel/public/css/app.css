@@ -75,11 +75,6 @@
     font-style: normal;
 }
 
-/*end vazir font*/
-* {
-    font-family: Vazir, serif !important;
-}
-
 :root {
     --blue: #3490dc;
     --indigo: #6574cd;

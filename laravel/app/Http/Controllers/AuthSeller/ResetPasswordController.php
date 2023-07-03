@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class ResetPasswordController extends Controller
 {
@@ -33,9 +35,6 @@ class ResetPasswordController extends Controller
      */
     protected $redirectTo = '/Seller-Panel';
 
-
-
-
     public function showResetForm(Request $request, $token = null){
         $password_resets = DB::table('password_resets')->get();
         $email="";
@@ -52,6 +51,30 @@ class ResetPasswordController extends Controller
             'token' => $token,
             'email' => $email,
         ]);
+    }
+
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        DB::table('sellers')
+            ->where('Mobile', Session::get('mobile'))
+            ->update([
+                'password' => Hash::make($request->get('password')),
+                'PasswordHint' => $request->get('password')
+            ]);
+
+        $seller=DB::table('sellers')
+            ->where('Mobile', Session::get('mobile'))
+            ->first();
+
+        Auth::guard('seller')->loginUsingId($seller->id, TRUE);
+        return redirect('/Seller-Panel');
     }
 
     protected function guard()

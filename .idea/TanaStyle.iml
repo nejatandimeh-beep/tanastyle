@@ -133,5 +133,7 @@
     <orderEntry type="library" name="jquery.form" level="application" />
     <orderEntry type="library" name="jquery-3.5.1" level="application" />
     <orderEntry type="library" name="clipboard" level="application" />
+    <orderEntry type="library" name="tinymce" level="application" />
+    <orderEntry type="library" name="swiper" level="application" />
   </component>
 </module>

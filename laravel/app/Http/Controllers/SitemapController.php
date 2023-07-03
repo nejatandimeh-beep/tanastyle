@@ -12,9 +12,14 @@ class SitemapController extends Controller
     public function index()
     {
         SitemapGenerator::create('https://www.tanastyle.ir')
+            ->getSitemap()
+            ->add(Url::create('/Customer-Product-Female-List'))
+            ->add(Url::create('/Customer-Product-Male-List'))
+            ->add(Url::create('/Customer-Product-Boy-List'))
+            ->add(Url::create('/Customer-Product-Girl-List'))
             ->writeToFile(public_path('Mapping/sitemap.xml'));
         echo 'site map created :)';
-//
+
 //        SitemapGenerator::create('https://example.com')
 //            ->getSitemap()
 //            ->add(Url::create('/Customer-Product-Female-List'))

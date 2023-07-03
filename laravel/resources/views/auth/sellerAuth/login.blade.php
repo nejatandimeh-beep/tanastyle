@@ -71,7 +71,7 @@
                             <div class="form-group row g-mb-60--lg g-mt-30">
                                 <div class="col-md-10 text-left">
                                     @if (Route::has('password.request'))
-                                        <a class="btn btn-link" href="{{ route('sellers.showEmailRequestForm') }}">
+                                        <a class="btn btn-link" href="{{ route('sellers.showMobileRequestForm') }}">
                                             رمزتان را فراموش کرده اید؟
                                         </a>
                                     @endif

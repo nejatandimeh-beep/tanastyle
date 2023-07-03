@@ -327,7 +327,7 @@
 
         function confirmAdd() {
             $.confirm({
-                title: 'حذف محصول',
+                title: 'افزودن فروشنده جدید',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {

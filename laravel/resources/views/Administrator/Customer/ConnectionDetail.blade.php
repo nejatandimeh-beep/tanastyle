@@ -41,6 +41,7 @@
                             </div>
                             @foreach($data as $key => $rec)
                                 @if ($rec->Replay === 1)
+                                    @if($rec->Question!=='')
                                     <div class="media g-mb-5">
                                         <div style="border-radius: 8px 0 8px 8px;"
                                              class="media-body g-brd-around g-brd-gray-light-v2 g-pa-30 text-right">
@@ -63,7 +64,8 @@
                                                 disabled>{{ $rec->Question }}</pre>
                                         </div>
                                     </div>
-                                    <div class="media g-mb-30 g-mr-30--lg sdCommentPadding-20">
+                                    @endif
+                                    <div class="media g-mb-5 g-mr-30--lg sdCommentPadding-20">
                                         <div style="border-radius: 8px 0 8px 8px;"
                                              class="media-body g-brd-around g-brd-primary g-pa-30 text-right">
                                             <div class="g-mb-15 text-right">
@@ -86,7 +88,8 @@
                                         </div>
                                     </div>
                                 @else
-                                    <div class="media g-mb-30">
+                                    @if($rec->Question!=='')
+                                    <div class="media g-mb-5">
                                         <div style="border-radius: 8px 0 8px 8px;"
                                              class="media-body g-brd-around g-brd-gray-light-v2 g-pa-30 text-right">
                                             <div class="g-mb-15 text-right">
@@ -108,6 +111,7 @@
                                                 disabled>{{ $rec->Question }}</pre>
                                         </div>
                                     </div>
+                                    @endif
                                 @endif
                             @endforeach
                             <div class="g-mt-100 p-0">
@@ -137,7 +141,7 @@
                                                       maxlength="300"></textarea>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="زعسفخئثقId" value="{{ isset($data) ? $data[0]->CustomerID: '' }}">
+                                    <input type="hidden" name="customerId" value="{{ isset($data) ? $data[0]->CustomerID: '' }}">
                                     <input type="hidden" name="detailId" value="{{ isset($data) ? $data[$key]->ID: '' }}">
                                     <button type="submit"
                                             class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-25">

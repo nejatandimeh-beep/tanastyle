@@ -1,0 +1,1226 @@
+<?php
+
+namespace App\Http\Controllers\SellerMajor;
+
+use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use DateTime;
+use File;
+use Hekmatinasser\Verta\Facades\Verta;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Kavenegar;
+
+
+class Basic extends Controller
+{
+    protected $sellerMajorID, $sellerMajorData;
+
+    public function __construct()
+    {
+        $this->middleware('IsSellerMajor');
+        $this->middleware(function ($request, $next) {
+            session_start();
+            $_SESSION['userProfileImg'] = Auth::guard('sellerMajor')->user()->Pic . '/profileImg.jpg';
+            $_SESSION['jobCategory'] = Auth::guard('sellerMajor')->user()->Category;
+            $_SESSION['userName'] = Auth::guard('sellerMajor')->user()->name;
+            $this->sellerMajorID = Auth::guard('sellerMajor')->user()->id;
+            $this->sellerMajorData = DB::table('sellersmajor')
+                ->where('id', $this->sellerMajorID)
+                ->first();
+
+            return $next($request);
+        });
+
+    }
+
+    public function panel()
+    {
+        $data = $this->sellerMajorData;
+
+        $events = DB::table('seller_major_event as e')
+            ->select('*', 'e.ID as eventID', 'e.Time as eventTime')
+            ->leftJoin('seller_major_event_like as el', 'el.EventID', 'e.ID')
+            ->where('e.SellerMajorID', $this->sellerMajorID)
+            ->where("e.Time", ">", Carbon::now()->subHours(24)->toDateTimeString())
+            ->groupBy('e.ID')
+            ->orderBy('e.ID', 'ASC')
+            ->get();
+
+        $eventDate = array();
+        $eventTime = array();
+        $eventHowDay = array();
+        foreach ($events as $key => $rec) {
+            $temp = explode(' ', $rec->eventTime);
+            $eventDate[$key] = $this->convertDateToPersian($temp[0]);
+            $eventDate[$key] = $this->addZero($eventDate[$key]);
+            $eventTime[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+
+            if ($eventTime[$key] < 11520) {
+                $eventHowDay[$key] = $this->howDays($eventTime[$key]);
+            } else {
+                $eventHowDay[$key] = $eventDate[$key];
+            }
+        }
+
+        $message = DB::table('seller_major_msg')
+            ->select('*')
+            ->where('SellerMajorID', $this->sellerMajorID)
+            ->where('Status', '0')
+            ->orderBy('ID', 'ASC')
+            ->get();
+
+        $_SESSION['loadPost'] = 6;
+        $postsCount = DB::table('seller_major_post')
+            ->select('SellerMajorID')
+            ->where('SellerMajorID', $this->sellerMajorID)
+            ->get()
+            ->count();
+
+        $posts = DB::table('seller_major_post as p')
+            ->select('*', 'p.ID as postID', 'p.Time as postTime', 'p.Pic as postPic', 'pc.ID as CommentID')
+            ->leftJoin('seller_major_post_like as pl', 'pl.PostID', 'p.ID')
+            ->leftJoin('seller_major_post_comment as pc', 'pc.PostID', 'p.ID')
+            ->where('p.SellerMajorID', $this->sellerMajorID)
+            ->groupBy('p.ID')
+            ->orderBy('p.ID', 'DESC')
+            ->take(6)
+            ->get();
+
+        $postDate = array();
+        $postTime = array();
+        $postHowDay = array();
+        $commentCount = array();
+        foreach ($posts as $key => $rec) {
+            $temp = explode(' ', $rec->postTime);
+            $postDate[$key] = $this->convertDateToPersian($temp[0]);
+            $postDate[$key] = $this->addZero($postDate[$key]);
+            $postTime[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+
+            if ($postTime[$key] < 11520) {
+                $postHowDay[$key] = $this->howDays($postTime[$key]);
+            } else {
+                $postHowDay[$key] = $postDate[$key];
+            }
+            $comments = DB::table('seller_major_post_comment as pc')
+                ->select('pc.ID')
+                ->where('pc.PostID', $rec->postID)
+                ->get()
+                ->count();
+
+            $commentsReply = DB::table('seller_major_post_comment_reply')
+                ->where('PostID', $rec->postID)
+                ->get()
+                ->count();
+
+            $commentCount[$key] = $comments + $commentsReply;
+        }
+
+        return view('SellerMajor.Panel', compact('data', 'events', 'eventHowDay', 'posts', 'postsCount',
+            'message', 'postHowDay', 'commentCount'));
+    }
+
+    public function bioUpdate($bioText)
+    {
+        DB::table('sellersmajor')
+            ->where('id', $this->sellerMajorID)
+            ->update([
+                'Bio' => $bioText,
+            ]);
+
+        return 'updated';
+    }
+
+    public function addressUpdate($address)
+    {
+        DB::table('sellersmajor')
+            ->where('id', $this->sellerMajorID)
+            ->update([
+                'Address' => $address,
+            ]);
+
+        return $address;
+    }
+
+    public function instagramUpdate($instagramLink)
+    {
+        $instagramLink = str_replace('88888888888888888888888', '/', $instagramLink);
+
+        DB::table('sellersmajor')
+            ->where('id', $this->sellerMajorID)
+            ->update([
+                'Instagram' => $instagramLink,
+            ]);
+
+        return $instagramLink;
+    }
+
+    public function updateProfileImage(Request $request)
+    {
+        $mobile = Auth::guard('sellerMajor')->user()->Mobile;
+        $image = $request->get('imageUrl');
+        $path = public_path('img/sellerMajorProfileImage/') . $mobile;
+        File::makeDirectory($path, 0777, true, true);
+        $image_parts = explode(";base64,", $image);
+        $image_base64 = base64_decode($image_parts[1]);
+        $imageFullPath = $path . '/profileImg.jpg';
+        file_put_contents($imageFullPath, $image_base64);
+
+        DB::table('sellersmajor')
+            ->where('id', $this->sellerMajorID)
+            ->update([
+                'Pic' => 'img/sellerMajorProfileImage/' . $mobile,
+            ]);
+
+        return 'Success';
+    }
+
+    public function addEvent(Request $request)
+    {
+        date_default_timezone_set('Asia/Tehran');
+        $text = $request->get('eventText');
+        DB::table('seller_major_event')
+            ->insert([
+                'SellerMajorID' => $this->sellerMajorID,
+                'Text' => $text,
+                'Pic' => 'img/SellerMajor/Events/' . $this->sellerMajorID,
+                'Time' => date('Y-m-d H:i:s'),
+            ]);
+
+        $eventId = DB::table('seller_major_event')
+            ->select('ID')
+            ->latest('ID')
+            ->first();
+
+        $image = $request->get('eventImageUrl');
+        $path = public_path('img/SellerMajor/Events/') . $this->sellerMajorID;
+        File::makeDirectory($path, 0777, true, true);
+        $image_parts = explode(";base64,", $image);
+        $image_base64 = base64_decode($image_parts[1]);
+        $imageFullPath = $path . '/' . $eventId->ID . '.jpg';
+        $source = imagecreatefromstring($image_base64);
+        list($width, $height) = getimagesize($image);
+        $newWidth = 1080;
+        $newHeight = 1920;
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $white = imagecolorallocate($thumb, 255, 255, 255);
+        imagefill($thumb, 0, 0, $white);
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        imagejpeg($thumb, $imageFullPath, 80);
+
+        imagedestroy($thumb);
+        imagedestroy($source);
+
+        return 'Success';
+    }
+
+    public function removeEvent($item)
+    {
+        $data = DB::table('seller_major_event')
+            ->select('ID', 'Pic')
+            ->where('ID', $item)
+            ->first();
+
+        File::delete(public_path($data->Pic . '/' . $item . '.jpg'));
+
+        DB::table('seller_major_event_visit')
+            ->where('EventID', $item)
+            ->delete();
+
+        DB::table('seller_major_event')
+            ->where('ID', $item)
+            ->delete();
+
+        return redirect()->route('sellerMajorPanel');
+    }
+
+    public function removeProfileImage()
+    {
+        $data = $this->sellerMajorData;
+
+        File::deleteDirectory(public_path($data->Pic));
+
+        DB::table('sellersmajor')
+            ->where('id', $this->sellerMajorID)
+            ->update([
+                'Pic' => '',
+            ]);
+
+        return redirect()->route('sellerMajorPanel');
+    }
+
+    public function messages()
+    {
+        $msg = DB::table('seller_major_msg as m')
+            ->select('m.*', 'm.ID as msgID', 'md.ID', 'md.Time', 'md.MessageID', 'c.PicPath', 'c.name','c.id as customerID')
+            ->leftJoin('seller_major_msg_detail as md', 'md.MessageID', 'm.ID')
+            ->leftJoin('customers as c', 'c.id', 'm.CustomerID')
+            ->where('m.SellerMajorID', $this->sellerMajorID)
+            ->orderBy('md.ID', 'DESC')
+            ->groupBy('m.CustomerID')
+            ->get();
+
+        $date = array();
+        $time = array();
+        $howDay = array();
+        foreach ($msg as $key => $rec) {
+            $temp = explode(' ', $rec->Time);
+            $date[$key] = $this->convertDateToPersian($temp[0]);
+            $date[$key] = $this->addZero($date[$key]);
+            $time[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+
+            if ($time[$key] < 11520) {
+                $howDay[$key] = $this->howDays($time[$key]);
+            } else {
+                $howDay[$key] = $date[$key];
+            }
+        }
+        return view('SellerMajor.Messages', compact('msg', 'howDay'));
+    }
+
+    public function messagesDetail(Request $request)
+    {
+        $customerID=$request->get('customerID');
+        $msg = DB::table('seller_major_msg as m')
+            ->select('m.*', 'md.*', 'c.id as customerID', 'c.PicPath as customerPic', 'c.name as customerName')
+            ->leftJoin('seller_major_msg_detail as md', 'md.MessageID', 'm.ID')
+            ->leftJoin('seller_major_event as e', 'e.ID', 'md.EventID')
+            ->leftJoin('customers as c', 'c.id', 'md.CustomerID')
+            ->where('m.SellerMajorID', $this->sellerMajorID)
+            ->where('m.CustomerID', $customerID)
+            ->orderBy('md.ID')
+            ->get();
+
+        $eventDate = array();
+        $eventTime = array();
+        $msgHowDay = array();
+        foreach ($msg as $key => $rec) {
+            $temp = explode(' ', $rec->Time);
+            $eventDate[$key] = $this->convertDateToPersian($temp[0]);
+            $eventDate[$key] = $this->addZero($eventDate[$key]);
+            $eventTime[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+
+            if ($eventTime[$key] < 11520) {
+                $msgHowDay[$key] = $this->howDays($eventTime[$key]);
+            } else {
+                $msgHowDay[$key] = $eventDate[$key];
+            }
+        }
+
+        DB::table('seller_major_msg')
+            ->where('SellerMajorID', $this->sellerMajorID)
+            ->update([
+                'Status' => '1',
+            ]);
+
+        return view('SellerMajor.MessagesDetail', compact('msg', 'msgHowDay'));
+    }
+
+    public function messagesAnswer(Request $request)
+    {
+        $msgID = $request->get('msgID');
+        $msgDetailID = $request->get('msgDetailID');
+        $answer = $request->get('answer');
+        $attachmentImg = $request->file('attachmentImg');
+        if (!is_null($attachmentImg)) {
+            $source = '';
+            $picPath = public_path('/img/SellerMajor/Attachment/') . $this->sellerMajorID . '/' . $msgDetailID;
+            File::makeDirectory($picPath, 0777, true, true);
+            switch ($attachmentImg->getMimeType()) {
+                case 'image/jpeg':
+                case 'image/jpg':
+                    $source = imagecreatefromjpeg($attachmentImg);
+                    break;
+                case 'image/png':
+                    $source = imagecreatefrompng($attachmentImg);
+                    break;
+                case 'image/gif':
+                    $source = imagecreatefromgif($attachmentImg);
+                    break;
+            }
+            $attachFullPath = $picPath  . '/0.jpg';
+            imagejpeg($source, $attachFullPath);
+
+            list($width, $height) = getimagesize($attachmentImg);
+            $newWidth = (25 * $width) / 100;
+            $newHeight = (25 * $height) / 100;
+            $thumb = imagecreatetruecolor($newWidth, $newHeight);
+            $white = imagecolorallocate($thumb, 255, 255, 255);
+            imagefill($thumb, 0, 0, $white);
+            imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            $imageFullPath = $picPath . '/sample.jpg';
+            imagejpeg($thumb, $imageFullPath, 80);
+            imagedestroy($thumb);
+            imagedestroy($source);
+            $attachFullPath = '/img/SellerMajor/Attachment/' . $this->sellerMajorID . '/' . $msgDetailID;
+        } else {
+            $attachFullPath = '';
+        }
+
+        $customerID = $request->get('customerID');
+        $msg = DB::table('seller_major_msg')
+            ->select('CustomerID')
+            ->where('CustomerID', $customerID)
+            ->first();
+
+        if (!isset($msg->CustomerID)) {
+            DB::table('seller_major_msg')->insert([
+                [
+                    'SellerMajorID' => $this->sellerMajorID,
+                    'CustomerID' => $customerID,
+                ],
+            ]);
+
+            $msgIDTemp = DB::table('seller_major_msg')
+                ->select('ID')
+                ->orderBy('ID', 'DESC')
+                ->first();
+
+            DB::table('seller_major_msg_detail')->insert([
+                [
+                    'MessageID' => $msgIDTemp->ID,
+                    'CustomerID' => $customerID,
+                    'Sender' => 'seller',
+                    'Reply' => !is_null($answer) ? $answer : '',
+                    'AttachPath' => $attachFullPath,
+                ],
+            ]);
+        } else {
+            DB::table('seller_major_msg_detail')->insert([
+                [
+                    'MessageID' => $msgID,
+                    'CustomerID' => $customerID,
+                    'Sender' => 'seller',
+                    'Reply' => !is_null($answer) ? $answer : '',
+                    'AttachPath' => $attachFullPath,
+                ],
+            ]);
+
+            DB::table('seller_major_msg')
+                ->where('SellerMajorID', $this->sellerMajorID)
+                ->update([
+                    'Status' => '2',
+                ]);
+        }
+
+        $msg = DB::table('seller_major_msg as m')
+            ->select('m.*', 'md.*')
+            ->leftJoin('seller_major_msg_detail as md', 'md.MessageID', 'm.ID')
+            ->latest('md.ID')
+            ->first();
+
+        DB::table('seller_major_msg')
+            ->where('SellerMajorID', $this->sellerMajorID)
+            ->update([
+                'Status' => '1',
+            ]);
+
+        return array($msg);
+    }
+
+    public function messagesDelete($msgDetailID)
+    {
+        DB::table('seller_major_msg_detail')
+            ->where('ID', $msgDetailID)
+            ->delete();
+
+        return 'success delete..';
+    }
+
+    public function userMsgDelete($msgID)
+    {
+        DB::table('seller_major_msg_detail')
+            ->where('MessageID', $msgID)
+            ->delete();
+
+        DB::table('seller_major_msg')
+            ->where('ID', $msgID)
+            ->delete();
+
+        return $msgID;
+    }
+
+    public function addPostForm()
+    {
+        return view('SellerMajor.AddPost');
+    }
+
+    public function addPost(Request $request)
+    {
+        date_default_timezone_set('Asia/Tehran');
+        $cat = $request->get('cat');
+        $catCode = $request->get('catCode');
+        $name = $request->get('name');
+        $nameCode = $request->get('nameCode');
+        $gender = $request->get('gender');
+        $genderCode = $request->get('genderCode');
+        $size = $request->get('size');
+        $price = $request->get('price');
+        $discount = $request->get('discount');
+        $finalPrice = $request->get('finalPrice');
+        $color = $request->get('color');
+        $colorCode = $request->get('colorCode');
+        $text = $request->get('postText');
+        $tag = '#';
+        $picCount = 0;
+        for ($i = 0; $i < 4; $i++) {
+            // original pic
+            $img = $request->get('postImageUrl-' . $i);
+            if ($img != null) {
+                $picCount++;
+            }
+        }
+        DB::table('seller_major_post')
+            ->insert([
+                'SellerMajorID' => $this->sellerMajorID,
+                'Cat' => $cat,
+                'CatCode' => $catCode,
+                'ProductName' => $name,
+                'ProductCode' => $nameCode,
+                'Gender' => $gender,
+                'GenderCode' => $genderCode,
+                'Size' => $size,
+                'Price' => $price,
+                'Discount' => $discount,
+                'FinalPrice' => $finalPrice,
+                'Color' => $color,
+                'ColorCode' => $colorCode,
+                'Text' => $text,
+                'Tag' => $tag,
+                'Pic' => 'img/SellerMajor/Posts/' . $this->sellerMajorID,
+                'PicCount' => $picCount,
+                'Time' => date('Y-m-d H:i:s'),
+            ]);
+
+        $postId = DB::table('seller_major_post')
+            ->select('ID')
+            ->latest('ID')
+            ->first();
+
+        for ($i = 0; $i < 4; $i++) {
+            // original pic
+            $image = $request->get('postImageUrl-' . $i);
+            if ($image != null) {
+                $path = public_path('img/SellerMajor/Posts/') . $this->sellerMajorID . '/' . $postId->ID;
+                File::makeDirectory($path, 0777, true, true);
+                $image_parts = explode(";base64,", $image);
+                $image_base64 = base64_decode($image_parts[1]);
+                $imageFullPath = $path . '/' . $i . '.jpg';
+                dd($image_base64);
+                $source = imagecreatefromstring($image_base64);
+                list($width, $height) = getimagesize($image);
+                $newWidth = 1200;
+                $newHeight = 1500;
+                $thumb = imagecreatetruecolor($newWidth, $newHeight);
+                $white = imagecolorallocate($thumb, 255, 255, 255);
+                imagefill($thumb, 0, 0, $white);
+                imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+                imagejpeg($thumb, $imageFullPath, 90);
+
+                imagedestroy($thumb);
+                imagedestroy($source);
+
+                if ($i === 0) {
+                    // sample pic
+                    $source = imagecreatefromstring($image_base64);
+                    list($width, $height) = getimagesize($image);
+                    $newWidth = 300;
+                    $newHeight = 375;
+                    $thumb = imagecreatetruecolor($newWidth, $newHeight);
+                    $white = imagecolorallocate($thumb, 255, 255, 255);
+                    imagefill($thumb, 0, 0, $white);
+                    imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+                    $imageFullPath = $path . '/' . 'sample.jpg';
+                    imagejpeg($thumb, $imageFullPath, 80);
+
+                    imagedestroy($thumb);
+                    imagedestroy($source);
+                }
+
+            }
+        }
+
+
+        DB::table('sellersmajor')
+            ->where('ID', $this->sellerMajorID)
+            ->update([
+                'Posts' => DB::raw('Posts + 1')
+            ]);
+
+        return redirect()->route('sellerMajorPanel');
+    }
+
+    public function loadPost()
+    {
+        $posts = DB::table('seller_major_post as p')
+            ->select('*', 'p.ID as postID', 'p.Time as postTime', 'p.Pic as postPic', 'pc.ID as CommentID')
+            ->leftJoin('seller_major_post_like as pl', 'pl.PostID', 'p.ID')
+            ->leftJoin('seller_major_post_comment as pc', 'pc.PostID', 'p.ID')
+            ->where('p.SellerMajorID', $this->sellerMajorID)
+            ->groupBy('p.ID')
+            ->orderBy('p.ID', 'DESC')
+            ->skip($_SESSION['loadPost'])
+            ->take(6)
+            ->get();
+
+        $postDate = array();
+        $postTime = array();
+        $postHowDay = array();
+        $commentCount = array();
+        foreach ($posts as $key => $rec) {
+            $temp = explode(' ', $rec->postTime);
+            $postDate[$key] = $this->convertDateToPersian($temp[0]);
+            $postDate[$key] = $this->addZero($postDate[$key]);
+            $postTime[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+
+            if ($postTime[$key] < 11520) {
+                $postHowDay[$key] = $this->howDays($postTime[$key]);
+            } else {
+                $postHowDay[$key] = $postDate[$key];
+            }
+            $comments = DB::table('seller_major_post_comment as pc')
+                ->select('pc.ID')
+                ->where('pc.PostID', $rec->postID)
+                ->get()
+                ->count();
+
+            $commentsReply = DB::table('seller_major_post_comment_reply')
+                ->where('PostID', $rec->postID)
+                ->get()
+                ->count();
+
+            $commentCount[$key] = $comments + $commentsReply;
+        }
+
+        $startStep = $_SESSION['loadPost'];
+        $_SESSION['loadPost'] = $_SESSION['loadPost'] + 6;
+
+        return array($posts, $startStep, $postHowDay, $commentCount, $this->sellerMajorData, $_SESSION['loadPost']);
+    }
+
+    public function likePost($postID, $status)
+    {
+        if ($status === 'like') {
+            $temp = DB::table('seller_major_post_like')
+                ->select('PostID')
+                ->where('PostID', $postID)
+                ->first();
+            if (!is_null($temp)) {
+                DB::table('seller_major_post')
+                    ->where('ID', $postID)
+                    ->update([
+                        'LikeCount' => DB::raw('LikeCount + 1')
+                    ]);
+                DB::table('seller_major_post_like')
+                    ->where('PostID', $postID)
+                    ->update([
+                        'Like' => 1,
+                    ]);
+            } else {
+                DB::table('seller_major_post')
+                    ->where('ID', $postID)
+                    ->update([
+                        'LikeCount' => DB::raw('LikeCount + 1')
+                    ]);
+                DB::table('seller_major_post_like')
+                    ->insert([
+                        'SellerMajorID' => $this->sellerMajorID,
+                        'PostID' => $postID,
+                        'Like' => 1,
+                    ]);
+            }
+        } else {
+            DB::table('seller_major_post')
+                ->where('ID', $postID)
+                ->update([
+                    'LikeCount' => DB::raw('LikeCount - 1')
+                ]);
+            DB::table('seller_major_post_like')
+                ->where('PostID', $postID)
+                ->update([
+                    'Like' => 0,
+                ]);
+        }
+
+        $like = DB::table('seller_major_post')
+            ->select('LikeCount', 'ID')
+            ->where('ID', $postID)
+            ->first();
+        return $like->LikeCount;
+    }
+
+    public function deletePost($postID)
+    {
+        DB::table('seller_major_post_visit')
+            ->where('PostID', $postID)
+            ->delete();
+
+        DB::table('seller_major_post_like')
+            ->where('PostID', $postID)
+            ->delete();
+
+        DB::table('seller_major_post_comment_reply_like as pcrl')
+            ->leftJoin('seller_major_post_comment_reply as pcr', 'pcr.ID', 'pcrl.CommentReplyID')
+            ->leftJoin('seller_major_post_comment as pc', 'pc.ID', 'pcr.CommentID')
+            ->where('pc.PostID', $postID)
+            ->delete();
+
+        DB::table('seller_major_post_comment_reply as pcr')
+            ->leftJoin('seller_major_post_comment as pc', 'pc.ID', 'pcr.CommentID')
+            ->where('pc.PostID', $postID)
+            ->delete();
+
+        DB::table('seller_major_post_comment_like as pcl')
+            ->leftJoin('seller_major_post_comment as pc', 'pc.ID', 'pcl.CommentID')
+            ->where('pc.PostID', $postID)
+            ->delete();
+
+        DB::table('seller_major_post_comment')
+            ->where('PostID', $postID)
+            ->delete();
+
+        DB::table('seller_major_post')
+            ->where('ID', $postID)
+            ->delete();
+        return 'success';
+    }
+
+    public function editPost(Request $request)
+    {
+        $postID = $request->get('postID');
+        $items = $request->get('items');
+        $text = $request->get('text');
+        $items = json_decode($items);
+        if (isset($items[0]) && !is_null($items[0]))
+            DB::table('seller_major_post')
+                ->where('ID', $postID)
+                ->update([
+                    'Cat' => null
+                ]);
+        if (isset($items[1]) && !is_null($items[1]))
+            DB::table('seller_major_post')
+                ->where('ID', $postID)
+                ->update([
+                    'ProductName' => null
+                ]);
+        if (isset($items[2]) && !is_null($items[2]))
+            DB::table('seller_major_post')
+                ->where('ID', $postID)
+                ->update([
+                    'Size' => null
+                ]);
+        if (isset($items[3]) && !is_null($items[3]))
+            DB::table('seller_major_post')
+                ->where('ID', $postID)
+                ->update([
+                    'Color' => null
+                ]);
+        if (isset($items[4]) && !is_null($items[4]))
+            DB::table('seller_major_post')
+                ->where('ID', $postID)
+                ->update([
+                    'Price' => null
+                ]);
+        if (isset($items[5]) && !is_null($items[5]))
+            DB::table('seller_major_post')
+                ->where('ID', $postID)
+                ->update([
+                    'Discount' => null
+                ]);
+        if (isset($items[6]) && !is_null($items[6]))
+            DB::table('seller_major_post')
+                ->where('ID', $postID)
+                ->update([
+                    'FinalPrice' => null
+                ]);
+
+        DB::table('seller_major_post')
+            ->where('ID', $postID)
+            ->update([
+                'Text' => $text
+            ]);
+    }
+
+    public function chartPost($postID)
+    {
+        return array(DB::table('seller_major_post')
+            ->select('*')
+            ->where('ID', $postID)
+            ->first());
+    }
+
+    public function sendComment($id, $text, $replyID)
+    {
+        date_default_timezone_set('Asia/Tehran');
+        if ($replyID === 'comment') {
+            DB::table('seller_major_post_comment')
+                ->insert([
+                    'PostID' => $id,
+                    'SellerMajorID' => $this->sellerMajorID,
+                    'CommenterID' => -1,
+                    'Commenter' => 'seller',
+                    'CommentText' => $text,
+                    'CommentTime' => date('Y-m-d H:i:s'),
+                ]);
+            $data = DB::table('seller_major_post_comment as pc')
+                ->select('*', 'pc.ID as commentId', 'pc.PostID')
+                ->leftJoin('seller_major_post_comment_reply as pcr', 'pcr.CommentID', 'pc.ID')
+                ->leftJoin('sellersmajor as s', 's.id', 'pc.SellerMajorID')
+                ->latest('pc.ID')
+                ->first();
+        } else {
+            DB::table('seller_major_post_comment_reply')
+                ->insert([
+                    'PostID' => $id,
+                    'CommentID' => $replyID,
+                    'CommenterID' => -1,
+                    'CommenterReply' => 'seller',
+                    'CommentReplyText' => $text,
+                    'CommentReplyTime' => date('Y-m-d H:i:s'),
+                ]);
+
+            $data = DB::table('seller_major_post_comment as pc')
+                ->select('*', 'pc.ID as commentId', 'pcr.ID as commentReplyId', 'pc.PostID')
+                ->leftJoin('seller_major_post_comment_reply as pcr', 'pcr.CommentID', 'pc.ID')
+                ->leftJoin('sellersmajor as s', 's.id', 'pc.SellerMajorID')
+                ->latest('pcr.ID')
+                ->first();
+        }
+
+        $temp = explode(' ', $replyID === 'comment' ? $data->CommentTime : $data->CommentReplyTime);
+        $postCommentDate = $this->convertDateToPersian($temp[0]);
+        $postCommentDate = $this->addZero($postCommentDate);
+        $postCommentTime = $this->dateLenToNow($temp[0], $temp[1]);
+
+        if ($postCommentTime < 11520) {
+            $postCommentHowDay = $this->howDays($postCommentTime);
+        } else {
+            $postCommentHowDay = $postCommentDate;
+        }
+
+        return array($data, $postCommentHowDay);
+    }
+
+    public function likeComments($id, $replyID, $status, $likeStatus)
+    {
+        $commentID = DB::table('seller_major_post_comment_reply')
+            ->select('CommentID')
+            ->where('CommentID', $id)
+            ->first();
+        if ($status === "comment") {
+            DB::table('seller_major_post_comment')
+                ->where('ID', $id)
+                ->update([
+                    'CommentLike' => DB::raw($likeStatus == 1 ? 'CommentLike - 1' : 'CommentLike + 1')
+                ]);
+
+            $checkLike = DB::table('seller_major_post_comment_like_seller')
+                ->select('ID')
+                ->where('CommentID', $id)
+                ->where('SellerMajorID', $this->sellerMajorID)
+                ->first();
+            if (!isset($checkLike->ID)) {
+                DB::table('seller_major_post_comment_like_seller')
+                    ->insert([
+                        'CommentID' => $id,
+                        'SellerMajorID' => $this->sellerMajorID,
+                        'LikeStatus' => $likeStatus == 1 ? 0 : 1,
+                    ]);
+
+                return 'success';
+            } else {
+                DB::table('seller_major_post_comment_like_seller')
+                    ->where('CommentID', $id)
+                    ->where('SellerMajorID', $this->sellerMajorID)
+                    ->update([
+                        'LikeStatus' => $likeStatus == 1 ? 0 : 1,
+                    ]);
+
+                return 'success';
+            }
+        } else {
+            DB::table('seller_major_post_comment_reply')
+                ->where('ID', $replyID)
+                ->update([
+                    'CommentReplyLike' => DB::raw($likeStatus == 1 ? 'CommentReplyLike - 1' : 'CommentReplyLike + 1')
+                ]);
+
+            $checkLike = DB::table('seller_major_post_comment_reply_like_seller')
+                ->select('ID')
+                ->where('CommentReplyID', $replyID)
+                ->where('SellerMajorID', $this->sellerMajorID)
+                ->first();
+
+            if (!isset($checkLike->ID)) {
+                DB::table('seller_major_post_comment_reply_like_seller')
+                    ->insert([
+                        'Comment_ID' => $id,
+                        'CommentReplyID' => $replyID,
+                        'SellerMajorID' => $this->sellerMajorID,
+                        'LikeStatus' => $likeStatus == 1 ? 0 : 1,
+                    ]);
+
+                return 'success';
+            } else {
+                DB::table('seller_major_post_comment_reply_like_seller')
+                    ->where('CommentReplyID', $replyID)
+                    ->where('SellerMajorID', $this->sellerMajorID)
+                    ->update([
+                        'LikeStatus' => $likeStatus == 1 ? 0 : 1,
+                    ]);
+
+                return 'success';
+            }
+        }
+    }
+
+    public function addComments($postID)
+    {
+        $comment = DB::table('seller_major_post_comment as pc')
+            ->select('*', 'pc.ID as commentId', 'p.SellerMajorID', 'c.id', 'c.PicPath', 'c.name as customerName', 'c.id as customerID', 's.name as sellerMajorName')
+            ->leftJoin('seller_major_post as p', 'p.ID', 'pc.PostID')
+            ->leftJoin('seller_major_post_comment_like_seller as pcl', 'pcl.CommentID', 'pc.ID')
+            ->leftJoin('sellersmajor as s', 's.id', 'p.SellerMajorID')
+            ->leftJoin('customers as c', 'c.id', 'pc.CommenterID')
+            ->where('pc.PostID', $postID)
+            ->groupBy('pc.ID')
+            ->get();
+
+        $commentTime = array();
+        foreach ($comment as $key => $rec) {
+            $temp = explode(' ', $rec->CommentTime);
+            $date[$key] = $this->convertDateToPersian($temp[0]);
+            $date[$key] = $this->addZero($date[$key]);
+            $time[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+
+            if ($time[$key] < 11520) {
+                $commentTime[$key] = $this->howDays($time[$key]);
+            } else {
+                $commentTime[$key] = $date[$key];
+            }
+        }
+
+        $commentReply = DB::table('seller_major_post_comment_reply as pcr')
+            ->select('*', 'pcr.ID as commentReplyID', 'p.SellerMajorID', 'c.id', 'c.PicPath', 'c.name as customerName', 'c.id as customerID', 's.name as sellerMajorName')
+            ->leftJoin('seller_major_post_comment as pc', 'pc.ID', 'pcr.CommentID')
+            ->leftJoin('seller_major_post as p', 'p.ID', 'pc.PostID')
+            ->leftJoin('seller_major_post_comment_reply_like_seller as pcrl', 'pcrl.CommentReplyID', 'pcr.ID')
+            ->leftJoin('sellersmajor as s', 's.id', 'p.SellerMajorID')
+            ->leftJoin('customers as c', 'c.id', 'pcr.CommenterID')
+            ->orderBy('pcr.ID')
+            ->where('pc.PostID', $postID)
+            ->get();
+
+        $commentReplyTime = array();
+        foreach ($commentReply as $key => $rec) {
+            $temp = explode(' ', $rec->CommentReplyTime);
+            $date[$key] = $this->convertDateToPersian($temp[0]);
+            $date[$key] = $this->addZero($date[$key]);
+            $time[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+
+            if ($time[$key] < 11520) {
+                $commentReplyTime[$key] = $this->howDays($time[$key]);
+            } else {
+                $commentReplyTime[$key] = $date[$key];
+            }
+        }
+        return array($comment, $commentTime, $commentReply, $commentReplyTime);
+    }
+
+    public function deleteComments($id, $status)
+    {
+        if ($status === 'comment') {
+            DB::table('seller_major_post_comment_reply_like_seller')
+                ->where('Comment_ID', $id)
+                ->delete();
+            DB::table('seller_major_post_comment_reply_like')
+                ->where('Comment_ID', $id)
+                ->delete();
+            DB::table('seller_major_post_comment_reply')
+                ->where('CommentID', $id)
+                ->delete();
+            DB::table('seller_major_post_comment_like_seller')
+                ->where('CommentID', $id)
+                ->delete();
+            DB::table('seller_major_post_comment_like')
+                ->where('CommentID', $id)
+                ->delete();
+            DB::table('seller_major_post_comment')
+                ->where('ID', $id)
+                ->delete();
+            return array($id, $status);
+        } else {
+            DB::table('seller_major_post_comment_reply_like_seller')
+                ->where('Comment_ID', $id)
+                ->delete();
+            DB::table('seller_major_post_comment_reply_like')
+                ->where('Comment_ID', $id)
+                ->delete();
+            DB::table('seller_major_post_comment_reply')
+                ->where('ID', $id)
+                ->delete();
+            return array($id, $status);
+        }
+    }
+
+    public function reaction()
+    {
+        $data = $this->sellerMajorData;
+        $eventLike = DB::table('seller_major_event_like as el')
+            ->select('*', 'el.Time as eventLikeTime')
+            ->leftJoin('seller_major_event as e', 'e.ID', 'el.EventID')
+            ->leftJoin('customers as c', 'c.id', 'el.CustomerID')
+            ->where('e.SellerMajorID', $this->sellerMajorID)
+            ->where("el.Time", ">", Carbon::now()->subMonth(30)->toDateTimeString())
+            ->orderBy('el.ID', 'DESC')
+            ->get();
+
+        $postsLike = DB::table('seller_major_post_like as pl')
+            ->select('*', 'pl.Time as postLikeTime')
+            ->leftJoin('seller_major_post as p', 'p.ID', 'pl.PostID')
+            ->leftJoin('customers as c', 'c.id', 'pl.CustomerID')
+            ->where('p.SellerMajorID', $this->sellerMajorID)
+            ->where("pl.Time", ">", Carbon::now()->subMonth(30)->toDateTimeString())
+            ->orderBy('pl.ID', 'DESC')
+            ->get();
+
+        $postsComment = DB::table('seller_major_post_comment as pc')
+            ->select('*', 'pc.ID as commentID','pc.CommenterID as userId')
+            ->leftJoin('seller_major_post as p', 'p.ID', 'pc.PostID')
+            ->leftJoin('seller_major_post_comment_like_seller as pcls', 'pcls.CommentID', 'pc.ID')
+            ->leftJoin('customers as c', 'c.id', 'pc.CommenterID')
+            ->where('pc.SellerMajorID', $this->sellerMajorID)
+            ->where("pc.Commenter", 'customer')
+            ->where("pc.CommentTime", ">", Carbon::now()->subMonth(30)->toDateTimeString())
+            ->orderBy('pc.ID', 'DESC')
+            ->get();
+
+        $postsCommentReply = DB::table('seller_major_post_comment_reply as pcr')
+            ->select('*', 'pc.SellerMajorID', 'pcr.ID as commentReplyID','pcr.CommenterID as userId')
+            ->leftJoin('seller_major_post_comment as pc', 'pc.id', 'pcr.CommentID')
+            ->leftJoin('seller_major_post as p', 'p.ID', 'pc.PostID')
+            ->leftJoin('seller_major_post_comment_reply_like_seller as pcrls', 'pcrls.Comment_ID', 'pc.ID')
+            ->leftJoin('customers as c', 'c.id', 'pcr.CommenterID')
+            ->where('pc.SellerMajorID', $this->sellerMajorID)
+            ->where("pcr.CommenterReply", 'customer')
+            ->where("pcr.CommentReplyTime", ">", Carbon::now()->subMonth(30)->toDateTimeString())
+            ->orderBy('pcr.ID', 'DESC')
+            ->get();
+
+        $date = array();
+        $time = array();
+        $rowTime = array();
+        $allRow=0;
+        $eventLikeHowDay = array();
+        foreach ($eventLike as $key => $rec) {
+            $temp = explode(' ', $rec->eventLikeTime);
+            $date[$key] = $this->convertDateToPersian($temp[0]);
+            $date[$key] = $this->addZero($date[$key]);
+            $time[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+            $rowTime[$allRow] = $time[$key];
+            $allRow++;
+            if ($time[$key] < 11520) {
+                $eventLikeHowDay[$key] = $this->howDays($time[$key]);
+            } else {
+                $eventLikeHowDay[$key] = $date[$key];
+            }
+        }
+
+        $postsLikeHowDay = array();
+        foreach ($postsLike as $key => $rec) {
+            $temp = explode(' ', $rec->postLikeTime);
+            $date[$key] = $this->convertDateToPersian($temp[0]);
+            $date[$key] = $this->addZero($date[$key]);
+            $time[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+            $rowTime[$allRow] = $time[$key];
+            $allRow++;
+            if ($time[$key] < 11520) {
+                $postsLikeHowDay[$key] = $this->howDays($time[$key]);
+            } else {
+                $postsLikeHowDay[$key] = $date[$key];
+            }
+        }
+
+        $postsCommentHowDay = array();
+        foreach ($postsComment as $key => $rec) {
+            $temp = explode(' ', $rec->CommentTime);
+            $date[$key] = $this->convertDateToPersian($temp[0]);
+            $date[$key] = $this->addZero($date[$key]);
+            $time[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+            $rowTime[$allRow] = $time[$key];
+            $allRow++;
+            if ($time[$key] < 11520) {
+                $postsCommentHowDay[$key] = $this->howDays($time[$key]);
+            } else {
+                $postsCommentHowDay[$key] = $date[$key];
+            }
+        }
+
+        $postsCommentReplyHowDay = array();
+        foreach ($postsCommentReply as $key => $rec) {
+            $temp = explode(' ', $rec->CommentReplyTime);
+            $date[$key] = $this->convertDateToPersian($temp[0]);
+            $date[$key] = $this->addZero($date[$key]);
+            $time[$key] = $this->dateLenToNow($temp[0], $temp[1]);
+            $rowTime[$allRow] = $time[$key];
+            $allRow++;
+            if ($time[$key] < 11520) {
+                $postsCommentReplyHowDay[$key] = $this->howDays($time[$key]);
+            } else {
+                $postsCommentReplyHowDay[$key] = $date[$key];
+            }
+        }
+        return view('SellerMajor.Reaction', compact('data', 'eventLike', 'postsLike', 'eventLikeHowDay', 'postsLikeHowDay'
+            , 'postsComment', 'postsCommentHowDay', 'postsCommentReply', 'postsCommentReplyHowDay','rowTime'));
+    }
+    //------------------------------------------------
+    //  Convert Date to Iranian Calender
+    public function convertDateToPersian($d)
+    {
+        if ($d === 0)
+            return 0;
+        else
+            $da = new DateTime($d);
+
+        $day = $da->format('d');
+        $mon = $da->format('m');
+        $year = $da->format('Y');
+
+        // Convert Date to Iranian
+        return Verta::getJalali($year, $mon, $day);
+    }
+
+//  Minutes Passed of Spacial Time
+    public function dateLenToNow($date, $time)
+    {
+        $orderDateTime = $date . ' ' . $time;
+        $today = new DateTime('Asia/Tehran');
+        $result = $today->format('Y-m-d H:i:s');
+        $datetime1 = strtotime($orderDateTime);
+        $datetime2 = strtotime($result);
+        $interval = abs($datetime2 - $datetime1);
+        $minutes = round($interval / 60);
+
+        return (int)$minutes;
+    }
+
+//    how past Days of Current Days
+    public function howDays($day)
+    {
+        switch (true) {
+            case  ($day < 3):
+                return 'لحضاتی پیش';
+                break;
+            case  (($day >= 3) && ($day < 59)):
+                return $day . ' د';
+                break;
+            case  (($day >= 60) && ($day <= 90)):
+                return '1 س';
+                break;
+            case  (($day > 90) && ($day <= 150)):
+                return '2 س';
+                break;
+            case  (($day > 150) && ($day <= 210)):
+                return '3 س';
+                break;
+            case  (($day > 210) && ($day <= 270)):
+                return '4 س';
+                break;
+            case  (($day > 270) && ($day <= 330)):
+                return '5 س';
+                break;
+            case  (($day > 330) && ($day <= 390)):
+                return '6 س';
+                break;
+            case  (($day > 390) && ($day <= 450)):
+                return '7 س';
+                break;
+            case  (($day > 450) && ($day <= 510)):
+                return '8 س';
+                break;
+            case  (($day > 510) && ($day <= 570)):
+                return '9 س';
+                break;
+            case  (($day > 570) && ($day <= 630)):
+                return '10 س';
+                break;
+            case  (($day > 630) && ($day <= 690)):
+                return '11 س';
+                break;
+            case  (($day > 690) && ($day <= 750)):
+                return '12 س';
+                break;
+            case  (($day > 750) && ($day <= 810)):
+                return '13 س';
+                break;
+            case  (($day > 810) && ($day <= 870)):
+                return '14 س';
+                break;
+            case  (($day > 870) && ($day <= 930)):
+                return '15 س';
+                break;
+            case  (($day > 930) && ($day <= 990)):
+                return '16 س';
+                break;
+            case  (($day > 990) && ($day <= 1050)):
+                return '17 س';
+                break;
+            case  (($day > 1050) && ($day <= 1110)):
+                return '18 س';
+                break;
+            case  (($day > 1110) && ($day <= 1170)):
+                return '19 س';
+                break;
+            case  (($day > 1170) && ($day <= 1230)):
+                return '20 س';
+                break;
+            case  (($day > 1230) && ($day <= 1290)):
+                return '21 س';
+                break;
+            case  (($day > 1290) && ($day <= 1350)):
+                return '22 س';
+                break;
+            case  (($day > 1350) && ($day <= 1410)):
+                return '23 س';
+                break;
+            case  (($day > 1410) && ($day <= 1440)):
+                return '24 س';
+                break;
+            case  (($day > 1440) && ($day < 2880)):
+                return '1 روز';
+                break;
+            case  (($day > 2880) && ($day < 4320)):
+                return '2 روز';
+                break;
+            case  (($day > 4320) && ($day < 5760)):
+                return '3 روز';
+                break;
+            case  (($day > 5760) && ($day < 7200)):
+                return '4 روز';
+                break;
+            case  (($day > 7200) && ($day < 8640)):
+                return '5 روز';
+                break;
+            case  (($day > 8640) && ($day < 10080)):
+                return '6 روز';
+                break;
+            case  (($day > 10080) && ($day < 11520)):
+                return 'هفته قبل';
+                break;
+            default :
+                break;
+        }
+    }
+
+    // Add Zero Number to Day and Month of Converted Dates
+    public function addZero($d)
+    {
+        for ($i = 0; $i < 3; $i++)
+            if (strlen($d[$i]) < 2)
+                $d[$i] = '0' . $d[$i];
+        return $d[0] . '.' . $d[1] . '.' . $d[2];
+    }
+}

@@ -21,7 +21,7 @@
                         <div class="col-sm-6 col-md-3 g-brd-right--md g-brd-white-opacity-0_3 g-mb-60 g-mb-0--md">
                             <i class="icon-user-following d-inline-block display-5 g-color-primary g-mb-25"></i>
                             <h4 class="small text-uppercase g-mb-5">ثبت نام فروشندگان</h4>
-                            <a href="{{ route('sellerRegister') }}"><strong>.. شروع کن</strong></a>
+                            <a href="{{ route('sellerLoginMode') }}"><strong>.. شروع کن</strong></a>
                         </div>
 
                         <div class="col-sm-6 col-md-3 g-brd-right--md g-brd-white-opacity-0_3 g-mb-60 g-mb-0--md">
@@ -115,7 +115,7 @@
                 {{--                </form>--}}
 
                 <small class="d-block g-mt-15 g-font-size-default">تمامی حقوق این وب سایت برای شرکت تابش پس زمینه مکریان
-                    محفوظ است 1398</small>
+                    محفوظ است 1400</small>
             </div>
         </footer>
         <!-- End Copyright and Subscribe -->

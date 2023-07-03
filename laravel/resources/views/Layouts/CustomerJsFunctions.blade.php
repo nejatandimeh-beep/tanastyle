@@ -50,15 +50,30 @@
                 }
             }
             if ($('.masterPage').length > 0) {
-                $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
-                carousel('js-carousel-0');
-                carousel('js-carousel-1');
-                carousel('js-carousel-2');
-                carousel('js-carousel-3');
-                carousel('js-carousel-4');
-                carousel('js-carousel-5');
-                carousel('js-carousel-6');
-                carousel('js-carousel-7');
+                const swiper = new Swiper('.swiper', {
+                    // Optional parameters
+                    direction: 'horizontal',
+                    loop: false,
+                    watchSlidesProgress: true,
+                    slidesPerView: 1,
+                    spaceBetween: 5,
+                    // using "ratio" endpoints
+                    breakpoints: {
+                        '@0.75': {
+                            slidesPerView: 2,
+                        },
+                        '@1.00': {
+                            slidesPerView: 3,
+                        },
+                        '@1.50': {
+                            slidesPerView: 4,
+                        },
+                    },
+                    // If we need pagination
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+                });
             }
 
             if ($('.productDetail').length > 0) {
@@ -399,10 +414,10 @@
             }
         });
 
-        $(window).bind('beforeunload', function () {
-            if (!$('.masterPage').length)
-                loaderShow();
-        });
+        // $(window).bind('beforeunload', function () {
+        //     if (!$('.masterPage').length)
+        //         loaderShow();
+        // });
 
         document.onreadystatechange = function () {
             let state = document.readyState;
@@ -1760,6 +1775,7 @@
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
                     $('#user-return').css('display', 'none');
+                    $('#user-interAction').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-data').removeClass('g-color-main').addClass('g-color-primary');
@@ -1772,6 +1788,7 @@
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
                     $('#user-return').css('display', 'none');
+                    $('#user-interAction').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-address').removeClass('g-color-main').addClass('g-color-primary');
@@ -1784,6 +1801,7 @@
                     $('#user-delivery').css('display', 'none');
                     $('#user-like').css('display', 'none');
                     $('#user-return').css('display', 'none');
+                    $('#user-interAction').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-bought').removeClass('g-color-main').addClass('g-color-primary');
@@ -1797,6 +1815,7 @@
                     $('#user-data').css('display', 'none');
                     $('#user-like').css('display', 'none');
                     $('#user-return').css('display', 'none');
+                    $('#user-interAction').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-delivery').removeClass('g-color-main').addClass('g-color-primary');
@@ -1809,6 +1828,7 @@
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
                     $('#user-return').css('display', 'none');
+                    $('#user-interAction').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-like').removeClass('g-color-main').addClass('g-color-primary');
@@ -1821,10 +1841,24 @@
                     $('#user-bought').css('display', 'none');
                     $('#user-address').css('display', 'none');
                     $('#user-data').css('display', 'none');
+                    $('#user-interAction').css('display', 'none');
 
                     $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
                     $('#filter-user-return').removeClass('g-color-main').addClass('g-color-primary');
                     $('html, body').animate({scrollTop: $('#user-return').offset().top}, 800);
+                    break;
+                case 'interaction':
+                    $('#user-interAction').css('display', 'block');
+                    $('#user-return').css('display', 'none');
+                    $('#user-like').css('display', 'none');
+                    $('#user-delivery').css('display', 'none');
+                    $('#user-bought').css('display', 'none');
+                    $('#user-address').css('display', 'none');
+                    $('#user-data').css('display', 'none');
+
+                    $('.filter a').removeClass('g-color-primary').addClass('g-color-main');
+                    $('#filter-user-interAction').removeClass('g-color-main').addClass('g-color-primary');
+                    $('html, body').animate({scrollTop: $('#user-interAction').offset().top}, 800);
                     break;
                 default:
                     break;
@@ -3036,6 +3070,5 @@
             return now;
         }
 
-        // ------------------------------------------------image magnifier ---------------------------------------------
     </script>
 @endsection

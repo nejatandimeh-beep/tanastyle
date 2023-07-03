@@ -2640,71 +2640,71 @@
                     </div>
 
                     <!-- sizeDetail -->
-                    <div style="direction: rtl" class="d-none col-12 g-pb-15 g-pb-20--lg row sizeDetailContainer justify-content-right g-brd-around g-brd-gray-light-v3 g-pa-20">
+                    <div style="direction: rtl" class="d-none m-0 col-12 g-pb-15 g-pb-20--lg row sizeDetailContainer justify-content-right g-brd-around g-brd-gray-light-v3 g-pa-20">
                         <div id="sizeDetail{{$i}}" class="{{(($name==='سوتین')||($name==='ست لباس زیر'))&&($gender==='0'||$gender==='2')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> دور سوتین</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ ($catCode==='c' || $catCode==='d'|| $catCode==='i' || $catCode==='j')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> سرشانه</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{($name==='زیر پوش'||$name==='گن'||$catCode==='c'|| $catCode==='i'|| $catCode==='d'|| $catCode==='j'||($gender==='1'&&$name==='ست لباس زیر'))&& $name!=='گن'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> دور سینه</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{$name==='زیر پوش'||$name==='گن'||$cat==='00' || $catCode==='c' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h'|| $catCode==='i'|| $catCode==='d'|| $catCode==='j'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> دور کمر</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{($name==='زیر پوش'||$name==='گن' || $catCode==='i' || $catCode==='d'|| $catCode==='j')&& $name!=='گن'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> دور شکم</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{($cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h')&&($name!=='زیر پوش')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> دور باسن</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ ($catCode==='c' || $catCode==='d'|| $catCode==='i' || $catCode==='j')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> آستین</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ ($cat==='00' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='c' || $catCode==='g'|| $catCode==='h'|| $catCode==='d'|| $catCode==='j'||($gender==='1'&&$name==='ست لباس زیر'))&&($name!=='زیر پوش')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> قد</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{($cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h')&&($name!=='زیر پوش')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> قد فاق</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{($cat==='00' || $cat==='02' || $cat==='03'|| $cat==='04' || $catCode==='b' || $catCode==='g'|| $catCode==='h')&&($name!=='زیر پوش')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title">اندازه دمپا</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='f'|| $catCode==='k'|| $catCode==='l'|| $name==='گردنبند'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> طول</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> عرض</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ $catCode==='e' || $catCode==='k'?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> عمق</span>
                             <input class="form-control form-control-md rounded-0 text-center value g-font-size-16 sizeDetailInput" type="text" value="" pattern="\d*">
-                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">cm</span>
+                            <span  style="border-left: 1px solid lightgrey" class="unitSize input-group-addon g-bg-gray-light-v5 g-brd-right-none">mm</span>
                         </div>
                         <div id="sizeDetail{{$i}}" class="{{ $name==='النگو' || $name==='انگشتر' ?' parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> قطر</span>

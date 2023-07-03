@@ -64,7 +64,6 @@ class ResetPasswordController extends Controller
 
     public function resetCustomerPassword(Request $request)
     {
-
         $customer=DB::table('customers')
         ->where('Mobile', Session::get('mobile'))
             ->update(['password' => Hash::make($request->get('password'))]);

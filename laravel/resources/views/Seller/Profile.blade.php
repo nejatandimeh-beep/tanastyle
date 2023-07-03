@@ -106,7 +106,7 @@
                                         </div>
                                         <div
                                             class="g-color-white align-self-center g-color-white text-center text-lg-right custom-mt-20">
-                                            <h4 class="g-mb-10">نجات اندیمه</h4>
+                                            <h4 class="g-mb-10">{{Auth::guard('seller')->user()->name.' '.Auth::guard('seller')->user()->Family}}</h4>
                                             <h5 class="m-0 text-center text-lg-left">شناسه شما در سیستم<span
                                                     class="g-mr-10 g-color-yellow">{{ Auth::guard('seller')->user()->id }}</span></h5>
                                         </div>
@@ -266,10 +266,11 @@
                                                 <div
                                                     class="g-color-white align-self-center g-color-white text-right custom-mt-20 g-mb-50">
                                                     <h6>آدرس</h6>
-                                                    <p class="m-0 g-mb-15 g-color-yellow">آذربایجان غربی
-                                                        مهاباد مجتمع پوشاک تاناکورا</p>
+                                                    <p class="m-0 g-mb-15 g-color-yellow">
+                                                        {{Auth::guard('seller')->user()->Address}}</p>
                                                     <h6>پلاک مغازه</h6>
-                                                    <p class="m-0 g-mb-15 g-color-yellow">1245</p>
+                                                    <p class="m-0 g-mb-15 g-color-yellow">
+                                                        {{Auth::guard('seller')->user()->ShopNumber}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -277,17 +278,17 @@
                                             <p style="direction: ltr"
                                                 class="d-flex justify-content-start m-0 text-left">
                                                 <i class="icon-media-085 u-line-icon-pro g-font-size-30 g-mr-10"></i>
-                                                <span class="g-pt-5 g-color-yellow">0444 223 1185</span>
+                                                <span class="g-pt-5 g-color-yellow">{{Auth::guard('seller')->user()->Phone}}</span>
                                             </p>
                                             <p style="direction: ltr"
                                                 class="d-flex justify-content-start m-0 text-left">
                                                 <i class="icon-media-054 u-line-icon-pro g-font-size-30 g-mr-10"></i>
-                                                <span class="g-pt-5 g-color-yellow">0914 166 8745</span>
+                                                <span class="g-pt-5 g-color-yellow">{{Auth::guard('seller')->user()->Mobile}}</span>
                                             </p>
                                             <p style="direction: ltr"
                                                 class="d-flex justify-content-start m-0 text-left">
                                                 <i class="icon-communication-154 u-line-icon-pro g-font-size-30 g-mr-10 align-self-center"></i>
-                                                <span class="g-pt-5 g-color-yellow">nejat.andimeh@gmail.com</span>
+                                                <span class="g-pt-5 g-color-yellow">{{Auth::guard('seller')->user()->email}}</span>
                                             </p>
                                         </div>
                                     </div>
@@ -406,7 +407,7 @@
                                     @foreach($data as $key => $rec)
                                         <tr>
                                             <td class="align-middle text-nowrap text-center">{{ ++$key }}</td>
-                                            <td class="align-middle text-center text-nowrap">{{ $rec->CardNumber }}</td>
+                                            <td style="direction: rtl" class="align-middle text-center text-nowrap">{{ $rec->CardNumber }}</td>
                                             <td class="align-middle text-center text-nowrap">
                                                 @if ($rec->Status === 1)
                                                     <i class="fa fa-toggle-on g-color-primary g-font-size-22"></i>
@@ -449,10 +450,9 @@
                                         <div
                                             class="align-self-center g-color-white text-center text-lg-right custom-mt-20">
                                             <h6>آدرس</h6>
-                                            <p class="m-0 g-mb-15 g-color-yellow">آذربایجان غربی مهاباد مجتمع پوشاک
-                                                تاناکورا</p>
+                                            <p class="m-0 g-mb-15 g-color-yellow">{{Auth::guard('seller')->user()->Address}}</p>
                                             <h6 >پلاک مغازه</h6>
-                                            <p class="m-0 g-mb-15 g-color-yellow">1245</p>
+                                            <p class="m-0 g-mb-15 g-color-yellow">{{Auth::guard('seller')->user()->ShopNumber}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -460,17 +460,17 @@
                                     <p style="direction: ltr"
                                         class="d-flex justify-content-start m-0 text-left">
                                         <i class="icon-media-085 u-line-icon-pro g-font-size-30 g-mr-10"></i>
-                                        <span class="g-pt-5 g-color-yellow">0444 223 1185</span>
+                                        <span class="g-pt-5 g-color-yellow">{{Auth::guard('seller')->user()->Phone}}</span>
                                     </p>
                                     <p style="direction: ltr"
                                         class="d-flex justify-content-start m-0 text-left">
                                         <i class="icon-media-054 u-line-icon-pro g-font-size-30 g-mr-10"></i>
-                                        <span class="g-pt-5 g-color-yellow">0914 166 8745</span>
+                                        <span class="g-pt-5 g-color-yellow">{{Auth::guard('seller')->user()->Mobile}}</span>
                                     </p>
                                     <p style="direction: ltr"
                                         class="d-flex justify-content-start m-0 text-left">
                                         <i class="icon-communication-154 u-line-icon-pro g-font-size-30 g-mr-10 align-self-center"></i>
-                                        <span class="g-pt-5 g-color-yellow">nejat.andimeh@gmail.com</span>
+                                        <span class="g-pt-5 g-color-yellow">{{Auth::guard('seller')->user()->email}}</span>
                                     </p>
                                 </div>
                             </div>

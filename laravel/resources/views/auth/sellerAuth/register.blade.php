@@ -8,7 +8,7 @@
 
 @yield('BaseCssLink')
 @yield('CustomerNavigation')
-<div class="container g-mb-40">
+<div class="container g-my-40">
     <div class="row justify-content-center">
         <div class="col-md-9">
             <div class="card">
@@ -34,7 +34,7 @@
                         <form action="{{route('sellerNew')}}" method="POST" style="direction: rtl" id="registerForm"
                               enctype="multipart/form-data">
                             @csrf
-                            <div class="container g-py-30--lg g-px-60--lg text-left">
+                            <div class="container g-pt-20 g-py-30--lg g-px-60--lg text-left">
                                 {{--نام--}}
                                 <div class="form-group row g-mb-15">
                                     <label
@@ -772,7 +772,7 @@
                                             مطالعه قوانین
                                         </a>
                                     </p>
-                                    <div class="text-lg-left text-center">
+                                    <div class="text-left">
                                         <div class="d-inline-block">
                                             <div style="cursor: pointer"
                                                  id="noAgree"

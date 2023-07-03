@@ -301,7 +301,7 @@ class Basic extends Controller
                 ->select('cpe.ID as requestID', 'cpe.CustomerID', 'cpe.Status', 'c.id', 'c.Mobile')
                 ->leftJoin('customers as c', 'c.id', '=', 'cpe.CustomerID')
                 ->where('ProductDetailID', $id)
-                ->where('Status', 'noExist')
+                ->where('cpe.Status', 'noExist')
                 ->get();
 
             DB::table('customer_call_product_exist')

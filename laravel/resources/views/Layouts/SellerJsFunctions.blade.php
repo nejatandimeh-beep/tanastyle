@@ -80,7 +80,6 @@
         });
 
         $('.multiColor').on('click', function () {
-            console.log('salammm')
             if (touchtime === 0) {
                 // set first click
                 touchtime = new Date().getTime();
@@ -227,12 +226,11 @@
                     $(this).find('.sizeDetail').each(function () {
                         let titleElement = $(this).find('.title'),
                             title = titleElement.text(),
-                            value = $(this).find('.value').val(),
-                            unitSize = ' '+$(this).find('.unitSize').text()+' ',
+                            value = parseInt($(this).find('.value').val())/10+' cm ',
                             detail = '';
                         if (!$(this).hasClass('d-none')) {
                             if( $(this).find('.sizeDetailInput').val() !==''){
-                                detail = detail + title + ': ' + unitSize + value + '\n';
+                                detail = detail + title + ': ' +  value + '\n';
                             }
                             productDetail.val(productDetail.val() + detail)
                         }
@@ -818,7 +816,7 @@
                     if($('.sellerProductDetail').length>0){
                         let companyShare=0;
                         if($('#seller').text()!=='2872282556')
-                            companyShare=10;
+                            companyShare=1;
                         calc=calc + (calc * (companyShare+9)) / 100;
                         calc = calc.toString().slice(0, -3) + "000";
                         $('#tempFinalPrice').val(calc);
@@ -847,7 +845,7 @@
 
             let companyShare=0;
             if($('#seller').text()!=='2872282556')
-                companyShare=10;
+                companyShare=1;
 
             if (unitPrice >= 10000) {
                 let calc = salePrice(discount, unitPrice), finalPrice, exValue,exValueWithoutDis, tanastyle,fPriceWithoutDis, dis,tanastyleWithoutDis;
@@ -899,7 +897,7 @@
                 let calc = salePrice(discount, temp1);
                 let companyShare=0;
                 if($('#seller').text()!=='2872282556')
-                    companyShare=10;
+                    companyShare=1;
                 calc=calc + (calc * (companyShare+9)) / 100;
                 calc = calc.toString().slice(0, -3) + "000";
                 $('#newFinalPriceByNewDiscount').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
@@ -1080,6 +1078,10 @@
                 folderName = createFolderName();
             $('#folderName2').val(createFolderName());
             console.log($('#folderName2').val());
+
+            $('input[id^="pic"]').on('mousedown', function (event) {
+                $(this).val(null);
+            });
 
             $('input[id^="pic"]').on('change', function (event) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');

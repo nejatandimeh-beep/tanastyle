@@ -23,7 +23,8 @@
             <hr class="g-brd-gray-light-v4 g-mt-10">
             @foreach($data as $key => $rec)
                 @if ($rec->Replay === 1)
-                    <div class="media g-mb-5">
+                    @if($rec->Question!=='')
+                       <div class="media g-mb-5">
                         <div style="border-radius: 8px 0 8px 8px;"
                              class="media-body g-brd-around g-brd-gray-light-v2 g-bg-gray-light-v5 g-pa-30 text-right">
                             <div class="g-mb-15 text-right">
@@ -45,7 +46,8 @@
                                 disabled>{{ $rec->Question }}</pre>
                         </div>
                     </div>
-                    <div class="media g-mb-30 g-mr-30--lg sdCommentPadding-20">
+                    @endif
+                    <div class="media g-mb-5 g-mr-30--lg sdCommentPadding-20">
                         <div style="border-radius: 8px 0 8px 8px;"
                              class="media-body g-brd-around g-brd-primary g-bg-gray-light-v5 g-pa-30 text-right">
                             <div class="g-mb-15 text-right">
@@ -68,7 +70,8 @@
                         </div>
                     </div>
                 @else
-                    <div class="media g-mb-30">
+                    @if($rec->Question!=='')
+                    <div class="media g-mb-5">
                         <div style="border-radius: 8px 0 8px 8px;"
                              class="media-body g-brd-around g-brd-gray-light-v2 g-bg-gray-light-v5 g-pa-30 text-right">
                             <div class="g-mb-15 text-right">
@@ -90,6 +93,7 @@
                                 disabled>{{ $rec->Question }}</pre>
                         </div>
                     </div>
+                    @endif
                 @endif
             @endforeach
         @endif

@@ -92,13 +92,13 @@ class VerifyController extends Controller
     public function verifyMobile(Request $req)
     {
         session_start();
-        unset($_SESSION['SEND']);
         $customer = new Customer();
         $verifyCode = $req->get('verifyCode');
         $source = Session::get('source');
         $mobile = Session::get('mobile');
 
         if ($customer->validateToken($verifyCode)) {
+            unset($_SESSION['SEND']);
 //            echo "Success";
 //            $tel = Auth::user()->phone_number;
 //            echo $tel;

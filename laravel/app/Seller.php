@@ -5,6 +5,7 @@ namespace App;
 use App\Notifications\CustomResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Session;
 
 class Seller extends Authenticatable
 {
@@ -35,5 +36,16 @@ class Seller extends Authenticatable
     {
         // Your your own implementation.
         $this->notify(new CustomResetPasswordNotification($token));
+    }
+
+    public function validateToken($token)
+    {
+        $validToken = Session::get('token');
+        if ($token == $validToken) {
+            return true;
+
+        } else {
+            return false;
+        }
     }
 }

@@ -57,7 +57,10 @@ return [
             'provider' => 'admins',
         ],
 
-
+        'sellerMajor' => [
+            'driver' => 'session',
+            'provider' => 'sellersmajor',
+        ],
     ],
 
     /*
@@ -91,6 +94,11 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
+        ],
+
+        'sellersmajor' => [
+            'driver' => 'eloquent',
+            'model' => App\SellerMajor::class,
         ],
 
         // 'users' => [
@@ -130,6 +138,13 @@ return [
 
         'sellers' => [
             'provider' => 'sellers',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+
+        'sellersmajor' => [
+            'provider' => 'sellersmajor',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

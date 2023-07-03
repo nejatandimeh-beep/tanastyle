@@ -780,7 +780,7 @@ class Basic extends Controller
                     'ProductDetailID' => $id,
                     'Qty' => $qty,
                     'Price' => $price,
-                    'OrderPrice' => (int)$finalPrice,
+                    'OrderPrice' => (int)$price,
                     'PostMethod' => $postMethod,
                     'PostPrice' => $postPrice,
                     'UnitPrice' => (int)$unitPrice,
@@ -813,6 +813,7 @@ class Basic extends Controller
             ->where('CustomerID', Auth::user()->id)
             ->get();
 
+        $status_ok=$request->get('Status');
         if ($request->get('Status') == 'OK') {
             $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
             $client->soap_defencoding = 'UTF-8';
@@ -842,6 +843,8 @@ class Basic extends Controller
                             'Authority' => $Authority,
                             'CustomerID' => Auth::user()->id,
                             'ProductDetailID' => $row->ProductDetailID,
+                            'Status_ok' => $status_ok,
+                            'Status' => $result['Status'],
                         ]);
                 }
 
@@ -863,6 +866,7 @@ class Basic extends Controller
                         'CustomerID' => Auth::user()->id,
                         'ProductDetailID' => $row->ProductDetailID,
                         'Authority' => $Authority,
+                        'Status_ok' => $status_ok,
                     ]);
             }
 
@@ -2471,6 +2475,21 @@ class Basic extends Controller
 
     }
 
+// -----------------------------------------[ Seller Register Mode ]----------------------------------------------------
+    public function registerMode()
+    {
+        return view('auth.sellerMajorAuth.registerMode');
+    }
+
+    public function sellerLoginMode()
+    {
+        return view('auth.sellerMajorAuth.LoginMode');
+    }
+
+    public function sellerLoginPlanMode()
+    {
+        return view('auth.sellerMajorAuth.LoginPlanMode');
+    }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($data, $Authority)
     {
@@ -2480,8 +2499,8 @@ class Basic extends Controller
             $customerInfo = DB::table('customers as c')
                 ->select('ca.*')
                 ->leftJoin('customer_address as ca',function ($join) {
-                    $join->on('ca.CustomerID', '=' , 'c.id') ;
-                    $join->where('ca.Status','=',1) ;
+                    $join->on('ca.CustomerID', '=' , 'c.id');
+                    $join->where('ca.Status','=',1);
                 }) ->where('c.id', Auth::user()->id)
                 ->first();
 

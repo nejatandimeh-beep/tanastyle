@@ -21,9 +21,8 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/Logo/browserIcon.png')}}">
     <link rel="apple-touch-icon" sizes="120x120" href="{{asset('img/Logo/browserIcon.png')}}">
     <link rel="apple-touch-icon" sizes="152x152" href="{{asset('img/Logo/browserIcon.png')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendor/dzsparallaxer/dzsparallaxer.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendor/dzsparallaxer/dzsscroller/scroller.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/vendor/dzsparallaxer/advancedscroller/plugin.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/swiper-bundle.css') }}">
+
     <!--My Style-->
     <link href="{{ asset('css/myStyle.css?v=dsv3wfs1we13e3') }}" rel="stylesheet">
 <!--Unify Style-->
@@ -52,8 +51,8 @@
             simple_line_icons.type = 'text/css';
             document.getElementsByTagName('head')[0].appendChild(simple_line_icons);
         })();
-
     </script>
+
     <link rel="stylesheet" href="{{ asset('assets/vendor/slick-carousel/slick/slick.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/wait-animate.min.css') }}">

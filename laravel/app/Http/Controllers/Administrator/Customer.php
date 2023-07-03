@@ -390,7 +390,6 @@ class Customer extends Controller
             ->leftJoin('customers as c', 'c.ID', '=', 'cc.CustomerID')
             ->where('ccd.ConversationID', $id)
             ->paginate(10);
-
         $questionMinuets = array();
         $answerMinuets = array();
         $questionHowDay = array();
@@ -419,11 +418,10 @@ class Customer extends Controller
         date_default_timezone_set('Asia/Tehran');
         $date = date('Y-m-d');
         $time = date('H:i:s');
+        $title = $request->get('title');
         $customerID = $request->get('customerId');
         $answer = $request->get('answer');
-        $title = $request->get('title');
         $detailId = $request->get('detailId');
-
         if (isset($title)) {
             $priority = $request->get('priority');
             $section = $request->get('section');
@@ -452,16 +450,31 @@ class Customer extends Controller
         DB::table('customer_conversation')
             ->where('ID', $conversationID)
             ->update(['Status' => 0]);
+        $conversationDetailID = DB::table('customer_conversation_detail')
+            ->select('ID','Answer','ConversationID','Replay')
+            ->where('ID',$detailId)
+            ->first();
 
-        // Insert Data to Conversation_detail
-        DB::table('customer_conversation_detail')
-            ->where('ID', $detailId)
-            ->update([
-                'Answer' => $answer,
-                'AnswerDate' => $date,
-                'AnswerTime' => $time,
-                'Replay' => 1,
+        if ($conversationDetailID->Answer !=='') {
+            DB::table('customer_conversation_detail')->insert([
+                [
+                    'ConversationID' => $conversationDetailID->ConversationID,
+                    'Answer' => $answer,
+                    'AnswerDate' => $date,
+                    'AnswerTime' => $time,
+                    'Replay' => 1,
+                ],
             ]);
+        } else {
+            DB::table('customer_conversation_detail')
+                ->where('ID', $detailId)
+                ->update([
+                    'Answer' => $answer,
+                    'AnswerDate' => $date,
+                    'AnswerTime' => $time,
+                    'Replay' => 1,
+                ]);
+        }
 
         return redirect()->route('adminCustomerConnectionDetail', ['id' => $conversationID, 'status' => '0']);
     }
