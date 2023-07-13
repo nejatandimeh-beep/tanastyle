@@ -1,18 +1,18 @@
 @section('SellerMajorJsFunction')
     <script>
         // stop fancy box additional url
-        if($('.js-fancybox').length>0){
+        if ($('.js-fancybox').length > 0) {
             $.fancybox.defaults.hash = false;
 
         }
 
-        function copy(textToCopy){
+        function copy(textToCopy) {
             navigator.clipboard.writeText(textToCopy).then(
-                function() {
+                function () {
                     /* clipboard successfully set */
                     window.alert('متن کپی شد.')
                 },
-                function() {
+                function () {
                     /* clipboard write failed */
                     window.alert('ناموفق')
                 }
@@ -20,7 +20,7 @@
         }
 
         let imgRowID = [], imgRowIdTemp, lastScrollTop = 0, lastScrollTopModal = 0, postNumber = 0, completeLoad = true,
-            touchtime = 0, postDeleteItems = [], imgWorking = 0, asset = $('#asset').text(),imgNumber=0;
+            touchtime = 0, postDeleteItems = [], imgWorking = 0, asset = $('#asset').text(), imgNumber = 0, file_type, dragging=false;
         // click any location in screen close all accordion exept clicked accordion
         document.addEventListener('click', function (event) {
             if ($('.accordionBtn').length > 0) {
@@ -151,14 +151,33 @@
                     direction: 'horizontal',
                     loop: false,
                     speed: 200,
+                    zoom: {
+                        maxRatio: 3,
+                        minRatio: 1,
+                    },
                     // If we need pagination
                     pagination: {
                         el: '.swiper-pagination' + key,
                     },
+                    on: {
+                        click: function (s, e) {
+                            s.zoom.in(3);
+                        },
+                        doubleClick: function (s, e) {
+                            e.preventDefault();
+                        },
+                        touchStart: function (s, e) {
+                            dragging=true;
+                        },
+                        touchEnd: function (s, e) {
+                            s.zoom.out();
+                            dragging=false;
+                        },
+                    },
                 });
                 for (let n = 0; n < posts['PicCount']; n++) {
                     src = asset + posts['postPic'] + '/' + postID + '/' + n + '.jpg';
-                    slide = '<div class="swiper-slide swiper-lazy"><img class="w-100" src="' + src + '" alt="Image Description"><div class="swiper-lazy-preloader"></div></div>';
+                    slide = '<div class="swiper-slide swiper-lazy"><div class="swiper-zoom-container"><img class="w-100" src="' + src + '" alt="Image Description"></div><div class="swiper-lazy-preloader"></div></div>';
                     swiper.appendSlide(slide);
                 }
             }, 100)
@@ -246,7 +265,7 @@
             $(postDetailContainer + ' ' + copyContainer).removeClass('d-none postContainerCopy');
             $(copyContainer + ' .containerSwiper').removeClass('swiper' + key);
             $(copyContainer + ' .paginationSwiper').removeClass('swiper-pagination' + key);
-            $(copyContainer + ' .containerSwiper .swiper-wrapper').empty();
+            $(copyContainer + ' .containerSwiper .swiper-wrapper .swiper-zoom-container').empty();
             $(copyContainer + ' .containerSwiper .swiper-notification').remove();
             $(copyContainer + ' ' + detailPost).removeAttr('id');
             $(copyContainer + ' .commentReplyShow').removeClass('d-none');
@@ -672,6 +691,12 @@
             }
         }
 
+        $("#postRail").on("touchmove", function (e) {
+            console.log(e.originalEvent.touches.length)
+            if (dragging && e.originalEvent.touches.length > 1)
+                e.preventDefault();
+        });
+
         $(document).ready(function () {
             $('.js-go-to').remove();
             if ($('.profileMenu').length > 0) {
@@ -692,15 +717,32 @@
                         direction: 'horizontal',
                         loop: false,
                         speed: 200,
-
+                        zoom: {
+                            maxRatio: 3,
+                            minRatio: 1,
+                        },
                         // If we need pagination
                         pagination: {
                             el: '.swiper-pagination' + i,
                         },
+                        on: {
+                            click: function (s, e) {
+                                s.zoom.in(3);
+                            },
+                            doubleClick: function (s, e) {
+                                e.preventDefault();
+                            },
+                            touchStart: function (s, e) {
+                               dragging=true;
+                            },
+                            touchEnd: function (s, e) {
+                                s.zoom.out();
+                                dragging=false;
+                            },
+                        },
                     });
                 }
             }
-
             if ($('.messageMenu').length > 0) {
                 let $wrapper = $('.messageMenuCopy');
 
@@ -710,7 +752,7 @@
                 $wrapper.remove();
             }
             if ($('.messageDetailMenu').length > 0) {
-                imgNumber=$('.imgNumber').last().text();
+                imgNumber = $('.imgNumber').last().text();
             }
         })
 
@@ -718,7 +760,7 @@
             e.preventDefault();
             $('#attachImgBtn').text('');
             $('<i class="fa fa-spin fa-spinner"></i>').appendTo($('#attachImgBtn'));
-            $('#attachImgBtn').prop('disable',true);
+            $('#attachImgBtn').prop('disable', true);
             if ($('#answer').val() !== '') {
                 let formData = new FormData(this);
                 $.ajax({
@@ -732,25 +774,25 @@
                         let msg = data[0];
                         $('.msgRow').attr('id', 'msg-' + msg['ID']);
                         $('.msgRow').removeClass('d-none');
-                        if (msg['AttachPath'] === ''){
+                        if (msg['AttachPath'] === '') {
                             $('.msgRow #attachPath').addClass('d-none');
                         } else {
                             $('.msgRow .fancy').addClass('js-fancybox');
                             $('.msgRow .js-fancybox').attr('data-src', msg['AttachPath'] + '/0.jpg');
-                            $('.msgRow .js-fancybox').attr('data-fancybox','lightbox-gallery');
-                            $('.msgRow .js-fancybox').attr('data-caption','Lightbox Gallery');
-                            $('.msgRow .js-fancybox').attr('data-speed','200');
-                            $('.msgRow .js-fancybox').attr('data-is-infinite','true');
-                            $('.msgRow .js-fancybox').attr('data-slideshow-speed','5000');
+                            $('.msgRow .js-fancybox').attr('data-fancybox', 'lightbox-gallery');
+                            $('.msgRow .js-fancybox').attr('data-caption', 'Lightbox Gallery');
+                            $('.msgRow .js-fancybox').attr('data-speed', '200');
+                            $('.msgRow .js-fancybox').attr('data-is-infinite', 'true');
+                            $('.msgRow .js-fancybox').attr('data-slideshow-speed', '5000');
                             $('.msgRow img').attr('src', msg['AttachPath'] + '/sample.jpg');
                             $('.msgRow #imgNumber').text(imgNumber++);
                         }
-                        if (msg['Reply'] === ''){
+                        if (msg['Reply'] === '') {
                             console.log(msg['Reply']);
                             $('.msgRow p').addClass('d-none');
                             $('.msgRow p').removeClass('d-inline-block');
                         } else {
-                            $('.msgRow p a').attr('onclick','deleteMsg('+msg['ID']+')');
+                            $('.msgRow p a').attr('onclick', 'deleteMsg(' + msg['ID'] + ')');
                             $('.msgRow #replyText').text(msg['Reply']);
                         }
                         $('.msgRow').appendTo($('.msgContainer'));
@@ -765,12 +807,12 @@
                         $('.msgRow p').removeClass('d-none');
                         $('.msgRow p').addClass('d-inline-block');
                         $('.msgRow').addClass('d-none');
-                        $('#imgPreview').css('background-image','none')
+                        $('#imgPreview').css('background-image', 'none')
                         $('#attachImgBtn i').removeClass('fa fa-spin fa-spinner');
                         $('#attachImgBtn i').addClass('icon-camera');
                     }
                 }).done(function () {
-                    $('#attachImgBtn').prop('disable',false);
+                    $('#attachImgBtn').prop('disable', false);
                     $('#attachImgBtn i').remove();
                     $('#attachImgBtn').text('ارسال پیام');
                 })
@@ -822,6 +864,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             });
 
@@ -857,34 +900,36 @@
                         reader = new FileReader();
                     reader.readAsDataURL(blob);
                     reader.onloadend = function () {
-                        $('#imageUrl').val(reader.result);
-                        $('#profileImgBox').attr('src', url);
-                        $modal.modal('hide');
-                        $("#imageUrl").clone().appendTo("#imageUploadForm");
-                        $('#imageUploadForm').submit();
+                        let type = file_type.split('/'), form;
+                        file_upload = new File([blob], "pic." + type[1]);
+                        form = new FormData();
+                        form.append('imageUrl', file_upload);
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: '/Seller-Major-profileImgUpdate',
+                            data: form,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            beforeSend: function () {
+                                $('#profileImgSubmitIcon').addClass('d-none');
+                                $('#waitingCrop').removeClass('d-none');
+                            },
+                            success: function () {
+                                console.log('uploaded');
+                                $modal.modal('hide');
+                                $('#profileImgSubmitIcon').removeClass('d-none');
+                                $('#waitingCrop').addClass('d-none');
+                                location.reload();
+                            }
+                        });
                     };
                 });
             });
-
-            $('#imageUploadForm').on('submit', (function (e) {
-                $('#profileImgSubmitIcon').addClass('d-none');
-                $('#waitingCrop').removeClass('d-none');
-                e.preventDefault();
-                let formData = new FormData(this);
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        console.log(data);
-                        $('#profileImgSubmitIcon').removeClass('d-none');
-                        $('#waitingCrop').addClass('d-none');
-                    }
-                })
-            }));
 
             $('.nowDate').text(nowDate());
         });
@@ -913,6 +958,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             });
 
@@ -954,30 +1000,37 @@
                         $("#eventImageUrl").clone().appendTo("#eventUploadForm");
                         $('#eventUploadForm').submit();
                     };
+                    reader.onloadend = function () {
+                        let type = file_type.split('/'), form;
+                        file_upload = new File([blob], "pic." + type[1]);
+                        form = new FormData();
+                        form.append('imageUrl', file_upload);
+                        form.append('text', $('#eventTextTemp').val());
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: '/Seller-Major-addEvent',
+                            data: form,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            beforeSend: function () {
+                                $('#eventSubmitIcon').addClass('d-none');
+                                $('#waitingEventCrop').removeClass('d-none');
+                            },
+                            success: function () {
+                                console.log('uploaded');
+                                $('#eventSubmitIcon').removeClass('d-none');
+                                $('#waitingEventCrop').addClass('d-none');
+                                location.reload();
+                            }
+                        });
+                    };
                 });
             });
-
-            $('#eventUploadForm').on('submit', (function (e) {
-                $('#eventSubmitIcon').addClass('d-none');
-                $('#waitingEventCrop').removeClass('d-none');
-                $('#eventText').val($('#eventTextTemp').val());
-                e.preventDefault();
-                let formData = new FormData(this);
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function (data) {
-                        console.log(data);
-                        $('#eventSubmitIcon').removeClass('d-none');
-                        $('#waitingEventCrop').addClass('d-none');
-                        window.location.href = "/Seller-Major-Panel";
-                    }
-                })
-            }));
         });
 
         function insertImg(key) {
@@ -1004,6 +1057,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             });
             $('#postImg-1').on('change', function (event) {
@@ -1020,6 +1074,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             });
             $('#postImg-2').on('change', function (event) {
@@ -1036,6 +1091,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             });
             $('#postImg-3').on('change', function (event) {
@@ -1052,6 +1108,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             });
 
@@ -1087,9 +1144,34 @@
                         reader = new FileReader(), key = imgWorking.replace(/[^0-9]/gi, '');
                     reader.readAsDataURL(blob);
                     reader.onloadend = function () {
-                        $('#postImageUrl-' + key).val(reader.result);
-                        $(imgWorking + ' .previewBox img').attr('src', reader.result);
-                        $postModal.modal('hide');
+                        let type = file_type.split('/'), form;
+                        file_upload = new File([blob], "pic." + type[1]);
+                        form = new FormData();
+                        form.append('imageUrl', file_upload);
+                        form.append('imgNumber', key);
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: '/Seller-Major-uploadImage',
+                            data: form,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            beforeSend: function () {
+                                $postModal.modal('hide');
+                                $('#addImgBtn-' + key + ' h3').addClass('d-none');
+                                $('#addImgBtn-' + key + ' .loadingImg').removeClass('d-none');
+                            },
+                            success: function () {
+                                console.log('uploaded');
+                                $('#addImgBtn-' + key + ' .loadingImg').addClass('d-none');
+                                $('#picCount').val(parseInt($('#picCount').val()) + 1);
+                                $(imgWorking + ' .previewBox img').attr('src', reader.result);
+                            }
+                        });
                     };
                 });
             });
@@ -1117,9 +1199,6 @@
             $(this).find('i').removeClass('fa-check').addClass('fa-spin fa-spinner');
             $(this).find('i').css('margin', '-7px');
             $(this).prop('disabled', true);
-            for (let i = 0; i < 4; i++) {
-                $("#postImageUrl-" + i).clone().appendTo("#postUploadForm");
-            }
             $('#postUploadForm').submit();
         });
 
@@ -1155,7 +1234,7 @@
 
             owl.on('translate.owl.carousel', function (e) {
                 let index = e.item.index;
-                $('#eventBackground-' + index + '-' + imgRowID[index]).css('background-image', 'url('+$('#asset').text()+'/img/SellerMajor/Events/' + userID + '/' + imgRowID[index] + '.jpg)');
+                $('#eventBackground-' + index + '-' + imgRowID[index]).css('background-image', 'url(' + $('#asset').text() + 'img/SellerMajor/Events/' + userID + '/' + imgRowID[index] + '.jpg)');
                 owl.trigger('stop.owl.autoplay');
                 owl.trigger('play.owl.autoplay', [restart]);
                 resetProgressBar(index);
@@ -1193,7 +1272,7 @@
                 }
             });
 
-            $('#eventBackground-0-' + imgRowID[0]).css('background-image', 'url('+$('#asset').text()+'/img/SellerMajor/Events/' + $('#userID').text() + '/' + imgRowID[0] + '.jpg)');
+            $('#eventBackground-0-' + imgRowID[0]).css('background-image', 'url(' + $('#asset').text() + 'img/SellerMajor/Events/' + $('#userID').text() + '/' + imgRowID[0] + '.jpg)');
             owl.trigger('play.owl.autoplay', [restart]);
             owl.owlCarousel({
                 loop: false,

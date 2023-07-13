@@ -13,7 +13,7 @@
                 <div class="col-lg-4 g-mb-0">
                     <!-- End User Details -->
                     <!-- User Image -->
-                    <div class="g-mb-5 {{isset($events[0]) ? 'ContainerAnimateBorder':''}}">
+                    <div class="g-mb-5 g-mt-10 {{isset($events[0]) ? 'ContainerAnimateBorder':''}}">
                         <div class="g-pos-rel">
                             <figure>
                                 <img id="profileImgBox" class="img-fluid w-100 u-block-hover__main--zoom-v1"
@@ -30,7 +30,7 @@
                                     <!-- Figure Social Icons -->
                                     <ul class="list-inline text-center g-flex-middle-item--bottom g-mb-20 p-0">
                                         <li class="list-inline-item align-middle g-mx-5 g-bg-black-opacity-0_4 g-rounded-50x g-pa-5">
-                                            <a onclick="$('#profileImg').trigger('click')"
+                                            <a onclick="$('#profileImg').trigger('click');"
                                                class="u-icon-v1 u-icon-size--md g-color-white" href="#!">
                                                 <i class="icon-camera u-line-icon-pro g-mr-1"></i>
                                             </a>
@@ -43,11 +43,6 @@
                                                        accept="image/*">
                                                 <input style="display: none" type="text" id="imageUrl" name="imageUrl">
                                             </div>
-
-                                            <form action="{{route('sellerMajorEditProfileImg')}}" id="imageUploadForm"
-                                                  method="post" enctype="multipart/form-data">
-                                                @csrf
-                                            </form>
                                         </li>
 
                                         <li class="list-inline-item align-middle g-mx-5 g-bg-black-opacity-0_4 g-rounded-50x g-pa-5">
@@ -62,19 +57,7 @@
                                                        type="file"
                                                        name="eventImg"
                                                        accept="image/*">
-                                                <input style="display: none" type="text" id="eventImageUrl"
-                                                       name="eventImageUrl">
                                             </div>
-
-                                            <form action="{{route('sellerMajorAddEvent')}}" id="eventUploadForm"
-                                                  method="post" enctype="multipart/form-data">
-                                                @csrf
-                                                <textarea id="eventText"
-                                                          name="eventText"
-                                                          autofocus
-                                                          class="d-none"
-                                                          maxlength="300" rows="4" placeholder="متن.."></textarea>
-                                            </form>
                                         </li>
 
                                         <li class="list-inline-item align-middle g-mx-5 g-bg-black-opacity-0_4 g-rounded-50x g-pa-5">
@@ -289,8 +272,8 @@
 
         <hr class="{{isset($posts[0])?'':'d-none'}} g-brd-gray-light-v3 g-my-5">
         <!--پیش نمایش پست ها-->
-        <div class="container g-px-10--lg g-px-0 g-pb-80--lg g-pb-20">
-            <div class="row g-mx-1 g-pb-20 g-pb-200--lg" id="postSampleContainer">
+        <div style="min-height: 100px" class="container g-px-10--lg g-px-0 g-pb-80--lg g-pb-20">
+            <div class="row g-mx-1 g-pb-25 g-pb-200--lg" id="postSampleContainer">
                 @foreach($posts as $key => $rec)
                     <div class="col-lg-2 col-4 g-brd-around g-brd-white p-0" id="postSample-{{$key}}">
                         <a class="d-block u-block-hover u-bg-overlay g-bg-black-opacity-0_3--after g-bg-transparent--hover--after"
@@ -356,9 +339,11 @@
                                                         <!-- Slides -->
                                                         @for($i=0;$i<$rec->PicCount;$i++)
                                                             <div class="swiper-slide">
-                                                                <img class="w-100"
-                                                                     src="{{asset($rec->postPic.'/'.$rec->postID.'/'.$i.'.jpg')}}"
-                                                                     alt="Image Description">
+                                                                <div class="swiper-zoom-container">
+                                                                    <img class="w-100"
+                                                                         src="{{asset($rec->postPic.'/'.$rec->postID.'/'.$i.'.jpg')}}"
+                                                                         alt="Image Description">
+                                                                </div>
                                                             </div>
                                                         @endfor
                                                     </div>

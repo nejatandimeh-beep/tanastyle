@@ -990,7 +990,6 @@
 
         $modal.on('shown.bs.modal', function () {
             cropper = new Cropper(image, {
-                aspectRatio: 1,
                 viewMode: 2,
                 zoomable: true,
                 background: true,

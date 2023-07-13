@@ -81,17 +81,40 @@ class RegisterController extends Controller
 
     public function uploadImage(Request $request)
     {
-        $mobile = $request->get('mobile');
-        $imgNumber = $request->get('imgNumber');
-        $image = $request->get('imageUrl');
+        $mobile = $request->get('mobileHint');
+        $image = $request->file('imageUrl');
         $path = public_path('img/imagesTemp/sellerMajorProfileImage/') . $mobile;
         File::makeDirectory($path, 0777, true, true);
-        $image_parts = explode(";base64,", $image);
-        $image_base64 = base64_decode($image_parts[1]);
-        $imageFullPath = $path . '/profileImg.jpg';
-        file_put_contents($imageFullPath, $image_base64);
 
-        return $imgNumber;
+        // 1000*1000 pic save
+        $source = '';
+        switch ($image->getMimeType()) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $source = imagecreatefromjpeg($image);
+                break;
+            case 'image/png':
+                $source = imagecreatefrompng($image);
+                break;
+            case 'image/gif':
+                $source = imagecreatefromgif($image);
+                break;
+        }
+
+        // 250*250 sample save
+        list($width, $height) = getimagesize($image);
+        $newWidth = 400;
+        $newHeight = 400;
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $white = imagecolorallocate($thumb, 255, 255, 255);
+        imagefill($thumb, 0, 0, $white);
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        $imageFullPath = $path . '/profileImg.jpg';
+        imagejpeg($thumb, $imageFullPath, 80);
+        imagedestroy($thumb);
+        imagedestroy($source);
+
+        return 'Success';
     }
 
     protected function createSeller(Request $request)

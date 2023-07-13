@@ -404,3 +404,4 @@ Route::get('/Seller-Major-AddComment/{postID}', 'SellerMajor\Basic@addComments')
 Route::get('/Seller-Major-Comment-Delete/{id}/{status}', 'SellerMajor\Basic@deleteComments');
 Route::get('/Seller-Major-LikeComment/{id}/{replyID}/{status}/{likeStatus}', 'SellerMajor\Basic@likeComments');
 Route::get('/Seller-Major-Reactions', 'SellerMajor\Basic@reaction')->name('sellerMajorReaction');
+Route::post( '/Seller-Major-uploadImage', 'SellerMajor\Basic@uploadImage');

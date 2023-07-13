@@ -135,5 +135,6 @@
     <orderEntry type="library" name="clipboard" level="application" />
     <orderEntry type="library" name="tinymce" level="application" />
     <orderEntry type="library" name="swiper" level="application" />
+    <orderEntry type="library" name="heic2any" level="application" />
   </component>
 </module>

@@ -8,9 +8,11 @@
 
     <div class="d-flex justify-content-center g-px-10">
         <div id="addImgBtn-0" class="list-inline-item g-mx-3">
-            <div style="width: 70px; min-height: 70px; border-radius: 10px"
+            <div style="position:relative; width: 70px; min-height: 70px; border-radius: 10px; background-color: #fdfdfd"
                  onclick="insertImg('0')"
-                 class="previewBox g-bg-gray-light-v5 g-brd-around g-brd-gray-light-v4">
+                 class="previewBox g-brd-around g-brd-gray-light-v4">
+                <h3 style="position:absolute; top:20px; left:27px; cursor: pointer" class="g-color-primary">+</h3>
+                <img style="position:absolute; top:17px; left:17px; width: 34px;" src="{{asset('img/Other/loadingImg.gif')}}" class="d-none g-rounded-5 loadingImg">
                 <img style="width: 100%;" src="" class="g-rounded-5">
             </div>
             <div style="display: none">
@@ -19,14 +21,15 @@
                        type="file"
                        name="postImg"
                        accept="image/png, image/jpeg">
-                <input style="display: none" type="text" accept="image/*" id="postImageUrl-0" name="postImageUrl-0" value="">
             </div>
 
         </div>
         <div id="addImgBtn-1" class="list-inline-item g-mx-3">
-            <div style="width: 70px; min-height: 70px; border-radius: 10px"
+            <div style="position:relative; width: 70px; min-height: 70px; border-radius: 10px; background-color: #fdfdfd"
                  onclick="insertImg('1')"
-                 class="previewBox g-bg-gray-light-v5 g-brd-around g-brd-gray-light-v4">
+                 class="previewBox g-brd-around g-brd-gray-light-v4">
+                <h3 style="position:absolute; top:20px; left:27px; cursor: pointer" class="g-color-primary">+</h3>
+                <img style="position:absolute; top:17px; left:17px; width: 34px;" src="{{asset('img/Other/loadingImg.gif')}}" class="d-none g-rounded-5 loadingImg">
                 <img style="width: 100%;" src="" class="g-rounded-5">
             </div>
             <div style="display: none">
@@ -35,14 +38,15 @@
                        type="file"
                        name="postImg"
                        accept="image/png, image/jpeg">
-                <input style="display: none" type="text" id="postImageUrl-1" accept="image/*" name="postImageUrl-1" value="">
             </div>
 
         </div>
         <div id="addImgBtn-2" class="list-inline-item g-mx-3">
-            <div style="width: 70px; min-height: 70px; border-radius: 10px"
+            <div style="position:relative; width: 70px; min-height: 70px; border-radius: 10px; background-color: #fdfdfd"
                  onclick="insertImg('2')"
-                 class="previewBox g-bg-gray-light-v5 g-brd-around g-brd-gray-light-v4">
+                 class="previewBox g-brd-around g-brd-gray-light-v4">
+                <h3 style="position:absolute; top:20px; left:27px; cursor: pointer" class="g-color-primary">+</h3>
+                <img style="position:absolute; top:17px; left:17px; width: 34px;" src="{{asset('img/Other/loadingImg.gif')}}" class="d-none g-rounded-5 loadingImg">
                 <img style="width: 100%;" src="" class="g-rounded-5">
             </div>
             <div style="display: none">
@@ -51,14 +55,15 @@
                        type="file"
                        name="postImg"
                        accept="image/png, image/jpeg">
-                <input style="display: none" type="text" id="postImageUrl-2" accept="image/*" name="postImageUrl-2" value="">
             </div>
 
         </div>
         <div id="addImgBtn-3" class="list-inline-item g-mx-3">
-            <div style="width: 70px; min-height: 70px; border-radius: 10px"
+            <div style="position:relative; width: 70px; min-height: 70px; border-radius: 10px; background-color: #fdfdfd"
                  onclick="insertImg('3')"
-                 class="previewBox g-bg-gray-light-v5 g-brd-around g-brd-gray-light-v4">
+                 class="previewBox g-brd-around g-brd-gray-light-v4">
+                <h3 style="position:absolute; top:20px; left:27px; cursor: pointer" class="g-color-primary">+</h3>
+                <img style="position:absolute; top:17px; left:17px; width: 34px;" src="{{asset('img/Other/loadingImg.gif')}}" class="d-none g-rounded-5 loadingImg">
                 <img style="width: 100%;" src="" class="g-rounded-5">
             </div>
             <div style="display: none">
@@ -67,7 +72,6 @@
                        type="file"
                        name="postImg"
                        accept="image/png, image/jpeg">
-                <input style="display: none" type="text" accept="image/*" id="postImageUrl-3" name="postImageUrl-3" value="">
             </div>
 
         </div>
@@ -90,24 +94,16 @@
             <input type="number" id="formFinalPrice" name="finalPrice" class="listBox g-color-gray-dark-v3">
             <input type="text" id="formColor" name="color" class="listBox g-color-gray-dark-v3">
             <input type="text" id="formColorCode" name="colorCode" class="listBox g-color-gray-dark-v3">
+            <input type="number" id="picCount" value="0" name="picCount" class="listBox g-color-gray-dark-v3">
         </form>
     </div>
     {{--مودال ساخت پست--}}
-    <div style="direction: rtl; z-index: 11000" class="modal fade bd-example-modal-lg hideScrollBar" id="postModal"
+    <div style="direction: rtl; z-index: 11000; max-height: 100vh" class="modal g-bg-white fade bd-example-modal-lg hideScrollBar" id="postModal"
          tabindex="-1" role="dialog"
          aria-labelledby="postModalCenterTitle"
          aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered m-0 mx-lg-auto" role="document">
-            <div style="min-height: 400px" class="modal-content">
-                <div class="modal-header">
-                    <h6 class="modal-title" id="postModalCenterTitle">افزودن تصویر</h6>
-                    <button type="button"
-                            class="g-brd-none g-bg-transparent g-font-size-20 g-line-height-0 align-self-center"
-                            data-dismiss="modal"
-                            aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
+            <div style="height: 85vh" class="modal-content g-brd-none">
                 <div class="modal-body">
                     <div class="img-container">
                         <div class="col-md-12 p-0">
@@ -118,7 +114,8 @@
                 <div class="modal-footer">
                     <div id="addPostButton" class="text-left">
                         <label class="u-check g-mr-15 mb-0" data-dismiss="modal">
-                            <div
+                            <div  data-dismiss="modal"
+                                  aria-label="Close"
                                 class="u-check-icon-checkbox-v3 g-brd-gray-light-v4 g-bg-gray-light-v4 g-color-gray-dark-v3 g-color-lightred--hover">
                                 <i class="fa fa-close g-absolute-centered"></i>
                             </div>

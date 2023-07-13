@@ -123,7 +123,7 @@
 
         let $modal = $('#modal'),
             image = document.getElementById('sample_image'),
-            cropper, inputID, inputIdFinshed = [], counter = 0;
+            cropper, inputID, inputIdFinshed = [], counter = 0,file_type;
         $('input[id^="pic"]').on('change', function (event) {
             if (!$('#mobile').hasClass('g-brd-red')) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
@@ -140,6 +140,7 @@
                         done(reader.result);
                     };
                     reader.readAsDataURL(files[0]);
+                    file_type = files[0].type;
                 }
             } else
                 alert('ابتدا لطفا شماره موبایل را بصورت صحیح وارد کنید.');
@@ -177,12 +178,34 @@
                     reader = new FileReader();
                 reader.readAsDataURL(blob);
                 reader.onloadend = function () {
-                    $('#imageUrl' + inputID).val(reader.result);
-                    $modal.modal('hide');
-                    $("#userImageDiv" + inputID).clone().appendTo("#imageUploadForm");
-                    $("#imgNumber").val(inputID);
-                    $('#imageUploadForm').submit();
-                    addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
+                    let type = file_type.split('/'), form;
+                    file_upload = new File([blob], "pic." + type[1]);
+                    form = new FormData();
+                    form.append('imageUrl', file_upload);
+                    form.append('mobileHint', $('#mobile').val());
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        }
+                    });
+                    $.ajax({
+                        url: '/sellerMajor/profile/image',
+                        data: form,
+                        processData: false,
+                        contentType: false,
+                        type: 'POST',
+                        beforeSend: function () {
+                            $('#profileImgSubmitIcon').addClass('d-none');
+                            $('#waitingCrop').removeClass('d-none');
+                        },
+                        success: function () {
+                            console.log('uploaded');
+                            $modal.modal('hide');
+                            $('#profileImgSubmitIcon').removeClass('d-none');
+                            $('#waitingCrop').addClass('d-none');
+                            addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
+                        }
+                    });
                 };
             });
         });

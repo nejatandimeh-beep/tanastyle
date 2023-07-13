@@ -40,7 +40,7 @@
                                                        autofocus
                                                        tabindex="1"
                                                        name="name"
-                                                       maxlength="15"
+                                                       maxlength="50"
                                                        onblur=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
                                                 <div
                                                     class="input-group-addon g-brd-around g-brd-primary g-brd-right-none d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
@@ -582,14 +582,6 @@
                                 </div>
                             </form>
                         </div>
-
-                        <form action="{{route('sellerMajorProfileImage')}}" id="imageUploadForm"
-                              method="post" enctype="multipart/form-data">
-                            @csrf
-                            <input id="mobileHint" name="mobile" type="text"
-                                   class="d-none">
-                            <input id="imgNumber" name="imgNumber" type="text" class="d-none">
-                        </form>
                     @endif
                 </div>
             </div>

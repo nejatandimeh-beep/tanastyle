@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use DateTime;
 use File;
 use Hekmatinasser\Verta\Facades\Verta;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
@@ -160,14 +161,39 @@ class Basic extends Controller
 
     public function updateProfileImage(Request $request)
     {
+        // Upload Images
         $mobile = Auth::guard('sellerMajor')->user()->Mobile;
-        $image = $request->get('imageUrl');
+        $image = $request->file('imageUrl');
         $path = public_path('img/sellerMajorProfileImage/') . $mobile;
         File::makeDirectory($path, 0777, true, true);
-        $image_parts = explode(";base64,", $image);
-        $image_base64 = base64_decode($image_parts[1]);
+
+        // 1000*1000 pic save
+        $source = '';
+        switch ($image->getMimeType()) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $source = imagecreatefromjpeg($image);
+                break;
+            case 'image/png':
+                $source = imagecreatefrompng($image);
+                break;
+            case 'image/gif':
+                $source = imagecreatefromgif($image);
+                break;
+        }
+
+        // 250*250 sample save
+        list($width, $height) = getimagesize($image);
+        $newWidth = 400;
+        $newHeight = 400;
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $white = imagecolorallocate($thumb, 255, 255, 255);
+        imagefill($thumb, 0, 0, $white);
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
         $imageFullPath = $path . '/profileImg.jpg';
-        file_put_contents($imageFullPath, $image_base64);
+        imagejpeg($thumb, $imageFullPath, 80);
+        imagedestroy($thumb);
+        imagedestroy($source);
 
         DB::table('sellersmajor')
             ->where('id', $this->sellerMajorID)
@@ -180,14 +206,12 @@ class Basic extends Controller
 
     public function addEvent(Request $request)
     {
-        date_default_timezone_set('Asia/Tehran');
-        $text = $request->get('eventText');
+        $text = $request->get('text');
         DB::table('seller_major_event')
             ->insert([
                 'SellerMajorID' => $this->sellerMajorID,
                 'Text' => $text,
                 'Pic' => 'img/SellerMajor/Events/' . $this->sellerMajorID,
-                'Time' => date('Y-m-d H:i:s'),
             ]);
 
         $eventId = DB::table('seller_major_event')
@@ -195,13 +219,26 @@ class Basic extends Controller
             ->latest('ID')
             ->first();
 
-        $image = $request->get('eventImageUrl');
+        $image = $request->file('imageUrl');
         $path = public_path('img/SellerMajor/Events/') . $this->sellerMajorID;
         File::makeDirectory($path, 0777, true, true);
-        $image_parts = explode(";base64,", $image);
-        $image_base64 = base64_decode($image_parts[1]);
-        $imageFullPath = $path . '/' . $eventId->ID . '.jpg';
-        $source = imagecreatefromstring($image_base64);
+
+        // 1000*1000 pic save
+        $source = '';
+        switch ($image->getMimeType()) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $source = imagecreatefromjpeg($image);
+                break;
+            case 'image/png':
+                $source = imagecreatefrompng($image);
+                break;
+            case 'image/gif':
+                $source = imagecreatefromgif($image);
+                break;
+        }
+
+        // 250*250 sample save
         list($width, $height) = getimagesize($image);
         $newWidth = 1080;
         $newHeight = 1920;
@@ -209,12 +246,12 @@ class Basic extends Controller
         $white = imagecolorallocate($thumb, 255, 255, 255);
         imagefill($thumb, 0, 0, $white);
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        $imageFullPath = $path . '/' . $eventId->ID . '.jpg';
         imagejpeg($thumb, $imageFullPath, 80);
-
         imagedestroy($thumb);
         imagedestroy($source);
 
-        return 'Success';
+        return redirect(route('sellerMajorPanel'));
     }
 
     public function removeEvent($item)
@@ -255,7 +292,7 @@ class Basic extends Controller
     public function messages()
     {
         $msg = DB::table('seller_major_msg as m')
-            ->select('m.*', 'm.ID as msgID', 'md.ID', 'md.Time', 'md.MessageID', 'c.PicPath', 'c.name','c.id as customerID')
+            ->select('m.*', 'm.ID as msgID', 'md.ID', 'md.Time', 'md.MessageID', 'c.PicPath', 'c.name', 'c.id as customerID')
             ->leftJoin('seller_major_msg_detail as md', 'md.MessageID', 'm.ID')
             ->leftJoin('customers as c', 'c.id', 'm.CustomerID')
             ->where('m.SellerMajorID', $this->sellerMajorID)
@@ -283,7 +320,7 @@ class Basic extends Controller
 
     public function messagesDetail(Request $request)
     {
-        $customerID=$request->get('customerID');
+        $customerID = $request->get('customerID');
         $msg = DB::table('seller_major_msg as m')
             ->select('m.*', 'md.*', 'c.id as customerID', 'c.PicPath as customerPic', 'c.name as customerName')
             ->leftJoin('seller_major_msg_detail as md', 'md.MessageID', 'm.ID')
@@ -341,7 +378,7 @@ class Basic extends Controller
                     $source = imagecreatefromgif($attachmentImg);
                     break;
             }
-            $attachFullPath = $picPath  . '/0.jpg';
+            $attachFullPath = $picPath . '/0.jpg';
             imagejpeg($source, $attachFullPath);
 
             list($width, $height) = getimagesize($attachmentImg);
@@ -443,6 +480,51 @@ class Basic extends Controller
         return $msgID;
     }
 
+    public function uploadImage(Request $request)
+    {
+        // Upload Images
+        $imgNumber = $request->get('imgNumber');
+        $image = $request->file('imageUrl');
+        $path = public_path('img/imagesTemp/sellerMajor/Posts/') . $this->sellerMajorID;
+
+        File::makeDirectory($path, 0777, true, true);
+
+        // 1000*1000 pic save
+        $source = '';
+        switch ($image->getMimeType()) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $source = imagecreatefromjpeg($image);
+                break;
+            case 'image/png':
+                $source = imagecreatefrompng($image);
+                break;
+            case 'image/gif':
+                $source = imagecreatefromgif($image);
+                break;
+        }
+        $imageFullPath = $path . '/' . $imgNumber . '.jpg';
+        imagejpeg($source, $imageFullPath);
+
+        if ($imgNumber == 0) {
+            // 250*250 sample save
+            list($width, $height) = getimagesize($image);
+            $newWidth = 300;
+            $newHeight = 375;
+            $thumb = imagecreatetruecolor($newWidth, $newHeight);
+            $white = imagecolorallocate($thumb, 255, 255, 255);
+            imagefill($thumb, 0, 0, $white);
+            imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+            $imageFullPath = $path . '/' . 'sample.jpg';
+            imagejpeg($thumb, $imageFullPath, 80);
+
+            imagedestroy($thumb);
+            imagedestroy($source);
+        }
+
+        return 'success';
+    }
+
     public function addPostForm()
     {
         return view('SellerMajor.AddPost');
@@ -465,14 +547,7 @@ class Basic extends Controller
         $colorCode = $request->get('colorCode');
         $text = $request->get('postText');
         $tag = '#';
-        $picCount = 0;
-        for ($i = 0; $i < 4; $i++) {
-            // original pic
-            $img = $request->get('postImageUrl-' . $i);
-            if ($img != null) {
-                $picCount++;
-            }
-        }
+        $picCount = $request->get('picCount');
         DB::table('seller_major_post')
             ->insert([
                 'SellerMajorID' => $this->sellerMajorID,
@@ -500,49 +575,10 @@ class Basic extends Controller
             ->latest('ID')
             ->first();
 
-        for ($i = 0; $i < 4; $i++) {
-            // original pic
-            $image = $request->get('postImageUrl-' . $i);
-            if ($image != null) {
-                $path = public_path('img/SellerMajor/Posts/') . $this->sellerMajorID . '/' . $postId->ID;
-                File::makeDirectory($path, 0777, true, true);
-                $image_parts = explode(";base64,", $image);
-                $image_base64 = base64_decode($image_parts[1]);
-                $imageFullPath = $path . '/' . $i . '.jpg';
-                dd($image_base64);
-                $source = imagecreatefromstring($image_base64);
-                list($width, $height) = getimagesize($image);
-                $newWidth = 1200;
-                $newHeight = 1500;
-                $thumb = imagecreatetruecolor($newWidth, $newHeight);
-                $white = imagecolorallocate($thumb, 255, 255, 255);
-                imagefill($thumb, 0, 0, $white);
-                imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-                imagejpeg($thumb, $imageFullPath, 90);
-
-                imagedestroy($thumb);
-                imagedestroy($source);
-
-                if ($i === 0) {
-                    // sample pic
-                    $source = imagecreatefromstring($image_base64);
-                    list($width, $height) = getimagesize($image);
-                    $newWidth = 300;
-                    $newHeight = 375;
-                    $thumb = imagecreatetruecolor($newWidth, $newHeight);
-                    $white = imagecolorallocate($thumb, 255, 255, 255);
-                    imagefill($thumb, 0, 0, $white);
-                    imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-                    $imageFullPath = $path . '/' . 'sample.jpg';
-                    imagejpeg($thumb, $imageFullPath, 80);
-
-                    imagedestroy($thumb);
-                    imagedestroy($source);
-                }
-
-            }
-        }
-
+        $source = public_path('img/imagesTemp/sellerMajor/Posts/') . $this->sellerMajorID;
+        $destination = public_path('img/SellerMajor/Posts/') . $this->sellerMajorID . '/' . $postId->ID;
+        $file = new Filesystem();
+        $file->moveDirectory($source, $destination, true);
 
         DB::table('sellersmajor')
             ->where('ID', $this->sellerMajorID)
@@ -988,7 +1024,7 @@ class Basic extends Controller
             ->get();
 
         $postsComment = DB::table('seller_major_post_comment as pc')
-            ->select('*', 'pc.ID as commentID','pc.CommenterID as userId')
+            ->select('*', 'pc.ID as commentID', 'pc.CommenterID as userId')
             ->leftJoin('seller_major_post as p', 'p.ID', 'pc.PostID')
             ->leftJoin('seller_major_post_comment_like_seller as pcls', 'pcls.CommentID', 'pc.ID')
             ->leftJoin('customers as c', 'c.id', 'pc.CommenterID')
@@ -999,7 +1035,7 @@ class Basic extends Controller
             ->get();
 
         $postsCommentReply = DB::table('seller_major_post_comment_reply as pcr')
-            ->select('*', 'pc.SellerMajorID', 'pcr.ID as commentReplyID','pcr.CommenterID as userId')
+            ->select('*', 'pc.SellerMajorID', 'pcr.ID as commentReplyID', 'pcr.CommenterID as userId')
             ->leftJoin('seller_major_post_comment as pc', 'pc.id', 'pcr.CommentID')
             ->leftJoin('seller_major_post as p', 'p.ID', 'pc.PostID')
             ->leftJoin('seller_major_post_comment_reply_like_seller as pcrls', 'pcrls.Comment_ID', 'pc.ID')
@@ -1013,7 +1049,7 @@ class Basic extends Controller
         $date = array();
         $time = array();
         $rowTime = array();
-        $allRow=0;
+        $allRow = 0;
         $eventLikeHowDay = array();
         foreach ($eventLike as $key => $rec) {
             $temp = explode(' ', $rec->eventLikeTime);
@@ -1074,7 +1110,7 @@ class Basic extends Controller
             }
         }
         return view('SellerMajor.Reaction', compact('data', 'eventLike', 'postsLike', 'eventLikeHowDay', 'postsLikeHowDay'
-            , 'postsComment', 'postsCommentHowDay', 'postsCommentReply', 'postsCommentReplyHowDay','rowTime'));
+            , 'postsComment', 'postsCommentHowDay', 'postsCommentReply', 'postsCommentReplyHowDay', 'rowTime'));
     }
     //------------------------------------------------
     //  Convert Date to Iranian Calender

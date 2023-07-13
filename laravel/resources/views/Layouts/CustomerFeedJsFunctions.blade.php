@@ -14,9 +14,16 @@
             $.fancybox.defaults.hash = false;
 
         }
-
+        $("#postRail").on("touchmove", function (e) {
+            console.log(e.originalEvent.touches.length)
+            if (dragging && e.originalEvent.touches.length > 1)
+                e.preventDefault();
+        });
         $(document).ready(function () {
             $('.js-go-to').remove();
+            if($('.feed').length>0){
+                $('body').attr('style','position: fixed; top:0; bottom:0; left:0; right:0; overflow-y:auto;')
+            }
             let firstPost = $('.postID').eq(0).text(), urlAddress = window.location.pathname;
             if ($('#sellerMajorPanel').length > 0) {
                 sellerMajorPanel = $('#sellerMajorPanel').text();
@@ -41,16 +48,33 @@
                         direction: 'horizontal',
                         loop: false,
                         speed: 200,
-
+                        zoom: {
+                            maxRatio: 3,
+                            minRatio: 1,
+                        },
                         // If we need pagination
                         pagination: {
                             el: '.swiper-pagination' + i,
+                        },
+                        on: {
+                            click: function (s, e) {
+                                s.zoom.in(3);
+                            },
+                            doubleClick: function (s, e) {
+                                e.preventDefault();
+                            },
+                            touchStart: function (s, e) {
+                                dragging=true;
+                            },
+                            touchEnd: function (s, e) {
+                                s.zoom.out();
+                                dragging=false;
+                            },
                         },
                     });
                 }
             }
         });
-
         window.onbeforeunload = function () {
             window.scrollTo(0, 0);
         }
@@ -63,7 +87,7 @@
         }
 
         let swiperTemp, swiperFinished = false, startSlide, sellerMajorPanel = true,
-            postID = 0, tempPostID = 0, imgRowID = [], imgRowIdTemp, lastScrollTop = 0, lastScrollTopModal = 0,
+            postID = 0, tempPostID = 0, imgRowID = [], imgRowIdTemp, lastScrollTop = 0, lastScrollTopModal = 0,dragging,
             postNumber = 0, completeLoad = true, asset = $('#asset').text();
 
         $('#allEvents').on('shown.bs.modal', function () {
@@ -344,14 +368,33 @@
                     direction: 'horizontal',
                     loop: false,
                     speed: 200,
+                    zoom: {
+                        maxRatio: 3,
+                        minRatio: 1,
+                    },
                     // If we need pagination
                     pagination: {
                         el: '.swiper-pagination' + key,
                     },
+                    on: {
+                        click: function (s, e) {
+                            s.zoom.in(3);
+                        },
+                        doubleClick: function (s, e) {
+                            e.preventDefault();
+                        },
+                        touchStart: function (s, e) {
+                            dragging=true;
+                        },
+                        touchEnd: function (s, e) {
+                            s.zoom.out();
+                            dragging=false;
+                        },
+                    },
                 });
                 for (let n = 0; n < posts['PicCount']; n++) {
                     src = asset + posts['postPic'] + '/' + postID + '/' + n + '.jpg';
-                    slide = '<div class="swiper-slide swiper-lazy"><img class="w-100" src="' + src + '" alt="Image Description"><div class="swiper-lazy-preloader"></div></div>';
+                    slide = '<div class="swiper-slide swiper-lazy"><div class="swiper-zoom-container"><img class="w-100" src="' + src + '" alt="Image Description"></div><div class="swiper-lazy-preloader"></div></div>';
                     swiper.appendSlide(slide);
                 }
             }, 100)
