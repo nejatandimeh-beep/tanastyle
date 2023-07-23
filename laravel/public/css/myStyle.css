@@ -1024,8 +1024,8 @@ body a{
 /*img border animated*/
 .circleBorder {
     background-image:linear-gradient(#7fc242, rgba(122, 255, 0, 0.64),#7fc242);
-    width:44px;
-    height:44px;
+    width:64px;
+    height:64px;
     border-style: solid;
     border-color:transparent;
     border-radius: 50%;
@@ -1034,8 +1034,8 @@ body a{
 }
 .circleBorder > div {
     background:transparent;
-    height: 45px;
-    width: 45px;
+    height: 65px;
+    width: 65px;
     border-style: solid;
     border-color:transparent;
     border-radius: 50%;

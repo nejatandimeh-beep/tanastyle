@@ -83,7 +83,7 @@ class RegisterController extends Controller
     {
         $mobile = $request->get('mobileHint');
         $image = $request->file('imageUrl');
-        $path = public_path('img/imagesTemp/sellerMajorProfileImage/') . $mobile;
+        $path = public_path('img/imagesTemp/SellerMajorProfileImage/') . $mobile;
         File::makeDirectory($path, 0777, true, true);
 
         // 1000*1000 pic save
@@ -120,7 +120,7 @@ class RegisterController extends Controller
     protected function createSeller(Request $request)
     {
         $mobile = $request->get('mobile');
-        $tempPath =  public_path('img\imagesTemp\sellerMajorProfileImage\\') . $mobile;
+        $tempPath =  public_path('img\imagesTemp\SellerMajorProfileImage\\') . $mobile;
         $path =  public_path('img\SellerMajorProfileImage\\'). $mobile;
         $file = new Filesystem();
         $file->moveDirectory($tempPath, $path,true);

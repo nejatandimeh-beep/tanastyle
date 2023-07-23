@@ -129,7 +129,7 @@ class Basic extends Controller
         DB::table('sellersmajor')
             ->where('id', $this->sellerMajorID)
             ->update([
-                'Bio' => $bioText,
+                'Bio' => $bioText === 'null'?null:$bioText,
             ]);
 
         return 'updated';
@@ -164,7 +164,7 @@ class Basic extends Controller
         // Upload Images
         $mobile = Auth::guard('sellerMajor')->user()->Mobile;
         $image = $request->file('imageUrl');
-        $path = public_path('img/sellerMajorProfileImage/') . $mobile;
+        $path = public_path('img/SellerMajorProfileImage/') . $mobile;
         File::makeDirectory($path, 0777, true, true);
 
         // 1000*1000 pic save
@@ -198,7 +198,7 @@ class Basic extends Controller
         DB::table('sellersmajor')
             ->where('id', $this->sellerMajorID)
             ->update([
-                'Pic' => 'img/sellerMajorProfileImage/' . $mobile,
+                'Pic' => 'img/SellerMajorProfileImage/' . $mobile,
             ]);
 
         return 'Success';
@@ -577,11 +577,12 @@ class Basic extends Controller
 
         $source = public_path('img/imagesTemp/sellerMajor/Posts/') . $this->sellerMajorID;
         $destination = public_path('img/SellerMajor/Posts/') . $this->sellerMajorID . '/' . $postId->ID;
+        File::makeDirectory($destination, 0777, true, true);
         $file = new Filesystem();
         $file->moveDirectory($source, $destination, true);
 
         DB::table('sellersmajor')
-            ->where('ID', $this->sellerMajorID)
+            ->where('id', $this->sellerMajorID)
             ->update([
                 'Posts' => DB::raw('Posts + 1')
             ]);
@@ -721,6 +722,10 @@ class Basic extends Controller
         DB::table('seller_major_post')
             ->where('ID', $postID)
             ->delete();
+
+        DB::table('sellersmajor')
+            ->where('id', $this->sellerMajorID)
+            ->decrement('Posts');
         return 'success';
     }
 

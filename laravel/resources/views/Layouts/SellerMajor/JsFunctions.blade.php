@@ -85,7 +85,7 @@
         });
 
         $('#postRail').on('shown.bs.modal', function () {
-            $('html').css({overflow: 'hidden', height: '100%'});
+            // $('html').css({overflow: 'hidden', height: '100%'});
             let sumHeight = 0;
             $('[id^="detailPost-"]').each(function (index) {
                 if (index < postNumber) {
@@ -96,7 +96,7 @@
         });
 
         $('#postRail').on('hide.bs.modal hidden.bs.modal', function () {
-            $('html').css('overflow', 'auto');
+            // $('html').css('overflow', 'auto');
             $('.postChart').addClass('d-none');
             $('.icon-chart').addClass('fa-ellipsis-h');
             $('.icon-chart').removeClass('g-color-primary');
@@ -535,6 +535,7 @@
                                 console.log(data)
                                 $('#detailPost-' + key).remove();
                                 $('#postSample-' + key).remove();
+                                $('#allPostCount').text(parseInt($('#allPostCount').text())-1);
                             }
                         })
                     },
@@ -1418,10 +1419,11 @@
         function updateBio() {
             $('#bioEditIcon').addClass('d-none');
             $('#waitingBioUpdate').removeClass('d-none');
+            let val=$('#bioText').val() !== '' ? $('#bioText').val():'null';
             $.ajax({
                 type: 'GET',
                 async: false,
-                url: '/Seller-Major-bioUpdate/' + $('#bioText').val(),
+                url: '/Seller-Major-bioUpdate/' + val,
                 success: function (data) {
                     $('#bioSubmit').addClass('d-none');
                     $('#bioEditIcon').removeClass('d-none');

@@ -49,10 +49,10 @@
                 <div class="d-flex align-items-center g-mt-10 g-mt-0--lg justify-content-between g-mb-5">
                     <h4 class="g-font-weight-500 g-ml-10 g-mb-0">
                         {{$data->name}}
-                        <span class="u-label g-mb-0 g-color-gray-dark-v3 g-font-size-14" title="پست ها">
+                        <span class="u-label g-mb-0 g-color-gray-dark-v3 g-font-size-16" title="پست ها">
                               <i class="icon-layers g-mr-3"></i> {{$data->Posts}}
                              </span>
-                        <span class="u-label g-mb-0 g-color-gray-dark-v3 g-font-size-14" title="دنبال کنندگان">
+                        <span class="u-label g-mb-0 g-color-gray-dark-v3 g-font-size-16" title="دنبال کنندگان">
                                   <i class="icon-people g-mr-3"></i> {{$data->Followers}}
                              </span>
                     </h4>
@@ -103,7 +103,7 @@
 
                 <!-- User Position -->
                 <h4 class="h6 g-font-weight-300 g-mb-5">
-                    <i class="icon-badge g-pos-rel g-top-1 g-ml-5 g-color-gray-dark-v5"></i> {{$data->HintCategory}}
+                    <i class="icon-badge g-pos-rel g-top-1 g-font-size-16 g-ml-5 g-color-gray-dark-v1"></i> {{$data->HintCategory}}
                 </h4>
                 <!-- End User Position -->
 
@@ -115,7 +115,7 @@
                     <li class="list-inline-item g-ml-20">
                         <a class="g-text-underline--none--hover"
                            href="#">
-                            <i class="icon-location-pin g-color-gray-dark-v5 g-pos-rel g-top-1 g-ml-5"></i><span
+                            <i class="icon-location-pin g-font-size-16 g-color-gray-dark-v5 g-pos-rel g-top-1 g-ml-5"></i><span
                                 id="addressLink">{{$data->Address !=='' ? $data->Address:'آدرس'}}</span>
                         </a>
                     </li>
@@ -127,7 +127,7 @@
                         <div class="input-group g-brd-primary--focus g-mb-10">
                             <textarea id="bioText"
                                       onfocus="if($('#edited').text()==='0'){$('#bioTextCopy').val($(this).val()); $('#edited').text('1')}"
-                                      class="form-control form-control-md g-resize-none g-brd-0 rounded-0 g-px-5 g-pt-0 g-color-gray-dark-v4 g-bg-transparent"
+                                      class="form-control form-control-md g-resize-none g-font-size-16 g-brd-0 rounded-0 g-px-5 g-pt-0 g-color-gray-dark-v4 g-bg-transparent"
                                       maxlength="300" rows="4" placeholder="بایوگرافی.."
                                       readonly>{{$data->Bio}}</textarea>
                             <textarea id="bioTextCopy" onfocus="" class="d-none" maxlength="300"
@@ -165,12 +165,12 @@
     </div>
 
     <!--مودال ریل پست ها-->
-    <div style="padding: 0 !important;" class="hideScrollBar modal fade bd-example-modal-lg" id="postRail"
+    <div style="padding: 0 !important;" class="hideScrollBar modal g-bg-white fade bd-example-modal-lg" id="postRail"
          tabindex="-1" role="dialog"
          aria-labelledby="exampleModalCenterTitle"
          aria-hidden="true">
         <div style="max-width: 100%" class="modal-dialog m-0 modal-dialog-centered" role="document">
-            <div style="height: auto" class="modal-content g-pb-80">
+            <div style="height: auto" class="g-brd-none modal-content g-pb-80">
                 <div>
                     <div class="p-0">
                         <div>
@@ -197,11 +197,11 @@
                                             <div class="col-12 p-0 text-right d-flex justify-content-between">
                                                 <div>
                                                     <img
-                                                        class="g-width-30 g-height-30 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
+                                                        class="g-width-45 g-height-45 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
                                                         src="{{asset($rec->sellerMajorPic.'/profileImg.jpg')}}"
                                                         alt="Image Description">
                                                     <span
-                                                        class="g-font-size-13 g-font-weight-600">{{$rec->name}}</span>
+                                                        class="g-font-size-16 g-font-weight-600">{{$rec->name}}</span>
                                                 </div>
                                                 <h6 class="{{is_null($rec->following)?'':'d-none'}} align-self-center g-ml-10 g-mb-0 g-color-primary user-{{$rec->sellerMajorID}}"
                                                     onclick="following($(this),{{$rec->sellerMajorID}})">دنبال کن</h6>
@@ -232,9 +232,9 @@
                                             <div>
                                                 <div class="text-left d-flex justify-content-between">
                                                     <div>
-                                                        <a class="g-color-gray-dark-v3" href="#!"
+                                                        <a class="g-color-gray-dark-v1" href="#!"
                                                            onclick="savePost({{$rec->postID}},$(this))">
-                                                            <i class="fa {{is_null($rec->save) ? 'fa-bookmark-o':'fa-bookmark'}} g-font-size-20 g-line-height-0_7"></i>
+                                                            <i class="fa {{is_null($rec->save) ? 'fa-bookmark-o':'fa-bookmark'}} g-font-size-22 g-line-height-0_7"></i>
                                                         </a>
                                                     </div>
                                                     <div>
@@ -243,7 +243,7 @@
                                                            data-toggle="modal"
                                                            data-target="#postMsgModal"
                                                            onclick="showPostMsg({{$rec->postID}},'{{asset($rec->postPic.'/'.$rec->postID.'/0.jpg')}}','{{$rec->name}}')">
-                                                            <i class="icon-paper-plane u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                                            <i class="icon-paper-plane u-line-icon-pro g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                                                         </a>
                                                         <a class="g-color-gray-dark-v1 g-ml-10 accordionBtn"
                                                            href="#accordion-04-body-{{$key}}"
@@ -252,11 +252,11 @@
                                                            data-parent="#accordion-04" aria-expanded="true"
                                                            aria-controls="accordion-04-body-{{$key}}"
                                                            onclick="addComments({{$rec->postID}},{{$key}},{{$rec->sellerMajorID}})">
-                                                            <i class="icon-bubble u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                                            <i class="icon-bubble u-line-icon-pro g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                                                         </a>
                                                         <a class="g-color-gray-dark-v1 g-ml-10" href="#!"
                                                            onclick="likePost($(this),{{$rec->postID}},{{$key}})">
-                                                            <i class="{{$rec->Like === 1 ? 'fa fa-heart g-color-red':'fa fa-heart-o'}} u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                                            <i class="{{$rec->Like === 1 ? 'fa fa-heart g-color-red':'fa fa-heart-o'}} u-line-icon-pro g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                                                         </a>
                                                     </div>
                                                 </div>
@@ -271,27 +271,27 @@
                                         <div class="g-px-10">
                                             <div style="direction: rtl;">
                                                 <p
-                                                    class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-13 g-font-weight-600">{{$rec->name}}</p>
-                                                <div class="{{is_null($rec->Cat) ? 'd-none':''}} g-font-size-13"><span
+                                                    class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-16 g-font-weight-600">{{$rec->name}}</p>
+                                                <div class="{{is_null($rec->Cat) ? 'd-none':''}} g-font-size-14"><span
                                                         class="g-font-weight-600">دسته بندی</span>{{' '.$rec->Cat}}
                                                 </div>
                                                 <div
-                                                    class="{{is_null($rec->ProductName) ? 'd-none':''}} g-font-size-13">
+                                                    class="{{is_null($rec->ProductName) ? 'd-none':''}} g-font-size-14">
                                                     <span
                                                         class="g-font-weight-600">نام محصول</span>{{' '.$rec->ProductName.' '.$rec->Gender}}
                                                 </div>
-                                                <div class="{{is_null($rec->Size) ? 'd-none':''}} g-font-size-13"><span
+                                                <div class="{{is_null($rec->Size) ? 'd-none':''}} g-font-size-14"><span
                                                         class="g-font-weight-600">سایز</span>{{' '.$rec->Size}}</div>
-                                                <div class="{{is_null($rec->Color) ? 'd-none':''}} g-font-size-13"><span
+                                                <div class="{{is_null($rec->Color) ? 'd-none':''}} g-font-size-14"><span
                                                         class="g-font-weight-600">رنگ</span>{{' '.$rec->Color}}</div>
-                                                <div class="{{is_null($rec->Price) ? 'd-none':''}} g-font-size-13"><span
+                                                <div class="{{is_null($rec->Price) ? 'd-none':''}} g-font-size-14"><span
                                                         class="g-font-weight-600">قیمت</span>{{' '.number_format($rec->Price).' تومان'}}
                                                 </div>
-                                                <div class="{{is_null($rec->Discount) ? 'd-none':''}} g-font-size-13">
+                                                <div class="{{is_null($rec->Discount) ? 'd-none':''}} g-font-size-14">
                                                     <span
                                                         class="g-font-weight-600">تخفیف</span>{{' '.$rec->Discount.' %'}}
                                                 </div>
-                                                <div class="{{is_null($rec->FinalPrice) ? 'd-none':''}} g-font-size-13">
+                                                <div class="{{is_null($rec->FinalPrice) ? 'd-none':''}} g-font-size-14">
                                                     <span
                                                         class="g-font-weight-600">قیمت نهایی</span>{{' '.number_format($rec->FinalPrice).' تومان'}}
                                                 </div>
@@ -301,7 +301,7 @@
                                                 <a class="g-color-gray-dark-v2 w-100"
                                                    href="#!">
                                                     <div style="cursor: pointer"
-                                                         class="g-font-weight-600 g-mx-5 g-font-size-12 g-color-gray-dark-v4 d-flex col-12 g-px-5 justify-content-end"
+                                                         class="g-font-weight-600 g-mx-5 g-font-size-13 g-color-gray-dark-v4 d-flex col-12 g-px-5 justify-content-end"
                                                          onclick="$('#accordionBtn-{{$key}}').trigger('click')">
                                                         <span class="g-mr-5">نظر</span>
                                                         <span class="allComment">{{$commentCount[$key]}}</span>
@@ -332,18 +332,18 @@
                                                                 class="d-none load loadCommentWaiting g-mt-20"></div>
                                                             <div style="position: relative" class="g-mt-2">
                                                                 <div class="d-flex">
-                                                <textarea style="direction: rtl"
-                                                          class="form-control growingToTop col-10 ml-auto hideScrollBar g-brd-none form-control-md g-resize-none rounded-0 p-0 text-right g-font-size-16"
-                                                          tabindex="1"
-                                                          value=""
-                                                          oninput="if($(this).val()==='') $('#sendCommentBtn-{{$key}}').addClass('d-none'); else $('#sendCommentBtn-{{$key}}').removeClass('d-none');"
-                                                          placeholder="نظر شما.."
-                                                          name="comment-{{$key}}"
-                                                          id="comment-{{$key}}"
-                                                          maxlength="300"></textarea>
+                                                                    <textarea style="direction: rtl"
+                                                                              class="form-control growingToTop col-10 ml-auto hideScrollBar g-brd-none form-control-md g-resize-none rounded-0 p-0 text-right g-font-size-16"
+                                                                              tabindex="1"
+                                                                              value=""
+                                                                              oninput="if($(this).val()==='') $('#sendCommentBtn-{{$key}}').addClass('d-none'); else $('#sendCommentBtn-{{$key}}').removeClass('d-none');"
+                                                                              placeholder="نظر شما.."
+                                                                              name="comment-{{$key}}"
+                                                                              id="comment-{{$key}}"
+                                                                              maxlength="300"></textarea>
                                                                     <div class="g-pl-5">
                                                                         <img
-                                                                            class="g-width-20 g-height-20 rounded-circle"
+                                                                            class="g-width-30 g-height-30 rounded-circle"
                                                                             src="{{isset(Auth::user()->PicPath) ? asset(Auth::user()->PicPath) : ''}}"
                                                                             alt="Image Description">
                                                                     </div>
@@ -383,19 +383,19 @@
                                                      alt="Image Description">
                                             </div>
                                             <div class="text-right g-px-20">
-                          <textarea style="direction: rtl"
-                                    class="form-control col-10 ml-auto hideScrollBar g-brd-none form-control-md g-resize-none rounded-0 p-0 g-mb-20 text-right g-font-size-16"
-                                    tabindex="1"
-                                    value=""
-                                    oninput="if($(this).val()==='') $('.sendMsgBtn').addClass('d-none'); else $('.sendMsgBtn').removeClass('d-none');"
-                                    maxlength="300"></textarea>
+                                              <textarea style="direction: rtl"
+                                                        class="form-control col-10 ml-auto hideScrollBar g-brd-none form-control-md g-resize-none rounded-0 p-0 g-mb-20 text-right g-font-size-16"
+                                                        tabindex="1"
+                                                        value=""
+                                                        oninput="if($(this).val()==='') $('.sendMsgBtn').addClass('d-none'); else $('.sendMsgBtn').removeClass('d-none');"
+                                                        maxlength="300"></textarea>
                                             </div>
                                             <div class="g-px-20 g-mb-20">
                                                 <a class="text-left d-none sendMsgBtn">
                                                     <div style="cursor: pointer"
                                                          class="d-inline-block g-py-10 g-px-20 g-color-gray-dark-v1">
-                                <span><i
-                                        class="icon-paper-plane u-line-icon-pro g-font-size-16 align-middle"></i></span>
+                                                        <span><i
+                                                                class="icon-paper-plane u-line-icon-pro g-font-size-16 align-middle"></i></span>
                                                     </div>
                                                 </a>
                                             </div>
@@ -424,12 +424,12 @@
                 <div style="position: relative;" id="eventContainer" class="opacity-0">
                     <div style="position: relative;" class="g-width--360 mx-auto">
                         <button
-                            style=" cursor: pointer; outline: 0; position: absolute; top: 30px; left: 5px; z-index: 1000"
+                            style=" cursor: pointer; outline: 0; position: absolute; z-index: 1000"
                             type="button"
-                            class="g-brd-none g-bg-transparent g-color-white g-font-size-40 g-line-height-0 align-self-center"
+                            class="g-brd-none g-bg-transparent g-px-15 g-color-white align-self-center"
                             data-dismiss="modal"
                             aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true" class="g-font-size-40">&times;</span>
                         </button>
                     </div>
                     <div class="swiper">
@@ -450,13 +450,13 @@
                                             class="g-pa-5 text-right">
                                             <div class="p-0 text-right d-flex">
                                                 <img
-                                                    class="g-width-30 g-height-30 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
+                                                    class="g-width-45 g-height-45 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
                                                     src="{{asset($row->profileImage.'/profileImg.jpg')}}"
                                                     alt="Image Description">
                                                 <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3)"
-                                                      class="g-font-size-13 g-color-white g-font-weight-600 align-self-center g-mr-5">{{$row->name}}</span>
+                                                      class="g-font-size-16 g-color-white g-font-weight-600 align-self-center g-mr-5">{{$row->name}}</span>
                                                 <small style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3); cursor: pointer"
-                                                       class="{{is_null($row->following)?'':'d-none'}} g-font-weight-600 align-self-center g-color-white g-mr-5 g-mb-0 user-{{$row->sellerMajorID}}"
+                                                       class="{{is_null($row->following) || $row->FollowStatus===''?'':'d-none'}} g-font-weight-600 align-self-center g-color-primary g-mr-5 g-mb-0 user-{{$row->sellerMajorID}}"
                                                        onclick="following($(this),{{$row->sellerMajorID}})">دنبال
                                                     کن</small>
                                             </div>
@@ -522,9 +522,9 @@
         <div>
             <div class="userInfo">
                 <span
-                    class="g-font-size-12 g-font-weight-600 g-color-gray-dark-v2"></span>
+                    class="g-font-size-13 g-font-weight-600 g-color-gray-dark-v2"></span>
                 <img
-                    class="g-width-20 g-height-20 rounded-circle"
+                    class="g-width-30 g-height-30 rounded-circle"
                     src=""
                     alt="Image Description">
             </div>
@@ -573,9 +573,9 @@
             <div class="g-pr-25">
                 <div class="userInfo">
                     <span
-                        class="g-font-size-12 g-font-weight-600 g-color-gray-dark-v2"></span>
+                        class="g-font-size-13 g-font-weight-600 g-color-gray-dark-v2"></span>
                     <img
-                        class="g-width-20 g-height-20 rounded-circle"
+                        class="g-width-30 g-height-30 rounded-circle"
                         src=""
                         alt="Image Description">
                 </div>

@@ -86,23 +86,22 @@
                     <div class="d-flex align-items-center g-mt-10 g-mt-0--lg justify-content-between g-mb-5">
                         <h4 class="g-font-weight-500 g-ml-10 g-mb-0">
                             {{$data->name}}
-                            <span class="u-label g-mb-0 g-color-gray-dark-v3 g-font-size-14" title="پست ها">
-                              <i class="icon-layers g-mr-3"></i> {{$data->Posts}}
+                            <span class="u-label g-mb-0 g-color-gray-dark-v3 g-font-size-16" title="پست ها">
+                              <i class="icon-layers g-mr-3"></i> <span id="allPostCount">{{$data->Posts}}</span>
                              </span>
-                            <span class="u-label g-mb-0 g-color-gray-dark-v3 g-font-size-14" title="دنبال کنندگان">
+                            <span class="u-label g-mb-0 g-color-gray-dark-v3 g-font-size-16" title="دنبال کنندگان">
                                   <i class="icon-people g-mr-3"></i> {{$data->Followers}}
                              </span>
                         </h4>
 
                         <ul style="direction: ltr" class="list-inline mb-0">
                             <li class="list-inline-item g-mx-2">
-                                <a class="u-icon-v1 u-icon-size--sm u-icon-slide-up--hover g-color-gray-light-v1 g-bg-gray-light-v5 g-color-gray-light-v1--hover rounded-circle"
+                                <a style="width: 3rem; height: 3rem;" class="d-inline-block text-center g-color-gray-dark-v3 g-bg-gray-light-v5 rounded-circle"
                                    data-toggle="modal"
                                    data-target="#instagramModal"
                                    onclick="$('#instagram').val('')"
                                    href="#!">
-                                    <i class="g-line-height-1 u-icon__elem-regular fa fa-instagram g-font-size-16 g-color-gray-dark-v4"></i>
-                                    <i class="g-line-height-0_8 u-icon__elem-hover fa fa-instagram g-font-size-16 g-color-gray-dark-v4"></i>
+                                    <i style="padding-top: 13px" class="fa fa-instagram align-middle g-font-size-16 g-color-gray-dark-v2"></i>
                                 </a>
                                 <!--modalInstagram-->
                                 <div style="direction: rtl" class="modal fade text-center" id="instagramModal"
@@ -158,7 +157,7 @@
                     <!-- End User Details -->
 
                     <!-- User Position -->
-                    <h4 class="h6 g-font-weight-300 g-mb-5">
+                    <h4 class="h6 g-font-size-16 g-font-weight-300 g-mb-5">
                         <i class="icon-badge g-pos-rel g-top-1 g-ml-5 g-color-gray-dark-v5"></i> {{$data->HintCategory}}
                     </h4>
                     <!-- End User Position -->
@@ -173,7 +172,7 @@
                                data-toggle="modal"
                                data-target="#modalAddress"
                                href="#">
-                                <i class="icon-location-pin g-color-gray-dark-v5 g-pos-rel g-top-1 g-ml-5"></i><span
+                                <i class="icon-location-pin g-font-size-16 g-color-gray-dark-v5 g-pos-rel g-top-1 g-ml-5"></i><span
                                     id="addressLink">{{$data->Address !=='' ? $data->Address:'آدرس'}}</span>
                             </a>
                             <!--address modal-->
@@ -227,7 +226,7 @@
                             <div class="input-group g-brd-primary--focus g-mb-10">
                             <textarea id="bioText"
                                       onfocus="if($('#edited').text()==='0'){$('#bioTextCopy').val($(this).val()); $('#edited').text('1')}"
-                                      class="form-control form-control-md g-resize-none g-brd-0 rounded-0 g-px-5 g-pt-0 g-color-gray-dark-v4 g-bg-transparent"
+                                      class="form-control form-control-md g-resize-none g-font-size-16 g-brd-0 rounded-0 g-px-5 g-pt-0 g-color-gray-dark-v4 g-bg-transparent"
                                       maxlength="300" rows="4" placeholder="بایوگرافی.."
                                       readonly>{{$data->Bio}}</textarea>
                                 <textarea id="bioTextCopy" onfocus="" class="d-none" maxlength="300"
@@ -259,7 +258,7 @@
                             <label class="u-check g-mr-15 mb-0"
                                    onclick="$('#bioText').removeAttr('readonly'); $('#bioText').focus(); $('#bioEdit').addClass('d-none'); $('#bioSubmit').removeClass('d-none');">
                                 <div
-                                    class="u-check-icon-checkbox-v3 g-brd-gray-light-v4 g-bg-gray-light-v4 g-color-gray-dark-v3 g-color-primary--hover">
+                                    class="u-check-icon-checkbox-v3 g-brd-none g-bg-gray-light-v5 g-color-gray-dark-v3 g-color-primary--hover">
                                     <i class="fa fa-edit g-absolute-centered g-font-size-16"></i>
                                 </div>
                             </label>
@@ -269,7 +268,6 @@
                 </div>
             </div>
         </div>
-
         <hr class="{{isset($posts[0])?'':'d-none'}} g-brd-gray-light-v3 g-my-5">
         <!--پیش نمایش پست ها-->
         <div style="min-height: 100px" class="container g-px-10--lg g-px-0 g-pb-80--lg g-pb-20">
@@ -293,12 +291,12 @@
                  class="d-none load g-mt-20"></div>
         </div>
         <!--مودال ریل پست ها-->
-        <div style="padding: 0 !important;" class="hideScrollBar modal fade bd-example-modal-lg" id="postRail"
+        <div style="padding: 0 !important;" class="hideScrollBar g-bg-white modal fade bd-example-modal-lg" id="postRail"
              tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
             <div style="max-width: 100%" class="modal-dialog m-0 modal-dialog-centered" role="document">
-                <div style="min-height: 100vh" class="modal-content g-pb-80">
+                <div style="min-height: 100vh" class="g-brd-none modal-content g-pb-80">
                     <div>
                         <div class="p-0">
                             <div>
@@ -323,11 +321,11 @@
                                             <div style="direction: rtl" class="g-pa-5 text-right">
                                                 <div class="col-12 p-0 text-right">
                                                     <img
-                                                        class="g-width-30 g-height-30 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
+                                                        class="g-width-45 g-height-45 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
                                                         src="{{asset($data->Pic.'/profileImg.jpg')}}"
                                                         alt="Image Description">
                                                     <span
-                                                        class="g-font-size-13 g-font-weight-600">{{$data->name}}</span>
+                                                        class="g-font-size-16 g-font-weight-600">{{$data->name}}</span>
                                                 </div>
                                             </div>
 
@@ -437,14 +435,14 @@
                                                             <span style="cursor: pointer"
                                                                   onclick="deletePost({{$rec->postID}},{{$key}})"
                                                                   class="g-pa-10">
-                                                                <i class="icon-trash g-font-size-16 g-color-white deleteIcon"></i>
+                                                                <i class="icon-trash g-font-size-20 g-color-white deleteIcon"></i>
                                                             </span>
                                                         </div>
                                                         <div class="">
                                                             <span style="cursor: pointer"
                                                                   onclick="editPost({{$rec->postID}})"
                                                                   class="g-pa-10">
-                                                                <i class="icon-note g-font-size-16 g-color-white editIcon"></i>
+                                                                <i class="icon-note g-font-size-20 g-color-white editIcon"></i>
                                                             </span>
                                                         </div>
                                                     </div>
@@ -461,7 +459,7 @@
                                                         <div>
                                                             <a class="g-color-gray-dark-v3" href="#!"
                                                                onclick="postChart($(this),{{$rec->postID}},{{$key}})">
-                                                                <i class="fa fa-ellipsis-h align-middle g-font-size-20 g-line-height-0_7"></i>
+                                                                <i class="fa fa-ellipsis-h align-middle g-font-size-23 g-line-height-0_7"></i>
                                                             </a>
                                                         </div>
                                                         <div style="direction: rtl">
@@ -476,7 +474,7 @@
                                                                data-parent="#accordion-04" aria-expanded="true"
                                                                aria-controls="accordion-04-body-{{$key}}"
                                                                onclick="addComments({{$rec->postID}},{{$key}})">
-                                                                <i class="icon-bubble u-line-icon-pro align-middle g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                                                <i class="icon-bubble u-line-icon-pro align-middle g-font-size-20 g-pr-5 g-font-weight-600 g-line-height-0_7"></i>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -487,8 +485,8 @@
                                             <div class="g-px-10">
                                                 <div onclick="copy($(this).text())" style="direction: rtl;">
                                                     <p
-                                                        class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-13 g-font-weight-600">{{$data->name}}</p>
-                                                    <div class="{{is_null($rec->Cat) ? 'd-none':''}} g-font-size-13">
+                                                        class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-16 g-font-weight-600">{{$data->name}}</p>
+                                                    <div class="{{is_null($rec->Cat) ? 'd-none':''}} g-font-size-14">
                                                         <span
                                                             class="g-font-weight-600">دسته بندی</span>{{' '.$rec->Cat}}
                                                         <span id="cat-{{$rec->postID}}"
@@ -496,26 +494,26 @@
                                                               onclick="deletePostInfo({{$rec->postID}},'cat')"><i
                                                                 class="fa fa-close g-color-red"></i></span></div>
                                                     <div
-                                                        class="{{is_null($rec->ProductName) ? 'd-none':''}} g-font-size-13">
+                                                        class="{{is_null($rec->ProductName) ? 'd-none':''}} g-font-size-14">
                                                         <span
                                                             class="g-font-weight-600">نام محصول</span>{{' '.$rec->ProductName.' '.$rec->Gender}}
                                                         <span id="productName-{{$rec->postID}}"
                                                               class="d-none captionInfo-{{$rec->postID}} g-py-5 g-px-10"
                                                               onclick="deletePostInfo({{$rec->postID}},'productName')"><i
                                                                 class="fa fa-close g-color-red"></i></span></div>
-                                                    <div class="{{is_null($rec->Size) ? 'd-none':''}} g-font-size-13">
+                                                    <div class="{{is_null($rec->Size) ? 'd-none':''}} g-font-size-14">
                                                         <span class="g-font-weight-600">سایز</span>{{' '.$rec->Size}}
                                                         <span id="size-{{$rec->postID}}"
                                                               class="d-none captionInfo-{{$rec->postID}} g-py-5 g-px-10"
                                                               onclick="deletePostInfo({{$rec->postID}},'size')"><i
                                                                 class="fa fa-close g-color-red"></i></span></div>
-                                                    <div class="{{is_null($rec->Color) ? 'd-none':''}} g-font-size-13">
+                                                    <div class="{{is_null($rec->Color) ? 'd-none':''}} g-font-size-14">
                                                         <span class="g-font-weight-600">رنگ</span>{{' '.$rec->Color}}
                                                         <span id="color-{{$rec->postID}}"
                                                               class="d-none captionInfo-{{$rec->postID}} g-py-5 g-px-10"
                                                               onclick="deletePostInfo({{$rec->postID}},'color')"><i
                                                                 class="fa fa-close g-color-red"></i></span></div>
-                                                    <div class="{{is_null($rec->Price) ? 'd-none':''}} g-font-size-13">
+                                                    <div class="{{is_null($rec->Price) ? 'd-none':''}} g-font-size-14">
                                                         <span
                                                             class="g-font-weight-600">قیمت</span>{{' '.number_format($rec->Price).' تومان'}}
                                                         <span id="price-{{$rec->postID}}"
@@ -523,7 +521,7 @@
                                                               onclick="deletePostInfo({{$rec->postID}},'price')"><i
                                                                 class="fa fa-close g-color-red"></i></span></div>
                                                     <div
-                                                        class="{{is_null($rec->Discount) ? 'd-none':''}} g-font-size-13">
+                                                        class="{{is_null($rec->Discount) ? 'd-none':''}} g-font-size-14">
                                                         <span
                                                             class="g-font-weight-600">تخفیف</span>{{' '.$rec->Discount.' %'}}
                                                         <span id="discount-{{$rec->postID}}"
@@ -531,7 +529,7 @@
                                                               onclick="deletePostInfo({{$rec->postID}},'discount')"><i
                                                                 class="fa fa-close g-color-red"></i></span></div>
                                                     <div
-                                                        class="{{is_null($rec->FinalPrice) ? 'd-none':''}} g-font-size-13">
+                                                        class="{{is_null($rec->FinalPrice) ? 'd-none':''}} g-font-size-14">
                                                         <span
                                                             class="g-font-weight-600">قیمت نهایی</span>{{' '.number_format($rec->FinalPrice).' تومان'}}
                                                         <span id="finalPrice-{{$rec->postID}}"
@@ -564,7 +562,7 @@
                                                     <a class="g-color-gray-dark-v2 w-100"
                                                        href="#!">
                                                         <div style="cursor: pointer"
-                                                             class="g-font-weight-600 g-mx-5 g-font-size-12 g-color-gray-dark-v4 d-flex col-12 g-px-5 justify-content-end"
+                                                             class="g-font-weight-600 g-mx-5 g-font-size-13 g-color-gray-dark-v4 d-flex col-12 g-px-5 justify-content-end"
                                                              onclick="$('#accordionBtn-{{$key}}').trigger('click')">
                                                             <span class="g-mr-5">نظر</span>
                                                             <span class="allComment">{{$commentCount[$key]}}</span>
@@ -606,7 +604,7 @@
                                                                                   maxlength="300"></textarea>
                                                                         <div class="g-pl-5">
                                                                             <img
-                                                                                class="g-width-20 g-height-20 rounded-circle"
+                                                                                class="g-width-30 g-height-30 rounded-circle"
                                                                                 src="{{asset($data->Pic.'/profileImg.jpg')}}"
                                                                                 alt="Image Description">
                                                                         </div>
@@ -667,7 +665,7 @@
                             <div class="input-group">
                            <textarea id="eventTextTemp"
                                      autofocus
-                                     class="form-control form-control-md g-resize-none g-brd-0 rounded-0 pl-0 g-bg-transparent"
+                                     class="form-control form-control-md g-font-size-16 g-resize-none g-brd-0 rounded-0 pl-0 g-bg-transparent"
                                      maxlength="100" rows="4" placeholder="متن..(100) کاراکتر"></textarea>
                             </div>
                         </div>
@@ -862,9 +860,9 @@
             <div>
                 <div class="userInfo">
                     <span
-                        class="g-font-size-12 g-font-weight-600 g-color-gray-dark-v2"></span>
+                        class="g-font-size-13 g-font-weight-600 g-color-gray-dark-v2"></span>
                     <img
-                        class="g-width-20 g-height-20 rounded-circle"
+                        class="g-width-30 g-height-30 rounded-circle"
                         src=""
                         alt="Image Description">
                 </div>
@@ -911,9 +909,9 @@
                 <div class="g-pr-25">
                     <div class="userInfo">
                         <span
-                            class="g-font-size-12 g-font-weight-600 g-color-gray-dark-v2"></span>
+                            class="g-font-size-13 g-font-weight-600 g-color-gray-dark-v2"></span>
                         <img
-                            class="g-width-20 g-height-20 rounded-circle"
+                            class="g-width-30 g-height-30 rounded-circle"
                             src=""
                             alt="Image Description">
                     </div>
@@ -971,11 +969,11 @@
                 <div style="direction: rtl" class="g-pa-5 text-right">
                     <div class="col-12 p-0 text-right">
                         <img id="postProfileImg"
-                             class="g-width-30 g-height-30 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
+                             class="g-width-45 g-height-45 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
                              src=""
                              alt="Image Description">
                         <span id="postProfileName"
-                              class="g-font-size-13 g-font-weight-600"></span>
+                              class="g-font-size-16 g-font-weight-600"></span>
                     </div>
                 </div>
                 <!--وضعیت بازدید پست-->
@@ -1067,12 +1065,12 @@
                         <div style="position: absolute; bottom: 35px; width: 100%" class="d-flex col-12">
                             <div class="deletePost">
                                 <span style="cursor: pointer" class="g-pa-10">
-                                    <i class="icon-trash g-font-size-16 g-color-white deleteIcon"></i>
+                                    <i class="icon-trash g-font-size-20 g-color-white deleteIcon"></i>
                                 </span>
                             </div>
                             <div class="editCaption">
                                 <span style="cursor: pointer" class="g-pa-10">
-                                    <i class="icon-note g-font-size-16 g-color-white editIcon"></i>
+                                    <i class="icon-note g-font-size-20 g-color-white editIcon"></i>
                                 </span>
                             </div>
                         </div>
@@ -1085,7 +1083,7 @@
                         <div class="text-left d-flex justify-content-between">
                             <div>
                                 <a id="postChart" class="g-color-gray-dark-v3" href="#!">
-                                    <i class="fa fa-ellipsis-h align-middle g-font-size-20 g-line-height-0_7"></i>
+                                    <i class="fa fa-ellipsis-h align-middle g-font-size-23 g-line-height-0_7"></i>
                                 </a>
                             </div>
                             <div style="direction: rtl">
@@ -1095,7 +1093,7 @@
                                 <a class="g-color-gray-dark-v1 accordionBtn accordionBtnComment"
                                    data-toggle="collapse"
                                    data-parent="#accordion-04" aria-expanded="true">
-                                    <i class="icon-bubble align-middle u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                    <i class="icon-bubble align-middle u-line-icon-pro g-font-size-20 g-pr-5 g-font-weight-600 g-line-height-0_7"></i>
                                 </a>
                             </div>
                         </div>
@@ -1105,31 +1103,31 @@
                 <div class="g-px-10">
                     <div class="postCaption" style="direction: rtl;">
                         <p id="name"
-                           class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-13 g-font-weight-600"></p>
-                        <div class="d-none extraInfo g-font-size-13 cat"><span
+                           class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-16 g-font-weight-600"></p>
+                        <div class="d-none extraInfo g-font-size-14 cat"><span
                                 class="g-font-weight-600">دسته بندی</span><span id="cat"></span><span
                                 class="d-none catDelete g-py-5 g-px-10"><i class="fa fa-close g-color-red"></i></span>
                         </div>
-                        <div class="d-none extraInfo g-font-size-13 productName"><span class="g-font-weight-600">نام محصول</span><span
+                        <div class="d-none extraInfo g-font-size-14 productName"><span class="g-font-weight-600">نام محصول</span><span
                                 id="productName"></span><span class="d-none productNameDelete g-py-5 g-px-10"><i
                                     class="fa fa-close g-color-red"></i></span></div>
-                        <div class="d-none extraInfo g-font-size-13 size"><span
+                        <div class="d-none extraInfo g-font-size-14 size"><span
                                 class="g-font-weight-600">سایز</span><span id="size"></span><span
                                 class="d-none sizeDelete g-py-5 g-px-10"><i class="fa fa-close g-color-red"></i></span>
                         </div>
-                        <div class="d-none extraInfo g-font-size-13 color"><span
+                        <div class="d-none extraInfo g-font-size-14 color"><span
                                 class="g-font-weight-600">رنگ</span><span id="color"></span><span
                                 class="d-none colorDelete g-py-5 g-px-10"><i class="fa fa-close g-color-red"></i></span>
                         </div>
-                        <div class="d-none extraInfo g-font-size-13 price"><span
+                        <div class="d-none extraInfo g-font-size-14 price"><span
                                 class="g-font-weight-600">قیمت</span><span id="price"></span>تومان<span
                                 class="d-none priceDelete g-py-5 g-px-10"><i class="fa fa-close g-color-red"></i></span>
                         </div>
-                        <div class="d-none extraInfo g-font-size-13 discount"><span
+                        <div class="d-none extraInfo g-font-size-14 discount"><span
                                 class="g-font-weight-600">تخفیف</span><span id="discount"></span>%<span
                                 class="d-none discountDelete g-py-5 g-px-10"><i
                                     class="fa fa-close g-color-red"></i></span></div>
-                        <div class="d-none extraInfo g-font-size-13 finalPrice"><span class="g-font-weight-600">قیمت نهایی</span><span
+                        <div class="d-none extraInfo g-font-size-14 finalPrice"><span class="g-font-weight-600">قیمت نهایی</span><span
                                 id="finalPrice"></span>تومان<span class="d-none finalPriceDelete g-py-5 g-px-10"><i
                                     class="fa fa-close g-color-red"></i></span></div>
 
@@ -1157,7 +1155,7 @@
                         <a class="g-color-gray-dark-v2 w-100"
                            href="#!">
                             <div style="cursor: pointer" id="allCommentContainer"
-                                 class="g-font-weight-600 g-mx-5 g-font-size-12 g-color-gray-dark-v4 d-flex col-12 g-px-5 justify-content-end">
+                                 class="g-font-weight-600 g-mx-5 g-font-size-13 g-color-gray-dark-v4 d-flex col-12 g-px-5 justify-content-end">
                                 <span class="g-mr-5">نظر</span>
                                 <span class="allComment"></span>
                                 <span class="g-ml-5">دیدن</span>
@@ -1194,7 +1192,7 @@
                                                       maxlength="300"></textarea>
                                             <div class="g-pl-5">
                                                 <img
-                                                    class="g-width-20 g-height-20 rounded-circle commenterProfileImg"
+                                                    class="g-width-30 g-height-30 rounded-circle commenterProfileImg"
                                                     src=""
                                                     alt="Image Description">
                                             </div>
@@ -1215,6 +1213,5 @@
                 </div>
             </div>
         </div>
-
     </section>
 @endsection

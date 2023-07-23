@@ -6,7 +6,7 @@
     <span id="postLoaded" class="d-none">0</span>
     <span id="commentReplyID" class="d-none"></span>
     <span id="customer_Id" class="d-none">{{isset(Auth::user()->id)?Auth::user()->id:-1}}</span>
-    <ul class="list-inline g-flex-middle-item--bottom p-0 g-width--360 mx-auto {{isset($events[0]->ID) ? 'g-brd-bottom':''}} g-pb-5 g-brd-gray-light-v5 feed">
+    <ul class="list-inline g-flex-middle-item--bottom p-0 g-width--360 mx-auto {{isset($events[0]->ID) ? 'g-brd-bottom':''}} g-pb-20 g-brd-gray-light-v5 feed">
         <span class="d-none">{{$temp=0}}</span>
         @foreach($events as $key => $row)
             @if($temp !== $row->sellerMajorID)
@@ -19,7 +19,7 @@
                                 <div id="circleBorder-{{$key}}" class="circleBorder"></div>
                                 <img id="borderAnimate-{{$key}}"
                                      class="rounded-circle borderAnimate g-brd-around g-brd-2 g-brd-gray-light-v2"
-                                     width="40" height="40"
+                                     width="60" height="60"
                                      src="{{asset($row->Pic.'/profileImg.jpg')}}"
                                      alt="Image Description">
                             </a>
@@ -39,14 +39,14 @@
         <div style="max-width: 100%" class="modal-dialog m-0 modal-dialog-centered" role="document">
             <div style="height: 100vh;" class="modal-content">
                 <div style="position: relative;" id="eventContainer" class="opacity-0">
-                    <div style="position: relative;" class="g-width--360 mx-auto">
+                    <div class="g-width--360 mx-auto">
                         <button
-                            style=" cursor: pointer; outline: 0; position: absolute; top: 30px; left: 5px; z-index: 1000"
+                            style="cursor: pointer; outline: 0; position: fixed; z-index: 1000"
                             type="button"
-                            class="g-brd-none g-bg-transparent g-color-white g-font-size-40 g-line-height-0 align-self-center"
+                            class="g-brd-none g-bg-transparent g-px-15 g-color-white align-self-center"
                             data-dismiss="modal"
                             aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true" class="g-font-size-40">&times;</span>
                         </button>
                     </div>
                     <div class="swiper">
@@ -68,14 +68,14 @@
                                             <a href="#" onclick="checkLogin({{$row->sellerMajorID}})"
                                                class="p-0 text-right d-flex">
                                                 <img
-                                                    class="g-width-30 g-height-30 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
+                                                    class="g-width-45 g-height-45 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
                                                     src="{{asset($row->profileImage.'/profileImg.jpg')}}"
                                                     alt="Image Description">
                                                 <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3)"
-                                                      class="g-font-size-13 g-color-white g-font-weight-600 align-self-center g-mr-5">{{$row->name}}</span>
+                                                      class="g-font-size-16 g-color-white g-font-weight-600 align-self-center g-mr-5">{{$row->name}}</span>
                                             </a>
                                             <small style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3); cursor: pointer"
-                                                   class="{{is_null($row->following)?'':'d-none'}} g-font-weight-600 align-self-center g-color-white g-mr-5 g-mb-0 user-{{$row->sellerMajorID}}"
+                                                   class="{{is_null($row->following)?'':'d-none'}} g-color-primary g-font-weight-600 align-self-center g-mr-5 g-mb-0 user-{{$row->sellerMajorID}}"
                                                    onclick="following($(this),{{$row->sellerMajorID}})">دنبال کن</small>
                                         </div>
                                         <img style="height: 100vh; object-fit: cover" class="w-100" alt=""
@@ -147,14 +147,14 @@
                         <div class="col-12 p-0 text-right d-flex justify-content-between">
                             <a href="#" onclick="checkLogin({{$rec->sellerMajorID}})" class="g-color-gray-dark-v3">
                                 <img
-                                    class="g-width-30 g-height-30 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
+                                    class="g-width-45 g-height-45 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
                                     src="{{asset($rec->sellerMajorPic.'/profileImg.jpg')}}"
                                     alt="Image Description">
                                 <span
-                                    class="g-font-size-13 g-font-weight-600">{{$rec->name}}</span>
+                                    class="g-font-size-16 g-font-weight-600">{{$rec->name}}</span>
                             </a>
                             <h6 style="cursor: pointer"
-                                class="{{is_null($rec->following)?'':'d-none'}} align-self-center g-ml-10 g-mb-0 user-{{$rec->sellerMajorID}}"
+                                class="{{is_null($rec->following)?'':'d-none'}} g-color-primary align-self-center g-ml-10 g-mb-0 user-{{$rec->sellerMajorID}}"
                                 onclick="following($(this),{{$rec->sellerMajorID}})">دنبال کن</h6>
                         </div>
                     </div>
@@ -185,9 +185,9 @@
                         <div>
                             <div class="text-left d-flex justify-content-between">
                                 <div>
-                                    <a class="g-color-gray-dark-v3" href="#!"
+                                    <a class="g-color-gray-dark-v1" href="#!"
                                        onclick="savePost({{$rec->postID}},$(this))">
-                                        <i class="fa {{is_null($rec->save) ? 'fa-bookmark-o':'fa-bookmark'}} g-font-size-20 g-line-height-0_7"></i>
+                                        <i class="fa {{is_null($rec->save) ? 'fa-bookmark-o':'fa-bookmark'}} g-font-size-22 g-font-weight-600 g-line-height-0_7"></i>
                                     </a>
                                 </div>
                                 <div>
@@ -196,7 +196,7 @@
                                        data-toggle="modal"
                                        data-target="#postMsgModal"
                                        onclick="showPostMsg({{$rec->postID}},'{{asset($rec->postPic.'/'.$rec->postID.'/0.jpg')}}','{{$rec->name}}')">
-                                        <i class="icon-paper-plane u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                        <i class="icon-paper-plane u-line-icon-pro g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                                     </a>
                                     <a class="g-color-gray-dark-v1 g-ml-10 accordionBtn"
                                        href="#accordion-04-body-{{$key}}"
@@ -205,11 +205,11 @@
                                        data-parent="#accordion-04" aria-expanded="true"
                                        aria-controls="accordion-04-body-{{$key}}"
                                        onclick="addComments({{$rec->postID}},{{$key}},{{$rec->sellerMajorID}})">
-                                        <i class="icon-bubble u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                        <i class="icon-bubble u-line-icon-pro g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                                     </a>
                                     <a class="g-color-gray-dark-v1 g-ml-10" href="#!"
                                        onclick="likePost($(this),{{$rec->postID}},{{$key}})">
-                                        <i class="{{$rec->Like === 1 ? 'fa fa-heart g-color-red':'fa fa-heart-o'}} u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                        <i class="{{$rec->Like === 1 ? 'fa fa-heart g-color-red':'fa fa-heart-o'}} u-line-icon-pro g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                                     </a>
                                 </div>
                             </div>
@@ -224,22 +224,22 @@
                     <div class="g-px-10">
                         <div style="direction: rtl;">
                             <p
-                                class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-13 g-font-weight-600">{{$rec->name}}</p>
-                            <div class="{{is_null($rec->Cat) ? 'd-none':''}} g-font-size-13"><span
+                                class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-16 g-font-weight-600">{{$rec->name}}</p>
+                            <div class="{{is_null($rec->Cat) ? 'd-none':''}} g-font-size-14"><span
                                     class="g-font-weight-600">دسته بندی</span>{{' '.$rec->Cat}}</div>
-                            <div class="{{is_null($rec->ProductName) ? 'd-none':''}} g-font-size-13"><span
+                            <div class="{{is_null($rec->ProductName) ? 'd-none':''}} g-font-size-14"><span
                                     class="g-font-weight-600">نام محصول</span>{{' '.$rec->ProductName.' '.$rec->Gender}}
                             </div>
-                            <div class="{{is_null($rec->Size) ? 'd-none':''}} g-font-size-13"><span
+                            <div class="{{is_null($rec->Size) ? 'd-none':''}} g-font-size-14"><span
                                     class="g-font-weight-600">سایز</span>{{' '.$rec->Size}}</div>
-                            <div class="{{is_null($rec->Color) ? 'd-none':''}} g-font-size-13"><span
+                            <div class="{{is_null($rec->Color) ? 'd-none':''}} g-font-size-14"><span
                                     class="g-font-weight-600">رنگ</span>{{' '.$rec->Color}}</div>
-                            <div class="{{is_null($rec->Price) ? 'd-none':''}} g-font-size-13"><span
+                            <div class="{{is_null($rec->Price) ? 'd-none':''}} g-font-size-14"><span
                                     class="g-font-weight-600">قیمت</span>{{' '.number_format($rec->Price).' تومان'}}
                             </div>
-                            <div class="{{is_null($rec->Discount) ? 'd-none':''}} g-font-size-13"><span
+                            <div class="{{is_null($rec->Discount) ? 'd-none':''}} g-font-size-14"><span
                                     class="g-font-weight-600">تخفیف</span>{{' '.$rec->Discount.' %'}}</div>
-                            <div class="{{is_null($rec->FinalPrice) ? 'd-none':''}} g-font-size-13"><span
+                            <div class="{{is_null($rec->FinalPrice) ? 'd-none':''}} g-font-size-14"><span
                                     class="g-font-weight-600">قیمت نهایی</span>{{' '.number_format($rec->FinalPrice).' تومان'}}
                             </div>
                             <p style=" white-space: pre-wrap;">{{$rec->Text}}</p>
@@ -281,7 +281,7 @@
                                         <div style="position: relative" class="g-mt-2">
                                             <div class="d-flex">
                                                 <textarea style="direction: rtl"
-                                                          class="form-control growingToTop col-10 ml-auto hideScrollBar g-brd-none form-control-md g-resize-none rounded-0 p-0 text-right g-font-size-16"
+                                                          class="form-control growingToTop col-10 ml-auto hideScrollBar g-pt-5 g-brd-none form-control-md g-resize-none rounded-0 p-0 text-right g-font-size-16"
                                                           tabindex="1"
                                                           value=""
                                                           oninput="if($(this).val()==='') $('#sendCommentBtn-{{$key}}').addClass('d-none'); else $('#sendCommentBtn-{{$key}}').removeClass('d-none');"
@@ -291,7 +291,7 @@
                                                           maxlength="300"></textarea>
                                                 <div class="g-pl-5">
                                                     <img
-                                                        class="g-width-20 g-height-20 rounded-circle"
+                                                        class="g-width-30 g-height-30 rounded-circle"
                                                         src="{{isset(Auth::user()->PicPath) ? asset(Auth::user()->PicPath) : ''}}"
                                                         alt="Image Description">
                                                 </div>
@@ -356,9 +356,9 @@
         <div>
             <div class="userInfo">
                 <span
-                    class="g-font-size-12 g-font-weight-600 g-color-gray-dark-v2"></span>
+                    class="g-font-size-13 g-font-weight-600 g-color-gray-dark-v2"></span>
                 <img
-                    class="g-width-20 g-height-20 rounded-circle"
+                    class="g-width-30 g-height-30 rounded-circle"
                     src=""
                     alt="Image Description">
             </div>
@@ -407,9 +407,9 @@
             <div class="g-pr-25">
                 <div class="userInfo">
                     <span
-                        class="g-font-size-12 g-font-weight-600 g-color-gray-dark-v2"></span>
+                        class="g-font-size-13 g-font-weight-600 g-color-gray-dark-v2"></span>
                     <img
-                        class="g-width-20 g-height-20 rounded-circle"
+                        class="g-width-30 g-height-30 rounded-circle"
                         src=""
                         alt="Image Description">
                 </div>
@@ -459,11 +459,11 @@
                 <div class="col-12 p-0 text-right d-flex justify-content-between">
                     <a href="#" class="g-color-gray-dark-v3">
                         <img id="postProfileImg"
-                             class="g-width-30 g-height-30 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
+                             class="g-width-45 g-height-45 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
                              src=""
                              alt="Image Description">
                         <span id="postProfileName"
-                              class="g-font-size-13 g-font-weight-600"></span>
+                              class="g-font-size-16 g-font-weight-600"></span>
                     </a>
                     <h6 style="cursor: pointer" class="d-none align-self-center g-ml-10 g-mb-0 followingBtn">دنبال
                         کن</h6>
@@ -485,8 +485,8 @@
                 <div>
                     <div class="text-left d-flex justify-content-between">
                         <div>
-                            <a id="savePost" class="g-color-gray-dark-v3" href="#!">
-                                <i class="fa fa-bookmark-o g-font-size-20 g-line-height-0_7"></i>
+                            <a id="savePost" class="g-color-gray-dark-v1" href="#!">
+                                <i class="fa fa-bookmark-o g-font-size-22 g-line-height-0_7"></i>
                             </a>
                         </div>
                         <div>
@@ -494,15 +494,15 @@
                                href="#postMsgModal"
                                data-toggle="modal"
                                data-target="#postMsgModal">
-                                <i class="icon-paper-plane u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                <i class="icon-paper-plane u-line-icon-pro g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                             </a>
                             <a class="g-color-gray-dark-v1 g-ml-10 accordionBtn accordionBtnComment"
                                data-toggle="collapse"
                                data-parent="#accordion-04" aria-expanded="true">
-                                <i class="icon-bubble u-line-icon-pro g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                <i class="icon-bubble u-line-icon-pro g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                             </a>
                             <a id="likePost" class="g-color-gray-dark-v1 g-ml-10" href="#!">
-                                <i class="g-font-size-17 g-font-weight-600 g-line-height-0_7"></i>
+                                <i class="g-font-size-20 g-font-weight-600 g-line-height-0_7"></i>
                             </a>
                         </div>
                     </div>
@@ -516,22 +516,22 @@
             <div class="g-px-10">
                 <div class="postCaption" style="direction: rtl;">
                     <p id="name"
-                       class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-13 g-font-weight-600"></p>
-                    <div class="d-none g-font-size-13 cat"><span class="g-font-weight-600">دسته بندی</span><span
+                       class="p-0 g-mt-10 text-right g-mb-0 g-color-black col-10 ml-auto g-font-size-16 g-font-weight-600"></p>
+                    <div class="d-none g-font-size-14 cat"><span class="g-font-weight-600">دسته بندی</span><span
                             id="cat"></span></div>
-                    <div class="d-none g-font-size-13 productName"><span class="g-font-weight-600">نام محصول</span><span
+                    <div class="d-none g-font-size-14 productName"><span class="g-font-weight-600">نام محصول</span><span
                             id="productName"></span></div>
-                    <div class="d-none g-font-size-13 size"><span class="g-font-weight-600">سایز</span><span
+                    <div class="d-none g-font-size-14 size"><span class="g-font-weight-600">سایز</span><span
                             id="size"></span></div>
-                    <div class="d-none g-font-size-13 color"><span class="g-font-weight-600">رنگ</span><span
+                    <div class="d-none g-font-size-14 color"><span class="g-font-weight-600">رنگ</span><span
                             id="color"></span></div>
-                    <div class="d-none g-font-size-13 price"><span class="g-font-weight-600">قیمت</span><span
+                    <div class="d-none g-font-size-14 price"><span class="g-font-weight-600">قیمت</span><span
                             id="price"></span>تومان
                     </div>
-                    <div class="d-none g-font-size-13 discount"><span class="g-font-weight-600">تخفیف</span><span
+                    <div class="d-none g-font-size-14 discount"><span class="g-font-weight-600">تخفیف</span><span
                             id="discount"></span>%
                     </div>
-                    <div class="d-none g-font-size-13 finalPrice"><span class="g-font-weight-600">قیمت نهایی</span><span
+                    <div class="d-none g-font-size-14 finalPrice"><span class="g-font-weight-600">قیمت نهایی</span><span
                             id="finalPrice"></span>تومان
                     </div>
                     <p id="detail" style="white-space: pre-wrap;"></p>
@@ -540,7 +540,7 @@
                     <a class="g-color-gray-dark-v2 w-100"
                        href="#!">
                         <div style="cursor: pointer" id="allCommentContainer"
-                             class="g-font-weight-600 g-mx-5 g-font-size-12 g-color-gray-dark-v4 d-flex col-12 g-px-5 justify-content-end">
+                             class="g-font-weight-600 g-mx-5 g-font-size-13 g-color-gray-dark-v4 d-flex col-12 g-px-5 justify-content-end">
                             <span class="g-mr-5">نظر</span>
                             <span class="allComment"></span>
                             <span class="g-ml-5">دیدن</span>
@@ -570,14 +570,14 @@
                                 <div style="position: relative" class="g-mt-2">
                                     <div class="d-flex">
                                             <textarea style="direction: rtl"
-                                                      class="form-control commentText growingToTop col-10 ml-auto hideScrollBar g-brd-none form-control-md g-resize-none rounded-0 p-0 text-right g-font-size-16"
+                                                      class="form-control commentText growingToTop col-10 ml-auto hideScrollBar g-pt-25 g-brd-none form-control-md g-resize-none rounded-0 p-0 text-right g-font-size-16"
                                                       tabindex="1"
                                                       value=""
                                                       placeholder="نظر شما.."
                                                       maxlength="300"></textarea>
                                         <div class="g-pl-5">
                                             <img
-                                                class="g-width-20 g-height-20 rounded-circle commenterProfileImg"
+                                                class="g-width-30 g-height-30 rounded-circle commenterProfileImg"
                                                 src=""
                                                 alt="Image Description">
                                         </div>
