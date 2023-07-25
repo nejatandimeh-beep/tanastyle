@@ -1,7 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <div class="masterPage">
-        <div class="d-lg-none g-pt-40">
+        <div class="d-lg-none">
             <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));">
                 <div class="container">
                     <a style="direction: rtl" href="{{route('feed')}}" class="text-decoration-none">

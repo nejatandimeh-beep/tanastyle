@@ -535,6 +535,8 @@
                                 console.log(data)
                                 $('#detailPost-' + key).remove();
                                 $('#postSample-' + key).remove();
+                                icon.addClass('icon-trash');
+                                icon.removeClass('fa fa-spinner fa-spin');
                                 $('#allPostCount').text(parseInt($('#allPostCount').text())-1);
                             }
                         })

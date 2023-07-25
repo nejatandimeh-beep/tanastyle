@@ -116,6 +116,7 @@
                                             id="nationalId"
                                             name="nationalId"
                                             tabindex="4"
+                                            pattern="\d*"
                                             value=""
                                             oninput="$('#nationalId12').val($(this).val())"
                                             onblur=" if($(this).val().length===10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
@@ -349,6 +350,7 @@
                                             id="phoneNumber"
                                             onblur="if($(this).val().length===8) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                             name="phone"
+                                            pattern="\d*"
                                             type="text"
                                             maxlength="8"
                                             value=""
@@ -360,6 +362,7 @@
                                             id="phonePreNumber"
                                             onblur=" if($(this).val().length===3) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                             name="prePhone"
+                                            pattern="\d*"
                                             class="text-left col-4 form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-right-none g-brd-red"
                                             maxlength="3"
                                             value=""
@@ -379,8 +382,9 @@
                                                class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
                                                id="mobile"
                                                tabindex="12"
-                                               onblur=" if($(this).val().length===11) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                               onblur="$(this).val(fixNumbers($(this).val())); if($(this).val().length===11) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                                name="mobile"
+                                               pattern="\d*"
                                                maxlength="11"
                                                value=""
                                                placeholder="09xxxxxxxx">
@@ -488,6 +492,7 @@
                                             tabindex="16"
                                             onblur=" if($(this).val().length===10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                             name="homePostalCode"
+                                            pattern="\d*"
                                             value=""
                                             maxlength="10"
                                             placeholder="فقط اعداد"
@@ -532,6 +537,7 @@
                                             tabindex="18"
                                             onblur=" if($(this).val().length===10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                             name="workPostalCode"
+                                            pattern="\d*"
                                             value=""
                                             maxlength="10"
                                             placeholder="فقط اعداد"
@@ -695,6 +701,7 @@
                                                        placeholder="0000"
                                                        id="creditCard4"
                                                        name="creditCard4"
+                                                       pattern="\d*"
                                                        value=""
                                                        maxlength="4"
                                                        oninput="if($(this).val().length === 4) $('#creditCard3').focus();">
@@ -703,6 +710,7 @@
                                                        type="text"
                                                        tabindex="31"
                                                        placeholder="0000"
+                                                       pattern="\d*"
                                                        id="creditCard3"
                                                        name="creditCard3"
                                                        value=""
@@ -714,6 +722,7 @@
                                                        tabindex="32"
                                                        placeholder="0000"
                                                        id="creditCard2"
+                                                       pattern="\d*"
                                                        name="creditCard2"
                                                        value=""
                                                        maxlength="4"
@@ -724,6 +733,7 @@
                                                        tabindex="33"
                                                        placeholder="0000"
                                                        id="creditCard1"
+                                                       pattern="\d*"
                                                        name="creditCard1"
                                                        value=""
                                                        maxlength="4"
@@ -746,6 +756,7 @@
                                                placeholder="معمولا 24 رقم"
                                                id="shabaNo"
                                                name="shabaNo"
+                                               pattern="\d*"
                                                value=""
                                                onblur="if($(this).val() !== '') {$(this).removeClass('g-brd-red'); $(this).addClass('g-brd-primary');} else {$(this).removeClass('g-brd-primary'); $(this).addClass('g-brd-red');}">
                                     </div>
@@ -960,6 +971,20 @@
 <script src="{{ asset('assets/js/cropper.js') }}"></script>
 </body>
 <script>
+    // change persian num to english num
+    let persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
+        arabicNumbers  = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
+        fixNumbers = function (str)
+        {
+            if(typeof str === 'string')
+            {
+                for(var i=0; i<10; i++)
+                {
+                    str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
+                }
+            }
+            return str;
+        };
     $(window).on('pageshow', function () {
         $('#load').hide();
     });
@@ -990,7 +1015,7 @@
 
         $modal.on('shown.bs.modal', function () {
             cropper = new Cropper(image, {
-                viewMode: 2,
+                viewMode: 0,
                 zoomable: true,
                 background: true,
                 minCropBoxWidth: 400,

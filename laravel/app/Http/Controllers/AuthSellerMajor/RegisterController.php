@@ -120,8 +120,8 @@ class RegisterController extends Controller
     protected function createSeller(Request $request)
     {
         $mobile = $request->get('mobile');
-        $tempPath =  public_path('img\imagesTemp\SellerMajorProfileImage\\') . $mobile;
-        $path =  public_path('img\SellerMajorProfileImage\\'). $mobile;
+        $tempPath =  public_path('img/imagesTemp/SellerMajorProfileImage/') . $mobile;
+        $path =  public_path('img/SellerMajorProfileImage/'). $mobile;
         $file = new Filesystem();
         $file->moveDirectory($tempPath, $path,true);
 
@@ -132,7 +132,7 @@ class RegisterController extends Controller
             'Mobile' => $mobile,
             'Category'=>$category,
             'HintCategory'=>$request['hintCategory'],
-            'Pic' => 'img\SellerMajorProfileImage\\'.$mobile,
+            'Pic' => 'img/SellerMajorProfileImage/'.$mobile,
             'password' => Hash::make($request['password']),
         ]);
 
