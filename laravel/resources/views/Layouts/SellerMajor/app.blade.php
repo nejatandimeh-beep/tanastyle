@@ -347,29 +347,28 @@
         console.log(checkData());
     }
 
+    $('#tablighBtn').on('click',function () {
+        if($(this).hasClass('g-bg-white')){
+            $('#tabligh').val('1');
+            $('#instaContainer').removeClass('d-none')
+            $(this).removeClass('g-bg-white g-color-gray-dark-v5').addClass('g-bg-primary g-color-white')
+        } else {
+            $('#tabligh').val('0');
+            $('#instaContainer').addClass('d-none')
+            $(this).removeClass('g-bg-primary g-color-white').addClass('g-bg-white  g-color-gray-dark-v5')
+        }
+    })
+
     function checkData() {
         if ($('#user-name').hasClass('g-brd-red') ||
             $('#mobile').hasClass('g-brd-red') ||
             $('#category').val() === 'empty' ||
-            $('#category').val() === 'empty' ||
-            $('#pic11').val() === ''
-            ){
+            $('#pic11').val() === ''||
+            ($('#instaAccount').hasClass('g-brd-red') && $('#tablighBtn').hasClass('g-bg-primary'))
+        ){
             return 'false';
         } else {
             return 'true';
-        }
-    }
-
-    function showPassword() {
-        let x = document.getElementById("password");
-        if (x.type === "password") {
-            $('#hidePassword').removeClass('d-none');
-            $('#showPassword').addClass('d-none');
-            x.type = "text";
-        } else {
-            $('#showPassword').removeClass('d-none');
-            $('#hidePassword').addClass('d-none');
-            x.type = "password";
         }
     }
 
@@ -402,6 +401,19 @@
             } else {
                 alert('رمز و تکرار رمز یکسان نیستند.')
             }
+        }
+    }
+
+    function showPassword() {
+        let x = document.getElementById("password");
+        if (x.type === "password") {
+            $('#hidePassword').removeClass('d-none');
+            $('#showPassword').addClass('d-none');
+            x.type = "text";
+        } else {
+            $('#showPassword').removeClass('d-none');
+            $('#hidePassword').addClass('d-none');
+            x.type = "password";
         }
     }
 

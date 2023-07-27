@@ -127,12 +127,16 @@ class RegisterController extends Controller
 
         $name = $request['name'];
         $category = $request['category'];
+        $tabligh = $request['tabligh'];
+        $instaAccount = $request['instaAccount'];
         $sellerMajor = SellerMajor::create([
             'name' => $name,
             'Mobile' => $mobile,
             'Category'=>$category,
             'HintCategory'=>$request['hintCategory'],
             'Pic' => 'img/SellerMajorProfileImage/'.$mobile,
+            'Instagram' => $instaAccount,
+            'Advertising' => $tabligh,
             'password' => Hash::make($request['password']),
         ]);
 
