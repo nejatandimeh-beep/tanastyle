@@ -274,7 +274,6 @@ Route::get('/Administrator-Seller-store/{id}', 'Administrator\Seller@store')->na
 Route::get('/Administrator-Seller-sale/{id}', 'Administrator\Seller@sale')->name('adminSellerSale');
 Route::get('/Administrator-Seller-Return/{id}', 'Administrator\Seller@return')->name('adminSellerReturn');
 
-//-----------------------------[seller][filtering]
 // -------------------------[Product]
 Route::get('/Administrator-Product-List', 'Administrator\Product@delivery')->name('adminProductDelivery');
 Route::get('/Administrator-Product-Detail/{id}', 'Administrator\Product@productDetail')->name('adminProductDetail');
@@ -299,6 +298,10 @@ Route::get('/Administrator-Customer-ConnectionDetail/{id}/{status}', 'Administra
 Route::post('/Administrator-Customer-Connection-NewMsg', 'Administrator\Customer@connectionNewMsg')->name('adminCustomerConnectionNewMsg');
 Route::get('/Administrator-Customer-Sale/{id}', 'Administrator\Customer@sale')->name('adminCustomerSale');
 Route::get('/Administrator-Customer-Return/{id}', 'Administrator\Customer@return')->name('adminCustomerReturn');
+// -------------------------[SellerMajor]
+Route::get('/Administrator-SellerMajor-AdList', 'Administrator\SellerMajor@adList')->name('sellerMajorAdList');
+Route::get('/Seller-Major-StartAd', 'Administrator\SellerMajor@startAd')->name('startAd');
+Route::get('/Seller-Major-AdSource/{postID}/{instagram}/{pic}', 'Administrator\SellerMajor@adSource')->name('adSource');
 // -------------------------[Delivery]
 Route::get('/Administrator-Delivery-Panel/{id}', 'Administrator\Admin@adminDeliveryPanel')->name('adminDeliveryPanel');
 Route::get('/Administrator-Kiosk-Panel/{id}', 'Administrator\Admin@adminKioskPanel')->name('adminKioskPanel');
@@ -404,4 +407,6 @@ Route::get('/Seller-Major-AddComment/{postID}', 'SellerMajor\Basic@addComments')
 Route::get('/Seller-Major-Comment-Delete/{id}/{status}', 'SellerMajor\Basic@deleteComments');
 Route::get('/Seller-Major-LikeComment/{id}/{replyID}/{status}/{likeStatus}', 'SellerMajor\Basic@likeComments');
 Route::get('/Seller-Major-Reactions', 'SellerMajor\Basic@reaction')->name('sellerMajorReaction');
+Route::get('/Seller-Major-Advertising/{id}/{status}', 'SellerMajor\Basic@advertising');
 Route::post( '/Seller-Major-uploadImage', 'SellerMajor\Basic@uploadImage');
+

@@ -573,10 +573,11 @@
                                     <div style="direction: rtl"
                                          class="alert alert-success alert-dismissible fade show text-right g-pa-20--lg g-px-10 g-py-10"
                                          role="alert">
-                                        <h4 class="h5"><i class="fa fa-warning"></i> شرکت در کمپین تبلیغاتی</h4>
+                                        <h4 class="h5"><i class="fa fa-check"></i> شرکت در کمپین تبلیغاتی</h4>
                                         <p class="g-mb-10">هدف از کمپین تبلیغاتی ما افزایش بازدیدکنندگان از محصولات و صفحات شغلی شما می باشد. روش کار به این صورت است که
                                             هر روز برای شما در موتورهای جستجو و همچنین صفحات اینستاگرام تبلیغ خواهد شد در ازای آن شما تنها یک استوری تبلیغاتی در لیست استوریهای خود روزانه قرار خواهید داد.
                                             هیچگونه هزینه ی مالی شامل حال اعضای کمپین نخواهد شد.
+                                            در صورتی که عضو می شوید لطفا بعد از ثبت نام و ورود به پنل خود، از طریق دکمه حاوی آیکون اینستاگرام، آپشن شرکت در کمپین تبلیغات را فعال کنید.
                                         </p>
                                         <div class="text-left">
                                             <div class="d-inline-block">
@@ -585,7 +586,6 @@
                                                      tabindex="22"
                                                      class="g-py-10 g-px-15 g-bg-white g-brd-white g-brd-around g-color-gray-dark-v5">
                                                     عضو شدن
-                                                    <input style="display: none" id="tabligh" name="tabligh" type="text" value="0">
                                                 </div>
                                             </div>
                                         </div>

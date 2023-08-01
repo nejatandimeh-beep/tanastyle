@@ -349,11 +349,9 @@
 
     $('#tablighBtn').on('click',function () {
         if($(this).hasClass('g-bg-white')){
-            $('#tabligh').val('1');
             $('#instaContainer').removeClass('d-none')
             $(this).removeClass('g-bg-white g-color-gray-dark-v5').addClass('g-bg-primary g-color-white')
         } else {
-            $('#tabligh').val('0');
             $('#instaContainer').addClass('d-none')
             $(this).removeClass('g-bg-primary g-color-white').addClass('g-bg-white  g-color-gray-dark-v5')
         }
@@ -363,7 +361,7 @@
         if ($('#user-name').hasClass('g-brd-red') ||
             $('#mobile').hasClass('g-brd-red') ||
             $('#category').val() === 'empty' ||
-            $('#pic11').val() === ''||
+            $('#pic12').val() === ''||
             ($('#instaAccount').hasClass('g-brd-red') && $('#tablighBtn').hasClass('g-bg-primary'))
         ){
             return 'false';

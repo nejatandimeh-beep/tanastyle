@@ -159,6 +159,35 @@ class Basic extends Controller
         return $instagramLink;
     }
 
+    public function advertising($id,$status)
+    {
+        DB::table('sellersmajor')
+            ->where('id',$id)
+            ->update([
+                'Advertising' => $status == 'true' ? '1' : '0'
+            ]);
+
+        $postID=DB::table('seller_major_post')
+            ->where('SellerMajorID',$this->sellerMajorID)
+            ->latest('ID')
+            ->first();
+        if(isset($postID)){
+            if($status == 'true'){
+                DB::table('ad_clothe')
+                    ->insert([
+                        'SellerMajorID'=>$this->sellerMajorID,
+                        'PostID'=>$postID->ID,
+                    ]);
+            } else {
+                DB::table('ad_clothe')
+                    ->where('SellerMajorID',$this->sellerMajorID)
+                    ->delete();
+            }
+        }
+
+        return 'success';
+    }
+
     public function updateProfileImage(Request $request)
     {
         // Upload Images

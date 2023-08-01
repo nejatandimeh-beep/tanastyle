@@ -6,6 +6,21 @@
 
         }
 
+        function membership(thisElement) {
+            if(parseInt($('#postLen').text()) > 0){
+                $.ajax({
+                    type: 'GET',
+                    url: '/Seller-Major-Advertising/' + $('#sellerMajorID').text() + '/' + thisElement.is(":checked"),
+                    success: function (data) {
+                        console.log(data)
+                    }
+                })
+            } else {
+                alert('لطفا ابتدا یک پست به پنل خود اضافه کنید.')
+                thisElement.removeAttr('checked')
+            }
+        }
+
         function copy(textToCopy) {
             navigator.clipboard.writeText(textToCopy).then(
                 function () {
@@ -20,7 +35,8 @@
         }
 
         let imgRowID = [], imgRowIdTemp, lastScrollTop = 0, lastScrollTopModal = 0, postNumber = 0, completeLoad = true,
-            touchtime = 0, postDeleteItems = [], imgWorking = 0, asset = $('#asset').text(), imgNumber = 0, file_type, dragging=false;
+            touchtime = 0, postDeleteItems = [], imgWorking = 0, asset = $('#asset').text(), imgNumber = 0, file_type,
+            dragging = false;
         // click any location in screen close all accordion exept clicked accordion
         document.addEventListener('click', function (event) {
             if ($('.accordionBtn').length > 0) {
@@ -167,11 +183,11 @@
                             e.preventDefault();
                         },
                         touchStart: function (s, e) {
-                            dragging=true;
+                            dragging = true;
                         },
                         touchEnd: function (s, e) {
                             s.zoom.out();
-                            dragging=false;
+                            dragging = false;
                         },
                     },
                 });
@@ -537,7 +553,7 @@
                                 $('#postSample-' + key).remove();
                                 icon.addClass('icon-trash');
                                 icon.removeClass('fa fa-spinner fa-spin');
-                                $('#allPostCount').text(parseInt($('#allPostCount').text())-1);
+                                $('#allPostCount').text(parseInt($('#allPostCount').text()) - 1);
                             }
                         })
                     },
@@ -736,11 +752,11 @@
                                 e.preventDefault();
                             },
                             touchStart: function (s, e) {
-                               dragging=true;
+                                dragging = true;
                             },
                             touchEnd: function (s, e) {
                                 s.zoom.out();
-                                dragging=false;
+                                dragging = false;
                             },
                         },
                     });
@@ -1421,7 +1437,7 @@
         function updateBio() {
             $('#bioEditIcon').addClass('d-none');
             $('#waitingBioUpdate').removeClass('d-none');
-            let val=$('#bioText').val() !== '' ? $('#bioText').val():'null';
+            let val = $('#bioText').val() !== '' ? $('#bioText').val() : 'null';
             $.ajax({
                 type: 'GET',
                 async: false,
@@ -1470,6 +1486,8 @@
                     $('#' + app + 'Link').text(data);
                     $('#' + app + 'UpdateIcon').removeClass('d-none');
                     $('#' + app + 'UpdateWaiting').addClass('d-none');
+                    $('#submitInstagram').addClass('d-none');
+                    $('#adContainer').removeClass('d-none');
                     console.log(data);
                 }
             });

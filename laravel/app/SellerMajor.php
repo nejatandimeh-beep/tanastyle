@@ -15,7 +15,7 @@ class SellerMajor extends Authenticatable
 
 
     protected $fillable = [
-        'name','Mobile','email','password','Category','HintCategory','Pic','remember_token','Advertising',
+        'name','Mobile','email','password','Category','HintCategory','Pic','Instagram','remember_token',
     ];
 
 

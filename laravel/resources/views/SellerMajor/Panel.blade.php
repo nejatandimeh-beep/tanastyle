@@ -1,6 +1,7 @@
 @extends('Layouts.SellerMajor.Index')
 @section('Content')
     <span id="asset" class="d-none">{{asset('/')}}</span>
+    <span id="sellerMajorID" class="d-none">{{$data->id}}</span>
     <span id="eventLen" class="d-none">{{count($events)}}</span>
     <span id="postLen" class="d-none">{{$postsCount}}</span>
     <span id="postLoaded" class="d-none">0</span>
@@ -96,12 +97,14 @@
 
                         <ul style="direction: ltr" class="list-inline mb-0">
                             <li class="list-inline-item g-mx-2">
-                                <a style="width: 3rem; height: 3rem;" class="d-inline-block text-center g-color-gray-dark-v3 g-bg-gray-light-v5 rounded-circle"
+                                <a style="width: 3rem; height: 3rem;"
+                                   class="d-inline-block text-center g-color-gray-dark-v3 g-bg-gray-light-v5 rounded-circle"
                                    data-toggle="modal"
                                    data-target="#instagramModal"
                                    onclick="$('#instagram').val('')"
                                    href="#!">
-                                    <i style="padding-top: 13px" class="fa fa-instagram align-middle g-font-size-16 g-color-gray-dark-v2"></i>
+                                    <i style="padding-top: 13px"
+                                       class="fa fa-instagram align-middle g-font-size-16 g-color-gray-dark-v2"></i>
                                 </a>
                                 <!--modalInstagram-->
                                 <div style="direction: rtl" class="modal fade text-center" id="instagramModal"
@@ -121,28 +124,54 @@
                                                 <div style="direction: ltr" class="form-group row g-mb-25">
                                                     <div class="input-group justify-content-center">
                                                         <div class="col-lg-10">
-                                                            <h6 class="d-flex justify-content-between"><span
-                                                                    id="instagramLink"
-                                                                    class="g-ml-5 g-color-gray-light-v1">{{$data->Instagram !== '' ? $data->Instagram : 'خالی'}}</span><span>آدرس فعلی</span>
+                                                            <h6 class="d-flex justify-content-between">
+                                                                <a href="{{$data->Instagram !== '' ? 'https://instagram.com/'.$data->Instagram : '#'}}"
+                                                                   class="g-text-underline--none--hover g-color-primary">
+                                                                        <span id="instagramLink"
+                                                                              class="h5 g-ml-5">{{$data->Instagram !== '' ? $data->Instagram : 'خالی'}}</span>
+                                                                </a>
+                                                                <span>آدرس فعلی</span>
                                                             </h6>
                                                             <div class="input-group">
                                                                <textarea id="instagram"
                                                                          autofocus
-                                                                         class="form-control form-control-md g-resize-none g-brd-0 rounded-0 pl-0 g-bg-transparent"
+                                                                         oninput="if($(this).val()==='') $('#submitInstagram').addClass('d-none'); else $('#submitInstagram').removeClass('d-none')"
+                                                                         class="form-control g-font-size-16 form-control-md g-resize-none g-brd-0 rounded-0 pl-0 g-bg-transparent"
                                                                          maxlength="300" rows="4"
                                                                          placeholder="آدرس جدید.."></textarea>
                                                             </div>
-                                                            <div class="text-left">
-                                                                <a href="#" onclick="socialAddressUpdate('instagram')"
-                                                                   class="g-text-underline--none--hover g-color-gray-dark-v3 g-color-primary--hover">
-                                                                <span
-                                                                    class="u-icon-v3 u-icon-size--sm g-mr-15 g-mb-15 g-rounded-50x">
-                                                                    <i id="instagramUpdateIcon"
-                                                                       class="fa fa-check u-line-icon-pro"></i>
-                                                                    <i id="instagramUpdateWaiting"
-                                                                       class="d-none fa fa-spinner fa-spin g-line-height-0 align-middle"></i>
-                                                                </span>
+                                                            <div class="d-flex">
+                                                                <a href="#" onclick="socialAddressUpdate('instagram',$(this))" id="submitInstagram"
+                                                                   class="d-none g-text-underline--none--hover g-color-gray-dark-v3 g-color-primary--hover">
+                                                                    <span
+                                                                        class="u-icon-v3 u-icon-size--sm g-mr-15 g-mb-15 g-rounded-50x">
+                                                                        <i id="instagramUpdateIcon"
+                                                                           class="fa fa-check u-line-icon-pro"></i>
+                                                                        <i id="instagramUpdateWaiting"
+                                                                           class="d-none fa fa-spinner fa-spin g-line-height-0 align-middle"></i>
+                                                                    </span>
                                                                 </a>
+                                                                <div id="adContainer" class="g-mt-10 {{$data->Instagram !== '' ? '' : 'd-none'}}">
+                                                                    <div style="direction: rtl" class="form-group m-0">
+                                                                        <label
+                                                                            class="d-flex align-items-center justify-content-between m-0">
+                                                                            <span class="h5 m-0">شرکت در کمپین تبلیغات</span>
+                                                                            <div class="u-check g-mr-10">
+                                                                                <input
+                                                                                    class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
+                                                                                    name="advertising"
+                                                                                    {{$data->Advertising === '1' ? 'checked=""':''}}
+                                                                                    onchange="membership($(this))"
+                                                                                    type="checkbox">
+                                                                                <div style="width: 53px; height: 26px" class="u-check-icon-radio-v8">
+                                                                                    <i class="fa"
+                                                                                       style="color: #72c02c !important"
+                                                                                       data-check-icon=""></i>
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -291,7 +320,8 @@
                  class="d-none load g-mt-20"></div>
         </div>
         <!--مودال ریل پست ها-->
-        <div style="padding: 0 !important;" class="hideScrollBar g-bg-white modal fade bd-example-modal-lg" id="postRail"
+        <div style="padding: 0 !important;" class="hideScrollBar g-bg-white modal fade bd-example-modal-lg"
+             id="postRail"
              tabindex="-1" role="dialog"
              aria-labelledby="exampleModalCenterTitle"
              aria-hidden="true">
