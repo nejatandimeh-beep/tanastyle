@@ -3,7 +3,7 @@
     <span class="d-none" id="imgWorking"></span>
     <div class="mx-auto col-12 col-lg-8">
         <h5 class="text-right g-py-10">افزودن پست</h5>
-        <label class="d-block text-right g-font-weight-600">تصاویر</label>
+        <label id="lblImg" class="d-block text-right g-font-weight-600 g-color-red">تصاویر</label>
     </div>
 
     <div class="d-flex justify-content-center g-px-10">
@@ -24,7 +24,7 @@
             </div>
 
         </div>
-        <div id="addImgBtn-1" class="list-inline-item g-mx-3">
+        <div id="addImgBtn-1" class="d-none list-inline-item g-mx-3">
             <div style="position:relative; width: 70px; min-height: 70px; border-radius: 10px; background-color: #fdfdfd"
                  onclick="insertImg('1')"
                  class="previewBox g-brd-around g-brd-gray-light-v4">
@@ -41,7 +41,7 @@
             </div>
 
         </div>
-        <div id="addImgBtn-2" class="list-inline-item g-mx-3">
+        <div id="addImgBtn-2" class="d-none list-inline-item g-mx-3">
             <div style="position:relative; width: 70px; min-height: 70px; border-radius: 10px; background-color: #fdfdfd"
                  onclick="insertImg('2')"
                  class="previewBox g-brd-around g-brd-gray-light-v4">
@@ -58,7 +58,7 @@
             </div>
 
         </div>
-        <div id="addImgBtn-3" class="list-inline-item g-mx-3">
+        <div id="addImgBtn-3" class="d-none list-inline-item g-mx-3">
             <div style="position:relative; width: 70px; min-height: 70px; border-radius: 10px; background-color: #fdfdfd"
                  onclick="insertImg('3')"
                  class="previewBox g-brd-around g-brd-gray-light-v4">
@@ -97,7 +97,7 @@
             <input type="number" id="picCount" value="0" name="picCount" class="listBox g-color-gray-dark-v3">
         </form>
     </div>
-    {{--مودال ساخت پست--}}
+    {{--مودال افزودن تصویر پست--}}
     <div style="direction: rtl; z-index: 11000; max-height: 100vh" class="modal g-bg-white fade bd-example-modal-lg hideScrollBar" id="postModal"
          tabindex="-1" role="dialog"
          aria-labelledby="postModalCenterTitle"
@@ -138,7 +138,7 @@
         <div class="{{$_SESSION['jobCategory'] === 'clothes' ? '':'d-none'}}">
             <!--دسته بندی-->
             <div class="listSearch col-12 p-0 g-my-20">
-                <label class="g-mb-5 g-font-weight-600">دسته بندی</label>
+                <label id="lblCat" class="g-mb-5 g-font-weight-600 g-color-red necessary">دسته بندی</label>
                 <div class="dropdown">
                     <div id="categoryContainer" class="listContainer dropdown-content">
                         <input type="text"
@@ -146,13 +146,13 @@
                                class="listBox g-color-gray-dark-v3"
                                placeholder="انتخاب کنید.."
                                value=""
+                               onchange="$('#lblCat').removeClass('g-color-red'); $('#lblName').removeClass('g-color-red')"
                                readonly
                                onfocus="$('#allCategory').show()">
                         <span id="catCode" class="d-none"></span>
                         <div style="display: none" id="allCategory"
                              class="g-py-10 customScrollBar listItems">
                             <div class="g-mb-15">
-                                <a href="#" onclick="setProductName('0','...')" class="g-font-size-14 g-my-10">بدون مقدار</a>
                                 <span class="g-font-size-14 g-font-weight-600 g-pr-15 g-pb-10">لباس</span>
                                 <a href="#" onclick="setProductName('a','لباس زیر')" class="g-font-size-14">لباس زیر</a>
                                 <a href="#" onclick="setProductName('b','لباس پایین تنه')" class="g-font-size-14">لباس
@@ -204,7 +204,7 @@
             </div>
             <!--نام محصول-->
             <div id="productNameContainer" class="listSearch col-12 p-0 g-my-20">
-                <label class="g-mb-5 g-font-weight-600">نام محصول</label>
+                <label id="lblName" class="g-mb-5 g-font-weight-600 g-color-red necessary">نام محصول</label>
                 <div class="dropdown">
                     <div class="listContainer dropdown-content">
                         <input type="text"
@@ -569,28 +569,28 @@
             <div class="col-12 p-0 g-my-20">
                 <span id="genderCode" class="d-none"></span>
                 <span id="gender" class="d-none"></span>
-                <label class="g-mb-5 g-font-weight-600">جنسیت</label>
+                <label id="lblGender" class="g-mb-5 g-font-weight-600 g-color-red necessary">جنسیت</label>
                 <div>
                     <div class="btn-group-lg d-flex">
                         <label class="u-check col-md-4 g-pa-0 m-0">
                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="gender"
                                    onclick="$('#gender').text('زنانه');$('#genderCode').text('0')"
                                    type="radio" value="0">
-                            <span
+                            <span onclick="$('#lblGender').removeClass('g-color-red')"
                                 class="btn btn-md btn-block g-brd-gray-light-v3 g-bg-gray-light-v5 g-brd-left-none g-brd-left-1--lg g-bg-primary--checked rounded-0 g-color-white--checked">زنانه</span>
                         </label>
                         <label class="u-check col-md-4 g-pa-0 m-0">
                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="gender"
                                    onclick="$('#gender').text('مردانه');$('#genderCode').text('1')"
                                    type="radio" value="1">
-                            <span
+                            <span onclick="$('#lblGender').removeClass('g-color-red')"
                                 class="btn btn-md btn-block g-brd-gray-light-v3 g-bg-gray-light-v5 g-brd-left-none g-brd-left-1--lg g-bg-primary--checked rounded-0 g-color-white--checked">مردانه</span>
                         </label>
                         <label class="u-check col-md-4 g-pa-0 m-0">
                             <input class="hidden-xs-up g-pos-abs g-top-0 g-left-0" name="gender"
                                    onclick="$('#gender').text('کودکانه');$('#genderCode').text('2')"
                                    type="radio" value="2">
-                            <span
+                            <span onclick="$('#lblGender').removeClass('g-color-red')"
                                 class="btn btn-md btn-block g-brd-gray-light-v3 g-bg-gray-light-v5 g-bg-primary--checked rounded-0 g-color-white--checked">کودکانه</span>
                         </label>
                     </div>
@@ -598,12 +598,11 @@
             </div>
             <!--سایز-->
             <div class="col-12 p-0 g-my-20">
-                <label class="g-mb-5 g-font-weight-600">سایز</label>
+                <label id="lblSize" class="g-mb-5 g-font-weight-600 g-color-red necessary">سایز</label>
                 <span id="size" class="d-none"></span>
                 <div>
-                    <select style="height: 40px" onchange="$('#size').text($(this).val())"
+                    <select style="height: 40px" onchange="$('#size').text($(this).val())" oninput="$('#lblSize').removeClass('g-color-red')"
                             class="form-control form-control-md custom-select g-brd-gray-light-v3 rounded-0 text-right g-pr-30 g-font-size-16">
-                        <option style="direction: rtl" value="">...</option>
                         <option style="direction: rtl" value="FreeSize">FreeSize</option>
                         <option style="direction: rtl" value="XXS">XXS</option>
                         <option style="direction: rtl" value="XS">XS</option>
@@ -618,7 +617,7 @@
             </div>
             <!--قیمت-->
             <div class="col-12 p-0 g-my-20">
-                <label class="g-mb-5 g-font-weight-600">قیمت</label>
+                <label id="lblPrice" class="g-mb-5 g-font-weight-600 g-color-red necessary">قیمت</label>
                 <span id="tempPrice" class="d-none"></span>
                 <div>
                     <input
@@ -648,7 +647,7 @@
             </div>
             <!--قیمت نهایی-->
             <div class="col-12 p-0 g-my-20">
-                <label class="g-mb-5 g-font-weight-600">قیمت نهایی</label>
+                <label id="lblFinalPrice" class="g-mb-5 g-font-weight-600 g-color-red necessary">قیمت نهایی</label>
                 <span id="tempFinalPrice" class="d-none"></span>
                 <div>
                     <input
@@ -664,7 +663,7 @@
             </div>
             <!--رنگ-->
             <div class="col-12 p-0 g-my-20">
-                <label class="g-mb-5 g-font-weight-600">رنگ</label>
+                <label id="lblColor" class="g-mb-5 g-font-weight-600 g-color-red necessary">رنگ</label>
                 <div class="g-px-15 g-brd-around g-brd-gray-light-v3">
                     <input
                         class="form-control g-bg-white g-brd-none form-control-md rounded-0 g-px-0 text-right g-font-size-16"
@@ -688,14 +687,14 @@
                                        href="#accordion-body-01" data-toggle="collapse"
                                        data-parent="#accordion" aria-expanded="true"
                                        aria-controls="accordion-body-01">
-                                                    <span
-                                                        class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                      <i class="fa fa-plus"></i>
-                                                      <i class="fa fa-minus"></i>
-                                                    </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                      خانواده رنگ های سفید
-                                                    </span>
+                                          خانواده رنگ های سفید
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -799,14 +798,14 @@
                                        href="#accordion-body-02" data-toggle="collapse"
                                        data-parent="#accordion" aria-expanded="false"
                                        aria-controls="accordion-body-02">
-                                                                    <span
-                                                                        class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                      <i class="fa fa-plus"></i>
-                                                                      <i class="fa fa-minus"></i>
-                                                                    </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های قرمز
-                                                                        </span>
+                                          خانواده رنگ های قرمز
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -870,14 +869,14 @@
                                        href="#accordion-body-03" data-toggle="collapse"
                                        data-parent="#accordion" aria-expanded="false"
                                        aria-controls="accordion-body-03">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های صورتی
-                                                                        </span>
+                                          خانواده رنگ های صورتی
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -939,14 +938,14 @@
                                        data-parent="#accordion"
                                        aria-expanded="false"
                                        aria-controls="accordion-body-04">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های نارنجی
-                                                                        </span>
+                                          خانواده رنگ های نارنجی
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -999,14 +998,14 @@
                                        data-parent="#accordion"
                                        aria-expanded="false"
                                        aria-controls="accordion-body-05">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های زرد
-                                                                        </span>
+                                          خانواده رنگ های زرد
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -1089,14 +1088,14 @@
                                        data-parent="#accordion"
                                        aria-expanded="false"
                                        aria-controls="accordion-body-06">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های سبز
-                                                                        </span>
+                                          خانواده رنگ های سبز
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -1239,14 +1238,14 @@
                                        data-parent="#accordion"
                                        aria-expanded="false"
                                        aria-controls="accordion-body-07">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های آبی
-                                                                        </span>
+                                          خانواده رنگ های آبی
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -1384,14 +1383,14 @@
                                        data-parent="#accordion"
                                        aria-expanded="false"
                                        aria-controls="accordion-body-08">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های بنفش
-                                                                        </span>
+                                          خانواده رنگ های بنفش
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -1489,14 +1488,14 @@
                                        data-parent="#accordion"
                                        aria-expanded="false"
                                        aria-controls="accordion-body-09">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های قهوه ای
-                                                                        </span>
+                                          خانواده رنگ های قهوه ای
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -1604,14 +1603,14 @@
                                        data-parent="#accordion"
                                        aria-expanded="false"
                                        aria-controls="accordion-body-10">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          خانواده رنگ های سیاه
-                                                                        </span>
+                                          خانواده رنگ های سیاه
+                                        </span>
                                     </a>
                                 </p>
                             </div>
@@ -1694,14 +1693,14 @@
                                        data-parent="#accordion"
                                        aria-expanded="false"
                                        aria-controls="accordion-body-11">
-                                                                        <span
-                                                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
-                                                                          <i class="fa fa-plus"></i>
-                                                                          <i class="fa fa-minus"></i>
-                                                                        </span>
+                                        <span
+                                            class="u-accordion__control-icon d-inline-block g-brd-right g-brd-gray-light-v4 g-color-primary text-center">
+                                          <i class="fa fa-plus"></i>
+                                          <i class="fa fa-minus"></i>
+                                        </span>
                                         <span class="d-inline-block g-px-15 g-py-5">
-                                                                          رنگ های مالتی کالر
-                                                                        </span>
+                                          رنگ های مالتی کالر
+                                        </span>
                                     </a>
                                 </p>
                             </div>

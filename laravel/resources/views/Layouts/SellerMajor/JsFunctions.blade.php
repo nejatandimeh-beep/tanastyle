@@ -7,7 +7,7 @@
         }
 
         function membership(thisElement) {
-            if(parseInt($('#postLen').text()) > 0){
+            if (parseInt($('#postLen').text()) > 0) {
                 $.ajax({
                     type: 'GET',
                     url: '/Seller-Major-Advertising/' + $('#sellerMajorID').text() + '/' + thisElement.is(":checked"),
@@ -1187,7 +1187,20 @@
                             success: function () {
                                 console.log('uploaded');
                                 $('#addImgBtn-' + key + ' .loadingImg').addClass('d-none');
+                                switch (key) {
+                                    case '0':
+                                        $('#addImgBtn-1').removeClass('d-none');
+                                        break;
+                                    case '1':
+                                        $('#addImgBtn-2').removeClass('d-none');
+                                        break;
+                                    case '2':
+                                        $('#addImgBtn-3').removeClass('d-none');
+                                        break;
+                                    default:
+                                }
                                 $('#picCount').val(parseInt($('#picCount').val()) + 1);
+                                $('#lblImg').removeClass('g-color-red');
                                 $(imgWorking + ' .previewBox img').attr('src', reader.result);
                             }
                         });
@@ -1215,10 +1228,14 @@
         });
 
         $('#addImg').on('click', function () {
-            $(this).find('i').removeClass('fa-check').addClass('fa-spin fa-spinner');
-            $(this).find('i').css('margin', '-7px');
-            $(this).prop('disabled', true);
-            $('#postUploadForm').submit();
+            if($('.necessary').hasClass('g-color-red')){
+                alert('لطفا عناوین قرمز رنگ را کامل نمایید.')
+            } else {
+                $(this).find('i').removeClass('fa-check').addClass('fa-spin fa-spinner');
+                $(this).find('i').css('margin', '-7px');
+                $(this).prop('disabled', true);
+                $('#postUploadForm').submit();
+            }
         });
 
         function eventShow(key) {
@@ -1734,6 +1751,7 @@
                     $('#color').show();
                     touchtime = 0;
                     console.log('dbclick')
+                    $('#lblColor').removeClass('g-color-red')
                 } else {
                     // not a double click so set as a new first click
                     touchtime = new Date().getTime();
@@ -1823,6 +1841,7 @@
                     $('#productCat').val('');
                     $('#productName').val('');
             }
+            $('#productCat').change();
         }
 
         function setProductCode(thisElement) {
@@ -1859,11 +1878,20 @@
                 $('#tempFinalPrice').text(price.replace(new RegExp(',', 'g'), ""));
                 $('#price').val(price.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
                 $('#finalPrice').val(price.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+                console.log(parseInt(price.replace(new RegExp(',', 'g'), "")))
+                if (parseInt(price.replace(new RegExp(',', 'g'), "")) >= 10000) {
+                    $('#lblPrice').removeClass('g-color-red');
+                    $('#lblFinalPrice').removeClass('g-color-red');
+                } else {
+                    $('#lblPrice').addClass('g-color-red');
+                    $('#lblFinalPrice').addClass('g-color-red');
+                }
             } else {
                 $('#discount').val('');
                 $('#finalPrice').val('...');
                 $('#tempPrice').text('');
                 $('#tempFinalPrice').text('');
+                $('#lblPrice').addClass('g-color-red');
             }
         }
     </script>
