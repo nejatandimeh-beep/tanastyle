@@ -362,6 +362,7 @@ Route::get('/login/sellerMajor-login-plan-Mode', 'Customer\Basic@sellerLoginPlan
 Route::get('/login/sellerMajor', 'AuthSellerMajor\LoginController@loginForm')->name('sellerMajorLog');
 Route::post('/logout/sellerMajor', 'AuthSellerMajor\LoginController@logout')->name('sellerMajorLogout');
 Route::get('/register/sellerMajor', 'AuthSellerMajor\RegisterController@registerForm')->name('sellerMajorRegister');
+Route::get('/sellerMajor/checkUserName/{userName}', 'AuthSellerMajor\RegisterController@checkUserName');
 Route::post('/login/sellerMajor', 'AuthSellerMajor\LoginController@login')->name('sellerMajorLogin');
 Route::post('/register/sellerMajor', 'AuthSellerMajor\RegisterController@create')->name('sellerMajorSave');
 Route::post('/verify-sellerMajor-mobile', 'AuthSellerMajor\VerifyController@verifyMobile')->name('verifySellerMajorMobile');

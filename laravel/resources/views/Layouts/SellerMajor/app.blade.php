@@ -77,13 +77,54 @@
                     str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
                 }
             }
-            console.log(str);
+            console.log('change number',str);
             return str;
         };
+
     $('input').on('input', function () {
         $(this).val(fixNumbers($(this).val()));
     })
 
+    function checkUserName(userName){
+        $('.checkUserAlarm').hide();
+        $('.checkUserAlarm2').hide();
+        $('.checkUserAlarm3').hide();
+        let re = /^[a-z\d\._\s]+$/i;
+        if(userName!==''){
+            if (re.test(userName)){
+                setTimeout(function () {
+                    $.ajax({
+                        url: '/sellerMajor/checkUserName/'+userName,
+                        type: 'GET',
+                        beforeSend: function () {
+                            $('.checkUserAlarm').hide();
+                            $('.checkUserAlarm2').hide();
+                            $('.checkUserAlarm3').hide();
+                            $('.userNameSpinner').show();
+                        },
+                        success: function (data) {
+                            if(data==='exist'){
+                                $('.checkUserAlarm').show();
+                                $('#user-name').addClass('g-brd-red');
+                            } else {
+                                if(userName.length > 1){
+                                    $('#user-name').removeClass('g-brd-red');
+                                } else {
+                                    $('.checkUserAlarm3').show();
+                                    $('#user-name').addClass('g-brd-red');
+                                }
+                            }
+                            $('.userNameSpinner').hide();
+                            console.log(data);
+                        }
+                    });
+                },500)
+            } else {
+                $('.checkUserAlarm2').show();
+                $('#user-name').addClass('g-brd-red');
+            }
+        }
+    }
     $(document).ready(function () {
         if($('#password').length>0){
             let myInput=$('#password'),

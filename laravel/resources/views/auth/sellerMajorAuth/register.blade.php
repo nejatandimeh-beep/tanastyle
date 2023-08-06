@@ -32,20 +32,34 @@
                                             class="col-sm-4 col-form-label align-self-center text-right">نام
                                             کاربری</label>
                                         <div class="col-sm-8 force-col-12">
-                                            <div class="input-group g-brd-primary--focus">
+                                            <div style="position: relative" class="input-group g-brd-primary--focus">
+                                                <div style="display: none; position: absolute; z-index: 100; top: 10px; right: 10px" class="userNameSpinner">
+                                                    <i class="fa fa-spin fa-spinner g-font-size-16"></i>
+                                                </div>
                                                 <input style="direction: ltr" id="user-name"
                                                        class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need text-left"
                                                        type="text"
                                                        value=""
                                                        autofocus
+                                                       spellcheck="false"
+                                                       oninput="checkUserName($(this).val())"
                                                        tabindex="1"
                                                        name="name"
                                                        maxlength="50"
-                                                       onblur=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
+                                                       onblur=" if($(this).val().length>1 && $('.checkUserAlarm').is(':hidden') && $('.checkUserAlarm2').is(':hidden')) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
                                                 <div
-                                                    class="input-group-addon g-brd-around g-brd-primary g-brd-right-none d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                                                    <i class="fa fa-at g-color-primary g-font-size-18"></i>
+                                                    class="input-group-addon g-brd-around g-brd-gray-light-v2 g-brd-right-none d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                    <i class="fa fa-at g-font-size-18"></i>
                                                 </div>
+                                            </div>
+                                            <div style="display: none" class="text-right checkUserAlarm">
+                                                <small class="g-color-red">نام کاربری موجود است</small>
+                                            </div>
+                                            <div style="display: none" class="text-right checkUserAlarm2">
+                                                <small class="g-color-red">نام کاربری مجاز نیست</small>
+                                            </div>
+                                            <div style="display: none" class="text-right checkUserAlarm3">
+                                                <small class="g-color-red">نام کاربری باید بیشتر از 1 حرف باشد</small>
                                             </div>
                                         </div>
                                     </div>
@@ -603,11 +617,12 @@
                                                        type="text"
                                                        value=""
                                                        autofocus
+                                                       spellcheck="false"
                                                        tabindex="1"
                                                        id="instaAccount"
                                                        name="instaAccount"
                                                        maxlength="50"
-                                                       onblur=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
+                                                       onblur="if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
                                                 <div
                                                     class="input-group-addon g-brd-around g-brd-primary g-brd-right-none d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                                                     <i class="fa fa-at g-color-primary g-font-size-18"></i>

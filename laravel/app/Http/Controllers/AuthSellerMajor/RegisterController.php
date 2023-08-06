@@ -79,6 +79,19 @@ class RegisterController extends Controller
         return view('auth.sellerMajorAuth.register');
     }
 
+    public function checkUserName($userName)
+    {
+        $data = DB::table('sellersmajor')
+            ->select('id','name')
+            ->where('name', $userName)
+            ->first();
+
+        if (isset($data->id))
+            return 'exist';
+        else
+            return 'noExist';
+    }
+
     public function uploadImage(Request $request)
     {
         $mobile = $request->get('mobileHint');
@@ -120,10 +133,10 @@ class RegisterController extends Controller
     protected function createSeller(Request $request)
     {
         $mobile = $request->get('mobile');
-        $tempPath =  public_path('img/imagesTemp/SellerMajorProfileImage/') . $mobile;
-        $path =  public_path('img/SellerMajorProfileImage/'). $mobile;
+        $tempPath = public_path('img/imagesTemp/SellerMajorProfileImage/') . $mobile;
+        $path = public_path('img/SellerMajorProfileImage/') . $mobile;
         $file = new Filesystem();
-        $file->moveDirectory($tempPath, $path,true);
+        $file->moveDirectory($tempPath, $path, true);
 
         $name = $request['name'];
         $category = $request['category'];
@@ -131,9 +144,9 @@ class RegisterController extends Controller
         $sellerMajor = SellerMajor::create([
             'name' => $name,
             'Mobile' => $mobile,
-            'Category'=>$category,
-            'HintCategory'=>$request['hintCategory'],
-            'Pic' => 'img/SellerMajorProfileImage/'.$mobile,
+            'Category' => $category,
+            'HintCategory' => $request['hintCategory'],
+            'Pic' => 'img/SellerMajorProfileImage/' . $mobile,
             'Instagram' => $instaAccount,
             'password' => Hash::make($request['password']),
         ]);
