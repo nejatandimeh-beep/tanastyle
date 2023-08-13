@@ -21,7 +21,7 @@
                                 استایل</h3>
                         </div>
                     @else
-                        <div class="card-body">
+                        <div class="card-body p-0">
                             <form action="{{route('sellerMajorNew')}}" method="POST" style="direction: rtl" id="registerForm"
                                   enctype="multipart/form-data">
                                 @csrf
@@ -504,8 +504,22 @@
                                                    type="password"
                                                    maxlength="20"
                                                    value=""
-                                                   placeholder="8 کاراکتر به بالا">
-
+                                                   placeholder="زبان انگلیسی">
+                                            </div>
+                                            <div class="form-group row g-mb-0">
+                                                <label for="password-confirm" class="col-md-4 col-form-label g-py-1 text-md-left"></label>
+                                                <div id="passwordHint"
+                                                     class="col-md-6">
+                                                    <div id="length" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg g-mt-5 align-top g-py-1 col-2"></div>
+                                                    <div id="number" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
+                                                    <div id="uppercase" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
+                                                    <div id="lowercase" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
+                                                </div>
+                                            </div>
+                                            <div style="direction: rtl" class="g-mt-5" id="passwordAlert">
+                                                <div class="alert alert-danger alert-dismissible fade show text-right g-pa-20--lg g-px-10 g-py-10">
+                                                    <span><i class="fa fa-info-circle g-font-size-16 g-pa-2 g-ml-5"></i>رمز عبور باید شامل اعداد، حروف بزرگ، حروف کوچک و بیشتر از 8 کاراکتر باشد.</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -558,7 +572,14 @@
                                         <h4 class="h5"><i class="fa fa-warning"></i> موافقت با قوانین</h4>
                                         <p class="g-mb-10">کاربر گرامی و گرانقدر تمامی هدف تیم تانا استایل بر
                                             این است که بتوانیم در کنار هم با کمترین هزینه ممکن شغل و کسب و کار خود را
-                                            رونق بخشیم. این تلاش مستلزم آن است که قوانین اجتماعی را راعایت نماییم. لذا از قرار دادن تصاویر و مطالب غیر اجتماعی خود داری فرمائید.</p>
+                                            رونق بخشیم. این تلاش مستلزم آن است که قوانین و مقررات فضای مجازی را رعایت نماییم. لذا قبل از ثبت نام، مقررات و قوانین پنل فروشنده ساده را به دقت مطالعه فرمائید.</p>
+                                        <a style="font-weight: bold" class="g-color-blue-dark-v1 g-color-primary--hover"
+                                           data-toggle="modal"
+                                           data-target="#modalRegulation"
+                                           onclick="$('.agreeDate').text(nowDate())"
+                                           href="#">
+                                            مطالعه قوانین
+                                        </a>
                                         <div class="text-left">
                                             <div class="d-inline-block">
                                                 <div style="cursor: pointer"
@@ -582,7 +603,225 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- مودال قوانین-->
+                                    <div class="modal fade text-center" id="modalRegulation" tabindex="-1" role="dialog"
+                                         aria-labelledby="myModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog m-0 mx-lg-auto modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="d-flex g-pa-15 justify-content-between g-bg-gray-light-v5">
+                                                    <h4 class="m-0">قوانین و شرایط فروشندگان</h4>
+                                                    <button style="outline: none" type="button" class="g-font-size-25 close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        ×
+                                                    </button>
+                                                </div>
+                                                <!-- شرایط استفاده -->
+                                                <div style="background-color: white; direction: rtl"
+                                                     class="hideScrollBar text-justify g-pa-30">
+                                                    <h4 class="text-right g-my-20 g-mt-0--lg">قوانین
+                                                        استفاده از پنل فروشنده ساده</h4>
+                                                    <div class="g-mb-30">
+                                                        <p class="m-0">کاربر گرامی درود</p>
+                                                        <p class="m-0">قبل از هر چیز لازم به ذکر است قوانین موجود در وب سایت تانا استایل تنها در جهت حفاظت از حقوق کاربران در بستر تانا استایل و همچنین حفاظت از حقوق شرکت تابش پس زمینه مکریان که تولید کننده وب سایت تانا استایل است می باشد.</p>
+                                                        <p>در این راستا برای ثبت نام در پنل فروشنده ساده لازم و ضروری است، قوانین این پنل را به دقت مطالغه فرموده و در صورت تایید و ثبت نام تمامی قوانین را رعایت فرمائید.</p>
+                                                        <h6>با تشکر فراوان شرکت تابش پس زمینه مکریان</h6>
+                                                    </div>
+                                                    <h4 class="m-0 text-right p-0 g-pb-10">مقررات و شرایط فروشندگان</h4>
+                                                    <div class="g-pb-20">
+                                                        <div style="direction: rtl" class="col-12 p-0 col-lg-6">
+                                                            <!--Nav tabs -->
+                                                            <ul class="nav flex-column u-nav-v1-2 u-nav-primary g-pa-0" role="tablist" data-target="nav-1-2-primary-ver"
+                                                                data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
+                                                                <li class="nav-item col-12 p-0">
+                                                                    <a class="nav-link active g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" data-toggle="tab"
+                                                                       href="#nav-1-2-primary-ver--1" role="tab">کالای مورد مبادله</a>
+                                                                </li>
+                                                                <li class="nav-item col-12 p-0">
+                                                                    <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="returnProduct"
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--2" role="tab">عضویت در کمپین</a>
+                                                                </li>
+                                                                <li class="nav-item col-12 p-0">
+                                                                    <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="falseProduct"
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--3" role="tab">محتوای نامناسب</a>
+                                                                </li>
+                                                                <li class="nav-item col-12 p-0">
+                                                                    <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="emptyProduct"
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--4" role="tab">مبادلات مالی و بانکی</a>
+                                                                </li>
+                                                                <li class="nav-item col-12 p-0">
+                                                                    <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="deliveryProduct"
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--5" role="tab">کپی رایت</a>
+                                                                </li>
+                                                                <li class="nav-item col-12 p-0">
+                                                                    <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="sellerCheckout"
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--6" role="tab">ارتباطات و پشتیبانی</a>
+                                                                </li>
+                                                                <li class="nav-item col-12 p-0">
+                                                                    <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="offlineSelling"
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--7" role="tab">به روز رسانی</a>
+                                                                </li>
+                                                            </ul>
+                                                            <!--End Nav tabs -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 p-0">
+                                                        <div id="nav-1-2-primary-ver" class="tab-content g-mb-100">
+                                                            <!-- شرایط استفاده -->
+                                                            <div style="background-color: white; direction: rtl" class="tab-pane fade show active text-justify"
+                                                                 id="nav-1-2-primary-ver--1" role="tabpanel">
+                                                                <div>
+                                                                    <h5> 1) کالای مورد مبادله</h5>
+                                                                    <div>
+                                                                        <p class="g-font-weight-600 m-0">1-1) فروش کالا</p>
+                                                                        <p>طرف دوم متعهد می شود که مسئولیت تمامی جوانب فروش کالا در پنل فروشنده ساده را بر عهده می گیرد
+                                                                            و همچنین می پذیرد که کالای فروش رفته طبق تصاویر و توضیحات مربوطه تحویل خریدار گردد و جبران
+                                                                            تمامی خسارتهای ناشی از فروش کالا بر عهده طرف دوم می باشد و طرف اول هیچگونه مسئولیتی در قبال
+                                                                            خرید و فروش و مبادله کالا ندارد.</p>
+                                                                    </div>
+                                                                    <div class="g-mt-15">
+                                                                        <p class="g-font-weight-600 m-0">1-2) ایراد در کالا</p>
+                                                                        <p>هرگونه ایراد و مشکلی در رابطه با کالاهای بارگذاری شده از سوی طرف دوم بر روی پنل خود اعم از
+                                                                            پارگی، زدگی، سوختگی، سایز و رنگ نادرست، اصل یا غیر اصل بودن و در نهایت هر نوع ایرادی در کالا
+                                                                            و همچنین عدم انطباق توضیحات و تصاویر با کالا به عهده طرف دوم این قرارداد می باشد و طرف اول
+                                                                            هیچگونه تعهد و مسئولیتی در قبال کالای مورد مبادله در بستر تانا استایل را ندارد.</p>
+                                                                    </div>
+                                                                    <div class="g-mt-15">
+                                                                        <p class="g-font-weight-600 m-0">1-3) اصالت کالا</p>
+                                                                        <p>طرف اول این قرارداد هیچگونه مسئولیتی در قبال اصل یا غیر اصل بودن کالا ندارد و تمامی مسئولیت
+                                                                            ها در خصوص اصل یا غیر اصل بودن کالا به عهده طرف دوم می باشد و جبران تمامی خسارتهای ناشی از
+                                                                            اصل یا غیر اصل بودن کالا بر عهده طرف دوم قرارداد است.</p>
+                                                                    </div>
+                                                                    <div class="g-mt-15">
+                                                                        <p class="g-font-weight-600 m-0">1-4) تصاویر و توضیحات کالا</p>
+                                                                        <p>تمامی محتوای تولیدی و ارائه شده در پنل فروشنده ساده از سوی طرف دوم در پنل خود درج می شود لذا
+                                                                            مسئولیت نادرستی و اظهار خلاف واقع و درج تصاویر و متون توهین آمیز در رابطه با هر شخص، قشر و
+                                                                            اجتماعی و همچنین قراردادن تصاویر و توضیحات غیر اخلاقی و مستهجن و مغایر با قوانین جمهوری
+                                                                            اسلامی ایران کاملا به عهده طرف دوم این قرارداد بوده و طرف اول هیچگونه مسئولیتی در قبال
+                                                                            محتوای تولید شده در پنل فروشنده ساده را ندارد.</p>
+                                                                    </div>
+                                                                    <div class="g-mt-15">
+                                                                        <p class="g-font-weight-600 m-0">1-5) ارسال و تحویل کالا</p>
+                                                                        <p>تمامی امور مربوط به ارسال و تحویل کالا اعم از بسته بندی، تاخیر در ارسال، عدم ارسال و روش های
+                                                                            پستی بر عهده طرف دوم این قرارداد است و طرف دوم می پذیرد کالای ارائه شده در بستر تانا استایل
+                                                                            را در اسرع وقت ارسال و تحویل خریدار نماید. تمامی خسارتهای ناشی از دیرکرد یا عدم ارسال و
+                                                                            تحویل بعهده طرف دوم قرارداد است و طرف اول هیچگونه مسئولیتی در قبال ارسال و تحویل کالا را
+                                                                            ندارد.</p>
+                                                                    </div>
+                                                                    <div class="g-mt-15">
+                                                                        <p class="g-font-weight-600 m-0">1-6) برگشت کالا</p>
+                                                                        <p>تمامی امور مربوط به برگشت کالا و جزئیات مربوط به دلایل برگشت به عهده طرف دوم بوده و طرف اول
+                                                                            هیچگونه مسئولیتی در قبال کالاهای برگشتی ندارد.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- قوانین برگشت کالا -->
+                                                            <div style="background-color: white; direction: rtl" class="tab-pane fade text-justify"
+                                                                 id="nav-1-2-primary-ver--2" role="tabpanel">
+                                                                <div>
+                                                                    <h5> 2) عضویت در کمپین</h5>
+                                                                    <div>
+                                                                        <p>طرف دوم این قرارداد پس از عضویت در کمپین تبلیغاتی تانا استایل می پذیرد طبق برنامه ارائه شده
+                                                                            از سوی تانا استایل به فعالیت خود در کمپین بپردازد. عدم اجرای تعهدات کمپین، خود به خود موجب
+                                                                            می شود تا طرف دوم از کمپین تبلیغاتی حذف و محدودیت های دسترسی به کمپین بر روی پنل وی اعمال
+                                                                            شود و طرف دوم حق هرگونه ادعایی را از خود سلب می نماید.</p>
+                                                                        <p>طرف دوم با عضویت در کمپین تبلیغاتی قبول می نماید تا برنامه زمان بندی شده کمپین (که از طریق
+                                                                            پیامک برای وی ارسال می شود) را در زمان مقرر اجرا نماید.</p>
+                                                                        <p>طرف دوم می پذیرد در صورت عدم همکاری سایر فروشندگان ساده در کمپین تبلیغاتی حق طرح هیچگونه
+                                                                            ادعای قانونی نسبت به طرف اول ندارد و در ازای آن طرف اول متعهد می شود با شخص خاطی و مخل
+                                                                            برنامه تبلیغاتی برخورد نماید.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- ثبت مشخصات اشتباه -->
+                                                            <div style="background-color: white; direction: rtl" class="tab-pane fade text-justify"
+                                                                 id="nav-1-2-primary-ver--3" role="tabpanel">
+                                                                <div>
+                                                                    <h5> 3) محتوای نامناسب</h5>
+                                                                    <div>
+                                                                        <p>تمامی مسئولیت های محتوای تولید و ارائه شده بر روی پنل فروشنده ساده اعم از تصویر، متن، نظر،
+                                                                            پیام و هرگونه محتوای دیگر بر عهده طرف دوم بوده و طرف اول هیچگونه مسئولیتی در قبال محتوای
+                                                                            بارگذاری شده از سوی فروشنده ساده بر روی پنل وی را ندارد.</p>
+                                                                        <p>طرف دوم می پذیرد عواقب ناشی از بارگذاری محتوای نادرست و اظهار خلاف واقع و تصاویر و متون توهین
+                                                                            آمیز به شخص یا اشخاص یا قشر و اجتماعی و همچنین قراردادن تصاویر و توضیحات غیر اخلاقی و مستهجن
+                                                                            و مغایر با قوانین جمهوری اسلامی ایران کاملا به عهده وی بوده و خسارات ناشی از نقض ماده جاری
+                                                                            بعهده طرف دوم قرارداد است و طرف اول قرارداد از طرح هرگونه ادعایی مبرا می باشد.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- ثبت محصول ناموجود -->
+                                                            <div style="background-color: white; direction: rtl" class="tab-pane fade text-justify"
+                                                                 id="nav-1-2-primary-ver--4" role="tabpanel">
+                                                                <div>
+                                                                    <h5> 4) مبادلات مالی و بانکی</h5>
+                                                                    <div>
+                                                                        <p>تمامی امور مربوط به مبادلات مالی و بانکی و غیر بانکی در رابطه با فعالیت بر روی پنل فروشنده
+                                                                            ساده اعم از واریز وجه، ارائه رسید وجه و برگشت وجه به عهده طرف دوم قرارداد بوده و طرف اول
+                                                                            هیچگونه مسئولیتی در قبال امورات مالی و بانکی و غیر بانکی بر روی بستر تانا استایل را
+                                                                            ندارد.</p>
+                                                                        <p>هرگونه پول شوئی و خلاف مالی و مالیاتی که طبق قوانین جمهوری اسلامی ایران وضع شده است کاملا به
+                                                                            عهده طرف دوم قرارداد می باشد و طرف اول از هرگونه مسئولیت قانونی و قضایی مبرا است.</p>
+                                                                        <p>با توجه به اینکه امورات انتقال وجه در بستر تانا استایل به حساب بانکی خود فروشنندگان ساده
+                                                                            انجام می شود طرف اول قرارداد هیچگونه مسئولیتی در قبال امورات مالیاتی ندارد و مالیات ناشی از
+                                                                            کسب درآمد در تانا استایل به عهده خود فروشنده ساده می باشد.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- تحویل به موقع -->
+                                                            <div style="background-color: white; direction: rtl" class="tab-pane fade text-justify"
+                                                                 id="nav-1-2-primary-ver--5" role="tabpanel">
+                                                                <div>
+                                                                    <h5> 5) کپی رایت</h5>
+                                                                    <div>
+                                                                        <p>طرف دوم می پذیرد که هرگونه ادعای قانونی در رابطه با نقض قوانین کپی رایت که از سوی جمهوری
+                                                                            اسلامی ایران وضع گردیده در رابطه با محتوای تولید و ارائه شده در پنل فروشنده ساده به عهده طرف
+                                                                            دوم قرارداد است و طرف اول هیچگونه مسئولیتی در قبال نقض قوانین کپی رایت کشور را ندارد.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- تسویه حساب با فروشنده -->
+                                                            <div style="background-color: white; direction: rtl" class="tab-pane fade text-justify"
+                                                                 id="nav-1-2-primary-ver--6" role="tabpanel">
+                                                                <div>
+                                                                    <h5> 5) ارتباطات و پشتیبانی</h5>
+                                                                    <div>
+                                                                        <p>طرف دوم می پذیرد اعلان ها، آگهی ها و برنامه های تانا استایل را از طریق پیامک دریافت نماید و
+                                                                            در صورت نیاز به پشتیبانی از دو طریق تیکت و تماس تلفنی در ساعت کاری با پشتیبانی تانا استایل
+                                                                            تماس حاصل نماید.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- فروش آفلاین -->
+                                                            <div style="background-color: white; direction: rtl" class="tab-pane fade text-justify"
+                                                                 id="nav-1-2-primary-ver--7" role="tabpanel">
+                                                                <div>
+                                                                    <h5> 6) به روز رسانی</h5>
+                                                                    <div>
+                                                                        <p class="g-font-weight-600 m-0">6-1) نرم افزاری</p>
+                                                                        <p>به دلیل تمایل مدیریت و تیم تانا استایل برای به روز بودن و پیشرفت همه روزه این بستر، در صورت
+                                                                            لزوم به روز رسانی های جدید بر روی وب سایت تانا استایل اعمال خواهد شد و طرف دوم ملزم به تبعیت
+                                                                            از نسخه های جدید نرم افزاری می باشد.</p>
+                                                                    </div>
+                                                                    <div class="g-mt-15">
+                                                                        <p class="g-font-weight-600 m-0">6-2) مقررات</p>
+                                                                        <p>با توجه به بروز بودن نرم افزار و ارتقاء کمی و کیفی به موازات آن قوانین موجود در بستر تانا
+                                                                            استایل نیز دست خوش تغییر خواهد بود لذا طرف دوم با تایید و ثبت نام در پنل فروشنده ساده متعهد
+                                                                            می شود تمامی قوانین و ضوابط موجود در بستر تانا استایل را در هر زمان پذیرفته و ملزم به اجرا و
+                                                                            رعایت آن خواهد بود.</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
+                                                    </div>
+                                                </div>
+                                                <button style="outline: none" type="button" class="close col-12 g-py-8 g-bg-primary" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    بستن
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <!-- Danger Alert -->
                                     <div style="direction: rtl"
                                          class="alert alert-success alert-dismissible fade show text-right g-pa-20--lg g-px-10 g-py-10"
@@ -591,7 +830,7 @@
                                         <p class="g-mb-10">هدف از کمپین تبلیغاتی ما افزایش بازدیدکنندگان از محصولات و صفحات شغلی شما می باشد. روش کار به این صورت است که
                                             هر روز برای شما در موتورهای جستجو و همچنین صفحات اینستاگرام تبلیغ خواهد شد در ازای آن شما تنها یک استوری تبلیغاتی در لیست استوریهای خود روزانه قرار خواهید داد.
                                             هیچگونه هزینه ی مالی شامل حال اعضای کمپین نخواهد شد.
-                                            در صورتی که عضو می شوید لطفا بعد از ثبت نام و ورود به پنل خود، از طریق دکمه حاوی آیکون اینستاگرام، آپشن شرکت در کمپین تبلیغات را فعال کنید.
+                                            در صورتی که عضو می شوید لطفا بعد از ثبت نام و <span class="g-color-black">ورود به پنل</span> خود، از طریق دکمه حاوی <span class="g-color-black">آیکون اینستاگرام</span> ، آپشن شرکت در کمپین تبلیغات را <span class="g-color-black">فعال</span> کنید.
                                         </p>
                                         <div class="text-left">
                                             <div class="d-inline-block">
@@ -622,10 +861,10 @@
                                                        id="instaAccount"
                                                        name="instaAccount"
                                                        maxlength="50"
-                                                       onblur="if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
+                                                       oninput="if($(this).val().length>1) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
                                                 <div
-                                                    class="input-group-addon g-brd-around g-brd-primary g-brd-right-none d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                                                    <i class="fa fa-at g-color-primary g-font-size-18"></i>
+                                                    class="input-group-addon g-brd-around g-brd-gray-light-v2 g-brd-right-none d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                    <i class="fa fa-at g-font-size-18"></i>
                                                 </div>
                                             </div>
                                         </div>

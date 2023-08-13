@@ -410,4 +410,5 @@ Route::get('/Seller-Major-LikeComment/{id}/{replyID}/{status}/{likeStatus}', 'Se
 Route::get('/Seller-Major-Reactions', 'SellerMajor\Basic@reaction')->name('sellerMajorReaction');
 Route::get('/Seller-Major-Advertising/{id}/{status}', 'SellerMajor\Basic@advertising');
 Route::post( '/Seller-Major-uploadImage', 'SellerMajor\Basic@uploadImage');
+Route::get( '/Seller-Major-Regulation', 'SellerMajor\Basic@regulation')->name('sellerMajorRegulation');
 

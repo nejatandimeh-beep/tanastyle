@@ -44,7 +44,7 @@
                             </li>
 
                             <li class="nav-item g-mx-20--lg">
-                                <a href="#" class="nav-link g-px-0 g-color-primary--hover">
+                                <a href="{{route('sellerMajorRegulation')}}" class="nav-link g-px-0 g-color-primary--hover">
                                     <i class="g-font-size-16 g-font-weight-600 icon-book-open align-middle g-ml-5"></i>
                                     <span class="align-self-center">قوانین</span>
                                 </a>

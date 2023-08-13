@@ -1146,6 +1146,11 @@ class Basic extends Controller
         return view('SellerMajor.Reaction', compact('data', 'eventLike', 'postsLike', 'eventLikeHowDay', 'postsLikeHowDay'
             , 'postsComment', 'postsCommentHowDay', 'postsCommentReply', 'postsCommentReplyHowDay', 'rowTime'));
     }
+
+    public function regulation()
+    {
+        return view('SellerMajor.Regulation');
+    }
     //------------------------------------------------
     //  Convert Date to Iranian Calender
     public function convertDateToPersian($d)

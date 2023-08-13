@@ -77,66 +77,72 @@
                     str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
                 }
             }
-            console.log('change number',str);
+            console.log('change number', str);
             return str;
         };
 
     $('input').on('input', function () {
+        if($(this).attr('type')!=='file')
         $(this).val(fixNumbers($(this).val()));
     })
 
-    function checkUserName(userName){
+    function checkUserName(userName) {
         $('.checkUserAlarm').hide();
         $('.checkUserAlarm2').hide();
         $('.checkUserAlarm3').hide();
-        let re = /^[a-z\d\._\s]+$/i;
-        if(userName!==''){
-            if (re.test(userName)){
-                setTimeout(function () {
-                    $.ajax({
-                        url: '/sellerMajor/checkUserName/'+userName,
-                        type: 'GET',
-                        beforeSend: function () {
-                            $('.checkUserAlarm').hide();
-                            $('.checkUserAlarm2').hide();
-                            $('.checkUserAlarm3').hide();
-                            $('.userNameSpinner').show();
-                        },
-                        success: function (data) {
-                            if(data==='exist'){
-                                $('.checkUserAlarm').show();
-                                $('#user-name').addClass('g-brd-red');
+        let re = /^[a-z\d\._\s]+$/i, p = /^[\u0600-\u06FF\s]+$/;
+        if (userName !== '') {
+            if (re.test(userName) || p.test(userName)) {
+                $.ajax({
+                    url: '/sellerMajor/checkUserName/' + userName,
+                    type: 'GET',
+                    async: false,
+                    beforeSend: function () {
+                        $('.checkUserAlarm').hide();
+                        $('.checkUserAlarm2').hide();
+                        $('.checkUserAlarm3').hide();
+                        $('.userNameSpinner').show();
+                    },
+                    success: function (data) {
+                        if (data === 'exist') {
+                            $('.checkUserAlarm').show();
+                            $('#user-name').addClass('g-brd-red');
+                        } else {
+                            if (userName.length > 1) {
+                                $('#user-name').removeClass('g-brd-red');
                             } else {
-                                if(userName.length > 1){
-                                    $('#user-name').removeClass('g-brd-red');
-                                } else {
-                                    $('.checkUserAlarm3').show();
-                                    $('#user-name').addClass('g-brd-red');
-                                }
+                                $('.checkUserAlarm3').show();
+                                $('#user-name').addClass('g-brd-red');
                             }
-                            $('.userNameSpinner').hide();
-                            console.log(data);
                         }
-                    });
-                },500)
+                        $('.userNameSpinner').hide();
+                        console.log(data);
+                    }
+                });
             } else {
                 $('.checkUserAlarm2').show();
                 $('#user-name').addClass('g-brd-red');
             }
         }
     }
+
+    $('#user-name').on('keypress', function (e) {
+        if (e.which === 32)
+            return false;
+    })
+
     $(document).ready(function () {
-        if($('#password').length>0){
-            let myInput=$('#password'),
+        if ($('#password').length > 0) {
+            let myInput = $('#password'),
                 letter = $("#lowercase"),
                 capital = $("#uppercase"),
                 number = $("#number"),
                 length = $("#length");
 
-            myInput.on('keyup',function() {
+            myInput.on('keyup', function () {
                 // Validate lowercase letters
                 let lowerCaseLetters = /[a-z]/g;
-                if(myInput.val().match(lowerCaseLetters)) {
+                if (myInput.val().match(lowerCaseLetters)) {
                     letter.removeClass("g-bg-red");
                     letter.addClass("g-bg-primary");
                 } else {
@@ -146,7 +152,7 @@
 
                 // Validate capital letters
                 let upperCaseLetters = /[A-Z]/g;
-                if(myInput.val().match(upperCaseLetters)) {
+                if (myInput.val().match(upperCaseLetters)) {
                     capital.removeClass("g-bg-red");
                     capital.addClass("g-bg-primary");
                 } else {
@@ -156,7 +162,7 @@
 
                 // Validate numbers
                 let numbers = /[0-9]/g;
-                if(myInput.val().match(numbers)) {
+                if (myInput.val().match(numbers)) {
                     number.removeClass("g-bg-red");
                     number.addClass("g-bg-primary");
                 } else {
@@ -165,12 +171,18 @@
                 }
 
                 // Validate length
-                if(myInput.val().length >= 8) {
+                if (myInput.val().length >= 8) {
                     length.removeClass("g-bg-red");
                     length.addClass("g-bg-primary");
                 } else {
                     length.removeClass("g-bg-primary");
                     length.addClass("g-bg-red");
+                }
+
+                if(letter.hasClass('g-bg-red') || capital.hasClass('g-bg-red') || number.hasClass('g-bg-red') || length.hasClass('g-bg-red')){
+                    $('#passwordAlert').removeClass('d-none');
+                } else {
+                    $('#passwordAlert').addClass('d-none');
                 }
             });
         }
@@ -180,7 +192,7 @@
 
         let $modal = $('#modal'),
             image = document.getElementById('sample_image'),
-            cropper, inputID, inputIdFinshed = [], counter = 0,file_type;
+            cropper, inputID, inputIdFinshed = [], counter = 0, file_type;
         $('input[id^="pic"]').on('change', function (event) {
             if (!$('#mobile').hasClass('g-brd-red')) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
@@ -331,56 +343,56 @@
             case 'vehicles':
                 category = 'وسایل نقلیه (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
             case 'sports':
                 category = 'وسایل ورزشی (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
             case 'estate':
                 category = 'املاک (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
             case 'electronic':
                 category = 'لوازم الکتریکی (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
             case 'industrial':
                 category = 'صنعتی، اداری و تجاری (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
             case 'services':
                 category = 'خدمات و کسب و کار (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
             case 'connections':
                 category = 'وسایل ارتباطی (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
             case 'appliances':
                 category = 'لوازم خانگی (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
 
             case 'personal':
                 category = 'لوازم شخصی (' + catHint + ')';
                 $('#selectedItem').text(category);
-                 $('#hintCategory').val(category);
+                $('#hintCategory').val(category);
                 $('#category').val(catCode);
                 break;
 
@@ -391,26 +403,31 @@
         }
     }
 
-    function regulationCheck(btn){
-        if(btn==='noAgree'){
-            if (checkData()==='false') {
+    function regulationCheck(btn) {
+        if (btn === 'noAgree') {
+            if (checkData() === 'false') {
                 alert('لطفا ابتدا تمامی داده های مورد نیاز را تکمیل بفرمایید.');
             } else {
-                $('#'+btn).addClass('d-none'); $('#agree').removeClass('d-none');
+                $('#' + btn).addClass('d-none');
+                $('#agree').removeClass('d-none');
             }
         } else {
-            $('#'+btn).addClass('d-none'); $('#noAgree').removeClass('d-none');
+            $('#' + btn).addClass('d-none');
+            $('#noAgree').removeClass('d-none');
         }
         console.log(checkData());
     }
 
-    $('#tablighBtn').on('click',function () {
-        if($(this).hasClass('g-bg-white')){
+    $('#tablighBtn').on('click', function () {
+        if ($(this).hasClass('g-bg-white')) {
             $('#instaContainer').removeClass('d-none')
+            $('#instaAccount').focus();
             $(this).removeClass('g-bg-white g-color-gray-dark-v5').addClass('g-bg-primary g-color-white')
         } else {
             $('#instaContainer').addClass('d-none')
             $(this).removeClass('g-bg-primary g-color-white').addClass('g-bg-white  g-color-gray-dark-v5')
+            $('#instaAccount').val('');
+            $('#instaAccount').addClass('g-brd-red');
         }
     })
 
@@ -418,9 +435,9 @@
         if ($('#user-name').hasClass('g-brd-red') ||
             $('#mobile').hasClass('g-brd-red') ||
             $('#category').val() === 'empty' ||
-            $('#pic12').val() === ''||
+            $('#pic12').val() === '' ||
             ($('#instaAccount').hasClass('g-brd-red') && $('#tablighBtn').hasClass('g-bg-primary'))
-        ){
+        ) {
             return 'false';
         } else {
             return 'true';
@@ -428,7 +445,12 @@
     }
 
     function saveUserData() {
-        if (checkData()==='false' || $('#agree').hasClass('d-none')) {
+        let myInput = $('#password'),
+            letter = $("#lowercase"),
+            capital = $("#uppercase"),
+            number = $("#number"),
+            length = $("#length");
+        if (checkData() === 'false' || $('#agree').hasClass('d-none') || !$('#passwordAlert').hasClass('d-none')) {
             alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و مجدداً تلاش کنید.');
         } else {
             $('#submitText').hide();
@@ -439,19 +461,19 @@
     }
 
     function checkPass() {
-        let myInput=$('#password'),
+        let myInput = $('#password'),
             letter = $("#lowercase"),
             capital = $("#uppercase"),
             number = $("#number"),
             length = $("#length");
 
-        if (letter.hasClass('g-bg-red')||capital.hasClass('g-bg-red')||number.hasClass('g-bg-red')||length.hasClass('g-bg-red')) {
+        if (letter.hasClass('g-bg-red') || capital.hasClass('g-bg-red') || number.hasClass('g-bg-red') || length.hasClass('g-bg-red')) {
             alert('لطفا قواعد رمزگذاری را رعایت کنید.');
         } else {
-            if(myInput.val() === $('#password-confirm').val()) {
+            if (myInput.val() === $('#password-confirm').val()) {
                 $('#submitText').hide();
                 $('#waitingSubmit').show();
-                $('#save').prop('disabled',true);
+                $('#save').prop('disabled', true);
                 $('form').submit();
             } else {
                 alert('رمز و تکرار رمز یکسان نیستند.')
