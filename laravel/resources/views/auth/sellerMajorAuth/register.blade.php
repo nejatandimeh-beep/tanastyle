@@ -619,8 +619,7 @@
                                                 <!-- شرایط استفاده -->
                                                 <div style="background-color: white; direction: rtl"
                                                      class="hideScrollBar text-justify g-pa-30">
-                                                    <h4 class="text-right g-my-20 g-mt-0--lg">قوانین
-                                                        استفاده از پنل فروشنده ساده</h4>
+                                                    <h5 class="m-0 text-right g-pa-15 g-px-75--lg">شرایط استفاده از پنل فروشنده ساده</h5>
                                                     <div class="g-mb-30">
                                                         <p class="m-0">کاربر گرامی درود</p>
                                                         <p class="m-0">قبل از هر چیز لازم به ذکر است قوانین موجود در وب سایت تانا استایل تنها در جهت حفاظت از حقوق کاربران در بستر تانا استایل و همچنین حفاظت از حقوق شرکت تابش پس زمینه مکریان که تولید کننده وب سایت تانا استایل است می باشد.</p>
@@ -635,37 +634,37 @@
                                                                 data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-primary g-mb-20">
                                                                 <li class="nav-item col-12 p-0">
                                                                     <a class="nav-link active g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" data-toggle="tab"
-                                                                       href="#nav-1-2-primary-ver--1" role="tab">کالای مورد مبادله</a>
+                                                                       href="#nav-1-2-primary-ver--1" onclick="windowScrollTo()" role="tab">کالای مورد مبادله</a>
                                                                 </li>
                                                                 <li class="nav-item col-12 p-0">
                                                                     <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="returnProduct"
-                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--2" role="tab">عضویت در کمپین</a>
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--2" onclick="windowScrollTo()" role="tab">عضویت در کمپین</a>
                                                                 </li>
                                                                 <li class="nav-item col-12 p-0">
                                                                     <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="falseProduct"
-                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--3" role="tab">محتوای نامناسب</a>
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--3" onclick="windowScrollTo()" role="tab">محتوای نامناسب</a>
                                                                 </li>
                                                                 <li class="nav-item col-12 p-0">
                                                                     <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="emptyProduct"
-                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--4" role="tab">مبادلات مالی و بانکی</a>
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--4" onclick="windowScrollTo()" role="tab">مبادلات مالی و بانکی</a>
                                                                 </li>
                                                                 <li class="nav-item col-12 p-0">
                                                                     <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="deliveryProduct"
-                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--5" role="tab">کپی رایت</a>
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--5" onclick="windowScrollTo()" role="tab">کپی رایت</a>
                                                                 </li>
                                                                 <li class="nav-item col-12 p-0">
                                                                     <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="sellerCheckout"
-                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--6" role="tab">ارتباطات و پشتیبانی</a>
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--6" onclick="windowScrollTo()" role="tab">ارتباطات و پشتیبانی</a>
                                                                 </li>
                                                                 <li class="nav-item col-12 p-0">
                                                                     <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="offlineSelling"
-                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--7" role="tab">به روز رسانی</a>
+                                                                       data-toggle="tab" href="#nav-1-2-primary-ver--7" onclick="windowScrollTo()" role="tab">به روز رسانی</a>
                                                                 </li>
                                                             </ul>
                                                             <!--End Nav tabs -->
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 p-0">
+                                                    <div id="regulationContainer" class="col-md-12 p-0">
                                                         <div id="nav-1-2-primary-ver" class="tab-content g-mb-100">
                                                             <!-- کالای مورد مبادله -->
                                                             <div style="background-color: white; direction: rtl" class="tab-pane fade show active text-justify"

@@ -86,6 +86,12 @@
         $(this).val(fixNumbers($(this).val()));
     })
 
+    function windowScrollTo(){
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $("#regulationContainer").offset().top
+        }, 1000);
+    }
+
     function checkUserName(userName) {
         $('.checkUserAlarm').hide();
         $('.checkUserAlarm2').hide();

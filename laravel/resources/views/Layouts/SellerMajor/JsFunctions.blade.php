@@ -34,6 +34,12 @@
             )
         }
 
+        function windowScrollTo(){
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $("#regulationContainer").offset().top
+            }, 1000);
+        }
+
         let imgRowID = [], imgRowIdTemp, lastScrollTop = 0, lastScrollTopModal = 0, postNumber = 0, completeLoad = true,
             touchtime = 0, postDeleteItems = [], imgWorking = 0, asset = $('#asset').text(), imgNumber = 0, file_type,
             dragging = false;
