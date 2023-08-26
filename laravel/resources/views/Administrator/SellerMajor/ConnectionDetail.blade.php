@@ -5,7 +5,7 @@
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
                 <a class="nav-link"
-                   href="{{route('customerControlPanel',['id'=>$data[0]->CustomerID,'tab'=>'support'])}}">پشتیبانی</a>
+                   href="#">پشتیبانی</a>
             </li>
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1"
@@ -46,12 +46,12 @@
                                     <div class="media g-mb-5">
                                         <div style="border-radius: 8px 0 8px 8px;"
                                              class="media-body g-brd-around g-brd-gray-light-v2 g-pa-30 text-right">
-                                            <div class="g-mb-15 text-right">
-                                                <h5 class="d-flex justify-content-between align-items-center h5 g-color-gray-light-v3 mb-0 flex-row-reverse">
-                                                    <span class="d-block">{{ $rec->Name.' '.$rec->Family }}</span>
+                                            <div  style="direction: rtl" class="g-mb-15 text-right">
+                                                <h5 class="h5 g-color-gray-light-v3 mb-0">
+                                                    <span class="d-block">{{ $rec->Name}}</span>
                                                 </h5>
                                                 @if (isset($questionHowDay[$key]))
-                                                    <span style="direction: rtl"
+                                                    <span
                                                           class="g-color-gray-light-v3 g-font-size-12">{{ $questionHowDay[$key] }}</span>
                                                 @else
                                                     <span style="direction: rtl"
@@ -69,12 +69,12 @@
                                     <div class="media g-mb-5 g-mr-30--lg sdCommentPadding-20">
                                         <div style="border-radius: 8px 0 8px 8px;"
                                              class="media-body g-brd-around g-brd-primary g-pa-30 text-right">
-                                            <div class="g-mb-15 text-right">
-                                                <h5 class="d-flex justify-content-between align-items-center g-color-primary h5 mb-0 flex-row-reverse">
+                                            <div  style="direction: rtl" class="g-mb-15 text-right">
+                                                <h5 class="g-color-primary h5 mb-0">
                                                     <span class="d-block">تانا استایل</span>
                                                 </h5>
                                                 @if (isset($answerHowDay[$key]))
-                                                    <span style="direction: rtl"
+                                                    <span
                                                           class="g-color-gray-light-v3 g-font-size-12">{{ $answerHowDay[$key] }}</span>
                                                 @else
                                                     <span style="direction: rtl"
@@ -95,7 +95,7 @@
                                              class="media-body g-brd-around g-brd-gray-light-v2 g-pa-30 text-right">
                                             <div class="g-mb-15 text-right">
                                                 <h5 class="d-flex justify-content-between align-items-center h5 g-color-gray-light-v3 mb-0 flex-row-reverse">
-                                                    <span class="d-block">{{ $rec->Name.' '.$rec->Family }}</span>
+                                                    <span class="d-block">{{ $rec->Name}}</span>
                                                 </h5>
                                                 @if (isset($questionHowDay[$key]))
                                                     <span style="direction: rtl"
@@ -117,7 +117,7 @@
                             @endforeach
                             @endif
                             <div class="g-mt-100 p-0">
-                                <form action="{{ route('adminCustomerConnectionNewMsg')}}" method="post"
+                                <form action="{{ route('adminSellerMajorConnectionNewMsg')}}" method="post"
                                       enctype='multipart/form-data'>
                                     @csrf
                                     {{--                Hidden Input--}}
@@ -143,7 +143,7 @@
                                                       maxlength="300"></textarea>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="customerId" value="{{ isset($data) ? $data[0]->CustomerID: '' }}">
+                                    <input type="hidden" name="sellerMajorID" value="{{ isset($data) ? $data[0]->SellerMajorID: '' }}">
                                     <input type="hidden" name="detailId" value="{{ isset($data) ? $data[$key]->ID: '' }}">
                                     <button type="submit"
                                             class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mb-25">

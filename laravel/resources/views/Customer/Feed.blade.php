@@ -193,6 +193,7 @@
                                 <div>
                                     <a class="g-color-gray-dark-v1 g-ml-10"
                                        href="#postMsgModal"
+                                       id="postMsgModalBtn"
                                        data-toggle="modal"
                                        data-target="#postMsgModal"
                                        onclick="showPostMsg({{$rec->postID}},'{{asset($rec->postPic.'/'.$rec->postID.'/0.jpg')}}','{{$rec->name}}')">

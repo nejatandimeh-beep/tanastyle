@@ -22,7 +22,7 @@
         <ul class="nav nav-fill u-nav-v4-1 u-nav-light adminPanelResponsive" role="tablist" data-target="nav-4-1-primary-hor-fill"
             data-tabs-mobile-type="slide-up-down" data-btn-classes="btn btn-md btn-block rounded-0 u-btn-outline-white">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('customerList')}}">خریداران</a>
+                <a class="nav-link" href="{{route('sellerMajorList')}}">فروشندگان ساده</a>
             </li>
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link active" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1"
@@ -63,7 +63,7 @@
                                             <i class="fa fa-close"></i>
                                         </button>
                                     </div>
-                                    <form action="{{ route('adminToCustomersMsg')}}" method="post"
+                                    <form action="{{ route('adminToSellerMajorMsg')}}" method="post"
                                           enctype='multipart/form-data'>
                                         @csrf
                                         {{--                            Hidden input--}}
@@ -133,15 +133,15 @@
                                                 <span style="border-right: 1px solid lightgrey"
                                                       class="input-group-addon g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-left-none w-25">لینک پیام</span>
                                                     <input style="direction: ltr"
-                                                        class="form-control form-control-md rounded-0 g-color-white g-font-size-16 g-bg-gray-dark-v3 g-color-gray-light-v4"
-                                                        type="text"
-                                                        value=""
-                                                        oninput="$('#linkHint').text('https://tanastyle.ir/'+$(this).val())"
-                                                        id="msgLink"
-                                                        placeholder="https://tanastyle.ir/..."
-                                                        name="msgLink"
-                                                        autocomplete="off" {{-- hide popup box when clicked --}}
-                                                        tabindex="1">
+                                                           class="form-control form-control-md rounded-0 g-color-white g-font-size-16 g-bg-gray-dark-v3 g-color-gray-light-v4"
+                                                           type="text"
+                                                           value=""
+                                                           oninput="$('#linkHint').text('https://tanastyle.ir/'+$(this).val())"
+                                                           id="msgLink"
+                                                           placeholder="https://tanastyle.ir/..."
+                                                           name="msgLink"
+                                                           autocomplete="off" {{-- hide popup box when clicked --}}
+                                                           tabindex="1">
                                                 </div>
                                             </div>
                                             <div style="direction: ltr" class="form-group row g-mb-25">
@@ -193,7 +193,6 @@
                                             گفتگو
                                         </th>
                                         <th class="align-middle text-center text-nowrap">بخش مربوطه</th>
-                                        <th class="align-middle text-center text-nowrap">کاربر</th>
                                         <th class="align-middle text-center text-nowrap">اولویت</th>
                                         <th class="align-middle text-center text-nowrap">زمان ایجاد گفتگو</th>
                                         <th class="align-middle text-center text-nowrap">جزئیات</th>
@@ -209,7 +208,6 @@
                                     @foreach($support as $key => $rec)
                                         @if (($rec->ConversationID) !== $groupBy)
                                             <tr>
-                                                <td class="align-middle text-nowrap text-center g-font-weight-600">{{ $rec->name.' '. $rec->Family}}</td>
                                                 <td class="align-middle text-nowrap text-center g-font-weight-600 g-color-aqua">{{ $rec->Subject }}</td>
                                                 {{--                                Section--}}
                                                 @if ($rec->Section === '0')
@@ -240,7 +238,7 @@
                                                 </td>
                                                 <td class="align-middle text-center text-nowrap">
                                                     <a style="cursor: pointer"
-                                                       href="{{ route('adminCustomerConnectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
+                                                       href="{{ route('adminSellerMajorConnectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
                                                        class="g-color-gray-light-v3 g-text-underline--none--hover g-color-primary--hover g-pa-5"
                                                        data-toggle="tooltip"
                                                        data-placement="top" data-original-title="مشاهده جزئیات گفتگو">
@@ -321,38 +319,38 @@
                                     <input style="display: none" value=" {{ $groupBy = '' }}">
 
                                     @foreach($alarmMsg as $key => $rec)
-                                            <tr>
-                                                <td class="align-middle text-nowrap text-center g-font-weight-600 g-color-aqua">{{ $rec->Title }}</td>
-                                                {{--                                Section--}}
-                                                @if ($rec->Section === '0')
-                                                    <td class="align-middle text-center text-nowrap">فنی</td>
-                                                @elseif ($rec->Section === '1')
-                                                    <td class="align-middle text-center text-nowrap">تحویل کالا</td>
-                                                @elseif ($rec->Section === '2')
-                                                    <td class="align-middle text-center text-nowrap">مالی</td>
-                                                @elseif ($rec->Section === '3')
-                                                    <td class="align-middle text-center text-nowrap">مدیریت</td>
-                                                @endif
+                                        <tr>
+                                            <td class="align-middle text-nowrap text-center g-font-weight-600 g-color-aqua">{{ $rec->Title }}</td>
+                                            {{--                                Section--}}
+                                            @if ($rec->Section === '0')
+                                                <td class="align-middle text-center text-nowrap">فنی</td>
+                                            @elseif ($rec->Section === '1')
+                                                <td class="align-middle text-center text-nowrap">تحویل کالا</td>
+                                            @elseif ($rec->Section === '2')
+                                                <td class="align-middle text-center text-nowrap">مالی</td>
+                                            @elseif ($rec->Section === '3')
+                                                <td class="align-middle text-center text-nowrap">مدیریت</td>
+                                            @endif
 
-                                                {{--                                Priority--}}
-                                                @if ($rec->Priority === '2')
-                                                    <td class="align-middle text-center text-nowrap">معمولی</td>
-                                                @elseif ($rec->Priority === '1')
-                                                    <td class="align-middle text-center text-nowrap">
-                                                        مهم
-                                                    </td>
-                                                @elseif ($rec->Priority === '0')
-                                                    <td class="align-middle text-center text-nowrap">
-                                                        فوری
-                                                    </td>
-                                                @endif
+                                            {{--                                Priority--}}
+                                            @if ($rec->Priority === '2')
+                                                <td class="align-middle text-center text-nowrap">معمولی</td>
+                                            @elseif ($rec->Priority === '1')
                                                 <td class="align-middle text-center text-nowrap">
-                                                    <p style="direction: ltr" class="g-font-size-13 g-color-primary m-0 p-0">{{ $rec->Time }}</p>
+                                                    مهم
                                                 </td>
-                                                <td class="align-middle text-center">
-                                                    <p class="g-font-size-13 g-color-white m-0 p-0">{{ $rec->Message }}</p>
+                                            @elseif ($rec->Priority === '0')
+                                                <td class="align-middle text-center text-nowrap">
+                                                    فوری
                                                 </td>
-                                            </tr>
+                                            @endif
+                                            <td class="align-middle text-center text-nowrap">
+                                                <p style="direction: ltr" class="g-font-size-13 g-color-primary m-0 p-0">{{ $rec->Time }}</p>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="g-font-size-13 g-color-white m-0 p-0">{{ $rec->Message }}</p>
+                                            </td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>

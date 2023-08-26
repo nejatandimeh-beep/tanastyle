@@ -562,6 +562,11 @@ class Basic extends Controller
             ->orderBy('sc.ID', 'DESC')
             ->get();
 
+        $alarmMsg=DB::table('seller_alarm_msg')
+            ->select('*')
+            ->where('SellerID',Auth::guard('seller')->user()->id)
+            ->get();
+
         // Convert Date
         $persianDate = array();
         foreach ($data as $key => $rec) {
@@ -569,7 +574,7 @@ class Basic extends Controller
             $persianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Seller.AdminConnection', compact('data', 'persianDate'));
+        return view('Seller.AdminConnection', compact('data', 'persianDate','alarmMsg'));
 
     }
 
@@ -679,6 +684,21 @@ class Basic extends Controller
                 'Replay' => 0,
             ],
         ]);
+
+        try {
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "support";
+            $type = "sms";
+
+            $result = $var->VerifyLookup('09144426149', 'Administrator-Master', 'Seller', null, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
 
         return redirect('/Seller-AdminConnection')->with('status', 'success');
     }

@@ -41,6 +41,7 @@
                             </div>
                             @foreach($data as $key => $rec)
                                 @if ($rec->Replay === 1)
+                                    @if($rec->Question!=='')
                                     <div class="media g-mb-5">
                                         <div style="border-radius: 8px 0 8px 8px;"
                                              class="media-body g-brd-around g-brd-gray-light-v2 g-pa-30 text-right">
@@ -57,13 +58,14 @@
                                                 @endif
                                             </div>
 
-                                            <pre
+                                            <p
                                                 style="direction: rtl; resize: none; opacity: 1;"
                                                 class="text-justify text-right col-12 g-brd-none g-color-gray-light-v5 g-bg-transparent g-line-height-2 msg"
-                                                disabled>{{ $rec->Question }}</pre>
+                                                disabled>{{ $rec->Question }}</p>
                                         </div>
                                     </div>
-                                    <div class="media g-mb-30 g-mr-30--lg sdCommentPadding-20">
+                                    @endif
+                                    <div class="media g-mb-5 g-mr-30--lg sdCommentPadding-20">
                                         <div style="border-radius: 8px 0 8px 8px;"
                                              class="media-body g-brd-around g-brd-primary g-pa-30 text-right">
                                             <div class="g-mb-15 text-right">
@@ -79,14 +81,14 @@
                                                 @endif
                                             </div>
 
-                                            <pre
+                                            <p
                                                 style="direction: rtl; resize: none; opacity: 1;"
                                                 class="text-justify text-right g-color-gray-light-v5 col-12 g-brd-none g-bg-transparent g-line-height-2 msg"
-                                                disabled>{{ $rec->Answer }}</pre>
+                                                disabled>{{ $rec->Answer }}</p>
                                         </div>
                                     </div>
                                 @else
-                                    <div class="media g-mb-30">
+                                    <div class="media g-mb-5">
                                         <div style="border-radius: 8px 0 8px 8px;"
                                              class="media-body g-brd-around g-brd-gray-light-v2 g-pa-30 text-right">
                                             <div class="g-mb-15 text-right">
@@ -102,10 +104,10 @@
                                                 @endif
                                             </div>
 
-                                            <pre
+                                            <p
                                                 style="direction: rtl; resize: none; opacity: 1;"
                                                 class="text-justify text-right col-12 g-color-gray-light-v5 g-brd-none g-bg-transparent g-line-height-2 msg"
-                                                disabled>{{ $rec->Question }}</pre>
+                                                disabled>{{ $rec->Question }}</p>
                                         </div>
                                     </div>
                                 @endif

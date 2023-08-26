@@ -1625,6 +1625,11 @@ class Basic extends Controller
             return redirect()->route('login');
         }
 
+        $alarmMsg=DB::table('customer_alarm_msg')
+            ->select('*')
+            ->where('CustomerID',Auth::user()->id)
+            ->get();
+
         // Convert Date
         $persianDate = array();
         foreach ($data as $key => $rec) {
@@ -1632,13 +1637,13 @@ class Basic extends Controller
             $persianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Customer.Conversation', compact('data', 'persianDate'));
+        return view('Customer.Conversation', compact('data', 'persianDate','alarmMsg'));
     }
 
     public function connectionDetail($id, $status)
     {
         $data = DB::table('customer_conversation_detail as ccd')
-            ->select('ccd.*', 'cc.Subject', 'cc.Status', 'cc.ID as ConversationID', 'cc.CustomerID', 'c.Name', 'c.Family')
+            ->select('ccd.*', 'cc.Subject', 'cc.Status', 'cc.ID as ConversationID', 'cc.CustomerID', 'c.Name', 'c.Family','cc.Priority')
             ->leftJoin('customer_conversation as cc', 'cc.ID', '=', 'ccd.ConversationID')
             ->leftJoin('customers as c', 'c.ID', '=', 'cc.CustomerID')
             ->where('ccd.ConversationID', $id)
@@ -1741,6 +1746,20 @@ class Basic extends Controller
             ],
         ]);
 
+        try {
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "support";
+            $type = "sms";
+
+            $result = $var->VerifyLookup('09144426149', 'Administrator-Master', 'Customer', null, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
         return redirect('/Customer-Connection')->with('status', 'success');
     }
 

@@ -180,7 +180,6 @@
                 <div class="container g-pb-170">
                     {{-- Total Info--}}
                     <div class="rowSeller g-mt-30 g-mb-20 g-mr-0 g-ml-0">
-
                         <!-- Icon Blocks -->
                         <div style="padding-right: 60px;"
                              class="text-header-responsive col-12 g-pt-25 g-pb-25 g-mb-5 g-pl-0">
@@ -190,10 +189,9 @@
                                     data-toggle="modal"
                                     data-target="#modalLoginForm"
                                     href="#">
-                                    <i class="et-icon-chat g-font-size-25"></i>
+                                    <i class="icon-earphones-alt g-font-size-25"></i>
                                 </a>
-                                <h6 class="g-color-white mb-3">ایجاد گفتگو</h6>
-                                <span class="u-label g-color-teal g-mb-5 g-font-size-14">با درج عنوان جدید</span>
+                                <h6 class="g-color-white mb-3">ارسال پیام</h6>
                             </div>
                         </div>
                         <!-- End Icon Blocks -->
@@ -203,14 +201,14 @@
                              aria-labelledby="myModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog" role="document">
-                                <div class="modal-content">
+                                <div class="g-bg-gray-dark-v2 modal-content">
                                     <div style="background-color: #333" class="modal-header">
-                                        <h4>ایجاد گفتگو جدید</h4>
+                                        <h5>ارسال پیام</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <i class="hs-icon hs-icon-close"></i>
+                                            <i class="fa fa-close"></i>
                                         </button>
                                     </div>
-                                    <form action="{{ route('connectionNew')}}" method="post"
+                                    <form action="{{ route('adminToSellerMsg')}}" method="post"
                                           enctype='multipart/form-data'>
                                         @csrf
                                         {{--                            Hidden input--}}
@@ -219,9 +217,9 @@
                                             <div class="form-group row g-mb-25">
                                                 <div class="input-group col-sm-10 force-col-12 mx-auto">
                                                 <span style="border-right: 1px solid lightgrey"
-                                                      class="input-group-addon  g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-left-none w-25">عنوان گفتگو</span>
+                                                      class="input-group-addon g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-left-none w-25">عنوان پیام</span>
                                                     <input
-                                                        class="form-control form-control-md rounded-0 g-color-darkblue g-font-size-16 g-bg-gray-dark-v2 g-color-gray-light-v4"
+                                                        class="form-control form-control-md rounded-0 g-color-white g-font-size-16 g-bg-gray-dark-v3 g-color-gray-light-v4"
                                                         type="text"
                                                         value=""
                                                         id="login"
@@ -234,7 +232,7 @@
                                             <div class="form-group row g-mb-25">
                                                 <div class="input-group col-sm-10 force-col-12 mx-auto">
                                                     <span style="border-right: 1px solid lightgrey;"
-                                                          class="input-group-addon  g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-left-none g-pa-10 w-25">اولویت</span>
+                                                          class="input-group-addon g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-left-none g-pa-10 w-25">اولویت</span>
                                                     <select style="height: 100%"
                                                             class="form-control form-control-md custom-select rounded-0 text-right g-font-size-16 g-height-70 g-pr-25 g-bg-gray-dark-v3 g-color-gray-light-v4"
                                                             tabindex="2"
@@ -260,16 +258,53 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="form-group row g-mb-25">
+                                                <div class="input-group col-sm-10 force-col-12 mx-auto">
+                                                <span style="border-right: 1px solid lightgrey"
+                                                      class="input-group-addon g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-left-none w-25">متن پیام</span>
+                                                    <textarea style="direction: rtl"
+                                                              class="form-control g-bg-gray-dark-v3 g-color-white form-control-md g-resize-none rounded-0 pl-0 text-right g-font-size-16"
+                                                              rows="6"
+                                                              tabindex="1"
+                                                              value=""
+                                                              placeholder="پیامتان را شروع کنید.. (300 حرف)"
+                                                              name="msg"
+                                                              id="msg"
+                                                              maxlength="300"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row g-mb-25">
+                                                <div class="input-group col-sm-10 force-col-12 mx-auto">
+                                                <span style="border-right: 1px solid lightgrey"
+                                                      class="input-group-addon g-bg-gray-dark-v2 g-color-gray-light-v4 g-brd-left-none w-25">لینک پیام</span>
+                                                    <input style="direction: ltr"
+                                                           class="form-control form-control-md rounded-0 g-color-white g-font-size-16 g-bg-gray-dark-v3 g-color-gray-light-v4"
+                                                           type="text"
+                                                           value=""
+                                                           oninput="$('#linkHint').text('https://tanastyle.ir/'+$(this).val())"
+                                                           id="msgLink"
+                                                           placeholder="https://tanastyle.ir/..."
+                                                           name="msgLink"
+                                                           autocomplete="off" {{-- hide popup box when clicked --}}
+                                                           tabindex="1">
+                                                </div>
+                                            </div>
+                                            <div style="direction: ltr" class="form-group row g-mb-25">
+                                                <div class="input-group col-sm-10 force-col-12 mx-auto">
+                                                    <h5 class="text-left" id="linkHint"></h5>
+                                                </div>
+                                            </div>
                                         </div>
                                         <button type="submit"
                                                 class="btn btn-md u-btn-primary col-12 rounded-0 g-pa-15 g-color-white">
-                                            شروع گفتگو
+                                            ارسال پیام
                                         </button>
+                                        <input class="d-none" type="text" value="{{$sellerInfo->id}}" name="userID">
+                                        <input class="d-none" type="text" value="{{$sellerInfo->Mobile}}" name="mobile">
                                     </form>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     {{-- Table --}}
                     <div class="g-pb-15">
@@ -384,6 +419,91 @@
                         {{-- End Table --}}
                     </div>
 
+                    {{-- Table --}}
+                    <div class="g-pb-15">
+                        <h4 class="text-right g-my-30 g-color-white">پیام های سیستمی</h4>
+                        @if ($alarmMsg->count()!==0)
+                            <h6 style="direction: rtl"
+                                class="card-header g-bg-orange-opacity-0_1 g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right tableHint">
+                                <i class="fa fa-hand-o-right g-font-size-18"></i>
+                                <span class="g-font-size-13">جدول را به سمت راست بکشید.</span>
+                            </h6>
+                        @endif
+
+                        @if ($alarmMsg->count()===0)
+                        <!-- Danger Alert -->
+                            <div style="direction: rtl" class="alert alert-danger alert-dismissible fade show"
+                                 role="alert">
+                                <div class="media">
+                                    <span class="d-flex ml-2 g-mt-5">
+                                      <i class="fa fa-minus-circle"></i>
+                                    </span>
+                                    <div class="media-body">
+                                        <strong>موردی یافت نشد.</strong>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Alert -->
+                        @else
+                            <div class="table-responsive">
+                                <table style="direction: rtl" class="table table-bordered u-table--v2">
+                                    <thead>
+                                    <tr>
+                                        <th class="align-middle text-center text-nowrap focused rtlPosition">عنوان
+                                            گفتگو
+                                        </th>
+                                        <th class="align-middle text-center text-nowrap">بخش مربوطه</th>
+                                        <th class="align-middle text-center text-nowrap">اولویت</th>
+                                        <th class="align-middle text-center text-nowrap">زمان پیام</th>
+                                        <th class="align-middle text-center text-nowrap">جزئیات</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    {{--                                GroupBy Variable Hidden input--}}
+                                    {{--                        groupBy for grouping msg with one title--}}
+                                    <input style="display: none" value=" {{ $groupBy = '' }}">
+
+                                    @foreach($alarmMsg as $key => $rec)
+                                        <tr>
+                                            <td class="align-middle text-nowrap text-center g-font-weight-600 g-color-aqua">{{ $rec->Title }}</td>
+                                            {{--                                Section--}}
+                                            @if ($rec->Section === '0')
+                                                <td class="align-middle text-center text-nowrap">فنی</td>
+                                            @elseif ($rec->Section === '1')
+                                                <td class="align-middle text-center text-nowrap">تحویل کالا</td>
+                                            @elseif ($rec->Section === '2')
+                                                <td class="align-middle text-center text-nowrap">مالی</td>
+                                            @elseif ($rec->Section === '3')
+                                                <td class="align-middle text-center text-nowrap">مدیریت</td>
+                                            @endif
+
+                                            {{--                                Priority--}}
+                                            @if ($rec->Priority === '2')
+                                                <td class="align-middle text-center text-nowrap">معمولی</td>
+                                            @elseif ($rec->Priority === '1')
+                                                <td class="align-middle text-center text-nowrap">
+                                                    مهم
+                                                </td>
+                                            @elseif ($rec->Priority === '0')
+                                                <td class="align-middle text-center text-nowrap">
+                                                    فوری
+                                                </td>
+                                            @endif
+                                            <td class="align-middle text-center text-nowrap">
+                                                <p style="direction: ltr" class="g-font-size-13 g-color-primary m-0 p-0">{{ $rec->Time }}</p>
+                                            </td>
+                                            <td class="align-middle text-center">
+                                                <p class="g-font-size-13 g-color-white m-0 p-0">{{ $rec->Message }}</p>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                        {{-- End Table --}}
+                    </div>
                     {{-- Pagination --}}
                     {{--        {{ $data->links('General.Pagination', ['result' => $data]) }}--}}
                 </div>

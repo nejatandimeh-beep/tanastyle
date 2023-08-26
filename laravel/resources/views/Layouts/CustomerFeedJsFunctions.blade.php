@@ -937,17 +937,22 @@
         }
 
         function postMsg(postId) {
-            $('#postMsgModal i').removeClass('icon-paper-plane').addClass('fa fa-spin fa-spinner');
-            $.ajax({
-                type: 'GET',
-                url: '/Customer-Msg-Post/' + postId + '/' + $('#postMsgModal textarea').val(),
-                success: function (data) {
-                    $('#postMsgModal i').removeClass('fa fa-spin fa-spinner').addClass('icon-paper-plane');
-                    $('#postMsgModal textarea').val();
-                    $('#postMsgModal').modal('hide');
-                    console.log(data)
-                }
-            })
+            if ($('#loginAlert').text() === 'login') {
+                $('#postMsgModal i').removeClass('icon-paper-plane').addClass('fa fa-spin fa-spinner');
+                $.ajax({
+                    type: 'GET',
+                    url: '/Customer-Msg-Post/' + postId + '/' + $('#postMsgModal textarea').val(),
+                    success: function (data) {
+                        $('#postMsgModal i').removeClass('fa fa-spin fa-spinner').addClass('icon-paper-plane');
+                        $('#postMsgModal textarea').val();
+                        $('#postMsgModal').modal('hide');
+                        console.log(data)
+                    }
+                })
+            } else {
+                alert('لطفا ابتدا داخل شوید..')
+                window.location.href = '/Login-Mode';
+            }
         }
 
         function showPostMsg(postId, imgSrc, name) {

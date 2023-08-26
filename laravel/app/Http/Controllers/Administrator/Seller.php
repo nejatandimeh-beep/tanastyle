@@ -27,13 +27,19 @@ class Seller extends Controller
             ->select('ID', 'Name', 'Family', 'NationalID')
             ->get();
 
-        $newSupport = DB::table('seller_conversation')
+        $newSupportSeller = DB::table('seller_conversation')
             ->select('SellerID', 'Status')
             ->where('Status', '1')
             ->get()
             ->count();
 
-        return view('Administrator.Seller.Verify', compact('data', 'newSupport'));
+        $newSupportSellerMajor = DB::table('seller_major_conversation')
+            ->select('SellerMajorID', 'Status')
+            ->where('Status', '1')
+            ->get()
+            ->count();
+
+        return view('Administrator.Seller.Verify', compact('data', 'newSupportSeller','newSupportSellerMajor'));
     }
 
     public function verifyDetail($id)
@@ -140,7 +146,6 @@ class Seller extends Controller
                 'scd.ConversationID',
                 'scd.ID as conversationDetailID')
             ->leftJoin('seller_conversation_detail as scd', 'scd.ConversationID', '=', 'sc.ID')
-            ->where('Status', '1')
             ->orderBy('sc.Status')
             ->orderBy(DB::raw('IF(sc.Status=0 || sc.Status=1, sc.Priority, false)'), 'ASC')
             ->orderBy('sc.ID', 'DESC')
@@ -152,13 +157,17 @@ class Seller extends Controller
             ->get()
             ->count();
 
+        $alarmMsg=DB::table('seller_alarm_msg')
+            ->select('*')
+            ->where('SellerID',-1)
+            ->get();
         $supportPersianDate = array();
         foreach ($support as $key => $rec) {
             $d = $rec->Date;
             $supportPersianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Administrator.Seller.Support', compact('support', 'supportPersianDate', 'newSupport'));
+        return view('Administrator.Seller.Support', compact('support', 'supportPersianDate', 'newSupport','alarmMsg'));
     }
 
     public function storeTableLoad($val, $sellerID)
@@ -600,15 +609,31 @@ class Seller extends Controller
             ->where('ID', $conversationID)
             ->update(['Status' => 0]);
 
-        // Insert Data to Conversation_detail
-        DB::table('seller_conversation_detail')
-            ->where('ID', $detailId)
-            ->update([
-                'Answer' => $answer,
-                'AnswerDate' => $date,
-                'AnswerTime' => $time,
-                'Replay' => 1,
+        $conversationDetailID = DB::table('seller_conversation_detail')
+            ->select('ID','Answer','ConversationID','Replay')
+            ->where('ID',$detailId)
+            ->first();
+
+        if ($conversationDetailID->Answer !=='') {
+            DB::table('seller_conversation_detail')->insert([
+                [
+                    'ConversationID' => $conversationDetailID->ConversationID,
+                    'Answer' => $answer,
+                    'AnswerDate' => $date,
+                    'AnswerTime' => $time,
+                    'Replay' => 1,
+                ],
             ]);
+        } else {
+            DB::table('seller_conversation_detail')
+                ->where('ID', $detailId)
+                ->update([
+                    'Answer' => $answer,
+                    'AnswerDate' => $date,
+                    'AnswerTime' => $time,
+                    'Replay' => 1,
+                ]);
+        }
 
         return redirect()->route('connectionDetail', ['id' => $conversationID, 'status' => '0']);
     }
@@ -688,6 +713,11 @@ class Seller extends Controller
             ->get()
             ->count();
 
+        $alarmMsg=DB::table('seller_alarm_msg')
+            ->select('*')
+            ->where('SellerID',$id)
+            ->get();
+
         $today = date('Y-m-d');
         $deliverPersianDate = array();
         $deliveryStatus = array();
@@ -717,7 +747,7 @@ class Seller extends Controller
             $amountPersianDate[$key] = $this->convertDateToPersian($d);
         }
         return view('Administrator.Seller.ControlPanel', compact('sellerInfo', 'creditCard',
-            'tab', 'amountSum', 'amountTable', 'lastPaymentDate', 'delivery', 'deliverPersianDate',
+            'tab', 'amountSum', 'amountTable', 'lastPaymentDate', 'delivery', 'deliverPersianDate','alarmMsg',
             'deliveryStatus', 'delivery', 'support', 'supportPersianDate', 'amountPersianDate', 'newSupport'));
     }
 
@@ -750,6 +780,65 @@ class Seller extends Controller
         return view('Administrator.Seller.ReturnProduct', compact('data','persianDate','returnPersianDate','sellerInfo'));
     }
 
+    public function adminToSellerMsg(Request $request)
+    {
+        $title = $request->get('title');
+        $priority = $request->get('priority');
+        $section = $request->get('section');
+        $msg = $request->get('msg');
+        $link = $request->get('msgLink');
+        $userID = $request->get('userID');
+        $mobile = $request->get('mobile');
+
+        DB::table('seller_alarm_msg')
+            ->insert([
+                'SellerID'=>$userID==='all'?-1:(int)$userID,
+                'Title'=>$title,
+                'Priority'=>$priority,
+                'Section'=>$section,
+                'Message'=>$msg,
+            ]);
+
+        if ($userID==='all'){
+            $seller=DB::table('sellers')
+                ->select('id','Mobile')
+                ->get();
+
+            foreach ($seller as $key => $row){
+                try {
+                    $api_key = Config::get('kavenegar.apikey');
+                    $var = new Kavenegar\KavenegarApi($api_key);
+                    $template = "adminToUser";
+                    $type = "sms";
+
+                    $result = $var->VerifyLookup($row->Mobile, $link, null, null, $template, $type);
+                } catch (\Kavenegar\Exceptions\ApiException $e) {
+                    // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                    echo $e->errorMessage();
+                } catch (\Kavenegar\Exceptions\HttpException $e) {
+                    // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                    echo $e->errorMessage();
+                }
+            }
+            return redirect()->route('support')->with('status', 'success');
+        } else {
+            try {
+                $api_key = Config::get('kavenegar.apikey');
+                $var = new Kavenegar\KavenegarApi($api_key);
+                $template = "adminToUser";
+                $type = "sms";
+
+                $result = $var->VerifyLookup($mobile, $link, null, null, $template, $type);
+            } catch (\Kavenegar\Exceptions\ApiException $e) {
+                // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            } catch (\Kavenegar\Exceptions\HttpException $e) {
+                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            }
+            return redirect()->route('sellerControlPanel',[$userID,'support'])->with('status', 'success');
+        }
+    }
 
 //--------------------------------------------[new function]------------------------------------------------------
     public function store($id)

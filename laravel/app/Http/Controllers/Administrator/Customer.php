@@ -9,7 +9,9 @@ use DateTime;
 use File;
 use Hekmatinasser\Verta\Facades\Verta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Kavenegar;
 
 class Customer extends Controller
 {
@@ -216,6 +218,11 @@ class Customer extends Controller
             ->get()
             ->count();
 
+        $alarmMsg=DB::table('customer_alarm_msg')
+            ->select('*')
+            ->where('CustomerID',$id)
+            ->get();
+
         $today = date('Y-m-d');
         $deliverPersianDate = array();
         $deliveryStatus = array();
@@ -240,7 +247,7 @@ class Customer extends Controller
         }
 
         return view('Administrator.Customer.ControlPanel', compact('customerInfo', 'address',
-            'tab','delivery','deliverPersianDate',
+            'tab','delivery','deliverPersianDate', 'alarmMsg',
             'deliveryStatus','delivery','support','supportPersianDate','newSupport'));
     }
 
@@ -359,9 +366,11 @@ class Customer extends Controller
                 'scd.AnswerTime as aTime',
                 'scd.Replay',
                 'scd.ConversationID',
+                'c.name',
+                'c.Family',
                 'scd.ID as conversationDetailID')
             ->leftJoin('customer_conversation_detail as scd', 'scd.ConversationID', '=', 'sc.ID')
-            ->where('Status', '1')
+            ->leftJoin('customers as c', 'sc.CustomerID', '=', 'c.id')
             ->orderBy('sc.Status')
             ->orderBy(DB::raw('IF(sc.Status=0 || sc.Status=1, sc.Priority, false)'), 'ASC')
             ->orderBy('sc.ID', 'DESC')
@@ -373,13 +382,18 @@ class Customer extends Controller
             ->get()
             ->count();
 
+        $alarmMsg=DB::table('customer_alarm_msg')
+            ->select('*')
+            ->where('CustomerID',-1)
+            ->get();
+
         $supportPersianDate = array();
         foreach ($support as $key => $rec) {
             $d = $rec->Date;
             $supportPersianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Administrator.Customer.Support', compact('support', 'supportPersianDate', 'newSupport'));
+        return view('Administrator.Customer.Support', compact('support', 'supportPersianDate', 'newSupport','alarmMsg'));
     }
 
     public function connectionDetail($id, $status)
@@ -477,6 +491,66 @@ class Customer extends Controller
         }
 
         return redirect()->route('adminCustomerConnectionDetail', ['id' => $conversationID, 'status' => '0']);
+    }
+
+    public function adminToCustomersMsg(Request $request)
+    {
+        $title = $request->get('title');
+        $priority = $request->get('priority');
+        $section = $request->get('section');
+        $msg = $request->get('msg');
+        $link = $request->get('msgLink');
+        $userID = $request->get('userID');
+        $mobile = $request->get('mobile');
+
+        DB::table('customer_alarm_msg')
+            ->insert([
+                'CustomerID'=>$userID==='all'?-1:(int)$userID,
+                'Title'=>$title,
+                'Priority'=>$priority,
+                'Section'=>$section,
+                'Message'=>$msg,
+            ]);
+
+        if ($userID==='all'){
+            $customers=DB::table('customers')
+                ->select('id','Mobile')
+                ->get();
+
+            foreach ($customers as $key => $row){
+                try {
+                    $api_key = Config::get('kavenegar.apikey');
+                    $var = new Kavenegar\KavenegarApi($api_key);
+                    $template = "adminToUser";
+                    $type = "sms";
+
+                    $result = $var->VerifyLookup($row->Mobile, $link, null, null, $template, $type);
+                } catch (\Kavenegar\Exceptions\ApiException $e) {
+                    // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                    echo $e->errorMessage();
+                } catch (\Kavenegar\Exceptions\HttpException $e) {
+                    // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                    echo $e->errorMessage();
+                }
+            }
+            return redirect()->route('customerSupport')->with('status', 'success');
+        } else {
+            try {
+                $api_key = Config::get('kavenegar.apikey');
+                $var = new Kavenegar\KavenegarApi($api_key);
+                $template = "adminToUser";
+                $type = "sms";
+
+                $result = $var->VerifyLookup($mobile, $link, null, null, $template, $type);
+            } catch (\Kavenegar\Exceptions\ApiException $e) {
+                // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            } catch (\Kavenegar\Exceptions\HttpException $e) {
+                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            }
+            return redirect()->route('customerControlPanel',[$userID,'support'])->with('status', 'success');
+        }
     }
 
     public function sale($id)

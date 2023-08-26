@@ -25,6 +25,7 @@ class Basic extends Controller
         $this->middleware('IsSellerMajor');
         $this->middleware(function ($request, $next) {
             session_start();
+            $_SESSION['userProfileID']=Auth::guard('sellerMajor')->user()->id;
             $_SESSION['userProfileImg'] = Auth::guard('sellerMajor')->user()->Pic . '/profileImg.jpg';
             $_SESSION['jobCategory'] = Auth::guard('sellerMajor')->user()->Category;
             $_SESSION['userName'] = Auth::guard('sellerMajor')->user()->name;
@@ -1150,6 +1151,166 @@ class Basic extends Controller
     public function regulation()
     {
         return view('SellerMajor.Regulation');
+    }
+
+    public function connection()
+    {
+        try {
+            $data = DB::table('seller_major_conversation as smc')
+                ->select('smc.*',
+                    'smcd.QuestionDate as qDate',
+                    'smcd.QuestionTime as qTime',
+                    'smcd.AnswerDate as aDate',
+                    'smcd.AnswerTime as aTime',
+                    'smcd.Replay',
+                    'smcd.ConversationID',
+                    'smcd.ID as conversationDetailID')
+                ->leftJoin('seller_major_conversation_detail as smcd', 'smcd.ConversationID', '=', 'smc.ID')
+                ->where('smc.SellerMajorID', $this->sellerMajorID)
+                ->orderBy('smc.Status')
+                ->orderBy(DB::raw('IF(smc.Status=0 || smc.Status=1, smc.Priority, false)'), 'ASC')
+                ->orderBy('smc.ID', 'DESC')
+                ->get();
+        } catch (\Exception $e) {
+            return redirect()->route('sellerMajorLog');
+        }
+
+        $alarmMsg=DB::table('seller_major_alarm_msg')
+            ->select('*')
+            ->where('SellerMajorID',$this->sellerMajorID)
+            ->get();
+
+        // Convert Date
+        $persianDate = array();
+        foreach ($data as $key => $rec) {
+            $d = $rec->Date;
+            $persianDate[$key] = $this->convertDateToPersian($d);
+        }
+
+        return view('SellerMajor.Conversation', compact('data', 'persianDate','alarmMsg'));
+    }
+
+    public function connectionDetail($id, $status)
+    {
+        $data = DB::table('seller_major_conversation_detail as ccd')
+            ->select('ccd.*', 'cc.Subject', 'cc.Status', 'cc.ID as ConversationID', 'cc.SellerMajorID', 's.Name','CC.Priority')
+            ->leftJoin('seller_major_conversation as cc', 'cc.ID', '=', 'ccd.ConversationID')
+            ->leftJoin('sellersmajor as s', 's.ID', '=', 'cc.SellerMajorID')
+            ->where('ccd.ConversationID', $id)
+            ->paginate(10);
+
+        if ($status === '0') {
+            foreach ($data as $key => $rec)
+                if ($rec->Replay !== 0) {
+                    DB::table('seller_major_conversation')
+                        ->where('ID', $id)
+                        ->update(['Status' => 2]);
+                } else {
+                    DB::table('seller_major_conversation')
+                        ->where('ID', $id)
+                        ->update(['Status' => 2]);
+                }
+        }
+
+        $questionMinuets = array();
+        $answerMinuets = array();
+        $questionHowDay = array();
+        $answerHowDay = array();
+        foreach ($data as $key => $rec) {
+            $d = $rec->QuestionDate;
+            $qPersianDate[$key] = $this->convertDateToPersian($d);
+            $d = $rec->AnswerDate;
+            $aPersianDate[$key] = $this->convertDateToPersian($d);
+            $questionMinuets[$key] = $this->dateLenToNow($rec->QuestionDate, $rec->QuestionTime);
+            $answerMinuets[$key] = $this->dateLenToNow($rec->AnswerDate, $rec->AnswerTime);
+            $questionHowDay[$key] = null;
+            $answerHowDay[$key] = null;
+            if (($questionMinuets[$key] < 11520) || ($answerMinuets[$key] < 11520)) {
+                $questionHowDay[$key] = $this->howDays($questionMinuets[$key]);
+                $answerHowDay[$key] = $this->howDays($answerMinuets[$key]);
+            }
+        }
+
+        $title = $data[0]->Subject;
+
+        return view('SellerMajor.ConversationDetail', compact('data', 'answerHowDay', 'questionHowDay', 'qPersianDate', 'aPersianDate', 'title'));
+    }
+
+    public function connectionNew(Request $request)
+    {
+        $title = $request->get('title');
+        $priority = $request->get('priority');
+        $section = $request->get('section');
+
+        return view('SellerMajor.ConversationDetail', compact('title', 'priority', 'section'));
+    }
+
+    public function connectionNewMsg(Request $request)
+    {
+
+        date_default_timezone_set('Asia/Tehran');
+        $date = date('Y-m-d');
+        $time = date('H:i:s');
+        $question = $request->get('question');
+        $title = $request->get('title');
+
+        if (isset($title)) {
+            $priority = $request->get('priority');
+            $section = $request->get('section');
+            // Insert Data to Conversation
+            DB::table('seller_major_conversation')->insert([
+                [
+                    'SellerMajorID' => $this->sellerMajorID,
+                    'Subject' => $title,
+                    'Section' => $section,
+                    'priority' => $priority,
+                    'Status' => 1,
+                    'Date' => $date,
+                    'Time' => $time,
+                ],
+            ]);
+
+            $conversationID = DB::table('seller_major_conversation')
+                ->select('ID')
+                ->latest('ID')
+                ->first();
+
+            $conversationID = $conversationID->ID;
+        } else {
+            $conversationID = $request->get('conversationID');
+        }
+        DB::table('seller_major_conversation')
+            ->where('ID', $conversationID)
+            ->update(['Status' => 1]);
+
+        // Insert Data to Conversation_detail
+        DB::table('seller_major_conversation_detail')->insert([
+            [
+                'ConversationID' => $conversationID,
+                'Question' => $question,
+                'Answer' => '',
+                'QuestionDate' => $date,
+                'QuestionTime' => $time,
+                'Replay' => 0,
+            ],
+        ]);
+
+        try {
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "support";
+            $type = "sms";
+
+            $result = $var->VerifyLookup('09144426149', 'Administrator-Master', 'SellerMajor', null, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
+
+        return redirect('/SellerMajor-Connection')->with('status', 'success');
     }
     //------------------------------------------------
     //  Convert Date to Iranian Calender

@@ -1,37 +1,9 @@
-@section('SellerMajorJsFunction')
+@section('SellerMajorPanelJsFunction')
     <script>
         // stop fancy box additional url
         if ($('.js-fancybox').length > 0) {
             $.fancybox.defaults.hash = false;
 
-        }
-
-        function membership(thisElement) {
-            if (parseInt($('#postLen').text()) > 0) {
-                $.ajax({
-                    type: 'GET',
-                    url: '/Seller-Major-Advertising/' + $('#sellerMajorID').text() + '/' + thisElement.is(":checked"),
-                    success: function (data) {
-                        console.log(data)
-                    }
-                })
-            } else {
-                alert('لطفا ابتدا یک پست به پنل خود اضافه کنید.')
-                thisElement.removeAttr('checked')
-            }
-        }
-
-        function copy(textToCopy) {
-            navigator.clipboard.writeText(textToCopy).then(
-                function () {
-                    /* clipboard successfully set */
-                    window.alert('متن کپی شد.')
-                },
-                function () {
-                    /* clipboard write failed */
-                    window.alert('ناموفق')
-                }
-            )
         }
 
         function windowScrollTo(){
@@ -144,7 +116,7 @@
                 originalContainer = '#postSampleContainer';
             $.ajax({
                 type: 'GET',
-                url: '/Seller-Major-Load-Post',
+                url: '/Administrator-SellerMajor-Load-Post',
                 success: function (data) {
                     console.log(data)
                     let j = data[1];
@@ -319,7 +291,7 @@
                 $('.loadCommentWaiting').removeClass('d-none');
                 $.ajax({
                     type: 'GET',
-                    url: '/Seller-Major-AddComment/' + postID,
+                    url: '/Administrator-SellerMajor-AddComment/' + postID,
                     async: false,
                     success: function (data) {
                         let showReplyCommentBtn = '<div style="direction: rtl; cursor: pointer" class="countCommentReply g-pr-25"><small>...دیدن پاسخ ها...</small></div>';
@@ -327,14 +299,14 @@
                             if (data[0][i]['Commenter'] === 'customer') {
                                 let username = data[0][i]['customerName'] !== null ? data[0][i]['customerName'] : 'کاربر' + data[0][i]['CommenterID'];
                                 $('.postCommentCopy .userInfo span').text(username);
-                                $('.postCommentCopy .userInfo img').attr('src', data[0][i]['PicPath']);
+                                $('.postCommentCopy .userInfo img').attr('src', asset+data[0][i]['PicPath']);
                                 $('.postCommentCopy .commentReplying').attr('onclick', 'commentReplying(' + data[0][i]['commentId'] + ',"' + username + '",' + key + ')');
                                 $('.postCommentCopy .commentLiking').attr('onclick', 'commentLiking(' + data[0][i]['commentId'] + ',-1,"comment",)');
                                 $('.postCommentCopy .commentLike').attr('id', 'commentLike-' + data[0][i]['commentId']);
                                 $('.postCommentCopy .commentLiking').removeClass('d-none');
                             } else {
                                 $('.postCommentCopy .userInfo span').text(data[0][i]['sellerMajorName']);
-                                $('.postCommentCopy .userInfo img').attr('src', data[0][i]['Pic'] + '/profileImg.jpg');
+                                $('.postCommentCopy .userInfo img').attr('src', asset+data[0][i]['Pic'] + '/profileImg.jpg');
                                 $('.postCommentCopy .commentReplying').attr('onclick', 'commentReplying(' + data[0][i]['commentId'] + ',"' + data[0][i]['sellerMajorName'] + '",' + key + ')');
                                 $('.postCommentCopy .commentLiking').addClass('d-none');
                             }
@@ -363,7 +335,7 @@
                                     if (data[2][j]['CommenterReply'] === 'customer') {
                                         let username = data[2][j]['customerName'] !== null ? data[2][j]['customerName'] : 'کاربر' + data[2][j]['customerID'];
                                         $('.postCommentReplyCopy .userInfo span').text(username);
-                                        $('.postCommentReplyCopy .userInfo img').attr('src', data[2][j]['PicPath']);
+                                        $('.postCommentReplyCopy .userInfo img').attr('src', asset+data[2][j]['PicPath']);
                                         $('.postCommentReplyCopy .commentReplying').attr('onclick', 'commentReplying(' + data[0][i]['commentId'] + ',"' + username + '",' + key + ')');
                                         $('.postCommentReplyCopy .commentLike').attr('id', 'commentReplyLike-' + data[2][j]['commentReplyID']);
                                         $('.postCommentReplyCopy .commentLikeIcon').attr('id', 'commentReplyLikeIcon-' + data[2][j]['commentReplyID']);
@@ -371,7 +343,7 @@
                                         $('.postCommentReplyCopy .commentLiking').removeClass('d-none');
                                     } else {
                                         $('.postCommentReplyCopy .userInfo span').text(data[2][j]['sellerMajorName']);
-                                        $('.postCommentReplyCopy .userInfo img').attr('src', data[2][j]['Pic'] + '/profileImg.jpg');
+                                        $('.postCommentReplyCopy .userInfo img').attr('src', asset+data[2][j]['Pic'] + '/profileImg.jpg');
                                         $('.postCommentReplyCopy .commentReplying').attr('onclick', 'commentReplying(' + data[0][i]['commentId'] + ',"' + data[2][j]['sellerMajorName'] + '",' + key + ')');
                                         $('.postCommentReplyCopy .commentLiking').addClass('d-none');
                                     }
@@ -407,75 +379,6 @@
             }, 100)
         }
 
-        function sendComment(postID, textElement) {
-            let key = textElement.replace(/[^0-9]/gi, ''), allCommentCount,
-                replyID = $('#commentReplyID').text(),
-                customerName = $('#customerName-' + key).length > 0 ? '@' + $('#customerName-' + key).text() + ' ' : '',
-                commentValue = customerName + $('#' + textElement).val();
-
-            $('#sendCommentBtn-' + key + ' i').removeClass('fa-arrow-left');
-            $('#sendCommentBtn-' + key + ' i').addClass('fa-spin')
-            $('#sendCommentBtn-' + key + ' i').addClass('fa-spinner')
-            $.ajax({
-                type: 'GET',
-                url: '/Seller-Major-Send-Comment/' + postID + '/' + commentValue + '/' + (replyID === '' ? 'comment' : replyID) + '/',
-                success: function (data) {
-                    let commentText = 'CommentText',
-                        commentLike = 'CommentLike',
-                        commentContainer = "#commentContainer-" + key,
-                        tempCopy = '.postCommentCopy';
-
-                    if (replyID !== '') {
-                        commentText = 'CommentReplyText';
-                        commentLike = 'CommentReplyLike';
-                        commentContainer = "#commentReply-" + data[0]['commentId'];
-                        tempCopy = '.postCommentReplyCopy';
-                        $('.postCommentReplyCopy .deleteCommentReply').attr('onclick', 'deleteComment(' + data[0]['commentReplyId'] + ',"commentReply",$(this),' + data[0]['PostID'] + ')');
-                    } else {
-                        $(tempCopy + ' .commentReply').attr('id', "commentReply-" + data[0]['commentId']);
-                        $('.postCommentCopy .deleteComment').attr('onclick', 'deleteComment(' + data[0]['commentId'] + ',"comment",$(this),' + data[0]['PostID'] + ')');
-                    }
-
-                    $(tempCopy + ' .userInfo span').text(data[0]['name']);
-                    $(tempCopy + ' .userInfo img').attr('src', data[0]['Pic'] + '/profileImg.jpg');
-                    $(tempCopy + ' .commentText').text(data[0][commentText]);
-                    $(tempCopy + ' .commentLike').text(data[0][commentLike] + ' پسند');
-                    $(tempCopy + ' .commentLiking').addClass('d-none');
-                    $(tempCopy + ' .commentTime').text(data[1]);
-                    $(tempCopy + ' .commentReplying').attr('onclick', 'commentReplying(' + data[0]['commentId'] + ',"' + data[0]['name'] + '",' + key + ')');
-                    allCommentCount = parseInt($('.postID-' + postID + ' .allComment').text()) + 1;
-                    $('.postID-' + postID + ' .allComment').text(allCommentCount)
-                    $(tempCopy).removeClass('d-none');
-                    $(tempCopy).clone().appendTo(commentContainer);
-                    if (replyID !== '') {
-                        $('.postCommentReplyCopy').attr('id', 'commentReplyID-' + data[0]['commentReplyId']);
-                    } else {
-                        $('.postCommentCopy').attr('id', 'commentID-' + data[0]['commentId']);
-                    }
-                    $(commentContainer + ' .postCommentCopy').removeClass('postCommentCopy');
-                    $(commentContainer + ' .postCommentReplyCopy').removeClass('postCommentReplyCopy');
-                    if (commentText === 'CommentReplyText') {
-                        $(commentContainer + ' .commentReplyDetail').removeClass('d-none')
-                        $(commentContainer + ' .countCommentReply').remove();
-                    }
-                }
-            }).done(function () {
-                $('#sendCommentBtn-' + key + ' i').removeClass('fa-spin');
-                $('#sendCommentBtn-' + key + ' i').removeClass('fa-spinner');
-                $('#sendCommentBtn-' + key + ' i').addClass('fa-check g-color-primary');
-
-                setTimeout(function () {
-                    $('#sendCommentBtn-' + key).addClass('d-none');
-                    $('#sendCommentBtn-' + key + ' i').removeClass('fa-check g-color-primary');
-                    $('#sendCommentBtn-' + key + ' i').addClass('fa-arrow-left');
-                    $('#' + textElement).val('');
-                }, 1000)
-
-                $('#commentReplyID').text('')
-            })
-            $('.postCommentCopy').addClass('d-none');
-        }
-
         function deleteComment(id, status, thisElement, postID) {
             $(thisElement).find('i').removeClass('icon-trash').addClass('fa fa-spin fa-spinner');
             $.confirm({
@@ -485,7 +388,7 @@
                     تایید: function () {
                         $.ajax({
                             type: 'GET',
-                            url: '/Seller-Major-Comment-Delete/' + id + '/' + status,
+                            url: '/Administrator-SellerMajor-Comment-Delete/' + id + '/' + status,
                             success: function (data) {
                                 let allCommentCount, count = 1;
                                 $(thisElement).find('i').removeClass('fa fa-spin fa-spinner').addClass('icon-trash');
@@ -512,46 +415,6 @@
             console.log(id, status)
         }
 
-        function commentReplying(commentID, commenterName, key) {
-            console.log(commenterName);
-            commenterName = '@' + commenterName + ' ';
-            $('#commentReplyID').text(commentID);
-            $('#comment-' + key).val(commenterName);
-            $('#comment-' + key).focus();
-        }
-
-        function commentLiking(id, replyID, status) {
-            let commentLike = '#commentLike-' + id,
-                commentLikeIcon = '#commentLikeIcon-' + id,
-                likeStatus = 0;
-            if (status === 'reply') {
-                commentLike = '#commentReplyLike-' + replyID;
-                commentLikeIcon = '#commentReplyLikeIcon-' + replyID;
-            }
-            if ($(commentLikeIcon).hasClass('fa-heart')) {
-                likeStatus = 1;
-            }
-            $.ajax({
-                type: 'GET',
-                url: '/Seller-Major-LikeComment/' + id + '/' + replyID + '/' + status + '/' + likeStatus,
-                async: false,
-                success: function (data) {
-                    if (likeStatus === 1) {
-                        $(commentLike).text((parseInt($(commentLike).text()) - 1) + ' پسند');
-                        $(commentLikeIcon).removeClass('fa-heart');
-                        $(commentLikeIcon).addClass('fa-heart-o');
-                        $(commentLikeIcon).removeClass('g-color-red');
-                    } else {
-                        $(commentLike).text((parseInt($(commentLike).text()) + 1) + ' پسند');
-                        $(commentLikeIcon).removeClass('fa-heart-o');
-                        $(commentLikeIcon).addClass('fa-heart');
-                        $(commentLikeIcon).addClass('g-color-red');
-                    }
-
-                }
-            })
-        }
-
         function deletePost(postID, key) {
             let icon = $('.deleteIcon');
             icon.removeClass('icon-trash');
@@ -563,7 +426,7 @@
                     تایید: function () {
                         $.ajax({
                             type: 'GET',
-                            url: '/Seller-Major-Delete-Post/' + postID,
+                            url: '/Administrator-SellerMajor-Delete-Post/' + postID,
                             success: function (data) {
                                 console.log(data)
                                 $('#detailPost-' + key).remove();
@@ -582,98 +445,6 @@
             });
         }
 
-        function editPost(postID) {
-            $('.captionInfo-' + postID).removeClass('d-none');
-            $('#editPostCaption-' + postID + ' p').addClass('d-none');
-            $('#editPostCaption-' + postID + ' div').removeClass('d-none');
-            $('#editPostCaption-' + postID + ' textarea').focus();
-        }
-
-        function saveCaption(thisElement, postID) {
-            let text = $('#editPostCaption-' + postID + ' textarea').val(),
-                items = JSON.stringify(postDeleteItems);
-            thisElement.find('i').removeClass('fa-check').addClass('fa-spin fa-spinner').css('margin', '-7px');
-            $.confirm({
-                title: 'ویرایش اطلاعات',
-                content: 'آیا اطمینان دارید؟',
-                buttons: {
-                    تایید: function () {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            type: 'POST',
-                            url: '/Seller-Major-Edit-Post',
-                            data: {'postID': postID, 'items': items, 'text': text},
-                            success: function (data) {
-                                console.log(data);
-                                $('.captionInfo-' + postID).addClass('d-none');
-                                $('#editPostCaption-' + postID + ' p').removeClass('d-none');
-                                $('#editPostCaption-' + postID + ' p').text(text);
-                                $('#editPostCaption-' + postID + ' div').addClass('d-none');
-                                thisElement.find('i').addClass('fa-check').removeClass('fa-spin fa-spinner').css('margin', '0');
-                            }
-                        })
-                    },
-                    انصراف: function () {
-                        $('.captionInfo-' + postID).addClass('d-none');
-                        $('#editPostCaption-' + postID + ' p').removeClass('d-none');
-                        $('#editPostCaption-' + postID + ' div').addClass('d-none');
-                        thisElement.find('i').addClass('fa-check').removeClass('fa-spin fa-spinner').css('margin', '0');
-                    },
-                }
-            })
-        }
-
-        function cancelEditCaption(postID) {
-            let item;
-            $('.captionInfo-' + postID).addClass('d-none');
-            $('#editPostCaption-' + postID + ' p').removeClass('d-none');
-            $('#editPostCaption-' + postID + ' div').addClass('d-none');
-            for (let i = 0; i < postDeleteItems.length; i++) {
-                item = postDeleteItems[i] + '-' + postID;
-                if (typeof (postDeleteItems[i]) != "undefined" && postDeleteItems[i] !== null) {
-                    $('#' + item).parent('div').eq(0).removeClass('d-none');
-                }
-            }
-        }
-
-        function deletePostInfo(postID, item) {
-            switch (item) {
-                case 'cat':
-                    postDeleteItems[0] = item;
-                    $('#cat-' + postID).parent().closest('div').eq(0).addClass('d-none');
-                    break;
-                case 'productName':
-                    postDeleteItems[1] = item;
-                    $('#productName-' + postID).parent().closest('div').eq(0).addClass('d-none');
-                    break;
-                case 'size':
-                    postDeleteItems[2] = item;
-                    $('#size-' + postID).parent().closest('div').eq(0).addClass('d-none');
-                    break;
-                case 'color':
-                    postDeleteItems[3] = item;
-                    $('#color-' + postID).parent().closest('div').eq(0).addClass('d-none');
-                    break;
-                case 'price':
-                    postDeleteItems[4] = item;
-                    $('#price-' + postID).parent().closest('div').eq(0).addClass('d-none');
-                    break;
-                case 'discount':
-                    postDeleteItems[5] = item;
-                    $('#discount-' + postID).parent().closest('div').eq(0).addClass('d-none');
-                    break;
-                case 'finalPrice':
-                    postDeleteItems[6] = item;
-                    $('#finalPrice-' + postID).parent().closest('div').eq(0).addClass('d-none');
-                    break;
-                default:
-            }
-        }
-
         function postChart(a, postID, key) {
             let icon = $(a).find('.fa'), chart = '#detailPost-' + key + ' .postChart', temp,
                 commentCount = $('#detailPost-' + key).find('.allComment').text();
@@ -686,7 +457,7 @@
                 icon.addClass('fa-spinner spin');
                 $.ajax({
                     type: 'GET',
-                    url: '/Seller-Major-Chart-Post/' + postID,
+                    url: '/Administrator-SellerMajor-Chart-Post/' + postID,
                     success: function (data) {
                         console.log(data[0]['ID'])
                         icon.removeClass('fa-spinner spin');
@@ -740,13 +511,16 @@
                     border: '2px solid black'
                 })
             }
-            if (window.location.pathname === '/Seller-Major-Messages-Detail') {
+            if (window.location.pathname === '/Administrator-SellerMajor-Messages-Detail') {
                 setTimeout(function () {
                     $('#answer').focus();
                 }, 100)
             }
-
-            if (window.location.pathname === '/Seller-Major-Panel') {
+            $('[id^="eventBackground-"]').each(function (i, obj) {
+                imgRowIdTemp = $(this).attr('id').split('-');
+                imgRowID[i] = imgRowIdTemp[2];
+            });
+            if (~window.location.pathname.indexOf('/Administrator-SellerMajor-Panel')) {
                 for (let i = 0; i < parseInt($('#postLen').text()) && i < 6; i++) {
                     const swiper = new Swiper('.swiper' + i, {
                         // Optional parameters
@@ -855,405 +629,10 @@
             }
         });
 
-        // تنظیم تصویر پروفایل
-        $(document).ready(function () {
-            // scroll to 0 postion when refresh page in panel
-            if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'manual';
-            }
-            $(document).scrollTop(0);
-            //------
-
-            //چک کردن ابعاد تصویر
-            let windowWidth = $(window).width(),
-                windowHeight = $(window).height();
-            switch (true) {
-                case (windowWidth > 1000):
-                    $('.eventContainer').css('width', 'auto !important')
-                    break;
-            }
-
-            //تنظیم تصویر پروفایل
-            let mq = window.matchMedia("(max-width: 900px)");
-            if (mq.matches) {
-                $('#bigDevice').remove();
-                $('.bigDevice').remove();
-
-            } else {
-                $('#smallDevice').remove();
-                $('.smallDevice').remove();
-            }
-
-            let $modal = $('#modal'),
-                image = document.getElementById('sample_image'),
-                cropper;
-            $('#profileImg').on('change', function (event) {
-                let files = event.target.files,
-                    done = function (url) {
-                        image.src = url;
-                        $modal.modal('show');
-                    };
-
-                if (files && files.length > 0) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]);
-                    file_type = files[0].type;
-                }
-            });
-
-            $modal.on('shown.bs.modal', function () {
-                cropper = new Cropper(image, {
-                    aspectRatio: 1,
-                    viewMode: 1,
-                    zoomable: true,
-                    background: true,
-                    minCropBoxWidth: 500,
-                    minCropBoxHeight: 500,
-                    dragCrop: true,
-                    dragMode: 'move',
-                    multiple: true,
-                    movable: true
-                    // preview: '.preview'
-                });
-            });
-
-            $modal.on('hidden.bs.modal', function () {
-                cropper.destroy();
-                cropper = null;
-            });
-
-            $('#crop').on('click', function () {
-                let canvas = cropper.getCroppedCanvas({
-                    width: 500,
-                    height: 500
-                });
-
-                canvas.toBlob(function (blob) {
-                    let url = URL.createObjectURL(blob),
-                        reader = new FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = function () {
-                        let type = file_type.split('/'), form;
-                        file_upload = new File([blob], "pic." + type[1]);
-                        form = new FormData();
-                        form.append('imageUrl', file_upload);
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            url: '/Seller-Major-profileImgUpdate',
-                            data: form,
-                            processData: false,
-                            contentType: false,
-                            type: 'POST',
-                            beforeSend: function () {
-                                $('#profileImgSubmitIcon').addClass('d-none');
-                                $('#waitingCrop').removeClass('d-none');
-                            },
-                            success: function () {
-                                console.log('uploaded');
-                                $modal.modal('hide');
-                                $('#profileImgSubmitIcon').removeClass('d-none');
-                                $('#waitingCrop').addClass('d-none');
-                                location.reload();
-                            }
-                        });
-                    };
-                });
-            });
-
-            $('.nowDate').text(nowDate());
-        });
-
-        // افزودن رویداد
-        $(document).ready(function () {
-            let $eventModal = $('#eventModal'),
-                eventImage = document.getElementById('event_sample_image'),
-                eventCropper;
-
-            $('[id^="eventBackground-"]').each(function (i, obj) {
-                imgRowIdTemp = $(this).attr('id').split('-');
-                imgRowID[i] = imgRowIdTemp[2];
-            });
-
-            $('#eventImg').on('change', function (event) {
-                let files = event.target.files,
-                    done = function (url) {
-                        eventImage.src = url;
-                        $eventModal.modal('show');
-                    };
-
-                if (files && files.length > 0) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]);
-                    file_type = files[0].type;
-                }
-            });
-
-            $eventModal.on('shown.bs.modal', function () {
-                eventCropper = new Cropper(eventImage, {
-                    aspectRatio: 9 / 16,
-                    viewMode: 1,
-                    zoomable: true,
-                    background: true,
-                    minCropBoxWidth: 1080,
-                    minCropBoxHeight: 1920,
-                    dragCrop: true,
-                    dragMode: 'move',
-                    multiple: true,
-                    movable: true
-                    // preview: '.preview'
-                });
-            });
-
-            $eventModal.on('hidden.bs.modal', function () {
-                eventCropper.destroy();
-                eventCropper = null;
-            });
-
-            $('#eventCrop').on('click', function () {
-                let canvas = eventCropper.getCroppedCanvas({
-                    width: 1080,
-                    height: 1920
-                });
-
-                canvas.toBlob(function (blob) {
-                    let url = URL.createObjectURL(blob),
-                        reader = new FileReader();
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = function () {
-                        $('#eventImageUrl').val(reader.result);
-                        // $('#profileImgBox').attr('src', url);
-                        $eventModal.modal('hide');
-                        $("#eventImageUrl").clone().appendTo("#eventUploadForm");
-                        $('#eventUploadForm').submit();
-                    };
-                    reader.onloadend = function () {
-                        let type = file_type.split('/'), form;
-                        file_upload = new File([blob], "pic." + type[1]);
-                        form = new FormData();
-                        form.append('imageUrl', file_upload);
-                        form.append('text', $('#eventTextTemp').val());
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            url: '/Seller-Major-addEvent',
-                            data: form,
-                            processData: false,
-                            contentType: false,
-                            type: 'POST',
-                            beforeSend: function () {
-                                $('#eventSubmitIcon').addClass('d-none');
-                                $('#waitingEventCrop').removeClass('d-none');
-                            },
-                            success: function () {
-                                console.log('uploaded');
-                                $('#eventSubmitIcon').removeClass('d-none');
-                                $('#waitingEventCrop').addClass('d-none');
-                                location.reload();
-                            }
-                        });
-                    };
-                });
-            });
-        });
-
         function insertImg(key) {
             $('#postImg-' + key).trigger('click');
             $('#imgWorking').text('#addImgBtn-' + key)
         }
-
-        // افزودن پست
-        $(document).ready(function () {
-            let $postModal = $('#postModal'),
-                postImage = document.getElementById('post_sample_image'),
-                postCropper;
-            $('#postImg-0').on('change', function (event) {
-                imgWorking = $('#imgWorking').text();
-                let files = event.target.files,
-                    done = function (url) {
-                        postImage.src = url;
-                        $postModal.modal('show');
-                    };
-
-                if (files && files.length > 0) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]);
-                    file_type = files[0].type;
-                }
-            });
-            $('#postImg-1').on('change', function (event) {
-                imgWorking = $('#imgWorking').text();
-                let files = event.target.files,
-                    done = function (url) {
-                        postImage.src = url;
-                        $postModal.modal('show');
-                    };
-
-                if (files && files.length > 0) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]);
-                    file_type = files[0].type;
-                }
-            });
-            $('#postImg-2').on('change', function (event) {
-                imgWorking = $('#imgWorking').text();
-                let files = event.target.files,
-                    done = function (url) {
-                        postImage.src = url;
-                        $postModal.modal('show');
-                    };
-
-                if (files && files.length > 0) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]);
-                    file_type = files[0].type;
-                }
-            });
-            $('#postImg-3').on('change', function (event) {
-                imgWorking = $('#imgWorking').text();
-                let files = event.target.files,
-                    done = function (url) {
-                        postImage.src = url;
-                        $postModal.modal('show');
-                    };
-
-                if (files && files.length > 0) {
-                    let reader = new FileReader();
-                    reader.onload = function (event) {
-                        done(reader.result);
-                    };
-                    reader.readAsDataURL(files[0]);
-                    file_type = files[0].type;
-                }
-            });
-
-            $postModal.on('shown.bs.modal', function () {
-                postCropper = new Cropper(postImage, {
-                    aspectRatio: 4 / 5,
-                    viewMode: 1,
-                    zoomable: true,
-                    background: true,
-                    minCropBoxWidth: 1400,
-                    minCropBoxHeight: 1750,
-                    dragCrop: true,
-                    dragMode: 'move',
-                    multiple: true,
-                    movable: true,
-                });
-            });
-
-            $postModal.on('hidden.bs.modal', function () {
-                postCropper.destroy();
-                $('[name^="postImg"]').val(null);
-                postCropper = null;
-            });
-
-            $('.postCrop').on('click', function () {
-                let canvas = postCropper.getCroppedCanvas({
-                    width: 1400,
-                    height: 1750
-                });
-
-                canvas.toBlob(function (blob) {
-                    let url = URL.createObjectURL(blob),
-                        reader = new FileReader(), key = imgWorking.replace(/[^0-9]/gi, '');
-                    reader.readAsDataURL(blob);
-                    reader.onloadend = function () {
-                        let type = file_type.split('/'), form;
-                        file_upload = new File([blob], "pic." + type[1]);
-                        form = new FormData();
-                        form.append('imageUrl', file_upload);
-                        form.append('imgNumber', key);
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            }
-                        });
-                        $.ajax({
-                            url: '/Seller-Major-uploadImage',
-                            data: form,
-                            processData: false,
-                            contentType: false,
-                            type: 'POST',
-                            beforeSend: function () {
-                                $postModal.modal('hide');
-                                $('#addImgBtn-' + key + ' h3').addClass('d-none');
-                                $('#addImgBtn-' + key + ' .loadingImg').removeClass('d-none');
-                            },
-                            success: function () {
-                                console.log('uploaded');
-                                $('#addImgBtn-' + key + ' .loadingImg').addClass('d-none');
-                                switch (key) {
-                                    case '0':
-                                        $('#addImgBtn-1').removeClass('d-none');
-                                        break;
-                                    case '1':
-                                        $('#addImgBtn-2').removeClass('d-none');
-                                        break;
-                                    case '2':
-                                        $('#addImgBtn-3').removeClass('d-none');
-                                        break;
-                                    default:
-                                }
-                                $('#picCount').val(parseInt($('#picCount').val()) + 1);
-                                $('#lblImg').removeClass('g-color-red');
-                                $(imgWorking + ' .previewBox img').attr('src', reader.result);
-                            }
-                        });
-                    };
-                });
-            });
-
-            $('#postUploadForm').on('submit', (function (e) {
-                $('#postSubmitIcon').addClass('d-none');
-                $('#waitingPostCrop').removeClass('d-none');
-                $('#formCat').val($('#productCat').val());
-                $('#formCatCode').val($('#catCode').text());
-                $('#formName').val($('#productName').val());
-                $('#formNameCode').val($('#productCode').text());
-                $('#formGender').val($('#gender').text());
-                $('#formGenderCode').val($('#genderCode').text());
-                $('#formSize').val($('#size').text());
-                $('#formPrice').val($('#tempPrice').text());
-                $('#formFinalPrice').val($('#tempFinalPrice').text());
-                $('#formDiscount').val($('#discount').val());
-                $('#formColor').val($('#color').val());
-                $('#formColorCode').val($('#colorCode').text());
-                $('#postText').val($('#postTextTemp').val());
-            }));
-        });
-
-        $('#addImg').on('click', function () {
-            if($('.necessary').hasClass('g-color-red')){
-                alert('لطفا عناوین قرمز رنگ را کامل نمایید.')
-            } else {
-                $(this).find('i').removeClass('fa-check').addClass('fa-spin fa-spinner');
-                $(this).find('i').css('margin', '-7px');
-                $(this).prop('disabled', true);
-                $('#postUploadForm').submit();
-            }
-        });
 
         function eventShow(key) {
             // $('#circleBorder-' + key).removeClass('circleBorder');
@@ -1325,6 +704,7 @@
                 }
             });
 
+            console.log('background-image', 'url(' + $('#asset').text() + 'img/SellerMajor/Events/' + $('#userID').text() + '/' + imgRowID[0] + '.jpg)')
             $('#eventBackground-0-' + imgRowID[0]).css('background-image', 'url(' + $('#asset').text() + 'img/SellerMajor/Events/' + $('#userID').text() + '/' + imgRowID[0] + '.jpg)');
             owl.trigger('play.owl.autoplay', [restart]);
             owl.owlCarousel({
@@ -1408,12 +788,6 @@
             $(".owl-carousel").trigger('next.owl.carousel');
         });
 
-        // برای قسمت کاستومر لازم است
-        $(".growingToTop").on("input", function () {
-            this.style.height = 0;
-            this.style.height = (this.scrollHeight) + "px";
-        });
-
         function isEmpty(el) {
             return !$.trim(el.html())
         }
@@ -1440,7 +814,7 @@
                 content: 'آیا اطمینان دارید؟',
                 buttons: {
                     تایید: function () {
-                        window.location = '/Seller-Major-profileImgRemove';
+                        window.location = '/Administrator-SellerMajor-profileImgRemove';
                     },
                     انصراف: function () {
                     },
@@ -1460,69 +834,10 @@
                 content: 'آیا اطمینان دارید؟',
                 buttons: {
                     تایید: function () {
-                        window.location = '/Seller-Major-removeEvent/' + item;
+                        window.location = '/Administrator-SellerMajor-removeEvent/' + item;
                     },
                     انصراف: function () {
                     },
-                }
-            });
-        }
-
-        function updateBio() {
-            $('#bioEditIcon').addClass('d-none');
-            $('#waitingBioUpdate').removeClass('d-none');
-            let val = $('#bioText').val() !== '' ? $('#bioText').val() : 'null';
-            $.ajax({
-                type: 'GET',
-                async: false,
-                url: '/Seller-Major-bioUpdate/' + val,
-                success: function (data) {
-                    $('#bioSubmit').addClass('d-none');
-                    $('#bioEditIcon').removeClass('d-none');
-                    $('#waitingBioUpdate').addClass('d-none');
-                    $('#bioEdit').removeClass('d-none');
-                    $('#edited').text('0');
-                    console.log(data);
-                }
-            });
-        }
-
-        function addressUpdate() {
-            $('#addressUpdateIcon').addClass('d-none');
-            $('#waitingAddressUpdate').removeClass('d-none');
-            console.log('/Seller-Major-addressUpdate/' + $('#address').val());
-            $.ajax({
-                type: 'GET',
-                async: false,
-                url: '/Seller-Major-addressUpdate/' + $('#address').val(),
-                success: function (data) {
-                    $('#modalAddress').modal('toggle');
-                    $('#addressLink').text(data);
-                    $('#addressUpdateIcon').removeClass('d-none');
-                    $('#waitingAddressUpdate').addClass('d-none');
-                    console.log(data);
-                }
-            });
-        }
-
-        function socialAddressUpdate(app) {
-            let link = $('#' + app).val().replace(/\//g, '88888888888888888888888'),
-                url = '/Seller-Major-' + app + 'Update/' + link;
-            console.log(url);
-            $('#' + app + 'UpdateIcon').addClass('d-none');
-            $('#' + app + 'UpdateWaiting').removeClass('d-none');
-            $.ajax({
-                type: 'GET',
-                async: false,
-                url: url,
-                success: function (data) {
-                    $('#' + app + 'Modal').modal('toggle');
-                    $('#' + app + 'Link').text(data);
-                    $('#' + app + 'UpdateIcon').removeClass('d-none');
-                    $('#' + app + 'UpdateWaiting').addClass('d-none');
-                    $('#submitInstagram').addClass('d-none');
-                    $('#adContainer').removeClass('d-none');
-                    console.log(data);
                 }
             });
         }
@@ -1672,10 +987,6 @@
             return now;
         }
 
-        function attachImg() {
-            $('#attachmentImg').trigger('click');
-        }
-
         function deleteMsg(msgDetailID) {
             console.log(msgDetailID);
             $.confirm({
@@ -1685,7 +996,7 @@
                     تایید: function () {
                         $.ajax({
                             type: 'GET',
-                            url: '/Seller-Major-Messages-Delete/' + msgDetailID,
+                            url: '/Administrator-SellerMajor-Messages-Delete/' + msgDetailID,
                             success: function (data) {
                                 $('#msg-' + msgDetailID).remove();
                                 console.log(data);
@@ -1707,7 +1018,7 @@
                     تایید: function () {
                         $.ajax({
                             type: 'GET',
-                            url: '/Seller-Major-UserMessages-Delete/' + msgID,
+                            url: '/Administrator-SellerMajor-UserMessages-Delete/' + msgID,
                             success: function (data) {
                                 $('#msg-' + msgID).remove();
                                 console.log(data);
@@ -1719,10 +1030,6 @@
                 }
             });
         }
-
-        $('#attachmentImg').on('change', function (event) {
-            readURL(this);
-        });
 
         $('.modal').on('shown.bs.modal', function () {
             $(this).find('[autofocus]').focus();
@@ -1752,141 +1059,6 @@
                 $('.listItems').hide();
             }
         });
-
-        function setColor(colorCode, thisElement) {
-            console.log('click')
-            let color = thisElement.find('span').text();
-            if (touchtime === 0) {
-                // set first click
-                touchtime = new Date().getTime();
-            } else {
-                // compare first click to this click and see if they occurred within double click threshold
-                if (((new Date().getTime()) - touchtime) < 500) {
-                    $('#colorCode').text(colorCode);
-                    $('#color').val(color);
-                    $('#accordion').hide();
-                    $('#color').show();
-                    touchtime = 0;
-                    console.log('dbclick')
-                    $('#lblColor').removeClass('g-color-red')
-                } else {
-                    // not a double click so set as a new first click
-                    touchtime = new Date().getTime();
-                }
-            }
-        }
-
-        function setProductName(cat, catName) {
-            $('.productNameContainer span').removeClass('d-none');
-            $('.productNameContainer span').addClass('d-none');
-            $('.productNameContainer a').removeClass('d-none');
-            $('.productNameContainer a').addClass('d-none');
-            $('.listItems').hide();
-            $('#productCat').val(catName);
-            $('#catCode').text(cat);
-            switch (cat) {
-                case 'a':
-                    $('.lebasZir').removeClass('d-none');
-                    $('#productName').val('شورت');
-                    break;
-                case 'b':
-                    $('.lebasPaeinTane').removeClass('d-none');
-                    $('#productName').val('شلوارک');
-                    break;
-                case 'c':
-                    $('.lebasBalaTane').removeClass('d-none');
-                    $('#productName').val('تیشرت');
-                    break;
-                case 'd':
-                    $('.lebasTamamTane').removeClass('d-none');
-                    $('#productName').val('لباس خواب');
-                    break;
-                case 'e':
-                    $('.kif').removeClass('d-none');
-                    $('#productName').val('پول');
-                    break;
-                case 'f':
-                    $('.kafsh').removeClass('d-none');
-                    $('#productName').val('دمپایی');
-                    break;
-                case 'g':
-                    $('.varzeshiZir').removeClass('d-none');
-                    $('#productName').val('مایو');
-                    break;
-                case 'h':
-                    $('.varzeshiPaein').removeClass('d-none');
-                    $('#productName').val('شورت');
-                    break;
-                case 'i':
-                    $('.varzeshiBala').removeClass('d-none');
-                    $('#productName').val('تیشرت');
-                    break;
-                case 'j':
-                    $('.varzeshiTamam').removeClass('d-none');
-                    $('#productName').val('ست ورزشی');
-                    break;
-                case 'k':
-                    $('.varzeshiKif').removeClass('d-none');
-                    $('#productName').val('ساک');
-                    break;
-                case 'l':
-                    $('.varzeshiKafsh').removeClass('d-none');
-                    $('#productName').val('کفش ساده');
-                    break;
-                case 'm':
-                    $('.varzeshiAksesori').removeClass('d-none');
-                    $('#productName').val('کلاه حرفه ای');
-                    break;
-                case 'n':
-                    $('.aksesoriBadalijat').removeClass('d-none');
-                    $('#productName').val('گوشواره');
-                    break;
-                case 'o':
-                    $('.aksesoriMoo').removeClass('d-none');
-                    $('#productName').val('گیره مو');
-                    break;
-                case 'p':
-                    $('.aksesoriSarpoosh').removeClass('d-none');
-                    $('#productName').val('کلاه زمستانی');
-                    break;
-                case 'q':
-                    $('.aksesoriSayer').removeClass('d-none');
-                    $('#productName').val('عینک');
-                    break;
-                default:
-                    $('.aksesoriSayer').removeClass('d-none');
-                    $('#productCat').val('');
-                    $('#productName').val('');
-            }
-            $('#productCat').change();
-        }
-
-        function setProductCode(thisElement) {
-            let str = thisElement.text(),
-                name = str.replace(str.match(/(\d+)/g)[0], '').trim(),
-                code = str.replace(/[^0-9]/gi, '');
-            $('#productName').val(name);
-            $('#productCode').text(code);
-            $('.listItems').hide();
-        }
-
-        function setFinalPrice(discount) {
-            if (discount.val() !== '') {
-                if ($('#price').val() !== '') {
-                    if (discount.val() === '0') discount.val(''); else {
-                        let p = parseInt($('#tempPrice').text()),
-                            d = parseInt(discount.val()),
-                            result = p - ((p * d) / 100);
-                        $('#tempFinalPrice').text(result);
-                        $('#finalPrice').val(result.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
-                    }
-                }
-            } else {
-                $('#finalPrice').val($('#price').val());
-                $('#tempFinalPrice').text($('#tempPrice').text());
-            }
-
-        }
 
         function addComa(thisElement) {
             if ($('#price').val() !== '') {

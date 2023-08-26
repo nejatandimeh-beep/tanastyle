@@ -273,6 +273,7 @@ Route::get('/Administrator-Seller-Support', 'Administrator\Seller@support')->nam
 Route::get('/Administrator-Seller-store/{id}', 'Administrator\Seller@store')->name('adminSellerStore');
 Route::get('/Administrator-Seller-sale/{id}', 'Administrator\Seller@sale')->name('adminSellerSale');
 Route::get('/Administrator-Seller-Return/{id}', 'Administrator\Seller@return')->name('adminSellerReturn');
+Route::post('/Administrator-Seller-SendToAll', 'Administrator\Seller@adminToSellerMsg')->name('adminToSellerMsg');
 
 // -------------------------[Product]
 Route::get('/Administrator-Product-List', 'Administrator\Product@delivery')->name('adminProductDelivery');
@@ -295,13 +296,36 @@ Route::post('/Administrator-Customer-AddressAdd', 'Administrator\Customer@addAdd
 Route::get('/Administrator-Customer-AddressDelete/{id}', 'Administrator\Customer@addressDelete');
 Route::get('/Administrator-Customer-OrderDetail/{addressId}/{id}', 'Administrator\Customer@orderDetail')->name('adminCustomerOrderDetail');
 Route::get('/Administrator-Customer-ConnectionDetail/{id}/{status}', 'Administrator\Customer@connectionDetail')->name('adminCustomerConnectionDetail');
+Route::post('/Administrator-Customer-ConnectionNew', 'Administrator\Customer@adminToCustomersMsg')->name('adminToCustomersMsg');
 Route::post('/Administrator-Customer-Connection-NewMsg', 'Administrator\Customer@connectionNewMsg')->name('adminCustomerConnectionNewMsg');
 Route::get('/Administrator-Customer-Sale/{id}', 'Administrator\Customer@sale')->name('adminCustomerSale');
 Route::get('/Administrator-Customer-Return/{id}', 'Administrator\Customer@return')->name('adminCustomerReturn');
 // -------------------------[SellerMajor]
-Route::get('/Administrator-SellerMajor-AdList', 'Administrator\SellerMajor@adList')->name('sellerMajorAdList');
+Route::get('/Administrator-SellerMajor', 'Administrator\SellerMajor@list')->name('sellerMajorList');
+Route::get('/Administrator-SellerMajor-ControlPanel/{id}/{tab}', 'Administrator\SellerMajor@controlPanel')->name('sellerMajorControlPanel');
 Route::get('/Seller-Major-StartAd', 'Administrator\SellerMajor@startAd')->name('startAd');
 Route::get('/Seller-Major-AdSource/{postID}/{instagram}/{pic}', 'Administrator\SellerMajor@adSource')->name('adSource');
+Route::get('/Administrator-SellerMajor-AdList', 'Administrator\SellerMajor@adList')->name('sellerMajorAdList');
+Route::get('/Administrator-SellerMajor-Support', 'Administrator\SellerMajor@support')->name('sellerMajorSupport');
+Route::post('/Administrator-SellerMajor-ConnectionNew', 'Administrator\SellerMajor@connectionNew')->name('adminSellerMajorConnectionNew');
+Route::get('/Administrator-SellerMajor-ConnectionDetail/{id}/{status}', 'Administrator\SellerMajor@connectionDetail')->name('adminSellerMajorConnectionDetail');
+Route::post('/Administrator-SellerMajor-Connection-NewMsg', 'Administrator\SellerMajor@connectionNewMsg')->name('adminSellerMajorConnectionNewMsg');
+Route::post('/Administrator-SellerMajor-Update', 'Administrator\SellerMajor@update')->name('updateSellerMajor');
+Route::get('/Administrator-SellerMajor-Panel/{id}', 'Administrator\SellerMajor@panel')->name('adminSellerMajorPanel');
+Route::get('/Administrator-SellerMajor-removeEvent/{item}', 'Administrator\SellerMajor@removeEvent')->name('adminSellerMajorRemoveEvent');
+Route::get('/Administrator-SellerMajor-profileImgRemove', 'Administrator\SellerMajor@removeProfileImage')->name('adminSellerMajorRemoveProfileImg');
+Route::get('/Administrator-SellerMajor-Messages/{id}', 'Administrator\SellerMajor@messages')->name('adminSellerMajorMessages');
+Route::post('/Administrator-SellerMajor-Messages-Detail', 'Administrator\SellerMajor@messagesDetail')->name('adminSellerMajorMessagesDetail');
+Route::get('/Administrator-SellerMajor-Messages-Delete/{msgDetailID}', 'Administrator\SellerMajor@messagesDelete');
+Route::get('/Administrator-SellerMajor-UserMessages-Delete/{msgID}', 'Administrator\SellerMajor@userMsgDelete');
+Route::get('/Administrator-SellerMajor-Load-Post', 'Administrator\SellerMajor@loadPost');
+Route::get('/Administrator-SellerMajor-Delete-Post/{postID}', 'Administrator\SellerMajor@deletePost');
+Route::get('/Administrator-SellerMajor-Chart-Post/{postID}', 'Administrator\SellerMajor@chartPost');
+Route::get('/Administrator-SellerMajor-Comment-Delete/{id}/{status}', 'Administrator\SellerMajor@deleteComments');
+Route::get('/Administrator-SellerMajor-Reactions/{id}', 'Administrator\SellerMajor@reaction')->name('adminSellerMajorReaction');
+Route::get('/Administrator-SellerMajor-AddComment/{postID}', 'Administrator\SellerMajor@addComments');
+Route::post('/Administrator-SellerMajor-SendToAll', 'Administrator\SellerMajor@adminToSellerMajorMsg')->name('adminToSellerMajorMsg');
+
 // -------------------------[Delivery]
 Route::get('/Administrator-Delivery-Panel/{id}', 'Administrator\Admin@adminDeliveryPanel')->name('adminDeliveryPanel');
 Route::get('/Administrator-Kiosk-Panel/{id}', 'Administrator\Admin@adminKioskPanel')->name('adminKioskPanel');
@@ -411,4 +435,7 @@ Route::get('/Seller-Major-Reactions', 'SellerMajor\Basic@reaction')->name('selle
 Route::get('/Seller-Major-Advertising/{id}/{status}', 'SellerMajor\Basic@advertising');
 Route::post( '/Seller-Major-uploadImage', 'SellerMajor\Basic@uploadImage');
 Route::get( '/Seller-Major-Regulation', 'SellerMajor\Basic@regulation')->name('sellerMajorRegulation');
-
+Route::get('/SellerMajor-Connection', 'SellerMajor\Basic@connection')->name('sellerMajorConnection');
+Route::post('/SellerMajor-Connection-New', 'SellerMajor\Basic@connectionNew')->name('sellerMajorConnectionNew');
+Route::get('/SellerMajorConnection-Detail/{id}/{status}', 'SellerMajor\Basic@connectionDetail')->name('sellerMajorConnectionDetail');
+Route::post('/SellerMajor-Connection-NewMsg', 'SellerMajor\Basic@connectionNewMsg')->name('sellerMajorConnectionNewMsg');

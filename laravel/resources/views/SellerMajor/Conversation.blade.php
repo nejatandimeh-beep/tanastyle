@@ -1,4 +1,4 @@
-@extends('Layouts.IndexSeller')
+@extends('Layouts.SellerMajor.Index')
 @section('Content')
 
     <!-- Delete Product Msg -->
@@ -22,32 +22,27 @@
     @endif
     <!-- End Delete Product Msg -->
 
-    <!-- Info Panel -->
-    <div style="direction: rtl; position: -webkit-sticky; position: sticky; top: 0; z-index: 100;"
-         class="card card-inverse g-brd-black g-bg-black-opacity-0_8 rounded-0">
-        <h3 class="card-header h5 g-color-white-opacity-0_9">
-            <i class="fa fa-list-alt g-font-size-default g-ml-5"></i>ارتباط با مرکز
-        </h3>
-    </div>
-    <!-- End Info Panel -->
-
-    <div class="container customBox">
+    <div class="container g-mb-100 customBox">
         {{-- Total Info--}}
-        <div class="rowSeller g-mt-30 g-mb-20 g-mr-0 g-ml-0">
+        <div class="rowSeller g-mt-30 g-mb-10 g-mr-0 g-ml-0">
 
             <!-- Icon Blocks -->
-            <div style="padding-right: 60px;"
-                 class="text-header-responsive col-12 g-pt-25 g-pb-25 g-mb-5 g-pl-0">
+            <div
+                 class="text-header-responsive col-12 g-pt-25 g-pb-0 g-mb-30 g-pl-0 text-center">
                 <div class="d-inline-block text-center">
-                    <a
-                        class="u-icon-v2 g-color-teal rounded-circle g-mb-20 g-color-orange--hover"
-                        data-toggle="modal"
-                        data-target="#modalLoginForm"
-                        href="#">
-                        <i class="icon-bubble g-font-size-25"></i>
+                    <a class="page-wrapper"
+                       data-toggle="modal"
+                       data-target="#modalLoginForm"
+                       href="#">
+                        <div class="circle-wrapper">
+                            <div class="success circle"></div>
+                            <div style="line-height: 0" class="icon">
+                                <i class="icon-earphones-alt"></i>
+                            </div>
+                        </div>
                     </a>
-                    <h6 class="g-color-black mb-0">ایجاد گفتگو</h6>
-                    <span class="u-label g-color-teal g-mb-5 g-font-size-14">با درج عنوان جدید</span>
+                    <h6 class="g-color-black m-0 g-mt-10">ایجاد گفتگو</h6>
+                    <span class="u-label g-color-gray-dark-v3 g-mb-5 g-font-size-14">با درج عنوان جدید</span>
                 </div>
             </div>
             <!-- End Icon Blocks -->
@@ -61,22 +56,23 @@
                         <div class="modal-header">
                             <h4>ایجاد گفتگو جدید</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <i class="hs-icon hs-icon-close"></i>
+                                ×
                             </button>
                         </div>
-                        <form action="{{ route('adminConnectionNew')}}" method="post" enctype='multipart/form-data'>
+                        <form action="{{ route('sellerMajorConnectionNew')}}" method="post" enctype='multipart/form-data'>
                             @csrf
                             {{--                            Hidden input--}}
                             <div style="direction: rtl" class="modal-body g-pr-10 g-pl-10">
                                 <div class="form-group row g-mb-25">
                                     <div class="input-group col-sm-10 force-col-12 mx-auto">
-                            <span style="border-right: 1px solid lightgrey"
-                                  class="input-group-addon g-bg-gray-light-v5 g-brd-left-none w-25">عنوان گفتگو</span>
+                            <span style="border-right: 1px solid lightgrey; width: 35% !important;"
+                                  class="input-group-addon g-bg-gray-light-v5 g-brd-left-none">عنوان گفتگو</span>
                                         <input
                                             class="form-control form-control-md rounded-0 g-color-darkblue g-font-size-16"
                                             type="text"
                                             value=""
                                             id="login"
+                                            required
                                             name="title"
                                             autocomplete="off" {{-- hide popup box when clicked --}}
                                             tabindex="1"
@@ -85,8 +81,8 @@
                                 </div>
                                 <div class="form-group row g-mb-25">
                                     <div class="input-group col-sm-10 force-col-12 mx-auto">
-                                        <span style="border-right: 1px solid lightgrey;"
-                                        class="input-group-addon g-bg-gray-light-v5 g-brd-left-none g-pa-10 w-25">اولویت</span>
+                                        <span style="border-right: 1px solid lightgrey; width: 35% !important;"
+                                        class="input-group-addon g-bg-gray-light-v5 g-brd-left-none g-pa-10">اولویت</span>
                                         <select style="height: 100%"
                                                 class="form-control form-control-md custom-select rounded-0 text-right g-font-size-16 g-height-70 g-pr-25"
                                                 tabindex="2"
@@ -99,8 +95,8 @@
                                 </div>
                                 <div class="form-group row g-mb-25">
                                     <div class="input-group col-sm-10 force-col-12 mx-auto">
-                            <span style="border-right: 1px solid lightgrey;"
-                                  class="input-group-addon g-bg-gray-light-v5 g-brd-left-none g-pa-10 w-25">بخش مربوطه</span>
+                            <span style="border-right: 1px solid lightgrey; width: 35% !important;"
+                                  class="input-group-addon g-bg-gray-light-v5 g-brd-left-none g-pa-10">بخش مربوطه</span>
                                         <select style="height: 100%"
                                                 class="form-control form-control-md custom-select rounded-0 text-right g-font-size-16 g-height-70 g-pr-25"
                                                 tabindex="3"
@@ -127,16 +123,8 @@
         <div class="g-pb-15">
             <h3 style="direction: rtl"
                 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                لیست گفتگوها
+                <i class="icon-real-estate-079 u-line-icon-pro g-font-size-22 g-ml-5"></i>لیست گفتگوها
             </h3>
-            @if ($data->count()!==0)
-                <h6 style="direction: rtl"
-                    class="card-header g-bg-orange-opacity-0_1 g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right tableHint">
-                    <i class="fa fa-hand-o-right g-font-size-18"></i>
-                    <span class="g-font-size-13">جدول را به سمت راست بکشید.
-                </span>
-                </h6>
-            @endif
 
             @if ($data->count()===0)
             <!-- Danger Alert -->
@@ -158,9 +146,6 @@
                         <tr>
                             <th class="align-middle text-center text-nowrap focused rtlPosition">عنوان گفتگو</th>
                             <th class="align-middle text-center text-nowrap">بخش مربوطه</th>
-                            <th class="align-middle text-center text-nowrap">اولویت</th>
-                            <th class="align-middle text-center text-nowrap">زمان ایجاد گفتگو</th>
-                            <th class="align-middle text-center text-nowrap">جزئیات</th>
                             <th class="align-middle text-center text-nowrap">وضعیت گفتگو</th>
                         </tr>
                         </thead>
@@ -173,7 +158,15 @@
                         @foreach($data as $key => $rec)
                             @if (($rec->ConversationID) !== $groupBy)
                                 <tr>
-                                    <td class="align-middle text-nowrap text-center g-font-weight-600 g-color-darkblue">{{ $rec->Subject }}</td>
+                                    <td class="align-middle text-nowrap text-center g-font-weight-600">
+                                        <a style="cursor: pointer"
+                                           href="{{ route('sellerMajorConnectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
+                                           class="g-text-underline--none--hover g-pa-5"
+                                           data-toggle="tooltip"
+                                           data-placement="top" data-original-title="مشاهده جزئیات گفتگو">
+                                            {{ $rec->Subject }}
+                                        </a>
+                                    </td>
                                     {{--                                Section--}}
                                     @if ($rec->Section === '0')
                                         <td class="align-middle text-center text-nowrap">فنی</td>
@@ -184,32 +177,6 @@
                                     @elseif ($rec->Section === '3')
                                         <td class="align-middle text-center text-nowrap">مدیریت</td>
                                     @endif
-
-                                    {{--                                Priority--}}
-                                    @if ($rec->Priority === '2')
-                                        <td class="align-middle text-center text-nowrap">معمولی</td>
-                                    @elseif ($rec->Priority === '1')
-                                        <td class="align-middle text-center text-nowrap {{ ($rec->Status == 2) ? '' : 'g-color-darkred' }}">
-                                            مهم
-                                        </td>
-                                    @elseif ($rec->Priority === '0')
-                                        <td class="align-middle text-center text-nowrap {{ ($rec->Status == 2) ? '' : 'g-color-red' }}">
-                                            فوری
-                                        </td>
-                                    @endif
-                                    <td class="align-middle text-center text-nowrap">
-                                        {{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}
-                                        <p class="g-font-size-13 g-color-primary m-0 p-0">{{ $rec->Time }}</p>
-                                    </td>
-                                    <td class="align-middle text-center text-nowrap">
-                                        <a style="cursor: pointer"
-                                           href="{{ route('adminConnectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
-                                           class="g-color-gray-dark-v3 g-text-underline--none--hover g-color-primary--hover g-pa-5"
-                                           data-toggle="tooltip"
-                                           data-placement="top" data-original-title="مشاهده جزئیات گفتگو">
-                                            <i class="fa fa-eye g-font-size-18"></i>
-                                        </a>
-                                    </td>
                                     @if ($rec->Status === '0')
                                         <td class="align-middle text-center text-nowrap g-color-primary"><i
                                                 class="fa fa-check g-ml-5"></i>پیام جدید
@@ -228,7 +195,7 @@
                                 </tr>
 
                                 {{--                                GroupBy Variable Hidden input--}}
-                                <input style="display: none" value=" {{ $groupBy = $rec->ConversationID }}">
+                                <input style="display: none" value="{{ $groupBy = $rec->ConversationID }}">
                             @endif
                         @endforeach
                         </tbody>

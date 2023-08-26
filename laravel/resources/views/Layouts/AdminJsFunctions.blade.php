@@ -61,6 +61,82 @@
             }
         });
 
+        function categorySelect(catHint, catCode) {
+            let category = '';
+            $('#accordion-04-body-01').removeClass('show');
+            $('.card').removeClass('g-brd-red');
+
+            switch (catCode) {
+                case 'clothes':
+                    category = 'پوشاک (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+                case 'vehicles':
+                    category = 'وسایل نقلیه (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+                case 'sports':
+                    category = 'وسایل ورزشی (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+                case 'estate':
+                    category = 'املاک (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+                case 'electronic':
+                    category = 'لوازم الکتریکی (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+                case 'industrial':
+                    category = 'صنعتی، اداری و تجاری (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+                case 'services':
+                    category = 'خدمات و کسب و کار (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+                case 'connections':
+                    category = 'وسایل ارتباطی (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+                case 'appliances':
+                    category = 'لوازم خانگی (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+
+                case 'personal':
+                    category = 'لوازم شخصی (' + catHint + ')';
+                    $('#selectedItem').text(category);
+                    $('#hintCategory').val(category);
+                    $('#category').val(catCode);
+                    break;
+
+                default:
+                    $('#selectedItem').text(catHint);
+                    $('#category').val(catHint);
+                    break;
+            }
+            console.log($('#hintCategory').val(),$('#category').val())
+        }
+
         //-------------------------------------------------------Seller---------------------------------------------------------
         // to Active CreditCard
         function cardActiveBtn(id, cardId) {

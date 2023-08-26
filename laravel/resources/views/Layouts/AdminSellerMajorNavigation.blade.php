@@ -1,4 +1,4 @@
-@section('SellerMajorNavigation')
+@section('AdminSellerMajorNavigation')
     <body>
     <header id="js-header" class="u-header u-header--static g-brd-bottom g-brd-gray-light-v4 g-mb-5">
         <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3">
@@ -19,7 +19,7 @@
                     <!-- End Responsive Toggle Button -->
 
                     <!-- user logo -->
-                    <a style="width: 80%" href="{{ url('/Seller-Major-Panel') }}" class="navbar-brand overFlow-dots"
+                    <a style="width: 80%" href="{{ route('adminSellerMajorPanel',$_SESSION['userProfileID'])}}" class="navbar-brand overFlow-dots"
                        title="{{$_SESSION['userName']}}">
                         <span class="align-self-center">{{$_SESSION['userName']}}</span>
                     </a>
@@ -30,30 +30,10 @@
                         id="navBar">
                         <ul style="direction: rtl" class="navbar-nav g-font-weight-600 ml-auto p-0">
                             <li class="nav-item g-mx-20--lg">
-                                <a href="{{ route('sellerMajorMessages') }}"
+                                <a href="{{ route('adminSellerMajorMessages',$_SESSION['userProfileID']) }}"
                                    class="nav-link g-px-0 g-color-primary--hover">
                                     <i class="g-font-size-16 g-font-weight-600 {{isset($message[0]) ? 'g-color-primary':''}} icon-bubbles align-middle g-ml-5"></i>
                                     <span class="align-self-center">پیام ها</span>
-                                </a>
-                            </li>
-                            <li class="nav-item g-mx-20--lg">
-                                <a href="{{route('sellerMajorConnection')}}" class="nav-link g-px-0 g-color-primary--hover">
-                                    <i class="g-font-size-16 g-font-weight-600 icon-earphones-alt  align-middle g-ml-5"></i>
-                                    <span class="align-self-center">پشتیبانی</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item g-mx-20--lg">
-                                <a href="{{route('sellerMajorRegulation')}}" class="nav-link g-px-0 g-color-primary--hover">
-                                    <i class="g-font-size-16 g-font-weight-600 icon-book-open align-middle g-ml-5"></i>
-                                    <span class="align-self-center">قوانین</span>
-                                </a>
-                            </li>
-
-                            <li class="nav-item g-mx-20--lg">
-                                <a href="{{ url('/') }}" class="nav-link g-px-0 g-color-primary--hover">
-                                    <i class="g-font-size-16 g-font-weight-600 icon-logout align-middle g-ml-5"></i>
-                                    <span class="align-self-center">خروج</span>
                                 </a>
                             </li>
                         </ul>

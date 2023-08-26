@@ -37,7 +37,7 @@
                         <div class="circle-wrapper">
                             <div class="success circle"></div>
                             <div style="line-height: 0" class="icon">
-                                <i class="icon-bubble"></i>
+                                <i class="icon-earphones-alt"></i>
                             </div>
                         </div>
                     </a>
@@ -125,14 +125,6 @@
                 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
                 <i class="icon-real-estate-079 u-line-icon-pro g-font-size-22 g-ml-5"></i>لیست گفتگوها
             </h3>
-            @if ($data->count()!==0)
-                <h6 style="direction: rtl"
-                    class="card-header g-bg-orange-opacity-0_1 g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right tableHint">
-                    <i class="fa fa-hand-o-right g-font-size-18"></i>
-                    <span class="g-font-size-13">جدول را به سمت راست بکشید.
-                </span>
-                </h6>
-            @endif
 
             @if ($data->count()===0)
             <!-- Danger Alert -->
@@ -154,9 +146,6 @@
                         <tr>
                             <th class="align-middle text-center text-nowrap focused rtlPosition">عنوان گفتگو</th>
                             <th class="align-middle text-center text-nowrap">بخش مربوطه</th>
-                            <th class="align-middle text-center text-nowrap">اولویت</th>
-                            <th class="align-middle text-center text-nowrap">زمان ایجاد گفتگو</th>
-                            <th class="align-middle text-center text-nowrap">جزئیات</th>
                             <th class="align-middle text-center text-nowrap">وضعیت گفتگو</th>
                         </tr>
                         </thead>
@@ -169,7 +158,15 @@
                         @foreach($data as $key => $rec)
                             @if (($rec->ConversationID) !== $groupBy)
                                 <tr>
-                                    <td class="align-middle text-nowrap text-center g-font-weight-600 g-color-darkblue">{{ $rec->Subject }}</td>
+                                    <td class="align-middle text-nowrap text-center g-font-weight-600">
+                                        <a style="cursor: pointer"
+                                           href="{{ route('customerConnectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
+                                           class="g-text-underline--none--hover g-pa-5"
+                                           data-toggle="tooltip"
+                                           data-placement="top" data-original-title="مشاهده جزئیات گفتگو">
+                                            {{ $rec->Subject }}
+                                        </a>
+                                    </td>
                                     {{--                                Section--}}
                                     @if ($rec->Section === '0')
                                         <td class="align-middle text-center text-nowrap">فنی</td>
@@ -181,31 +178,6 @@
                                         <td class="align-middle text-center text-nowrap">مدیریت</td>
                                     @endif
 
-                                    {{--                                Priority--}}
-                                    @if ($rec->Priority === '2')
-                                        <td class="align-middle text-center text-nowrap">معمولی</td>
-                                    @elseif ($rec->Priority === '1')
-                                        <td class="align-middle text-center text-nowrap {{ ($rec->Status == 2) ? '' : 'g-color-darkred' }}">
-                                            مهم
-                                        </td>
-                                    @elseif ($rec->Priority === '0')
-                                        <td class="align-middle text-center text-nowrap {{ ($rec->Status == 2) ? '' : 'g-color-red' }}">
-                                            فوری
-                                        </td>
-                                    @endif
-                                    <td class="align-middle text-center text-nowrap">
-                                        {{ $persianDate[$key][0].'/'.$persianDate[$key][1].'/'.$persianDate[$key][2] }}
-                                        <p class="g-font-size-13 g-color-gray-dark-v3 m-0 p-0">{{ $rec->Time }}</p>
-                                    </td>
-                                    <td class="align-middle text-center text-nowrap">
-                                        <a style="cursor: pointer"
-                                           href="{{ route('customerConnectionDetail',['id'=>$rec->ID, 'status'=>$rec->Status])}}"
-                                           class="g-color-gray-dark-v3 g-text-underline--none--hover g-color-primary--hover g-pa-5"
-                                           data-toggle="tooltip"
-                                           data-placement="top" data-original-title="مشاهده جزئیات گفتگو">
-                                            <i class="fa fa-eye g-font-size-18"></i>
-                                        </a>
-                                    </td>
                                     @if ($rec->Status === '0')
                                         <td class="align-middle text-center text-nowrap g-color-primary"><i
                                                 class="fa fa-check g-ml-5"></i>پیام جدید
@@ -234,6 +206,92 @@
             {{-- End Table --}}
         </div>
 
+
+        {{-- Table --}}
+        <div class="g-pb-15">
+            <h4 class="text-right g-my-30 g-color-gray-dark-v2">پیام های سیستمی</h4>
+            @if ($alarmMsg->count()!==0)
+                <h6 style="direction: rtl"
+                    class="card-header g-bg-orange-opacity-0_1 g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right tableHint">
+                    <i class="fa fa-hand-o-right g-font-size-18"></i>
+                    <span class="g-font-size-13">جدول را به سمت راست بکشید.</span>
+                </h6>
+            @endif
+
+            @if ($alarmMsg->count()===0)
+            <!-- Danger Alert -->
+                <div style="direction: rtl" class="alert alert-danger alert-dismissible fade show"
+                     role="alert">
+                    <div class="media">
+                                    <span class="d-flex ml-2 g-mt-5">
+                                      <i class="fa fa-minus-circle"></i>
+                                    </span>
+                        <div class="media-body">
+                            <strong>موردی یافت نشد.</strong>
+                        </div>
+                    </div>
+                </div>
+                <!-- Danger Alert -->
+            @else
+                <div class="table-responsive">
+                    <table style="direction: rtl" class="table table-bordered u-table--v2">
+                        <thead>
+                        <tr>
+                            <th class="align-middle text-center text-nowrap focused rtlPosition">عنوان
+                                گفتگو
+                            </th>
+                            <th class="align-middle text-center text-nowrap">بخش مربوطه</th>
+                            <th class="align-middle text-center text-nowrap">اولویت</th>
+                            <th class="align-middle text-center text-nowrap">زمان پیام</th>
+                            <th class="align-middle text-center text-nowrap">جزئیات</th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        {{--                                GroupBy Variable Hidden input--}}
+                        {{--                        groupBy for grouping msg with one title--}}
+                        <input style="display: none" value=" {{ $groupBy = '' }}">
+
+                        @foreach($alarmMsg as $key => $rec)
+                            <tr>
+                                <td class="align-middle text-nowrap text-center g-font-weight-600 g-color-aqua">{{ $rec->Title }}</td>
+                                {{--                                Section--}}
+                                @if ($rec->Section === '0')
+                                    <td class="align-middle text-center text-nowrap">فنی</td>
+                                @elseif ($rec->Section === '1')
+                                    <td class="align-middle text-center text-nowrap">تحویل کالا</td>
+                                @elseif ($rec->Section === '2')
+                                    <td class="align-middle text-center text-nowrap">مالی</td>
+                                @elseif ($rec->Section === '3')
+                                    <td class="align-middle text-center text-nowrap">مدیریت</td>
+                                @endif
+
+                                {{--                                Priority--}}
+                                @if ($rec->Priority === '2')
+                                    <td class="align-middle text-center text-nowrap">معمولی</td>
+                                @elseif ($rec->Priority === '1')
+                                    <td class="align-middle text-center text-nowrap">
+                                        مهم
+                                    </td>
+                                @elseif ($rec->Priority === '0')
+                                    <td class="align-middle text-center text-nowrap">
+                                        فوری
+                                    </td>
+                                @endif
+                                <td class="align-middle text-center text-nowrap">
+                                    <p style="direction: ltr" class="g-font-size-13 g-color-primary m-0 p-0">{{ $rec->Time }}</p>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <p class="g-font-size-13 g-color-gray-dark-v2 m-0 p-0">{{ $rec->Message }}</p>
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            @endif
+            {{-- End Table --}}
+        </div>
         {{-- Pagination --}}
         {{--        {{ $data->links('General.Pagination', ['result' => $data]) }}--}}
     </div>

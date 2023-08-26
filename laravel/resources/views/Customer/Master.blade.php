@@ -120,7 +120,7 @@
                             <div class="swiper-slide">
                                 <!-- Product -->
                                 <div class="g-pb-50">
-                                    <figure class="g-px-10 g-py-10 productFrame u-shadow-v24">
+                                    <figure class="g-px-10 g-py-10 productFrame">
                                         <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                             <img class="img-fluid w-100" loading="lazy"
                                                  src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
@@ -177,7 +177,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame u-shadow-v24 g-pb-5">
+                                        class="g-px-10 g-py-10 productFrame g-pb-5">
                                     <div>
                                         <a href="{{ route('moreItem','newProduct') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -212,7 +212,7 @@
                             <div class="swiper-slide">
                                 <!-- Product -->
                                 <div class="g-pb-50">
-                                    <figure class="g-px-10 g-py-10 productFrame u-shadow-v24">
+                                    <figure class="g-px-10 g-py-10 productFrame">
                                         <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                             <img class="img-fluid w-100" loading="lazy"
                                                  src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
@@ -270,7 +270,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame u-shadow-v24 g-pb-5">
+                                        class="g-px-10 g-py-10 productFrame g-pb-5">
                                     <div>
                                         <a href="{{ route('moreItem','730') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -305,7 +305,7 @@
                             <div class="swiper-slide">
                                 <!-- Product -->
                                 <div class="g-pb-50">
-                                    <figure class="g-px-10 g-py-10 productFrame u-shadow-v24">
+                                    <figure class="g-px-10 g-py-10 productFrame">
                                         <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                             <img class="img-fluid w-100" loading="lazy"
                                                  src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
@@ -363,7 +363,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame u-shadow-v24 g-pb-5">
+                                        class="g-px-10 g-py-10 productFrame g-pb-5">
                                     <div>
                                         <a href="{{ route('moreItem','24') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -398,7 +398,7 @@
                             <div class="swiper-slide">
                                 <!-- Product -->
                                 <div class="g-pb-50">
-                                    <figure class="g-px-10 g-py-10 productFrame u-shadow-v24">
+                                    <figure class="g-px-10 g-py-10 productFrame">
                                         <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                             <img class="img-fluid w-100" loading="lazy"
                                                  src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
@@ -456,7 +456,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame u-shadow-v24 g-pb-5">
+                                        class="g-px-10 g-py-10 productFrame g-pb-5">
                                     <div>
                                         <a href="{{ route('moreItem','700') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -491,7 +491,7 @@
                             <div class="swiper-slide">
                                 <!-- Product -->
                                 <div class="g-pb-50">
-                                    <figure class="g-px-10 g-py-10 productFrame u-shadow-v24">
+                                    <figure class="g-px-10 g-py-10 productFrame">
                                         <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                             <img class="img-fluid w-100" loading="lazy"
                                                  src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
@@ -548,7 +548,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame u-shadow-v24 g-pb-5">
+                                        class="g-px-10 g-py-10 productFrame g-pb-5">
                                     <div>
                                         <a href="{{ route('moreItem','703') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -583,7 +583,7 @@
                             <div class="swiper-slide">
                                 <!-- Product -->
                                 <div class="g-pb-50">
-                                    <figure class="g-px-10 g-py-10 productFrame u-shadow-v24">
+                                    <figure class="g-px-10 g-py-10 productFrame">
                                         <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                             <img class="img-fluid w-100" loading="lazy"
                                                  src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
