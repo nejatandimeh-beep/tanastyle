@@ -1,6 +1,6 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-
+    <span class="d-none">{{$result=isset($data[0])?$data[0]->Priority:$priority}}</span>
     <!-- End Info Panel -->
     {{--Hidden Input--}}
     <div class="container g-brd-top g-brd-gray-light-v4">
@@ -17,11 +17,11 @@
 
                         <div class="g-mr-5">
                             <span class="h5 g-color-black g-ma-5">اولویت</span>
-                            @if ($priority === '2')
+                            @if ( $result=== '2')
                                 <span class="align-middle g-color-gray-dark-v2 g-font-size-16 text-center text-nowrap">معمولی</span>
-                            @elseif ($priority === '1')
+                            @elseif ($result === '1')
                                 <span class="align-middle g-color-gray-dark-v2 g-font-size-16 text-center text-nowrap">مهم</span>
-                            @elseif ($priority === '0')
+                            @elseif ($result === '0')
                                 <span class="align-middle g-color-gray-dark-v2 g-font-size-16 text-center text-nowrap">فوری</span>
                             @endif
                         </div>
