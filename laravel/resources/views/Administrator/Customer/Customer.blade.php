@@ -1,7 +1,7 @@
 @extends('Layouts.IndexAdmin')
 @section('Content')
 
-    <div id="customerContainer"  style="direction: rtl" class="g-bg-gray-dark-v2 d-lg-flex">
+    <div id="customerContainer"  style="direction: rtl; min-height: 100vh" class="g-bg-gray-dark-v2 d-lg-flex">
         <div class="col-12 col-lg-3 g-brd-left g-brd-white-opacity-0_8 text-center g-pt-20 g-pb-40">
             <span class="d-block g-font-size-25 g-color-pink g-mb-15 g-pb-20 g-brd-bottom g-brd-white-opacity-0_8">پنل خریداران</span>
             <a href="{{route('customerList')}}" class="d-block btn btn-md u-btn-darkgray active rounded-0 g-mb-15">خریداران</a>
@@ -53,6 +53,7 @@
                         <th class="g-font-weight-600 g-color-white text-center">جزئیات</th>
                         <th class="g-font-weight-600 g-color-white text-center">تحویل محصول</th>
                         <th class="g-font-weight-600 g-color-white text-center">فاکتور حاوی اشتباه</th>
+                        <th class="g-font-weight-600 g-color-white text-center">دسترسی به حساب</th>
                     </tr>
                     </thead>
 
@@ -128,6 +129,21 @@
                                    data-placement="top" data-original-title="صحیح">
                                     <i class="fa fa-check g-font-size-18 g-color-primary"></i>
                                 </a>
+                            </td>
+                            <td class="align-middle text-center g-color-gray-light-v2">
+                                @if ($row->status===1)
+                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                       data-toggle="tooltip"
+                                       data-placement="top" data-original-title="بدون محدودیت">
+                                        <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                    </a>
+                                @else
+                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                       data-toggle="tooltip"
+                                       data-placement="top" data-original-title="محدود شده است">
+                                        <i class="fa fa-minus-circle g-font-size-18 g-color-red"></i>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

@@ -270,13 +270,13 @@
                         contentType: false,
                         type: 'POST',
                         beforeSend: function () {
-                            $('#profileImgSubmitIcon').addClass('d-none');
+                            $('#crop').addClass('d-none');
                             $('#waitingCrop').removeClass('d-none');
                         },
                         success: function () {
                             console.log('uploaded');
                             $modal.modal('hide');
-                            $('#profileImgSubmitIcon').removeClass('d-none');
+                            $('#crop').removeClass('d-none');
                             $('#waitingCrop').addClass('d-none');
                             addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
                         }
@@ -476,14 +476,10 @@
         if (letter.hasClass('g-bg-red') || capital.hasClass('g-bg-red') || number.hasClass('g-bg-red') || length.hasClass('g-bg-red')) {
             alert('لطفا قواعد رمزگذاری را رعایت کنید.');
         } else {
-            if (myInput.val() === $('#password-confirm').val()) {
                 $('#submitText').hide();
                 $('#waitingSubmit').show();
                 $('#save').prop('disabled', true);
                 $('form').submit();
-            } else {
-                alert('رمز و تکرار رمز یکسان نیستند.')
-            }
         }
     }
 

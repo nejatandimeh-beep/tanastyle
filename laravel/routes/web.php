@@ -274,6 +274,7 @@ Route::get('/Administrator-Seller-store/{id}', 'Administrator\Seller@store')->na
 Route::get('/Administrator-Seller-sale/{id}', 'Administrator\Seller@sale')->name('adminSellerSale');
 Route::get('/Administrator-Seller-Return/{id}', 'Administrator\Seller@return')->name('adminSellerReturn');
 Route::post('/Administrator-Seller-SendToAll', 'Administrator\Seller@adminToSellerMsg')->name('adminToSellerMsg');
+Route::get('/Administrator-Seller-Block/{id}/{status}', 'Administrator\Seller@accountBlock');
 
 // -------------------------[Product]
 Route::get('/Administrator-Product-List', 'Administrator\Product@delivery')->name('adminProductDelivery');
@@ -300,6 +301,8 @@ Route::post('/Administrator-Customer-ConnectionNew', 'Administrator\Customer@adm
 Route::post('/Administrator-Customer-Connection-NewMsg', 'Administrator\Customer@connectionNewMsg')->name('adminCustomerConnectionNewMsg');
 Route::get('/Administrator-Customer-Sale/{id}', 'Administrator\Customer@sale')->name('adminCustomerSale');
 Route::get('/Administrator-Customer-Return/{id}', 'Administrator\Customer@return')->name('adminCustomerReturn');
+Route::get('/Administrator-Customer-Block/{id}/{status}', 'Administrator\Customer@accountBlock');
+
 // -------------------------[SellerMajor]
 Route::get('/Administrator-SellerMajor', 'Administrator\SellerMajor@list')->name('sellerMajorList');
 Route::get('/Administrator-SellerMajor-ControlPanel/{id}/{tab}', 'Administrator\SellerMajor@controlPanel')->name('sellerMajorControlPanel');
@@ -325,7 +328,10 @@ Route::get('/Administrator-SellerMajor-Comment-Delete/{id}/{status}', 'Administr
 Route::get('/Administrator-SellerMajor-Reactions/{id}', 'Administrator\SellerMajor@reaction')->name('adminSellerMajorReaction');
 Route::get('/Administrator-SellerMajor-AddComment/{postID}', 'Administrator\SellerMajor@addComments');
 Route::post('/Administrator-SellerMajor-SendToAll', 'Administrator\SellerMajor@adminToSellerMajorMsg')->name('adminToSellerMajorMsg');
-
+Route::get('/Administrator-SellerMajor-AdLimit/{id}/{status}', 'Administrator\SellerMajor@adLimit');
+Route::get('/Administrator-SellerMajor-Block/{id}/{status}', 'Administrator\SellerMajor@accountBlock');
+Route::get('/Administrator-SellerMajor-Search-Name/{val}', 'Administrator\SellerMajor@searchName');
+Route::get('/Administrator-SellerMajor-Search-Mobile/{val}', 'Administrator\SellerMajor@searchMobile');
 // -------------------------[Delivery]
 Route::get('/Administrator-Delivery-Panel/{id}', 'Administrator\Admin@adminDeliveryPanel')->name('adminDeliveryPanel');
 Route::get('/Administrator-Kiosk-Panel/{id}', 'Administrator\Admin@adminKioskPanel')->name('adminKioskPanel');
@@ -439,3 +445,5 @@ Route::get('/SellerMajor-Connection', 'SellerMajor\Basic@connection')->name('sel
 Route::post('/SellerMajor-Connection-New', 'SellerMajor\Basic@connectionNew')->name('sellerMajorConnectionNew');
 Route::get('/SellerMajorConnection-Detail/{id}/{status}', 'SellerMajor\Basic@connectionDetail')->name('sellerMajorConnectionDetail');
 Route::post('/SellerMajor-Connection-NewMsg', 'SellerMajor\Basic@connectionNewMsg')->name('sellerMajorConnectionNewMsg');
+Route::get('/Seller-Major-Panel-AdSource/{id}', 'SellerMajor\Basic@adSource')->name('adSourcePanel');
+

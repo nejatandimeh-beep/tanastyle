@@ -31,7 +31,7 @@ class SellerMajor extends Controller
     public function startAd()
     {
         $data = DB::table('ad_clothe as adc')
-            ->select('adc.*', 'sp.Pic', 's.Instagram', 'sp.ID as postID', 's.Mobile', 's.name')
+            ->select('adc.*', 'sp.Pic', 's.Instagram', 'sp.ID as postID', 's.Mobile', 's.name','s.id as sellerMajorID')
             ->leftJoin('sellersmajor as s', 's.id', 'adc.SellerMajorID')
             ->leftJoin('seller_major_post as sp', 'sp.SellerMajorID', 'adc.SellerMajorID')
             ->groupBy('adc.ID')
@@ -56,13 +56,22 @@ class SellerMajor extends Controller
         $arr1 = array_values($arr1);
         $arr2 = array_values($arr2);
         foreach ($arr1 as $key => $a1) {
+            $pic = str_replace('/', '-', $a1->Pic);
+            $link = '/Seller-Major-AdSource/' . $a1->PostID . '/' . $a1->Instagram . '/' . $pic;
+            DB::table('ad_clothe_source')
+                ->insert([
+                    'SellerMajorID'=>$arr2[$key]->sellerMajorID,
+                    'SellerMajorID_AD'=>$a1->sellerMajorID,
+                    'PostID'=>$a1->PostID,
+                    'Instagram'=>$a1->Instagram,
+                    'Pic'=>str_replace('-', '/', $a1->Pic),
+                    'Link'=>$link,
+                ]);
             try {
                 $api_key = Config::get('kavenegar.apikey');
                 $var = new Kavenegar\KavenegarApi($api_key);
                 $template = "adSource";
                 $type = "sms";
-                $pic = str_replace('/', '-', $a1->Pic);
-                $link = '/Seller-Major-AdSource/' . $a1->PostID . '/' . $a1->Instagram . '/' . $pic;
 
                 $result = $var->VerifyLookup($arr2[$key]->Mobile, $link, null, null, $template, $type);
             } catch (\Kavenegar\Exceptions\ApiException $e) {
@@ -74,6 +83,17 @@ class SellerMajor extends Controller
             }
         }
         foreach ($arr2 as $key => $a2) {
+            $pic = str_replace('/', '-', $a2->Pic);
+            $link = '/Seller-Major-AdSource/' . $a2->PostID . '/' . $a2->Instagram . '/' . $pic;
+            DB::table('ad_clothe_source')
+                ->insert([
+                    'SellerMajorID'=>$arr1[$key]->sellerMajorID,
+                    'SellerMajorID_AD'=>$a2->sellerMajorID,
+                    'PostID'=>$a2->PostID,
+                    'Instagram'=>$a2->Instagram,
+                    'Pic'=>str_replace('-', '/', $a2->Pic),
+                    'Link'=>$link,
+                ]);
             try {
                 $api_key = Config::get('kavenegar.apikey');
                 $var = new Kavenegar\KavenegarApi($api_key);
@@ -124,9 +144,9 @@ class SellerMajor extends Controller
             ->get()
             ->count();
 
-        $alarmMsg=DB::table('seller_major_alarm_msg')
+        $alarmMsg = DB::table('seller_major_alarm_msg')
             ->select('*')
-            ->where('SellerMajorID',-1)
+            ->where('SellerMajorID', -1)
             ->get();
 
         $supportPersianDate = array();
@@ -135,7 +155,7 @@ class SellerMajor extends Controller
             $supportPersianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Administrator.SellerMajor.Support', compact('support', 'supportPersianDate', 'newSupport','alarmMsg'));
+        return view('Administrator.SellerMajor.Support', compact('support', 'supportPersianDate', 'newSupport', 'alarmMsg'));
     }
 
     public function connectionDetail($id, $status)
@@ -287,9 +307,9 @@ class SellerMajor extends Controller
             ->get()
             ->count();
 
-        $alarmMsg=DB::table('seller_major_alarm_msg')
+        $alarmMsg = DB::table('seller_major_alarm_msg')
             ->select('*')
-            ->where('SellerMajorID',$id)
+            ->where('SellerMajorID', $id)
             ->get();
 
         $supportPersianDate = array();
@@ -298,7 +318,7 @@ class SellerMajor extends Controller
             $supportPersianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Administrator.SellerMajor.ControlPanel', compact('sellerMajorInfo', 'support', 'newSupport', 'supportPersianDate', 'tab','alarmMsg'));
+        return view('Administrator.SellerMajor.ControlPanel', compact('sellerMajorInfo', 'support', 'newSupport', 'supportPersianDate', 'tab', 'alarmMsg'));
     }
 
     public function update(Request $request)
@@ -876,19 +896,19 @@ class SellerMajor extends Controller
 
         DB::table('seller_major_alarm_msg')
             ->insert([
-                'SellerMajorID'=>$userID==='all'?-1:(int)$userID,
-                'Title'=>$title,
-                'Priority'=>$priority,
-                'Section'=>$section,
-                'Message'=>$msg,
+                'SellerMajorID' => $userID === 'all' ? -1 : (int)$userID,
+                'Title' => $title,
+                'Priority' => $priority,
+                'Section' => $section,
+                'Message' => $msg,
             ]);
 
-        if ($userID==='all'){
-            $sellerMajor=DB::table('sellersmajor')
-                ->select('id','Mobile')
+        if ($userID === 'all') {
+            $sellerMajor = DB::table('sellersmajor')
+                ->select('id', 'Mobile')
                 ->get();
 
-            foreach ($sellerMajor as $key => $row){
+            foreach ($sellerMajor as $key => $row) {
                 try {
                     $api_key = Config::get('kavenegar.apikey');
                     $var = new Kavenegar\KavenegarApi($api_key);
@@ -920,8 +940,139 @@ class SellerMajor extends Controller
                 // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
                 echo $e->errorMessage();
             }
-            return redirect()->route('sellerMajorControlPanel',[$userID,'support'])->with('status', 'success');
+            return redirect()->route('sellerMajorControlPanel', [$userID, 'support'])->with('status', 'success');
         }
+    }
+
+    public function adLimit($id, $status)
+    {
+        $user=DB::table('sellersmajor as s')
+            ->select('s.id','s.Mobile','s.name','s.Instagram','p.ID as postID','p.Pic')
+            ->leftJoin('seller_major_post as p',function($join){
+                $join->on('p.SellerMajorID','s.id')
+                ->on('p.ID', '=', DB::raw("(select max(id) from seller_major_post)")); //get last record from second table
+            })
+            ->where('s.id',$id)
+            ->first();
+
+        switch ($status) {
+            case 'on':
+                DB::table('sellersmajor')
+                    ->where('id', $id)
+                    ->update([
+                        'AdBlock' => '1',
+                        'Advertising' => '0',
+                    ]);
+
+                DB::table('ad_clothe')
+                    ->where('SellerMajorID',$id)
+                    ->delete();
+                break;
+            case 'off':
+                DB::table('sellersmajor')
+                    ->where('id', $id)
+                    ->update([
+                        'AdBlock' => '0',
+                        'Advertising' => '1',
+                    ]);
+
+                DB::table('ad_clothe')
+                    ->insert([
+                        'SellerMajorID'=>$id,
+                        'PostID'=>$user->postID,
+                    ]);
+                break;
+            default:
+                DB::table('sellersmajor')
+                    ->where('id', $id)
+                    ->increment('AdWarning');
+
+                try {
+                    $api_key = Config::get('kavenegar.apikey');
+                    $var = new Kavenegar\KavenegarApi($api_key);
+                    $template = "adWarning";
+                    $type = "sms";
+                    $pic = str_replace('/', '-', $user->Pic);
+                    $link = 'Seller-Major-AdSource/' . $user->postID . '/' . $user->Instagram . '/' . $pic;
+
+                    $result = $var->VerifyLookup($user->Mobile, $user->name, $link, null, $template, $type);
+                } catch (\Kavenegar\Exceptions\ApiException $e) {
+                    // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                    echo $e->errorMessage();
+                } catch (\Kavenegar\Exceptions\HttpException $e) {
+                    // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                    echo $e->errorMessage();
+                }
+        }
+
+        return $status;
+    }
+
+    public function accountBlock($id, $status)
+    {
+        switch ($status) {
+            case 'on':
+                DB::table('sellersmajor')
+                    ->where('id', $id)
+                    ->update([
+                        'status' => 0,
+                    ]);
+                break;
+            case 'off':
+                DB::table('sellersmajor')
+                    ->where('id', $id)
+                    ->update([
+                        'status' => 1,
+                    ]);
+                break;
+        }
+
+        return $status;
+    }
+
+    public function searchName($val)
+    {
+        $output = '';
+        $data = DB::table('sellersmajor')
+            ->select('name', 'id')
+            ->where('name', 'like', $val . '%')
+            ->take(10)
+            ->get();
+        foreach ($data as $key => $row) {
+            $output .= '<li style="border-radius: 0 !important;"
+                        class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
+                            <a  href="' . route('sellerMajorControlPanel', ['id' => $row->id, 'tab' => 'all']) . '"
+                                style="text-decoration: none"
+                                class="col-12 p-0 text-left g-color-gray-dark-v3 g-color-primary--hover">
+                             ' . $row->name . '
+                            </a>
+                        </li>';
+        }
+
+        return $output;
+    }
+
+    public function searchMobile($val)
+    {
+        $output = '';
+        $data = DB::table('sellersmajor')
+            ->select('Mobile', 'id')
+            ->where('Mobile', 'like', $val . '%')
+            ->take(10)
+            ->get();
+
+        foreach ($data as $key => $row) {
+            $output .= '<li style="border-radius: 0 !important;"
+                        class="list-group-item g-color-gray-dark-v3 g-letter-spacing-0 g-opacity-0_8--hover">
+                            <a  href="' . route('sellerMajorControlPanel', ['id' => $row->id, 'tab' => 'all']) . '"
+                                style="text-decoration: none"
+                                class="col-12 p-0 text-left g-color-gray-dark-v3 g-color-primary--hover">
+                             ' . $row->Mobile . '
+                            </a>
+                        </li>';
+        }
+
+        return $output;
     }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------

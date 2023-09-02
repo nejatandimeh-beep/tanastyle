@@ -604,6 +604,27 @@ class Customer extends Controller
         return view('Administrator.Customer.ReturnProduct', compact('data','persianDate','returnPersianDate','customerInfo'));
     }
 
+    public function accountBlock($id, $status)
+    {
+        switch ($status) {
+            case 'on':
+                DB::table('customers')
+                    ->where('id', $id)
+                    ->update([
+                        'status' => 0,
+                    ]);
+                break;
+            case 'off':
+                DB::table('customers')
+                    ->where('id', $id)
+                    ->update([
+                        'status' => 1,
+                    ]);
+                break;
+        }
+
+        return $status;
+    }
 
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
 

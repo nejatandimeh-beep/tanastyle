@@ -507,9 +507,8 @@
                                                    placeholder="زبان انگلیسی">
                                             </div>
                                             <div class="form-group row g-mb-0">
-                                                <label for="password-confirm" class="col-md-4 col-form-label g-py-1 text-md-left"></label>
                                                 <div id="passwordHint"
-                                                     class="col-md-6">
+                                                     class="col-12">
                                                     <div id="length" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg g-mt-5 align-top g-py-1 col-2"></div>
                                                     <div id="number" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
                                                     <div id="uppercase" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
@@ -558,8 +557,7 @@
                                                     <button type="button" id="crop" class="btn btn-primary g-mr-5">برش
                                                     </button>
                                                     <i id="waitingCrop"
-                                                       style="display: none"
-                                                       class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+                                                       class="d-none fa fa-spinner fa-spin g-mx-10 g-font-size-20 g-color-primary"></i>
                                                 </div>
                                             </div>
                                         </div>

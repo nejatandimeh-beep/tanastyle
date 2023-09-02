@@ -1,7 +1,7 @@
 @extends('Layouts.IndexAdmin')
 @section('Content')
 
-    <div id="customerContainer"  style="direction: rtl" class="g-bg-gray-dark-v2 d-flex">
+    <div id="customerContainer"  style="direction: rtl; min-height: 100vh" class="g-bg-gray-dark-v2 d-flex">
         <div class="col-12 col-lg-3 g-brd-left g-brd-white-opacity-0_8 text-center g-pt-20 g-pb-40">
             <span class="d-block g-font-size-25 g-color-pink g-mb-15 g-pb-20 g-brd-bottom g-brd-white-opacity-0_8">پنل کیوسک</span>
             <a href="{{route('customerList')}}" class="d-block btn btn-md u-btn-darkgray active rounded-0 g-mb-15">پرسنل</a>

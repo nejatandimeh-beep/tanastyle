@@ -8,6 +8,11 @@
 
         function membership(thisElement) {
             if (parseInt($('#postLen').text()) > 0) {
+                if(thisElement.is(":checked")){
+                    $('#kampeynAlert').show();
+                } else {
+                    $('#kampeynAlert').hide();
+                }
                 $.ajax({
                     type: 'GET',
                     url: '/Seller-Major-Advertising/' + $('#sellerMajorID').text() + '/' + thisElement.is(":checked"),
@@ -734,6 +739,12 @@
         });
 
         $(document).ready(function () {
+            // Product Table Events Success Message
+            $('#overlay').modal('show');
+
+            setTimeout(function () {
+                $('#overlay').modal('hide');
+            }, 3000);
             $('.js-go-to').remove();
             if ($('.profileMenu').length > 0) {
                 $('#profileMenu').css({

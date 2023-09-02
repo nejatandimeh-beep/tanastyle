@@ -1,5 +1,23 @@
 @extends('Layouts.SellerMajor.Index')
 @section('Content')
+    @if(session()->has('advertising'))
+        <div class="modal fade" id="overlay">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header text-right g-bg-gray-light-v5">
+                        <button type="button" class="close g-font-size-20" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title"><span
+                                class="fa fa-check-square g-color-primary g-font-size-25 g-ml-15"></span></h4>
+                    </div>
+                    <div class="modal-body text-right">
+                        <p style="direction: rtl">در حال حاضر فعالیت تبلیغاتی برای شما تعیین نشده است.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
     <span id="asset" class="d-none">{{asset('/')}}</span>
     <span id="sellerMajorID" class="d-none">{{$data->id}}</span>
     <span id="eventLen" class="d-none">{{count($events)}}</span>
@@ -161,7 +179,8 @@
                                                                                     class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
                                                                                     name="advertising"
                                                                                     {{$data->Advertising === '1' ? 'checked=""':''}}
-                                                                                    onchange="membership($(this))"
+                                                                                    onchange="{{$data->AdBlock === '1' ? '':'membership($(this))'}}"
+                                                                                    {{$data->AdBlock === '1' ? 'disabled':''}}
                                                                                     type="checkbox">
                                                                                 <div style="width: 53px; height: 26px" class="u-check-icon-radio-v8">
                                                                                     <i class="fa"
@@ -173,6 +192,20 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                            <div id="kampeynAlert" style="{{$data->Advertising === '1' ? 'display: block':'display: none'}}">
+                                                                <p style="line-height: 2.2;direction: rtl;"
+                                                                   class="alert alert-warning text-right g-pa-20--lg g-mt-25 g-px-10 g-py-10">
+                                                                    <i class="fa fa-warning g-ml-5 g-font-size-18"></i>لطفا در صورتی که برایتان در زمان مشخص شده در اینستاگرام استوری تبلیغاتی گذاشته نشده بود از طریق قسمت پشتیبانی تیکت ثبت کنید تا موضوع را پیگیری نماییم.</p>
+                                                                <a href="{{route('adSourcePanel',$data->id)}}"
+                                                                   class="g-text-underline--none--hover g-color-primary">
+                                                                        <span class="h5 g-ml-5">استوری تبلیغاتی من</span>
+                                                                </a>
+                                                            </div>
+                                                            <p id="kampeynLimit"
+                                                               style="line-height: 2.2;
+                                                                direction: rtl;{{$data->AdBlock === '1' ? 'display: block':'display: none'}}"
+                                                               class="alert alert-danger text-right g-pa-20--lg g-mt-25 g-px-10 g-py-10">
+                                                                <i class="fa fa-minus-circle g-ml-5 g-font-size-18"></i>دسترسی شما به کمپین محدود شده است لطفا از طریق پشتیبانی پیگیری نمایید.</p>
                                                         </div>
                                                     </div>
                                                 </div>

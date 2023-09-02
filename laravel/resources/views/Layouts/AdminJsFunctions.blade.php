@@ -1,5 +1,189 @@
 @section('AdminJsFunction')
     <script>
+        function accountBlock(id, status) {
+            let alert = '';
+            switch (status) {
+                case ('on'):
+                    alert = 'محدود سازی حساب کاربری';
+                    break;
+                case ('off'):
+                    alert = 'رفع محدودیت حساب کاربری';
+                    break;
+            }
+            $.confirm({
+                title: alert,
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: "/Administrator-SellerMajor-Block/" + id + '/' + status,
+                            success: function (data) {
+                                console.log(status);
+                                if (status === 'on') {
+                                    $('#blockOn').addClass('d-none');
+                                    $('#blockOff').removeClass('d-none');
+                                } else {
+                                    $('#blockOn').removeClass('d-none');
+                                    $('#blockOff').addClass('d-none');
+                                }
+                            }
+                        });
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+        function accountBlockSeller(id, status) {
+            let alert = '';
+            switch (status) {
+                case ('on'):
+                    alert = 'محدود سازی حساب کاربری';
+                    break;
+                case ('off'):
+                    alert = 'رفع محدودیت حساب کاربری';
+                    break;
+            }
+            $.confirm({
+                title: alert,
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: "/Administrator-Seller-Block/" + id + '/' + status,
+                            success: function (data) {
+                                console.log(status);
+                                if (status === 'on') {
+                                    $('#blockOn').addClass('d-none');
+                                    $('#blockOff').removeClass('d-none');
+                                } else {
+                                    $('#blockOn').removeClass('d-none');
+                                    $('#blockOff').addClass('d-none');
+                                }
+                            }
+                        });
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+        function accountBlockCustomer(id, status) {
+            let alert = '';
+            switch (status) {
+                case ('on'):
+                    alert = 'محدود سازی حساب کاربری';
+                    break;
+                case ('off'):
+                    alert = 'رفع محدودیت حساب کاربری';
+                    break;
+            }
+            $.confirm({
+                title: alert,
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: "/Administrator-Customer-Block/" + id + '/' + status,
+                            success: function (data) {
+                                console.log(status);
+                                if (status === 'on') {
+                                    $('#blockOn').addClass('d-none');
+                                    $('#blockOff').removeClass('d-none');
+                                } else {
+                                    $('#blockOn').removeClass('d-none');
+                                    $('#blockOff').addClass('d-none');
+                                }
+                            }
+                        });
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+
+        function smSearchName(val) {
+            $('#sMobile').val('')
+            $('#searchContainer').addClass('d-none');
+            val = val === '' ? '-1' : val;
+            $.ajax({
+                type: 'GET',
+                url: "/Administrator-SellerMajor-Search-Name/" + val,
+                success: function (data) {
+                    console.log(data);
+                    if (data !== '') {
+                        $('#searchContainer').removeClass('d-none');
+                        $('#resultContainer').html(data);
+                    } else {
+                        $('#searchContainer').addClass('d-none');
+                    }
+                }
+            });
+        }
+
+        function smSearchMobile(val) {
+            $('#sName').val('')
+            $('#searchContainer').addClass('d-none');
+            val = val === '' ? '-1' : val;
+            $.ajax({
+                type: 'GET',
+                url: "/Administrator-SellerMajor-Search-Mobile/" + val,
+                success: function (data) {
+                    console.log(data);
+                    if (data !== '') {
+                        $('#searchContainer').removeClass('d-none');
+                        $('#resultContainer').html(data);
+                    } else {
+                        $('#searchContainer').addClass('d-none');
+                    }
+                }
+            });
+        }
+
+        function AdLimit(id, status) {
+            let alert = '';
+            switch (status) {
+                case ('on'):
+                    alert = 'محدودسازی دسترسی به کمپین';
+                    break;
+                case ('off'):
+                    alert = 'رفع محدودیت دسترسی به کمپین';
+                    break;
+                default:
+                    alert = 'اخطار قطع دسترسی به کمپین';
+            }
+            $.confirm({
+                title: alert,
+                content: 'آیا مطمئن هستید؟',
+                buttons: {
+                    تایید: function () {
+                        $.ajax({
+                            type: 'GET',
+                            url: "/Administrator-SellerMajor-AdLimit/" + id + '/' + status,
+                            success: function (data) {
+                                console.log(status);
+                                if (status === 'on') {
+                                    $('#limitOn').addClass('d-none');
+                                    $('#limitWarning').addClass('d-none');
+                                    $('#limitOff').removeClass('d-none');
+                                } else {
+                                    $('#limitOn').removeClass('d-none');
+                                    $('#limitWarning').removeClass('d-none');
+                                    $('#limitOff').addClass('d-none');
+                                }
+                            }
+                        });
+                    },
+                    انصراف: function () {
+                    },
+                }
+            });
+        }
+
         $(document).on('ready', function () {
             // Set Seller Navigation Date
             nowDate();
@@ -47,7 +231,7 @@
             if ($('#cardContainer').length > 0)
                 $('#cardContainer').css('height', $(window).height() - 100);
 
-            if($('.orderDetail').length>0){
+            if ($('.orderDetail').length > 0) {
                 $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
             }
         });
@@ -134,7 +318,7 @@
                     $('#category').val(catHint);
                     break;
             }
-            console.log($('#hintCategory').val(),$('#category').val())
+            console.log($('#hintCategory').val(), $('#category').val())
         }
 
         //-------------------------------------------------------Seller---------------------------------------------------------
@@ -187,7 +371,7 @@
         }
 
         function customerSearch(mobile) {
-            if(mobile!==''){
+            if (mobile !== '') {
                 $.ajax({
                     type: 'GET',
                     url: "/Administrator-Customer-Search/" + mobile,
@@ -201,8 +385,8 @@
         }
 
         function trackingCodeSearch(trackingCode) {
-            if (trackingCode==='')
-                trackingCode='null';
+            if (trackingCode === '')
+                trackingCode = 'null';
 
             $.ajax({
                 type: 'GET',
@@ -214,7 +398,7 @@
         }
 
         //-------------------------------------------------------My Function----------------------------------------------------
-        function addComa(ele){
+        function addComa(ele) {
             ele.val(ele.val().toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
         }
 

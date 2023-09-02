@@ -1,6 +1,6 @@
 @extends('Layouts.IndexAdmin')
 @section('Content')
-    <div class="g-bg-gray-dark-v2 g-color-white g-px-15 g-py-30">
+    <div style="min-height: 100vh" class="g-bg-gray-dark-v2 g-color-white g-px-15 g-py-30">
         <!-- Tab panes -->
         <div style="padding-bottom: 120px" class="container">
             {{-- Table --}}
@@ -53,13 +53,15 @@
                 @endif
                 {{-- End Table --}}
             </div>
-
+            <div>
+                <a style="margin-top: 35px" type="button" href="{{route('startAd')}}"
+                   class="btn btn-lg u-btn-outline-primary g-font-weight-600 rounded-0 g-font-size-14 g-px-25 g-my-20">
+                    <i class="icon-bell g-mr-10 g-font-weight-600"></i>شروع تبلیغ
+                </a>
+            </div>
             {{-- Pagination --}}
             {{ $data->links('General.Pagination', ['result' => $data]) }}
-            <a style="margin-top: 35px" type="button" href="{{route('startAd')}}"
-                    class="btn btn-lg u-btn-outline-primary g-font-weight-600 rounded-0 g-font-size-14 g-px-25 g-my-20">
-                <i class="icon-bell g-mr-10 g-font-weight-600"></i>شروع تبلیغ
-            </a>
+
         </div>
 
     </div>

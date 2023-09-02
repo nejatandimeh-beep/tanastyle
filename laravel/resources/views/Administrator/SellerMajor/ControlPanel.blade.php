@@ -82,6 +82,11 @@
                 <a class="nav-link" href="{{route('adminSellerMajorPanel',$sellerMajorInfo->id)}}">محتویات پنل</a>
             </li>
 
+            <li class="nav-item">
+                <a id="sellerBlock" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--3"
+                   role="tab">اعمال محدودیت</a>
+            </li>
+
             <!--پشتیبانی-->
             <li class="nav-item">
                 <a id="sellerSupport" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--1" role="tab">
@@ -1001,7 +1006,47 @@
                     </div>
                 </div>
             </div>
-            <!-- End Tab panes -->
+            <!--اعمال محدودیت -->
+            <div style="min-height: 100vh" class="tab-pane fade" id="nav-4-1-primary-hor-fill--3" role="tabpanel">
+                <div class="row justify-content-center">
+                    <div class="col-md-9 g-mt-30">
+                        <div style="direction: rtl" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <h4 class="h5">
+                                <i class="fa fa-minus-circle"></i>
+                                شرکت در کمپین تبلیغاتی
+                            </h4>
+                            <p class="g-mb-10">جهت اعمال محدودیت و عدم دسترسی فروشندگان ساده به حساب کاربری خود لطفا از کلید اعمال محدودیت و در صورت رفع محدودیت از کلید مربوطه استفاده نمایید و همچنین جهت اخطار به فروشنده ساده از کلید اخطار استفاده کنید.</p>
+                            <a id="limitWarning" href="#!" onclick="AdLimit({{$sellerMajorInfo->id}},'danger')" class="{{$sellerMajorInfo->AdBlock === '0' ?'':'d-none'}} btn u-btn-outline-orange btn-xs g-brd-2 rounded-0">
+                                <i class="fa fa-info-circle g-mr-2"></i>
+                                {{$sellerMajorInfo->AdWarning ==0 ?'اخطار':'اخطار شماره '.$sellerMajorInfo->AdWarning}}
+                            </a>
+                            <a id="limitOn" href="#!" onclick="AdLimit({{$sellerMajorInfo->id}},'on')" class="{{$sellerMajorInfo->AdBlock === '0' ?'':'d-none'}} btn u-btn-outline-lightred btn-xs g-brd-2 rounded-0">
+                                <i class="fa fa-minus-circle g-mr-2"></i>
+                                اعمال محدودیت
+                            </a>
+                            <a id="limitOff" href="#!" onclick="AdLimit({{$sellerMajorInfo->id}},'off')" class="{{$sellerMajorInfo->AdBlock === '1' ?'':'d-none'}} btn u-btn-outline-bluegray btn-xs g-brd-2 rounded-0">
+                                <i class="fa fa-check-circle g-mr-2"></i>
+                                رفع محدودیت
+                            </a>
+                        </div>
+                        <div style="direction: rtl" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <h4 class="h5">
+                                <i class="fa fa-minus-circle"></i>
+                                محدود سازی حساب کاربری
+                            </h4>
+                            <p class="g-mb-10">جهت اعمال محدودیت و عدم دسترسی فروشندگان ساده به کمپین تبلیغاتی لطفا از کلید اعمال محدودیت و در صورت رفع محدودیت از کلید مربوطه استفاده نمایید.</p>
+                            <a id="blockOn" href="#!" onclick="accountBlock({{$sellerMajorInfo->id}},'on','sellerMajor')" class="{{$sellerMajorInfo->status == 1 ?'':'d-none'}} btn u-btn-outline-lightred btn-xs g-brd-2 rounded-0">
+                                <i class="fa fa-minus-circle g-mr-2"></i>
+                                اعمال محدودیت
+                            </a>
+                            <a id="blockOff" href="#!" onclick="accountBlock({{$sellerMajorInfo->id}},'off','sellerMajor')" class="{{$sellerMajorInfo->status == 0 ?'':'d-none'}} btn u-btn-outline-bluegray btn-xs g-brd-2 rounded-0">
+                                <i class="fa fa-check-circle g-mr-2"></i>
+                                رفع محدودیت
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

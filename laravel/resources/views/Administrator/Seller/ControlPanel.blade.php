@@ -122,6 +122,11 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a id="sellerBlock" class="nav-link" data-toggle="tab" href="#nav-4-1-primary-hor-fill--8"
+                   role="tab">اعمال محدودیت</a>
+            </li>
+
             <!--محصولات برگشتی-->
             <li class="nav-item">
                 <a id="sellerOrder" class="nav-link g-mb-minus-1" href="{{route('adminSellerReturn',$sellerInfo->id)}}">
@@ -508,7 +513,28 @@
                     {{--        {{ $data->links('General.Pagination', ['result' => $data]) }}--}}
                 </div>
             </div>
-
+            <!--اعمال محدودیت -->
+            <div style="min-height: 100vh" class="tab-pane fade" id="nav-4-1-primary-hor-fill--8" role="tabpanel">
+                <div class="row justify-content-center">
+                    <div class="col-md-9 g-mt-30">
+                        <div style="direction: rtl" class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <h4 class="h5">
+                                <i class="fa fa-minus-circle"></i>
+                                محدود سازی حساب کاربری
+                            </h4>
+                            <p class="g-mb-10">جهت اعمال محدودیت و عدم دسترسی فروشندگان ساده به حساب کاربری خود لطفا از کلید اعمال محدودیت و در صورت رفع محدودیت از کلید مربوطه استفاده نمایید و همچنین جهت اخطار به فروشنده ساده از کلید اخطار استفاده کنید.</p>
+                            <a id="blockOn" href="#!" onclick="accountBlockSeller({{$sellerInfo->id}},'on')" class="{{$sellerInfo->status==1?'':'d-none'}} btn u-btn-outline-lightred btn-xs g-brd-2 rounded-0">
+                                <i class="fa fa-minus-circle g-mr-2"></i>
+                                اعمال محدودیت
+                            </a>
+                            <a id="blockOff" href="#!" onclick="accountBlockSeller({{$sellerInfo->id}},'off')" class="{{$sellerInfo->status==0?'':'d-none'}} btn u-btn-outline-bluegray btn-xs g-brd-2 rounded-0">
+                                <i class="fa fa-check-circle g-mr-2"></i>
+                                رفع محدودیت
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <!--محصولات نحویلی-->
             <div class="tab-pane fade" id="nav-4-1-primary-hor-fill--2" role="tabpanel">
                 <div style="padding-bottom: 300px;" class="container g-pt-60">

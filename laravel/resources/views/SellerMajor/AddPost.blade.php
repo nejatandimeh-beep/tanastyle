@@ -3,7 +3,7 @@
     <span class="d-none" id="imgWorking"></span>
     <div class="mx-auto col-12 col-lg-8">
         <h5 class="text-right g-py-10">افزودن پست</h5>
-        <label id="lblImg" class="d-block text-right g-font-weight-600 g-color-red">تصاویر</label>
+        <label id="lblImg" class="d-block text-right g-font-weight-600 g-color-red necessary">تصاویر</label>
     </div>
 
     <div class="d-flex justify-content-center g-px-10">

@@ -53,6 +53,7 @@
                         <th class="g-font-weight-600 g-color-white text-center">جزئیات</th>
                         <th class="g-font-weight-600 g-color-white text-center">تحویل محصول</th>
                         <th class="g-font-weight-600 g-color-white text-center">فاکتور حاوی اشتباه</th>
+                        <th class="g-font-weight-600 g-color-white text-center">دسترسی به حساب</th>
                     </tr>
                     </thead>
 
@@ -89,15 +90,8 @@
                                            data-placement="top" data-original-title="اتمام زمان تحویل">
                                             <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
                                         </a>
-                                    @else
-                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5">
-                                            <i class="fa fa-check g-font-size-18 g-color-primary"></i>
-                                        </a>
                                     @endif
                                 @endforeach
-                                <a class="{{$deliveryAlarm===[] ? '':'d-none '}}g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5">
-                                    <i class="fa fa-check g-font-size-18 g-color-primary"></i>
-                                </a>
                             </td>
                             <td class="align-middle text-center">
                                 @foreach($falseAlarm as $sellerId)
@@ -107,19 +101,23 @@
                                            data-placement="top" data-original-title="حاوی اشتباه">
                                             <i class="fa fa-exclamation-triangle g-font-size-18 g-color-lightred"></i>
                                         </a>
-                                    @else
-                                        <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                           data-toggle="tooltip"
-                                           data-placement="top" data-original-title="صحیح">
-                                            <i class="fa fa-check g-font-size-18 g-color-primary"></i>
-                                        </a>
                                     @endif
                                 @endforeach
-                                <a class="{{$falseAlarm===[] ? '':'d-none '}}g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                   data-toggle="tooltip"
-                                   data-placement="top" data-original-title="صحیح">
-                                    <i class="fa fa-check g-font-size-18 g-color-primary"></i>
-                                </a>
+                            </td>
+                            <td class="align-middle text-center g-color-gray-light-v2">
+                                @if ($row->status===1)
+                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                       data-toggle="tooltip"
+                                       data-placement="top" data-original-title="بدون محدودیت">
+                                        <i class="fa fa-check g-font-size-18 g-color-primary"></i>
+                                    </a>
+                                @else
+                                    <a class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
+                                       data-toggle="tooltip"
+                                       data-placement="top" data-original-title="محدود شده است">
+                                        <i class="fa fa-minus-circle g-font-size-18 g-color-red"></i>
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

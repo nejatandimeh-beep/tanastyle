@@ -1312,6 +1312,25 @@ class Basic extends Controller
 
         return redirect('/SellerMajor-Connection')->with('status', 'success');
     }
+
+    public function adSource($id)
+    {
+        $data=DB::table('ad_clothe_source')
+            ->select('*')
+            ->where('SellerMajorID',$id)
+            ->where("Time", ">", Carbon::now()->subHours(24)->toDateTimeString())
+            ->latest('Time')
+            ->first();
+        if(isset($data->ID)){
+            $instagram=$data->Instagram;
+            $pic = str_replace('-', '/', $data->Pic);
+            $pic = $pic . '/' . $data->PostID . '/0.jpg';
+            return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic'));
+        } else {
+            return redirect('/Seller-Major-Panel')->with('advertising','null');
+        }
+
+    }
     //------------------------------------------------
     //  Convert Date to Iranian Calender
     public function convertDateToPersian($d)

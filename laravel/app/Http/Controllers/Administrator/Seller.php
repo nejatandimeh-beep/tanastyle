@@ -840,6 +840,28 @@ class Seller extends Controller
         }
     }
 
+    public function accountBlock($id, $status)
+    {
+        switch ($status) {
+            case 'on':
+                DB::table('sellers')
+                    ->where('id', $id)
+                    ->update([
+                        'status' => 0,
+                    ]);
+                break;
+            case 'off':
+                DB::table('sellers')
+                    ->where('id', $id)
+                    ->update([
+                        'status' => 1,
+                    ]);
+                break;
+        }
+
+        return $status;
+    }
+
 //--------------------------------------------[new function]------------------------------------------------------
     public function store($id)
     {
