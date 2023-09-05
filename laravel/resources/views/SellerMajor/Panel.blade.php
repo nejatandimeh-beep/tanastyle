@@ -129,10 +129,10 @@
                                      tabindex="-1" role="dialog"
                                      aria-labelledby="myModalLabel"
                                      aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
+                                    <div class="modal-dialog m-0 mx-lg-auto" role="document">
+                                        <div style="min-height: 100vh" class="modal-content">
                                             <div class="modal-header g-pr-20 g-pl-20">
-                                                <h5 class="m-0">آدرس اکانت اینستاگرام</h5>
+                                                <h5 class="m-0">کمپین تبلیغاتی</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                     <i class="fa fa-close g-font-size-16"></i>
@@ -142,23 +142,26 @@
                                                 <div style="direction: ltr" class="form-group row g-mb-25">
                                                     <div class="input-group justify-content-center">
                                                         <div class="col-lg-10">
-                                                            <h6 class="d-flex justify-content-between">
+                                                            <!--current insta user name-->
+                                                            <h5 class="d-flex justify-content-between">
                                                                 <a href="{{$data->Instagram !== '' ? 'https://instagram.com/'.$data->Instagram : '#'}}"
                                                                    class="g-text-underline--none--hover g-color-primary">
                                                                         <span id="instagramLink"
                                                                               class="h5 g-ml-5">{{$data->Instagram !== '' ? $data->Instagram : 'خالی'}}</span>
                                                                 </a>
-                                                                <span>آدرس فعلی</span>
-                                                            </h6>
-                                                            <div class="input-group">
+                                                                <span>نام حساب فعلی</span>
+                                                            </h5>
+                                                            <!--new insta user name-->
+                                                            <div class="input-group g-mb-20">
                                                                <textarea id="instagram"
                                                                          autofocus
                                                                          oninput="if($(this).val()==='') $('#submitInstagram').addClass('d-none'); else $('#submitInstagram').removeClass('d-none')"
-                                                                         class="form-control g-font-size-16 form-control-md g-resize-none g-brd-0 rounded-0 pl-0 g-bg-transparent"
-                                                                         maxlength="300" rows="4"
-                                                                         placeholder="آدرس جدید.."></textarea>
+                                                                         class="form-control g-font-size-16 form-control-md g-resize-none g-brd-1 rounded-0 g-bg-transparent"
+                                                                         maxlength="300" rows="1"
+                                                                         placeholder="نام حساب جدید"></textarea>
                                                             </div>
-                                                            <div class="d-flex">
+                                                            <!--update user name button-->
+                                                            <div class="text-left">
                                                                 <a href="#" onclick="socialAddressUpdate('instagram',$(this))" id="submitInstagram"
                                                                    class="d-none g-text-underline--none--hover g-color-gray-dark-v3 g-color-primary--hover">
                                                                     <span
@@ -169,36 +172,79 @@
                                                                            class="d-none fa fa-spinner fa-spin g-line-height-0 align-middle"></i>
                                                                     </span>
                                                                 </a>
-                                                                <div id="adContainer" class="g-mt-10 {{$data->Instagram !== '' ? '' : 'd-none'}}">
-                                                                    <div style="direction: rtl" class="form-group m-0">
-                                                                        <label
-                                                                            class="d-flex align-items-center justify-content-between m-0">
-                                                                            <span class="h5 m-0">شرکت در کمپین تبلیغات</span>
-                                                                            <div class="u-check g-mr-10">
-                                                                                <input
-                                                                                    class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
-                                                                                    name="advertising"
-                                                                                    {{$data->Advertising === '1' ? 'checked=""':''}}
-                                                                                    onchange="{{$data->AdBlock === '1' ? '':'membership($(this))'}}"
-                                                                                    {{$data->AdBlock === '1' ? 'disabled':''}}
-                                                                                    type="checkbox">
-                                                                                <div style="width: 53px; height: 26px" class="u-check-icon-radio-v8">
-                                                                                    <i class="fa"
-                                                                                       style="color: #72c02c !important"
-                                                                                       data-check-icon=""></i>
-                                                                                </div>
-                                                                            </div>
-                                                                        </label>
+                                                            </div>
+                                                            <!--insta profile img-->
+                                                            <div class="form-group row g-mb-15">
+                                                                <label style="direction: rtl" class="col-12 d-flex justify-content-between col-form-label text-right"
+                                                                       for="fileShow11"
+                                                                       id="img-file-label12">
+                                                                    <h5 class="align-self-center m-0">تصویر پروفایل اینستاگرام</h5>
+                                                                    <div class="text-right {{$data->Instagram !== '' ? '' : 'd-none'}}" id="instaProfileImgContainer">
+                                                                        @if (file_exists(public_path($data->Pic.'/instaProfileImg.jpg')))
+                                                                        <img id="instaProfileImg"
+                                                                            class="g-width-55 g-height-55 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4"
+                                                                            src="{{asset($data->Pic.'/instaProfileImg.jpg?'.date('Y-m-d H:i:s'))}}"
+                                                                            alt="Image Description">
+                                                                        @endif
                                                                     </div>
+                                                                </label>
+                                                                <div style="direction: rtl" class="col-12">
+                                                                    <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
+                                                                    <span style="cursor: default"
+                                                                          class="d-none align-self-center g-mr-5 g-pa-10 g-color-primary"
+                                                                          id="uploadingIcon11"><i class="fa fa-spinner fa-spin"></i></span>
+                                                                    <div class="input-group-btn col-12 g-mt-15 p-0">
+                                                                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="20">
+                                                                            بارگذاری تصویر
+                                                                        </button>
+                                                                        <input id="pic11"
+                                                                               value=""
+                                                                               type="file"
+                                                                               name="pic11"
+                                                                               accept="image/*">
+                                                                        <div id="userImageDiv11">
+                                                                            <input type="text" id="imageUrl11" name="imageUrl11"
+                                                                                   style="display: none">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                    <div style="direction: rtl">
+                                                                    <p class="text-muted g-font-size-13 g-line-height-1_5 text-justify g-pt-5 m-0">
+                                                                        جهت تسریع در پیدا کردن اکانت شما  در اینستاگرام از سوی سایر اعضای کمپین، بروزترین تصویر پروفایل اینستاگرام خود را آپلود نمایید. <span class="text-muted g-font-size-13 g-line-height-1_5 text-right g-pt-5 m-0 g-color-orange">در صورت نبود عکس کافیست از خود تصویر پروفایل اینستاگرام اسکرین شات بگیرید.</span></p>
+                                                                </div>
+                                                                </div>
+                                                            </div>
+                                                            <!--advertising part-->
+                                                            <div id="adContainer" class="g-mt-10 {{$data->Instagram !== '' ? '' : 'd-none'}}">
+                                                                <div style="direction: rtl" class="form-group m-0">
+                                                                    <label
+                                                                        class="d-flex align-items-center justify-content-start m-0">
+                                                                        <span class="h5 m-0">شرکت در کمپین تبلیغات</span>
+                                                                        <div class="u-check g-mr-10">
+                                                                            <input
+                                                                                class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
+                                                                                name="advertising"
+                                                                                {{$data->Advertising === '1' ? 'checked=""':''}}
+                                                                                onchange="{{$data->AdBlock === '1' ? '':'membership($(this))'}}"
+                                                                                {{$data->AdBlock === '1' ? 'disabled':''}}
+                                                                                type="checkbox">
+                                                                            <div style="width: 53px; height: 26px" class="u-check-icon-radio-v8">
+                                                                                <i class="fa"
+                                                                                   style="color: #72c02c !important"
+                                                                                   data-check-icon=""></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </label>
                                                                 </div>
                                                             </div>
                                                             <div id="kampeynAlert" style="{{$data->Advertising === '1' ? 'display: block':'display: none'}}">
                                                                 <p style="line-height: 2.2;direction: rtl;"
-                                                                   class="alert alert-warning text-right g-pa-20--lg g-mt-25 g-px-10 g-py-10">
+                                                                   class="alert alert-warning text-right g-pa-20--lg g-mt-10 g-px-10 g-py-10">
                                                                     <i class="fa fa-warning g-ml-5 g-font-size-18"></i>لطفا در صورتی که برایتان در زمان مشخص شده در اینستاگرام استوری تبلیغاتی گذاشته نشده بود از طریق قسمت پشتیبانی تیکت ثبت کنید تا موضوع را پیگیری نماییم.</p>
+                                                                <h5 class="text-right">فعالیت روزانه شما در کمپین</h5>
                                                                 <a href="{{route('adSourcePanel',$data->id)}}"
                                                                    class="g-text-underline--none--hover g-color-primary">
-                                                                        <span class="h5 g-ml-5">استوری تبلیغاتی من</span>
+                                                                        <span class="h5 g-ml-5">لینک نمایش فعالیت</span>
                                                                 </a>
                                                             </div>
                                                             <p id="kampeynLimit"
@@ -209,6 +255,45 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--newProfileInstagram modal-->
+                                <div style="direction: rtl; overflow:scroll" class="modal fade bd-example-modal-lg" id="newInstagramModal"
+                                     tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalCenterTitle"
+                                     aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered my-0" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">تنظیم اندازه
+                                                    تصویر</h5>
+                                                <button type="button"
+                                                        class="g-brd-none g-bg-transparent g-font-size-20 g-line-height-0 align-self-center"
+                                                        data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="img-container">
+                                                    <div class="col-md-12 p-0">
+                                                        <img style="width: 100%;" src="" id="insta_sample_image">
+                                                    </div>
+                                                    {{--                        <div class="col-md-4">--}}
+                                                    {{--                            <div class="preview rounded-circle mx-auto g-mt-20"></div>--}}
+                                                    {{--                        </div>--}}
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button"
+                                                        class="btn btn-secondary" data-dismiss="modal">انصراف
+                                                </button>
+                                                <button type="button" id="instaCrop" class="btn btn-primary g-mr-5">برش
+                                                </button>
+                                                <i id="instaWaitingCrop"
+                                                   class="d-none fa fa-spinner fa-spin g-mx-10 g-font-size-20 g-color-primary"></i>
                                             </div>
                                         </div>
                                     </div>

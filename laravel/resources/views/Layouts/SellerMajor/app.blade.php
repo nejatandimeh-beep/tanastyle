@@ -198,7 +198,7 @@
 
         let $modal = $('#modal'),
             image = document.getElementById('sample_image'),
-            cropper, inputID, inputIdFinshed = [], counter = 0, file_type;
+            cropper, inputID, inputIdFinished = [], counter = 0, file_type;
         $('input[id^="pic"]').on('change', function (event) {
             if (!$('#mobile').hasClass('g-brd-red')) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
@@ -258,6 +258,8 @@
                     form = new FormData();
                     form.append('imageUrl', file_upload);
                     form.append('mobileHint', $('#mobile').val());
+                    form.append('picNum', inputID);
+
                     $.ajaxSetup({
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -273,8 +275,8 @@
                             $('#crop').addClass('d-none');
                             $('#waitingCrop').removeClass('d-none');
                         },
-                        success: function () {
-                            console.log('uploaded');
+                        success: function (data) {
+                            console.log(data);
                             $modal.modal('hide');
                             $('#crop').removeClass('d-none');
                             $('#waitingCrop').addClass('d-none');
@@ -299,16 +301,16 @@
                 contentType: false,
                 processData: false,
                 success: function (data) {
-                    inputIdFinshed[counter] = data;
+                    inputIdFinished[counter] = data;
                     counter++;
                     console.log("success");
                     console.log(data);
                 }
             }).done(function () {
-                for (let i = 0; i <= inputIdFinshed.length; i++) {
-                    $('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');
-                    $('#uploadingText' + inputIdFinshed[i]).addClass('d-none');
-                    $('#fileShow' + inputIdFinshed[i]).removeClass('d-none');
+                for (let i = 0; i <= inputIdFinished.length; i++) {
+                    $('#uploadingIcon' + inputIdFinished[i]).addClass('d-none');
+                    $('#uploadingText' + inputIdFinished[i]).addClass('d-none');
+                    $('#fileShow' + inputIdFinished[i]).removeClass('d-none');
                 }
             })
         }));
@@ -442,7 +444,8 @@
             $('#mobile').hasClass('g-brd-red') ||
             $('#category').val() === 'empty' ||
             $('#pic12').val() === '' ||
-            ($('#instaAccount').hasClass('g-brd-red') && $('#tablighBtn').hasClass('g-bg-primary'))
+            ($('#instaAccount').hasClass('g-brd-red') && $('#tablighBtn').hasClass('g-bg-primary')) ||
+            ($('#pic11').val()==='' && $('#tablighBtn').hasClass('g-bg-primary'))
         ) {
             return 'false';
         } else {

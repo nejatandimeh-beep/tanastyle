@@ -1018,7 +1018,7 @@
                             <p class="g-mb-10">جهت اعمال محدودیت و عدم دسترسی فروشندگان ساده به حساب کاربری خود لطفا از کلید اعمال محدودیت و در صورت رفع محدودیت از کلید مربوطه استفاده نمایید و همچنین جهت اخطار به فروشنده ساده از کلید اخطار استفاده کنید.</p>
                             <a id="limitWarning" href="#!" onclick="AdLimit({{$sellerMajorInfo->id}},'danger')" class="{{$sellerMajorInfo->AdBlock === '0' ?'':'d-none'}} btn u-btn-outline-orange btn-xs g-brd-2 rounded-0">
                                 <i class="fa fa-info-circle g-mr-2"></i>
-                                {{$sellerMajorInfo->AdWarning ==0 ?'اخطار':'اخطار شماره '.$sellerMajorInfo->AdWarning}}
+                                {{$sellerMajorInfo->AdWarning ==0 ?'اخطار':'اخطار شماره '.($sellerMajorInfo->AdWarning+1)}}
                             </a>
                             <a id="limitOn" href="#!" onclick="AdLimit({{$sellerMajorInfo->id}},'on')" class="{{$sellerMajorInfo->AdBlock === '0' ?'':'d-none'}} btn u-btn-outline-lightred btn-xs g-brd-2 rounded-0">
                                 <i class="fa fa-minus-circle g-mr-2"></i>

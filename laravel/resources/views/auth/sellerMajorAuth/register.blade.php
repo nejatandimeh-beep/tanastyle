@@ -464,15 +464,14 @@
                                                            name="{{'pic12'}}"
                                                            accept="image/*">
                                                     <div id="userImageDiv12">
-                                                        <input type="text" id="imageUrl12" name="imageUrl"
+                                                        <input type="text" id="imageUrl12" name="imageUrl12"
                                                                style="display: none">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div style="direction: rtl">
-                                                <p class="text-muted g-font-size-12 g-line-height-1_5 text-right g-pt-5 m-0">
-                                                    تصویر پروفایل نماینگر هویت شماست و هر زمان آنرا در اینستاگرام تغییر
-                                                    دادید لطفا در سیستم ما هم به روزرسانی بفرمایید.</p>
+                                                <p class="text-muted g-font-size-13 g-line-height-1_5 text-right g-pt-5 m-0">
+                                                    تصویر پروفایل کاربری در پنل فروشنده ساده</p>
                                             </div>
                                         </div>
                                     </div>
@@ -841,26 +840,70 @@
                                     </div>
 
                                     {{--اینستاگرام--}}
-                                    <div id="instaContainer" class="d-none form-group row g-mb-15">
-                                        <label
-                                            class="col-sm-4 col-form-label align-self-center text-right">نام
-                                            کاربری اینستاگرام</label>
-                                        <div class="col-sm-8 force-col-12">
-                                            <div class="input-group g-brd-primary--focus">
-                                                <input style="direction: ltr"
-                                                       class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need text-left"
-                                                       type="text"
-                                                       value=""
-                                                       autofocus
-                                                       spellcheck="false"
-                                                       tabindex="1"
-                                                       id="instaAccount"
-                                                       name="instaAccount"
-                                                       maxlength="50"
-                                                       oninput="if($(this).val().length>1) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
-                                                <div
-                                                    class="input-group-addon g-brd-around g-brd-gray-light-v2 g-brd-right-none d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
-                                                    <i class="fa fa-at g-font-size-18"></i>
+                                    <div id="instaContainer" class="d-none">
+                                        <div class="form-group row g-mb-15">
+                                            <label
+                                                class="col-sm-5 col-form-label align-self-center text-right">نام
+                                                کاربری اینستاگرام</label>
+                                            <div class="col-sm-7 force-col-12">
+                                                <div class="input-group g-brd-primary--focus">
+                                                    <input style="direction: ltr"
+                                                           class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need text-left"
+                                                           type="text"
+                                                           value=""
+                                                           autofocus
+                                                           spellcheck="false"
+                                                           tabindex="1"
+                                                           id="instaAccount"
+                                                           name="instaAccount"
+                                                           maxlength="50"
+                                                           oninput="if($(this).val().length>1) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');">
+                                                    <div
+                                                        class="input-group-addon g-brd-around g-brd-gray-light-v2 g-brd-right-none d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
+                                                        <i class="fa fa-at g-font-size-18"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row g-mb-15">
+                                            <label class="col-sm-5 col-form-label text-right"
+                                                   for="fileShow11"
+                                                   id="img-file-label12">
+                                                 تصویر پروفایل اینستاگرام
+                                            </label>
+                                            <div class="col-sm-7 force-col-12">
+                                                <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
+                                            <span style="cursor: default"
+                                                  class="d-none align-self-center g-mr-5 g-pa-10 g-color-primary"
+                                                  id="uploadingIcon11"><i class="fa fa-spinner fa-spin"></i></span>
+                                                    <input style="direction: rtl" id="uploadingText11"
+                                                           class="need d-none form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
+                                                           type="text"
+                                                           placeholder="درحال بارگذاری.." readonly="">
+                                                    <input id="fileShow11"
+                                                           class="form-control form-control-md rounded-0 g-font-size-16 g-brd-red"
+                                                           type="text"
+                                                           placeholder="فاقد تصویر" readonly="">
+                                                    <div class="input-group-btn">
+                                                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="20">
+                                                            بارگذاری
+                                                        </button>
+                                                        <input id="pic11"
+                                                               value=""
+                                                               type="file"
+                                                               name="pic11"
+                                                               accept="image/*">
+                                                        <div id="userImageDiv11">
+                                                            <input type="text" id="imageUrl11" name="imageUrl11"
+                                                                   style="display: none">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="direction: rtl">
+                                                    <p class="text-muted g-font-size-13 g-line-height-1_5 text-justify g-pt-5 m-0">
+                                                        جهت تسریع در پیدا کردن اکانت شما  در اینستاگرام از سوی سایر اعضای کمپین، بروزترین تصویر پروفایل اینستاگرام خود را آپلود نمایید. <span class="text-muted g-font-size-13 g-line-height-1_5 text-right g-pt-5 m-0 g-color-orange">در صورت نبود عکس کافیست از خود تصویر پروفایل اینستاگرام اسکرین شات بگیرید.</span></p>
+
                                                 </div>
                                             </div>
                                         </div>

@@ -7,21 +7,31 @@
         }
 
         function membership(thisElement) {
-            if (parseInt($('#postLen').text()) > 0) {
-                if(thisElement.is(":checked")){
-                    $('#kampeynAlert').show();
-                } else {
-                    $('#kampeynAlert').hide();
-                }
-                $.ajax({
-                    type: 'GET',
-                    url: '/Seller-Major-Advertising/' + $('#sellerMajorID').text() + '/' + thisElement.is(":checked"),
-                    success: function (data) {
-                        console.log(data)
+            if($('#instagramLink').text() !== 'خالی'){
+                if($('#instaProfileImg').length>0){
+                    if (parseInt($('#postLen').text()) > 0) {
+                        if(thisElement.is(":checked")){
+                            $('#kampeynAlert').show();
+                        } else {
+                            $('#kampeynAlert').hide();
+                        }
+                        $.ajax({
+                            type: 'GET',
+                            url: '/Seller-Major-Advertising/' + $('#sellerMajorID').text() + '/' + thisElement.is(":checked")+'/'+$('#instagramLink').text(),
+                            success: function (data) {
+                                console.log(data)
+                            }
+                        })
+                    } else {
+                        alert('لطفا ابتدا یک پست به پنل خود اضافه کنید.')
+                        thisElement.removeAttr('checked')
                     }
-                })
+                } else {
+                    alert('لطفا ابتدا تصویر پروفایل اینستاگرام خود را آپلود نمایید.')
+                    thisElement.removeAttr('checked')
+                }
             } else {
-                alert('لطفا ابتدا یک پست به پنل خود اضافه کنید.')
+                alert('لطفا ابتدا نام حساب اینستاگرام خود را بارگذاری نمایید.')
                 thisElement.removeAttr('checked')
             }
         }
@@ -981,6 +991,98 @@
             $('.nowDate').text(nowDate());
         });
 
+        // تنظیم تصویر پروفایل اینستاگرام
+        $(document).ready(function () {
+            let $newInstaModal = $('#newInstagramModal'),
+                instaImage = document.getElementById('insta_sample_image'),
+                instaCropper, instaFile_type;
+            $('input[id^="pic"]').on('change', function (event) {
+                    $('#instagramModal').modal('toggle');
+                    let files = event.target.files,
+                        done = function (url) {
+                            instaImage.src = url;
+                            $newInstaModal.modal('show');
+                        };
+
+                    if (files && files.length > 0) {
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            done(reader.result);
+                        };
+                        reader.readAsDataURL(files[0]);
+                        instaFile_type = files[0].type;
+                    }
+            });
+
+            $newInstaModal.on('shown.bs.modal', function () {
+                instaCropper = new Cropper(instaImage, {
+                    aspectRatio: 1,
+                    viewMode: 1,
+                    zoomable: true,
+                    background: true,
+                    minCropBoxWidth: 500,
+                    minCropBoxHeight: 500,
+                    dragCrop: true,
+                    dragMode: 'move',
+                    multiple: true,
+                    movable: true
+                    // preview: '.preview'
+                });
+            });
+
+            $('#instaCrop').on('click', function () {
+                let canvas = instaCropper.getCroppedCanvas({
+                    width: 500,
+                    height: 500
+                });
+
+                canvas.toBlob(function (blob) {
+                    let url = URL.createObjectURL(blob),
+                        reader = new FileReader(), currentDate=new Date(),
+                        imgElement='<img id="instaProfileImg" class="g-width-55 g-height-55 rounded-circle g-brd-around g-brd-2 g-brd-gray-light-v4" src="" alt="Image Description">';
+                    reader.readAsDataURL(blob);
+                    reader.onloadend = function () {
+                        let type = instaFile_type.split('/'), form;
+                        file_upload = new File([blob], "pic." + type[1]);
+                        form = new FormData();
+                        form.append('imageUrl', file_upload);
+                        $.ajaxSetup({
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                            }
+                        });
+                        $.ajax({
+                            url: '/sellerMajor/instaProfile/imageUpdate',
+                            data: form,
+                            processData: false,
+                            contentType: false,
+                            type: 'POST',
+                            beforeSend: function () {
+                                $('#instaCrop').addClass('d-none');
+                                $('#instaWaitingCrop').removeClass('d-none');
+                            },
+                            success: function (data) {
+                                console.log(data);
+                                $newInstaModal.modal('hide');
+                                $('#instagramModal').modal('show');
+                                if(!$('#instaProfileImg').length>0){
+                                    $(imgElement).appendTo($('#instaProfileImgContainer'));
+                                }
+                                $('#instaProfileImg').attr('src',data+'?'+currentDate.getTime());
+                                $('#instaCrop').removeClass('d-none');
+                                $('#instaWaitingCrop').addClass('d-none');
+                            }
+                        });
+                    };
+                });
+            });
+
+            $newInstaModal.on('hidden.bs.modal', function () {
+                instaCropper.destroy();
+                instaCropper = null;
+            });
+        })
+
         // افزودن رویداد
         $(document).ready(function () {
             let $eventModal = $('#eventModal'),
@@ -1527,13 +1629,13 @@
                 async: false,
                 url: url,
                 success: function (data) {
-                    $('#' + app + 'Modal').modal('toggle');
                     $('#' + app + 'Link').text(data);
+                    $('#' + app).val('');
                     $('#' + app + 'UpdateIcon').removeClass('d-none');
                     $('#' + app + 'UpdateWaiting').addClass('d-none');
                     $('#submitInstagram').addClass('d-none');
                     $('#adContainer').removeClass('d-none');
-                    console.log(data);
+                    $('#instaProfileImgContainer').removeClass('d-none');
                 }
             });
         }

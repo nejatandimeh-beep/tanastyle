@@ -49,6 +49,7 @@ class SellerMajor extends Controller
             ->insert([
                 'SellerMajorID' => $data[0]->SellerMajorID,
                 'PostID' => $data[0]->PostID,
+                'Instagram' => $data[0]->Instagram,
             ]);
         DB::table('ad_clothe')
             ->where('ID', $data[0]->ID)
@@ -57,7 +58,7 @@ class SellerMajor extends Controller
         $arr2 = array_values($arr2);
         foreach ($arr1 as $key => $a1) {
             $pic = str_replace('/', '-', $a1->Pic);
-            $link = '/Seller-Major-AdSource/' . $a1->PostID . '/' . $a1->Instagram . '/' . $pic;
+            $link = '/Seller-Major-AdSource/' . $a1->PostID . '/' . $a1->Instagram . '/' . $pic.'/'.$a1->Mobile;
             DB::table('ad_clothe_source')
                 ->insert([
                     'SellerMajorID'=>$arr2[$key]->sellerMajorID,
@@ -84,7 +85,7 @@ class SellerMajor extends Controller
         }
         foreach ($arr2 as $key => $a2) {
             $pic = str_replace('/', '-', $a2->Pic);
-            $link = '/Seller-Major-AdSource/' . $a2->PostID . '/' . $a2->Instagram . '/' . $pic;
+            $link = '/Seller-Major-AdSource/' . $a2->PostID . '/' . $a2->Instagram . '/' . $pic.'/'.$a2->Mobile;
             DB::table('ad_clothe_source')
                 ->insert([
                     'SellerMajorID'=>$arr1[$key]->sellerMajorID,
@@ -99,8 +100,6 @@ class SellerMajor extends Controller
                 $var = new Kavenegar\KavenegarApi($api_key);
                 $template = "adSource";
                 $type = "sms";
-                $pic = str_replace('/', '-', $a2->Pic);
-                $link = '/Seller-Major-AdSource/' . $a2->PostID . '/' . $a2->Instagram . '/' . $pic;
 
                 $result = $var->VerifyLookup($arr1[$key]->Mobile, $link, null, null, $template, $type);
             } catch (\Kavenegar\Exceptions\ApiException $e) {
@@ -114,11 +113,11 @@ class SellerMajor extends Controller
         dd('success');
     }
 
-    public function adSource($postID, $instagram, $pic)
+    public function adSource($postID, $instagram, $pic,$mobile)
     {
         $pic = str_replace('-', '/', $pic);
         $pic = $pic . '/' . $postID . '/0.jpg';
-        return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic'));
+        return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic','mobile'));
     }
 
     public function support()
@@ -947,7 +946,7 @@ class SellerMajor extends Controller
     public function adLimit($id, $status)
     {
         $user=DB::table('sellersmajor as s')
-            ->select('s.id','s.Mobile','s.name','s.Instagram','p.ID as postID','p.Pic')
+            ->select('s.id','s.name','s.Mobile','p.ID as postID','s.Instagram')
             ->leftJoin('seller_major_post as p',function($join){
                 $join->on('p.SellerMajorID','s.id')
                 ->on('p.ID', '=', DB::raw("(select max(id) from seller_major_post)")); //get last record from second table
@@ -980,6 +979,7 @@ class SellerMajor extends Controller
                     ->insert([
                         'SellerMajorID'=>$id,
                         'PostID'=>$user->postID,
+                        'Instagram'=>$user->Instagram,
                     ]);
                 break;
             default:
@@ -987,15 +987,20 @@ class SellerMajor extends Controller
                     ->where('id', $id)
                     ->increment('AdWarning');
 
+                $data=DB::table('ad_clothe_source')
+                    ->select('SellerMajorID','Time','Link')
+                    ->where('SellerMajorID',$id)
+                    ->where("Time", ">", Carbon::now()->subHours(24)->toDateTimeString())
+                    ->latest('Time')
+                    ->first();
+
                 try {
                     $api_key = Config::get('kavenegar.apikey');
                     $var = new Kavenegar\KavenegarApi($api_key);
                     $template = "adWarning";
                     $type = "sms";
-                    $pic = str_replace('/', '-', $user->Pic);
-                    $link = 'Seller-Major-AdSource/' . $user->postID . '/' . $user->Instagram . '/' . $pic;
 
-                    $result = $var->VerifyLookup($user->Mobile, $user->name, $link, null, $template, $type);
+                    $result = $var->VerifyLookup($user->Mobile, $user->name, $data->Link, null, $template, $type);
                 } catch (\Kavenegar\Exceptions\ApiException $e) {
                     // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
                     echo $e->errorMessage();

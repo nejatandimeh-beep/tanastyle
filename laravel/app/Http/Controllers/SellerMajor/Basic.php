@@ -160,7 +160,7 @@ class Basic extends Controller
         return $instagramLink;
     }
 
-    public function advertising($id,$status)
+    public function advertising($id,$status,$instagram)
     {
         DB::table('sellersmajor')
             ->where('id',$id)
@@ -178,6 +178,7 @@ class Basic extends Controller
                     ->insert([
                         'SellerMajorID'=>$this->sellerMajorID,
                         'PostID'=>$postID->ID,
+                        'Instagram'=>$instagram,
                     ]);
             } else {
                 DB::table('ad_clothe')
@@ -555,6 +556,42 @@ class Basic extends Controller
         return 'success';
     }
 
+    public function uploadInstaImage(Request $request)
+    {
+        $image = $request->file('imageUrl');
+        $path = public_path('img/SellerMajorProfileImage/') . $this->sellerMajorData->Mobile;
+
+        // 1000*1000 pic save
+        $source = '';
+        switch ($image->getMimeType()) {
+            case 'image/jpeg':
+            case 'image/jpg':
+                $source = imagecreatefromjpeg($image);
+                break;
+            case 'image/png':
+                $source = imagecreatefrompng($image);
+                break;
+            case 'image/gif':
+                $source = imagecreatefromgif($image);
+                break;
+        }
+
+        // 250*250 sample save
+        list($width, $height) = getimagesize($image);
+        $newWidth = 400;
+        $newHeight = 400;
+        $thumb = imagecreatetruecolor($newWidth, $newHeight);
+        $white = imagecolorallocate($thumb, 255, 255, 255);
+        imagefill($thumb, 0, 0, $white);
+        imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        $imageFullPath = $path . '/instaProfileImg.jpg';
+        imagejpeg($thumb, $imageFullPath, 80);
+        imagedestroy($thumb);
+        imagedestroy($source);
+
+        return 'img/SellerMajorProfileImage/'.$this->sellerMajorData->Mobile. '/instaProfileImg.jpg';
+    }
+
     public function addPostForm()
     {
         return view('SellerMajor.AddPost');
@@ -615,6 +652,12 @@ class Basic extends Controller
             ->where('id', $this->sellerMajorID)
             ->update([
                 'Posts' => DB::raw('Posts + 1')
+            ]);
+
+        DB::table('ad_clothe')
+            ->where('SellerMajorID',$this->sellerMajorID)
+            ->update([
+                'PostID'=>$postId->ID,
             ]);
 
         return redirect()->route('sellerMajorPanel');
@@ -1315,17 +1358,19 @@ class Basic extends Controller
 
     public function adSource($id)
     {
-        $data=DB::table('ad_clothe_source')
-            ->select('*')
-            ->where('SellerMajorID',$id)
-            ->where("Time", ">", Carbon::now()->subHours(24)->toDateTimeString())
-            ->latest('Time')
+        $data=DB::table('ad_clothe_source as ads')
+            ->select('ads.*','s.id','s.Mobile')
+            ->leftJoin('sellersmajor as s','s.id','ads.SellerMajorID')
+            ->where('ads.SellerMajorID',$id)
+            ->where("ads.Time", ">", Carbon::now()->subHours(24)->toDateTimeString())
+            ->latest('ads.Time')
             ->first();
         if(isset($data->ID)){
             $instagram=$data->Instagram;
             $pic = str_replace('-', '/', $data->Pic);
             $pic = $pic . '/' . $data->PostID . '/0.jpg';
-            return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic'));
+            $mobile=$data->Mobile;
+            return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic','mobile'));
         } else {
             return redirect('/Seller-Major-Panel')->with('advertising','null');
         }

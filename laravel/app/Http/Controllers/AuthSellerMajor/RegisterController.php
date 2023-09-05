@@ -95,6 +95,7 @@ class RegisterController extends Controller
     public function uploadImage(Request $request)
     {
         $mobile = $request->get('mobileHint');
+        $picNum = $request->get('picNum');
         $image = $request->file('imageUrl');
         $path = public_path('img/imagesTemp/SellerMajorProfileImage/') . $mobile;
         File::makeDirectory($path, 0777, true, true);
@@ -122,7 +123,7 @@ class RegisterController extends Controller
         $white = imagecolorallocate($thumb, 255, 255, 255);
         imagefill($thumb, 0, 0, $white);
         imagecopyresized($thumb, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
-        $imageFullPath = $path . '/profileImg.jpg';
+        $imageFullPath = $picNum==='12'?$path . '/profileImg.jpg':$path . '/instaProfileImg.jpg';
         imagejpeg($thumb, $imageFullPath, 80);
         imagedestroy($thumb);
         imagedestroy($source);

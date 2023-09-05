@@ -307,7 +307,7 @@ Route::get('/Administrator-Customer-Block/{id}/{status}', 'Administrator\Custome
 Route::get('/Administrator-SellerMajor', 'Administrator\SellerMajor@list')->name('sellerMajorList');
 Route::get('/Administrator-SellerMajor-ControlPanel/{id}/{tab}', 'Administrator\SellerMajor@controlPanel')->name('sellerMajorControlPanel');
 Route::get('/Seller-Major-StartAd', 'Administrator\SellerMajor@startAd')->name('startAd');
-Route::get('/Seller-Major-AdSource/{postID}/{instagram}/{pic}', 'Administrator\SellerMajor@adSource')->name('adSource');
+Route::get('/Seller-Major-AdSource/{postID}/{instagram}/{pic}/{mobile}', 'Administrator\SellerMajor@adSource')->name('adSource');
 Route::get('/Administrator-SellerMajor-AdList', 'Administrator\SellerMajor@adList')->name('sellerMajorAdList');
 Route::get('/Administrator-SellerMajor-Support', 'Administrator\SellerMajor@support')->name('sellerMajorSupport');
 Route::post('/Administrator-SellerMajor-ConnectionNew', 'Administrator\SellerMajor@connectionNew')->name('adminSellerMajorConnectionNew');
@@ -438,7 +438,7 @@ Route::get('/Seller-Major-AddComment/{postID}', 'SellerMajor\Basic@addComments')
 Route::get('/Seller-Major-Comment-Delete/{id}/{status}', 'SellerMajor\Basic@deleteComments');
 Route::get('/Seller-Major-LikeComment/{id}/{replyID}/{status}/{likeStatus}', 'SellerMajor\Basic@likeComments');
 Route::get('/Seller-Major-Reactions', 'SellerMajor\Basic@reaction')->name('sellerMajorReaction');
-Route::get('/Seller-Major-Advertising/{id}/{status}', 'SellerMajor\Basic@advertising');
+Route::get('/Seller-Major-Advertising/{id}/{status}/{instagram}', 'SellerMajor\Basic@advertising');
 Route::post( '/Seller-Major-uploadImage', 'SellerMajor\Basic@uploadImage');
 Route::get( '/Seller-Major-Regulation', 'SellerMajor\Basic@regulation')->name('sellerMajorRegulation');
 Route::get('/SellerMajor-Connection', 'SellerMajor\Basic@connection')->name('sellerMajorConnection');
@@ -446,4 +446,5 @@ Route::post('/SellerMajor-Connection-New', 'SellerMajor\Basic@connectionNew')->n
 Route::get('/SellerMajorConnection-Detail/{id}/{status}', 'SellerMajor\Basic@connectionDetail')->name('sellerMajorConnectionDetail');
 Route::post('/SellerMajor-Connection-NewMsg', 'SellerMajor\Basic@connectionNewMsg')->name('sellerMajorConnectionNewMsg');
 Route::get('/Seller-Major-Panel-AdSource/{id}', 'SellerMajor\Basic@adSource')->name('adSourcePanel');
+Route::post('/sellerMajor/instaProfile/imageUpdate', 'SellerMajor\Basic@uploadInstaImage');
 
