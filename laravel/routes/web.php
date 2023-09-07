@@ -307,7 +307,7 @@ Route::get('/Administrator-Customer-Block/{id}/{status}', 'Administrator\Custome
 Route::get('/Administrator-SellerMajor', 'Administrator\SellerMajor@list')->name('sellerMajorList');
 Route::get('/Administrator-SellerMajor-ControlPanel/{id}/{tab}', 'Administrator\SellerMajor@controlPanel')->name('sellerMajorControlPanel');
 Route::get('/Seller-Major-StartAd', 'Administrator\SellerMajor@startAd')->name('startAd');
-Route::get('/Seller-Major-AdSource/{postID}/{instagram}/{pic}/{mobile}', 'Administrator\SellerMajor@adSource')->name('adSource');
+Route::get('/SMA/{postID}/{id}', 'Administrator\SellerMajor@adSource')->name('adSource');
 Route::get('/Administrator-SellerMajor-AdList', 'Administrator\SellerMajor@adList')->name('sellerMajorAdList');
 Route::get('/Administrator-SellerMajor-Support', 'Administrator\SellerMajor@support')->name('sellerMajorSupport');
 Route::post('/Administrator-SellerMajor-ConnectionNew', 'Administrator\SellerMajor@connectionNew')->name('adminSellerMajorConnectionNew');

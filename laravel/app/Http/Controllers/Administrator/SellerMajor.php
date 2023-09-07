@@ -25,7 +25,11 @@ class SellerMajor extends Controller
             ->leftJoin('sellersmajor as s', 's.id', 'adc.SellerMajorID')
             ->paginate(10);
 
-        return view('Administrator.SellerMajor.Ad', compact('data'));
+        $adGroup=DB::table('ad_clothe_source')
+            ->select('*')
+            ->get();
+
+        return view('Administrator.SellerMajor.Ad', compact('data','adGroup'));
     }
 
     public function startAd()
@@ -56,16 +60,17 @@ class SellerMajor extends Controller
             ->delete();
         $arr1 = array_values($arr1);
         $arr2 = array_values($arr2);
+        DB::table('ad_clothe_source')->truncate();
         foreach ($arr1 as $key => $a1) {
-            $pic = str_replace('/', '-', $a1->Pic);
-            $link = '/Seller-Major-AdSource/' . $a1->PostID . '/' . $a1->Instagram . '/' . $pic.'/'.$a1->Mobile;
+            $link = '/SMA/' . $a1->PostID . '/' . $a1->sellerMajorID;
             DB::table('ad_clothe_source')
                 ->insert([
                     'SellerMajorID'=>$arr2[$key]->sellerMajorID,
                     'SellerMajorID_AD'=>$a1->sellerMajorID,
                     'PostID'=>$a1->PostID,
-                    'Instagram'=>$a1->Instagram,
-                    'Pic'=>str_replace('-', '/', $a1->Pic),
+                    'Instagram'=>$arr2[$key]->Instagram,
+                    'Instagram_AD'=>$a1->Instagram,
+                    'Pic_AD'=>str_replace('-', '/', $a1->Pic),
                     'Link'=>$link,
                 ]);
             try {
@@ -84,15 +89,15 @@ class SellerMajor extends Controller
             }
         }
         foreach ($arr2 as $key => $a2) {
-            $pic = str_replace('/', '-', $a2->Pic);
-            $link = '/Seller-Major-AdSource/' . $a2->PostID . '/' . $a2->Instagram . '/' . $pic.'/'.$a2->Mobile;
+            $link = '/SMA/' . $a2->PostID . '/' . $a2->sellerMajorID;
             DB::table('ad_clothe_source')
                 ->insert([
                     'SellerMajorID'=>$arr1[$key]->sellerMajorID,
                     'SellerMajorID_AD'=>$a2->sellerMajorID,
                     'PostID'=>$a2->PostID,
-                    'Instagram'=>$a2->Instagram,
-                    'Pic'=>str_replace('-', '/', $a2->Pic),
+                    'Instagram'=>$arr1[$key]->Instagram,
+                    'Instagram_AD'=>$a2->Instagram,
+                    'Pic_AD'=>str_replace('-', '/', $a2->Pic),
                     'Link'=>$link,
                 ]);
             try {
@@ -113,10 +118,15 @@ class SellerMajor extends Controller
         dd('success');
     }
 
-    public function adSource($postID, $instagram, $pic,$mobile)
+    public function adSource($postID,$id)
     {
-        $pic = str_replace('-', '/', $pic);
-        $pic = $pic . '/' . $postID . '/0.jpg';
+        $pic='img/SellerMajor/Posts/'.$id. '/' . $postID . '/0.jpg';
+        $user=DB::table('sellersmajor')
+            ->select('id','Mobile','Instagram')
+            ->where('id',$id)
+            ->first();
+        $mobile=$user->Mobile;
+        $instagram=$user->Instagram;
         return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic','mobile'));
     }
 

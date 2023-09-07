@@ -1359,16 +1359,13 @@ class Basic extends Controller
     public function adSource($id)
     {
         $data=DB::table('ad_clothe_source as ads')
-            ->select('ads.*','s.id','s.Mobile')
-            ->leftJoin('sellersmajor as s','s.id','ads.SellerMajorID')
+            ->select('ads.*','s.id','s.Mobile','s.Pic')
+            ->leftJoin('sellersmajor as s','s.id','ads.SellerMajorID_AD')
             ->where('ads.SellerMajorID',$id)
-            ->where("ads.Time", ">", Carbon::now()->subHours(24)->toDateTimeString())
-            ->latest('ads.Time')
             ->first();
         if(isset($data->ID)){
-            $instagram=$data->Instagram;
-            $pic = str_replace('-', '/', $data->Pic);
-            $pic = $pic . '/' . $data->PostID . '/0.jpg';
+            $instagram=$data->Instagram_AD;
+            $pic = $data->Pic_AD . '/' . $data->PostID . '/0.jpg';
             $mobile=$data->Mobile;
             return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic','mobile'));
         } else {

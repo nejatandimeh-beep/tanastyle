@@ -603,6 +603,7 @@
                 <div>
                     <select style="height: 40px" onchange="$('#size').text($(this).val())" oninput="$('#lblSize').removeClass('g-color-red')"
                             class="form-control form-control-md custom-select g-brd-gray-light-v3 rounded-0 text-right g-pr-30 g-font-size-16">
+                        <option style="direction: rtl" value="--">--</option>
                         <option style="direction: rtl" value="FreeSize">FreeSize</option>
                         <option style="direction: rtl" value="XXS">XXS</option>
                         <option style="direction: rtl" value="XS">XS</option>

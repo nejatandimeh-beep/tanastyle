@@ -53,6 +53,12 @@
                         <i class="fa fa-close g-font-size-16"></i>
                     </button>
                 </div>
+                <div style="direction: rtl"
+                     class="alert alert-warning alert-dismissible fade show text-right g-pa-20--lg g-px-10 g-py-10"
+                     role="alert">
+                    <h4 class="h5"><i class="fa fa-warning"></i>قوانین با یک مثال</h4>
+                    <p>کاربر عزیز جهت سهولت در یادگیری قوانین، مراحل را با یک مثال توضیح داده ایم و تصاویر و آیدی زیر تنها یک مثال است.</p>
+                </div>
                 <div style="direction: rtl" class="modal-body mx-3 text-right">
                     <div class="g-pb-30">
                         <h4 style="direction: rtl" class="text-right">1. فعالیت امشب من</h4>

@@ -37,7 +37,7 @@
                             <figure>
                                 <img id="profileImgBox" class="img-fluid w-100 u-block-hover__main--zoom-v1"
                                      style="cursor:pointer;"
-                                     src="{{$data->Pic!=''?asset($data->Pic.'/profileImg.jpg'):asset('/img/SellerMajorProfileImage/Default/icon.jpg')}}"
+                                     src="{{$data->Pic!=''?asset($data->Pic.'/profileImg.jpg?'.date('Y-m-d H:i:s')):asset('/img/SellerMajorProfileImage/Default/icon.jpg?'.date('Y-m-d H:i:s'))}}"
                                      alt="Image Description"
                                      onclick="{{isset($events[0]) ? 'eventShow(0)':''}}">
                             </figure>
@@ -132,7 +132,7 @@
                                     <div class="modal-dialog m-0 mx-lg-auto" role="document">
                                         <div style="min-height: 100vh" class="modal-content">
                                             <div class="modal-header g-pr-20 g-pl-20">
-                                                <h5 class="m-0">کمپین تبلیغاتی</h5>
+                                                <h5 class="m-0">کانون انعکاس</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                     <i class="fa fa-close g-font-size-16"></i>
@@ -210,7 +210,7 @@
                                                                 </div>
                                                                     <div style="direction: rtl">
                                                                     <p class="text-muted g-font-size-13 g-line-height-1_5 text-justify g-pt-5 m-0">
-                                                                        جهت تسریع در پیدا کردن اکانت شما  در اینستاگرام از سوی سایر اعضای کمپین، بروزترین تصویر پروفایل اینستاگرام خود را آپلود نمایید. <span class="text-muted g-font-size-13 g-line-height-1_5 text-right g-pt-5 m-0 g-color-orange">در صورت نبود عکس کافیست از خود تصویر پروفایل اینستاگرام اسکرین شات بگیرید.</span></p>
+                                                                        جهت تسریع در پیدا کردن اکانت شما  در اینستاگرام از سوی سایر اعضای کانون، بروزترین تصویر پروفایل اینستاگرام خود را آپلود نمایید. <span class="text-muted g-font-size-13 g-line-height-1_5 text-right g-pt-5 m-0 g-color-orange">در صورت نبود عکس کافیست از خود تصویر پروفایل اینستاگرام اسکرین شات بگیرید.</span></p>
                                                                 </div>
                                                                 </div>
                                                             </div>
@@ -219,7 +219,7 @@
                                                                 <div style="direction: rtl" class="form-group m-0">
                                                                     <label
                                                                         class="d-flex align-items-center justify-content-start m-0">
-                                                                        <span class="h5 m-0">شرکت در کمپین تبلیغات</span>
+                                                                        <span class="h5 m-0">شرکت در کانون انعکاس</span>
                                                                         <div class="u-check g-mr-10">
                                                                             <input
                                                                                 class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
@@ -241,7 +241,7 @@
                                                                 <p style="line-height: 2.2;direction: rtl;"
                                                                    class="alert alert-warning text-right g-pa-20--lg g-mt-10 g-px-10 g-py-10">
                                                                     <i class="fa fa-warning g-ml-5 g-font-size-18"></i>لطفا در صورتی که برایتان در زمان مشخص شده در اینستاگرام استوری تبلیغاتی گذاشته نشده بود از طریق قسمت پشتیبانی تیکت ثبت کنید تا موضوع را پیگیری نماییم.</p>
-                                                                <h5 class="text-right">فعالیت روزانه شما در کمپین</h5>
+                                                                <h5 class="text-right">فعالیت روزانه شما در کانون انعکاس</h5>
                                                                 <a href="{{route('adSourcePanel',$data->id)}}"
                                                                    class="g-text-underline--none--hover g-color-primary">
                                                                         <span class="h5 g-ml-5">لینک نمایش فعالیت</span>
@@ -251,7 +251,7 @@
                                                                style="line-height: 2.2;
                                                                 direction: rtl;{{$data->AdBlock === '1' ? 'display: block':'display: none'}}"
                                                                class="alert alert-danger text-right g-pa-20--lg g-mt-25 g-px-10 g-py-10">
-                                                                <i class="fa fa-minus-circle g-ml-5 g-font-size-18"></i>دسترسی شما به کمپین محدود شده است لطفا از طریق پشتیبانی پیگیری نمایید.</p>
+                                                                <i class="fa fa-minus-circle g-ml-5 g-font-size-18"></i>دسترسی شما به کانون انعکاس محدود شده است لطفا از طریق پشتیبانی پیگیری نمایید.</p>
                                                         </div>
                                                     </div>
                                                 </div>
