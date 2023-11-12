@@ -114,317 +114,345 @@
                                                                 <strong>پوشاک</strong>
                                                                 <ul class="g-pt-15">
                                                                     <li>
-                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">زنانه</span></li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">لباس</span></li>
                                                                     <li>
-                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">مردانه</span></li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">کیف</span></li>
                                                                     <li>
-                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">دخترانه</span></li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">کفش</span></li>
                                                                     <li>
-                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">پسرانه</span></li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">ورزشی</span></li>
                                                                     <li>
-                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">نوزادی</span></li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">اکسسوری</span></li>
                                                                     <li>
                                                                         <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">مخلوط</span></li>
-                                                                    <li>
-                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'clothes')">همه</span></li>
                                                                 </ul>
                                                             </div>
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>وسایل نقلیه</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">خودرو</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">موتور--}}
-{{--                                                                            سیکلت</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">خودرو--}}
-{{--                                                                            کلاسیک</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">سنگین--}}
-{{--                                                                            و نیمه سنگین</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">کشاورزی--}}
-{{--                                                                            و عمرانی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">لوازم--}}
-{{--                                                                            و قطعات وسایل نقلیه</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">سایر--}}
-{{--                                                                            وسایل نقلیه</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">اجاره--}}
-{{--                                                                            خودرو</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">اجاره--}}
-{{--                                                                            کشاورزی و عمرانی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">قایق--}}
-{{--                                                                            و تفریحات آبی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">سایر وسایل نقلیه</span></li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>وسایل ورزشی</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">دوچرخه</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">تور--}}
-{{--                                                                            مسافرتی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">کتاب--}}
-{{--                                                                            و لوازم تحریر</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">سرگرمی--}}
-{{--                                                                            و اسباب بازی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">حیوانات--}}
-{{--                                                                            و لوازم</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">انواع--}}
-{{--                                                                            ساز و آلات موسیقی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">هنر--}}
-{{--                                                                            و صنایع دستی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">کلکسیونی</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">--}}
-{{--                                                                            سرگرمی ها</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">--}}
-{{--                                                                            سایر وسایل ورزشی</span></li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>املاک</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">رهن--}}
-{{--                                                                            و اجاره خانه و آپارتمان</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">خرید--}}
-{{--                                                                            و فروش خانه و آپارتمان</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">اجاره--}}
-{{--                                                                            کوتاه مدت ویلا، سوئیت</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">رهن--}}
-{{--                                                                            و اجاره اداری، تجاری و صنعتی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">خرید--}}
-{{--                                                                            و فروش اداری، تجاری و صنعتی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">زمین--}}
-{{--                                                                            و باغ</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">سایر--}}
-{{--                                                                            املاک</span></li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>لوازم الکترونیکی</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">لپ--}}
-{{--                                                                            تاپ و کامپیوتر</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">صوتی--}}
-{{--                                                                            و تصویری</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">دوربین--}}
-{{--                                                                            عکاسی و فیلمبرداری و لوازم</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">کنسول--}}
-{{--                                                                            بازی و لوازم</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">بازی--}}
-{{--                                                                            های اینترنتی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">سایر--}}
-{{--                                                                            لوازم الکترونیکی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">لوازم--}}
-{{--                                                                            کامپیوتر و پرینتر</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">سایر وسایل الکتریکی</span></li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>صنعتی، اداری و تجاری</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">ماشین--}}
-{{--                                                                            الات و تجهیزات صنعتی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">ابزار--}}
-{{--                                                                            و یراق آلات</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">لوازم--}}
-{{--                                                                            اداری</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات--}}
-{{--                                                                            پزشکی و آزمایشگاهی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات--}}
-{{--                                                                            و لوازم کافه و رستوران</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات--}}
-{{--                                                                            تجاری و فروشگاه</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات--}}
-{{--                                                                            عمرانی و ساختمانی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات--}}
-{{--                                                                            کشاورزی و دامداری</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">اجاره--}}
-{{--                                                                            تجهیزات صنعتی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر وسایل صنعتی</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر وسایل اداری</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر وسایل تجاری</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>خدمات و کسب و کار</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">آرایشگری--}}
-{{--                                                                            و زیبایی</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">آموزش</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">اجاره--}}
-{{--                                                                            لوازم</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">اسباب--}}
-{{--                                                                            کشی و حمل و نقل</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">اینترنت--}}
-{{--                                                                            ، رایانه و موبایل</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">باغبانی--}}
-{{--                                                                            و فضای سبز</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">پزشکی--}}
-{{--                                                                            و درمانی</span></li>--}}
-{{--                                                                    <li class=""><a--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">ترجمه--}}
-{{--                                                                            و تایپ</a></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">تعمیرات</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">خرید--}}
-{{--                                                                            و فروش عمده</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">خودرو--}}
-{{--                                                                            و موتورسیکلت</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">رویدادهای--}}
-{{--                                                                            اجتماعی</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">ساختمان--}}
-{{--                                                                            و دکوراسیون داخلی</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">گرافیک،--}}
-{{--                                                                            تبلیغات و چاپ</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">مالی،--}}
-{{--                                                                            حقوقی و بیمه</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">مراسم--}}
-{{--                                                                            و کترینگ</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">معرفی--}}
-{{--                                                                            و تبلیغات کسب و کار</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">مواد--}}
-{{--                                                                            غذایی</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">نظافت--}}
-{{--                                                                            و خدمات منزل</span></li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">هنری</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li class=""><span--}}
-{{--                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر--}}
-{{--                                                                            خدمات و کسب و کار</span></li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>وسایل ارتباطی</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'connections')">موبایل--}}
-{{--                                                                            و تبلت</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'connections')">لوازم--}}
-{{--                                                                            موبایل</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'connections')">--}}
-{{--                                                                            آیفون و تلفن</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">--}}
-{{--                                                                            سایر وسایل ارتباطی</span></li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>لوازم خانگی</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">مبلمان--}}
-{{--                                                                            و لوازم چوبی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">وسایل--}}
-{{--                                                                            برقی خانه و آشپزخانه</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">ظروف--}}
-{{--                                                                            و لوازم آشپزخانه</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">دکوراسیون--}}
-{{--                                                                            داخلی و روشنایی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">فرش،--}}
-{{--                                                                            گلیم و قالیچه</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">آنتیک</span>--}}
-{{--                                                                    </li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">سایر--}}
-{{--                                                                            لوازم خانه و حیاط</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">لوازم--}}
-{{--                                                                            سرمایش و گرمایش</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر لوازم خانگی</span></li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
-{{--                                                            <div class="text-right">--}}
-{{--                                                                <strong>لوازم شخصی</strong>--}}
-{{--                                                                <ul class="g-pt-15">--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'personal')">لوازم آرایشی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'personal')">لوازم بهداشتی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'personal')">لوازم پزشکی</span></li>--}}
-{{--                                                                    <li>--}}
-{{--                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر لوازم شخصی</span></li>--}}
-{{--                                                                </ul>--}}
-{{--                                                            </div>--}}
+                                                            <div class="text-right">
+                                                                <strong>وسایل نقلیه</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">خودرو</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">موتور
+                                                                            سیکلت</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">خودرو
+                                                                            کلاسیک</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">سنگین
+                                                                            و نیمه سنگین</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">کشاورزی
+                                                                            و عمرانی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">لوازم
+                                                                            و قطعات وسایل نقلیه</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">سایر
+                                                                            وسایل نقلیه</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">اجاره
+                                                                            خودرو</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">اجاره
+                                                                            کشاورزی و عمرانی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">قایق
+                                                                            و تفریحات آبی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'vehicles')">سایر وسایل نقلیه</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>وسایل ورزشی</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">دوچرخه</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">تور
+                                                                            مسافرتی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">کتاب
+                                                                            و لوازم تحریر</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">سرگرمی
+                                                                            و اسباب بازی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">حیوانات
+                                                                            و لوازم</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">انواع
+                                                                            ساز و آلات موسیقی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">هنر
+                                                                            و صنایع دستی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">کلکسیونی</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'sports')">
+                                                                            سرگرمی ها</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">
+                                                                            سایر وسایل ورزشی</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>املاک</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">رهن
+                                                                            و اجاره خانه و آپارتمان</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">خرید
+                                                                            و فروش خانه و آپارتمان</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">اجاره
+                                                                            کوتاه مدت ویلا، سوئیت</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">رهن
+                                                                            و اجاره اداری، تجاری و صنعتی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">خرید
+                                                                            و فروش اداری، تجاری و صنعتی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">زمین
+                                                                            و باغ</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'estate')">سایر
+                                                                            املاک</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>لوازم الکترونیکی</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">لپ
+                                                                            تاپ و کامپیوتر</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">صوتی
+                                                                            و تصویری</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">دوربین
+                                                                            عکاسی و فیلمبرداری و لوازم</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">کنسول
+                                                                            بازی و لوازم</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">بازی
+                                                                            های اینترنتی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">سایر
+                                                                            لوازم الکترونیکی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">لوازم
+                                                                            کامپیوتر و پرینتر</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'electronic')">سایر وسایل الکتریکی</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>صنعتی، اداری و تجاری</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">ماشین
+                                                                            الات و تجهیزات صنعتی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">ابزار
+                                                                            و یراق آلات</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">لوازم
+                                                                            اداری</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات
+                                                                            پزشکی و آزمایشگاهی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات
+                                                                            و لوازم کافه و رستوران</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات
+                                                                            تجاری و فروشگاه</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات
+                                                                            عمرانی و ساختمانی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">تجهیزات
+                                                                            کشاورزی و دامداری</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'industrial')">اجاره
+                                                                            تجهیزات صنعتی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر وسایل صنعتی</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر وسایل اداری</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر وسایل تجاری</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>خدمات و کسب و کار</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">آرایشگری
+                                                                            و زیبایی</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">آموزش</span>
+                                                                    </li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">اجاره
+                                                                            لوازم</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">اسباب
+                                                                            کشی و حمل و نقل</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">اینترنت
+                                                                            ، رایانه و موبایل</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">باغبانی
+                                                                            و فضای سبز</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">پزشکی
+                                                                            و درمانی</span></li>
+                                                                    <li class=""><a
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">ترجمه
+                                                                            و تایپ</a></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">تعمیرات</span>
+                                                                    </li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">خرید
+                                                                            و فروش عمده</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">خودرو
+                                                                            و موتورسیکلت</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">رویدادهای
+                                                                            اجتماعی</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">ساختمان
+                                                                            و دکوراسیون داخلی</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">گرافیک،
+                                                                            تبلیغات و چاپ</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">مالی،
+                                                                            حقوقی و بیمه</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">مراسم
+                                                                            و کترینگ</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">معرفی
+                                                                            و تبلیغات کسب و کار</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">مواد
+                                                                            غذایی</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">نظافت
+                                                                            و خدمات منزل</span></li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'services')">هنری</span>
+                                                                    </li>
+                                                                    <li class=""><span
+                                                                            style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر
+                                                                            خدمات و کسب و کار</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>وسایل ارتباطی</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'connections')">موبایل
+                                                                            و تبلت</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'connections')">لوازم
+                                                                            موبایل</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'connections')">
+                                                                            آیفون و تلفن</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">
+                                                                            سایر وسایل ارتباطی</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>لوازم خانگی</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">مبلمان
+                                                                            و لوازم چوبی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">وسایل
+                                                                            برقی خانه و آشپزخانه</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">ظروف
+                                                                            و لوازم آشپزخانه</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">دکوراسیون
+                                                                            داخلی و روشنایی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">فرش،
+                                                                            گلیم و قالیچه</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">آنتیک</span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">سایر
+                                                                            لوازم خانه و حیاط</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'appliances')">لوازم
+                                                                            سرمایش و گرمایش</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر لوازم خانگی</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>لوازم شخصی</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'personal')">لوازم آرایشی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'personal')">لوازم بهداشتی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'personal')">لوازم پزشکی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'')">سایر لوازم شخصی</span></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="text-right">
+                                                                <strong>تولید محتوا</strong>
+                                                                <ul class="g-pt-15">
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">آموزشی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">علمی</span></li>
+                                                                    <li>
+                                                                        <span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">پزشکی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">بلاگر</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">آشپزی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">روانشناسی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">ورزشی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">تاریخی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">گردشگری</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">خبری</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">هنری</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">تجاری</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">مالی و اقتصادی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">کمدی و طنز</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">فیلم و سبنما</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">موسیقی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">اطلاعات عمومی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">دکوراسیون</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">استایل و مد</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">صنعتی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">خدماتی</span></li>
+                                                                    <li><span style="cursor: pointer" class="g-font-weight-500 g-color-primary--hover" onclick="categorySelect($(this).text(),'content')">سایر محتوا</span></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -573,7 +601,6 @@
                                         <a style="font-weight: bold" class="g-color-blue-dark-v1 g-color-primary--hover"
                                            data-toggle="modal"
                                            data-target="#modalRegulation"
-                                           onclick="$('.agreeDate').text(nowDate())"
                                            href="#">
                                             مطالعه قوانین
                                         </a>
@@ -616,7 +643,7 @@
                                                 <!-- شرایط استفاده -->
                                                 <div style="background-color: white; direction: rtl"
                                                      class="hideScrollBar text-justify g-pa-30">
-                                                    <h5 class="m-0 text-right g-pa-15 g-px-75--lg">شرایط استفاده از پنل فروشنده ساده</h5>
+                                                    <h5 class="m-0 text-right g-py-5">شرایط استفاده از پنل فروشنده ساده</h5>
                                                     <div class="g-mb-30">
                                                         <p class="m-0">کاربر گرامی درود</p>
                                                         <p class="m-0">قبل از هر چیز لازم به ذکر است قوانین موجود در وب سایت تانا استایل تنها در جهت حفاظت از حقوق کاربران در بستر تانا استایل و همچنین حفاظت از حقوق شرکت تابش پس زمینه مکریان که تولید کننده وب سایت تانا استایل است می باشد.</p>
@@ -634,7 +661,7 @@
                                                                        href="#nav-1-2-primary-ver--1" onclick="windowScrollTo()" role="tab">کالای مورد مبادله</a>
                                                                 </li>
                                                                 <li class="nav-item col-12 p-0">
-                                                                    <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="returnProduct"
+                                                                    <a class="nav-link g-brd-bottom g-brd-gray-light-v3 g-my-10 g-my-5--lg" id="kanoonOzviat"
                                                                        data-toggle="tab" href="#nav-1-2-primary-ver--2" onclick="windowScrollTo()" role="tab">عضویت در کانون</a>
                                                                 </li>
                                                                 <li class="nav-item col-12 p-0">
@@ -717,15 +744,15 @@
                                                                 <div>
                                                                     <h5> 2) عضویت در کانون</h5>
                                                                     <div>
-                                                                        <p>فروشنده ساده پس از عضویت در کانون انعکاس تانا استایل می پذیرد طبق برنامه ارائه شده
+                                                                        <p>فروشنده ساده پس از عضویت در کانون انعکاس تانا استایل بایستی طبق برنامه ارائه شده
                                                                             از سوی تانا استایل به فعالیت خود در کانون بپردازد. عدم اجرای تعهدات کانون، خود به خود موجب
                                                                             می شود تا فروشنده ساده از کانون انعکاس حذف و محدودیت های دسترسی به کانون بر روی پنل وی اعمال
-                                                                            شود و فروشنده ساده حق هرگونه ادعایی را از خود سلب می نماید.</p>
-                                                                        <p>فروشنده ساده با عضویت در کانون انعکاس قبول می نماید تا برنامه زمان بندی شده کانون (که از طریق
-                                                                            پیامک برای وی ارسال می شود) را در زمان مقرر اجرا نماید.</p>
-                                                                        <p>فروشنده ساده می پذیرد در صورت عدم همکاری سایر فروشندگان ساده در کانون انعکاس حق طرح هیچگونه
-                                                                            ادعای قانونی نسبت به شرکت تابش پس زمینه مکریان ندارد و در ازای آن شرکت تابش پس زمینه مکریان متعهد می شود با شخص خاطی و مخل
-                                                                            برنامه انعکاس برخورد نماید.</p>
+                                                                            شود.</p>
+                                                                        <p>فروشنده ساده با عضویت در کانون انعکاس بایستی برنامه زمان بندی شده کانون (که از طریق
+                                                                            پیامک برای وی ارسال می شود و همچنین لینک آن در پنل وی وجود دارد) را در زمان مقرر اجرا نماید.</p>
+                                                                        <p></p>
+
+                                                                        <p><span class="g-font-weight-600 g-color-orange g-mx-5">نکته مهم:</span>فروشنده ساده باید به یاد داشته باشد در صورت دریافت نکردن پیامک روزانه کانون (احتمال اشکال در سیستم ارتباطات مخابرات وجود دارد) هر روز حداقل یکبار قبل از ساعت 11 شب به پنل خود سر بزند و از طریق لینک مربوطه که در قسمت اینستاگرام می باشد استوری تبلیغاتی روزانه خود را بررسی نماید. و در صورتی که تمایل به شرکت در تبلیغ آن شب داشته باشد کلید 'تایید' را انتخاب و در صورتی که تمایل نداشته باشد کلید 'عدم شرکت در تبلیغ' را انتخاب نمایید.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -741,7 +768,7 @@
                                                                         <p>فروشنده ساده می پذیرد عواقب ناشی از بارگذاری محتوای نادرست و اظهار خلاف واقع و تصاویر و متون توهین
                                                                             آمیز به شخص یا اشخاص یا قشر و اجتماعی و همچنین قراردادن تصاویر و توضیحات غیر اخلاقی و مستهجن
                                                                             و مغایر با قوانین جمهوری اسلامی ایران کاملا به عهده وی بوده و خسارات ناشی از نقض ماده جاری
-                                                                            بعهده فروشنده ساده است و شرکت تابش پس زمینه مکریان قرارداد از طرح هرگونه ادعایی مبرا می باشد.</p>
+                                                                            بعهده فروشنده ساده است و شرکت تابش پس زمینه مکریان از طرح هرگونه ادعایی مبرا می باشد.</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -827,6 +854,13 @@
                                             هیچگونه هزینه ی مالی شامل حال اعضای کانون نخواهد شد.
                                             در صورتی که عضو می شوید لطفا بعد از ثبت نام و <span class="g-color-black">ورود به پنل</span> خود، از طریق دکمه حاوی <span class="g-color-black">آیکون اینستاگرام</span> ، آپشن شرکت در کانون انعکاس را <span class="g-color-black">فعال</span> کنید.
                                         </p>
+                                        <a style="font-weight: bold" class="g-color-blue-dark-v1 g-color-primary--hover"
+                                           data-toggle="modal"
+                                           data-target="#modalRegulation"
+                                           onclick="setTimeout(function() {$('#kanoonOzviat').trigger('click')},500)"
+                                           href="#">
+                                            مطالعه قوانین
+                                        </a>
                                         <div class="text-left">
                                             <div class="d-inline-block">
                                                 <div style="cursor: pointer"

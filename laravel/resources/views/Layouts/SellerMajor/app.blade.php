@@ -87,7 +87,7 @@
     })
 
     function windowScrollTo(){
-        $([document.documentElement, document.body]).animate({
+        $('#modalRegulation').animate({
             scrollTop: $("#regulationContainer").offset().top
         }, 1000);
     }
@@ -399,6 +399,13 @@
 
             case 'personal':
                 category = 'لوازم شخصی (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                $('#category').val(catCode);
+                break;
+
+            case 'content':
+                category = 'تولید محتوا (' + catHint + ')';
                 $('#selectedItem').text(category);
                 $('#hintCategory').val(category);
                 $('#category').val(catCode);

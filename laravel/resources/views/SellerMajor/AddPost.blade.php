@@ -1,5 +1,6 @@
 @extends('Layouts.SellerMajor.Index')
 @section('Content')
+    <span id="userCategory" class="d-none">{{Auth::guard('sellerMajor')->user()->Category}}</span>
     <span class="d-none" id="imgWorking"></span>
     <div class="mx-auto col-12 col-lg-8">
         <h5 class="text-right g-py-10">افزودن پست</h5>

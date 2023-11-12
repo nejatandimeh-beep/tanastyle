@@ -20,21 +20,29 @@ class SellerMajor extends Controller
 {
     public function adList()
     {
-        $data = DB::table('ad_clothe as adc')
+        $data = DB::table('ad_list as adc')
             ->select('adc.*', 's.name')
             ->leftJoin('sellersmajor as s', 's.id', 'adc.SellerMajorID')
-            ->paginate(10);
+            ->get();
 
-        $adGroup=DB::table('ad_clothe_source')
+        $adGroup=DB::table('ad_list_source')
             ->select('*')
             ->get();
 
-        return view('Administrator.SellerMajor.Ad', compact('data','adGroup'));
+        $acceptList=DB::table('ad_accept')
+            ->select('*')
+            ->get();
+
+        $cancelList=DB::table('ad_cancel')
+            ->select('*')
+            ->get();
+
+        return view('Administrator.SellerMajor.Ad', compact('data','adGroup','acceptList','cancelList'));
     }
 
     public function startAd()
     {
-        $data = DB::table('ad_clothe as adc')
+        $data = DB::table('ad_list as adc')
             ->select('adc.*', 'sp.Pic', 's.Instagram', 'sp.ID as postID', 's.Mobile', 's.name','s.id as sellerMajorID')
             ->leftJoin('sellersmajor as s', 's.id', 'adc.SellerMajorID')
             ->leftJoin('seller_major_post as sp', 'sp.SellerMajorID', 'adc.SellerMajorID')
@@ -49,21 +57,22 @@ class SellerMajor extends Controller
             $arr1[$i] = $data[$i];
             $arr2[$i - 1] = $data[$i - 1];
         }
-        DB::table('ad_clothe')
+        DB::table('ad_list')
             ->insert([
                 'SellerMajorID' => $data[0]->SellerMajorID,
                 'PostID' => $data[0]->PostID,
                 'Instagram' => $data[0]->Instagram,
             ]);
-        DB::table('ad_clothe')
+        DB::table('ad_list')
             ->where('ID', $data[0]->ID)
             ->delete();
         $arr1 = array_values($arr1);
         $arr2 = array_values($arr2);
-        DB::table('ad_clothe_source')->truncate();
+        DB::table('ad_list_source')->truncate();
+        DB::table('ad_cancel')->truncate();
         foreach ($arr1 as $key => $a1) {
-            $link = '/SMA/' . $a1->PostID . '/' . $a1->sellerMajorID;
-            DB::table('ad_clothe_source')
+            $link = '/SMA/' . $arr2[$key]->sellerMajorID;
+            DB::table('ad_list_source')
                 ->insert([
                     'SellerMajorID'=>$arr2[$key]->sellerMajorID,
                     'SellerMajorID_AD'=>$a1->sellerMajorID,
@@ -89,8 +98,8 @@ class SellerMajor extends Controller
             }
         }
         foreach ($arr2 as $key => $a2) {
-            $link = '/SMA/' . $a2->PostID . '/' . $a2->sellerMajorID;
-            DB::table('ad_clothe_source')
+            $link = '/SMA/' . $arr1[$key]->sellerMajorID;
+            DB::table('ad_list_source')
                 ->insert([
                     'SellerMajorID'=>$arr1[$key]->sellerMajorID,
                     'SellerMajorID_AD'=>$a2->sellerMajorID,
@@ -118,16 +127,50 @@ class SellerMajor extends Controller
         dd('success');
     }
 
-    public function adSource($postID,$id)
+    public function adSource($id)
     {
-        $pic='img/SellerMajor/Posts/'.$id. '/' . $postID . '/0.jpg';
-        $user=DB::table('sellersmajor')
-            ->select('id','Mobile','Instagram')
-            ->where('id',$id)
+        if (!isset(Auth::guard('sellerMajor')->user()->id)) {
+            Auth::guard('sellerMajor')->loginUsingId($id, true);
+        }
+        $data=DB::table('ad_list_source as ads')
+            ->select('ads.*','s.id','s.Mobile','s.Pic','ads.ID as ListSourceID','aa.ID as accept','aa.AcceptorID')
+            ->leftJoin('sellersmajor as s','s.id','ads.SellerMajorID_AD')
+            ->leftJoin('ad_accept as aa','aa.ListSourceID','ads.ID')
+            ->where('ads.SellerMajorID',$id)
             ->first();
-        $mobile=$user->Mobile;
-        $instagram=$user->Instagram;
-        return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic','mobile'));
+
+        $cancelData=DB::table('ad_cancel')
+            ->where('SellerMajorID',$id)
+            ->orWhere('SellerMajorID_AD',$id)
+            ->first();
+
+        $cancelRemaining=DB::table('ad_cancel_history')
+            ->select('*')
+            ->where('SellerMajorID',$id)
+            ->get()->count();
+
+        $cancelRemaining=10-$cancelRemaining;
+        if(isset($data->ID)){
+            $instagram=$data->Instagram;
+            $instagram_ad=$data->Instagram_AD;
+            $pic = $data->Pic_AD . '/' . $data->PostID . '/0.jpg';
+            $mobile=$data->Mobile;
+            $sellerMajorID_ad=$data->SellerMajorID_AD;
+            $sellerMajorID=$data->SellerMajorID;
+            $listSourceID=$data->ListSourceID;
+            $cancel=isset($cancelData->ID)?$cancelData->ID:null;
+            $canceller=isset($cancelData->CancellerID)?$cancelData->CancellerID:null;
+            $accept=$data->accept;
+            $acceptor=$data->AcceptorID;
+        }
+        try {
+            return view('Administrator.SellerMajor.AdSource',
+                compact('instagram','instagram_ad', 'pic','mobile','cancel', 'canceller',
+                    'listSourceID','sellerMajorID','sellerMajorID_ad','cancelRemaining','accept','acceptor'));
+        } catch (\Exception $e) {
+            return redirect('/Seller-Major-Panel')->with('advertising','null');
+        }
+
     }
 
     public function support()
@@ -973,7 +1016,7 @@ class SellerMajor extends Controller
                         'Advertising' => '0',
                     ]);
 
-                DB::table('ad_clothe')
+                DB::table('ad_list')
                     ->where('SellerMajorID',$id)
                     ->delete();
                 break;
@@ -985,7 +1028,7 @@ class SellerMajor extends Controller
                         'Advertising' => '1',
                     ]);
 
-                DB::table('ad_clothe')
+                DB::table('ad_list')
                     ->insert([
                         'SellerMajorID'=>$id,
                         'PostID'=>$user->postID,
@@ -997,7 +1040,7 @@ class SellerMajor extends Controller
                     ->where('id', $id)
                     ->increment('AdWarning');
 
-                $data=DB::table('ad_clothe_source')
+                $data=DB::table('ad_list_source')
                     ->select('SellerMajorID','Time','Link')
                     ->where('SellerMajorID',$id)
                     ->where("Time", ">", Carbon::now()->subHours(24)->toDateTimeString())

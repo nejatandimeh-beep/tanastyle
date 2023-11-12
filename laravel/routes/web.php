@@ -307,7 +307,7 @@ Route::get('/Administrator-Customer-Block/{id}/{status}', 'Administrator\Custome
 Route::get('/Administrator-SellerMajor', 'Administrator\SellerMajor@list')->name('sellerMajorList');
 Route::get('/Administrator-SellerMajor-ControlPanel/{id}/{tab}', 'Administrator\SellerMajor@controlPanel')->name('sellerMajorControlPanel');
 Route::get('/Seller-Major-StartAd', 'Administrator\SellerMajor@startAd')->name('startAd');
-Route::get('/SMA/{postID}/{id}', 'Administrator\SellerMajor@adSource')->name('adSource');
+Route::get('/SMA/{id}', 'Administrator\SellerMajor@adSource')->name('adSource');
 Route::get('/Administrator-SellerMajor-AdList', 'Administrator\SellerMajor@adList')->name('sellerMajorAdList');
 Route::get('/Administrator-SellerMajor-Support', 'Administrator\SellerMajor@support')->name('sellerMajorSupport');
 Route::post('/Administrator-SellerMajor-ConnectionNew', 'Administrator\SellerMajor@connectionNew')->name('adminSellerMajorConnectionNew');
@@ -446,5 +446,6 @@ Route::post('/SellerMajor-Connection-New', 'SellerMajor\Basic@connectionNew')->n
 Route::get('/SellerMajorConnection-Detail/{id}/{status}', 'SellerMajor\Basic@connectionDetail')->name('sellerMajorConnectionDetail');
 Route::post('/SellerMajor-Connection-NewMsg', 'SellerMajor\Basic@connectionNewMsg')->name('sellerMajorConnectionNewMsg');
 Route::get('/Seller-Major-Panel-AdSource/{id}', 'SellerMajor\Basic@adSource')->name('adSourcePanel');
+Route::Post('/sellerMajor-story-Cancel', 'SellerMajor\Basic@actionCancel');
 Route::post('/sellerMajor/instaProfile/imageUpdate', 'SellerMajor\Basic@uploadInstaImage');
 

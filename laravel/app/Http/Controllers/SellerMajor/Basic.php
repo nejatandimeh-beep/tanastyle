@@ -174,14 +174,14 @@ class Basic extends Controller
             ->first();
         if(isset($postID)){
             if($status == 'true'){
-                DB::table('ad_clothe')
+                DB::table('ad_list')
                     ->insert([
                         'SellerMajorID'=>$this->sellerMajorID,
                         'PostID'=>$postID->ID,
                         'Instagram'=>$instagram,
                     ]);
             } else {
-                DB::table('ad_clothe')
+                DB::table('ad_list')
                     ->where('SellerMajorID',$this->sellerMajorID)
                     ->delete();
             }
@@ -654,7 +654,7 @@ class Basic extends Controller
                 'Posts' => DB::raw('Posts + 1')
             ]);
 
-        DB::table('ad_clothe')
+        DB::table('ad_list')
             ->where('SellerMajorID',$this->sellerMajorID)
             ->update([
                 'PostID'=>$postId->ID,
@@ -1358,20 +1358,100 @@ class Basic extends Controller
 
     public function adSource($id)
     {
-        $data=DB::table('ad_clothe_source as ads')
-            ->select('ads.*','s.id','s.Mobile','s.Pic')
+        $data=DB::table('ad_list_source as ads')
+            ->select('ads.*','s.id','s.Mobile','s.Pic','ads.ID as ListSourceID','aa.ID as accept','aa.AcceptorID')
             ->leftJoin('sellersmajor as s','s.id','ads.SellerMajorID_AD')
+            ->leftJoin('ad_accept as aa','aa.ListSourceID','ads.ID')
             ->where('ads.SellerMajorID',$id)
             ->first();
+
+        $cancelData=DB::table('ad_cancel')
+            ->where('SellerMajorID',$id)
+            ->orWhere('SellerMajorID_AD',$id)
+            ->first();
+
+        $cancelRemaining=DB::table('ad_cancel_history')
+            ->select('*')
+            ->where('SellerMajorID',$id)
+            ->get()->count();
+
+        $cancelRemaining=10-$cancelRemaining;
         if(isset($data->ID)){
-            $instagram=$data->Instagram_AD;
+            $instagram=$data->Instagram;
+            $instagram_ad=$data->Instagram_AD;
             $pic = $data->Pic_AD . '/' . $data->PostID . '/0.jpg';
             $mobile=$data->Mobile;
-            return view('Administrator.SellerMajor.AdSource', compact('instagram', 'pic','mobile'));
+            $sellerMajorID_ad=$data->SellerMajorID_AD;
+            $sellerMajorID=$data->SellerMajorID;
+            $listSourceID=$data->ListSourceID;
+            $cancel=isset($cancelData->ID)?$cancelData->ID:null;
+            $canceller=isset($cancelData->CancellerID)?$cancelData->CancellerID:null;
+            $accept=$data->accept;
+            $acceptor=$data->AcceptorID;
+            return view('Administrator.SellerMajor.AdSource',
+                compact('instagram','instagram_ad', 'pic','mobile','cancel', 'canceller',
+                    'listSourceID','sellerMajorID','sellerMajorID_ad','cancelRemaining','accept','acceptor'));
         } else {
             return redirect('/Seller-Major-Panel')->with('advertising','null');
         }
 
+    }
+
+    public function actionCancel(Request $request)
+    {
+        $userOnline=$request->get('userOnline');
+        $ListSourceID=$request->get('listSourceID');
+        $sellerMajorID=$request->get('sellerMajorID');
+        $sellerMajorID_ad=$request->get('sellerMajorID_ad');
+        $reason=$request->get('reason');
+        $status=$request->get('status');
+        $mobile=$request->get('mobile');
+        $instagram='@'.$request->get('instagram');
+        if ($status==='cancel'){
+            DB::table('ad_cancel')
+                ->insert([
+                    'ListSourceID' => $ListSourceID,
+                    'SellerMajorID' => $sellerMajorID,
+                    'SellerMajorID_AD' => $sellerMajorID_ad,
+                    'CancellerID' => $instagram,
+                    'Reason' => $reason,
+                ]);
+
+            DB::table('ad_cancel_history')
+                ->insert([
+                    'SellerMajorID' => $userOnline,
+                    'Reason' => $reason,
+                ]);
+
+            DB::table('ad_accept')
+                ->where('ListSourceID',$ListSourceID)
+                ->delete();
+
+            try {
+                $api_key = Config::get('kavenegar.apikey');
+                $var = new Kavenegar\KavenegarApi($api_key);
+                $template = "storyCancel";
+                $type = "sms";
+
+                $result = $var->VerifyLookup($mobile, $instagram, null, null, $template, $type);
+            } catch (\Kavenegar\Exceptions\ApiException $e) {
+                // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            } catch (\Kavenegar\Exceptions\HttpException $e) {
+                // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+                echo $e->errorMessage();
+            }
+        } else {
+            DB::table('ad_accept')
+                ->insert([
+                    'ListSourceID' => $ListSourceID,
+                    'SellerMajorID' => $sellerMajorID,
+                    'SellerMajorID_AD' => $sellerMajorID_ad,
+                    'AcceptorID' => $instagram,
+                ]);
+        }
+
+        return 'success';
     }
     //------------------------------------------------
     //  Convert Date to Iranian Calender

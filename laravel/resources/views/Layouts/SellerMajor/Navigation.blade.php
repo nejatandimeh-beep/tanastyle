@@ -51,10 +51,14 @@
                             </li>
 
                             <li class="nav-item g-mx-20--lg">
-                                <a href="{{ url('/') }}" class="nav-link g-px-0 g-color-primary--hover">
+                                <a href="#" onclick="document.getElementById('logoutForm').submit();"
+                                   class="nav-link g-px-0 g-color-primary--hover">
                                     <i class="g-font-size-16 g-font-weight-600 icon-logout align-middle g-ml-5"></i>
                                     <span class="align-self-center">خروج</span>
                                 </a>
+                                <form id="logoutForm" action="{{route('sellerMajorLogout')}}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
                             </li>
                         </ul>
                     </div>

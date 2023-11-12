@@ -11,7 +11,7 @@
                     </a>
                 </div>
                 <div class="container text-lg-right text-center g-pb-30">
-                    <h1 class="h3">بازارچه مجازی پوشاک</h1>
+                    <h1 class="h3">بازارچه مجازی</h1>
                     <h2 class="h5">همین الان دیدن کن و داغترین ها رو ببین</h2>
                     <h3 class="h5 g-mb-0">
                         <a style="direction: rtl" href="{{route('feed')}}" class="text-decoration-none">
@@ -28,7 +28,7 @@
                      alt="بدلیجات پوشاک لباس تاناکورا مهاباد عمده خرده">
             </a>
             <div style="padding-right: 17%" class="text-lg-right text-center">
-                <h1>بازارچه مجازی پوشاک</h1>
+                <h1>بازارچه مجازی</h1>
                 <h2 class="h5">همین الان دیدن کن و داغترین ها رو ببین</h2>
                 <h3 class="g-pb-60 g-mb-0">
                     <a style="direction: rtl" href="{{route('feed')}}" class="text-decoration-none">

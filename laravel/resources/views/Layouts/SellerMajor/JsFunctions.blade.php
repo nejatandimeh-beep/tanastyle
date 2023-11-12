@@ -1358,7 +1358,7 @@
         });
 
         $('#addImg').on('click', function () {
-            if($('.necessary').hasClass('g-color-red')){
+            if($('.necessary').hasClass('g-color-red') && $('#userCategory').text()==='clothes'){
                 alert('لطفا عناوین قرمز رنگ را کامل نمایید.')
             } else {
                 $(this).find('i').removeClass('fa-check').addClass('fa-spin fa-spinner');

@@ -194,8 +194,8 @@
                                                                           class="d-none align-self-center g-mr-5 g-pa-10 g-color-primary"
                                                                           id="uploadingIcon11"><i class="fa fa-spinner fa-spin"></i></span>
                                                                     <div class="input-group-btn col-12 g-mt-15 p-0">
-                                                                        <button class="btn btn-md u-btn-primary rounded-0" tabindex="20">
-                                                                            بارگذاری تصویر
+                                                                        <button class="btn btn-md u-btn-primary rounded-0 px-0" tabindex="20">
+                                                                            بارگذاری تصویر آیدی اینستاگرام
                                                                         </button>
                                                                         <input id="pic11"
                                                                                value=""
@@ -242,6 +242,8 @@
                                                                    class="alert alert-warning text-right g-pa-20--lg g-mt-10 g-px-10 g-py-10">
                                                                     <i class="fa fa-warning g-ml-5 g-font-size-18"></i>لطفا در صورتی که برایتان در زمان مشخص شده در اینستاگرام استوری تبلیغاتی گذاشته نشده بود از طریق قسمت پشتیبانی تیکت ثبت کنید تا موضوع را پیگیری نماییم.</p>
                                                                 <h5 class="text-right">فعالیت روزانه شما در کانون انعکاس</h5>
+                                                                <p style="direction: rtl">به یاد داشته باشید همواره آخرین پست شما به کانون تبلیغاتی اضافه می شود به عبارتی جهت تبلیغ در صفحات دیگر به صورت خودکار آخرین پست شما استفاده قرار خواهد گرفت.</p>
+                                                                <p style="direction: rtl">همچنین در صورتی که پیامک کانون به دستتان نرسید همواره می توانید فعالیت روزانه خود را در لینک زیر مشاهد بفرمایید.</p>
                                                                 <a href="{{route('adSourcePanel',$data->id)}}"
                                                                    class="g-text-underline--none--hover g-color-primary">
                                                                         <span class="h5 g-ml-5">لینک نمایش فعالیت</span>
