@@ -12,13 +12,6 @@
         <div class="container g-brd-bottom g-brd-gray-light-v5 g-py-5 g-mb-5 customerNavigation" id="HeaderContainer">
             <!-- Search and Login -->
             <div class="d-flex w-100 justify-content-end">
-                {{--بازار مجازی--}}
-                <div class="g-mr-15 g-pt-10">
-                    <a href="{{ route('feed') }}" id="login"
-                       class="d-flex nav-link g-color-black h6 g-text-underline--none--hover p-0 g-color-primary--hover loginBtn">
-                        بازارچه مجازی <span class="sr-only">(current)</span>
-                    </a>
-                </div>
                 <div class="g-mr-15 g-pt-10">
                     <a href="{{ url('/') }}" id="login"
                        class="d-flex nav-link g-color-black h6 g-text-underline--none--hover p-0 g-color-primary--hover loginBtn">
@@ -2808,13 +2801,6 @@
                                         </div>
                                     </div>
                                     <!-- End Mega Menu -->
-                                </li>
-
-                                {{--بازارچه پوشاک--}}
-                                <li class="nav-item g-mx-20--lg">
-                                    <a href="{{ route('feed') }}" class="nav-link g-px-0 g-color-primary--hover">بازارچه
-                                        مجازی <span
-                                            class="sr-only">(current)</span></a>
                                 </li>
                             </ul>
                         </div>

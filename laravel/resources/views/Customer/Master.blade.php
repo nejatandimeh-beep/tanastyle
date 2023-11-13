@@ -3,44 +3,22 @@
     <div class="masterPage">
         <div class="d-lg-none">
             <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));">
-                <div class="container">
-                    <a style="direction: rtl" href="{{route('feed')}}" class="text-decoration-none">
-                        <img class="img-fluid w-100" loading="lazy"
-                             src="{{asset('img/Other/tanakora.png')}}"
-                             alt="بدلیجات پوشاک لباس تاناکورا مهاباد عمده خرده">
-                    </a>
-                </div>
-                <div class="container text-lg-right text-center g-pb-30">
-                    <h1 class="h3">بازارچه مجازی</h1>
-                    <h2 class="h5">همین الان دیدن کن و داغترین ها رو ببین</h2>
-                    <h3 class="h5 g-mb-0">
-                        <a style="direction: rtl" href="{{route('feed')}}" class="text-decoration-none">
-                            ! بزن بریم
-                        </a>
-                    </h3>
-                </div>
+                <img style="height: 500px; object-fit: cover" class="img-fluid w-100" loading="lazy"
+                     src="{{asset('img/Banners/new.jpg')}}"
+                     alt="بدلیجات پوشاک لباس تاناکورا مهاباد عمده خرده">
             </div>
         </div>
-        <div  style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));" class="d-lg-block d-none">
-            <a style="direction: rtl" href="{{route('feed')}}" class="text-decoration-none">
-                <img class="img-fluid w-100" loading="lazy"
-                     src="{{asset('img/Other/tanakora2.png')}}"
-                     alt="بدلیجات پوشاک لباس تاناکورا مهاباد عمده خرده">
-            </a>
-            <div style="padding-right: 17%" class="text-lg-right text-center">
-                <h1>بازارچه مجازی</h1>
-                <h2 class="h5">همین الان دیدن کن و داغترین ها رو ببین</h2>
-                <h3 class="g-pb-60 g-mb-0">
-                    <a style="direction: rtl" href="{{route('feed')}}" class="text-decoration-none">
-                        ! بزن بریم
-                    </a>
-                </h3>
-            </div>
+        <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));"
+             class="d-lg-block d-none">
+            <img class="img-fluid w-100" loading="lazy"
+                 src="{{asset('img/Banners/new.jpg')}}"
+                 alt="بدلیجات پوشاک لباس تاناکورا مهاباد عمده خرده">
         </div>
         <div style="background-image: linear-gradient(to bottom, rgba(240,240,240,1), #ffffff);"
              class="g-py-50">
             <div class="container text-center g-z-index-1">
-                <h1 class="d-none h1 g-color-gray-dark-v3 g-font-weight-600 g-mb-15">فروشگاه آنلاین پوشاک استوک و تاناکورا tanakora mahabad estok بدلیجات عینک زنانه پوشاک زنانه</h1>
+                <h1 class="d-none h1 g-color-gray-dark-v3 g-font-weight-600 g-mb-15">فروشگاه آنلاین پوشاک استوک و
+                    تاناکورا tanakora mahabad estok بدلیجات عینک زنانه پوشاک زنانه</h1>
                 <h2 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">تانا استایل
                     <span class="g-color-gray-dark-v3 ">استایلی خاص و متفاوت</span></h2>
 
@@ -134,7 +112,8 @@
                                                 <h1 class="h6 g-color-black my-1 text-left">
                                                     {{$row->Brand}}
                                                 </h1>
-                                                <h4 style="text-overflow: ellipsis; overflow: hidden; width: 160px; white-space: nowrap;" class="h6 g-color-black my-1">
+                                                <h4 style="text-overflow: ellipsis; overflow: hidden; width: 160px; white-space: nowrap;"
+                                                    class="h6 g-color-black my-1">
                                                     <span class="u-link-v5 g-color-black"
                                                           tabindex="0">
                                                         {{ $row->Name }}

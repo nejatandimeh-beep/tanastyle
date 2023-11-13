@@ -2497,17 +2497,12 @@ class Basic extends Controller
 // -----------------------------------------[ Seller Register Mode ]----------------------------------------------------
     public function registerMode()
     {
-        return view('auth.sellerMajorAuth.registerMode');
+        return view('auth.registerMode');
     }
 
     public function sellerLoginMode()
     {
-        return view('auth.sellerMajorAuth.LoginMode');
-    }
-
-    public function sellerLoginPlanMode()
-    {
-        return view('auth.sellerMajorAuth.LoginPlanMode');
+        return view('auth.LoginMode');
     }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($data, $Authority)
