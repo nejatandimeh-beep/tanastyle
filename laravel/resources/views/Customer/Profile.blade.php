@@ -140,19 +140,7 @@
                                     </h5>
                                 </div>
                             </div>
-                            <!-- تعامل با بازار -->
-                            <div class="card g-brd-0 g-mb-5">
-                                <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
-                                    <h5 class="h6 g-bg-white g-px-0 g-py-10 mb-0">
-                                        <a style="cursor: pointer"
-                                           id="filter-user-interAction"
-                                           class="nav-link g-color-main g-color-primary--hover p-0"
-                                           onclick="showPanel('interaction');">تعامل با بازار
-                                            <i class="fa fa-exchange float-left g-font-size-17 g-pb-5 g-pl-8"></i>
-                                        </a>
-                                    </h5>
-                                </div>
-                            </div>
+
                             <!-- آدرس ها -->
                             <div class="card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
@@ -2239,68 +2227,6 @@
                                 </div>
                             @endforeach
                         </div>
-                    </div>
-                </div>
-
-                <!-- تعامل با بازار -->
-                <div style="display: none" id="user-interAction">
-                    <div class="g-bg-white-opacity-0_9 g-mb-15 g-mt-30 g-mt-0--lg">
-                        <div style="padding-bottom: 21px;" class="g-pr-15 d-flex g-pt-20--lg g-pt-10 g-color-primary">
-                            <i class="fa fa-exchange g-pl-5 g-font-size-20 g-font-weight-500"></i>
-
-                            <h6 class="m-0 g-mt-4">
-                                تعامل با بازار
-                            </h6>
-                        </div>
-                        <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0 bigDevice">
-                        <hr class="g-brd-primary g-mx-minus-15 g-mt-0 g-mb-0 smallDevice">
-                    </div>
-                    <div class="g-mb-40 g-mb-0--lg">
-                        <div class="row justify-content-center">
-                            <div class="text-center g-pa-5 g-pa-15--lg">
-                                <a href="{{route('sellerMajorFollowing')}}"
-                                   class="g-color-gray-dark-v4 g-color-primary--hover">
-                                <span class="u-icon-v4 u-icon-v4-rounded-10 g-mb-15">
-                                  <span class="u-icon-v4-inner">
-                                    <i class="icon-user-following"></i>
-                                  </span>
-                                </span>
-                                </a>
-                                <p>دنبال شوندگان</p>
-                            </div>
-                            <div class="text-center g-pa-5 g-pa-15--lg">
-                                <a href="{{route('customerReaction')}}"
-                                   class="g-color-gray-dark-v4 g-color-primary--hover">
-                                <span class="u-icon-v4 u-icon-v4-rounded-10 g-mb-15">
-                                  <span class="u-icon-v4-inner">
-                                    <i class="icon-bubbles"></i>
-                                  </span>
-                                </span>
-                                </a>
-                                <p>نظرات</p>
-                            </div>
-                            <div class="text-center g-pa-5 g-pa-15--lg">
-                                <a href="{{route('cSmMessages')}}" class="g-color-gray-dark-v4 g-color-primary--hover">
-                                <span class="u-icon-v4 u-icon-v4-rounded-10 g-mb-15">
-                                  <span class="u-icon-v4-inner">
-                                    <i class="icon-paper-plane"></i>
-                                  </span>
-                                </span>
-                                </a>
-                                <p>پیام ها</p>
-                            </div>
-                            <div class="text-center g-pa-5 g-pa-15--lg">
-                                <a href="{{route('cSmSaved')}}" class="g-color-gray-dark-v4 g-color-primary--hover">
-                                <span class="u-icon-v4 u-icon-v4-rounded-10 g-mb-15">
-                                  <span class="u-icon-v4-inner">
-                                    <i class="fa fa-bookmark-o"></i>
-                                  </span>
-                                </span>
-                                </a>
-                                <p>ذخیره شده ها</p>
-                            </div>
-                        </div>
-                        <div id="userInterActionContainer"></div>
                     </div>
                 </div>
             </div>

@@ -6,17 +6,10 @@
             <span class="d-block g-font-size-25 g-color-pink g-mb-15 g-pb-20 g-brd-bottom g-brd-white-opacity-0_8">پنل فروشندگان</span>
             <a href="{{route('sellerVerify')}}" class="d-block btn btn-md u-btn-darkgray active rounded-0 g-mb-15">تایید هویت فروشندگان</a>
             <a href="{{route('sellerList')}}" class="d-block btn btn-md u-btn-darkgray rounded-0 u-btn-hover-v2-1 g-mb-15">
-                فروشندگان حرفه ای
+                فروشندگان
                 <div style="width: 20px; height: 20px"
                      class="{{$newSupportSeller===0 ? 'd-none ': 'd-inline-block '}}text-center g-color-black g-bg-lightred g-rounded-50x g-mr-10">
                     {{$newSupportSeller}}
-                </div>
-            </a>
-            <a href="{{route('sellerMajorList')}}" class="d-block btn btn-md u-btn-darkgray rounded-0 u-btn-hover-v2-1 g-mb-40">
-                فروشندگان ساده
-                <div style="width: 20px; height: 20px"
-                     class="{{$newSupportSellerMajor===0 ? 'd-none ': 'd-inline-block '}}text-center g-color-black g-bg-lightred g-rounded-50x g-mr-10">
-                    {{$newSupportSellerMajor}}
                 </div>
             </a>
 

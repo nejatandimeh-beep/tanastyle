@@ -17,7 +17,7 @@
     <meta name="_token" content="{{ csrf_token() }}">
     <title>TanaStyle</title>
 
-    <link rel="shortcut icon" href="{{asset('img/Logo/browserIcon.png')}}" />
+    <link rel="icon" href="{{asset('img/Logo/browserIcon.png')}}" />
 
     <link rel="apple-touch-icon" href="{{asset('img/Logo/browserIcon.png')}}">
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/Logo/browserIcon.png')}}">

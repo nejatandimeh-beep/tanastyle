@@ -1843,7 +1843,7 @@ class Basic extends Controller
                    class="u-icon-v1 g-mt-minus-5 g-color-gray-dark-v4 g-color-primary--hover rounded-circle g-ml-5"
                    data-toggle="tooltip"
                    data-placement="top"
-                   href="https://tanastyle/Product/' . $row->ID . '"
+                   href="' . route('productDetail', [$row->ProductID, $row->Size]) . '"
                    data-original-title="جزئیات محصول">
                    <i class="icon-eye g-line-height-0_7"></i>
                 </a>
@@ -2502,7 +2502,7 @@ class Basic extends Controller
 
     public function sellerLoginMode()
     {
-        return view('auth.LoginMode');
+        return view('auth.sellerAuth.LoginMode');
     }
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($data, $Authority)

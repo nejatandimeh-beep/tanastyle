@@ -39,10 +39,6 @@
                 </div>
 
                 <div class="col-sm-6 col-lg g-mb-30 g-mb-0--lg">
-                    <h6 class="g-font-weight-600 g-mb-20 g-mb-0--lg"><a class="g-color-white-opacity-0_8 g-color-primary--hover g-text-underline--none--hover" href="{{route('sellerMajorAdList')}}">کانون انعکاس</a></h6>
-                </div>
-
-                <div class="col-sm-6 col-lg g-mb-30 g-mb-0--lg">
                     <h6 class="g-font-weight-600 g-mb-20 g-mb-0--lg"><a class="g-color-white-opacity-0_8 g-color-primary--hover g-text-underline--none--hover" href="{{route('adminRegister')}}">ثبت نام پرسنل</a></h6>
                 </div>
                 <!-- End Footer Content -->

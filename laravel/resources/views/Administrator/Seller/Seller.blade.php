@@ -3,12 +3,12 @@
 
     <div style="direction: rtl" class="g-bg-gray-dark-v2 d-lg-flex">
         <div class="col-12 col-lg-3 g-brd-left g-brd-white-opacity-0_8 text-center g-pt-20 g-pb-40">
-            <span class="d-block g-font-size-22 g-color-pink g-mb-15 g-pb-20 g-brd-bottom g-brd-white-opacity-0_8">پنل فروشندگان حرفه ای</span>
+            <span class="d-block g-font-size-22 g-color-pink g-mb-15 g-pb-20 g-brd-bottom g-brd-white-opacity-0_8">پنل فروشندگان</span>
             <a href="{{route('sellerVerify')}}"
-               class="d-block btn btn-md u-btn-darkgray rounded-0 u-btn-hover-v2-1 g-mb-15">تایید هویت فروشندگان حرفه ای</a>
-            <a href="{{route('sellerList')}}" class="d-block btn btn-md u-btn-darkgray active rounded-0 g-mb-15">فروشندگان حرفه ای</a>
+               class="d-block btn btn-md u-btn-darkgray rounded-0 u-btn-hover-v2-1 g-mb-15">تایید هویت فروشندگان</a>
+            <a href="{{route('sellerList')}}" class="d-block btn btn-md u-btn-darkgray active rounded-0 g-mb-15">فروشندگان</a>
             <a href="{{route('support')}}" class="d-block btn btn-md u-btn-darkgray rounded-0 u-btn-hover-v2-1 g-mb-40">
-                پشتیبانی فروشندگان حرفه ای
+                پشتیبانی فروشندگان
                 <div style="width: 20px; height: 20px"
                      class="{{$newSupport===0 ? 'd-none ': 'd-inline-block '}}text-center g-color-black g-bg-lightred g-rounded-50x g-mr-10">
                     {{$newSupport}}
@@ -27,7 +27,7 @@
         </div>
         <div class="col-12 col-lg-9 g-pt-25 g-pb-40">
             <div class="d-flex justify-content-between g-mb-15">
-                <h5 class="g-mb-0 g-color-gray-light-v2 align-self-center">لیست فروشندگان حرفه ای</h5>
+                <h5 class="g-mb-0 g-color-gray-light-v2 align-self-center">لیست فروشندگان</h5>
                 <div class="g-pl-0">
                     <div style="direction: ltr" class="input-group">
                         <form class="revtp-searchform">

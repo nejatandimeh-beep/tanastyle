@@ -103,17 +103,7 @@
                 </a>
                 <!-- End Icon Blocks -->
             </div>
-            <div class="col-lg-4 g-mb-30">
-                <!-- Icon Blocks -->
-                <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-teal g-color-white text-center g-py-60 g-px-30"
-                   href="{{route('sellerMajorAdList')}}">
-                    <span class="u-icon-v2  g-mb-25">
-                    <i class="fa fa-bullhorn"></i>
-                    </span>
-                    <h3 class="h4 g-font-weight-600 mb-30">کانون انعکاس</h3>
-                </a>
-                <!-- End Icon Blocks -->
-            </div>
+
             <div class="col-lg-4 g-mb-30">
                 <!-- Icon Blocks -->
                 <a class="d-block g-text-underline--none--hover g-brd-around g-brd-white--hover g-bg-pink g-color-white text-center g-py-60 g-px-30"

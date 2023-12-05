@@ -33,13 +33,7 @@ class Seller extends Controller
             ->get()
             ->count();
 
-        $newSupportSellerMajor = DB::table('seller_major_conversation')
-            ->select('SellerMajorID', 'Status')
-            ->where('Status', '1')
-            ->get()
-            ->count();
-
-        return view('Administrator.Seller.Verify', compact('data', 'newSupportSeller','newSupportSellerMajor'));
+        return view('Administrator.Seller.Verify', compact('data', 'newSupportSeller'));
     }
 
     public function verifyDetail($id)
