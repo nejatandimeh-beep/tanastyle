@@ -51,6 +51,10 @@ Route::get('/Add-Product/{cat}/{gender}', 'Seller\Add@AskSize')->name('AddProduc
 Route::get('/Add-Product', 'Seller\Add@AddProduct')->name('AddProduct');
 Route::post('/Add-Product', 'Seller\Add@SaveProduct')->name('SaveProduct');
 Route::post('/Add-Product-Upload-Image', 'Seller\Add@uploadImage')->name('sellerProductImage');
+// ---------Add Other Product-----------
+Route::get('/Add-Other-Product/{cat}', 'Seller\AddOther@AddProduct')->name('AddOtherProduct');
+Route::post('/Add-Other-Product', 'Seller\AddOther@SaveProduct')->name('SaveOtherProduct');
+Route::post('/Add-Other-Product-Upload-Image', 'Seller\AddOther@uploadImage');
 // ------------Store--------------
 // Store
 Route::get('/Seller-Store', 'Seller\Basic@store')->name('store');
@@ -136,6 +140,7 @@ Route::get('/Customer-Product-Girl-List', 'Customer\Basic@productGirlList')->nam
 Route::get('/Customer-Product-Boy-List', 'Customer\Basic@productBoyList')->name('productBoyList');
 Route::get('/Customer-Product-BabyGirl-List', 'Customer\Basic@productBabyGirlList')->name('productBabyGirlList');
 Route::get('/Customer-Product-BabyBoy-List', 'Customer\Basic@productBabyBoyList')->name('productBabyBoyList');
+Route::get('/Customer-Product-Other-List', 'Customer\Basic@productOtherList')->name('productOtherList');
 Route::get('/Customer-Product-Search-List/{val}', 'Customer\Basic@productSearchList')->name('productSearchList');
 Route::get('/Customer-Product-/{gender}/{cat}/{catCode}', 'Customer\Basic@product')->name('menuProduct');
 // Customer Product Detail
@@ -311,6 +316,10 @@ Route::get('/route-cache', function() {
 Route::get('/config-clear', function() {
     $exitCode = Artisan::call('config:clear');
     echo 'config:clear: ok';
+});
+Route::get('/view-clear', function() {
+    $exitCode = Artisan::call('view:clear');
+    echo 'view:clear: ok';
 });
 Route::get('/optimize', function() {
     $exitCode = Artisan::call('optimize');

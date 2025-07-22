@@ -59,6 +59,7 @@
                         colorList = [],
                         colorText = color.replace(/\d+/g, ''),
                         id = $(this).parent().closest('div').attr('id').substring(2);
+                    console.log(parentID,id,colorText)
                     $('#colorBtn' + id).text(colorText);
                     $('#hexCode' + id).attr('value', hexc($(this).css('backgroundColor')));
                     $('#color' + id + ' option').val(color);
@@ -160,6 +161,10 @@
 
 
             if (typeof r !== "undefined") err = 'size';
+            if ($('#productName').val() === '') {
+                err = 'name';
+                $('#lblName').addClass('g-color-red');
+            }
             if ($('#addProductModel').val() === '') {
                 err = 'model';
                 $('#lblModel').addClass('g-color-red');
@@ -814,10 +819,9 @@
                     $('#tempFinalPrice').val(calc);
 
                     if($('.sellerProductDetail').length>0){
-                        let companyShare=0;
-                        if($('#seller').text()!=='2872282556')
-                            companyShare=1;
-                        calc=calc + (calc * (companyShare+9)) / 100;
+                        let additionalValue=3;
+
+                        calc=calc + (calc * (additionalValue)) / 100;
                         calc = calc.toString().slice(0, -3) + "000";
                         $('#tempFinalPrice').val(calc);
                         $('#newPriceBtn').prop('disabled', false);
@@ -843,22 +847,21 @@
             let discount = $(this).val(),
                 unitPrice = $('#tempPrice').val();
 
-            let companyShare=0;
-            if($('#seller').text()!=='2872282556')
-                companyShare=1;
+            let additionalValue=3;
 
             if (unitPrice >= 10000) {
-                let calc = salePrice(discount, unitPrice), finalPrice, exValue,exValueWithoutDis, tanastyle,fPriceWithoutDis, dis,tanastyleWithoutDis;
+                let calc = salePrice(discount, unitPrice),
+                    finalPrice, exValue,exValueWithoutDis, fPriceWithoutDis, dis,tanastyle;
+
                 $("#sellerShare").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#BsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#SsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#priceWithDiscount").val((calc.toString().slice(0, -3) + "000"));
-                tanastyle=calc * (companyShare) / 100;
-                exValue=calc * (9) / 100;
-                finalPrice=calc + exValue+tanastyle;
-                exValueWithoutDis=parseInt(unitPrice) * (9) / 100;
-                tanastyleWithoutDis=parseInt(unitPrice) * (companyShare) / 100;
-                fPriceWithoutDis=parseInt(unitPrice)+tanastyleWithoutDis+exValueWithoutDis;
+                exValue=calc * (additionalValue) / 100;
+                tanastyle=exValue.toString().slice(0, -3) + "000";
+                finalPrice=calc + exValue;
+                exValueWithoutDis=parseInt(unitPrice) * (additionalValue) / 100;
+                fPriceWithoutDis=parseInt(unitPrice)+exValueWithoutDis;
                 dis=parseInt(unitPrice)-calc;
                 $("#companyShare").text((tanastyle.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#exValue").text((exValue.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
@@ -895,10 +898,8 @@
             temp1 = parseInt(currentPrice.replace(new RegExp(',', 'g'), "")); // remove coma
             if ($(this).val() >= 1 && $(this).val() <= 99) {
                 let calc = salePrice(discount, temp1);
-                let companyShare=0;
-                if($('#seller').text()!=='2872282556')
-                    companyShare=1;
-                calc=calc + (calc * (companyShare+9)) / 100;
+                let additionalValue=2;
+                calc=calc + (calc * (additionalValue)) / 100;
                 calc = calc.toString().slice(0, -3) + "000";
                 $('#newFinalPriceByNewDiscount').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $('#tempNewFinalPrice').val(calc);
@@ -1075,7 +1076,7 @@
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
                 cropper, inputID, inputIdFinshed = [], counter = 0, file_upload, file_type,
-                folderName = createFolderName();
+                folderName = createFolderName(), uploadUrl=(window.location.path==='/Add-Other-Product-Upload-Image') ? '/Add-Other-Product-Upload-Image':'/Add-Product-Upload-Image';
             $('#folderName2').val(createFolderName());
             console.log($('#folderName2').val());
 
@@ -1153,7 +1154,7 @@
                             }
                         });
                         $.ajax({
-                            url: '/Add-Product-Upload-Image',
+                            url: uploadUrl,
                             data: form,
                             processData: false,
                             contentType: false,
@@ -1223,17 +1224,6 @@
             // Set Seller Navigation Date
             nowDate();
             setInterval('updateClock()', 1000);
-
-            // Set Autofocus for Wrongly Entered Fields
-            @if($errors->first('tempPrice'))
-            $("#unitPrice").focus();
-            @elseif($errors->first('discount'))
-            $("#discount").focus();
-            @elseif($errors->first('pic1'))
-            $("#pic1").focus();
-            @elseif($errors->first('pic2'))
-            $("#pic2").focus();
-            @endif
 
             // Set Focus Table Right to left
             if ($('.rtlPosition').length > 0)

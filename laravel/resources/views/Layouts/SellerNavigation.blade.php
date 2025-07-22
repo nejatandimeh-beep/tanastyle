@@ -58,7 +58,7 @@
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                             <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                                                افزودن پوشاک زنانه<i class="icon-user-female g-font-size-22 g-ml-10"></i>
+                                                افزودن پوشاک زنانه
                                             </h5>
 
                                         <div style="height: 90%;" class="rowSeller align-items-stretch">
@@ -785,7 +785,7 @@
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                                            افزودن پوشاک مردانه<i class="icon-user g-font-size-22 g-ml-10"></i>
+                                            افزودن پوشاک مردانه
                                         </h5>
 
                                         <div style="height: 90%;" class="rowSeller align-items-stretch">
@@ -1314,7 +1314,7 @@
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                                            افزودن پوشاک بچگانه<i class="icon-graduation g-font-size-25 g-ml-10"></i>
+                                            افزودن پوشاک بچگانه
                                         </h5>
 
                                         <div style="height: 90%;" class="rowSeller align-items-stretch">
@@ -1889,7 +1889,7 @@
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                                            افزودن پوشاک نوزادی<i class="icon-emotsmile g-font-size-22 g-ml-10"></i>
+                                            افزودن پوشاک نوزادی
                                         </h5>
 
                                         <div style="height: 90%;" class="rowSeller align-items-stretch">
@@ -2227,6 +2227,46 @@
                                     </div>
                                 </li>
                                 <!-- End Link baby Product -->
+
+                                <!-- Add Link Female Product -->
+                                <li class="nav-item hs-has-mega-menu g-my-6">
+                                    <a href="#" class="nav-link" id="nav-link-408"
+                                       aria-haspopup="true"
+                                       aria-expanded="false"
+                                       aria-controls="nav-megamenu-408"> افزودن سایر محصولات<i class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
+                                    <!-- Add Female Product -->
+                                    <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
+                                         id="nav-megamenu-408"
+                                         aria-labelledby="nav-link-408">
+                                        <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
+                                            افزودن سایر محصولات
+                                        </h5>
+
+                                        <div style="height: 90%;" class="rowSeller align-items-stretch">
+                                            <!-- Add Dress Product -->
+                                            <div class="col-lg-2 g-brd-right g-brd-gray-light-v4">
+                                                <h6 class="g-mr-8 g-mt-15 g-mb-8 g-font-weight-600">وسایل برقی</h6>
+                                                <ul class="list-unstyled h-100 g-py-10 g-pt-0">
+                                                    <!-- Female Dress_Under -->
+                                                    <li class="nav-item hs-has-sub-menu d-inline-block">
+                                                        <a href="#"
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">وسایل دیجیتال<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
+                                                        <ul class="list-unstyled hs-sub-menu">
+                                                            <li>
+                                                                <a href="{{ route('AddOtherProduct',['00']) }}"
+                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کالاهای آمازون</a>
+                                                            </li>
+                                                        </ul>
+                                                    </li>
+                                                    <!-- End Female Dress_Under -->
+                                                </ul>
+                                            </div>
+                                            <!-- End Add Dress Product -->
+                                        </div>
+                                    </div>
+                                    <!-- End Add Kids Product -->
+                                </li>
+                                <!-- End Link Female Product -->
 
                                 <!-- Store Page Link -->
                                 <li class="nav-item g-my-3">

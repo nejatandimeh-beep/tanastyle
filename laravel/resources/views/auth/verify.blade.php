@@ -12,7 +12,7 @@
                 <div style="direction: rtl" class="card-body text-right">
                     @if (session('resent'))
                         <div class="alert alert-success" role="alert">
-                            لینک فعال سازی به آدرس ایمیل شما ارسال شد. برای اتمام فرآیند لطفا ایمیل خود را چک کرده و روی لینک ارسال شده از طرف <span class="g-font-weight-500">Tanastyle.ir</span> کلیک کنید.
+                            لینک فعال سازی به آدرس ایمیل شما ارسال شد. برای اتمام فرآیند لطفا ایمیل خود را چک کرده و روی لینک ارسال شده از طرف <span class="g-font-weight-500">mevan.ir</span> کلیک کنید.
                         </div>
                     @endif
 

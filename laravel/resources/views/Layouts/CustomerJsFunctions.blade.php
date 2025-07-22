@@ -639,7 +639,6 @@
         }
 
         function filtering(filterChange) {
-            console.log('gender=' + gender, '\n category=' + category, '\n size=' + size, '\n priceMin=' + priceMin, '\n priceMax=' + priceMax, '\n color=' + color);
             if (filterChange === 1)
                 $('#productContainer').empty();
             $.ajax({
@@ -654,7 +653,7 @@
                     + JSON.stringify(color) + '/'
                     + filterChange,
                 success: function (data) {
-                    // console.log(data);
+                    console.log('data=>',data);
                     $('#loadProduct').addClass('d-none');
                     $('#productTitle').text('نتایج فیلترها');
                     $('#productTitleSD').text('نتایج فیلترها');
@@ -1607,7 +1606,7 @@
             postPrice = $('#postPrice').text().replace(new RegExp(',', 'g'), "");
             $('#orderID').text($('#productID').text() + '/' + $('#productDetailID').text());
             $('#orderProductID').text($('#productDetailID').text());
-            $('#orderProductName').text($('#productName').text() + ' ' + $('#productModel').text());
+            $('#orderProductName').text($('#productName').text());
             $('#orderProductColor').text($('input[name="color"]:checked').val());
             $('#orderProductSize').text($('input[name="size"]:checked').val());
             $('#orderProductQty').text($('#productQtyBought').val());

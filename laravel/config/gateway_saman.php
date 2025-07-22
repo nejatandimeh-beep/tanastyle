@@ -20,13 +20,13 @@ return [
      */
     'main' => [
         'terminal_id' => '12780197',
-        'callback_url' => 'https://tanastyle.ir/Payment-Success',
+        'callback_url' => 'https://mevan.ir/Payment-Success',
         'callback_method' => 'POST', // Supported values: POST, GET
         'description' => 'payment using saman',
     ],
     'other' => [
         'terminal_id' => '',
-        'callback_url' => 'https://tanastyle.ir/Payment-Success',
+        'callback_url' => 'https://mevan.ir/Payment-Success',
         'callback_method' => 'POST',
         'description' => 'payment using saman',
     ]

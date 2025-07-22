@@ -29,8 +29,8 @@
                 <h6>زمان پاسخگویی تلفنی: شنبه تا پنج شنبه ساعت 14 الی 20</h6>
                 <h6>تلفن تماس: 42340241-044</h6>
                 <h6>ایمیل</h6>
-                <h6 class="mb-0">tanastyle.ir@gmail.com</h6>
-                <h6>info@tanastyle.ir</h6>
+                <h6 class="mb-0">mevan.ir@gmail.com</h6>
+                <h6>info@mevan.ir</h6>
             </div>
         </div>
     </div>

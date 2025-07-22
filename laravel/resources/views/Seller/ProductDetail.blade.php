@@ -21,7 +21,8 @@
             <div class="form-group row g-mb-25">
                 <label for="example-text-input" class="col-sm-2 col-form-label">کد محصول</label>
                 <div class="col-sm-10 force-col-12">
-                    <input class="form-control form-control-md rounded-0" type="text" value="{{ $data->ID.'/'.$dataDetail->ID }}"
+                    <input class="form-control form-control-md rounded-0" type="text"
+                           value="{{ $data->ID.'/'.$dataDetail->ID }}"
                            id="example-text-input" readonly>
                 </div>
             </div>
@@ -37,25 +38,8 @@
             <div class="form-group row g-mb-25">
                 <label for="example-text-input" class="col-sm-2 col-form-label">جنسیت</label>
                 <div class="col-sm-10 force-col-12">
-                    @if($data->Gender == 0)
-                        <input class="form-control form-control-md rounded-0" type="text" value="زنانه"
-                               id="example-text-input" readonly>
-                    @elseif($rec->Gender == 1)
-                        <input class="form-control form-control-md rounded-0" type="text" value="مردانه"
-                               id="example-text-input" readonly>
-                    @elseif($rec->Gender == 2)
-                        <input class="form-control form-control-md rounded-0" type="text" value="دخترانه"
-                               id="example-text-input" readonly>
-                    @elseif($rec->Gender == 3)
-                        <input class="form-control form-control-md rounded-0" type="text" value="پسرانه"
-                               id="example-text-input" readonly>
-                    @elseif($rec->Gender == 4)
-                        <input class="form-control form-control-md rounded-0" type="text" value="نوزادی دخترانه"
-                               id="example-text-input" readonly>
-                    @else
-                        <input class="form-control form-control-md rounded-0" type="text" value="نوزادی پسرانه"
-                               id="example-text-input" readonly>
-                    @endif
+                    <input class="form-control form-control-md rounded-0" type="text" value="{{$data->Gender}}"
+                           id="example-text-input" readonly>
                 </div>
             </div>
 
@@ -98,7 +82,8 @@
             <div class="form-group row g-mb-25">
                 <label for="example-text-input" class="col-sm-2 col-form-label">تخفیف قیمت</label>
                 <div class="input-group col-sm-10 force-col-12">
-                    <input class="form-control form-control-md rounded-0 g-color-red" type="number" value="{{ $data->Discount }}"
+                    <input class="form-control form-control-md rounded-0 g-color-red" type="number"
+                           value="{{ $data->Discount }}"
                            id="currentDiscount" readonly>
                     <span style="border-left: 1px solid lightgrey"
                           class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">درصد</span>
@@ -196,33 +181,34 @@
                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
                             <h4 class="h5"><i class="fa fa-warning g-ml-5"></i>لطفا توجه فرمائید:
                             </h4>
-                            برای افزودن تعداد موجودی یا تغییر قیمت یا تغییر تخفیف یک محصول باید تمامی مشخصات فوق با محصول در دست اضافه یکی
+                            برای افزودن تعداد موجودی یا تغییر قیمت یا تغییر تخفیف یک محصول باید تمامی مشخصات فوق با
+                            محصول در دست اضافه یکی
                             باشد.
                             <h4 class="h6 g-mt-15">در غیر اینصورت محصول شما حاوی اطلاعات اشتباه خواهد بود.</h4>
                         </div>
 
                         @if (is_null($falseProduct) && (isset($dataDetail->OrderID)))
 
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <h4 class="h5"><i class="fa fa-exclamation-circle  g-ml-5"></i>اگر مشخصات فوق صحیح نیست:
-                            </h4>
-                            با توجه به اینکه محصول فروخته شده است گزارش مشخصات اشتباه را
-                            سریعا از طریق دکمه پایین ثبت کنید.
-                        </div>
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <h4 class="h5"><i class="fa fa-exclamation-circle  g-ml-5"></i>اگر مشخصات فوق صحیح نیست:
+                                </h4>
+                                با توجه به اینکه محصول فروخته شده است گزارش مشخصات اشتباه را
+                                سریعا از طریق دکمه پایین ثبت کنید.
+                            </div>
                         @endif
-                        <!-- Danger Alert -->
+                    <!-- Danger Alert -->
                         @if (is_null($falseProduct) && (is_null($dataDetail->orderDetailID)))
 
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            <h4 class="h5"><i class="fa fa-exclamation-circle g-ml-5"></i>اگر مشخصات فوق صحیح
-                                نیست:</h4>
-                            با توجه به اینکه محصول هنوز به فروش نرفته است از طریق دکمه پایین آنرا حذف کنید.
-                            <h4 class="h6 g-mt-15">به یاد داشته باشید حذف محصول حاوی مشخصات اشتباه از متحمل شدن
-                                زیان
-                                جلوگیری می کند.</h4>
-                        </div>
-                        @endif
-                        <!-- Danger Alert -->
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <h4 class="h5"><i class="fa fa-exclamation-circle g-ml-5"></i>اگر مشخصات فوق صحیح
+                                    نیست:</h4>
+                                با توجه به اینکه محصول هنوز به فروش نرفته است از طریق دکمه پایین آنرا حذف کنید.
+                                <h4 class="h6 g-mt-15">به یاد داشته باشید حذف محصول حاوی مشخصات اشتباه از متحمل شدن
+                                    زیان
+                                    جلوگیری می کند.</h4>
+                            </div>
+                    @endif
+                    <!-- Danger Alert -->
                     </div>
                 </div>
                 <div class="text-left">
@@ -330,7 +316,7 @@
                                     ثبت موجودی جدید
                                 </a>
                                 <a
-                                   class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white{{($dataDetail->Qty > 0) ? ' d-none' : ''}}">
+                                    class="btn btn-md u-btn-primary rounded-0 g-pa-15 g-color-white{{($dataDetail->Qty > 0) ? ' d-none' : ''}}">
                                     موجودی محصول صفر است
                                 </a>
                             </div>
@@ -365,35 +351,45 @@
                                                 <p>قیمت جدید</p>
                                                 <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <button id="newPriceBtn" disabled class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewPrice({{$data->ID}},$('#tempPrice').val(),$('#tempFinalPrice').val(),{{ $data->Discount }})">بروز رسانی</button>
+                                                        <button id="newPriceBtn" disabled
+                                                                class="btn u-btn-primary rounded-0" type="button"
+                                                                onclick="confirmNewPrice({{$data->ID}},$('#tempPrice').val(),$('#tempFinalPrice').val(),{{ $data->Discount }})">بروز رسانی</button>
                                                       </span>
                                                     <span class="input-group-addon">تومان</span>
-                                                    <input class="form-control form-control-md rounded-0 text-left g-font-size-16"
-                                                           type="text"
-                                                           tabindex="6"
-                                                           name="unitPrice"
-                                                           id="unitPrice"
-                                                           autofocus
-                                                           {{--                           pattern="\d*"--}}
-                                                               placeholder=""
-                                                           value="">
-                                                    <input style="display: none" type="number" name="tempPrice" id="tempPrice"
+                                                    <input
+                                                        class="form-control form-control-md rounded-0 text-left g-font-size-16"
+                                                        type="text"
+                                                        tabindex="6"
+                                                        name="unitPrice"
+                                                        id="unitPrice"
+                                                        autofocus
+                                                        {{--                           pattern="\d*"--}}
+                                                        placeholder=""
+                                                        value="">
+                                                    <input style="display: none" type="number" name="tempPrice"
+                                                           id="tempPrice"
                                                            value="">
                                                 </div>
-                                                <div style="direction: rtl"  class=" g-mt-10">
-                                                    <small class="text-muted g-font-size-12">قبلا <span class="g-color-red g-font-weight-600">{{ $data->Discount }}%</span> تخفیف را برای این محصول در نظر گرفته اید.</small>
-                                                    <input style="display: none" type="number" name="tempFinalPrice" id="tempFinalPrice"
+                                                <div style="direction: rtl" class=" g-mt-10">
+                                                    <small class="text-muted g-font-size-12">قبلا <span
+                                                            class="g-color-red g-font-weight-600">{{ $data->Discount }}%</span>
+                                                        تخفیف را برای این محصول در نظر گرفته اید.</small>
+                                                    <input style="display: none" type="number" name="tempFinalPrice"
+                                                           id="tempFinalPrice"
                                                            value="">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <small class="g-font-size-12">با احتساب {{ $data->Discount }}% تخفیف {{Auth::guard('seller')->user()->NationalID!==2872282556?' و سهم تانا استایل':''}} و 9% ارزش افزوده</small>
+                                        <small class="g-font-size-12">با احتساب {{ $data->Discount }}%
+                                            تخفیف {{Auth::guard('seller')->user()->NationalID!==2872282556?' و سهم تانا استایل':''}}
+                                            و 9% ارزش افزوده</small>
                                         <span
-                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-13 g-py-15 g-px-15--lg g-px-5 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
+                                            class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-13 g-py-15 g-px-15--lg g-px-5 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
                                               قیمت فروش
-                                              <span class="d-lg-inline-block g-mt-10 g-color-primary g-mr-5 g-mb-10" id="newFinalPrice">...</span>
+                                              <span class="d-lg-inline-block g-mt-10 g-color-primary g-mr-5 g-mb-10"
+                                                    id="newFinalPrice">...</span>
                                               <span class="g-font-size-12 g-font-weight-300 g-mt-10 g-mr-5">تومان</span>
                                           </span>
                                     </div>
@@ -429,7 +425,9 @@
                                                 <p>تخفیف جدید</p>
                                                 <div class="input-group">
                                                       <span class="input-group-btn">
-                                                        <button id="newDiscountBtn" disabled class="btn u-btn-primary rounded-0" type="button" onclick="confirmNewDiscount({{$data->ID}},$('#newDiscount').val(),$('#tempNewFinalPrice').val(),{{$data->UnitPrice}})">بروز رسانی</button>
+                                                        <button id="newDiscountBtn" disabled
+                                                                class="btn u-btn-primary rounded-0" type="button"
+                                                                onclick="confirmNewDiscount({{$data->ID}},$('#newDiscount').val(),$('#tempNewFinalPrice').val(),{{$data->UnitPrice}})">بروز رسانی</button>
                                                       </span>
                                                     <span class="input-group-addon">درصد</span>
                                                     <input type="text"
@@ -440,19 +438,25 @@
                                                            maxlength="2"
                                                            placeholder="1..99">
                                                 </div>
-                                                <div style="direction: rtl"  class=" g-mt-10">
-                                                    <small class="text-muted g-font-size-12">قیمت پایه محصول <span class="g-color-primary g-font-weight-600">{{ number_format($data->UnitPrice) }}</span> تومان می باشد.</small>
+                                                <div style="direction: rtl" class=" g-mt-10">
+                                                    <small class="text-muted g-font-size-12">قیمت پایه محصول <span
+                                                            class="g-color-primary g-font-weight-600">{{ number_format($data->UnitPrice) }}</span>
+                                                        تومان می باشد.</small>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <small class="g-font-size-12">با احتساب تخفیف جدید{{Auth::guard('seller')->user()->NationalID!==2872282556?' و سهم تانا استایل':''}} و 9% ارزش افزوده</small>
+                                        <small class="g-font-size-12">با احتساب تخفیف
+                                            جدید{{Auth::guard('seller')->user()->NationalID!==2872282556?' و سهم تانا استایل':''}}
+                                            و 9% ارزش افزوده</small>
                                         <span
-                                              class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
+                                            class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
                                               قیمت فروش
-                                              <span class="d-lg-inline-block g-my-10 g-color-primary g-mr-5" id="newFinalPriceByNewDiscount">...</span>
-                                                 <input style="display: none" type="number" name="tempNewFinalPrice" id="tempNewFinalPrice"
+                                              <span class="d-lg-inline-block g-my-10 g-color-primary g-mr-5"
+                                                    id="newFinalPriceByNewDiscount">...</span>
+                                                 <input style="display: none" type="number" name="tempNewFinalPrice"
+                                                        id="tempNewFinalPrice"
                                                         value="">
                                               <span class="g-font-size-12 g-font-weight-300 g-mt-10 g-mr-5">تومان</span>
                                           </span>

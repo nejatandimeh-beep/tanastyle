@@ -37,7 +37,7 @@
                 <div style="line-height: 0" class="align-self-center col-8 p-0">
                     <h1 style="text-overflow: ellipsis; overflow: hidden; width: 100%; white-space: nowrap;"
                         class="d-inline-block g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}
-                        <span id="productGender" class="align-self-center g-font-size-13">{{ $data->Gender }}</span>
+                        <span id="productGender" class="{{ $data->GenderCode==='6'?'d-none':'' }} align-self-center g-font-size-13">{{ $data->Gender }}</span>
                         <span id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span></h1>
 
                 </div>
@@ -287,7 +287,7 @@
                         <div class="align-self-center">
                             <h1
                                 class="d-flex g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}
-                                <span id="productGender" class="align-self-center g-font-size-13 g-mx-5">{{ $data->Gender }}</span>
+                                <span id="productGender" class="{{ $data->GenderCode==='6'?'d-none':'' }} align-self-center g-font-size-13 g-mx-5">{{ $data->Gender }}</span>
                                 <span style="text-overflow: ellipsis; overflow: hidden; width: 200px;" id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
                             </h1>
                         </div>

@@ -50,11 +50,13 @@
                 // initialization of carousels
             }
             // initialization of autonomous popups
-            if($('.modalBox').length>0){
-                $.HSCore.components.HSModalWindow.init('.js-autonomous-popup', {
-                    autonomous: true
-                });
-                $.HSCore.components.HSModalWindow.init('[data-modal-target]:not(.js-modal-markup)');
+            if($('.productDetail').length>0 || $('.cartContainer').length>0|| $('.profileContainer').length>0) {
+                if ($('.modalBox').length > 0) {
+                    $.HSCore.components.HSModalWindow.init('.js-autonomous-popup', {
+                        autonomous: true
+                    });
+                    $.HSCore.components.HSModalWindow.init('[data-modal-target]:not(.js-modal-markup)');
+                }
             }
         });
 

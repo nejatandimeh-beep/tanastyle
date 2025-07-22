@@ -13,7 +13,7 @@
 {{--                        @csrf--}}
 {{--                        <input name='token' type='hidden' value='{{$result}}'>--}}
 {{--                        <input name='getmethod' type='hidden' value='true'>--}}
-{{--                        <input name='RedirectURL' type='hidden' value='https://tanastyle.ir/Payment-Status'>--}}
+{{--                        <input name='RedirectURL' type='hidden' value='https://mevan.ir/Payment-Status'>--}}
 {{--                        <input style="visibility: hidden" name='btn' type='submit' value='Send' id="bankBtn">--}}
 {{--                    </form>--}}
 {{--                </div>--}}
@@ -33,7 +33,7 @@
                         @csrf
                         <input name='merchant_id' type='hidden' value='ccd4acab-a4dc-416d-9172-b066aa674e2b'>
                         <input name='amount' type='number' value='1000' style="display: none">
-                        <input name='callback_url' type='hidden' value='https://tanastyle.ir/Payment-Status'>
+                        <input name='callback_url' type='hidden' value='https://mevan.ir/Payment-Status'>
                         <input name='description' type='hidden' value="فروش محصول">
                         <input name='btn' type='submit' value='Send' id="bankBtn">
                     </form>

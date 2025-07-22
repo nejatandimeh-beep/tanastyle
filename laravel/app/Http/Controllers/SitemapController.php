@@ -11,7 +11,7 @@ class SitemapController extends Controller
 {
     public function index()
     {
-        SitemapGenerator::create('https://www.tanastyle.ir')
+        SitemapGenerator::create('https://www.mevan.ir')
             ->getSitemap()
             ->add(Url::create('/Customer-Product-Female-List'))
             ->add(Url::create('/Customer-Product-Male-List'))

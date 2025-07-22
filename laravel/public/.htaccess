@@ -15,7 +15,7 @@
     # redirect all web trafic to https
     RewriteEngine On
     RewriteCond %{SERVER_PORT} 80
-    RewriteRule ^(.*)$ https://www.tanastyle.ir/$1 [R,L]
+    RewriteRule ^(.*)$ https://www.mevan.ir/$1 [R,L]
 
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d

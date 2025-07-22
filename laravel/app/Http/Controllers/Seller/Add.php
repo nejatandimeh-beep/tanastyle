@@ -97,6 +97,7 @@ class Add extends Controller
                             'XXL-45',
                             'XXXL-46',
                             'XXXL-47',
+                            'FreeSize',
                         ];
                         break;
                     case '1':
@@ -117,6 +118,7 @@ class Add extends Controller
                             'XXXL-50',
                             'XXXL-51',
                             'XXXL-52',
+                            'FreeSize',
                         ];
                         break;
                     case '2':
@@ -136,6 +138,7 @@ class Add extends Controller
                             'XXL-35',
                             'XXXL-36',
                             'XXXL-37',
+                            'FreeSize',
                         ];
                         break;
                     case '4':
@@ -149,6 +152,7 @@ class Add extends Controller
                             'XXL-21',
                             'XXL-22',
                             'XXXL-23',
+                            'FreeSize',
                         ];
                         break;
                 }
@@ -162,6 +166,7 @@ class Add extends Controller
                             'M',
                             'L',
                             'XL',
+                            'FreeSize',
                         ];
                         break;
                     default:
@@ -192,7 +197,7 @@ class Add extends Controller
             case 'o':
             case 'p':
             case 'q':
-                $size = ['Free'];
+                $size = ['FreeSize'];
                 break;
             default:
                 switch ($gender) {
@@ -204,6 +209,7 @@ class Add extends Controller
                             'M',
                             'L',
                             'XL',
+                            'FreeSize',
                         ];
                         break;
                     default:
@@ -214,7 +220,8 @@ class Add extends Controller
                             'L',
                             'XL',
                             'XXL',
-                            'XXXL'
+                            'XXXL',
+                            'FreeSize',
                         ];
                 }
         }
@@ -283,6 +290,10 @@ class Add extends Controller
             'sizeQty' => '',
             'hexCode' => '',
         ]);
+        $repeat = [];  // خروجی نهایی
+        $colorToPicNumber = [];  // برای ردیابی اینکه هر رنگ چه شماره عکسی گرفته
+
+        $picNumberCounter = 1;  // شماره عکس ها از 1 شروع می‌کنه
 
         for ($i = 0; $i < $qty; $i++) {
             $temp = (string)$i;
@@ -292,6 +303,18 @@ class Add extends Controller
             $imageColor[$i]['size'] = $request->get('size' . $temp);
             $imageColor[$i]['sizeQty'] = $request->get('sizeQty' . $temp);
             $imageColor[$i]['hexCode'] = $request->get('hexCode' . $temp);
+
+            $color = $imageColor[$i]['color'];
+
+            if (isset($colorToPicNumber[$color])) {
+                // اگر این رنگ قبلا ثبت شده، از همان شماره عکس استفاده کن
+                $repeat[$i] = $colorToPicNumber[$color];
+            } else {
+                // رنگ جدید است، شماره عکس جدید می‌گیرد
+                $repeat[$i] = $picNumberCounter;
+                $colorToPicNumber[$color] = $picNumberCounter;
+                $picNumberCounter++;
+            }
         }
 
         $imageColor = collect($imageColor)->toArray();
@@ -372,8 +395,8 @@ class Add extends Controller
                     'ColorCode' => $imageColor[$i]['colorCode'],
                     'HexCode' => $imageColor[$i]['hexCode'],
                     'Qty' => $imageColor[$i]['sizeQty'],
-                    'PicNumber' => 'pic'.($i+1),
-                    'SampleNumber' => 'sample'.($i+1),
+                    'PicNumber' => 'pic'.$repeat[$i],
+                    'SampleNumber' => 'sample'.$repeat[$i],
                 ],
             ]);
         }

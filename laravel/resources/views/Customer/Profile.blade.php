@@ -1,7 +1,7 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <p id="pageLocation" class="d-none">{{ $location }}</p>
-    <div class="container-fluid modalBox">
+    <div class="container-fluid modalBox profileContainer">
         <div class="row">
             <div class="col-lg-12 g-brd-top g-brd-gray-light-v4">
                 <!-- Figure -->

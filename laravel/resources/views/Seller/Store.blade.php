@@ -146,7 +146,7 @@
 
             <!-- Icon Blocks -->
             <div style="direction: rtl"
-                class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
+                 class="col-lg-4 text-center g-pt-25 g-pb-25 g-mb-5 g-pr-0 g-pl-0">
                 <h3 class="h6 g-color-black mb-3">تعداد محصولات به تفکیک جنسیت</h3>
                 <span class="u-label g-bg-bluegray g-mb-5">زنانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $female }}</span>عدد</span>
@@ -209,7 +209,8 @@
                                         <div class="input-group g-brd-primary--focus g-mb-10">
                                             <input style="direction: rtl"
                                                    class="form-control form-control-md  g-color-gray-dark-v3 rounded-0 pl-0 text-right g-font-size-16"
-                                                   type="text" name="productSearchCode" id="storeProduct_Code" pattern="\d*"
+                                                   type="text" name="productSearchCode" id="storeProduct_Code"
+                                                   pattern="\d*"
                                                    placeholder="{{ (!isset($valName)) ? 'اعداد انگلیسی' : $valName }}"
                                                    value="">
                                             <div
@@ -245,13 +246,26 @@
                                                 tabindex="2"
                                                 id="storeGender">
                                                 <option
-                                                    value="">همه</option>
-                                                <option value="0" {{ (isset($val) && $val == 0) ? 'selected' : '' }}>زنانه</option>
-                                                <option value="1" {{ (isset($val) && $val == 1) ? 'selected' : '' }}>مردانه</option>
-                                                <option value="2" {{ (isset($val) && $val == 2) ? 'selected' : '' }}>دخترانه</option>
-                                                <option value="3" {{ (isset($val) && $val == 3) ? 'selected' : '' }}>پسرانه</option>
-                                                <option value="4" {{ (isset($val) && $val == 4) ? 'selected' : '' }}>نوزادی دخترانه</option>
-                                                <option value="5" {{ (isset($val) && $val == 5) ? 'selected' : '' }}>نوزادی پسرانه</option>
+                                                    value="">همه
+                                                </option>
+                                                <option value="0" {{ (isset($val) && $val == 0) ? 'selected' : '' }}>
+                                                    زنانه
+                                                </option>
+                                                <option value="1" {{ (isset($val) && $val == 1) ? 'selected' : '' }}>
+                                                    مردانه
+                                                </option>
+                                                <option value="2" {{ (isset($val) && $val == 2) ? 'selected' : '' }}>
+                                                    دخترانه
+                                                </option>
+                                                <option value="3" {{ (isset($val) && $val == 3) ? 'selected' : '' }}>
+                                                    پسرانه
+                                                </option>
+                                                <option value="4" {{ (isset($val) && $val == 4) ? 'selected' : '' }}>
+                                                    نوزادی دخترانه
+                                                </option>
+                                                <option value="5" {{ (isset($val) && $val == 5) ? 'selected' : '' }}>
+                                                    نوزادی پسرانه
+                                                </option>
                                             </select>
                                             <div
                                                 class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0 w-50">
@@ -482,20 +496,7 @@
                                 <td class="align-middle text-nowrap text-center">{{ $rec->ID.'/'.$rec->pDetailID }}</td>
                                 <td class="align-middle text-nowrap text-center">{{ $rec->Name }}</td>
                                 <td class="align-middle text-center">{{ $rec->Brand }}</td>
-                                @if($rec->Gender == 'زنانه')
-                                    <td class="align-middle text-center">زنانه</td>
-                                @elseif($rec->Gender == 'مردانه')
-                                    <td class="align-middle text-center">مردانه</td>
-                                @elseif($rec->Gender == 'دخترانه')
-                                    <td class="align-middle text-center">دخترانه</td>
-                                @elseif($rec->Gender == 'پسرانه')
-                                    <td class="align-middle text-center">پسرانه</td>
-                                @elseif($rec->Gender == 'نوزادی دخترانه')
-                                    <td class="align-middle text-center">نوزادی دخترانه</td>
-                                @else
-                                    <td class="align-middle text-center">نوزادی پسرانه</td>
-                                @endif
-
+                                <td class="align-middle text-center">{{$rec->Gender}}</td>
                                 <td class="align-middle text-center text-nowrap">{{ $rec->Color }}</td>
                                 <td class="align-middle text-center">{{ $rec->Qty }}</td>
                                 <td class="align-middle text-center"><s>{{ number_format($rec->UnitPrice) }}</s></td>
@@ -504,7 +505,8 @@
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg" alt="Image Description">
+                                             src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg"
+                                             alt="Image Description">
                                     </div>
                                 </td>
                                 <td class="align-middle text-center g-color-gray-dark-v1">{{ number_format($rec->VisitCounter) }}</td>
@@ -542,8 +544,8 @@
                                         </a>
                                     @else
                                         <span class="g-color-gray-dark-v5 g-text-underline--none--hover g-pa-5"
-                                           data-toggle="tooltip"
-                                           data-placement="top" data-original-title="فروخته شد">
+                                              data-toggle="tooltip"
+                                              data-placement="top" data-original-title="فروخته شد">
                                             <i class="fa fa-lock g-font-size-22 g-color-gray-dark-v3"></i>
                                         </span>
                                     @endif
@@ -590,7 +592,8 @@
                         </h5>
                         <p class="m-0">نماد اخطار بیانگر این است که شما
                             این محصول را به عنوان محصول حاوی مشخصات اشتباه به ما گزارش داده اید.</p>
-                        <p class="m-0">گزارش مشخصات اشتباه برای محصول از پرداخت خسارات بیشتر به مشتریان جلوگیری می کند.</p>
+                        <p class="m-0">گزارش مشخصات اشتباه برای محصول از پرداخت خسارات بیشتر به مشتریان جلوگیری می
+                            کند.</p>
                     </div>
                 </div>
             </div>
@@ -622,7 +625,7 @@
                             <span class="g-mr-5">فروخته شد</span>
                         </h5>
                         <p class="m-0">نماد فروش بیانگر این است که محصول شما به فروش رفته است.</p>
-{{--                        <p class="m-0">با کلیک بر روی این نماد می توانید فاکتور فروش محصول را مشاهد فرمایید.</p>--}}
+                        {{--                        <p class="m-0">با کلیک بر روی این نماد می توانید فاکتور فروش محصول را مشاهد فرمایید.</p>--}}
                         <p class="m-0">هر گاه محصولی به فروش برسد آن محصول را نمی توانید از لیست انبارتان حذف کنید.</p>
                         <p class="m-0">در صورتی که محصولی به فروش رفته بود و شما پس از فروش متوجه شدید مشخصات محصول
                             اشتباه است بلافاصله محصول حاوی مشخصات اشتباه را گزارش کنید. تا پیگیری های لازم برای مشتری

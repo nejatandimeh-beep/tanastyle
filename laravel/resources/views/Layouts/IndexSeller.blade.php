@@ -14,6 +14,7 @@
 {{--{{dd($_SERVER['REQUEST_URI'])}}--}}
 @switch($_SERVER['REQUEST_URI'])
     @case(strpos($_SERVER['REQUEST_URI'],'/Add-Product'))
+    @case(strpos($_SERVER['REQUEST_URI'],'/Add-Other-Product'))
     <!--Modal and cropper-->
     <script src="{{ asset('assets/js/cropper.js') }}"></script>
     <script src="{{ asset('assets/vendor/custombox/custombox.min.js') }}"></script>

@@ -127,6 +127,7 @@ class Basic extends Controller
              data-arrow-left-classes="fa fa-angle-left g-left-20 rounded-0"
              data-arrow-right-classes="fa fa-angle-right g-right-20 rounded-0"
              data-pagi-classes="u-carousel-indicators-v1 g-absolute-centered--x g-bottom-20 text-center">';
+        $gender = $genderCode === '6' ? 'd-none' : '';
         foreach ($similarProduct as $key => $row) {
             $products = $products . '
              <div class="js-slide g-mx-10">
@@ -162,7 +163,7 @@ class Basic extends Controller
                                         <span
                                             class="g-font-size-12 g-font-weight-300"> ' . $row->Model . '</span>
                                         <span
-                                            class="g-font-size-12 g-font-weight-300"> ' . $row->Gender . '</span>
+                                            class="' . $gender . ' g-font-size-12 g-font-weight-300"> ' . $row->Gender . '</span>
                                     </span>
                                 </h4>
                                 <div>
@@ -230,7 +231,7 @@ class Basic extends Controller
 
         // order
         $mainOrder = DB::table('product_order as po')
-            ->select('po.ID as orderID', 'po.PostMethod', 'po.PostPrice', 'po.OrderPrice', 'pod.ID', 'pod.ProductID', 'pd.*','ca.*')
+            ->select('po.ID as orderID', 'po.PostMethod', 'po.PostPrice', 'po.OrderPrice', 'pod.ID', 'pod.ProductID', 'pd.*', 'ca.*')
             ->leftJoin('product_order_detail as pod', 'pod.OrderID', '=', 'po.ID')
             ->leftJoin('product_delivery as pd', 'pd.OrderDetailID', '=', 'pod.ID')
             ->leftJoin('customer_address as ca', 'ca.ID', '=', 'po.AddressID')
@@ -683,14 +684,14 @@ class Basic extends Controller
         $stock = false;
         $qty = [];
         $discount = [];
-        $FinalPriceWithoutDiscount=[];
-        $finalPrice=[];
-        $unitPrice=[];
+        $FinalPriceWithoutDiscount = [];
+        $finalPrice = [];
+        $unitPrice = [];
         for ($i = 0; $i < $row; $i++) {
             $productDetailID[$i] = $request->get('productDetailID' . $i);
             $discount[$i] = preg_replace('/\D/', '', $request->get('discount' . $i));
             $FinalPriceWithoutDiscount[$i] = preg_replace('/\D/', '', $request->get('FinalPriceWithoutDiscount' . $i));
-            $finalPrice[$i] = preg_replace('/\D/', '',$request->get('productFinalPrice' . $i));
+            $finalPrice[$i] = preg_replace('/\D/', '', $request->get('productFinalPrice' . $i));
             $unitPrice[$i] = $request->get('unitPrice' . $i);
             $data = DB::table('product_detail')
                 ->select('ID', 'Qty')
@@ -744,7 +745,7 @@ class Basic extends Controller
         }
     }
 
-    public function bankingPortal($id, $qty, $postPrice,$FinalPriceWithoutDiscount,$discount,$finalPrice,$unitPrice)
+    public function bankingPortal($id, $qty, $postPrice, $FinalPriceWithoutDiscount, $discount, $finalPrice, $unitPrice)
     {
         switch ($postPrice) {
             case '0':
@@ -813,7 +814,7 @@ class Basic extends Controller
             ->where('CustomerID', Auth::user()->id)
             ->get();
 
-        $status_ok=$request->get('Status');
+        $status_ok = $request->get('Status');
         if ($request->get('Status') == 'OK') {
             $client = new nusoap_client('https://www.zarinpal.com/pg/services/WebGate/wsdl', 'wsdl');
             $client->soap_defencoding = 'UTF-8';
@@ -1625,9 +1626,9 @@ class Basic extends Controller
             return redirect()->route('login');
         }
 
-        $alarmMsg=DB::table('customer_alarm_msg')
+        $alarmMsg = DB::table('customer_alarm_msg')
             ->select('*')
-            ->where('CustomerID',Auth::user()->id)
+            ->where('CustomerID', Auth::user()->id)
             ->get();
 
         // Convert Date
@@ -1637,13 +1638,13 @@ class Basic extends Controller
             $persianDate[$key] = $this->convertDateToPersian($d);
         }
 
-        return view('Customer.Conversation', compact('data', 'persianDate','alarmMsg'));
+        return view('Customer.Conversation', compact('data', 'persianDate', 'alarmMsg'));
     }
 
     public function connectionDetail($id, $status)
     {
         $data = DB::table('customer_conversation_detail as ccd')
-            ->select('ccd.*', 'cc.Subject', 'cc.Status', 'cc.ID as ConversationID', 'cc.CustomerID', 'c.Name', 'c.Family','cc.Priority')
+            ->select('ccd.*', 'cc.Subject', 'cc.Status', 'cc.ID as ConversationID', 'cc.CustomerID', 'c.Name', 'c.Family', 'cc.Priority')
             ->leftJoin('customer_conversation as cc', 'cc.ID', '=', 'ccd.ConversationID')
             ->leftJoin('customers as c', 'c.ID', '=', 'cc.CustomerID')
             ->where('ccd.ConversationID', $id)
@@ -1766,6 +1767,16 @@ class Basic extends Controller
 // ------------------------------------------[ Products Filter ]--------------------------------------------------------
     public function productFilter($gender, $cat, $size, $priceMin, $priceMax, $color, $filterChange)
     {
+//        $data=[
+//            'gender'=>$gender,
+//            'cat'=>$cat,
+//            'size'=>$size,
+//            'priceMin'=>$priceMin,
+//            'priceMax'=>$priceMax,
+//            'color'=>$color,
+//            'filterChange'=>$filterChange,
+//        ];
+
         session_start();
         if ($filterChange == 1)
             $_SESSION['listSkip'] = 0;
@@ -1778,6 +1789,10 @@ class Basic extends Controller
         if (!isset($size[0]))
             $size[0] = 'empty';
 
+        if ($gender[0] === '6') {
+            $size = array();
+            $size[0] = '--';
+        }
         $data = DB::table('product as p')
             ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
             ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
@@ -2346,6 +2361,29 @@ class Basic extends Controller
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
+    public function productOtherList()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->where('GenderCode', '6')
+            ->paginate(12);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('GenderCode', '6')
+            ->groupBy('p.ID')
+            ->paginate(12);
+
+        $gender = '6';
+        $catCode = 'all';
+        $title = 'سایر محصولات';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
+    }
+
     public function productSearch($val)
     {
         $output = '';
@@ -2504,6 +2542,7 @@ class Basic extends Controller
     {
         return view('auth.sellerAuth.LoginMode');
     }
+
 // --------------------------------------------[ MY FUNCTION ]----------------------------------------------------------
     public function newOrder($data, $Authority)
     {
@@ -2512,10 +2551,10 @@ class Basic extends Controller
         foreach ($data as $step => $record) {
             $customerInfo = DB::table('customers as c')
                 ->select('ca.*')
-                ->leftJoin('customer_address as ca',function ($join) {
-                    $join->on('ca.CustomerID', '=' , 'c.id');
-                    $join->where('ca.Status','=',1);
-                }) ->where('c.id', Auth::user()->id)
+                ->leftJoin('customer_address as ca', function ($join) {
+                    $join->on('ca.CustomerID', '=', 'c.id');
+                    $join->where('ca.Status', '=', 1);
+                })->where('c.id', Auth::user()->id)
                 ->first();
 
             $productInfo = DB::table('product_detail as pd')

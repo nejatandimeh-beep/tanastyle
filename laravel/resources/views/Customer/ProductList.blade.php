@@ -181,6 +181,23 @@
                                                     </label>
                                                 </div>
                                             </li>
+                                            <li class="my-2">
+                                                <div class="form-group">
+                                                    <label class="d-flex align-items-center justify-content-between">
+                                                        <span>فاقد جنسیت</span>
+                                                        <div class="u-check">
+                                                            <input class="hidden-xs-up g-pos-abs g-top-0 g-right-0 radioBtn radioBtn"
+                                                                   name="gender"
+                                                                   id="g-6"
+                                                                   onchange="$('#gender-all').prop('checked',false); checkAllIsOff('#filters-on-gender',$(this).attr('name'))"
+                                                                   type="checkbox" {{ ($gender === '6' || ($gender === 'all')) ? 'checked=""' : '' }}>
+                                                            <div class="u-check-icon-radio-v8">
+                                                                <i class="fa" style="color: #72c02c !important" data-check-icon=""></i>
+                                                            </div>
+                                                        </div>
+                                                    </label>
+                                                </div>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

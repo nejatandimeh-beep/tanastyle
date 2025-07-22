@@ -2572,11 +2572,11 @@
                                     <i class="fa fa-ellipsis-v"></i>
                                 </div>
                                 <select
-                                    class="form-control form-control-md custom-select rounded-0 text-right h-25 g-font-size-16"
+                                    class="form-control form-control-md SubMenuScroll custom-select rounded-0 text-right h-25 g-font-size-16"
                                     id="qty{{$i}}"
                                     tabindex="5+{{ $i }}"
                                     name="sizeQty{{$i}}">
-                                    @for ($j = 1; $j<= 10; $j++)
+                                    @for ($j = 1; $j<= 20; $j++)
                                         <option
                                             value="{{$j}}">{{$j}}</option>
                                     @endfor
@@ -2640,6 +2640,7 @@
                     </div>
 
                     <!-- sizeDetail -->
+                    <h6 class="text-right">در صورت وجود مشخصات، این قسمت را پر کنید</h6>
                     <div style="direction: rtl" class="d-none m-0 col-12 g-pb-15 g-pb-20--lg row sizeDetailContainer justify-content-right g-brd-around g-brd-gray-light-v3 g-pa-20">
                         <div id="sizeDetail{{$i}}" class="{{(($name==='سوتین')||($name==='ست لباس زیر'))&&($gender==='0'||$gender==='2')?'parentShow':'d-none'}} input-group col-lg-3 col-12 g-mb-5 p-0 g-ml-5 sizeDetail">
                             <span style="border-right: 1px solid lightgrey" class="input-group-addon g-bg-gray-light-v5 g-brd-left-none title"> دور سوتین</span>
@@ -2859,8 +2860,8 @@
                     <small class="d-block text-muted g-font-size-12">روش محاسبه قیمت فروش:</small>
                     <small class="d-block text-muted g-font-size-12">تخفیف <small id="dis"></small></small>
                     <small class="d-block text-muted g-font-size-12">سهم فروشنده <small id="sellerShare"></small></small>
-                    <small class="{{Auth::guard('seller')->user()->NationalID===2872282556 ?'d-none':'d-block'}} text-muted g-font-size-12">سهم تانا استایل <small id="companyShare"></small></small>
-                    <small class="d-block text-muted g-font-size-12">9% ارزش افزوده <small id="exValue"></small></small>
+                    <small class="{{Auth::guard('seller')->user()->NationalID===2872282556 ?'d-none':'d-block'}} text-muted g-font-size-12">کارمزد خدمات پلتفرم <small id="companyShare"></small></small>
+{{--                    <small class="d-block text-muted g-font-size-12">9% ارزش افزوده <small id="exValue"></small></small>--}}
                 </div>
             </div>
 

@@ -120,7 +120,7 @@
                                                         <span
                                                             class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
                                                         <span
-                                                            class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
+                                                            class="{{ $row->GenderCode==='6'?'d-none':'' }} g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
                                                     </span>
                                                 </h4>
                                                 <div>
@@ -584,7 +584,7 @@
                                                 <span
                                                     class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
                                                 <span
-                                                    class="g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
+                                                    class="{{ $row->GenderCode==='6'?'d-none':'' }} g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
                                             </span>
                                                 </h4>
                                                 <div>

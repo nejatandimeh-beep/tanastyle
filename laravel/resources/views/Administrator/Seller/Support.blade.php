@@ -136,9 +136,9 @@
                                                            class="form-control form-control-md rounded-0 g-color-white g-font-size-16 g-bg-gray-dark-v3 g-color-gray-light-v4"
                                                            type="text"
                                                            value=""
-                                                           oninput="$('#linkHint').text('https://tanastyle.ir/'+$(this).val())"
+                                                           oninput="$('#linkHint').text('https://mevan.ir/'+$(this).val())"
                                                            id="msgLink"
-                                                           placeholder="https://tanastyle.ir/..."
+                                                           placeholder="https://mevan.ir/..."
                                                            name="msgLink"
                                                            autocomplete="off" {{-- hide popup box when clicked --}}
                                                            tabindex="1">

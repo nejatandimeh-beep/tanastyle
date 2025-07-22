@@ -104,13 +104,26 @@
                                                 tabindex="2"
                                                 id="saleGender">
                                                 <option
-                                                    value="">همه</option>
-                                                <option value="0" {{ (isset($val) && $val == 0) ? 'selected' : '' }}>زنانه</option>
-                                                <option value="1" {{ (isset($val) && $val == 1) ? 'selected' : '' }}>مردانه</option>
-                                                <option value="2" {{ (isset($val) && $val == 2) ? 'selected' : '' }}>دخترانه</option>
-                                                <option value="3" {{ (isset($val) && $val == 3) ? 'selected' : '' }}>پسرانه</option>
-                                                <option value="4" {{ (isset($val) && $val == 4) ? 'selected' : '' }}>نوزادی دخترانه</option>
-                                                <option value="5" {{ (isset($val) && $val == 5) ? 'selected' : '' }}>نوزادی پسرانه</option>
+                                                    value="">همه
+                                                </option>
+                                                <option value="0" {{ (isset($val) && $val == 0) ? 'selected' : '' }}>
+                                                    زنانه
+                                                </option>
+                                                <option value="1" {{ (isset($val) && $val == 1) ? 'selected' : '' }}>
+                                                    مردانه
+                                                </option>
+                                                <option value="2" {{ (isset($val) && $val == 2) ? 'selected' : '' }}>
+                                                    دخترانه
+                                                </option>
+                                                <option value="3" {{ (isset($val) && $val == 3) ? 'selected' : '' }}>
+                                                    پسرانه
+                                                </option>
+                                                <option value="4" {{ (isset($val) && $val == 4) ? 'selected' : '' }}>
+                                                    نوزادی دخترانه
+                                                </option>
+                                                <option value="5" {{ (isset($val) && $val == 5) ? 'selected' : '' }}>
+                                                    نوزادی پسرانه
+                                                </option>
                                             </select>
                                             <div
                                                 class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-dark-v3 rounded-0 w-50">
@@ -703,20 +716,7 @@
                                 <td class="align-middle text-nowrap text-center text-nowrap">{{ $rec->pDetailID }}</td>
                                 <td class="align-middle text-nowrap text-center text-nowrap">{{ $rec->Name }}</td>
                                 <td class="align-middle text-center">{{ $rec->Brand }}</td>
-                                @if($rec->Gender == 'زنانه')
-                                    <td class="align-middle text-center">زنانه</td>
-                                @elseif($rec->Gender == 'مردانه')
-                                    <td class="align-middle text-center">مردانه</td>
-                                @elseif($rec->Gender == 'دخترانه')
-                                    <td class="align-middle text-center">دخترانه</td>
-                                @elseif($rec->Gender == 'پسرانه')
-                                    <td class="align-middle text-center">پسرانه</td>
-                                @elseif($rec->Gender == 'نوزادی دخترانه')
-                                    <td class="align-middle text-center">نوزادی دخترانه</td>
-                                @else
-                                    <td class="align-middle text-center">نوزادی پسرانه</td>
-                                @endif
-
+                                <td class="align-middle text-center">{{$rec->Gender}}</td>
                                 <td class="align-middle text-center">{{ $rec->Qty }}</td>
                                 <td class="align-middle text-center">{{ number_format((int)($orderDetail[$key]/$rec->Qty)) }}</td>
                                 <td class="align-middle text-center g-color-primary">{{ number_format($orderDetail[$key]) }}</td>
@@ -725,7 +725,8 @@
                                 <td class="align-middle">
                                     <div class="media">
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg" alt="">
+                                             src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg"
+                                             alt="">
                                     </div>
                                 </td>
                                 <td class="align-middle text-center">
