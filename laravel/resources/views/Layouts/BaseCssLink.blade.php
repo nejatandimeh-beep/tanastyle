@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="_token" content="{{ csrf_token() }}">
-    <title>TanaStyle</title>
+    <title>Mevan</title>
 
     <link rel="icon" href="{{asset('img/Logo/browserIcon.png')}}" />
 

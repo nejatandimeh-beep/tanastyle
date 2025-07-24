@@ -3,8 +3,8 @@
     <div class="masterPage">
         <div class="d-lg-none">
             <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));">
-                <img style="height: 500px; object-fit: cover" class="img-fluid w-100" loading="lazy"
-                     src="{{asset('img/Banners/new.jpg')}}"
+                <img style="height: 640px; object-fit: cover" class="img-fluid w-100" loading="lazy"
+                     src="{{asset('img/Banners/new-mobile.jpg')}}"
                      alt="بدلیجات پوشاک لباس تاناکورا مهاباد عمده خرده">
             </div>
         </div>
@@ -19,10 +19,10 @@
             <div class="container text-center g-z-index-1">
                 <h1 class="d-none h1 g-color-gray-dark-v3 g-font-weight-600 g-mb-15">فروشگاه آنلاین پوشاک استوک و
                     تاناکورا tanakora mahabad estok بدلیجات عینک زنانه پوشاک زنانه</h1>
-                <h2 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">تانا استایل
+                <h2 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">میوان
                     <span class="g-color-gray-dark-v3 ">استایلی خاص و متفاوت</span></h2>
 
-                <h3 class="g-color-primary g-font-weight-600 g-mb-15 smallDevice">تانا استایل
+                <h3 class="g-color-primary g-font-weight-600 g-mb-15 smallDevice">میوان
                     <span class="g-color-gray-dark-v3">استایلی خاص و متفاوت</span></h3>
                 <h4 class="g-color-gray-dark-v3  g-font-weight-600 g-mb-30">خریدی آسان، سریع و مطمئن</h4>
                 <!-- Promo Blocks - Form -->
@@ -48,7 +48,7 @@
                         <i class="icon-present g-mt-5 g-ml-5"></i>
                       </span>
                     </span>
-                        <h1 class="h5 g-color-black mb-3">کسب 3 امتیاز در تانا استایل</h1>
+                        <h1 class="h5 g-color-black mb-3">کسب 3 امتیاز در میوان</h1>
                         <p class="g-color-gray-dark-v4">ارسال محصول برای همیشه رایگان</p>
                     </div>
                     <!-- End Icon Blocks -->
@@ -63,7 +63,7 @@
                         <i class="icon-present g-mt-5"></i>
                       </span>
                     </span>
-                        <h1 class="h5 g-color-black mb-3">کسب 15 امتیاز در تانا استایل</h1>
+                        <h1 class="h5 g-color-black mb-3">کسب 15 امتیاز در میوان</h1>
                         <p class="g-color-gray-dark-v4">ورود به قرعه کشی یک سال خرید با تخفیف مازاد</p>
                     </div>
                     <!-- End Icon Blocks -->
@@ -78,7 +78,7 @@
                         <i class="icon-present g-mt-5"></i>
                       </span>
                     </span>
-                        <h1 class="h5 g-color-black mb-3">کسب 8 امتیاز در تانا استایل</h1>
+                        <h1 class="h5 g-color-black mb-3">کسب 8 امتیاز در میوان</h1>
                         <p class="g-color-gray-dark-v4">یک خرید رایگان تا سقف محدود</p>
                     </div>
                     <!-- End Icon Blocks -->
@@ -87,7 +87,7 @@
         </div>
         <div id="newProductContainer" class="g-pt-10">
             <div class="container g-mb-10 g-brd-bottom g-brd-gray-light-v4">
-                <h4 class="text-lg-right text-center g-my-20 g-my-10--lg">جدیدترین های تانا استایل</h4>
+                <h4 class="text-lg-right text-center g-my-20 g-my-10--lg">جدیدترین های میوان</h4>
             </div>
             <div class="container g-px-0--lg g-mb-15">
                 <!-- Slider main container -->

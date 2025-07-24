@@ -4,7 +4,7 @@
     <div style="direction: rtl" class="container-fluid g-mb-100">
         <hr class="g-brd-gray-light-v4 g-mx-minus-15 g-mt-0 g-mb-0">
         <div class="g-pt-40 col-lg-7 col-12 g-pa-20 mx-auto text-center bigDevice">
-            <img src="{{ asset('img/Logo/logo.svg') }}" alt="tanastyle logo" width="400"
+            <img src="{{ asset('img/Logo/logo.svg') }}" alt="mevan logo" width="400"
              class="g-pt-7 g-pt-0--lg">
         </div>
         <div class="g-pt-40 col-lg-7 col-12 g-pa-20 mx-auto text-center smallDevice">

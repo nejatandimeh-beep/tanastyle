@@ -33,7 +33,7 @@
                         <div class="col-sm-6 col-md-3 g-brd-right--md g-brd-white-opacity-0_3 g-mb-60 g-mb-0--md">
                             <i class="icon-envelope d-inline-block display-5 g-color-primary g-mb-25"></i>
                             <h4 class="small text-uppercase g-mb-5">ایمیل ما</h4>
-                            <a class="g-color-white-opacity-0_8" href="mailto:hello@unify-gym.com"><strong>info@tanastyle.com</strong></a>
+                            <a class="g-color-white-opacity-0_8" href="mailto:hello@unify-gym.com"><strong>info@mevan.com</strong></a>
                         </div>
 
                         <div class="col-sm-6 col-md-3">

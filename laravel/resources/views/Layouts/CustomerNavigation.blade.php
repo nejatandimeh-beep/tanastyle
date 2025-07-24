@@ -22,9 +22,9 @@
                     <!-- End Responsive Toggle Button -->
 
                     <!-- Logo -->
-                    <a href="{{ url('/') }}" class="navbar-brand">
-                        <img src="{{ asset('img/Logo/logo.svg') }}" alt="فروشگاه پوشاک تانا استایل" width="120"
-                             class="g-pt-7 g-pt-0--lg">
+                    <a href="{{ url('/') }}" class="navbar-brand pt-0">
+                        <img src="{{ asset('img/Logo/logo2.svg') }}" alt="فروشگاه پوشاک تانا استایل" width="100"
+                             class="g-pt-0">
                     </a>
                     <!-- End Logo -->
 
