@@ -1,18 +1,22 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
     <div class="masterPage">
-        <div class="d-lg-none">
-            <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));">
-                <img style="height: 640px; object-fit: cover" class="img-fluid w-100" loading="lazy"
-                     src="{{asset('img/Banners/new-mobile.jpg')}}"
-                     alt="بدلیجات پوشاک لباس تاناکورا مهاباد عمده خرده">
+        <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));">
+            <div class="carousel-container d-lg-block d-none">
+                <div class="carousel-track desktop-track">
+                    <div class="slide"><img src="{{asset('img/Banners/new.jpg')}}" alt="اسلاید 1"></div>
+                    <div class="slide"><img src="{{asset('img/Banners/new.jpg')}}" alt="اسلاید 2"></div>
+                    <div class="slide"><img src="{{asset('img/Banners/new.jpg')}}" alt="اسلاید 3"></div>
+                </div>
             </div>
-        </div>
-        <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));"
-             class="d-lg-block d-none">
-            <img class="img-fluid w-100" loading="lazy"
-                 src="{{asset('img/Banners/new.jpg')}}"
-                 alt="بدلیجات پوشاک لباس تاناکورا مهاباد عمده خرده">
+
+            <div class="carousel-container d-lg-none">
+                <div class="carousel-track mobile-track">
+                    <div class="slide"><img src="{{asset('img/Banners/new-mobile.jpg')}}" alt="اسلاید 1"></div>
+                    <div class="slide"><img src="{{asset('img/Banners/new-mobile.jpg')}}" alt="اسلاید 2"></div>
+                    <div class="slide"><img src="{{asset('img/Banners/new-mobile.jpg')}}" alt="اسلاید 3"></div>
+                </div>
+            </div>
         </div>
         <div style="background-image: linear-gradient(to bottom, rgba(240,240,240,1), #ffffff);"
              class="g-py-50">

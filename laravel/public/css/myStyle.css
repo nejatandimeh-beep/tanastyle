@@ -1082,7 +1082,31 @@ body a{
 
 .listSearch .show {display:block;}
 /*end dropdown style */
+.carousel-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
 
+.carousel-track {
+    display: flex;
+    width: max-content;
+    height: 100%;
+    transition: transform 0.6s ease;
+}
+
+.slide {
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100%;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 @keyframes rot {
     0%
     {

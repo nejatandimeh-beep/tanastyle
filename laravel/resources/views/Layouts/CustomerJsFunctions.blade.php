@@ -3068,6 +3068,77 @@
             let now = day + " " + months[month - 1] + " " + year;
             return now;
         }
+        document.addEventListener("DOMContentLoaded", () => {
 
+            function initCarousel(trackSelector) {
+                const track = document.querySelector(trackSelector);
+                if (!track) return;
+
+                let slides = Array.from(track.children);
+                const slideCount = slides.length;
+                const realSlideCount = slideCount - 2; // بعد از clone اضافه شدن
+                let currentIndex = 1;
+                let transitioning = false;
+                let interval;
+
+                // اضافه کردن کلون اول و آخر
+                const firstClone = slides[0].cloneNode(true);
+                const lastClone = slides[slides.length - 1].cloneNode(true);
+                track.appendChild(firstClone);
+                track.insertBefore(lastClone, slides[0]);
+                slides = Array.from(track.children);
+
+                function goToSlide(index, animate = true) {
+                    if (animate) {
+                        track.style.transition = "transform 0.6s ease";
+                    } else {
+                        track.style.transition = "none";
+                    }
+                    track.style.transform = `translateX(-${index * 100}vw)`;
+                }
+
+                function nextSlide() {
+                    if (transitioning) return;
+                    transitioning = true;
+                    currentIndex++;
+                    goToSlide(currentIndex);
+                }
+
+                track.addEventListener("transitionend", () => {
+                    transitioning = false;
+                    if (currentIndex === slideCount + 1) {
+                        track.style.transition = "none";
+                        currentIndex = 1;
+                        goToSlide(currentIndex, false);
+                    }
+                    if (currentIndex === 0) {
+                        track.style.transition = "none";
+                        currentIndex = realSlideCount;
+                        goToSlide(currentIndex, false);
+                    }
+                });
+
+                function startAutoPlay() {
+                    interval = setInterval(nextSlide, 4000);
+                }
+
+                function stopAutoPlay() {
+                    clearInterval(interval);
+                }
+
+                window.addEventListener("resize", () => {
+                    stopAutoPlay();
+                    goToSlide(currentIndex, false);
+                    startAutoPlay();
+                });
+
+                goToSlide(currentIndex, false);
+                startAutoPlay();
+            }
+
+            initCarousel(".desktop-track");
+            initCarousel(".mobile-track");
+
+        });
     </script>
 @endsection

@@ -3,7 +3,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <meta name="enamad" content="533166"/>
+    <meta name="enamad" content="46682445"/>
     <meta name="google-site-verification" content="ZF9gtW1PLAjYwujNgL6mFfeQHmeZF1dP2W090aHWCD8" />
     <meta name="description"
           content="tanakora mahabad marz لباس استوک تاناکورا بازارچه مرزی مهاباد بانه پیرانشهر سردشت تانا استایل فروشگاه پوشاک زنانه مردانه بچگانه دخترانه پسرانه لباس زیر کفش کیف ورزشی اکسسوری بدلیجات">
@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="_token" content="{{ csrf_token() }}">
-    <title>Mevan</title>
+    <title>میوان</title>
 
     <link rel="icon" href="{{asset('img/Logo/browserIcon.png')}}" />
 

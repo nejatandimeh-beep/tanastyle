@@ -74,15 +74,7 @@
                         <!-- Contact Info -->
                         <div class="row no-gutters g-color-white text-center g-mb-80">
                             <div class="col-md-6 col-lg-6 g-bg-primary-dark-v3 g-py-60">
-                                <a referrerpolicy="origin"
-                                   target="_blank"
-                                   href="https://trustseal.enamad.ir/?id=241578&amp;Code=gEEBxepfVp0Ayi5kPrbt">
-                                    <img referrerpolicy="origin"
-                                         src="{{asset('img/Other/enamad.jpg')}}"
-                                         alt=""
-                                         style="cursor:pointer"
-                                         id="gEEBxepfVp0Ayi5kPrbt">
-                                </a>
+                                <a referrerpolicy='origin' target='_blank' href='https://trustseal.enamad.ir/?id=630801&Code=JJ6OLWeKv3ZPx5E62X03x8dB9fmAsMLo'><img referrerpolicy='origin' src='https://trustseal.enamad.ir/logo.aspx?id=630801&Code=JJ6OLWeKv3ZPx5E62X03x8dB9fmAsMLo' alt='' style='cursor:pointer' code='JJ6OLWeKv3ZPx5E62X03x8dB9fmAsMLo'></a>
                                 <strong class="d-block g-font-size-16 g-mt-10">نشان اعتماد الکترونیک</strong>
                             </div>
 
