@@ -21,7 +21,7 @@
 
                     <!-- Logo -->
                     <a href="{{ url('/') }}" class="navbar-brand">
-                        <img src="{{ asset('img/logo/Logo_white.png') }}" alt="Image Description" width="120"
+                        <img src="{{ asset('img/logo/img/Logo/logo2.svg') }}" alt="Image Description" width="120"
                              class="g-pt-7 g-pt-0--lg">
                     </a>
                     <!-- End Logo -->

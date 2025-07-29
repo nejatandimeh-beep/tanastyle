@@ -2304,7 +2304,7 @@
 
                         <!-- Logo -->
                         <a href="{{ url('/Seller-Panel') }}" class="navbar-brand g-mt-10--lg g-mr-0">
-                            <img src="/img/Logo/logo_white.png" alt="Image Description" width="150">
+                            <img src="{{ asset('img/Logo/logo2.png') }}" alt="Image Description" width="100">
                         </a>
                         <!-- End Logo -->
                         <!-- Time And Date -->

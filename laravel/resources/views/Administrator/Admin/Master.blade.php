@@ -9,7 +9,7 @@
                 <blockquote class="g-color-white g-font-size-28 g-mb-20">پنل مدیریت سیستم</blockquote>
                 <!-- Logo -->
                 <div class="navbar-brand g-mb-10--lg g-mr-0">
-                    <img src="img/Logo/logo_white.png" alt="Image Description" width="300">
+                    <img src="img/Logo/img/Logo/logo2.svg" alt="Image Description" width="300">
                 </div>
                 <h4 class="h6 g-color-white-opacity-0_6 g-mb-0">
                     <div class="text-center hidden-lg-down">

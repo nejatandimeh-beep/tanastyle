@@ -19,7 +19,7 @@
         <footer class="text-center g-pt-100 g-pb-30">
             <div class="container">
                 <a class="d-block g-mb-30" href="index.html">
-                    <img class="img-fluid" src="{{ asset('img/Logo/logo.png') }}" width="150" alt="Logo">
+                    <img class="img-fluid" src="{{ asset('img/Logo/logo2.svg') }}" width="150" alt="Logo">
                 </a>
 
                 <small class="d-block g-font-size-default">© 1398 تمامی حقوق برای توسعه دهندگان این سیستم محفوظ است

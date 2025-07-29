@@ -31,7 +31,7 @@
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container text-right g-py-5">
             <a class="navbar-brand" href="{{ url('/Seller-Panel') }}">
-                <img src="{{ asset('img/Logo/logo.png') }}" alt="Image Description" width="120" class="">
+                <img src="{{ asset('img/Logo/logo2.svg') }}" alt="Image Description" width="120" class="">
             </a>
             <button style="border: none !important;" class="navbar-toggler rounded-0" type="button"
                     data-toggle="collapse"

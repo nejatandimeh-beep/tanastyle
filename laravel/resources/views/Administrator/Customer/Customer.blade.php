@@ -13,7 +13,7 @@
                 </div>
             </a>
             <div style="margin-top: 250px" class="navbar-brand g-mr-0">
-                <img src="img/Logo/logo_white.png" alt="Image Description" width="150">
+                <img src="img/Logo/img/Logo/logo2.svg" alt="Image Description" width="150">
             </div>
             <h4 class="h6 g-color-white-opacity-0_6 g-mb-0">
                 <div class="text-center hidden-lg-down">
