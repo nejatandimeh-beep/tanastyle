@@ -5,16 +5,53 @@
             <div class="carousel-container d-lg-block d-none">
                 <div class="carousel-track desktop-track">
                     <div class="slide"><img src="{{asset('img/Banners/new.jpg')}}" alt="اسلاید 1"></div>
-                    <div class="slide"><img src="{{asset('img/Banners/new.jpg')}}" alt="اسلاید 2"></div>
-                    <div class="slide"><img src="{{asset('img/Banners/new.jpg')}}" alt="اسلاید 3"></div>
+                    <div class="slide"><img src="{{asset('img/Banners/new2.jpg')}}" alt="اسلاید 2"></div>
+                    <div class="slide"><img src="{{asset('img/Banners/new3.jpg')}}" alt="اسلاید 3"></div>
                 </div>
             </div>
 
             <div class="carousel-container d-lg-none">
                 <div class="carousel-track mobile-track">
-                    <div class="slide"><img src="{{asset('img/Banners/new-mobile.jpg')}}" alt="اسلاید 1"></div>
-                    <div class="slide"><img src="{{asset('img/Banners/new-mobile.jpg')}}" alt="اسلاید 2"></div>
-                    <div class="slide"><img src="{{asset('img/Banners/new-mobile.jpg')}}" alt="اسلاید 3"></div>
+                    <div class="slide">
+                        <div style="position: relative">
+                            <img src="{{asset('img/Banners/new-mobile.jpg?v=2')}}" alt="اسلاید 1">
+                            <div style="direction:rtl; position: absolute; top: 18%; right: 5%; border-right: 2px solid #7fc242" class="text-right g-font-weight-600 g-pr-10 g-font-size-30 g-color-white">
+                                <p class="m-0">داری</p>
+                                <p class="m-0">چیزی</p>
+                                <p class="m-0">می فروشی؟</p>
+                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-25">پس منتظرت بودیم!</p>
+                            </div>
+                            <div style="position: absolute; bottom: 20%; right: 35px; width: 200px">
+                                <img src="{{ asset('img/Logo/logo2.png') }}" alt="فروشگاه بزرگ میوان" class="g-pt-0">
+                                <p style="text-align-last: justify" class="m-0 g-color-white">شرکت تابش پس زمینه مکریان</p>
+                                <p class="m-0 g-color-white d-flex justify-content-between"><span>تاسیس 1400</span><span>ثبت 2918</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="position: relative;">
+                            <img src="{{asset('img/Banners/new-mobile2.jpg?v=2')}}" alt="اسلاید 2">
+                            <div style="direction:rtl; position: absolute; top: 10%" class="text-center col-12">
+                                <p class="m-0 g-color-primary g-font-weight-800 g-font-size-28">ما یه بازار آنلاین هستیم</p>
+                                <p class="m-0 g-color-white g-font-size-20">برای همه مشاغل از کوچک تا بزرگ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="position: relative;">
+                            <div class="slide">
+                                <div style="position: relative">
+                                    <img src="{{asset('img/Banners/new-mobile3.jpg?v=2')}}" alt="اسلاید 1">
+                                    <div style="direction:rtl; position: absolute; top: 40%; left: 7%; border-left: 2px solid #7fc242" class="text-left g-font-weight-600 g-pl-10 g-font-size-25 g-color-white">
+                                        <p class="m-0 g-color-primary">از همین الان</p>
+                                        <p class="m-0">تا یکماه آینده ثبت نام کن</p>
+                                        <p class="m-0">تا به مدت یک هفته</p>
+                                        <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-16">تبلیغت روی بنر اصلی سایت بدرخشه!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -24,11 +61,11 @@
                 <h1 class="d-none h1 g-color-gray-dark-v3 g-font-weight-600 g-mb-15">فروشگاه آنلاین پوشاک استوک و
                     تاناکورا tanakora mahabad estok بدلیجات عینک زنانه پوشاک زنانه</h1>
                 <h2 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">میوان
-                    <span class="g-color-gray-dark-v3 ">استایلی خاص و متفاوت</span></h2>
+                    <span class="g-color-gray-dark-v3 ">ویترین دیجیتال کسب‌وکار شما</span></h2>
 
                 <h3 class="g-color-primary g-font-weight-600 g-mb-15 smallDevice">میوان
-                    <span class="g-color-gray-dark-v3">استایلی خاص و متفاوت</span></h3>
-                <h4 class="g-color-gray-dark-v3  g-font-weight-600 g-mb-30">خریدی آسان، سریع و مطمئن</h4>
+                    <span class="g-color-gray-dark-v3">ویترین دیجیتال کسب‌وکار شما</span></h3>
+                <h4 class="g-color-gray-dark-v3  g-font-weight-600 g-mb-30">از میوان به بازار، فقط یک کلیک فاصله‌ست</h4>
                 <!-- Promo Blocks - Form -->
                 <form style="direction: rtl" class="align-self-center text-center">
                     <input oninput="productSearch('productSearch',$(this).attr('value'))"
@@ -49,11 +86,11 @@
                     <span
                         class="d-inline-block u-icon-v4 u-icon-v4-rounded-50x u-icon-size--xl u-icon-v4-bg-primary--hover g-color-white--hover g-mb-20">
                       <span class="u-icon-v4-inner">
-                        <i class="icon-present g-mt-5 g-ml-5"></i>
+                        <i class="icon-present g-mt-5"></i>
                       </span>
                     </span>
                         <h1 class="h5 g-color-black mb-3">کسب 3 امتیاز در میوان</h1>
-                        <p class="g-color-gray-dark-v4">ارسال محصول برای همیشه رایگان</p>
+                        <p class="g-color-gray-dark-v4">ارسال محصول به مدت 3 ماه رایگان</p>
                     </div>
                     <!-- End Icon Blocks -->
                 </div>

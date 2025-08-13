@@ -5,8 +5,7 @@
 <head>
     <meta name="enamad" content="46682445"/>
     <meta name="google-site-verification" content="ZF9gtW1PLAjYwujNgL6mFfeQHmeZF1dP2W090aHWCD8" />
-    <meta name="description"
-          content="tanakora mahabad marz لباس استوک تاناکورا بازارچه مرزی مهاباد بانه پیرانشهر سردشت تانا استایل فروشگاه پوشاک زنانه مردانه بچگانه دخترانه پسرانه لباس زیر کفش کیف ورزشی اکسسوری بدلیجات">
+    <meta name="description" content="فروشگاه میوان لوازم شخصی، لوازم خانگی، وسایل ارتباطی، خدمات و کسب و کار، صنعتی اداری تجاری، لوازم الکترونیکی، موبایل و لپ تاپ، املاک وسایل ورزشی، وسایل نقلیه، پوشاک">
     <meta name="keywords" content="HTML,CSS,XML,JavaScript">
     <meta name="author" content="nejat andimeh">
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
@@ -17,12 +16,6 @@
     <meta name="_token" content="{{ csrf_token() }}">
     <title>میوان</title>
 
-    <link rel="icon" href="{{asset('img/Logo/browserIcon.png')}}" />
-
-    <link rel="apple-touch-icon" href="{{asset('img/Logo/browserIcon.png')}}">
-    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/Logo/browserIcon.png')}}">
-    <link rel="apple-touch-icon" sizes="120x120" href="{{asset('img/Logo/browserIcon.png')}}">
-    <link rel="apple-touch-icon" sizes="152x152" href="{{asset('img/Logo/browserIcon.png')}}">
     <link rel="stylesheet" href="{{ asset('css/swiper-bundle.css') }}">
 
     <!--My Style-->
@@ -31,6 +24,7 @@
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/magnifier.css?v=2') }}">
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
 
     <!-- CSS Implementing Plugins -->
 {{--    <link rel="stylesheet" href="{{ asset('assets/vendor/icon-awesome/css/font-awesome.min.css') }}">--}}
