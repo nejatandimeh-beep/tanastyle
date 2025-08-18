@@ -4,9 +4,42 @@
         <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));">
             <div class="carousel-container d-lg-block d-none">
                 <div class="carousel-track desktop-track">
-                    <div class="slide"><img src="{{asset('img/Banners/new.jpg')}}" alt="اسلاید 1"></div>
-                    <div class="slide"><img src="{{asset('img/Banners/new2.jpg')}}" alt="اسلاید 2"></div>
-                    <div class="slide"><img src="{{asset('img/Banners/new3.jpg')}}" alt="اسلاید 3"></div>
+                    <div class="slide">
+                        <div style="position: relative">
+                            <img src="{{asset('img/Banners/new.jpg?v=2')}}" alt="اسلاید 1">
+                            <div
+                                style="direction:rtl; position: absolute; top: 37%; right: 22%; border-right: 2px solid #7fc242"
+                                class="text-right g-font-weight-900 g-pr-10 g-font-size-35 g-color-white">
+                                <p class="m-0">داری چیزی میفروشی؟</p>
+                                <p class="m-0 g-bg-white g-color-primary g-px-5 g-font-size-30">پس منتظرت بودیم!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="position: relative;">
+                            <img src="{{asset('img/Banners/new2.jpg?v=2')}}" alt="اسلاید 2">
+                            <div style="direction:rtl; position: absolute; bottom: 20%" class="text-center col-12">
+                                <p class="m-0 g-color-primary g-font-weight-900 g-font-size-45">ما یه بازار آنلاین
+                                    هستیم</p>
+                                <p class="m-0 g-color-white g-font-weight-600 g-font-size-33">برای همه مشاغل از کوچک تا
+                                    بزرگ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div style="position: relative">
+                            <img src="{{asset('img/Banners/new3.jpg?v=2')}}" alt="اسلاید 1">
+                            <div
+                                style="direction:rtl; position: absolute; top: 22%; right: 31%; border-right: 2px solid #7fc242"
+                                class="text-right g-font-weight-900 g-pr-10 g-font-size-40 g-color-white">
+                                <p class="m-0 g-font-weight-900  g-color-primary">از همین الان</p>
+                                <p class="m-0 g-font-weight-300">تا یکماه آینده ثبت نام کن</p>
+                                <p class="m-0 g-font-weight-300">تا به مدت یک هفته</p>
+                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-25">تبلیغت روی
+                                    بنر اصلی سایت بدرخشه!</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -15,16 +48,21 @@
                     <div class="slide">
                         <div style="position: relative">
                             <img src="{{asset('img/Banners/new-mobile.jpg?v=2')}}" alt="اسلاید 1">
-                            <div style="direction:rtl; position: absolute; top: 18%; right: 5%; border-right: 2px solid #7fc242" class="text-right g-font-weight-600 g-pr-10 g-font-size-30 g-color-white">
+                            <div
+                                style="direction:rtl; position: absolute; top: 18%; right: 5%; border-right: 2px solid #7fc242"
+                                class="half-right text-right g-font-weight-600 g-pr-10 g-font-size-30 g-color-white">
                                 <p class="m-0">داری</p>
                                 <p class="m-0">چیزی</p>
                                 <p class="m-0">می فروشی؟</p>
-                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-25">پس منتظرت بودیم!</p>
+                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-25">پس منتظرت
+                                    بودیم!</p>
                             </div>
-                            <div style="position: absolute; bottom: 20%; right: 35px; width: 200px">
+                            <div style="position: absolute; bottom: 20%; right: 5%; width: 200px" class="half-right">
                                 <img src="{{ asset('img/Logo/logo2.png') }}" alt="فروشگاه بزرگ میوان" class="g-pt-0">
-                                <p style="text-align-last: justify" class="m-0 g-color-white">شرکت تابش پس زمینه مکریان</p>
-                                <p class="m-0 g-color-white d-flex justify-content-between"><span>تاسیس 1400</span><span>ثبت 2918</span></p>
+                                <p style="text-align-last: justify" class="m-0 g-color-white">شرکت تابش پس زمینه
+                                    مکریان</p>
+                                <p class="m-0 g-color-white d-flex justify-content-between">
+                                    <span>تاسیس 1400</span><span>ثبت 2918</span></p>
                             </div>
                         </div>
                     </div>
@@ -32,23 +70,23 @@
                         <div style="position: relative;">
                             <img src="{{asset('img/Banners/new-mobile2.jpg?v=2')}}" alt="اسلاید 2">
                             <div style="direction:rtl; position: absolute; top: 10%" class="text-center col-12">
-                                <p class="m-0 g-color-primary g-font-weight-800 g-font-size-28">ما یه بازار آنلاین هستیم</p>
+                                <p class="m-0 g-color-primary g-font-weight-800 g-font-size-28">ما یه بازار آنلاین
+                                    هستیم</p>
                                 <p class="m-0 g-color-white g-font-size-20">برای همه مشاغل از کوچک تا بزرگ</p>
                             </div>
                         </div>
                     </div>
                     <div class="slide">
-                        <div style="position: relative;">
-                            <div class="slide">
-                                <div style="position: relative">
-                                    <img src="{{asset('img/Banners/new-mobile3.jpg?v=2')}}" alt="اسلاید 1">
-                                    <div style="direction:rtl; position: absolute; top: 40%; left: 7%; border-left: 2px solid #7fc242" class="text-left g-font-weight-600 g-pl-10 g-font-size-25 g-color-white">
-                                        <p class="m-0 g-color-primary">از همین الان</p>
-                                        <p class="m-0">تا یکماه آینده ثبت نام کن</p>
-                                        <p class="m-0">تا به مدت یک هفته</p>
-                                        <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-16">تبلیغت روی بنر اصلی سایت بدرخشه!</p>
-                                    </div>
-                                </div>
+                        <div style="position: relative">
+                            <img src="{{asset('img/Banners/new-mobile3.jpg?v=2')}}" alt="اسلاید 1">
+                            <div
+                                style="direction:rtl; position: absolute; top: 40%; left: 7%; border-left: 2px solid #7fc242"
+                                class="half-right text-left g-font-weight-600 g-pl-10 g-font-size-25 g-color-white">
+                                <p class="m-0 g-color-primary">از همین الان</p>
+                                <p class="m-0">تا یکماه آینده ثبت نام کن</p>
+                                <p class="m-0">تا به مدت یک هفته</p>
+                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-16">تبلیغت روی
+                                    بنر اصلی سایت بدرخشه!</p>
                             </div>
                         </div>
                     </div>

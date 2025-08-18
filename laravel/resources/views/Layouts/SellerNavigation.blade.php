@@ -49,19 +49,17 @@
 
                                 <!-- Add Link Female Product -->
                                 <li class="nav-item hs-has-mega-menu g-my-6">
-                                    <a href="#" class="nav-link" id="nav-link-408"
+                                    <a href="#" class="nav-link" id="nav-link-409"
                                        aria-haspopup="true"
                                        aria-expanded="false"
-                                       aria-controls="nav-megamenu-408"> افزودن پوشاک زنانه<i class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
-                                    <!-- Add Female Product -->
-                                    <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
-                                         id="nav-megamenu-408"
-                                         aria-labelledby="nav-link-408">
-                                            <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                                                افزودن پوشاک زنانه
-                                            </h5>
-
-                                        <div style="height: 90%;" class="rowSeller align-items-stretch">
+                                       aria-controls="nav-megamenu-408"> افزودن پوشاک<i class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu megaMenuScroll g-font-size-13"
+                                         id="nav-megamenu-409"
+                                         aria-labelledby="nav-link-409">
+                                        <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
+                                            افزودن پوشاک زنانه
+                                        </h5>
+                                        <div class="rowSeller align-items-stretch">
                                             <!-- Add Dress Product -->
                                             <div class="col-lg-2 g-brd-right g-brd-gray-light-v4">
                                                 <h6 class="g-mr-8 g-mt-15 g-mb-8 g-font-weight-600">لباس زنانه</h6>
@@ -158,7 +156,7 @@
                                                                 <a href="{{ route('AddProduct_askSize',['23','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">تونیک</a>
                                                             </li>
- 							                                <li>
+                                                            <li>
                                                                 <a href="{{ route('AddProduct_askSize',['24','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">پیراهن</a>
                                                             </li>
@@ -612,7 +610,7 @@
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['710','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">تاج
-                                                                    </a>
+                                                                </a>
                                                             </li>
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['711','0']) }}"
@@ -691,10 +689,10 @@
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ساس
                                                                     بند</a>
                                                             </li>
-{{--                                                            <li>--}}
-{{--                                                                <a href="{{ route('AddProduct_askSize',['734','0']) }}"--}}
-{{--                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ساعت</a>--}}
-{{--                                                            </li>--}}
+                                                            {{--                                                            <li>--}}
+                                                            {{--                                                                <a href="{{ route('AddProduct_askSize',['734','0']) }}"--}}
+                                                            {{--                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">ساعت</a>--}}
+                                                            {{--                                                            </li>--}}
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['735','0']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">کمربند</a>
@@ -768,27 +766,10 @@
                                             </div>
                                             <!-- End Add Accessory Product -->
                                         </div>
-                                    </div>
-                                    <!-- End Add Kids Product -->
-                                </li>
-                                <!-- End Link Female Product -->
-
-                                <!-- Add Link Male Product -->
-                                <li class="nav-item hs-has-mega-menu g-my-6">
-                                    <a href="#" class="nav-link" id="nav-link-408"
-                                       aria-haspopup="true"
-                                       aria-expanded="false"
-                                       aria-controls="nav-megamenu-408"> افزودن پوشاک مردانه<i
-                                            class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
-                                    <!-- Add Male Product -->
-                                    <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
-                                         id="nav-megamenu-408"
-                                         aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
                                             افزودن پوشاک مردانه
                                         </h5>
-
-                                        <div style="height: 90%;" class="rowSeller align-items-stretch">
+                                        <div class="rowSeller align-items-stretch">
                                             <!-- Add Dress Product -->
                                             <div class="col-lg-2 g-brd-right g-brd-gray-light-v4">
                                                 <h6 class="g-mr-8 g-mt-15 g-mb-8 g-font-weight-600">لباس مردانه</h6>
@@ -1298,26 +1279,10 @@
                                             </div>
                                             <!-- End Add Accessory Product -->
                                         </div>
-                                    </div>
-                                    <!-- End Add Mae Product -->
-                                </li>
-                                <!-- End Link Male Product -->
-
-                                <!-- Add Link Kids Product -->
-                                <li class="nav-item hs-has-mega-menu g-my-6">
-                                    <a href="#" class="nav-link" id="nav-link-408"
-                                       aria-haspopup="true"
-                                       aria-expanded="false"
-                                       aria-controls="nav-megamenu-408"> افزودن پوشاک بچگانه<i
-                                            class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
-                                    <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
-                                         id="nav-megamenu-408"
-                                         aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
                                             افزودن پوشاک بچگانه
                                         </h5>
-
-                                        <div style="height: 90%;" class="rowSeller align-items-stretch">
+                                        <div class="rowSeller align-items-stretch">
                                             <!-- دخترانه -->
                                             <div class="col-lg-4 g-brd-right g-brd-gray-light-v4">
                                                 <h6 class="g-mr-8 g-mt-15 g-mb-8 g-font-weight-600">دخترانه</h6>
@@ -1365,7 +1330,7 @@
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['14','2']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">جوراب
-                                                                    </a>
+                                                                </a>
                                                             </li>
                                                         </ul>
                                                     </li>
@@ -1874,25 +1839,10 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <!-- End Link Kids Product -->
-
-                                <!-- Add Link baby Product -->
-                                <li class="nav-item hs-has-mega-menu g-my-6">
-                                    <a href="#" class="nav-link" id="nav-link-408"
-                                       aria-haspopup="true"
-                                       aria-expanded="false"
-                                       aria-controls="nav-megamenu-408"> افزودن پوشاک نوزادی<i
-                                            class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
-                                    <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
-                                         id="nav-megamenu-408"
-                                         aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
                                             افزودن پوشاک نوزادی
                                         </h5>
-
-                                        <div style="height: 90%;" class="rowSeller align-items-stretch">
+                                        <div class="rowSeller align-items-stretch">
                                             <!-- دخترانه -->
                                             <div class="col-lg-4 g-brd-right g-brd-gray-light-v4">
                                                 <h6 class="g-mr-8 g-mt-15 g-mb-8 g-font-weight-600">دخترانه</h6>
@@ -2013,11 +1963,11 @@
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
-{{--                                                            <li>--}}
-{{--                                                                <a href="{{ route('AddProduct_askSize',['50','4']) }}"--}}
-{{--                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">اسباب--}}
-{{--                                                                    بازی</a>--}}
-{{--                                                            </li>--}}
+                                                            {{--                                                            <li>--}}
+                                                            {{--                                                                <a href="{{ route('AddProduct_askSize',['50','4']) }}"--}}
+                                                            {{--                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">اسباب--}}
+                                                            {{--                                                                    بازی</a>--}}
+                                                            {{--                                                            </li>--}}
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['51','4']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سر پوش</a>
@@ -2177,11 +2127,11 @@
                                                         <a href="#"
                                                            class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">اکسسوری<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu">
-{{--                                                            <li>--}}
-{{--                                                                <a href="{{ route('AddProduct_askSize',['50','5']) }}"--}}
-{{--                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">اسباب--}}
-{{--                                                                    بازی</a>--}}
-{{--                                                            </li>--}}
+                                                            {{--                                                            <li>--}}
+                                                            {{--                                                                <a href="{{ route('AddProduct_askSize',['50','5']) }}"--}}
+                                                            {{--                                                                   class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">اسباب--}}
+                                                            {{--                                                                    بازی</a>--}}
+                                                            {{--                                                            </li>--}}
                                                             <li>
                                                                 <a href="{{ route('AddProduct_askSize',['51','5']) }}"
                                                                    class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller">سرپوش</a>
@@ -2226,23 +2176,22 @@
                                         </div>
                                     </div>
                                 </li>
-                                <!-- End Link baby Product -->
 
-                                <!-- Add Link Female Product -->
+                                <!-- Add Link Medicine Product -->
                                 <li class="nav-item hs-has-mega-menu g-my-6">
                                     <a href="#" class="nav-link" id="nav-link-408"
                                        aria-haspopup="true"
                                        aria-expanded="false"
-                                       aria-controls="nav-megamenu-408"> افزودن سایر محصولات<i class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
+                                       aria-controls="nav-megamenu-408"> افزودن کالای پزشکی<i class="icon-arrow-down align-middle g-font-size-10 g-mr-7"></i></a>
                                     <!-- Add Female Product -->
                                     <div style="direction: ltr;" class="hs-mega-menu g-font-size-13"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
-                                            افزودن سایر محصولات
+                                            افزودن کالای پزشکی
                                         </h5>
 
-                                        <div style="height: 90%;" class="rowSeller align-items-stretch">
+                                        <div class="rowSeller align-items-stretch">
                                             <!-- Add Dress Product -->
                                             <div class="col-lg-2 g-brd-right g-brd-gray-light-v4">
                                                 <h6 class="g-mr-8 g-mt-15 g-mb-8 g-font-weight-600">وسایل برقی</h6>

@@ -92,17 +92,17 @@
 
 /* width */
 ::-webkit-scrollbar {
-    width: 8px;
+    width: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey;
+    box-shadow: inset 0 0 5px #bdbdbd;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #1c1b1b;
+    background: #747373;
 }
 
 /* Handle on hover */
@@ -1129,6 +1129,12 @@ body a{
     }
 }
 /*img border animated end*/
+@media screen and (max-width: 400px) {
+    .half-right{
+        transform: scale(0.8);
+        right: 0 !important;
+    }
+}
 @media screen and (max-width: 900px) {
     .swiper{
         width: 100%;
@@ -1158,7 +1164,9 @@ body a{
     .SubMenuScroll {
         height: auto !important;
     }
-
+    .megaMenuScroll {
+        overflow: hidden scroll;
+    }
     .ltrSubMenuScroll {
         height: auto !important;
     }
@@ -1271,3 +1279,4 @@ body a{
         height: 445px;
     }
 }
+
