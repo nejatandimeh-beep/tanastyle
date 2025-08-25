@@ -59,7 +59,7 @@
                         colorList = [],
                         colorText = color.replace(/\d+/g, ''),
                         id = $(this).parent().closest('div').attr('id').substring(2);
-                    console.log(parentID,id,colorText)
+                    console.log(parentID, id, colorText)
                     $('#colorBtn' + id).text(colorText);
                     $('#hexCode' + id).attr('value', hexc($(this).css('backgroundColor')));
                     $('#color' + id + ' option').val(color);
@@ -212,7 +212,7 @@
 
         $('#addProductForm').on('submit', function () {
             $('#addProductBtnCaption').text('لطفا منتظر بمانید..');
-            $('#addProductBtn').prop('disabled',true);
+            $('#addProductBtn').prop('disabled', true);
 
             let productDetail = $('#addProductDetail');
 
@@ -231,11 +231,11 @@
                     $(this).find('.sizeDetail').each(function () {
                         let titleElement = $(this).find('.title'),
                             title = titleElement.text(),
-                            value = parseInt($(this).find('.value').val())/10+' cm ',
+                            value = parseInt($(this).find('.value').val()) / 10 + ' cm ',
                             detail = '';
                         if (!$(this).hasClass('d-none')) {
-                            if( $(this).find('.sizeDetailInput').val() !==''){
-                                detail = detail + title + ': ' +  value + '\n';
+                            if ($(this).find('.sizeDetailInput').val() !== '') {
+                                detail = detail + title + ': ' + value + '\n';
                             }
                             productDetail.val(productDetail.val() + detail)
                         }
@@ -652,7 +652,7 @@
                 }
             }
             let now = week[d] + " " + day + " " + months[month - 1] + " " + year;
-            $('#persianDate').text(now);
+            $('.persianDate').text(now);
             $('#panelPersianDate').text(now);
         }
 
@@ -668,29 +668,29 @@
             currentSeconds = (currentSeconds < 10 ? "0" : "") + currentSeconds;
 
             let currentTimeString = currentHours + ":" + currentMinutes + ":" + currentSeconds;
-            $("#persianTime").html(currentTimeString);
+            $(".persianTime").html(currentTimeString);
         }
 
-        function incQty(container,maxLen) {
-            let val = parseInt($('#'+container+' #qtyInput').val()), q;
+        function incQty(container, maxLen) {
+            let val = parseInt($('#' + container + ' #qtyInput').val()), q;
             if ((val < maxLen) && (val > 0)) {
                 q = val + 1;
-                $('#'+container+' #qtyInput').val(q);
+                $('#' + container + ' #qtyInput').val(q);
             } else
-                $('#'+container+' #qtyPlus').prop('disabled', true);
+                $('#' + container + ' #qtyPlus').prop('disabled', true);
         }
 
-        function decQty(container,maxLen) {
-            let val = parseInt($('#'+container+' #qtyInput').val()), q;
+        function decQty(container, maxLen) {
+            let val = parseInt($('#' + container + ' #qtyInput').val()), q;
             if ((val > 1)) {
                 q = val - 1;
-                $('#'+container+' #qtyInput').val(q);
+                $('#' + container + ' #qtyInput').val(q);
             } else
-                $('#'+container+' #qtyPlus').prop('disabled', true);
+                $('#' + container + ' #qtyPlus').prop('disabled', true);
         }
 
-        function applyAddQty(id,container) {
-            let val = parseInt($('#'+container+' #qtyInput').val());
+        function applyAddQty(id, container) {
+            let val = parseInt($('#' + container + ' #qtyInput').val());
             $.confirm({
                 title: 'حذف محصول',
                 content: 'آیا مطمئن هستید؟',
@@ -706,8 +706,8 @@
             });
         }
 
-        function applyDecQty(id,container) {
-            let val = parseInt($('#'+container+' #qtyInput').val());
+        function applyDecQty(id, container) {
+            let val = parseInt($('#' + container + ' #qtyInput').val());
             $.confirm({
                 title: 'حذف محصول',
                 content: 'آیا مطمئن هستید؟',
@@ -818,10 +818,10 @@
                     $('#BsalePrice').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                     $('#tempFinalPrice').val(calc);
 
-                    if($('.sellerProductDetail').length>0){
-                        let additionalValue=3;
+                    if ($('.sellerProductDetail').length > 0) {
+                        let additionalValue = 3;
 
-                        calc=calc + (calc * (additionalValue)) / 100;
+                        calc = calc + (calc * (additionalValue)) / 100;
                         calc = calc.toString().slice(0, -3) + "000";
                         $('#tempFinalPrice').val(calc);
                         $('#newPriceBtn').prop('disabled', false);
@@ -847,22 +847,22 @@
             let discount = $(this).val(),
                 unitPrice = $('#tempPrice').val();
 
-            let additionalValue=3;
+            let additionalValue = 3;
 
             if (unitPrice >= 10000) {
                 let calc = salePrice(discount, unitPrice),
-                    finalPrice, exValue,exValueWithoutDis, fPriceWithoutDis, dis,mevan;
+                    finalPrice, exValue, exValueWithoutDis, fPriceWithoutDis, dis, mevan;
 
                 $("#sellerShare").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#BsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#SsalePrice").text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#priceWithDiscount").val((calc.toString().slice(0, -3) + "000"));
-                exValue=calc * (additionalValue) / 100;
-                mevan=exValue.toString().slice(0, -3) + "000";
-                finalPrice=calc + exValue;
-                exValueWithoutDis=parseInt(unitPrice) * (additionalValue) / 100;
-                fPriceWithoutDis=parseInt(unitPrice)+exValueWithoutDis;
-                dis=parseInt(unitPrice)-calc;
+                exValue = calc * (additionalValue) / 100;
+                mevan = exValue.toString().slice(0, -3) + "000";
+                finalPrice = calc + exValue;
+                exValueWithoutDis = parseInt(unitPrice) * (additionalValue) / 100;
+                fPriceWithoutDis = parseInt(unitPrice) + exValueWithoutDis;
+                dis = parseInt(unitPrice) - calc;
                 $("#companyShare").text((mevan.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#exValue").text((exValue.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#dis").text((dis.toString()).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
@@ -870,7 +870,7 @@
                 finalPrice = finalPrice.toString().slice(0, -3) + "000";
                 $("#tempFinalPrice").val(finalPrice);
                 $("#finalPrice").val(finalPrice.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-                fPriceWithoutDis=fPriceWithoutDis.toString().slice(0, -3) + "000";
+                fPriceWithoutDis = fPriceWithoutDis.toString().slice(0, -3) + "000";
                 $("#tempFinalPriceWithoutDiscount").val(fPriceWithoutDis);
                 $("#finalPriceWithoutDiscount").val(fPriceWithoutDis.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
             } else {
@@ -878,7 +878,7 @@
                 $("#SsalePrice").text('!!!');
                 $("#discount").val('');
             }
-            if (discount === 0 || discount === ''){
+            if (discount === 0 || discount === '') {
                 $("#SsalePrice").text('...');
                 $("#BsalePrice").text('...');
                 $("#finalPrice").val('...');
@@ -898,8 +898,8 @@
             temp1 = parseInt(currentPrice.replace(new RegExp(',', 'g'), "")); // remove coma
             if ($(this).val() >= 1 && $(this).val() <= 99) {
                 let calc = salePrice(discount, temp1);
-                let additionalValue=2;
-                calc=calc + (calc * (additionalValue)) / 100;
+                let additionalValue = 2;
+                calc = calc + (calc * (additionalValue)) / 100;
                 calc = calc.toString().slice(0, -3) + "000";
                 $('#newFinalPriceByNewDiscount').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $('#tempNewFinalPrice').val(calc);
@@ -912,11 +912,12 @@
         });
 
         function salePrice(discount, unitPrice) {
-            let temp1=unitPrice - ((unitPrice * discount) / 100);
+            let temp1 = unitPrice - ((unitPrice * discount) / 100);
             temp1 = temp1.toString().slice(0, -3) + "000";
             temp1 = parseInt(temp1);
             return temp1;
         }
+
         // ---------------------------------- Add Image Success Icon ----------------------------
         // Add FileName and Check Mark when Uploaded Image
         function addPathCheckMark(picID, filePathID, checkMarkID) {
@@ -971,13 +972,13 @@
             });
         }
 
-        function confirmNewPrice(id, unitPrice, finalPrice,discount) {
+        function confirmNewPrice(id, unitPrice, finalPrice, discount) {
             $.confirm({
                 title: 'تغییر قیمت محصول',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        location.href = '/Seller-ChangePrice-Product/' + id + '/' + unitPrice + '/' + finalPrice+'/'+discount;
+                        location.href = '/Seller-ChangePrice-Product/' + id + '/' + unitPrice + '/' + finalPrice + '/' + discount;
                     },
                     انصراف: function () {
                         $.alert('عملیات تغییر قیمت محصول لغو شد!');
@@ -986,13 +987,13 @@
             });
         }
 
-        function confirmNewDiscount(id, discount, finalPrice,unitPrice) {
+        function confirmNewDiscount(id, discount, finalPrice, unitPrice) {
             $.confirm({
                 title: 'تغییر قیمت محصول',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
-                        location.href = '/Seller-ChangeDiscount-Product/' + id + '/' + discount + '/' + finalPrice+'/'+unitPrice;
+                        location.href = '/Seller-ChangeDiscount-Product/' + id + '/' + discount + '/' + finalPrice + '/' + unitPrice;
                     },
                     انصراف: function () {
                         $.alert('عملیات تغییر قیمت محصول لغو شد!');
@@ -1020,12 +1021,12 @@
         }
 
         $(document).on('ready', function () {
-            if($('.orderDetail').length>0){
+            if ($('.orderDetail').length > 0) {
                 $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
             }
 
-            if($('#regulationTab').length>0){
-                let tab=$('#regulationTab').text();
+            if ($('#regulationTab').length > 0) {
+                let tab = $('#regulationTab').text();
                 switch (tab) {
                     case 'returnProduct':
                         setTimeout(function () {
@@ -1076,7 +1077,9 @@
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
                 cropper, inputID, inputIdFinshed = [], counter = 0, file_upload, file_type,
-                folderName = createFolderName(), uploadUrl=(window.location.path==='/Add-Other-Product-Upload-Image') ? '/Add-Other-Product-Upload-Image':'/Add-Product-Upload-Image';
+                folderName = createFolderName(),
+                uploadUrl = (window.location.pathname.includes('/Add-Product-Upload')) ? '/Add-Product-Upload-Image' : '/Add-Other-Product-Upload-Image';
+
             $('#folderName2').val(createFolderName());
             console.log($('#folderName2').val());
 
@@ -1168,14 +1171,14 @@
                                 $('#errorIcon' + inputID).addClass('d-none');
                                 $('#errorText' + inputID).addClass('d-none');
                                 $('#check' + inputID).addClass('d-none');
-                                },
+                            },
                             success: function (data) {
                                 inputIdFinshed[counter] = data;
                                 counter++;
                                 console.log("success");
                                 console.log(inputIdFinshed);
                             },
-                            error: function(xhr, status, error) {
+                            error: function (xhr, status, error) {
                                 console.log("error");
                                 $('#uploadingIcon' + inputID).addClass('d-none');
                                 $('#uploadingText' + inputID).addClass('d-none');
@@ -2120,6 +2123,26 @@
                         return 'یزد ' + s[city];
             }
         }
+
+        function resizeBox() {
+            let mq = window.matchMedia("(max-width: 900px)");
+            if (!mq.matches) {
+                const box = document.getElementById("js-header");
+                // گرفتن ارتفاع کل سند
+                let fullHeight = Math.max(
+                    document.body.scrollHeight,
+                    document.documentElement.scrollHeight
+                );
+                box.style.height = fullHeight + "px";
+            } else {
+                $('.hs-mega-menu').removeClass('megaMenu');
+            }
+        }
+
+        // وقتی صفحه لود شد یا تغییر کرد
+        window.addEventListener("load", resizeBox);
+        window.addEventListener("resize", resizeBox);
+
     </script>
     </html>
 @endsection

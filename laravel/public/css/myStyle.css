@@ -117,7 +117,9 @@
 .g-width-100x{
     width: 100%;
 }
-
+.megaMenu{
+    height: 93vh !important;
+}
 .customScrollBar{
     padding: 10px;
     overflow-y: scroll;
@@ -141,7 +143,7 @@
 /*Sub Menu Scrolling*/
 .SubMenuScroll {
     overflow-y: scroll;
-    height: 300px !important;
+    max-height: 300px !important;
 }
 
 .SubMenuScroll::-webkit-scrollbar {
@@ -150,8 +152,7 @@
 
 /* Track */
 .SubMenuScroll::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #959595;
-    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgb(255, 255, 255);
 }
 
 /* Handle */
@@ -1163,9 +1164,6 @@ body a{
     }
     .SubMenuScroll {
         height: auto !important;
-    }
-    .megaMenuScroll {
-        overflow: hidden scroll;
     }
     .ltrSubMenuScroll {
         height: auto !important;

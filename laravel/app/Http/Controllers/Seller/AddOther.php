@@ -23,7 +23,7 @@ class AddOther extends Controller
     // Detail of Sizes and Category
     public function AddProduct($cat)
     {
-        $data = DB::table('product_hint_digital')
+        $data = DB::table('product_hint_other')
             ->where('Cat', $cat)
             ->first();
 

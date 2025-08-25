@@ -35,9 +35,10 @@
 
     <div style="direction: rtl">
         <!-- Description Divs-->
-        <div class="g-my-100 g-pa-10">
+        <div class="g-mt-100 g-pa-10 g-mb-20">
             <!-- Gray Colored Blockquotes -->
             <blockquote
+
                 class="blockquote blockquote-reverse g-bg-gray-light-v5 g-brd-primary g-font-size-16 g-pa-40 g-mb-30 text-right">
                 <p class="g-mb-10 p-0 g-font-weight-700">وقت بخیر <span>{{ Auth::guard('seller')->user()->name }}</span> عزیز</p>
                 <p class="m-0 p-0 g-font-size-14">امیدواریم با فروش محصولات با کیفیت و مرغوب، فروش روزانه خود را دو
@@ -48,5 +49,16 @@
             <!-- End Gray Colored Blockquotes -->
         </div>
         <!-- Description Divs -->
+    </div>
+    <div class="text-left g-py-30 g-pl-80--lg g-pl-30 g-bg-gray-light-v3">
+        <a href="{{ url('/Seller-Panel') }}" class="navbar-brand g-mt-10--lg g-mr-0">
+            <img src="{{ asset('img/Logo/logo2.png') }}" alt="Image Description" width="100">
+        </a>
+        <!-- Time And Date -->
+        <div class="g-brd-left g-brd-2 g-brd-primary g-pl-5 g-color-gray-dark-v3">
+            <p class="mb-0 persianDate"></p>
+            <p class="mb-0 persianTime"></p>
+        </div>
+        <!-- End Time And Date -->
     </div>
 @endsection

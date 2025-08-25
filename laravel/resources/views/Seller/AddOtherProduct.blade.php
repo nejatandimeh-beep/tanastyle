@@ -28,13 +28,14 @@
                     <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                         <i class="fa fa-lock"></i>
                     </div>
-                    <input
+                    <input style="direction: rtl"
                         class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16"
                         type="text"
                         id="productName"
                         onkeypress="$('#productName').removeClass('g-color-red')"
                         tabindex="1"
-                        name="name">
+                        value="{{$name}}"
+                        name="name" {{ str_contains($cat, 'optional') ? 'autofocus' : 'readonly' }}>
                     <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">نام محصولی که قصد دارید به
                         انبارتان اضافه گردد.</b>
                 </div>
@@ -49,7 +50,7 @@
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
             <!-- Model -->
             <div class="form-group g-mb-20 text-right">
-                <label id="lblModel" class="g-mb-10">مدل محصول</label>
+                <label id="lblModel" class="g-mb-10">مدل یا اسم خاص محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <div class="input-group-addon d-flex align-items-center g-bg-white g-color-gray-light-v1 rounded-0">
                         <i class="fa fa-i-cursor"></i>
@@ -65,7 +66,7 @@
                         است.</b>
                 </div>
                 <div style="direction: rtl">
-                    <small class="text-muted g-font-size-12">اگر محصولتان مدل یا شماره مدل خاصی ندارد این قسمت را خالی
+                    <small class="text-muted g-font-size-12">اگر محصولتان مدل یا شماره مدل یا اسم خاصی ندارد این قسمت را خالی
                         بگذارید.</small>
                 </div>
             </div>
@@ -84,13 +85,13 @@
                            name="brand"
                            id="addProductBrand"
                            onkeypress="$('#lblBrand').removeClass('g-color-red')"
-                           value="">
+                           onfocus="this.select()"
+                           value="FreeBrand">
                 </div>
 
                 <div style="direction: rtl">
                     <small class="text-muted g-font-size-12">برند هویت محصول شماست.</small><br>
-                    <small class="text-muted g-font-size-12">اگر محصولتان برند ندارد مقدار FreeBrand را وارد
-                        نمایید.</small><br>
+                    <small class="text-muted g-font-size-12">اگر محصولتان برند ندارد مقدار FreeBrand را تغییر ندهید.</small><br>
                 </div>
             </div>
 
@@ -146,7 +147,7 @@
             <div id="sizeRowContainer">
                 <div class="text-right rowSeller" id="sizeRow-0">
                     {{--رنگ--}}
-                    <div class="form-group g-mb-20 text-right col-lg-3">
+                    <div class="form-group g-mb-20 text-right col-lg-4">
                         <label id="lblColor0" class="g-mb-10">رنگ</label>
                         <div class="input-group g-brd-primary--focus g-mb-10">
                             <div
@@ -1118,7 +1119,7 @@
                     </div>
 
                     {{--موجودی--}}
-                    <div class="form-group g-mb-20 text-right col-lg-3">
+                    <div class="form-group g-mb-20 text-right col-lg-4">
                         <label class="g-mb-10 g-color-gray-dark-v3">تعداد موجود</label>
                         <div class="input-group g-brd-primary--focus g-mb-10">
                             <div
@@ -1139,7 +1140,7 @@
                     </div>
 
                     {{--تصویر--}}
-                    <div id="colorImgDiv0" class="form-group g-mb-0 text-right col-lg-3">
+                    <div id="colorImgDiv0" class="form-group g-mb-0 text-right col-lg-4">
                         <label class="g-mb-10 g-color-gray-dark-v3" for="{{ 'fileShow'.'0' }}"
                                id="{{ 'img-file-label'.'0' }}">تصویر محصول
                             <span id="{{ 'productColorImg'.'0' }}"></span></label>
@@ -1184,15 +1185,6 @@
                         <div style="direction: rtl">
                             <p class="text-muted g-font-size-12 g-line-height-1_5">لطفا تا پایان بارگذاری عکس، صفحه را
                                 ترک نفرمائید.</p><br>
-                        </div>
-                    </div>
-                    <div id="repeatColorMsg0" class="d-none form-group g-mb-0 text-right col-lg-3">
-                        <label class="g-mb-10">تصویر محصول</label>
-                        <div class="input-group g-brd-primary--focus g-mb-10">
-                            <div
-                                class="form-control form-control-md rounded-0 g-font-size-16 g-px-5 text-center g-bg-primary g-color-white g-brd-none">
-                                <span>تصویر موجود است</span>
-                            </div>
                         </div>
                     </div>
                 </div>

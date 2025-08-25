@@ -1,6 +1,6 @@
 @section('SellerFooter')
     <!-- Footer -->
-    <footer class="g-bg-black-opacity-0_9 g-color-white-opacity-0_8 text-center g-pt-60 g-pb-40">
+    <footer class="g-bg-black-opacity-0_9 g-color-white-opacity-0_8 text-center g-py-80">
         <!-- Footer Content -->
         <div class="container">
             <div class="row">
@@ -74,7 +74,7 @@
         </div>
         <!-- End Footer Content -->
 
-        <hr class="g-brd-white-opacity-0_2 g-my-40">
+        <hr class="g-brd-white-opacity-0_2 g-my-55">
 
         <!-- Copyright -->
         <div class="container">
