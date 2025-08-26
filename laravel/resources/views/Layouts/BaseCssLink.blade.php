@@ -5,9 +5,11 @@
 <head>
     <meta name="enamad" content="46682445"/>
     <meta name="google-site-verification" content="ZF9gtW1PLAjYwujNgL6mFfeQHmeZF1dP2W090aHWCD8" />
-    <meta name="description" content="فروشگاه میوان لوازم شخصی، لوازم خانگی، وسایل ارتباطی، خدمات و کسب و کار، صنعتی اداری تجاری، لوازم الکترونیکی، موبایل و لپ تاپ، املاک وسایل ورزشی، وسایل نقلیه، پوشاک">
+    <meta name="description" content="خرید و فروش محصولات متنوع در Mevan.ir – بهترین مارکت‌پلیس ایران برای موبایل، لوازم خانگی، پوشاک، محصولات دیجیتال و بسیاری دیگر. با بهترین قیمت و ارسال سریع.">
+    <meta name="keywords" content="خرید آنلاین، فروشگاه اینترنتی، مارکت‌پلیس، محصولات متنوع، Mevan.ir، موبایل، لوازم خانگی، پوشاک، دیجیتال">
+    <meta name="author" content="Mevan.ir">
+
     <meta name="keywords" content="HTML,CSS,XML,JavaScript">
-    <meta name="author" content="nejat andimeh">
     <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">

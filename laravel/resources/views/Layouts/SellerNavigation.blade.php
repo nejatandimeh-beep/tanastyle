@@ -31,7 +31,7 @@
                         <div style="direction: rtl;"
                              class="collapse navbar-collapse align-items-center flex-sm-row g-mt-20 g-mt-0--lg g-mb-20"
                              id="navBar">
-                            <ul class="navbar-nav ml-auto text-uppercase g-pr-10 g-font-weight-600 u-sub-menu-v1">
+                            <ul class="navbar-nav ml-auto text-uppercase g-font-weight-600 u-sub-menu-v1">
                                 <!-- Home Page Link -->
                                 <li class="nav-item g-my-3">
                                     <a href="{{ url('/Seller-Panel') }}" class="nav-link">صفحه اصلی</a>
@@ -5957,7 +5957,7 @@
                                                 <ul class="list-unstyled h-100 g-py-10 g-pt-0">
                                                     <li class="nav-item hs-has-sub-menu d-inline-block">
                                                         <a href="#"
-                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لوازم مصرفی<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
+                                                           class="d-block g-color-gray-dark-v4 g-color-primary--hover g-text-underline--none--hover g-py-5 g-px-20-Seller d-flex flex-row-reverse">لوازم مصرفی موتور سیکلت<i class="icon-arrow-left align-self-center g-font-size-8 g-mr-7"></i></a>
                                                         <ul class="list-unstyled hs-sub-menu SubMenuScroll">
                                                             <li>
                                                                 <a style="direction: rtl" href="{{ route('AddOtherProduct',['m8_6_0']) }}"

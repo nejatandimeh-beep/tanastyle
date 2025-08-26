@@ -11,7 +11,7 @@
         </h3>
     </div>
     <!-- End Info Panel -->
-    <div class="container p-lg-5 g-mt-10 gmb-10 modalBox">
+    <div class="container p-lg-5 g-mt-50 gmb-10 modalBox">
         <!-- Text Input Tooltips -->
         <form id="addProductForm" action="{{ route('SaveOtherProduct')}}" method="post" enctype='multipart/form-data'
               class="g-brd-around g-brd-gray-light-v4 g-pa-30--lg g-mb-30 smallDevicePadding-20">
@@ -32,7 +32,7 @@
                         class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16"
                         type="text"
                         id="productName"
-                        onkeypress="$('#productName').removeClass('g-color-red')"
+                        oninput="$('#productName').removeClass('g-color-red')"
                         tabindex="1"
                         value="{{$name}}"
                         name="name" {{ str_contains($cat, 'optional') ? 'autofocus' : 'readonly' }}>

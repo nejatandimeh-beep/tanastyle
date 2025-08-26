@@ -33,8 +33,8 @@
                                 style="direction:rtl; position: absolute; top: 22%; right: 31%; border-right: 2px solid #7fc242"
                                 class="text-right g-font-weight-900 g-pr-10 g-font-size-40 g-color-white">
                                 <p class="m-0 g-font-weight-900  g-color-primary">از همین الان</p>
-                                <p class="m-0 g-font-weight-300">تا یکماه آینده ثبت نام کن</p>
-                                <p class="m-0 g-font-weight-300">تا به مدت یک هفته</p>
+                                <p class="m-0 g-font-size-30 g-font-weight-300">تا یکماه آینده ثبت نام کن</p>
+                                <p class="m-0 g-font-size-30 g-font-weight-300">تا به مدت یک هفته</p>
                                 <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-25">تبلیغت روی
                                     بنر اصلی سایت بدرخشه!</p>
                             </div>

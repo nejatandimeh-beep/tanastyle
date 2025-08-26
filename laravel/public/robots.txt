@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login/
+Disallow: /register/
+
+Allow: /
+
+Sitemap: https://mevan.ir/sitemap.xml

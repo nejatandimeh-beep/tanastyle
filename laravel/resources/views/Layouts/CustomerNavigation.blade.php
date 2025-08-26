@@ -39,19 +39,22 @@
                                     <span
                                         class="sr-only">(current)</span></a>
                             </li>
-                            {{--زنانه--}}
+                            {{--پوشاک--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="femaleCat">
                                 <a id="mega-menu-label-4" class="nav-link g-px-0 g-color-primary--hover"
                                    href="{{ route('productFemaleList') }}" aria-haspopup="true"
-                                   aria-expanded="false">زنانه
+                                   aria-expanded="false">مد و پوشاک
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
                                 <!-- Mega Menu -->
                                 <div
                                     class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
                                     aria-labelledby="mega-menu-label-4" style="display: none;">
-                                    <div class="row">
+                                    <h4 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right">
+                                        پوشاک زنانه
+                                    </h4>
+                                    <div class="row g-pa-20">
                                         {{-- لباس --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
@@ -277,8 +280,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- کیف و کفش --}}
-                                        <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
+                                        {{-- کفش --}}
+                                        <div class="col-sm-6 col-md-2 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
                                                 <a href="{{ route('productFemaleShoesList') }}"
                                                    class="nav-link g-color-primary--hover p-0">کفش</a>
@@ -309,7 +312,9 @@
                                                                       href="{{ route('menuProduct',['0','shoeCare','f']) }}">مراقبت
                                                         کفش</a></li>
                                             </ul>
-
+                                        </div>
+                                        {{-- کیف --}}
+                                        <div class="col-sm-6 col-md-2 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
                                                 <a href="{{ route('productFemaleBagsList') }}"
                                                    class="nav-link g-color-primary--hover p-0">کیف</a>
@@ -624,7 +629,7 @@
                                             </div>
                                         </div>
                                         {{-- اکسسوری --}}
-                                        <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
+                                        <div class="col-sm-6 col-md-2 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
                                                 <a href="{{ route('productFemaleRhinestoneList') }}"
                                                    class="nav-link g-color-primary--hover p-0">اکسسوری</a>
@@ -822,23 +827,10 @@
 
                                         </div>
                                     </div>
-                                </div>
-                                <!-- End Mega Menu -->
-                            </li>
-
-                            {{--مردانه--}}
-                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
-                                data-animation-out="fadeOut" data-position="right" id="maleCat">
-                                <a id="mega-menu-label-5" class="nav-link g-px-0 g-color-primary--hover"
-                                   href="{{ route('productMaleList') }}" aria-haspopup="true"
-                                   aria-expanded="false">مردانه
-                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
-
-                                <!-- Mega Menu -->
-                                <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
-                                    aria-labelledby="mega-menu-label-5" style="display: none;">
-                                    <div class="row">
+                                    <h4 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right">
+                                        پوشاک مردانه
+                                    </h4>
+                                    <div class="row g-pa-20">
                                         {{-- لباس --}}
                                         <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
@@ -1020,8 +1012,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- کیف و کفش --}}
-                                        <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
+                                        {{-- کفش --}}
+                                        <div class="col-sm-6 col-md-2 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
                                                 <a href="{{ route('productMaleShoesList') }}"
                                                    class="nav-link g-color-primary--hover p-0">کفش</a>
@@ -1049,7 +1041,9 @@
                                                                       href="{{ route('menuProduct',['1','shoeCare','f']) }}">مراقبت
                                                         کفش</a></li>
                                             </ul>
-
+                                        </div>
+                                        {{-- کیف --}}
+                                        <div class="col-sm-6 col-md-2 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
                                                 <a href="{{ route('productMaleBagsList') }}"
                                                    class="nav-link g-color-primary--hover p-0">کیف</a>
@@ -1326,7 +1320,7 @@
                                             </div>
                                         </div>
                                         {{-- اکسسوری --}}
-                                        <div class="col-sm-6 col-md-3 g-mb-15 g-mb-0--sm">
+                                        <div class="col-sm-6 col-md-2 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
                                                 <a href="{{ route('productMaleRhinestoneList') }}"
                                                    class="nav-link g-color-primary--hover p-0">اکسسوری</a>
@@ -1458,23 +1452,10 @@
 
                                         </div>
                                     </div>
-                                </div>
-                                <!-- End Mega Menu -->
-                            </li>
-
-                            {{--بچگانه--}}
-                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
-                                data-animation-out="fadeOut" data-position="right" id="kidsCat">
-                                <a id="mega-menu-label-6" class="nav-link g-px-0 g-color-primary--hover" href="#"
-                                   aria-haspopup="true"
-                                   aria-expanded="false">بچگانه
-                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
-
-                                <!-- Mega Menu -->
-                                <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
-                                    aria-labelledby="mega-menu-label-6" style="display: none;">
-                                    <div class="row">
+                                    <h4 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right">
+                                        پوشاک بچگانه
+                                    </h4>
+                                    <div class="row g-pa-20">
                                         {{-- دخترانه --}}
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
@@ -2203,23 +2184,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- End Mega Menu -->
-                            </li>
-
-                            {{--نوزادی--}}
-                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
-                                data-animation-out="fadeOut" data-position="right" id="kidsCat">
-                                <a id="mega-menu-label-9" class="nav-link g-px-0 g-color-primary--hover" href="#"
-                                   aria-haspopup="true"
-                                   aria-expanded="false">نوزادی
-                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
-
-                                <!-- Mega Menu -->
-                                <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
-                                    aria-labelledby="mega-menu-label-9" style="display: none;">
-                                    <div class="row">
+                                    <h4 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right">
+                                        پوشاک بچگانه
+                                    </h4>
+                                    <div class="row g-pa-20">
                                         {{-- دخترانه --}}
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
                                             <h4 class="h5 g-font-weight-600 g-mb-15">
@@ -2699,12 +2667,12 @@
                                 <!-- End Mega Menu -->
                             </li>
 
-                            {{--سایر محصولات--}}
+                            {{--لوازم برقی خانگی--}}
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="kidsCat">
                                 <a id="mega-menu-label-10" class="nav-link g-px-0 g-color-primary--hover" href="#"
                                    aria-haspopup="true"
-                                   aria-expanded="false">سایر محصولات
+                                   aria-expanded="false">لوازم خانگی برقی
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
                                 <!-- Mega Menu -->
@@ -2712,11 +2680,221 @@
                                     class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
                                     aria-labelledby="mega-menu-label-9" style="display: none;">
                                     <div class="row">
-                                        {{-- وسایل برقی --}}
-                                        <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
-                                            <h4 class="h5 g-font-weight-600 g-mb-15">
+                                        <div class="col-sm-6 col-md-6 g-mb-15 g-mb-0--sm">
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
                                                 <a href="{{ route('productOtherList') }}"
-                                                   class="nav-link g-color-primary--hover p-0">وسایل برقی</a>
+                                                   class="nav-link g-color-primary--hover p-0">تهویه، سرمایش و گرمایش</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">جارو برقی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">ماشین شوینده</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">یخچال فریزر</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">تلویزیون</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">تلویزیون بر اساس سایز</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">لوازم پخت و پز</a>
+                                            </h4>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 g-mb-15 g-mb-0--sm">
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">اتو</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">نوشیدنی ساز</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">چرخ خیاطی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">خردکن و غذاساز</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">بخارشو</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">تصفیه آب</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">لوازم توکار</a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Mega Menu -->
+                            </li>
+
+                            {{--کالای دیجیتال--}}
+                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
+                                data-animation-out="fadeOut" data-position="right" id="kidsCat">
+                                <a id="mega-menu-label-10" class="nav-link g-px-0 g-color-primary--hover" href="#"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">کالای دیجیتال
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
+
+                                <!-- Mega Menu -->
+                                <div
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
+                                    aria-labelledby="mega-menu-label-9" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6 g-mb-15 g-mb-0--sm">
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">کنسول بازی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">وسایل گیمینگ</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">کامپیوتر و قطعات</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">دوربین و ابزار جانبی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">تجهیزات شبکه</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">مودم</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">تجهیزات امنیتی و نظارتی</a>
+                                            </h4>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 g-mb-15 g-mb-0--sm">
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">لپ تاپ و لوازم جانبی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">پرینتر و قطعات</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">ماشین های اداری</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">تجهیزات دیجیتال اداری</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">ابزار ذخیره سازی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">باتری</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">خانه هوشمند</a>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Mega Menu -->
+                            </li>
+
+                            {{--کالای وارداتی--}}
+                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
+                                data-animation-out="fadeOut" data-position="right" id="kidsCat">
+                                <a id="mega-menu-label-10" class="nav-link g-px-0 g-color-primary--hover" href="#"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">کالای وارداتی
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
+
+                                <!-- Mega Menu -->
+                                <div
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
+                                    aria-labelledby="mega-menu-label-9" style="display: none;">
+                                        <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">ابزار تولید محتوا</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">لوازم شخصی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">لوازم خانگی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">وسایل ارتباطی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">ابزارآلات و تجهیزات صنعتی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">لوازم الکتریکی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">وسایل ورزشی</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">وسایل نقلیه</a>
+                                            </h4>
+                                            <h4 class="h6 g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">محصولات خوراکی</a>
+                                            </h4>
+                                        </div>
+                                </div>
+                                <!-- End Mega Menu -->
+                            </li>
+
+                            {{--سایر کالاها--}}
+                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
+                                data-animation-out="fadeOut" data-position="right" id="kidsCat">
+                                <a id="mega-menu-label-10" class="nav-link g-px-0 g-color-primary--hover" href="#"
+                                   aria-haspopup="true"
+                                   aria-expanded="false">سایر کالاها
+                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
+
+                                <!-- Mega Menu -->
+                                <div
+                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
+                                    aria-labelledby="mega-menu-label-9" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
+                                            {{-- پزشکی و آرایشی و بهداشتی --}}
+                                            <h4 class="h5 g-brd-3 g-pr-5 g-brd-right--lg g-brd-primary g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">پزشکی و آرایشی و بهداشتی</a>
                                             </h4>
                                             <div id="accordion-20" class="u-accordion" role="tablist"
                                                  aria-multiselectable="true">
@@ -2734,7 +2912,7 @@
                                                           <i class="fa fa-angle-down"></i>
                                                           <i class="fa fa-angle-up"></i>
                                                         </span>
-                                                                وسایل دیجیتال
+                                                                پزشکی
                                                             </a>
                                                         </h5>
                                                     </div>
@@ -2744,8 +2922,531 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">محصولات
-                                                                        آمازون</a>
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ماساژور</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        تجهیزات پزشکی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        تجهیزات تنفسی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       ارتوپدی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        کنترل دیابت</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        تجهیزات مصرفی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        دندانپزشکی</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="accordion-21" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-21-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-21-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-21" aria-expanded="false"
+                                                               aria-controls="accordion-21-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                آرایشی و بهداشتی
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-21-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-21-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم آرایشی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        مراقبت پوست</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        مراقبت و زیبایی مو</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم بهداشتی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        عطر و ادکلن</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم شخصی برقی</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- خانه و آشپزخانه --}}
+                                            <h4 class="h5 g-brd-3 g-pr-5 g-brd-right--lg g-brd-primary g-font-weight-600 g-mb-15 g-mt-20">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">خانه و آشپزخانه</a>
+                                            </h4>
+                                            <div id="accordion-22" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-22-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-22-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-22" aria-expanded="false"
+                                                               aria-controls="accordion-22-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                وسایل آشپزخانه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-22-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-22-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       ظروف پخت و پز</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ابزار آشپزی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        تهیه چای و قهوه</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       ظروف آشپزخانه</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        سرو و پذیرایی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        منسوجات آشپزخانه</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم تهیه کیک و دسر</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="accordion-23" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-23-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-23-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-23" aria-expanded="false"
+                                                               aria-controls="accordion-23-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                وسایل خانه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-23-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-23-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       مبل</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        دکوراسیون خانگی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        مبلمان اداری</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       نگهدارنده لباس و لوازم</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        دکوراتیو</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        قاب عکس و تابلو</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        اکسسوری مبل</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        فرش و گلیم</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ملزومات خواب</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="accordion-24" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-24-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-24-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-24" aria-expanded="false"
+                                                               aria-controls="accordion-24-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                بهداشت خانه
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-24-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-24-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       حمام</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        سرویس بهداشتی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        شستشو و نظافت</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       نظافت لباس</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- موبایل و تبلت --}}
+                                            <h4 class="h5 g-brd-3 g-pr-5 g-brd-right--lg g-brd-primary g-font-weight-600 g-mb-15 g-mt-20">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">موبایل و تبلت</a>
+                                            </h4>
+                                            <div id="accordion-25" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-25-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-25-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-25" aria-expanded="false"
+                                                               aria-controls="accordion-25-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                موبایل
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-25-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-25-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       برندها</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم جانبی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        قاب گوشی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       هدفون و هدست</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ساعت و مچ یند هوشمند</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="accordion-26" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-26-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-26-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-26" aria-expanded="false"
+                                                               aria-controls="accordion-26-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                تبلت
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-26-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-26-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       برندها</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        سرفیس تبلت</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        آیپد</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
+                                            {{-- لوازم تحریر و سرگرمی --}}
+                                            <h4 class="h5 g-brd-3 g-pr-5 g-brd-right--lg g-brd-primary g-font-weight-600 g-mb-15">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">لوازم تحریر و سرگرمی</a>
+                                            </h4>
+                                            <div id="accordion-27" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-27-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-27-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-27" aria-expanded="false"
+                                                               aria-controls="accordion-27-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لوازم تحریر
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-27-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-27-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       نوشت افزار</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ابزار طراحی و مهندسی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ملزومات مدرسه</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       ابزار نقاشی و رنگ آمیزی</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="accordion-28" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-28-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-28-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-28" aria-expanded="false"
+                                                               aria-controls="accordion-28-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                سرگرمی
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-28-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-28-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        سرگرمی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        اسباب بازی کودک</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{-- خودرو و موتورسیکلت --}}
+                                            <h4 class="h5 g-brd-3 g-pr-5 g-brd-right--lg g-brd-primary g-font-weight-600 g-mb-15 g-mt-20">
+                                                <a href="{{ route('productOtherList') }}"
+                                                   class="nav-link g-color-primary--hover p-0">خودرو و موتورسیکلت</a>
+                                            </h4>
+                                            <div id="accordion-29" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-29-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-29-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-29" aria-expanded="false"
+                                                               aria-controls="accordion-29-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                لوازم خودرو
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-29-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-29-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم مصرفی</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم یدکی بدنه خودرو</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم داخل کابین خودرو</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم یدکی موتور خودرو</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم جانبی خودرو</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="accordion-30" class="u-accordion" role="tablist"
+                                                 aria-multiselectable="true">
+                                                <div style="direction: rtl"
+                                                     class="card rounded-0 g-bg-transparent g-brd-none">
+                                                    <div id="accordion-30-heading-00"
+                                                         class="u-accordion__header g-pt-0 g-pr-0 g-pl-0"
+                                                         role="tab">
+                                                        <h5 class="mb-0 g-font-size-default g-font-weight-700">
+                                                            <a class="collapsed d-block g-color-black g-text-underline--none--hover"
+                                                               href="#accordion-30-body-00" data-toggle="collapse"
+                                                               data-parent="#accordion-30" aria-expanded="false"
+                                                               aria-controls="accordion-30-body-00">
+                                                        <span class="float-right u-accordion__control-icon g-ml-10">
+                                                          <i class="fa fa-angle-down"></i>
+                                                          <i class="fa fa-angle-up"></i>
+                                                        </span>
+                                                                موتور سیکلت
+                                                            </a>
+                                                        </h5>
+                                                    </div>
+                                                    <div id="accordion-30-body-00" class="collapse" role="tabpanel"
+                                                         aria-labelledby="accordion-30-heading-00">
+                                                        <div class="u-accordion__body g-color-gray-dark-v5 p-0">
+                                                            <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم مصرفی موتور سیکلت</a>
+                                                                </li>
+                                                                <li class="g-mb-5">
+                                                                    <a class="g-color-black"
+                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم یدکی موتور سیکلت</a>
                                                                 </li>
                                                             </ul>
                                                         </div>

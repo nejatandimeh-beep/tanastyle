@@ -3,10 +3,42 @@
 use App\Http\Controllers\SitemapXmlController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
+use Spatie\Sitemap\SitemapGenerator;
+use Spatie\Sitemap\Tags\Url;
+use Spatie\Sitemap\Sitemap;
+use Illuminate\Support\Facades\DB;
+
 // Test Pages
 Route::get('/test', 'Customer\Basic@test')->name('test');
 // site map
-Route::get('/SiteMap', 'SitemapController@index')->name('sitemap');
+
+Route::get('/sitemap.xml', function () {
+    $sitemap = Sitemap::create();
+
+    // 🔹 صفحات اصلی سایت (صفحات ثابت)
+    $sitemap->add(Url::create('/')->setPriority(1.0));
+    $sitemap->add(Url::create('/About-Me')->setPriority(0.7));
+
+    // 🔹 محصولات داینامیک
+    $products = DB::table('product')->get(['slug','updated_at']);
+
+    foreach ($products as $product) {
+        $sitemap->add(
+            Url::create(url('/product/' . $product->slug))
+                ->setLastModificationDate(new \DateTime($product->updated_at ?? now()))
+                ->setChangeFrequency('daily')
+                ->setPriority(0.8)
+        );
+    }
+
+    // ذخیره در فایل public/sitemap.xml
+    $sitemap->writeToFile(public_path('sitemap.xml'));
+
+    return 'Sitemap ساخته شد: ' . url('sitemap.xml');
+});
+
+
+
 // ******************************************** ( Seller Routes ) ******************************************************
 // Seller Auth
 Route::get('/login/seller', 'AuthSeller\LoginController@showSellerLoginForm')->name('sellerLog');
