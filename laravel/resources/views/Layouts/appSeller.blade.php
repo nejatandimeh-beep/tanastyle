@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/unify_1.css') }}">
     <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/vendor/icon-awesome/css/font-awesome.min.css') }}">
+    <link href="{{ asset('css/fontiran.css') }}" rel="stylesheet">
 
     <!-- Cropper img -->
     <link  href="{{ asset('css/cropper.css') }}" rel="stylesheet">
@@ -49,7 +50,7 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto p-0" style="direction: rtl">
                     <li class="nav-item">
-                        <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{ url('/Seller-Panel') }}">صفحه
+                        <a class="nav-link g-mt-20 g-mt-0--lg g-color-primary--hover" href="{{ url('/') }}">صفحه
                             نخست</a>
                     </li>
                 </ul>

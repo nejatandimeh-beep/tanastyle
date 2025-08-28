@@ -1422,11 +1422,12 @@
 
         $modal.on('shown.bs.modal', function () {
             cropper = new Cropper(image, {
-                viewMode: 0,
+                aspectRatio:16/9,
+                viewMode: 1,
                 zoomable: true,
                 background: true,
-                minCropBoxWidth: 400,
-                minCropBoxHeight: 400,
+                minCropBoxWidth: 800,
+                minCropBoxHeight: 450,
                 dragCrop: true,
                 dragMode: 'move',
                 multiple: true,
@@ -1442,8 +1443,8 @@
 
         $('#crop').on('click', function () {
             let canvas = cropper.getCroppedCanvas({
-                width: 400,
-                height: 400
+                width: 800,
+                height: 450
             });
 
             canvas.toBlob(function (blob) {

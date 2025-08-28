@@ -43,7 +43,7 @@
                     <div class="g-pr-15 g-pl-15 g-pl-0--lg g-pt-20">
                         <div style="direction: rtl" id="filterContainer" role="tablist" aria-multiselectable="true">
                             <!-- فیلتر جمسیت -->
-                            <div class="card g-brd-0 g-mb-5">
+                            <div class="{{$gender!='6'?'':'d-none'}} card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-01" class="card-header g-pa-0" role="tab">
                                     <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
                                         <a class="collapsed d-block u-link-v5 g-color-black g-color-primary--hover"
@@ -204,7 +204,7 @@
                             </div>
 
                             <!-- فیلتر طبقه بندی -->
-                            <div class="card g-brd-0 g-mb-5">
+                            <div class="{{$gender!='6'?'':'d-none'}} card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-02" class="card-header g-pa-0" role="tab">
                                     <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
                                         <a class="collapsed d-block u-link-v5 g-color-black g-color-primary--hover"
@@ -553,7 +553,7 @@
                             </div>
 
                             <!-- فیلتر سایز -->
-                            <div class="card g-brd-0 g-mb-5">
+                            <div class="{{$gender!='6'?'':'d-none'}} card g-brd-0 g-mb-5">
                                 <div id="accordion-100-heading-05" class="card-header g-pa-0" role="tab">
                                     <h5 class="g-font-size-15 g-bg-white g-px-0 g-py-10 mb-0">
                                         <a class="collapsed d-block u-link-v5 g-color-black g-color-primary--hover"
@@ -1502,14 +1502,19 @@
                                         </div>
                                     </div>
                                     <div
-                                        class="d-block g-color-black g-font-size-17 g-ml-10">
-                                        <div style="direction: rtl" class="text-left">
-                                            <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                                {{  number_format($row->FinalPriceWithoutDiscount) }}
-                                            </s>
-                                            <span>{{  number_format($row->FinalPrice) }}</span>
-                                            <span
-                                                class="d-block g-color-gray-dark-v5 g-font-size-10">تومان</span>
+                                        class="d-block g-color-black g-font-size-17 g-ml-5">
+                                        <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                            <div>
+                                                <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                                <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                        {{  number_format($row->Discount) }}%
+                                                    </span>
+                                            </div>
+                                            <div>
+                                                <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                                <span
+                                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </figure>

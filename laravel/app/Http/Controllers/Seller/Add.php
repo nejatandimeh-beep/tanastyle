@@ -379,6 +379,7 @@ class Add extends Controller
                 'FinalPriceWithoutDiscount' => $priceWithoutDiscount,
                 'PicPath' => $picPath,
                 'RegDate' => $regDate,
+                'slug' => str_replace(" ", "-", $name) . '-' . str_replace(" ", "-", $model) . '-' . str_replace(" ", "-", $brand),
             ],
         ]);
 
@@ -397,6 +398,7 @@ class Add extends Controller
                     'Qty' => $imageColor[$i]['sizeQty'],
                     'PicNumber' => 'pic'.$repeat[$i],
                     'SampleNumber' => 'sample'.$repeat[$i],
+                    'slug' => str_replace(" ", "-", $name) . '-' . str_replace(" ", "-", $model) . '-' . str_replace(" ", "-", $brand) . '-' . str_replace(" ", "-", $imageColor[0]['color']),
                 ],
             ]);
         }

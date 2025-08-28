@@ -30,9 +30,10 @@ class AddOther extends Controller
         $gender = $data->Gender;
         $cat = $data->Cat;
         $catCode = $data->CatCode;
+        $subCat = $data->SubCat;
         $name = $data->Name;
-        $hintCat = $data->HintCat;
-        return view('Seller.AddOtherProduct', compact('gender', 'cat', 'catCode', 'name', 'hintCat'));
+        $hintCat = $data->HintCat.' ('.$data->HintMinorCat.')';
+        return view('Seller.AddOtherProduct', compact('gender', 'cat', 'catCode', 'name', 'hintCat','subCat'));
     }
 
     public function uploadImage(Request $request)
@@ -115,6 +116,7 @@ class AddOther extends Controller
         $cat = $request->get('cat');
         $catCode = $request->get('catCode');
         $hintCat = $request->get('hintCat');
+        $subCat = $request->get('subCat');
         $name = $request->get('name');
         $model = $request->get('model');
         $brand = $request->get('brand');
@@ -157,6 +159,7 @@ class AddOther extends Controller
                 'GenderCode' => $genderCode,
                 'Cat' => $cat,
                 'CatCode' => $catCode,
+                'SubCat' => $subCat,
                 'HintCat' => $hintCat,
                 'Name' => $name,
                 'Model' => $model,
@@ -169,6 +172,7 @@ class AddOther extends Controller
                 'FinalPriceWithoutDiscount' => $priceWithoutDiscount,
                 'PicPath' => $picPath,
                 'RegDate' => $regDate,
+                'slug' => str_replace(" ", "-", $name) . '-' . str_replace(" ", "-", $model) . '-' . str_replace(" ", "-", $brand),
             ],
         ]);
 
@@ -186,6 +190,7 @@ class AddOther extends Controller
                 'Qty' => $imageColor[0]['sizeQty'],
                 'PicNumber' => 'pic' . (0 + 1),
                 'SampleNumber' => 'sample' . (0 + 1),
+                'slug' => str_replace(" ", "-", $name) . '-' . str_replace(" ", "-", $model) . '-' . str_replace(" ", "-", $brand) . '-' . str_replace(" ", "-", $imageColor[0]['color']),
             ],
         ]);
 

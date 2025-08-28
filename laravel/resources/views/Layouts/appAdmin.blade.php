@@ -21,6 +21,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('assets/css/unify_1.css') }}">
     <link href="{{ asset('css/myStyle.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontiran.css') }}" rel="stylesheet">
 
 </head>
 <body>

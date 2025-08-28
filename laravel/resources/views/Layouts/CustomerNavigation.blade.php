@@ -43,7 +43,7 @@
                             <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
                                 data-animation-out="fadeOut" data-position="right" id="femaleCat">
                                 <a id="mega-menu-label-4" class="nav-link g-px-0 g-color-primary--hover"
-                                   href="{{ route('productFemaleList') }}" aria-haspopup="true"
+                                   href="{{ route('productFashion') }}" aria-haspopup="true"
                                    aria-expanded="false">مد و پوشاک
                                     <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
 
@@ -2682,61 +2682,61 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-md-6 g-mb-15 g-mb-0--sm">
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_1','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">تهویه، سرمایش و گرمایش</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_2','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">جارو برقی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_3','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">ماشین شوینده</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_4','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">یخچال فریزر</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_5','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">تلویزیون</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_6','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">تلویزیون بر اساس سایز</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_7','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">لوازم پخت و پز</a>
                                             </h4>
                                         </div>
                                         <div class="col-sm-6 col-md-6 g-mb-15 g-mb-0--sm">
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_8','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">اتو</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_9','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">نوشیدنی ساز</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_10','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">چرخ خیاطی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_11','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">خردکن و غذاساز</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_12','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">بخارشو</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_13','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">تصفیه آب</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m3_14','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">لوازم توکار</a>
                                             </h4>
                                         </div>
@@ -2760,61 +2760,61 @@
                                     <div class="row">
                                         <div class="col-sm-6 col-md-6 g-mb-15 g-mb-0--sm">
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_1','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">کنسول بازی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_2','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">وسایل گیمینگ</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_5','m6_6']) }}"
                                                    class="nav-link g-color-primary--hover p-0">کامپیوتر و قطعات</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_9','m6_10']) }}"
                                                    class="nav-link g-color-primary--hover p-0">دوربین و ابزار جانبی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_11','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">تجهیزات شبکه</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_14','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">مودم</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_17','18']) }}"
                                                    class="nav-link g-color-primary--hover p-0">تجهیزات امنیتی و نظارتی</a>
                                             </h4>
                                         </div>
                                         <div class="col-sm-6 col-md-6 g-mb-15 g-mb-0--sm">
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_3','m6_4']) }}"
                                                    class="nav-link g-color-primary--hover p-0">لپ تاپ و لوازم جانبی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_7','m6_8']) }}"
                                                    class="nav-link g-color-primary--hover p-0">پرینتر و قطعات</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_11','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">ماشین های اداری</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_12','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">تجهیزات دیجیتال اداری</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_15','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">ابزار ذخیره سازی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_3','m6_16']) }}"
                                                    class="nav-link g-color-primary--hover p-0">باتری</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m6_19','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">خانه هوشمند</a>
                                             </h4>
                                         </div>
@@ -2837,39 +2837,39 @@
                                     aria-labelledby="mega-menu-label-9" style="display: none;">
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_1','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">ابزار تولید محتوا</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_2','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">لوازم شخصی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_3','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">لوازم خانگی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_4','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">وسایل ارتباطی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_5','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">ابزارآلات و تجهیزات صنعتی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_6','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">لوازم الکتریکی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_7','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">وسایل ورزشی</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_8','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">وسایل نقلیه</a>
                                             </h4>
                                             <h4 class="h6 g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="{{ route('productByCode',['m1_9','x']) }}"
                                                    class="nav-link g-color-primary--hover p-0">محصولات خوراکی</a>
                                             </h4>
                                         </div>
@@ -2893,7 +2893,7 @@
                                         <div class="col-sm-6 col-md-4 g-mb-15 g-mb-0--sm">
                                             {{-- پزشکی و آرایشی و بهداشتی --}}
                                             <h4 class="h5 g-brd-3 g-pr-5 g-brd-right--lg g-brd-primary g-font-weight-600 g-mb-15">
-                                                <a href="{{ route('productOtherList') }}"
+                                                <a href="#"
                                                    class="nav-link g-color-primary--hover p-0">پزشکی و آرایشی و بهداشتی</a>
                                             </h4>
                                             <div id="accordion-20" class="u-accordion" role="tablist"
@@ -2922,31 +2922,31 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ماساژور</a>
+                                                                       href="{{ route('productByCode',['m2_1','x']) }}">                                                                        ماساژور</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        تجهیزات پزشکی</a>
+                                                                       href="{{ route('productByCode',['m2_2','x']) }}">                                                                        تجهیزات پزشکی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        تجهیزات تنفسی</a>
+                                                                       href="{{ route('productByCode',['m2_3','x']) }}">                                                                        تجهیزات تنفسی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       ارتوپدی</a>
+                                                                       href="{{ route('productByCode',['m2_4','x']) }}">                                                                       ارتوپدی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        کنترل دیابت</a>
+                                                                       href="{{ route('productByCode',['m2_5','x']) }}">                                                                        کنترل دیابت</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        تجهیزات مصرفی</a>
+                                                                       href="{{ route('productByCode',['m2_6','x']) }}">                                                                        تجهیزات مصرفی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        دندانپزشکی</a>
+                                                                       href="{{ route('productByCode',['m2_7','x']) }}">                                                                        دندانپزشکی</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -2979,27 +2979,27 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم آرایشی</a>
+                                                                       href="{{ route('productByCode',['m2_8','x']) }}">                                                                        لوازم آرایشی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        مراقبت پوست</a>
+                                                                       href="{{ route('productByCode',['m2_9','x']) }}">                                                                        مراقبت پوست</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        مراقبت و زیبایی مو</a>
+                                                                       href="{{ route('productByCode',['m2_10','x']) }}">                                                                        مراقبت و زیبایی مو</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم بهداشتی</a>
+                                                                       href="{{ route('productByCode',['m2_11','x']) }}">                                                                       لوازم بهداشتی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        عطر و ادکلن</a>
+                                                                       href="{{ route('productByCode',['m2_12','x']) }}">                                                                        عطر و ادکلن</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم شخصی برقی</a>
+                                                                       href="{{ route('productByCode',['m2_13','x']) }}">                                                                        لوازم شخصی برقی</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3037,31 +3037,31 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       ظروف پخت و پز</a>
+                                                                       href="{{ route('productByCode',['m4_1','x']) }}">                                                                       ظروف پخت و پز</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ابزار آشپزی</a>
+                                                                       href="{{ route('productByCode',['m4_2','x']) }}">                                                                        ابزار آشپزی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        تهیه چای و قهوه</a>
+                                                                       href="{{ route('productByCode',['m4_3','x']) }}">                                                                        تهیه چای و قهوه</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       ظروف آشپزخانه</a>
+                                                                       href="{{ route('productByCode',['m4_4','x']) }}">                                                                       ظروف آشپزخانه</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        سرو و پذیرایی</a>
+                                                                       href="{{ route('productByCode',['m4_5','x']) }}">                                                                        سرو و پذیرایی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        منسوجات آشپزخانه</a>
+                                                                       href="{{ route('productByCode',['m4_6','x']) }}">                                                                        منسوجات آشپزخانه</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم تهیه کیک و دسر</a>
+                                                                       href="{{ route('productByCode',['m4_7','x']) }}">                                                                        لوازم تهیه کیک و دسر</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3094,39 +3094,39 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       مبل</a>
+                                                                       href="{{ route('productByCode',['m4_8','x']) }}">                                                                       مبل</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        دکوراسیون خانگی</a>
+                                                                       href="{{ route('productByCode',['m4_9','x']) }}">                                                                        دکوراسیون خانگی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        مبلمان اداری</a>
+                                                                       href="{{ route('productByCode',['m4_10','x']) }}">                                                                        مبلمان اداری</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       نگهدارنده لباس و لوازم</a>
+                                                                       href="{{ route('productByCode',['m4_11','x']) }}">                                                                       نگهدارنده لباس و لوازم</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        دکوراتیو</a>
+                                                                       href="{{ route('productByCode',['m4_12','x']) }}">                                                                        دکوراتیو</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        قاب عکس و تابلو</a>
+                                                                       href="{{ route('productByCode',['m4_13','x']) }}">                                                                        قاب عکس و تابلو</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        اکسسوری مبل</a>
+                                                                       href="{{ route('productByCode',['m4_14','x']) }}">                                                                        اکسسوری مبل</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        فرش و گلیم</a>
+                                                                       href="{{ route('productByCode',['m4_15','x']) }}">                                                                        فرش و گلیم</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ملزومات خواب</a>
+                                                                       href="{{ route('productByCode',['m4_16','x']) }}">                                                                        ملزومات خواب</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3159,19 +3159,19 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       حمام</a>
+                                                                       href="{{ route('productByCode',['m4_17','x']) }}">                                                                       حمام</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        سرویس بهداشتی</a>
+                                                                       href="{{ route('productByCode',['m4_18','x']) }}">                                                                        سرویس بهداشتی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        شستشو و نظافت</a>
+                                                                       href="{{ route('productByCode',['m4_19','x']) }}">                                                                        شستشو و نظافت</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       نظافت لباس</a>
+                                                                       href="{{ route('productByCode',['m4_20','x']) }}">                                                                       نظافت لباس</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3209,23 +3209,23 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       برندها</a>
+                                                                       href="{{ route('productByCode',['m5_1','x']) }}">                                                                       برندها</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم جانبی</a>
+                                                                       href="{{ route('productByCode',['m5_2','x']) }}">                                                                        لوازم جانبی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        قاب گوشی</a>
+                                                                       href="{{ route('productByCode',['m5_3','x']) }}">                                                                        قاب گوشی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       هدفون و هدست</a>
+                                                                       href="{{ route('productByCode',['m5_4','x']) }}">                                                                       هدفون و هدست</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ساعت و مچ یند هوشمند</a>
+                                                                       href="{{ route('productByCode',['m5_5','x']) }}">                                                                        ساعت و مچ یند هوشمند</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3258,15 +3258,15 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       برندها</a>
+                                                                       href="{{ route('productByCode',['m5_6','x']) }}">                                                                       برندها</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        سرفیس تبلت</a>
+                                                                       href="{{ route('productByCode',['m5_7','x']) }}">                                                                        سرفیس تبلت</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        آیپد</a>
+                                                                       href="{{ route('productByCode',['m5_8','x']) }}">                                                                        آیپد</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3306,19 +3306,19 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       نوشت افزار</a>
+                                                                       href="{{ route('productByCode',['m7_1','x']) }}">                                                                       نوشت افزار</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ابزار طراحی و مهندسی</a>
+                                                                       href="{{ route('productByCode',['m7_2','x']) }}">                                                                        ابزار طراحی و مهندسی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        ملزومات مدرسه</a>
+                                                                       href="{{ route('productByCode',['m7_3','x']) }}">                                                                        ملزومات مدرسه</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       ابزار نقاشی و رنگ آمیزی</a>
+                                                                       href="{{ route('productByCode',['m7_4','x']) }}">                                                                       ابزار نقاشی و رنگ آمیزی</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3351,11 +3351,11 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        سرگرمی</a>
+                                                                       href="{{ route('productByCode',['m7_5','x']) }}">                                                                        سرگرمی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        اسباب بازی کودک</a>
+                                                                       href="{{ route('productByCode',['m7_6','x']) }}">                                                                        اسباب بازی کودک</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3393,23 +3393,23 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم مصرفی</a>
+                                                                       href="{{ route('productByCode',['m8_1','x']) }}">                                                                       لوازم مصرفی</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم یدکی بدنه خودرو</a>
+                                                                       href="{{ route('productByCode',['m8_2','x']) }}">                                                                        لوازم یدکی بدنه خودرو</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم داخل کابین خودرو</a>
+                                                                       href="{{ route('productByCode',['m8_3','x']) }}">                                                                        لوازم داخل کابین خودرو</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم یدکی موتور خودرو</a>
+                                                                       href="{{ route('productByCode',['m8_4','x']) }}">                                                                       لوازم یدکی موتور خودرو</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم جانبی خودرو</a>
+                                                                       href="{{ route('productByCode',['m8_5','x']) }}">                                                                       لوازم جانبی خودرو</a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -3442,11 +3442,11 @@
                                                             <ul class="list-unstyled p-0  g-pr-20 g-pb-15">
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                       لوازم مصرفی موتور سیکلت</a>
+                                                                       href="{{ route('productByCode',['m8_6','x']) }}">                                                                       لوازم مصرفی موتور سیکلت</a>
                                                                 </li>
                                                                 <li class="g-mb-5">
                                                                     <a class="g-color-black"
-                                                                       href="{{ route('menuProduct',['6','00','a']) }}">                                                                        لوازم یدکی موتور سیکلت</a>
+                                                                       href="{{ route('productByCode',['m8_7','x']) }}">                                                                        لوازم یدکی موتور سیکلت</a>
                                                                 </li>
                                                             </ul>
                                                         </div>

@@ -92,18 +92,32 @@ class Basic extends Controller
 
     public function sameProduct($genderCode, $catCode, $productID, $cat)
     {
-        $similarProduct = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
-            ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
-            ->where('p.Cat', $cat)
-            ->where('p.CatCode', $catCode)
-            ->where('p.GenderCode', $genderCode)
-            ->where('p.ID', '<>', $productID)
-            ->groupBy('p.ID')
-            ->inRandomOrder()
-            ->take(5)
-            ->get();
+        if($genderCode=='6'){
+            $similarProduct = DB::table('product as p')
+                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+                ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+                ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+                ->where('p.CatCode', $catCode)
+                ->where('p.ID', '<>', $productID)
+                ->groupBy('p.ID')
+                ->inRandomOrder()
+                ->take(5)
+                ->get();
+        } else {
+            $similarProduct = DB::table('product as p')
+                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+                ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+                ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+                ->where('p.Cat', $cat)
+                ->where('p.CatCode', $catCode)
+                ->where('p.GenderCode', $genderCode)
+                ->where('p.ID', '<>', $productID)
+                ->groupBy('p.ID')
+                ->inRandomOrder()
+                ->take(5)
+                ->get();
+        }
+
 
         if (count($similarProduct) === 0) {
             $similarProduct = DB::table('product as p')
@@ -179,17 +193,22 @@ class Basic extends Controller
                             </div>
                         </div>
                          <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: ' . $row->sellerName . ' ' . $row->sellerFamily . '</h1>
-                        <div
-                            class="d-block g-color-black g-font-size-17 g-ml-5">
-                            <div style="direction: rtl" class="text-left">
-                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                    ' . number_format($row->FinalPriceWithoutDiscount) . '
-                                </s>
-                                <span>' . number_format($row->FinalPrice) . '</span>
-                                <span
-                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
-                            </div>
-                        </div>
+                        <div class="d-block g-color-black g-font-size-17 g-ml-5">
+    <div style="direction: rtl" class="d-flex justify-content-between text-left">
+        <div>
+            <s class="' . ($row->Discount == 0 ? 'd-none' : '') . ' g-color-gray-light-v2 g-font-weight-500 g-font-size-13">
+                ' . number_format($row->FinalPriceWithoutDiscount) . '
+            </s>
+            <span class="' . ($row->Discount == 0 ? 'd-none' : '') . ' g-color-lightred g-mx-5 g-font-weight-500">
+                ' . number_format($row->Discount) . '%
+            </span>
+        </div>
+        <div>
+             <span>' . number_format($row->FinalPrice) . '</span>
+            <span class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+        </div>
+    </div>
+</div>
                     </figure>
                     <!-- End Product -->
                 </div>';
@@ -1999,6 +2018,29 @@ class Basic extends Controller
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
     }
 
+    public function productAllFashion()
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->whereNotIn('CatCode', ['m1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8'])
+            ->paginate(12);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->whereNotIn('CatCode', ['m1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8'])
+            ->groupBy('p.ID')
+            ->paginate(12);
+
+        $gender = 'All';
+        $catCode = 'all';
+        $title = 'مد و پوشاک';
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
+    }
+
     public function productFemaleClothesList()
     {
         session_start();
@@ -2499,6 +2541,29 @@ class Basic extends Controller
 
         $_SESSION['title'] = isset($data[0]) ? $data[0]->Name . ' ' . $data[0]->Gender : 'نتایج منوی انتخاب شده';
 
+        return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
+    }
+
+    public function productByCode($subCat, $subCat2)
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+
+        $data = DB::table('product')
+            ->select('*')
+            ->whereIn('SubCat', [$subCat, $subCat2])
+            ->paginate(12);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount', 'p.CatCode')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->where('p.SubCat', [$subCat, $subCat2])
+            ->groupBy('p.ID')
+            ->paginate(12);
+
+        $_SESSION['title'] = isset($data[0]) ? $data[0]->Name : 'نتایج منوی انتخاب شده';
+        $gender = '6';
+        $catCode = substr($subCat, 0, 2); //select 2 character from first
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
     }
 

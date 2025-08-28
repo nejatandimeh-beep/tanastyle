@@ -9,9 +9,16 @@
                             <img src="{{asset('img/Banners/new.jpg?v=2')}}" alt="اسلاید 1">
                             <div
                                 style="direction:rtl; position: absolute; top: 37%; right: 22%; border-right: 2px solid #7fc242"
-                                class="text-right g-font-weight-900 g-pr-10 g-font-size-35 g-color-white">
+                                class="text-right g-font-weight-600 g-pr-10 g-font-size-35 g-color-white">
                                 <p class="m-0">داری چیزی میفروشی؟</p>
                                 <p class="m-0 g-bg-white g-color-primary g-px-5 g-font-size-30">پس منتظرت بودیم!</p>
+                                <a style="direction: rtl" href="{{route('sellerLoginMode')}}" class="btn btn-xl g-mt-5 btn-primary col-12 g-font-weight-600 g-letter-spacing-0_5 text-uppercase text-left rounded-0">
+                                    <i class="fa fa-user-plus float-left g-font-size-32 g-ml-15"></i>
+                                    <span class="pull-right text-right">
+                                        <span class="g-font-size-25 g-font-weight-600">ثبت نام</span>
+                                        <span class="d-block g-font-size-13">همین الان غرفه‌ات رو بساز..</span>
+                                      </span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -19,7 +26,7 @@
                         <div style="position: relative;">
                             <img src="{{asset('img/Banners/new2.jpg?v=2')}}" alt="اسلاید 2">
                             <div style="direction:rtl; position: absolute; bottom: 20%" class="text-center col-12">
-                                <p class="m-0 g-color-primary g-font-weight-900 g-font-size-45">ما یه بازار آنلاین
+                                <p class="m-0 g-color-primary g-font-weight-600 g-font-size-45">ما یه بازار آنلاین
                                     هستیم</p>
                                 <p class="m-0 g-color-white g-font-weight-600 g-font-size-33">برای همه مشاغل از کوچک تا
                                     بزرگ</p>
@@ -35,7 +42,7 @@
                                 <p class="m-0 g-font-weight-900  g-color-primary">از همین الان</p>
                                 <p class="m-0 g-font-size-30 g-font-weight-300">تا یکماه آینده ثبت نام کن</p>
                                 <p class="m-0 g-font-size-30 g-font-weight-300">تا به مدت یک هفته</p>
-                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-25">تبلیغت روی
+                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-pa-5 g-font-size-25">تبلیغت روی
                                     بنر اصلی سایت بدرخشه!</p>
                             </div>
                         </div>
@@ -54,10 +61,17 @@
                                 <p class="m-0">داری</p>
                                 <p class="m-0">چیزی</p>
                                 <p class="m-0">می فروشی؟</p>
-                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-25">پس منتظرت
+                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-pa-5 g-font-size-20">پس منتظرت
                                     بودیم!</p>
+                                <a style="direction: rtl" href="{{route('sellerLoginMode')}}" class="btn btn-xl g-mt-5 btn-primary col-12 g-font-weight-600 g-letter-spacing-0_5 text-uppercase rounded-0">
+                                    <i class="fa fa-user-plus float-left g-font-size-32 g-mr-15"></i>
+                                    <span class="pull-right">
+                                        <span class="g-font-size-25 g-font-weight-600">ثبت نام</span>
+                                        <span class="d-block g-font-size-13">غرفه‌ات رو بساز..</span>
+                                      </span>
+                                </a>
                             </div>
-                            <div style="position: absolute; bottom: 20%; right: 5%; width: 200px" class="half-right">
+                            <div style="position: absolute; bottom: 10%; right: 5%; width: 200px" class="half-right">
                                 <img src="{{ asset('img/Logo/logo2.png') }}" alt="فروشگاه بزرگ میوان" class="g-pt-0">
                                 <p style="text-align-last: justify" class="m-0 g-color-white">شرکت تابش پس زمینه
                                     مکریان</p>
@@ -70,7 +84,7 @@
                         <div style="position: relative;">
                             <img src="{{asset('img/Banners/new-mobile2.jpg?v=2')}}" alt="اسلاید 2">
                             <div style="direction:rtl; position: absolute; top: 10%" class="text-center col-12">
-                                <p class="m-0 g-color-primary g-font-weight-800 g-font-size-28">ما یه بازار آنلاین
+                                <p class="m-0 g-color-primary g-font-weight-600 g-font-size-28">ما یه بازار آنلاین
                                     هستیم</p>
                                 <p class="m-0 g-color-white g-font-size-20">برای همه مشاغل از کوچک تا بزرگ</p>
                             </div>
@@ -80,12 +94,12 @@
                         <div style="position: relative">
                             <img src="{{asset('img/Banners/new-mobile3.jpg?v=2')}}" alt="اسلاید 1">
                             <div
-                                style="direction:rtl; position: absolute; top: 40%; left: 7%; border-left: 2px solid #7fc242"
-                                class="half-right text-left g-font-weight-600 g-pl-10 g-font-size-25 g-color-white">
-                                <p class="m-0 g-color-primary">از همین الان</p>
-                                <p class="m-0">تا یکماه آینده ثبت نام کن</p>
-                                <p class="m-0">تا به مدت یک هفته</p>
-                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-px-5 g-font-size-16">تبلیغت روی
+                                style="direction:rtl; position: absolute; left: 7%; top: 40%; border-left: 2px solid #7fc242"
+                                class="half-left text-left g-pl-10 g-font-size-25 g-color-white">
+                                <p class="m-0 g-color-primary g-font-weight-600">از همین الان</p>
+                                <p class="m-0 g-font-size-20 ">تا یکماه آینده ثبت نام کن</p>
+                                <p class="m-0 g-font-size-20 ">تا به مدت یک هفته</p>
+                                <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-pa-5 g-font-size-16">تبلیغت روی
                                     بنر اصلی سایت بدرخشه!</p>
                             </div>
                         </div>
@@ -94,16 +108,15 @@
             </div>
         </div>
         <div style="background-image: linear-gradient(to bottom, rgba(240,240,240,1), #ffffff);"
-             class="g-py-50">
-            <div class="container text-center g-z-index-1">
-                <h1 class="d-none h1 g-color-gray-dark-v3 g-font-weight-600 g-mb-15">فروشگاه آنلاین پوشاک استوک و
-                    تاناکورا tanakora mahabad estok بدلیجات عینک زنانه پوشاک زنانه</h1>
-                <h2 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">میوان
-                    <span class="g-color-gray-dark-v3 ">ویترین دیجیتال کسب‌وکار شما</span></h2>
+             class="g-pb-50 g-pt-20">
+            <div style="direction: rtl" class="container text-center g-z-index-1 g-px-30">
+                <h1 class="d-none h1 g-color-gray-dark-v3 g-font-weight-600 g-mb-15">فروشگاه بزرگ میوان</h1>
+                <h1 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">میوان
+                    <span class="g-color-gray-dark-v3 ">ویترین دیجیتال کسب‌ و کار شما</span></h1>
 
-                <h3 class="g-color-primary g-font-weight-600 g-mb-15 smallDevice">میوان
-                    <span class="g-color-gray-dark-v3">ویترین دیجیتال کسب‌وکار شما</span></h3>
-                <h4 class="g-color-gray-dark-v3  g-font-weight-600 g-mb-30">از میوان به بازار، فقط یک کلیک فاصله‌ست</h4>
+                <h1 class="h2 g-color-primary g-font-weight-600 g-mb-15 smallDevice">میوان
+                    <span class="g-color-gray-dark-v3">ویترین دیجیتال کسب‌ و کار شما</span></h1>
+                <h4 class="g-color-gray-dark-v5 g-mb-30">از میوان به بازار تنها یک کلیک فاصله‌ست..</h4>
                 <!-- Promo Blocks - Form -->
                 <form style="direction: rtl" class="align-self-center text-center">
                     <input oninput="productSearch('productSearch',$(this).attr('value'))"
@@ -203,27 +216,32 @@
                                                     </span>
                                                 </h4>
                                                 <div>
-                                                    <span class="g-ml-5">سایز
+                                                    <span class="g-ml-5 {{ $row->Size =='--'?'d-none':'' }}">سایز
                                                         <span class="g-color-primary">{{ $row->Size }}</span>
                                                     </span>
                                                     <span>رنگ
                                                     <span class="g-color-primary">{{ $row->Color }}</span>
                                                 </span>
                                                 </div>
-                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}">موجودی <span
+                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
                                                         id="{{ 'cartQty'.$key }}"
-                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار</span>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="text-left">
-                                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
-                                                </s>
-                                                <span>{{ number_format($row->FinalPrice) }}</span>
-                                                <span
-                                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                                <div>
+                                                    <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                        {{  number_format($row->Discount) }}%
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                                    <span
+                                                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </figure>
@@ -296,27 +314,32 @@
                                             </span>
                                                 </h4>
                                                 <div>
-                                            <span class="g-ml-5">سایز
+                                            <span class="g-ml-5 {{ $row->Size =='--'?'d-none':'' }}">سایز
                                                 <span class="g-color-primary">{{ $row->Size }}</span>
                                             </span>
                                                     <span>رنگ
                                                 <span class="g-color-primary">{{ $row->Color }}</span>
                                             </span>
                                                 </div>
-                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}">موجودی <span
+                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
                                                         id="{{ 'cartQty'.$key }}"
-                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="text-left">
-                                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
-                                                </s>
-                                                <span>{{ number_format($row->FinalPrice) }}</span>
-                                                <span
-                                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                                <div>
+                                                    <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                        {{  number_format($row->Discount) }}%
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                                    <span
+                                                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </figure>
@@ -389,27 +412,32 @@
                                             </span>
                                                 </h4>
                                                 <div>
-                                            <span class="g-ml-5">سایز
+                                            <span class="g-ml-5 {{ $row->Size =='--'?'d-none':'' }}">سایز
                                                 <span class="g-color-primary">{{ $row->Size }}</span>
                                             </span>
                                                     <span>رنگ
                                                 <span class="g-color-primary">{{ $row->Color }}</span>
                                             </span>
                                                 </div>
-                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}">موجودی <span
+                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
                                                         id="{{ 'cartQty'.$key }}"
-                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="text-left">
-                                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
-                                                </s>
-                                                <span>{{ number_format($row->FinalPrice) }}</span>
-                                                <span
-                                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                                <div>
+                                                    <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                        {{  number_format($row->Discount) }}%
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                                    <span
+                                                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </figure>
@@ -482,29 +510,35 @@
                                             </span>
                                                 </h4>
                                                 <div>
-                                            <span class="g-ml-5">سایز
+                                            <span class="g-ml-5 {{ $row->Size =='--'?'d-none':'' }}">سایز
                                                 <span class="g-color-primary">{{ $row->Size }}</span>
                                             </span>
                                                     <span>رنگ
                                                 <span class="g-color-primary">{{ $row->Color }}</span>
                                             </span>
                                                 </div>
-                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}">موجودی <span
+                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
                                                         id="{{ 'cartQty'.$key }}"
-                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="text-left">
-                                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
-                                                </s>
-                                                <span>{{  number_format($row->UnitPrice) }}</span>
-                                                <span
-                                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                                <div>
+                                                    <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                        {{  number_format($row->Discount) }}%
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                                    <span
+                                                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                                </div>
                                             </div>
                                         </div>
+
                                     </figure>
                                 </div>
                                 <!-- End Product -->
@@ -575,26 +609,31 @@
                                             </span>
                                                 </h4>
                                                 <div>
-                                            <span class="g-ml-5">سایز
+                                            <span class="g-ml-5 {{ $row->Size =='--'?'d-none':'' }}">سایز
                                                 <span class="g-color-primary">{{ $row->Size }}</span>
                                             </span>
                                                     <span>رنگ
                                                 <span class="g-color-primary">{{ $row->Color }}</span>
                                             </span>
                                                 </div>
-                                                <span>موجودی <span id="{{ 'cartQty'.$key }}"
-                                                                   class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                                                <span><span id="{{ 'cartQty'.$key }}"
+                                                                   class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="text-left">
-                                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
-                                                </s>
-                                                <span>{{ number_format($row->FinalPrice) }}</span>
-                                                <span
-                                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                                <div>
+                                                    <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                        {{  number_format($row->Discount) }}%
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                                    <span
+                                                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </figure>
@@ -667,27 +706,32 @@
                                             </span>
                                                 </h4>
                                                 <div>
-                                            <span class="g-ml-5">سایز
+                                            <span class="g-ml-5 {{ $row->Size =='--'?'d-none':'' }}">سایز
                                                 <span class="g-color-primary">{{ $row->Size }}</span>
                                             </span>
                                                     <span>رنگ
                                                 <span class="g-color-primary">{{ $row->Color }}</span>
                                             </span>
                                                 </div>
-                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}">موجودی <span
+                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}">در انبار <span
                                                         id="{{ 'cartQty'.$key }}"
                                                         class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="text-left">
-                                                <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                                    {{  number_format($row->FinalPriceWithoutDiscount) }}
-                                                </s>
-                                                <span>{{  number_format($row->FinalPrice) }}</span>
-                                                <span
-                                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                                <div>
+                                                    <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                        {{  number_format($row->Discount) }}%
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                                    <span
+                                                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                                </div>
                                             </div>
                                         </div>
                                     </figure>

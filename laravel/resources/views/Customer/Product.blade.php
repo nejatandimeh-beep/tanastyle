@@ -280,7 +280,7 @@
             <div style="direction: rtl; position: relative" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
 
                 <div class="magnifier-preview g-z-index-4" onclick="$('#productName').removeAttr('style')" id="preview" style="position:absolute; width: 445px; height: 556px"></div>
-                <div style="min-height: 556px">
+                <div>
                     <!-- bigDevice -->
                     <header class="d-flex justify-content-between bigDevice">
                         <!-- Article Icons -->
@@ -288,7 +288,7 @@
                             <h1
                                 class="d-flex g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}
                                 <span id="productGender" class="{{ $data->GenderCode==='6'?'d-none':'' }} align-self-center g-font-size-13 g-mx-5">{{ $data->Gender }}</span>
-                                <span style="text-overflow: ellipsis; overflow: hidden; width: 200px;" id="productModel" class="align-self-center g-font-size-13">{{ $data->Model }}</span>
+                                <span style="text-overflow: ellipsis; overflow: hidden; width: 200px;" id="productModel" class="align-self-center g-font-size-13 g-mr-5">{{ $data->Model }}</span>
                             </h1>
                         </div>
                         <div style="direction: ltr"
@@ -363,15 +363,15 @@
                         <fieldset class="d-inline-block g-ml-60--lg col-12 col-lg-5 p-0">
                             <div class="d-inline-block amountLine">
                                 <span id="productUnitPrice"
-                                      class="d-inline-block align-middle g-color-red g-font-size-20">{{ number_format($data->FinalPriceWithoutDiscount) }}</span>
-                                <span class="g-font-size-12 g-color-red g-mr-minus-5">تومان</span>
+                                      class="d-inline-block align-middle g-color-red g-font-size-20">{{ $data->Discount==0 ? '':number_format($data->FinalPriceWithoutDiscount) }}</span>
+                                <span class="{{ $data->Discount==0 ? 'd-none':''}} g-font-size-12 g-color-red g-mr-minus-5">تومان</span>
                             </div>
                             <span
-                                class="d-inline-block align-middle g-bg-red g-color-white g-font-size-12 g-py-3 g-px-8">{{$data->Discount}} درصد</span>
+                                class="{{ $data->Discount==0 ? 'd-none':'d-inline-block'}} align-middle g-bg-red g-color-white g-font-size-12 g-py-3 g-px-8">{{$data->Discount}} درصد</span>
                         </fieldset>
                         <fieldset class="d-inline-block col-12 col-lg-5 p-0">
                             <span id="productFinalPrice"
-                                  class="d-inline-block align-middle g-color-primary g-font-size-25">{{ number_format($data->FinalPrice) }}</span>
+                                  class="d-inline-block align-middle g-color-primary g-font-size-25">{{ number_format($data->PriceWithDiscount) }}</span>
                             <span class="g-font-size-14">تومان</span>
                         </fieldset>
                     </div>

@@ -395,7 +395,8 @@
                     if (data !== 'null') {
                         $('#similarContainer').append(data);
                         $('#similarContainer').removeClass('d-none');
-                        $.HSCore.components.HSCarousel.init('[class*="js-carousel"]');
+                        // بعد از append شدن اسلایدهای جدید
+                        $.HSCore.components.HSCarousel.init($('#js-carousel-1'));
                         return true;
                     } else {
                         stopLoadProduct = true;
@@ -3119,7 +3120,7 @@
                 });
 
                 function startAutoPlay() {
-                    interval = setInterval(nextSlide, 4000);
+                    interval = setInterval(nextSlide, 6000);
                 }
 
                 function stopAutoPlay() {

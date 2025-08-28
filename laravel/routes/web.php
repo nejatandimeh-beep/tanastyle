@@ -156,6 +156,7 @@ Route::get('/', 'Customer\Basic@Master')->name('Master');
 Route::get('/Seller-Register-Mode', 'Customer\Basic@registerMode')->name('registerMode');
 //-------------------[ Customer Product List ]-----------------------
 Route::get('/Customer-Product-More/{cat}', 'Customer\Basic@moreItem')->name('moreItem');
+Route::get('/Customer-Product-Fashion', 'Customer\Basic@productAllFashion')->name('productFashion');
 Route::get('/Customer-Product-Female-List', 'Customer\Basic@productFemaleList')->name('productFemaleList');
 Route::get('/Customer-Product-Female-Clothes-List', 'Customer\Basic@productFemaleClothesList')->name('productFemaleClothesList');
 Route::get('/Customer-Product-Female-Shoes-List', 'Customer\Basic@productFemaleShoesList')->name('productFemaleShoesList');
@@ -175,6 +176,7 @@ Route::get('/Customer-Product-BabyBoy-List', 'Customer\Basic@productBabyBoyList'
 Route::get('/Customer-Product-Other-List', 'Customer\Basic@productOtherList')->name('productOtherList');
 Route::get('/Customer-Product-Search-List/{val}', 'Customer\Basic@productSearchList')->name('productSearchList');
 Route::get('/Customer-Product-/{gender}/{cat}/{catCode}', 'Customer\Basic@product')->name('menuProduct');
+Route::get('/Customer-Product-ByCode/{subCat}/{subCat2}', 'Customer\Basic@productByCode')->name('productByCode');
 // Customer Product Detail
 Route::get('/Product/{id}/{size}', 'Customer\Basic@productDetail')->name('productDetail');
 Route::get('/Customer-Product-Visit/{id}', 'Customer\Basic@productVisit')->name('productVisit');

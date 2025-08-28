@@ -45,7 +45,7 @@
                 <div style="direction: rtl">
                     <input name="hintCat" class="d-none" value="{{ $hintCat }}">
                     <small class="text-muted g-font-size-12">این محصول در دسته بندی <span
-                            class="g-font-weight-600 g-ml-1 g-mr-1">{{$hintCat}}</span> قرار می گیرد.</small>
+                            class="g-font-weight-600 g-ml-1 g-mr-1 g-color-primary">{{$hintCat}}</span> قرار می گیرد.</small>
                 </div>
             </div>
 
@@ -2792,9 +2792,10 @@
                 </div>
 
                 <div style="direction: rtl">
-                    <small class="text-muted g-font-size-12">عددی را که در این قسمت قید می کنید بر اساس درصد محاسبه شده
-                        و از قیمت پایه کسر می گردد و عدد مانده به عنوان سهم شما ثبت می شود.</small><br>
-                    <small class="text-muted g-font-size-12">تخفیف می تواند مشتریان را به خود جلب کند.</small>
+                    <small class="d-block text-muted g-font-size-12 g-color-orange">اگر تخفیف ندارید عدد 0 (صفر) را وارد کنید.</small>
+                    <small class="d-block text-muted g-font-size-12">عددی را که در این قسمت قید می کنید بر اساس درصد محاسبه شده
+                        و از قیمت پایه کسر می گردد و عدد مانده به عنوان سهم شما ثبت می شود.</small>
+                    <small class="d-block text-muted g-font-size-12">تخفیف می تواند مشتریان را به خود جلب کند.</small>
                 </div>
             </div>
 
@@ -2828,8 +2829,8 @@
                     <small class="d-block text-muted g-font-size-12">روش محاسبه قیمت فروش:</small>
                     <small class="d-block text-muted g-font-size-12">تخفیف <small id="dis"></small></small>
                     <small class="d-block text-muted g-font-size-12">سهم فروشنده <small id="sellerShare"></small></small>
-                    <small class="{{Auth::guard('seller')->user()->NationalID===2872282556 ?'d-none':'d-block'}} text-muted g-font-size-12">سهم تانا استایل <small id="companyShare"></small></small>
-                    <small class="d-block text-muted g-font-size-12">9% ارزش افزوده <small id="exValue"></small></small>
+                    <small class="text-muted g-font-size-12">کارمزد خدمات پلتفرم <small id="companyShare"></small></small>
+{{--                    <small class="d-block text-muted g-font-size-12">9% ارزش افزوده <small id="exValue"></small></small>--}}
                 </div>
             </div>
 
@@ -2860,7 +2861,7 @@
                     <small class="d-block text-muted g-font-size-12">روش محاسبه قیمت فروش:</small>
                     <small class="d-block text-muted g-font-size-12">تخفیف <small id="dis"></small></small>
                     <small class="d-block text-muted g-font-size-12">سهم فروشنده <small id="sellerShare"></small></small>
-                    <small class="{{Auth::guard('seller')->user()->NationalID===2872282556 ?'d-none':'d-block'}} text-muted g-font-size-12">کارمزد خدمات پلتفرم <small id="companyShare"></small></small>
+                    <small class="text-muted g-font-size-12">کارمزد خدمات پلتفرم <small id="companyShare"></small></small>
 {{--                    <small class="d-block text-muted g-font-size-12">9% ارزش افزوده <small id="exValue"></small></small>--}}
                 </div>
             </div>
@@ -2939,37 +2940,38 @@
                                accept="image/*">
                     </div>
                 </div>
-                <div class="modal fade bd-example-modal-lg" id="modal" tabindex="-1" role="dialog"
-                     aria-labelledby="exampleModalCenterTitle"
-                     aria-hidden="true">
-                    <div id="picModal" class="modal-dialog modal-lg g-width-auto--lg w-100 mx-lg-auto g-ml-minus-4 modal-dialog-centered" role="document">
-                        <div style="direction:rtl;" class="modal-content">
+                <div style="direction: rtl" class="modal fade" id="modal" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modal-fullscreen g-ma-0 mx-set" role="document">
+                        <div style="height: 100vh;" class="modal-content d-flex flex-column">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLongTitle">برش تصویر</h5>
-                                <button type="button" class="close"
-                                        data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                <h5 class="modal-title">برش تصویر</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body g-pa-25">
-                                <div class="img-container">
-                                    <div class="col-md-12 p-0">
-                                        <img style="width: 100%;" src="" id="sample_image">
-                                    </div>
-                                    {{--                        <div class="col-md-4">--}}
-                                    {{--                            <div class="preview rounded-circle mx-auto g-mt-20"></div>--}}
-                                    {{--                        </div>--}}
+
+                            <div class="modal-body p-0 flex-grow-1 d-flex flex-column">
+                                <div class="img-container flex-grow-1">
+                                    <img id="sample_image" class="w-100 h-100" style="object-fit:contain;">
+                                </div>
+                                <!-- دکمه‌های ابزار -->
+                                <div class="cropper-tools text-center py-2 g-bg-white">
+                                    <button type="button" class="btn btn-light btn-sm" id="zoomIn">🔍+</button>
+                                    <button type="button" class="btn btn-light btn-sm" id="zoomOut">🔍-</button>
+                                    <button type="button" class="btn btn-light btn-sm" id="rotateLeft">↩️</button>
+                                    <button type="button" class="btn btn-light btn-sm" id="rotateRight">↪️</button>
+                                    <button type="button" class="btn btn-light btn-sm" id="reset">♻️</button>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button"
-                                        class="btn btn-secondary rounded-0 g-ml-5" data-dismiss="modal">انصراف
-                                </button>
+
+                            <div class="modal-footer g-bg-white">
+                                <button type="button" class="btn btn-secondary rounded-0 g-ml-5" data-dismiss="modal">انصراف</button>
                                 <button type="button" id="crop" class="btn btn-primary rounded-0">برش</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
 
                 <div style="direction: rtl">
                     <small class="text-muted g-font-size-12">لطفا تا پایان بارگذاری عکس این صفحه را ترک نفرمائید.</small><br>
