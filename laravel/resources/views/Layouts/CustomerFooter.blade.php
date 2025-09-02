@@ -1,5 +1,4 @@
 @section('CustomerFooter')
-
     <div>
         <!-- Contact Info -->
         <div class="g-bg-black g-color-white text-center g-py-100">

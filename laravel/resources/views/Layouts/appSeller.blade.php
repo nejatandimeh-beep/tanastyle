@@ -28,6 +28,12 @@
 
 </head>
 <body>
+<!-- دکمه برگشت شبیه کروم -->
+<button id="backButton" title="بازگشت به صفحه قبل">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
 <div id="app">
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container text-right g-py-5">
@@ -153,6 +159,13 @@
             }
         }
     }
+    document.getElementById('backButton').addEventListener('click', function() {
+        if (document.referrer) {
+            window.history.back();
+        } else {
+            window.location.href = '/';
+        }
+    });
 </script>
 </html>
 

@@ -52,12 +52,12 @@
                                             </span>
                                         </h4>
                                         <div>
-                                            <span class="g-ml-5">سایز <span
-                                                    class="g-color-primary">{{ $row->Size }}</span></span>
+                                            <span class="{{$row->Size=='--'?'d-none':''}} g-ml-5">سایز <span
+                                                    class="{{$row->Size=='--'?'d-none':''}} g-color-primary">{{ $row->Size }}</span></span>
                                             <span>رنگ <span class="g-color-primary">{{ $row->Color }}</span></span>
                                         </div>
-                                        <span>موجودی <span id="{{ 'cartQty'.$key }}"
-                                                           class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                                        <span><span id="{{ 'cartQty'.$key }}"
+                                                           class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
                                     </div>
 
                                     <!-- آیکون و سایز و رنگ -->
@@ -78,17 +78,22 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <h1
-                                    class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: {{ $row->sellerName.' '.$row->sellerFamily }}</h1>
                                 <div
                                     class="d-block g-color-black g-font-size-17 g-ml-5">
-                                    <div style="direction: rtl" class="text-left">
-                                        <s class="g-color-lightred g-font-weight-500 g-font-size-13">
-                                            {{  number_format($row->FinalPriceWithoutDiscount) }}
-                                        </s>
-                                        <span>{{  number_format($row->FinalPrice) }}</span>
-                                        <span
-                                            class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                    <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                        <div>
+                                            <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                            <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                        {{  number_format($row->Discount) }}%
+                                                    </span>
+                                            <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                {{$row->ShopName}}</h1>
+                                        </div>
+                                        <div>
+                                            <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                            <span
+                                                class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <hr class="g-brd-gray-light-v4 g-my-10">
@@ -228,7 +233,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                             <span id="productFinalPrice{{$key}}" class="g-pa-5">
-                                                                {{ number_format($row->FinalPrice) }}
+                                                                {{ number_format($row->PriceWithDiscount) }}
                                                             </span>
                                             </td>
                                             <td class="align-middle text-center d-none">
@@ -238,7 +243,7 @@
                                             </td>
                                             <td class="align-middle text-center">
                                                             <span class="g-pa-5">
-                                                                {{ $row->sellerName.' '.$row->sellerFamily }}
+                                                                {{ $row->ShopName }}
                                                             </span>
                                             </td>
                                             <td class="align-middle text-center">

@@ -22,12 +22,11 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicon-16x16.png')}}">
-    <link rel="manifest" href="{{asset('site.webmanifest')}}">
     <link rel="stylesheet" href="{{ asset('css/swiper-bundle.css') }}">
     <link href="{{ asset('css/fontiran.css') }}" rel="stylesheet">
 
     <!--My Style-->
-    <link href="{{ asset('css/myStyle.css?v=dsv3wfs1we13e3') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css?v=28o85') }}" rel="stylesheet">
 <!--Unify Style-->
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">

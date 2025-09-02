@@ -279,14 +279,14 @@
             {{--اطلاعات محصول--}}
             <div style="direction: rtl; position: relative" class="col-lg-6 g-mb-30--lg g-pl-0--lg">
 
-                <div class="magnifier-preview g-z-index-4" onclick="$('#productName').removeAttr('style')" id="preview" style="position:absolute; width: 445px; height: 556px"></div>
+                <div class="magnifier-preview g-z-index-4 bigDevice" onclick="$('#productName').removeAttr('style')" id="preview" style="position:absolute; width: 445px; height: 556px"></div>
                 <div>
                     <!-- bigDevice -->
                     <header class="d-flex justify-content-between bigDevice">
                         <!-- Article Icons -->
                         <div class="align-self-center">
                             <h1
-                                class="d-flex g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Name }}
+                                class="d-flex g-font-size-18 g-font-weight-600 g-color-black mb-0">{{ $data->Name }}
                                 <span id="productGender" class="{{ $data->GenderCode==='6'?'d-none':'' }} align-self-center g-font-size-13 g-mx-5">{{ $data->Gender }}</span>
                                 <span style="text-overflow: ellipsis; overflow: hidden; width: 200px;" id="productModel" class="align-self-center g-font-size-13 g-mr-5">{{ $data->Model }}</span>
                             </h1>
@@ -339,19 +339,19 @@
                     <div class="align-self-center g-mb-15">
                         <h1 id="productName" style="text-overflow: ellipsis; overflow: hidden; width: 100%; white-space: nowrap;"
                             onclick="$(this).removeAttr('style')"
-                            class="g-font-size-14 g-font-size-18--lg g-color-black mb-2">
+                            class="g-font-size-18 g-font-weight-600 g-color-black mb-2">
                             {{ $data->Name }}
                             <span
-                                class="g-font-size-14 g-font-size-18--lg g-color-black mb-0">{{ $data->Model }}</span>
+                                class="g-font-size-18 g-color-black mb-0">{{ $data->Model }}</span>
                             <span
                                 class="h5 g-color-black mb-2">{{ $data->Brand }}</span>
                         </h1>
 
                         <h1
-                            class="d-block h6 g-font-weight-300 g-color-black mb-2">فروشنده: {{ $data->sellerName.' '.$data->sellerFamily }}</h1>
+                            class="d-block h6 g-font-weight-600 g-font-size-20 g-color-black mb-2"> فروشنده: <a class="g-color-primary" href="{{route('CustomerSellerPanel',$data->sellerID)}}">{{ $data->ShopName }}</a></h1>
 
                         <h1
-                            class="d-block h6 g-font-weight-300 g-color-black mb-2">کد محصول: <span id="detailID" class="g-font-weight-600"></span></h1>
+                            class="d-block h6 g-color-black mb-2">کد محصول: <span id="detailID" class="g-font-weight-600"></span></h1>
                     </div>
 
                     {{--توضیحات--}}
@@ -639,18 +639,18 @@
                                     <span id="popularPost"
                                           class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
                                         <span id="postPrice">{{isset($sendAddress->ID) && $sendAddress->State==2 && $sendAddress->City==36?number_format($postPriceCost->Mahabad):number_format($postPriceCost->OtherCity)}}</span>
-                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                        <span class="g-font-size-12 g-mr-5">تومان</span>
                                     </span>
                                     <span  id="tPaxPost"
                                            class="d-none u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 text-center">هزینه پستی:
                                         <span id="tpaxPrice" class="d-none">0</span>
-                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">پرداخت در محل</span>
+                                        <span class="g-font-size-12 g-mr-5">پرداخت در محل</span>
                                     </span>
                                     {{--مبلغ فاکتور--}}
                                     <span
                                         class="d-block u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
                                             id="orderPrice"></span>
-                                        <span class="g-font-size-12 g-font-weight-300 g-mr-5">تومان</span>
+                                        <span class="g-font-size-12 g-mr-5">تومان</span>
                                     </span>
                                     <span
                                         class="d-none u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-16 g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center">مبلغ کل فاکتور: <span
@@ -676,14 +676,14 @@
                                     @else
                                         <div id="addressContainer">
                                             <div
-                                                class="d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg g-pt-10 text-right">
+                                                class="d-lg-inline-block g-font-size-16 g-mr-5--lg g-pt-10 text-right">
                                                 <h5 class="d-lg-inline-block d-block g-color-gray-dark-v2">آدرس
                                                     ارسال:</h5>
                                                 <span id="receiverState" class="d-none">{{ $sendAddress->State }}</span>
                                                 <span id="receiverCity" class="d-none">{{ $sendAddress->City }}</span>
                                                 <span class="receiverStateCity"></span>
                                                 <span id="addressID"
-                                                      class="d-block d-lg-inline-block g-font-size-16 g-font-weight-300 g-mr-5--lg text-justify"> {{$sendAddress->Address}}
+                                                      class="d-block d-lg-inline-block g-font-size-16 g-mr-5--lg text-justify"> {{$sendAddress->Address}}
                                                     <strong class="g-color-gray-dark-v2 g-mr-5">گیرنده:</strong> {{$sendAddress->ReceiverName.' '.$sendAddress->ReceiverFamily}}
                                                     <strong class="g-color-gray-dark-v2 g-mr-5">شماره تماس:</strong> {{$sendAddress->Mobile}}</span>
                                             </div>

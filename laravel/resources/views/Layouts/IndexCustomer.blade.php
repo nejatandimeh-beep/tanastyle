@@ -32,6 +32,7 @@
     <script type="text/javascript" src="{{ asset('js/Magnifier.js?v=3') }}"></script>
     @break
     @case(strpos($_SERVER['REQUEST_URI'],'/Customer-Product'))
+    @case(strpos($_SERVER['REQUEST_URI'],'/Customer-SellerPanel'))
     <!--تخفیفات ویژه-->
     <script src="{{ asset('assets/js/components/hs.carousel.js') }}"></script>
     <script

@@ -1,6 +1,18 @@
 @section('CustomerNavigation')
     <body class="customerPanel">
-    {{--    <div id="load" class="load"></div>--}}
+    <!-- Global Loader -->
+    <div id="global-loader">
+        <div class="loader-container">
+            <div class="logo-wrapper">
+                <img src="{{ asset('img/Logo/logo2.png') }}" alt="Logo">
+                <span class="particle"></span>
+                <span class="particle"></span>
+                <span class="particle"></span>
+            </div>
+            <div class="loader-text">میوان، مهمانی برای همه</div>
+        </div>
+    </div>
+
     <span id="loginAlert" class="d-none">{{ (isset(Auth::user()->id)) ? 'login':'logout' }}</span>
     <header id="js-header" class="u-header u-header--static">
         <div class="u-header__section u-header__section--light g-bg-white g-transition-0_3 g-pt-10 g-pb-10--lg">
@@ -52,7 +64,7 @@
                                     class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-pa-30 g-mb-25 g-mt-17 g-mt-7--lg--scrolling"
                                     aria-labelledby="mega-menu-label-4" style="display: none;">
                                     <h4 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark rounded-0 g-mb-5 text-right">
-                                        پوشاک زنانه
+                                        <a class="nav-link" href="{{route('productFemaleList')}}">پوشاک زنانه</a>
                                     </h4>
                                     <div class="row g-pa-20">
                                         {{-- لباس --}}
@@ -3458,65 +3470,6 @@
                                 </div>
                                 <!-- End Mega Menu -->
                             </li>
-
-                            {{--فروش ویژه--}}
-                            <li class="hs-has-mega-menu nav-item g-mx-10--lg g-mx-15--xl" data-animation-in="fadeIn"
-                                data-animation-out="fadeOut" data-position="right" id="spacialSale">
-                                <a id="mega-menu-label-2" class="nav-link g-px-0 g-color-primary--hover" href="#"
-                                   aria-haspopup="true"
-                                   aria-expanded="false">فروش ویژه
-                                    <i class="icon-arrow-down align-middle g-font-size-11 g-mr-7"></i></a>
-
-                                <!-- Mega Menu -->
-                                <div
-                                    class="w-100 hs-mega-menu u-shadow-v11 g-text-transform-none g-font-weight-400 g-brd-top g-brd-primary g-brd-top-2 g-bg-white g-mb-25 g-pa-30 g-mt-17 g-mt-7--lg--scrolling animated hs-position-right fadeOut"
-                                    aria-labelledby="mega-menu-label-2" style="display: none;">
-                                    <div class="row align-items-stretch text-left">
-                                        <div class="col-md-4 g-mb-30 g-mb-0--md">
-                                            <article class="u-block-hover">
-                                                <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                                                     src="{{ asset('img/Other/bronze.jpg?v=445')}}"
-                                                     alt="تخفیف برنز تاناکورا">
-                                                <div class="g-pos-abs g-bottom-30 g-left-30 custom-bottom">
-                                                    <h2 class="h5 mb-0 g-color-black">تخفیف های برنز</h2>
-                                                    <span class="d-block g-color-black">15 تا 25 درصد</span>
-                                                </div>
-                                                <a class="u-link-v2"
-                                                   href="{{route('spacialSelling',[15, 25])}}"></a>
-                                            </article>
-                                        </div>
-
-                                        <div class="col-md-4 g-mb-30 g-mb-0--md">
-                                            <article class="u-block-hover">
-                                                <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                                                     src="{{ asset('img/Other/silver.jpg?v=445')}}"
-                                                     alt="تخفیف نقره ای تاناکورا">
-                                                <div class="g-pos-abs g-bottom-30 g-left-30 custom-bottom">
-                                                    <h2 class="h5 mb-0 g-color-black">تخفیف های نقره ای</h2>
-                                                    <span class="d-block g-color-black">25 تا 35 درصد</span>
-                                                </div>
-                                                <a class="u-link-v2"
-                                                   href="{{route('spacialSelling',[25, 35])}}"></a>
-                                            </article>
-                                        </div>
-
-                                        <div class="col-md-4 g-mb-30 g-mb-0--md">
-                                            <article class="u-block-hover">
-                                                <img class="w-100 u-block-hover__main--zoom-v1 g-mb-minus-8"
-                                                     src="{{ asset('img/Other/gold.jpg?v=445')}}"
-                                                     alt="تخفیف طلایی تاناکورا">
-                                                <div class="g-pos-abs g-bottom-30 g-left-30 custom-bottom">
-                                                    <h2 class="h5 mb-0 g-color-black">تخفیف های طلایی</h2>
-                                                    <span class="d-block g-color-black">35 درصد به بالا</span>
-                                                </div>
-                                                <a class="u-link-v2"
-                                                   href="{{route('spacialSelling',[35, 99])}}"></a>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- End Mega Menu -->
-                            </li>
                         </ul>
                     </div>
                     <!-- End Navigation -->
@@ -3605,4 +3558,10 @@
             </nav>
         </div>
     </header>
+    <!-- دکمه برگشت شبیه کروم -->
+    <button id="backButton" title="بازگشت به صفحه قبل">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
 @endsection

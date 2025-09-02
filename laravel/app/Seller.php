@@ -18,7 +18,8 @@ class Seller extends Authenticatable
         'name','email', 'password','Family','NationalID',
         'Birthday','Gender','Phone','Mobile','State','City',
         'Address','ShopNumber','HomeAddress','HomePostalCode',
-        'WorkPostalCode','PicPath','Signature','PicPathCard','status'
+        'WorkPostalCode','PicPath','Signature','PicPathCard','status','Category',
+        'HintCategory','CatCode','Bio','Instagram','Telegram','WebSite','CoverPath','ShopName','Bio',
     ];
 
 

@@ -1,5 +1,40 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
+    <script src="/js/app.js?v={{ filemtime(public_path('js/app.js')) }}"></script>
+
+    <script>
+        // ثبت Service Worker بهینه
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(reg => {
+                        console.log('Service Worker فعال شد', reg);
+
+                        // بررسی بروزرسانی Service Worker
+                        reg.onupdatefound = () => {
+                            const newWorker = reg.installing;
+                            newWorker.onstatechange = () => {
+                                if (newWorker.state === 'activated') {
+                                    console.log('نسخه جدید Service Worker فعال شد');
+                                    // اگر بخوای می‌تونی اینجا refresh خودکار صفحه بزنی
+                                    // window.location.reload();
+                                }
+                            };
+                        };
+                    })
+                    .catch(err => console.error('Service Worker ثبت نشد:', err));
+            });
+        }
+    </script>
+    <!-- Modal -->
+    <div style="direction: rtl" id="install-modal">
+        <div class="modal-content">
+            <h2 class="g-font-weight-600">اپلیکیشن میوان را نصب کنید</h2>
+            <p>با نصب اپ، دسترسی سریع و راحت و همچنین تجربه بهتری از وب‌سایت خواهید داشت.</p>
+            <button id="install-btn">نصب اپ</button>
+            <button id="close-btn">بعداً</button>
+        </div>
+    </div>
     <div class="masterPage">
         <div style="background-image: linear-gradient(to bottom, #ffffff,rgba(240,240,240,1));">
             <div class="carousel-container d-lg-block d-none">
@@ -12,7 +47,8 @@
                                 class="text-right g-font-weight-600 g-pr-10 g-font-size-35 g-color-white">
                                 <p class="m-0">داری چیزی میفروشی؟</p>
                                 <p class="m-0 g-bg-white g-color-primary g-px-5 g-font-size-30">پس منتظرت بودیم!</p>
-                                <a style="direction: rtl" href="{{route('sellerLoginMode')}}" class="btn btn-xl g-mt-5 btn-primary col-12 g-font-weight-600 g-letter-spacing-0_5 text-uppercase text-left rounded-0">
+                                <a style="direction: rtl" href="{{route('sellerLoginMode')}}"
+                                   class="btn btn-xl g-mt-5 btn-primary col-12 g-font-weight-600 g-letter-spacing-0_5 text-uppercase text-left rounded-0">
                                     <i class="fa fa-user-plus float-left g-font-size-32 g-ml-15"></i>
                                     <span class="pull-right text-right">
                                         <span class="g-font-size-25 g-font-weight-600">ثبت نام</span>
@@ -26,6 +62,7 @@
                         <div style="position: relative;">
                             <img src="{{asset('img/Banners/new2.jpg?v=2')}}" alt="اسلاید 2">
                             <div style="direction:rtl; position: absolute; bottom: 20%" class="text-center col-12">
+                                <p class="m-0 g-color-white g-font-weight-600 g-font-size-45">میوان مهمانی برای همه</p>
                                 <p class="m-0 g-color-primary g-font-weight-600 g-font-size-45">ما یه بازار آنلاین
                                     هستیم</p>
                                 <p class="m-0 g-color-white g-font-weight-600 g-font-size-33">برای همه مشاغل از کوچک تا
@@ -38,8 +75,8 @@
                             <img src="{{asset('img/Banners/new3.jpg?v=2')}}" alt="اسلاید 1">
                             <div
                                 style="direction:rtl; position: absolute; top: 22%; right: 31%; border-right: 2px solid #7fc242"
-                                class="text-right g-font-weight-900 g-pr-10 g-font-size-40 g-color-white">
-                                <p class="m-0 g-font-weight-900  g-color-primary">از همین الان</p>
+                                class="text-right g-font-weight-800 g-pr-10 g-font-size-40 g-color-white">
+                                <p class="m-0 g-color-primary">از همین الان</p>
                                 <p class="m-0 g-font-size-30 g-font-weight-300">تا یکماه آینده ثبت نام کن</p>
                                 <p class="m-0 g-font-size-30 g-font-weight-300">تا به مدت یک هفته</p>
                                 <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-pa-5 g-font-size-25">تبلیغت روی
@@ -63,7 +100,8 @@
                                 <p class="m-0">می فروشی؟</p>
                                 <p class="m-0 g-bg-white-opacity-0_9 g-color-primary g-pa-5 g-font-size-20">پس منتظرت
                                     بودیم!</p>
-                                <a style="direction: rtl" href="{{route('sellerLoginMode')}}" class="btn btn-xl g-mt-5 btn-primary col-12 g-font-weight-600 g-letter-spacing-0_5 text-uppercase rounded-0">
+                                <a style="direction: rtl" href="{{route('sellerLoginMode')}}"
+                                   class="btn btn-xl g-mt-5 btn-primary col-12 g-font-weight-600 g-letter-spacing-0_5 text-uppercase rounded-0">
                                     <i class="fa fa-user-plus float-left g-font-size-32 g-mr-15"></i>
                                     <span class="pull-right">
                                         <span class="g-font-size-25 g-font-weight-600">ثبت نام</span>
@@ -226,14 +264,18 @@
                                                 <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
                                                         id="{{ 'cartQty'.$key }}"
                                                         class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار</span>
+                                                <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                    {{$row->ShopName}}</h1>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                            <div style="direction: rtl"
+                                                 class="d-flex justify-content-between text-left">
                                                 <div>
                                                     <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
-                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                    <span
+                                                        class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
                                                         {{  number_format($row->Discount) }}%
                                                     </span>
                                                 </div>
@@ -253,7 +295,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame g-pb-5">
+                                        class="g-px-10 g-pt-10 productFrame g-pb-30">
                                     <div>
                                         <a href="{{ route('moreItem','newProduct') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -275,7 +317,7 @@
                 </div>
             </div>
         </div>
-        <div id="newProductContainer">
+        <div id="glass">
             <div class="container g-pt-50 g-mb-10 g-brd-bottom g-brd-gray-light-v4">
                 <h4 class="text-lg-right text-center g-my-20 g-my-10--lg">عینک</h4>
             </div>
@@ -324,14 +366,18 @@
                                                 <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
                                                         id="{{ 'cartQty'.$key }}"
                                                         class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
+                                                <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                    {{$row->ShopName}}</h1>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                            <div style="direction: rtl"
+                                                 class="d-flex justify-content-between text-left">
                                                 <div>
                                                     <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
-                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                    <span
+                                                        class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
                                                         {{  number_format($row->Discount) }}%
                                                     </span>
                                                 </div>
@@ -351,7 +397,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame g-pb-5">
+                                        class="g-px-10 g-pt-10 productFrame g-pb-30">
                                     <div>
                                         <a href="{{ route('moreItem','730') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -373,7 +419,7 @@
                 </div>
             </div>
         </div>
-        <div id="newProductContainer">
+        <div id="dress">
             <div class="container g-pt-50 g-mb-10 g-brd-bottom g-brd-gray-light-v4">
                 <h4 class="text-lg-right text-center g-my-20 g-my-10--lg">لباس</h4>
             </div>
@@ -422,14 +468,18 @@
                                                 <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
                                                         id="{{ 'cartQty'.$key }}"
                                                         class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
+                                                <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                    {{$row->ShopName}}</h1>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                            <div style="direction: rtl"
+                                                 class="d-flex justify-content-between text-left">
                                                 <div>
                                                     <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
-                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                    <span
+                                                        class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
                                                         {{  number_format($row->Discount) }}%
                                                     </span>
                                                 </div>
@@ -449,7 +499,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame g-pb-5">
+                                        class="g-px-10 g-pt-10 productFrame g-pb-30">
                                     <div>
                                         <a href="{{ route('moreItem','24') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -471,7 +521,7 @@
                 </div>
             </div>
         </div>
-        <div id="newProductContainer">
+        <div id="earrings">
             <div class="container g-pt-50 g-mb-10 g-brd-bottom g-brd-gray-light-v4">
                 <h4 class="text-lg-right text-center g-my-20 g-my-10--lg">گوشواره</h4>
             </div>
@@ -520,14 +570,18 @@
                                                 <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
                                                         id="{{ 'cartQty'.$key }}"
                                                         class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
+                                                <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                    {{$row->ShopName}}</h1>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                            <div style="direction: rtl"
+                                                 class="d-flex justify-content-between text-left">
                                                 <div>
                                                     <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
-                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                    <span
+                                                        class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
                                                         {{  number_format($row->Discount) }}%
                                                     </span>
                                                 </div>
@@ -548,7 +602,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame g-pb-5">
+                                        class="g-px-10 g-pt-10 productFrame g-pb-30">
                                     <div>
                                         <a href="{{ route('moreItem','700') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -570,7 +624,7 @@
                 </div>
             </div>
         </div>
-        <div id="newProductContainer">
+        <div id="Bracelets ">
             <div class="container g-pt-50 g-mb-10 g-brd-bottom g-brd-gray-light-v4">
                 <h4 class="text-lg-right text-center g-my-20 g-my-10--lg">دستبند و گردنبند</h4>
             </div>
@@ -617,15 +671,19 @@
                                             </span>
                                                 </div>
                                                 <span><span id="{{ 'cartQty'.$key }}"
-                                                                   class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
+                                                            class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار </span>
+                                                <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                    {{$row->ShopName}}</h1>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                            <div style="direction: rtl"
+                                                 class="d-flex justify-content-between text-left">
                                                 <div>
                                                     <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
-                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                    <span
+                                                        class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
                                                         {{  number_format($row->Discount) }}%
                                                     </span>
                                                 </div>
@@ -645,7 +703,7 @@
                             <div class="g-pb-50">
                                 <!-- Product -->
                                 <figure style="direction: ltr;"
-                                        class="g-px-10 g-py-10 productFrame g-pb-5">
+                                        class="g-px-10 g-pt-10 productFrame g-pb-30">
                                     <div>
                                         <a href="{{ route('moreItem','703') }}" class="customLinkHover">
                                             <img class="img-fluid w-100" loading="lazy"
@@ -667,7 +725,7 @@
                 </div>
             </div>
         </div>
-        <div id="newProductContainer">
+        <div id="spacialDiscount">
             <div class="container g-pt-50 g-mb-10 g-brd-bottom g-brd-gray-light-v4">
                 <h4 class="text-lg-right text-center g-my-20 g-my-10--lg">تخفیفات ویژه</h4>
             </div>
@@ -716,14 +774,18 @@
                                                 <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}">در انبار <span
                                                         id="{{ 'cartQty'.$key }}"
                                                         class="g-color-primary">{{ $row->Qty }}</span> عدد</span>
+                                                <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                    {{$row->ShopName}}</h1>
                                             </div>
                                         </div>
                                         <div
                                             class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl" class="d-flex justify-content-between text-left">
+                                            <div style="direction: rtl"
+                                                 class="d-flex justify-content-between text-left">
                                                 <div>
                                                     <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
-                                                    <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                                    <span
+                                                        class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
                                                         {{  number_format($row->Discount) }}%
                                                     </span>
                                                 </div>

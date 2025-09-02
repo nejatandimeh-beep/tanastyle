@@ -4,7 +4,6 @@
         <div style="left: 0; background-position: 50% 5% !important; height: 2000px" id="load" class="load"></div>
 
         <div style="direction: rtl" class="row">
-
             <!-- Filters -->
             <div style="display: none" id="filterDiv" class="col-md-3 flex-md-first g-brd-left--lg g-brd-gray-light-v4">
                 <div id="stickyDiv1" class="g-z-index-1">
@@ -1467,38 +1466,35 @@
                                     </div>
 
                                     <!-- مشخصات محصول -->
-                                    <h4 class="h6 g-color-black text-left g-brd-top g-brd-gray-light-v4 g-ml-5 g-mt-5 g-pt-5">
-                                        {{$row->Brand}}
-                                    </h4>
-
                                     <div style="direction: rtl"
-                                         class="media">
+                                         class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
                                         <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
-                                        <div class="d-flex justify-content-between col-12 p-0">
-                                            <div class="d-flex flex-column">
-                                                <h1 class="h6 g-color-black my-1">
+                                        <div class="d-flex flex-column col-12 g-px-5">
+                                            <h1 class="h6 g-color-black my-1 text-left">
+                                                {{$row->Brand}}
+                                            </h1>
+                                            <h4 style="text-overflow: ellipsis; overflow: hidden; width: 160px; white-space: nowrap;"
+                                                class="h6 g-color-black my-1">
                                                     <span class="u-link-v5 g-color-black"
                                                           tabindex="0">
                                                         {{ $row->Name }}
                                                         <span
-                                                            class="g-font-size-12 g-font-weight-300">{{ $row->Model }}</span>
+                                                            class="g-font-size-12 g-font-weight-300"> {{ $row->Model }}</span>
+                                                        <span
+                                                            class="{{ $row->GenderCode==='6'?'d-none':'' }} g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
                                                     </span>
-                                                </h1>
-                                                <ul style="padding: 0"
-                                                    class="list-unstyled g-color-gray-dark-v4 g-font-size-12 g-mb-5">
-                                                    <li>
-                                                        <a class="g-color-gray-dark-v4 g-color-black--hover g-font-style-normal g-font-weight-600">{{ $row->HintCat.' '.$row->Gender }}</a>
-                                                    </li>
-                                                </ul>
+                                            </h4>
+                                            <div>
+                                                    <span class="g-ml-5 {{ $size[$key]->Size =='--'?'d-none':'' }}">سایز
+                                                        <span class="g-color-primary">{{ $size[$key]->Size }}</span>
+                                                    </span>
+                                                <span>رنگ
+                                                    <span class="g-color-primary">{{ $size[$key]->Color }}</span>
+                                                </span>
                                             </div>
-                                            <a style="cursor: pointer"
-                                               class="u-icon-v1 g-mt-minus-5 g-color-black g-color-primary--hover rounded-circle"
-                                               data-toggle="tooltip"
-                                               data-placement="top"
-                                               href="{{ route('productDetail',[$row->ID,$size[$key]->Size]) }}"
-                                               data-original-title="جزئیات محصول">
-                                                <i class="icon-eye g-line-height-0_7"></i>
-                                            </a>
+                                            <span class="{{ $size[$key]->Qty ==0 ?'opacity-0': '' }}"><span
+                                                    id="{{ 'cartQty'.$key }}"
+                                                    class="g-color-primary">{{ $size[$key]->Qty }}</span> عدد در انبار</span>
                                         </div>
                                     </div>
                                     <div
@@ -1509,6 +1505,8 @@
                                                 <span class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
                                                         {{  number_format($row->Discount) }}%
                                                     </span>
+                                                <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                    {{$size[$key]->ShopName}}</h1>
                                             </div>
                                             <div>
                                                 <span>{{ number_format($row->PriceWithDiscount) }}</span>
@@ -1522,9 +1520,15 @@
                         @endforeach
                     </div>
 
-                    <div style="display: none" id="noProduct">
-                        <div class="noProduct g-mt-100--lg mx-auto"></div>
-                        <p class="text-center">عدم موجودی</p>
+                    <div style="display: none" id="noProduct" class="g-mb-50">
+                        <div class="noProduct mx-auto"></div>
+                        <div style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                            <!-- اسپینر -->
+                            <div class="spinner" style="border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite;"></div>
+                            <!-- متن -->
+                            <p class="text-center g-mt-15 g-mb-0">این کالا در انبار تمام شده است</p>
+                            <h2 style="color:#333; font-size:1.5rem;">در صف موجود کردن کالا در انبار...</h2>
+                        </div>
                     </div>
                     <!-- End Products -->
 

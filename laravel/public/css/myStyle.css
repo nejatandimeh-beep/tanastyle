@@ -429,14 +429,6 @@ input[type=number] {
     color: #72c02c;
 }
 
-.load{
-    width:100%;
-    height:100%;
-    position:absolute;
-    z-index:9999;
-    background: url("/../img/Other/loader.png?v=4") no-repeat 50% 50% rgb(255, 255, 255);
-}
-
 .loadProduct{
     width:200px;
     height:200px;
@@ -452,7 +444,7 @@ input[type=number] {
 }
 
 .noProduct{
-    height:250px;
+    height:210px;
     background-size: contain;
     background:url("/../img/Other/noProduct.gif") no-repeat center center rgb(255, 255, 255)
 }
@@ -1231,3 +1223,152 @@ body a{
     margin: auto;
 }
 
+/* Modal CSS */
+#install-modal {
+    display: none;
+    position: fixed; z-index: 9999;
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    font-family: Arial, sans-serif;
+}
+#install-modal .modal-content {
+    background-color: #fff; margin: 15% auto;
+    padding: 30px 20px; border-radius: 12px;
+    width: 90%; max-width: 400px; text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    animation: fadeIn 0.3s ease-out;
+}
+#install-modal h2 { margin-bottom: 15px; color: #333; }
+#install-modal p { margin-bottom: 25px; color: #555; }
+#install-btn, #close-btn {
+    padding: 10px 25px; margin: 5px; border: none;
+    border-radius: 8px; cursor: pointer; font-size: 16px;
+}
+#install-btn { background-color: #72c02c; color: white; }
+#close-btn { background-color: #555555; color: white; }
+@keyframes fadeIn { from {opacity:0; transform:translateY(-20px);} to {opacity:1; transform:translateY(0);} }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* صفحه کامل */
+#global-loader {
+    position: fixed;
+    top:0; left:0; right:0; bottom:0;
+    background: rgba(255,255,255,0.95);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* کانتینر داخلی */
+.loader-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* لوگو با انیمیشن pulse */
+.logo-wrapper {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+.logo-wrapper img {
+    width: 100px;
+    animation: pulse 1s infinite ease-in-out;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); opacity:0.8; }
+    100% { transform: scale(1); opacity:1; }
+}
+
+/* ذرات کوچک اطراف لوگو */
+.particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #3498db;
+    border-radius: 50%;
+    animation: particleMove 1.2s linear infinite;
+}
+.particle:nth-child(1) { top: -10px; left: 50%; animation-delay: 0s; }
+.particle:nth-child(2) { bottom: -10px; left: 20%; animation-delay: 0.3s; }
+.particle:nth-child(3) { bottom: -10px; right: 20%; animation-delay: 0.6s; }
+
+@keyframes particleMove {
+    0% { transform: translate(0,0) scale(1); opacity:1; }
+    50% { transform: translateY(-15px) scale(0.5); opacity:0.5; }
+    100% { transform: translate(0,0) scale(1); opacity:1; }
+}
+
+/* متن تایپینگ ساده */
+.loader-text {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    color: #333;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 3px solid #3498db;
+    width: 0;
+    animation: typing 2s steps(30) forwards;
+    animation-delay: 0.5s;
+}
+@keyframes typing {
+    from { width: 0; }
+    to { width: 200px; }
+}
+
+.rating span {
+    font-size: 2rem;
+    color: #ccc; /* خاکستری برای ستاره‌های خالی */
+    cursor: pointer;
+    transition: color 0.2s ease;
+    user-select: none;
+}
+
+.rating span.selected {
+    color: #72c02c; /* سبز توپر برای ستاره‌های انتخاب شده */
+}
+
+#backButton {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(9, 9, 9, 0.51);
+    border: 10px solid #72c02c;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, background 0.2s ease;
+    z-index: 9999;
+}
+
+#backButton:hover {
+    transform: scale(1.1);
+    background:  rgba(9, 9, 9, 0.51);
+}
+
+/* حالت موبایل */
+@media (max-width: 767px) {
+    #backButton {
+        width: 40px;
+        height: 40px;
+        bottom: 20px;
+        left: 20px;
+    }
+}
+
+#backButton svg {
+    display: block;
+}

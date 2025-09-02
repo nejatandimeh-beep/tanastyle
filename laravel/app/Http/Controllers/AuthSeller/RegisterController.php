@@ -98,30 +98,38 @@ class RegisterController extends Controller
     {
         $nationalId = $request->get('nationalId');
         $path =  'img/imagesTemp/SellerProfileImage/'. $nationalId . '/';
-
         DB::table('seller_new')
             ->insert([
                 'Name' => $request->get('name'),
                 'Family' => $request->get('family'),
+                'ShopName' => $request->get('shopName'),
                 'Email' => $request->get('email'),
                 'NationalID' => $nationalId,
+                'Category' => $request->get('category'),
+                'HintCategory' => $request->get('hintCategory'),
+                'CatCode' => $request->get('catCode'),
+                'Bio' => $request->get('bio'),
                 'BDay' => $request->get('day'),
                 'BMon' => $request->get('mon'),
                 'BYear' => $request->get('year'),
                 'Gender' => $request->get('gender'),
-                'PrePhone' => $request->get('prePhone'),
-                'Phone' => $request->get('phone'),
+                'PrePhone' => '!',
+                'Phone' => '!',
                 'Mobile' => $request->get('mobile'),
                 'State' => $request->get('state'),
                 'City' => $request->get('city'),
                 'HomeAddress' => $request->get('homeAddress'),
-                'HomePostalCode' => $request->get('homePostalCode'),
+                'HomePostalCode' => '!',
                 'WorkAddress' => $request->get('workAddress'),
-                'WorkPostalCode' => $request->get('workPostalCode'),
-                'ShopNumber' => $request->get('shopNumber'),
+                'WorkPostalCode' => '!',
+                'ShopNumber' => '!',
                 'CreditCard' => (string)$request->get('creditCard4') . (string)$request->get('creditCard3') . (string)$request->get('creditCard2') . (string)$request->get('creditCard1'),
-                'ShabaNo' => (string)$request->get('shabaNo'),
+                'ShabaNo' => '!',
                 'PicPath' => $path,
+                'Instagram' => '!',
+                'Telegram' => '!',
+                'WebSite' => '!',
+                'CoverPath' => '!',
                 'Signature' => $request->get('signature'),
             ]);
 
@@ -135,9 +143,10 @@ class RegisterController extends Controller
 //            'email' => 'required|string|email|max:255|unique:sellers',
 //            'password' => 'required|string|min:8|confirmed',
 //        ]);
+
         $nationalId = $request->get('nationalId');
         $tempPath =  public_path('img\imagesTemp\SellerProfileImage\\') . $nationalId;
-        $path =  public_path('img\SellerProfileImage\\'). $nationalId;
+        $path =  'img/SellerProfileImage/'. $nationalId;
         $file = new Filesystem();
         $file->moveDirectory($tempPath, $path,true);
 
@@ -148,7 +157,12 @@ class RegisterController extends Controller
         $seller = Seller::create([
             'name' => $name,
             'Family' => $family,
+            'ShopName' => $request->get('shopName'),
             'NationalID' => $nationalId,
+            'Category' => $request->get('category'),
+            'HintCategory' => $request->get('HintCategory'),
+            'CatCode' => $request->get('catCode'),
+            'Bio' => $request->get('bio'),
             'Birthday' => $request['year'] . '/' . $request['mon'] . '/' . $request['day'],
             'Gender' => (int)$request['gender'],
             'Phone' => $request['prePhone'] . $request['phone'],
@@ -160,10 +174,14 @@ class RegisterController extends Controller
             'HomeAddress' => $request['homeAddress'],
             'HomePostalCode' => $request['homePostalCode'],
             'WorkPostalCode' => $request['workPostalCode'],
-            'PicPath' => $request['userImage'],
-            'PicPathCard' => $request['nationalityCardImage'],
+            'PicPath' => $path.'/pic11.jpg',
+            'PicPathCard' => $path.'/pic12.jpg',
             'Signature'=>$request['signature'],
             'email' => $request['email'],
+            'Instagram' => '!',
+            'Telegram' => '!',
+            'WebSite' => '!',
+            'CoverPath' => '!',
             'password' => Hash::make($password),
         ]);
 

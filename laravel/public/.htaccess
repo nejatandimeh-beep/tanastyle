@@ -5,8 +5,8 @@
 
     RewriteEngine On
     #redirect without www to www
-    RewriteCond %{HTTP_HOST} ^yourdomain.com [NC]
-    RewriteRule ^(.*)$ http://www.yourdomain.com/$1 [L,R=301]
+    RewriteCond %{HTTP_HOST} ^mevan.ir [NC]
+    RewriteRule ^(.*)$ http://www.mevan.ir/$1 [L,R=301]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d

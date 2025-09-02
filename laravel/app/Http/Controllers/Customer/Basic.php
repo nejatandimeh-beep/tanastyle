@@ -24,7 +24,7 @@ class Basic extends Controller
     public function Master()
     {
         $newProduct = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','ShopName')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->orderBy('p.ID', 'DESC')
@@ -33,7 +33,7 @@ class Basic extends Controller
             ->get();
 
         $glass = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','ShopName')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '730')
@@ -44,7 +44,7 @@ class Basic extends Controller
             ->get();
 
         $earring = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','ShopName')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '700')
@@ -55,7 +55,7 @@ class Basic extends Controller
             ->get();
 
         $bracelet = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','ShopName')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '703')
@@ -66,7 +66,7 @@ class Basic extends Controller
             ->get();
 
         $dress = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','ShopName')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('Cat', '24')
@@ -78,7 +78,7 @@ class Basic extends Controller
         $minDiscount = 1;
         $maxDiscount = 99;
         $discounts = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','ShopName')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->whereBetween('Discount', [$minDiscount, $maxDiscount])
@@ -94,7 +94,7 @@ class Basic extends Controller
     {
         if($genderCode=='6'){
             $similarProduct = DB::table('product as p')
-                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','s.ShopName')
                 ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
                 ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
                 ->where('p.CatCode', $catCode)
@@ -105,7 +105,7 @@ class Basic extends Controller
                 ->get();
         } else {
             $similarProduct = DB::table('product as p')
-                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','s.ShopName')
                 ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
                 ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
                 ->where('p.Cat', $cat)
@@ -121,7 +121,7 @@ class Basic extends Controller
 
         if (count($similarProduct) === 0) {
             $similarProduct = DB::table('product as p')
-                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+                ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','s.ShopName')
                 ->rightJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
                 ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
                 ->where('p.GenderCode', $genderCode)
@@ -188,11 +188,11 @@ class Basic extends Controller
                                         <span class="g-color-primary">' . $row->Color . '</span>
                                     </span>
                                 </div>
-                                <span>موجودی <span id="' . "cartQty" . $key . '"
-                                                   class="g-color-primary">' . $row->Qty . '</span> عدد</span>
+                                <span><span id="' . "cartQty" . $key . '"
+                                                   class="g-color-primary">' . $row->Qty . '</span> عدد در انبار</span>
                             </div>
                         </div>
-                         <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: ' . $row->sellerName . ' ' . $row->sellerFamily . '</h1>
+                         <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: ' . $row->ShopName . '</h1>
                         <div class="d-block g-color-black g-font-size-17 g-ml-5">
     <div style="direction: rtl" class="d-flex justify-content-between text-left">
         <div>
@@ -591,7 +591,7 @@ class Basic extends Controller
         try {
             // گرفتن تمامی جزییات مربوط به محصول کلیک شده
             $data = DB::table('product_cart as pc')
-                ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID', 's.Name as sellerName', 's.Family as sellerFamily')
+                ->select('p.*', 'pd.*', 'pd.ID as ProductDetailID', 's.Name as sellerName', 's.Family as sellerFamily','s.ShopName')
                 ->leftJoin('product_detail as pd', 'pd.ID', '=', 'pc.ProductDetailID')
                 ->leftJoin('product as p', 'p.ID', '=', 'pd.ProductID')
                 ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
@@ -1117,7 +1117,7 @@ class Basic extends Controller
 
         // گرفتن اطلاعات کلی مربوط به محصول کلیک شده
         $data = DB::table('product as p')
-            ->select('p.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('p.*', 's.Name as sellerName', 's.Family as sellerFamily','s.id as sellerID','s.ShopName')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('p.ID', $id)
             ->first();
@@ -1783,19 +1783,34 @@ class Basic extends Controller
         return redirect('/Customer-Connection')->with('status', 'success');
     }
 
+    public function sellerPanel($id)
+    {
+        session_start();
+        $_SESSION['listSkip'] = 0;
+        $seller=DB::table('sellers')
+            ->select('*')
+            ->where('id',$id)
+            ->first();
+
+        $data = DB::table('product as p')
+            ->select('p.*')
+            ->leftJoin('sellers as s', 'p.SellerID', '=', 's.id')
+            ->where('s.id', $id)
+            ->paginate(12);
+
+        $size = DB::table('product as p')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName')
+            ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->leftJoin('sellers as s', 'p.SellerID', '=', 's.id')
+            ->where('s.id', $id)
+            ->groupBy('p.ID')
+            ->paginate(12);
+        return view('Customer.SellerPanel',compact('seller','data','size'));
+    }
+
 // ------------------------------------------[ Products Filter ]--------------------------------------------------------
     public function productFilter($gender, $cat, $size, $priceMin, $priceMax, $color, $filterChange)
     {
-//        $data=[
-//            'gender'=>$gender,
-//            'cat'=>$cat,
-//            'size'=>$size,
-//            'priceMin'=>$priceMin,
-//            'priceMax'=>$priceMax,
-//            'color'=>$color,
-//            'filterChange'=>$filterChange,
-//        ];
-
         session_start();
         if ($filterChange == 1)
             $_SESSION['listSkip'] = 0;
@@ -1813,7 +1828,7 @@ class Basic extends Controller
             $size[0] = '--';
         }
         $data = DB::table('product as p')
-            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily')
+            ->select('p.*', 'pd.*', 's.Name as sellerName', 's.Family as sellerFamily','s.ShopName')
             ->leftJoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->whereIn('p.GenderCode', $gender)
@@ -1883,7 +1898,7 @@ class Basic extends Controller
                 </a>
             </div>
          </div>
-          <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: ' . $row->sellerName . ' ' . $row->sellerFamily . '</h1>
+          <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده: ' . $row->ShopName. '</h1>
           <div
             class="d-block g-color-black g-font-size-17 g-ml-10">
                 <div style="direction: rtl" class="text-left">
@@ -1971,8 +1986,9 @@ class Basic extends Controller
                     ->paginate(12);
 
                 $size = DB::table('product as p')
-                    ->select('pd.Size', 'pd.Color', 'p.ID')
+                    ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName')
                     ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+                    ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
                     ->orderBy('ID', 'DESC')
                     ->groupBy('p.ID')
                     ->paginate(12);
@@ -1987,9 +2003,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.Cat')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->whereIn('Cat', $category)
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->whereIn('p.Cat', $category)
             ->groupBy('p.ID')
             ->paginate(12);
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size', 'title'));
@@ -2006,9 +2023,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '0')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2029,9 +2047,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.CatCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->whereNotIn('CatCode', ['m1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8'])
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->whereNotIn('p.CatCode', ['m1', 'm2', 'm3', 'm4', 'm5', 'm6', 'm7', 'm8'])
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2053,10 +2072,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.CatCode','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '0')
+            ->whereIn('p.CatCode', ['a', 'b', 'c', 'd'])
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2078,10 +2098,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.CatCode','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->where('CatCode', 'e')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '0')
+            ->where('p.CatCode', 'e')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2103,10 +2124,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode','p.CatCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->where('CatCode', 'f')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '0')
+            ->where('p.CatCode', 'f')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2128,10 +2150,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.CatCode','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '0')
+            ->whereIn('p.CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2153,10 +2176,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode','p.CatCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '0')
-            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '0')
+            ->whereIn('p.CatCode', ['n', 'o', 'p', 'q'])
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2177,9 +2201,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '1')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2201,10 +2226,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode','p.CatCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['a', 'b', 'c', 'd'])
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '1')
+            ->whereIn('p.CatCode', ['a', 'b', 'c', 'd'])
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2226,10 +2252,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.CatCode','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->where('CatCode', 'e')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '1')
+            ->where('p.CatCode', 'e')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2251,10 +2278,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode','p.CatCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->where('CatCode', 'f')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '1')
+            ->where('p.CatCode', 'f')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2276,10 +2304,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode','p.CatCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '1')
+            ->whereIn('p.CatCode', ['g', 'h', 'i', 'j', 'k', 'l', 'm'])
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2301,10 +2330,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode','p.CatCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '1')
-            ->whereIn('CatCode', ['n', 'o', 'p', 'q'])
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '1')
+            ->whereIn('p.CatCode', ['n', 'o', 'p', 'q'])
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2325,9 +2355,10 @@ class Basic extends Controller
             ->paginate(10);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '2')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '2')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2348,9 +2379,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '3')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '3')
             ->groupBy('p.ID')
             ->paginate(12);
         $gender = '3';
@@ -2370,9 +2402,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '4')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '4')
             ->groupBy('p.ID')
             ->paginate(12);
         $gender = '4';
@@ -2392,9 +2425,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '5')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '5')
             ->groupBy('p.ID')
             ->paginate(12);
         $gender = '5';
@@ -2414,9 +2448,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.GenderCode')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('GenderCode', '6')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', '6')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2483,11 +2518,12 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID')
+            ->select('pd.Size', 'pd.Color', 'p.ID','pd.Qty','s.ShopName','p.Model','p.Brand','p.Name')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('Name', 'like', '%' . $val . '%')
-            ->orWhere('Model', 'like', '%' . $val . '%')
-            ->orWhere('Brand', 'like', '%' . $val . '%')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.Name', 'like', '%' . $val . '%')
+            ->orWhere('p.Model', 'like', '%' . $val . '%')
+            ->orWhere('p.Brand', 'like', '%' . $val . '%')
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2508,9 +2544,10 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
+            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount','s.ShopName','p.Discount')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->whereBetween('Discount', [$minDiscount, $maxDiscount])
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->whereBetween('p.Discount', [$minDiscount, $maxDiscount])
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2532,10 +2569,11 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount')
+            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount','s.ShopName','p.GenderCode','p.Cat')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
-            ->where('genderCode', $gender)
-            ->where('Cat', $cat)
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
+            ->where('p.GenderCode', $gender)
+            ->where('p.Cat', $cat)
             ->groupBy('p.ID')
             ->paginate(12);
 
@@ -2555,8 +2593,9 @@ class Basic extends Controller
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount', 'p.CatCode')
+            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount', 'p.CatCode','s.ShopName','p.SubCat')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
+            ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('p.SubCat', [$subCat, $subCat2])
             ->groupBy('p.ID')
             ->paginate(12);

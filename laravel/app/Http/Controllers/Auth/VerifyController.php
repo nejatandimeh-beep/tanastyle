@@ -4,116 +4,110 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Kavenegar;
 use App\Customer;
+use Kavenegar;
 
 class VerifyController extends Controller
 {
-    function getMobile()
+    // نمایش فرم دریافت موبایل و ارسال کد
+    public function getMobile(Request $request)
     {
-        if($_GET['source'] ==='forget') {
-            $mobileNum=DB::table('customers')
+        $source = $request->get('source');
+        $mobile = (string)$request->get('mobile');
+
+        // بررسی حالت forget
+        if ($source === 'forget') {
+            $mobileNum = DB::table('customers')
                 ->select('Mobile')
-                ->where('Mobile',(string)$_GET['mobile'])
+                ->where('Mobile', $mobile)
                 ->first();
-            if(is_null($mobileNum))
-                return redirect()->route('requestMobile', ['source' => 'forget'])->with('message', 'شما قبلا ثبت نام نکرده اید');
+
+            if (is_null($mobileNum)) {
+                return redirect()->route('requestMobile', ['source' => 'forget'])
+                    ->with('message', 'شما قبلا ثبت نام نکرده‌اید');
+            }
         }
-        session_start();
-        if (!isset($_SESSION['SEND'])) {
-            $_SESSION['SEND']=time();
-            $customer = new Customer();
-            $mobile = (string)$_GET['mobile'];
+        // چک کردن Session
+        if (!Session::has('SEND')) {
+            Session::put('SEND', time());
             Session::put('mobile', $mobile);
+            Session::put('source', $source);
+
             $customerExist = Customer::where('Mobile', $mobile)->first();
-            if (Session::get('source') === 'register') {
-                if (!isset($customerExist)) {
+
+            if ($source === 'register') {
+                if (!$customerExist) {
                     try {
-
                         $this->sendToken($mobile);
-
                     } catch (\Exception $e) {
-                        unset($_SESSION['SEND']);
-                        return redirect()->route('requestMobile', ['source' => 'register'])->with('message', 'شماره موبایل نامعتبر است');
+                        Session::forget('SEND');
+                        return redirect()->route('requestMobile', ['source' => 'register'])
+                            ->with('message', 'شماره موبایل نامعتبر است');
                     }
-
                     return view('auth.verifyMobile');
                 } else {
-                    unset($_SESSION['SEND']);
-                    return redirect()->route('requestMobile', ['source' => 'register'])->with('message', 'شماره موبایل قبلا ثبت نام کرده است');
+                    Session::forget('SEND');
+                    return redirect()->route('requestMobile', ['source' => 'register'])
+                        ->with('message', 'شماره موبایل قبلا ثبت نام کرده است');
                 }
             } else {
                 try {
-
                     $this->sendToken($mobile);
-
                 } catch (\Exception $e) {
-                    unset($_SESSION['SEND']);
-                    return redirect()->route('requestMobile', ['source' => 'forget'])->with('message', 'شماره موبایل نامعتبر است');
+                    Session::forget('SEND');
+                    return redirect()->route('requestMobile', ['source' => 'forget'])
+                        ->with('message', 'شماره موبایل نامعتبر است');
                 }
                 return view('auth.verifyMobile');
             }
         } else {
-            $timer = time() - $_SESSION['SEND'];
-            if($timer>=120) {
-                unset($_SESSION['SEND']);
-                $source=Session::get('source');
-                return redirect()->route('requestMobile',compact('source'));
+            $timer = time() - Session::get('SEND');
+            if ($timer >= 120) {
+                Session::forget('SEND');
+                return redirect()->route('requestMobile', ['source' => $source]);
             } else {
-                $timer=120-$timer;
-                return view('auth.verifyMobile',compact('timer'));
+                $timer = 120 - $timer;
+                return view('auth.verifyMobile', compact('timer'));
             }
         }
     }
 
+    // ارسال کد به موبایل
     public function sendToken($mobile)
     {
-
         $token = mt_rand(100000, 999999);
-        $token2 = mt_rand(100000, 999999);
-        $token3 = mt_rand(100000, 999999);
         Session::put('token', $token);
-//        Session::put('token', $token2);
-//        Session::put('token', $token3);
 
         $api_key = Config::get('kavenegar.apikey');
-        $var = new Kavenegar\KavenegarApi($api_key);
+        $kavenegar = new Kavenegar\KavenegarApi($api_key);
         $template = "verifyUser";
         $type = "sms";
 
-        $result = $var->VerifyLookup($mobile, $token, $token2, $token3, $template, $type);
-
+        $kavenegar->VerifyLookup($mobile, $token, null, null, $template, $type);
     }
 
-    public function verifyMobile(Request $req)
+    // تایید کد وارد شده
+    public function verifyMobile(Request $request)
     {
-        session_start();
-        $customer = new Customer();
-        $verifyCode = $req->get('verifyCode');
+        $verifyCode = $request->get('verifyCode');
         $source = Session::get('source');
         $mobile = Session::get('mobile');
+        $customer = new Customer();
 
         if ($customer->validateToken($verifyCode)) {
-            unset($_SESSION['SEND']);
-//            echo "Success";
-//            $tel = Auth::user()->phone_number;
-//            echo $tel;
-            if ($source === 'register')
+            // پاک کردن Session
+            Session::forget('SEND');
 
+            if ($source === 'register') {
                 return redirect()->route('register');
-            else
+            } else {
                 return view('auth.passwords.resetPassword');
+            }
         } else {
-//            $this->create($mobile);
-//            $customer = Customer::where('phone_number', $mobile)->first();
-//            Auth::login($customer);
-            echo "کد وارد شده اشتباه است";
+            return back()->with('message', 'کد وارد شده اشتباه است');
         }
-
-        return true;
     }
 }

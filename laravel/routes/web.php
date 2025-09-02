@@ -185,6 +185,7 @@ Route::get('/Banking-Portal/{id}/{qty}/{postPrice}/{FinalPriceWithoutDiscount}/{
 Route::get('/Customer-Verify', 'Customer\Basic@customerVerify')->name('customerVerify');
 // Profile
 Route::get('/Customer-Profile/{id}', 'Customer\Basic@userProfile')->name('userProfile');
+Route::get('/Customer-SellerPanel/{id}', 'Customer\Basic@sellerPanel')->name('CustomerSellerPanel');
 Route::get('/Customer-Product-spacialSelling-List/{min}/{max}', 'Customer\Basic@spacialSelling')->name('spacialSelling');
 Route::get('/Customer-Connection', 'Customer\Basic@connection')->name('customerConnection');
 Route::get('/Customer-Connection-Detail/{id}/{status}', 'Customer\Basic@connectionDetail')->name('customerConnectionDetail');

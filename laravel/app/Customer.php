@@ -18,7 +18,7 @@ class Customer extends Authenticatable implements MustVerifyEmail
 
 
     protected $fillable = [
-         'Mobile', 'password','status'
+         'Mobile', 'password','status','passwordHint',
     ];
 
 

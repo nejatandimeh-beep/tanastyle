@@ -16,6 +16,24 @@
                             @csrf
                             <div class="container g-py-30--lg g-px-60--lg">
                                 <input type="hidden" name="id" value="{{$data->ID}}">
+                                {{--دسته بندی--}}
+                                <div class="form-group row g-mb-15">
+                                    <label class="col-sm-3 col-form-label align-self-center text-right">دسته بندی</label>
+                                    <div dir="ltr" class="col-sm-9 force-col-12">
+                                        <input
+                                            class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16"
+                                            id="HintCategory"
+                                            name="HintCategory"
+                                            value="{{$data->HintCategory}}"
+                                            maxlength="10"
+                                            placeholder="فقط اعداد"
+                                        >
+                                        <input style="display: none" id="category" name="category"
+                                               value="{{$data->Category}}">
+                                        <input style="display: none" id="catCode" name="catCode"
+                                               value="{{$data->CatCode}}">
+                                    </div>
+                                </div>
                                 {{--نام--}}
                                 <div class="form-group row g-mb-15">
                                     <label
@@ -66,6 +84,39 @@
                                     </div>
                                 </div>
 
+                                {{--نام کسب و کار--}}
+                                <div class="form-group row g-mb-15">
+                                    <label
+                                        class="col-sm-3 col-form-label align-self-center text-right">نام کسب و کار</label>
+                                    <div class="col-sm-9 force-col-12">
+                                        <input style="direction: ltr"
+                                               class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 need"
+                                               tabindex="3"
+                                               id="shopName"
+                                               name="shopName"
+                                               value="{{$data->ShopName}}"
+                                               placeholder="نامی که در میوان با آن فعالیت خواهید کرد"
+                                        >
+                                    </div>
+                                </div>
+
+                                {{--بایوگرافی--}}
+                                <div class="form-group row g-mb-15">
+                                    <label
+                                        class="col-sm-3 col-form-label align-self-center text-right">درباره
+                                        شغلتان</label>
+                                    <div class="col-sm-9 force-col-12">
+                                        <textarea style="direction: rtl"
+                                                  class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
+                                                  rows="6"
+                                                  tabindex="1"
+                                                  value="{{$data->Bio}}"
+                                                  placeholder="این توضیحات به مشتری هایتان کمک می کند بیشتر شما را بشناسند"
+                                                  name="bio"
+                                                  id="bio"
+                                                  maxlength="300"></textarea>
+                                    </div>
+                                </div>
                                 {{--ایمیل--}}
                                 <div class="form-group row g-mb-15">
                                     <label class="col-sm-3 col-form-label align-self-center text-right">ایمیل</label>
@@ -574,8 +625,7 @@
                                                        placeholder="معمولا 24 رقم"
                                                        id="shabaNo"
                                                        name="shabaNo"
-                                                       value="{{$data->ShabaNo}}"
-                                                       onblur="if($(this).val() !== '') {$(this).removeClass('g-brd-red'); $(this).addClass('g-brd-primary');} else {$(this).removeClass('g-brd-primary'); $(this).addClass('g-brd-red');}">
+                                                       value="{{$data->ShabaNo}}">
                                             </div>
                                         </div>
                                     </div>

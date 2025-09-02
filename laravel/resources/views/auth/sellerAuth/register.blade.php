@@ -35,6 +35,418 @@
                               enctype="multipart/form-data">
                             @csrf
                             <div class="container g-pt-20 g-py-30--lg g-px-60--lg text-left">
+                                {{--دسته شغلی--}}
+                                <div class="customDisable form-group row g-mb-15">
+                                    <label class="col-sm-3 col-form-label align-self-center text-right">دسته
+                                        شغلی</label>
+                                    <div class="col-sm-9 force-col-12">
+                                        <div id="accordion-04" class="u-accordion" role="tablist"
+                                             aria-multiselectable="true">
+                                            <!-- Card -->
+                                            <div id="catList" class="card rounded-0 g-mb-5 g-brd-red">
+                                                <div id="accordion-04-heading-01"
+                                                     class="u-accordion__header g-brd-bottom g-brd-gray-light-v4 "
+                                                     role="tab">
+                                                    <h5 class="mb-0 g-font-weight-300">
+                                                        <a class="u-link-v5 g-color-main g-color-primary--hover g-font-size-16 d-block text-right"
+                                                           href="#accordion-04-body-01" data-toggle="collapse"
+                                                           data-parent="#accordion-04" aria-expanded="true"
+                                                           aria-controls="accordion-04-body-01" id="selectedItem">
+                                                            انتخاب کنید
+                                                        </a>
+                                                        <input style="display: none" id="hintCategory"
+                                                               name="hintCategory" value="empty">
+                                                        <input style="display: none" id="category" name="category"
+                                                               value="empty">
+                                                        <input style="display: none" id="catCode" name="catCode"
+                                                               value="empty">
+                                                    </h5>
+                                                </div>
+                                                <div id="accordion-04-body-01" class="collapse g-py-10 g-px-5"
+                                                     role="tabpanel"
+                                                     aria-labelledby="accordion-04-heading-01"
+                                                     data-parent="#accordion-04">
+                                                    <div style="height: 230px !important;"
+                                                         class="u-accordion__body g-color-gray-dark-v5 customScrollBar">
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">مد و پوشاک</strong>
+                                                            <ul>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="lebas"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'clothes')">لباس</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="kif"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'clothes')">کیف</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="kafsh"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'clothes')">کفش</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="varzeshi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'clothes')">ورزشی</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="aksesori"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'clothes')">اکسسوری</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="makhloot"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'clothes')">مخلوط</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">وسایل نقلیه</strong>
+                                                            <ul>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="khodro"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'vehicles')">خودرو</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="motorSiklet"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">موتور
+                                                                            سیکلت</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="khodroKlasik"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">خودرو
+                                                                            کلاسیک</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="khodroSangin"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">سنگین
+                                                                            و نیمه سنگین</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="khodroKeshavarzi"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">کشاورزی
+                                                                            و عمرانی</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="khodroLavazem"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">لوازم
+                                                                            و قطعات وسایل نقلیه</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="khodroSayer"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">سایر
+                                                                            وسایل نقلیه</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="khodroEjare"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">اجاره
+                                                                            خودرو</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="khodroKeshavarziEjare"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">اجاره
+                                                                            کشاورزی و عمرانی</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="ghayeghVaTafrihat"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'vehicles')">قایق
+                                                                            و تفریحات آبی</span></li>
+                                                                <li>
+                                                                    <span style="cursor: pointer"
+                                                                          id="vasileNaghlieSayer"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'vehicles')">سایر وسایل نقلیه</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">کالای دیجیتال</strong>
+                                                            <ul>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="computer"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'Digital')">لپ
+                                                                            تاپ و کامپیوتر</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="sotiTasviri"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'Digital')">صوتی
+                                                                            و تصویری</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="doorbin"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'Digital')">دوربین
+                                                                            عکاسی و فیلمبرداری و لوازم</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="consoleBazi"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'Digital')">کنسول
+                                                                            بازی و لوازم</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="internetBazi"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'Digital')">بازی
+                                                                            های اینترنتی</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="lavazemeComputerPrinter"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'Digital')">لوازم
+                                                                            کامپیوتر و پرینتر</span></li>
+                                                                <li>
+                                                                    <span style="cursor: pointer"
+                                                                          id="sayerVasayeleElektriki"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'Digital')">سایر وسایل الکتریکی</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">کالای وارداتی</strong>
+                                                            <ul>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="AbzareTolidMohtava"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'')">ابزار تولید محتوا</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="lavazemeShakhsi"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'ImportedProduct')">لوازم شخصی</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="lavazemeKhanegi"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'ImportedProduct')">لوازم خانگی</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="vasaeleErtebati"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'ImportedProduct')">وسایل ارتباطی</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="abzaralatVaTajhizateSanati"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'ImportedProduct')">
+                                                                            ابزارآلات و تجهیزات صنعتی</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="lavazemeElectrici"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'ImportedProduct')">لوازم الکتریکی</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="vasaeleVarzeshi"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'ImportedProduct')">وسایل ورزشی</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="vasaeleNaghlie"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'ImportedProduct')">وسایل نقلیه</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="mahsoolateKhooraki"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'ImportedProduct')">محصولات خوراکی</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">وسایل ارتباطی</strong>
+                                                            <ul>
+                                                                <li>
+                                                                        <span style="cursor: pointer" id="mobileTablet"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'connections')">موبایل
+                                                                            و تبلت</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="lavazemeMobile"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'connections')">لوازم
+                                                                            موبایل</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="ayfonVaTelefon"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'connections')">
+                                                                            آیفون و تلفن</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="sayereErtebatat"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'connections')">
+                                                                            سایر وسایل ارتباطی</span></li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">لوازم خانگی</strong>
+                                                            <ul>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="moblemanVaCharm"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'appliances')">مبلمان
+                                                                            و لوازم چوبی</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="vasaeleBarghiAshpazkhane"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'appliances')">وسایل
+                                                                            برقی خانه و آشپزخانه</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="zoroofVaLavazemAshpazkhane"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'appliances')">ظروف
+                                                                            و لوازم آشپزخانه</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="dekorasionDakheliRoshanaei"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'appliances')">دکوراسیون
+                                                                            داخلی و روشنایی</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="farshGlimGhaliche"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'appliances')">فرش،
+                                                                            گلیم و قالیچه</span></li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="antik"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'appliances')">آنتیک</span>
+                                                                </li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="sayereLavazemeKhane"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'appliances')">سایر
+                                                                            لوازم خانه و حیاط</span></li>
+                                                                <li>
+                                                                        <span style="cursor: pointer"
+                                                                              id="sarmayeshVaGarmayesh"
+                                                                              class="g-font-weight-500 g-color-primary--hover"
+                                                                              onclick="categorySelect($(this),'appliances')">لوازم
+                                                                            سرمایش و گرمایش</span></li>
+                                                                <li>
+                                                                    <span style="cursor: pointer"
+                                                                          id="sayereLavazemeKhanegi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'appliances')">سایر لوازم خانگی</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">لوازم شخصی</strong>
+                                                            <ul>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="lavazemeArayeshi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'personal')">لوازم آرایشی</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="lavazemeBehdashti"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'personal')">لوازم بهداشتی</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer"
+                                                                          id="lavazemeArayeshiVaBehdashti"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'personal')">لوازم آرایشی و بهداشتی</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer"
+                                                                          id="sayereLavazemeShakhsi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'personal')">سایر لوازم شخصی</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">دارو و کالای پزشکی</strong>
+                                                            <ul>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="darooGiahi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'medicine')">دارو گیاهی</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id=darookhane"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'medicine')">داروخانه</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="kalayePezeshki"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'medicine')">کالای پزشکی</span>
+                                                                </li>
+                                                                <li><span style="cursor: pointer"
+                                                                          id="kalayePezeshkiTakhasosi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'medicine')">کالای پزشکی تخصصی</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <strong class="g-color-insta">لوازم تحریر و اداری</strong>
+                                                            <ul>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="neveshtAfzar"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'Stationery')">نوشت افزار</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer" id="lavazemeSargarmi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'Stationery')">لوازم سرگرمی</span>
+                                                                </li>
+                                                                <li>
+                                                                    <span style="cursor: pointer"
+                                                                          id="mahsoolateAmoozeshi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'Stationery')">محصولات آموزشی</span>
+                                                                </li>
+                                                                <li><span style="cursor: pointer" id="malzoomateMadrese"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'Stationery')">ملزومات مدرسه</span>
+                                                                </li>
+                                                                <li><span style="cursor: pointer" id="abzareMohandesi"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'Stationery')">ابزار مهندسی</span>
+                                                                </li>
+                                                                <li><span style="cursor: pointer" id="kalayeEdari"
+                                                                          class="g-font-weight-500 g-color-primary--hover"
+                                                                          onclick="categorySelect($(this),'Stationery')">کالای اداری</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End Card -->
+                                        </div>
+                                    </div>
+                                </div>
+
                                 {{--نام--}}
                                 <div class="form-group row g-mb-15">
                                     <label
@@ -46,7 +458,7 @@
                                                value=""
                                                tabindex="1"
                                                name="name"
-                                               maxlength="15"
+                                               maxlength="30"
                                                onblur=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');"
                                                placeholder="الزاما فارسی"
                                                {{--                                           lang="fa"--}}
@@ -71,7 +483,7 @@
                                             id="user-family"
                                             name="family"
                                             tabindex="2"
-                                            maxlength="15"
+                                            maxlength="30"
                                             type="text"
                                             value=""
                                             onblur=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
@@ -85,6 +497,43 @@
                                                     } else
                                                         $(this).attr('autocomplete', 'name');"
                                         >
+                                    </div>
+                                </div>
+
+                                {{--نام کسب و کار--}}
+                                <div class="form-group row g-mb-15">
+                                    <label
+                                        class="col-sm-3 col-form-label align-self-center text-right">نام کسب و
+                                        کار</label>
+                                    <div class="col-sm-9 force-col-12">
+                                        <input style="direction: ltr"
+                                               class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
+                                               tabindex="3"
+                                               id="shopName"
+                                               onblur=" if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                               name="shopName"
+                                               value=""
+                                               placeholder="نامی که در میوان با آن فعالیت خواهید کرد"
+                                        >
+                                    </div>
+                                </div>
+
+                                {{--بایوگرافی--}}
+                                <div class="form-group row g-mb-15">
+                                    <label
+                                        class="col-sm-3 col-form-label align-self-center text-right">درباره
+                                        شغلتان</label>
+                                    <div class="col-sm-9 force-col-12">
+                                        <textarea style="direction: rtl"
+                                                  class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
+                                                  rows="6"
+                                                  tabindex="1"
+                                                  value=""
+                                                  onblur=" if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                                  placeholder="این توضیحات به مشتری هایتان کمک می کند بیشتر شما را بشناسند"
+                                                  name="bio"
+                                                  id="bio"
+                                                  maxlength="300"></textarea>
                                     </div>
                                 </div>
 
@@ -338,45 +787,11 @@
                                     </div>
                                 </div>
 
-                                {{--تلفن ثابت--}}
-                                <div class="form-group row g-mb-15">
-                                    <label class="col-sm-3 col-form-label align-self-center text-right">تلفن
-                                        ثابت</label>
-                                    <div class="col-sm-9 force-col-12 d-flex">
-                                        <input
-                                            style="direction: ltr"
-                                            tabindex="11"
-                                            class="text-left col-8 form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
-                                            id="phoneNumber"
-                                            onblur="if($(this).val().length===8) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
-                                            name="phone"
-                                            pattern="\d*"
-                                            type="text"
-                                            maxlength="8"
-                                            value=""
-                                            placeholder="xxxxxxxx"
-                                        >
-                                        <input
-                                            style="direction: ltr"
-                                            tabindex="10"
-                                            id="phonePreNumber"
-                                            onblur=" if($(this).val().length===3) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
-                                            name="prePhone"
-                                            pattern="\d*"
-                                            class="text-left col-4 form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-right-none g-brd-red"
-                                            maxlength="3"
-                                            value=""
-                                            oninput="if($(this).val().length === 3) $('#phoneNumber').focus();"
-                                            placeholder="0xx"
-                                        >
-                                    </div>
-                                </div>
-
                                 {{--موبایل--}}
                                 <div class="form-group row g-mb-15">
                                     <label
-                                        class="col-sm-3 col-form-label align-self-center text-right">تلفن
-                                        همراه</label>
+                                        class="col-sm-3 col-form-label align-self-center text-right">موبایل
+                                    </label>
                                     <div class="col-sm-9 force-col-12">
                                         <input style="direction: ltr"
                                                class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
@@ -470,32 +885,14 @@
                                                name="homeAddress"
                                                placeholder="الزاما فارسی"
                                                {{--                                           lang="fa"--}}
-                                               onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                        str = $(this).val();
+                                               onkeyup="if (!(/^[\u0600-\u06FF\u06F0-\u06F90-9\s]+$/.test($(this).val()))) {
+                                                        let str = $(this).val();
                                                         str = str.substring(0, str.length - 1);
                                                         $(this).val(str);
                                                         $(this).attr('autocomplete', 'off');
-                                                    } else
-                                                        $(this).attr('autocomplete', 'name');"
-                                        >
-                                    </div>
-                                </div>
-
-                                {{--کد پستی سکونت--}}
-                                <div class="form-group row g-mb-15">
-                                    <label class="col-sm-3 col-form-label align-self-center text-right">کد
-                                        پستی سکونت</label>
-                                    <div dir="ltr" class="col-sm-9 force-col-12">
-                                        <input
-                                            class="need form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red"
-                                            id="homePostalCode"
-                                            tabindex="16"
-                                            onblur=" if($(this).val().length===10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
-                                            name="homePostalCode"
-                                            pattern="\d*"
-                                            value=""
-                                            maxlength="10"
-                                            placeholder="فقط اعداد"
+                                                    } else {
+                                                        $(this).attr('autocomplete', 'name');
+                                                    }"
                                         >
                                     </div>
                                 </div>
@@ -515,50 +912,14 @@
                                                name="workAddress"
                                                placeholder="الزاما فارسی"
                                                {{--                                           lang="fa"--}}
-                                               onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
-                                                        str = $(this).val();
+                                               onkeyup="if (!(/^[\u0600-\u06FF\u06F0-\u06F90-9\s]+$/.test($(this).val()))) {
+                                                        let str = $(this).val();
                                                         str = str.substring(0, str.length - 1);
                                                         $(this).val(str);
                                                         $(this).attr('autocomplete', 'off');
-                                                    } else
-                                                        $(this).attr('autocomplete', 'name');"
-                                        >
-                                    </div>
-                                </div>
-
-                                {{--کد پستی محل کار--}}
-                                <div class="form-group row g-mb-15">
-                                    <label class="col-sm-3 col-form-label align-self-center text-right">کد
-                                        پستی محل کار</label>
-                                    <div dir="ltr" class="col-sm-9 force-col-12">
-                                        <input
-                                            class="need form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red"
-                                            id="workPostalCode"
-                                            tabindex="18"
-                                            onblur=" if($(this).val().length===10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
-                                            name="workPostalCode"
-                                            pattern="\d*"
-                                            value=""
-                                            maxlength="10"
-                                            placeholder="فقط اعداد"
-                                        >
-                                    </div>
-                                </div>
-
-                                {{--شماره پلاک محل کار--}}
-                                <div class="form-group row g-mb-15">
-                                    <label class="col-sm-3 col-form-label align-self-center text-right">شماره پلاک
-                                        محل کار</label>
-                                    <div dir="ltr" class="col-sm-9 force-col-12">
-                                        <input
-                                            class="need form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red"
-                                            id="shopNumber"
-                                            tabindex="19"
-                                            onblur=" if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
-                                            name="shopNumber"
-                                            value=""
-                                            maxlength="10"
-                                            placeholder="فقط اعداد"
+                                                    } else {
+                                                        $(this).attr('autocomplete', 'name');
+                                                    }"
                                         >
                                     </div>
                                 </div>
@@ -737,38 +1098,9 @@
                                                        name="creditCard1"
                                                        value=""
                                                        maxlength="4"
-                                                       oninput="if($(this).val().length === 4) $('#shabaNo').focus();">
+                                                       oninput="if($(this).val().length === 4)">
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-
-                                {{--شماره شبای کارت بانکی--}}
-                                <div class="form-group row g-mb-15">
-                                    <label class="col-sm-3 col-form-label align-self-center text-right">شماره شبای کارت
-                                        وارد شده</label>
-                                    <div style="direction: ltr"
-                                         class="input-group g-brd-primary--focus g-mb-10--lg col-12 col-lg-9">
-                                        <div
-                                            class="input-group-addon d-flex align-items-center g-brd-primary g-bg-white g-color-gray-light-v1 rounded-0">
-                                            IR
-                                        </div>
-                                        <input
-                                            class="need g-brd-red form-control form-control-md rounded-0 text-left g-font-size-16"
-                                            type="text"
-                                            type="text"
-                                            tabindex="35"
-                                            placeholder="معمولا 24 رقم"
-                                            id="shabaNo"
-                                            name="shabaNo"
-                                            pattern="\d*"
-                                            value=""
-                                            onblur="if($(this).val() !== '') {$(this).removeClass('g-brd-red'); $(this).addClass('g-brd-primary');} else {$(this).removeClass('g-brd-primary'); $(this).addClass('g-brd-red');}">
-                                    </div>
-                                    <label class="col-sm-3 col-form-label align-self-center text-right"></label>
-                                    <div style="direction: rtl" class="col-12 col-lg-9 text-right">
-                                        <small class="text-muted g-font-size-12">شماره شبا و کارت بایستی متعلق به یک
-                                            حساب و به نام شخص فروشنده باشد.</small>
                                     </div>
                                 </div>
 
@@ -1422,7 +1754,7 @@
 
         $modal.on('shown.bs.modal', function () {
             cropper = new Cropper(image, {
-                aspectRatio:16/9,
+                aspectRatio: 16 / 9,
                 viewMode: 1,
                 zoomable: true,
                 background: true,
@@ -1509,20 +1841,18 @@
             $('#email').hasClass('g-brd-red') || $('#nationalId').hasClass('g-brd-red') ||
             $('#birthday-day').hasClass('g-brd-red') || $('#birthday-mon').hasClass('g-brd-red') ||
             $('#birthday-year').hasClass('g-brd-red') || $('#male').hasClass('g-bg-gray-light-v5') ||
-            $('#female').hasClass('g-bg-gray-light-v5') || $('#phoneNumber').hasClass('g-brd-red') ||
-            $('#phonePreNumber').hasClass('g-brd-red') || $('#phoneNumber').hasClass('g-brd-red') ||
+            $('#female').hasClass('g-bg-gray-light-v5') ||
             $('#mobile').hasClass('g-brd-red') || $('#stateSelect').hasClass('g-brd-red') ||
             $('#citySelect').hasClass('g-brd-red') || $('#homeAddress').hasClass('g-brd-red') ||
-            $('#homePostalCode').hasClass('g-brd-red') || $('#workAddress').hasClass('g-brd-red') ||
-            $('#workPostalCode').hasClass('g-brd-red') || $('#shopNumber').hasClass('g-brd-red') ||
+            $('#workAddress').hasClass('g-brd-red') ||
             $('#fileShow11').hasClass('g-brd-red') || $('#fileShow12').hasClass('g-brd-red') ||
             !$('#uploadingText11').hasClass('d-none') || !$('#uploadingText12').hasClass('d-none') ||
-            $('.creditCard').hasClass('g-brd-red') || $('#shabaNo').hasClass('g-brd-red')) {
+            $('#catList').hasClass('g-brd-red') || $('#shopName').hasClass('g-brd-red') ||
+            $('.creditCard').hasClass('g-brd-red')) {
             return 'false';
         } else {
             return 'true';
         }
-
     }
 
     $('.creditCard').on('blur', function () {
@@ -2630,6 +2960,113 @@
         $('#nextYear').text(nextYear);
         return now;
     }
+
+    function categorySelect(thisElement, cat) {
+        let category = '', catHint = thisElement.text().replace(/\s+/g, " "), catCode = thisElement.attr('id');
+        $('#accordion-04-body-01').removeClass('show');
+        $('.card').removeClass('g-brd-red');
+        switch (cat) {
+            case 'clothes':
+                category = 'پوشاک (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+            case 'vehicles':
+                category = 'وسایل نقلیه (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+            case 'Digital':
+                category = 'لوازم الکتریکی (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+            case 'ImportedProduct':
+                category = 'کالای وارداتی (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+            case 'connections':
+                category = 'وسایل ارتباطی (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+            case 'appliances':
+                category = 'لوازم خانگی (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+
+            case 'personal':
+                category = 'لوازم شخصی (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+
+            case 'medicine':
+                category = 'دارو و کالای پزشکی (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+            case 'Stationery':
+                category = 'لوازم تحریر و اداری (' + catHint + ')';
+                $('#selectedItem').text(category);
+                $('#hintCategory').val(category);
+                break;
+
+            default:
+                $('#selectedItem').text(catHint);
+                $('#category').val(catHint);
+                break;
+        }
+        $('#category').val(cat);
+        $('#catCode').val(catCode);
+        console.log('category->', $('#category').val(), 'catCode', $('#catCode').val(), 'hintCat', $('#hintCategory').val())
+    }
+    function showLoader() {
+        const loader = document.getElementById('global-loader');
+        if (loader) loader.style.display = 'flex';
+    }
+    function hideLoader() {
+        const loader = document.getElementById('global-loader');
+        if (loader) {
+            loader.style.opacity = "0";
+            setTimeout(() => loader.style.display = 'none', 500);
+        }
+    }
+
+    // --- 1) بستن Loader بعد از load یا حداکثر 6 ثانیه ---
+    window.addEventListener("load", () => hideLoader());
+    setTimeout(hideLoader, 6000);
+
+    // --- 2) مدیریت Loader روی درخواست‌ها ---
+    (function () {
+        let activeRequests = 0;
+        const originalFetch = window.fetch;
+
+        window.fetch = async function (...args) {
+            if (activeRequests === 0) showLoader();
+            activeRequests++;
+
+            try {
+                const response = await originalFetch.apply(this, args);
+                return response;
+            } catch (err) {
+                throw err;
+            } finally {
+                activeRequests--;
+                if (activeRequests <= 0) hideLoader();
+            }
+        };
+    })();
+
+    document.getElementById('backButton').addEventListener('click', function() {
+        if (document.referrer) {
+            window.history.back();
+        } else {
+            window.location.href = '/';
+        }
+    });
 </script>
 @yield('BaseJsFunction')
 </html>

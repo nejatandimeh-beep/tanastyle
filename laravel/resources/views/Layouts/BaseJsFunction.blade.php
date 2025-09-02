@@ -58,6 +58,12 @@
                     $.HSCore.components.HSModalWindow.init('[data-modal-target]:not(.js-modal-markup)');
                 }
             }
+
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(() => console.log('Service Worker فعال شد'))
+                    .catch(console.error);
+            }
         });
 
         // check cookie
@@ -72,11 +78,6 @@
             document.cookie = "cookietest=1; expires=Thu, 01-Jan-1970 00:00:01 GMT";
 
             return ret;
-        }
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(() => console.log("Service Worker Registered"))
-                .catch(err => console.error("SW Error", err));
         }
     </script>
     </html>

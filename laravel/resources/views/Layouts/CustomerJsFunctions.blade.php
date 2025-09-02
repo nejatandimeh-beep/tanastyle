@@ -16,13 +16,13 @@
             }
         });
 
-        function copy(textToCopy){
+        function copy(textToCopy) {
             navigator.clipboard.writeText(textToCopy).then(
-                function() {
+                function () {
                     /* clipboard successfully set */
                     window.alert('متن کپی شد.')
                 },
-                function() {
+                function () {
                     /* clipboard write failed */
                     window.alert('ناموفق')
                 }
@@ -39,7 +39,7 @@
         }
 
         $(document).ready(function () {
-            if(('.regulation').length>0){
+            if (('.regulation').length > 0) {
                 switch ($('#regulationTab').text()) {
                     case 'returnRegulation':
                         setTimeout(function () {
@@ -218,7 +218,7 @@
             if (mq.matches) {
                 $('#bigDevice').remove();
                 $('.bigDevice').remove();
-                if($('.regulation').length>0){
+                if ($('.regulation').length > 0) {
                     $('.regulation').removeClass('row');
                 }
                 $('#productGallery').removeClass('largeDevice');
@@ -321,7 +321,7 @@
                     $('#user-notionalId') === '' || $('#birthday-day').val() === 'روز' ||
                     $('#birthday-mon') === 'ماه' || $('#birthday-year').val() === 'سال' ||
                     $('input[name="gender"]') === '' || $('#phoneNumber').val() === '' || $('#phonePreNumber').val() === '' ||
-                    $('#state') === '' || $('#city').val() === '') {
+                    $('#state') === '' || $('#city').val() === '') || $('#bio').val() === ''){
                     $('#completeProfileHint').removeClass('d-none');
                 }
             }
@@ -384,7 +384,7 @@
         function similarProducts() {
             $.ajax({
                 type: 'GET',
-                url: '/Customer-Similar-Products/' + $('#genderCode').text() + '/' + $('#catCode').text() + '/' + $('#productID').text()+'/'+$('#cat').text(),
+                url: '/Customer-Similar-Products/' + $('#genderCode').text() + '/' + $('#catCode').text() + '/' + $('#productID').text() + '/' + $('#cat').text(),
                 async: false,
                 beforeSend: function () {
                     $('[class*="js-carousel"]').each(function () {
@@ -415,11 +415,6 @@
             }
         });
 
-        // $(window).bind('beforeunload', function () {
-        //     if (!$('.masterPage').length)
-        //         loaderShow();
-        // });
-
         document.onreadystatechange = function () {
             let state = document.readyState;
             if (state === 'complete') {
@@ -433,7 +428,7 @@
             }
         }
 
-        function magnify(src, zoomNum){
+        function magnify(src, zoomNum) {
             let evt = new Event(),
                 m = new Magnifier(evt);
 
@@ -451,7 +446,7 @@
             //     zoom: 3
             // });
             m.attach({
-                thumb: '.'+src,
+                thumb: '.' + src,
                 largeWrapper: 'preview',
                 zoom: zoomNum,
                 zoomable: true,
@@ -468,11 +463,6 @@
             });
 
             $('#preview').hide();
-        }
-
-        function loaderShow() {
-            let loader = '<div id="load" class="load"></div>';
-            $('body').prepend(loader);
         }
 
         // نمایش فیلد جستجو در ناویگیشن
@@ -654,7 +644,7 @@
                     + JSON.stringify(color) + '/'
                     + filterChange,
                 success: function (data) {
-                    console.log('data=>',data);
+                    console.log('data=>', data);
                     $('#loadProduct').addClass('d-none');
                     $('#productTitle').text('نتایج فیلترها');
                     $('#productTitleSD').text('نتایج فیلترها');
@@ -742,7 +732,7 @@
         $('.ratingContainer a').on('click', function () {
             if ($('#loginAlert').text() === 'login')
                 addVote($(this).text(), 'ratingProduct');
-            else{
+            else {
                 if (confirm('تا زمانیکه داخل نشوید نمره شما ثبت نمی گردد.')) {
                     window.location = '/Login-Mode';
                 }
@@ -770,7 +760,7 @@
                 $('#likeHint').addClass('d-none');
                 $('#customerLike').removeClass('d-none');
                 addVote('true', 'likeProduct');
-            } else{
+            } else {
                 if (confirm('تا زمانیکه داخل نشوید محصول به لیست علاقه مندیهایتان افزوده نمی شود.')) {
                     window.location = '/Login-Mode';
                 }
@@ -907,7 +897,7 @@
                         }
                         if (error === 0) {
                             if ($('#addressID').length > 0) {
-                                window.location = '/Banking-Portal/' + id + '/' + qty + '/' + postPrice+'/'+FinalPriceWithoutDiscount+'/'+discount+'/'+finalPrice+'/'+unitPrice;
+                                window.location = '/Banking-Portal/' + id + '/' + qty + '/' + postPrice + '/' + FinalPriceWithoutDiscount + '/' + discount + '/' + finalPrice + '/' + unitPrice;
                             } else {
                                 $('.custombox-content #bankingPortalBtn').show();
                                 $('.custombox-content #waitingIconSubmit').hide();
@@ -1230,7 +1220,7 @@
                     $('#orderQty' + i).text(qty[i]);
                     tempPrice[i] = $('#productFinalPrice' + i).text().replace(/,/g, '');
                     productFinalPrice[i] = parseInt(qty[i]) * parseInt(tempPrice[i]);
-                    unitPrice[i] =  $('#unitPrice' + i).text();
+                    unitPrice[i] = $('#unitPrice' + i).text();
                     allPrice = allPrice + productFinalPrice[i];
                     $('#rowNumber' + i).text(i + 1);
                     form.append("<input name='productDetailID" + i + "' value=" + pdId[i] + ">");
@@ -1393,7 +1383,7 @@
                         $('#waitingCheckCart').addClass('d-none');
                     }
                 });
-            } else{
+            } else {
                 $('#addToBasketBtn').removeClass('d-none');
                 $('#buy').removeClass('d-none');
             }
@@ -1612,7 +1602,7 @@
             $('#orderProductSize').text($('input[name="size"]:checked').val());
             $('#orderProductQty').text($('#productQtyBought').val());
             $('#orderProductDiscount').text($('#productDiscount').text());
-            $('#orderProductUnitPrice').text($('#productUnitPrice').text());
+            $('#orderProductUnitPrice').text($('#productFinalPrice').text().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#orderProductFinalPrice').text($('#productFinalPrice').text());
             $('#orderProductQtyPrice').text(orderPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","));
             $('#pureOrderPrice').text(orderPrice);
@@ -3069,6 +3059,7 @@
             let now = day + " " + months[month - 1] + " " + year;
             return now;
         }
+
         document.addEventListener("DOMContentLoaded", () => {
 
             function initCarousel(trackSelector) {
@@ -3120,7 +3111,7 @@
                 });
 
                 function startAutoPlay() {
-                    interval = setInterval(nextSlide, 6000);
+                    interval = setInterval(nextSlide, 4000);
                 }
 
                 function stopAutoPlay() {
@@ -3141,5 +3132,86 @@
             initCarousel(".mobile-track");
 
         });
+
+        if ($('.masterPage').length > 0) {
+            // مدیریت نصب PWA
+            let deferredPrompt;
+            window.addEventListener('beforeinstallprompt', e => {
+                e.preventDefault();
+                deferredPrompt = e;
+                document.getElementById('install-modal').style.display = 'block';
+            });
+
+            document.getElementById('install-btn').addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const choice = await deferredPrompt.userChoice;
+                    console.log(choice.outcome === 'accepted' ? 'کاربر اپ را نصب کرد' : 'کاربر نصب را رد کرد');
+                    deferredPrompt = null;
+                    document.getElementById('install-modal').style.display = 'none';
+                }
+            });
+
+            document.getElementById('close-btn').addEventListener('click', () => {
+                document.getElementById('install-modal').style.display = 'none';
+            })
+        }
+
+        function showLoader() {
+            const loader = document.getElementById('global-loader');
+            if (loader) loader.style.display = 'flex';
+        }
+        function hideLoader() {
+            const loader = document.getElementById('global-loader');
+            if (loader) {
+                loader.style.opacity = "0";
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        }
+
+        // --- 1) بستن Loader بعد از load یا حداکثر 6 ثانیه ---
+        window.addEventListener("load", () => hideLoader());
+        setTimeout(hideLoader, 6000);
+
+        // --- 2) مدیریت Loader روی درخواست‌ها ---
+        (function () {
+            let activeRequests = 0;
+            const originalFetch = window.fetch;
+
+            window.fetch = async function (...args) {
+                if (activeRequests === 0) showLoader();
+                activeRequests++;
+
+                try {
+                    const response = await originalFetch.apply(this, args);
+                    return response;
+                } catch (err) {
+                    throw err;
+                } finally {
+                    activeRequests--;
+                    if (activeRequests <= 0) hideLoader();
+                }
+            };
+        })();
+
+        const stars = document.querySelectorAll(".rating span");
+        stars.forEach(star => {
+            star.addEventListener("click", () => {
+                const val = parseInt(star.getAttribute("data-value"));
+
+                stars.forEach(s => {
+                    s.classList.toggle("selected", parseInt(s.getAttribute("data-value")) <= val);
+                });
+            });
+        });
+
+        document.getElementById('backButton').addEventListener('click', function() {
+            if (document.referrer) {
+                window.history.back();
+            } else {
+                window.location.href = '/';
+            }
+        });
+
     </script>
 @endsection
