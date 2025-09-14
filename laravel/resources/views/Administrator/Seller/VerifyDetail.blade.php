@@ -107,14 +107,14 @@
                                         شغلتان</label>
                                     <div class="col-sm-9 force-col-12">
                                         <textarea style="direction: rtl"
-                                                  class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
+                                                  class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 need"
                                                   rows="6"
                                                   tabindex="1"
                                                   value="{{$data->Bio}}"
                                                   placeholder="این توضیحات به مشتری هایتان کمک می کند بیشتر شما را بشناسند"
                                                   name="bio"
                                                   id="bio"
-                                                  maxlength="300"></textarea>
+                                                  maxlength="300">{{$data->Bio}}</textarea>
                                     </div>
                                 </div>
                                 {{--ایمیل--}}

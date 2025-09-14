@@ -321,7 +321,7 @@
                     $('#user-notionalId') === '' || $('#birthday-day').val() === 'روز' ||
                     $('#birthday-mon') === 'ماه' || $('#birthday-year').val() === 'سال' ||
                     $('input[name="gender"]') === '' || $('#phoneNumber').val() === '' || $('#phonePreNumber').val() === '' ||
-                    $('#state') === '' || $('#city').val() === '') || $('#bio').val() === ''){
+                    $('#state') === '' || $('#city').val() === '' || $('#bio').val() === ''){
                     $('#completeProfileHint').removeClass('d-none');
                 }
             }
