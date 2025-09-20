@@ -13,11 +13,10 @@ use Kavenegar;
 class VerifyController extends Controller
 {
     // نمایش فرم دریافت موبایل و ارسال کد
-    public function getMobile(Request $request)
+    public function checkMobile(Request $request)
     {
         $source = $request->get('source');
         $mobile = (string)$request->get('mobile');
-
         // بررسی حالت forget
         if ($source === 'forget') {
             $mobileNum = DB::table('customers')
@@ -93,21 +92,29 @@ class VerifyController extends Controller
     public function verifyMobile(Request $request)
     {
         $verifyCode = $request->get('verifyCode');
-        $source = Session::get('source');
-        $mobile = Session::get('mobile');
-        $customer = new Customer();
+        $source     = Session::get('source');
+        $mobile     = Session::get('mobile');
+        $customer   = new Customer();
 
-        if ($customer->validateToken($verifyCode)) {
-            // پاک کردن Session
+        if($customer->validateToken($verifyCode)){
             Session::forget('SEND');
-
-            if ($source === 'register') {
-                return redirect()->route('register');
-            } else {
-                return view('auth.passwords.resetPassword');
+            $redirectUrl = $source==='register'? route('register') : route('resetPassword');
+            if($request->expectsJson()){
+                return response()->json(['success'=>true,'redirect'=>$redirectUrl]);
             }
+            return redirect($redirectUrl);
         } else {
-            return back()->with('message', 'کد وارد شده اشتباه است');
+            if($request->expectsJson()){
+                return response()->json(['success'=>false,'message'=>'کد وارد شده اشتباه است'],422);
+            }
+            return back()->with('message','کد وارد شده اشتباه است');
         }
+    }
+
+    // نمونه متد resend
+    public function resendCode(Request $request){
+        $mobile = Session::get('mobile');
+        $this->sendToken($mobile);
+        return response()->json(['success'=>true,'message'=>'کد جدید ارسال شد']);
     }
 }

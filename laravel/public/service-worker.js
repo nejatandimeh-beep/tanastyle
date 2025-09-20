@@ -13,7 +13,6 @@ const noCachePaths = [
     "/register/seller-UploadImage",
     "/check-seller-mobile",
     "/verify-seller-mobile",
-    "/login/seller",
     "/register/seller/accept",
     "/sendEmail",
     "/requestMobile",
@@ -30,12 +29,8 @@ const noCachePaths = [
     "/login/admin",
     "/logout/admin",
     "/register/admin",
-    "/login/admin",
-    "/register/admin",
     "/change-admin-password",
     "/requestEmail",
-    "/sendEmail",
-    "/reset",
     "/login/seller-login-Mode",
     "/Seller-Register-Request",
     "/Seller-Delete-Request",
@@ -81,11 +76,12 @@ self.addEventListener("fetch", (event) => {
             .then((networkResponse) => {
                 // فقط GET رو کش کن
                 if (event.request.method === "GET") {
+                    const responseClone = networkResponse.clone(); // ✅ مهم
                     caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, networkResponse.clone());
+                        cache.put(event.request, responseClone);
                     });
                 }
-                return networkResponse;
+                return networkResponse; // اصلش برگرده
             })
             .catch(() => {
                 // اگه شبکه قطع بود → از کش برگردون

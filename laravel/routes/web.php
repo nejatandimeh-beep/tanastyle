@@ -142,8 +142,9 @@ Route::get('/request-customer-mobile/{source}', function ($source) {
     return view('auth.requestMobile',compact('source'));
 })->name('requestMobile');
 Route::get('/Login-Mode', 'Auth\LoginController@loginMode')->name('loginMode');
-Route::get('/check-customer-mobile', 'Auth\VerifyController@getMobile')->name('checkMobile');
-Route::post('verify-customer-mobile', 'Auth\VerifyController@verifyMobile')->name('verifyMobile');
+Route::post('/check-customer-mobile', 'Auth\VerifyController@checkMobile')->name('checkMobile');
+Route::post('verify-customer-mobile','Auth\VerifyController@verifyMobile')->name('verifyMobile');
+Route::post('resend-customer-code','Auth\VerifyController@resendCode')->name('resendVerifyCode');
 Route::post('reset-password', 'Auth\ResetPasswordController@resetCustomerPassword')->name('mobileResetPassword');
 // Customer Change Password Links with email
 //Route::get('change-password', 'Auth\ChangePasswordController@index')->name('changePass');

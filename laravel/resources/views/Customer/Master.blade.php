@@ -1,12 +1,10 @@
 @extends('Layouts.IndexCustomer')
 @section('Content')
-    <script src="/js/app.js?v={{ filemtime(public_path('js/app.js')) }}"></script>
-
     <script>
         // ثبت Service Worker بهینه
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('/service-worker.js')
                     .then(reg => {
                         console.log('Service Worker فعال شد', reg);
 

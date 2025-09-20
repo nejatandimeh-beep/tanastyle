@@ -1887,17 +1887,7 @@
                         $('#profileUpdate').submit();
                     },
                     انصراف: function () {
-                        $('#save').hide();
-                        $('#edit').show();
-                        let clone = $('#user-data :input');
-                        clone.attr("readonly", true);
-                        clone.addClass("g-bg-gray-light-v5");
-                        $('#edit').removeClass("g-bg-gray-light-v5");
-
-                        clone = $('.customDisable');
-                        clone.css('pointer-events', 'none');
-                        clone = $('.u-check .btn');
-                        clone.addClass('g-bg-gray-light-v5');
+                        window.location.reload();
                     },
                 }
             });
@@ -3134,9 +3124,12 @@
         });
 
         if ($('.masterPage').length > 0) {
-            // مدیریت نصب PWA
             let deferredPrompt;
-            window.addEventListener('beforeinstallprompt', e => {
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                // فقط وقتی نمایش بده که قبلاً نصب نشده باشه
+                if (localStorage.getItem('pwaInstalled') === 'true') return;
+
                 e.preventDefault();
                 deferredPrompt = e;
                 document.getElementById('install-modal').style.display = 'block';
@@ -3145,8 +3138,10 @@
             document.getElementById('install-btn').addEventListener('click', async () => {
                 if (deferredPrompt) {
                     deferredPrompt.prompt();
-                    const choice = await deferredPrompt.userChoice;
-                    console.log(choice.outcome === 'accepted' ? 'کاربر اپ را نصب کرد' : 'کاربر نصب را رد کرد');
+                    const { outcome } = await deferredPrompt.userChoice;
+
+                    console.log(outcome === 'accepted' ? 'کاربر اپ را نصب کرد' : 'کاربر نصب را رد کرد');
+
                     deferredPrompt = null;
                     document.getElementById('install-modal').style.display = 'none';
                 }
@@ -3154,8 +3149,17 @@
 
             document.getElementById('close-btn').addEventListener('click', () => {
                 document.getElementById('install-modal').style.display = 'none';
-            })
+            });
+
+            // 🔥 وقتی نصب شد، دوباره مودال نشون داده نشه
+            window.addEventListener('appinstalled', () => {
+                console.log('PWA نصب شد ✅');
+                localStorage.setItem('pwaInstalled', 'true'); // ثبت وضعیت نصب
+                deferredPrompt = null;
+                document.getElementById('install-modal').style.display = 'none';
+            });
         }
+
 
         function showLoader() {
             const loader = document.getElementById('global-loader');

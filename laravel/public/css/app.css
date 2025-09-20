@@ -10874,3 +10874,27 @@ a.text-dark:focus {
     }
 }
 
+/*customer register*/
+.code-input {
+    border: 2px solid #e6e6e6;
+    border-radius: 10px;
+    transition: all .15s ease-in-out;
+}
+.code-input:focus {
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 12px rgba(13,110,253,0.18);
+    outline: none;
+}
+.code-input.is-invalid {
+    border-color: #dc3545 !important;
+    box-shadow: 0 0 10px rgba(220,53,69,0.12);
+}
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-8px); }
+    40% { transform: translateX(8px); }
+    60% { transform: translateX(-6px); }
+    80% { transform: translateX(6px); }
+    100% { transform: translateX(0); }
+}
+.code-input-container.shake { animation: shake .56s ease-in-out; }

@@ -1,63 +1,57 @@
 @extends('Layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <h5 class="card-header text-right">{{($source==='register'?'ثبت نام در سایت':'درخواست رمز جدید')}}</h5>
-                    <div class="card-body">
-                        <form method="GET" action="{{ route('checkMobile') }}" style="direction: rtl"
-                              novalidate>
+            <div class="col-md-6 col-lg-5">
+                <div class="card shadow-lg border-0 rounded-3">
+                    {{-- عنوان --}}
+                    <h5 class="card-header g-bg-primary text-white text-center py-3">
+                        {{ $source === 'register' ? 'ثبت نام در سایت' : 'درخواست رمز جدید' }}
+                    </h5>
+
+                    <div class="card-body p-4">
+                        <form method="POST" action="{{ route('checkMobile') }}" novalidate>
                             @csrf
-                            <input class="d-none" type="text" name="source" value="{{$source}}">
-                            <div class="form-group row">
-                                <label for="mobile"
-                                       class="col-md-4 col-form-label text-right text-md-left g-font-size-16">شماره
-                                    موبایل</label>
+                            <input type="hidden" name="source" value="{{ $source }}">
 
-                                <div class="col-md-6">
-                                    <input style="direction: ltr"
-                                           id="mobile"
-                                           type="number"
-                                           class="form-control @error('mobile') is-invalid @enderror @if(session()->has('message')) is-invalid @endif input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md forceEnglishNumber"
-                                           name="mobile"
-                                           pattern="\d*"
-                                           placeholder="فقط اعداد انگلیسی"
-                                           onKeyPress="if(this.value.length===11) return false;"
-                                           value="{{ old('mobile') }}"
-                                           required autocomplete="off"
-                                           autofocus>
+                            {{-- شماره موبایل --}}
+                            <div class="mb-3 text-right">
+                                <label for="mobile" class="form-label fw-bold">شماره موبایل</label>
+                                <input
+                                    type="tel"
+                                    id="mobile"
+                                    name="mobile"
+                                    pattern="09[0-9]{9}"
+                                    maxlength="11"
+                                    class="form-control form-control-lg text-center @error('mobile') is-invalid @enderror @if(session()->has('message')) is-invalid @endif"
+                                    placeholder="09xxxxxxxxx"
+                                    value="{{ old('mobile') }}"
+                                    required
+                                    autocomplete="off"
+                                    autofocus
+                                >
 
-                                    @error('mobile')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                    @if (session()->has('message'))
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{!! Session::get('message') !!}</strong>
-                                        </span>
-                                    @endif
+                                {{-- خطاها --}}
+                                @error('mobile')
+                                <div class="invalid-feedback d-block">
+                                    {{ $message }}
                                 </div>
+                                @enderror
+
+                                @if (session()->has('message'))
+                                    <div class="invalid-feedback d-block">
+                                        {!! Session::get('message') !!}
+                                    </div>
+                                @endif
                             </div>
 
-                            <div class="form-group row g-mb-60--lg g-mt-20">
-                                <div class="col-md-10 text-left">
-                                    <button  id="submitText"
-                                             type="submit"
-                                            onclick="$('#submitText').hide(); $('#waitingSubmit').show();"
-                                            onsubmit="$(this).prop('disabled',true)"
-                                            class="btn u-btn-primary rounded-0 g-font-size-16">
-                                      ارسال کد
-                                    </button>
-                                    <button id="waitingSubmit" style="display:none; direction: rtl" type="button" disabled="disabled"
-                                            class="btn u-btn-primary rounded-0 g-font-size-16">
-                                                <span
-                                                    class="m-0 g-color-white">منتظر بمانید..</span>
-                                    </button>
-                                </div>
+                            {{-- دکمه ارسال --}}
+                            <div class="d-grid mt-4">
+                                <button id="submitBtn" type="submit" class="btn btn-primary btn-lg">
+                                    <span class="spinner-border spinner-border-sm me-2 d-none" id="btnSpinner"></span>
+                                    <span id="btnText">ارسال کد</span>
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -65,4 +59,22 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+            const submitBtn = document.getElementById("submitBtn");
+            const btnSpinner = document.getElementById("btnSpinner");
+            const btnText = document.getElementById("btnText");
+
+            form.addEventListener("submit", function () {
+                // غیر فعال کردن دکمه
+                submitBtn.disabled = true;
+
+                // نمایش لودر
+                btnSpinner.classList.remove("d-none");
+                btnText.textContent = "لطفاً صبر کنید...";
+            });
+        });
+    </script>
+
 @endsection
