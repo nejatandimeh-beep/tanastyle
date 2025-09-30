@@ -1,132 +1,83 @@
-let $modal = $('#modal'),
-image = document.getElementById('sample_image'),
-cropper, inputID, inputIdFinshed = [], counter = 0, file_upload, file_type,
-folderName = createFolderName(),
-uploadUrl = (window.location.pathname.includes('/Add-Product-Upload')) ? '/Add-Product-Upload-Image' : '/Add-Other-Product-Upload-Image';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Upload HEIC</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
+        #preview { max-width: 400px; margin-top: 20px; display:block; }
+        #uploadBtn { margin-top: 10px; padding:5px 15px; }
+    </style>
+</head>
+<body>
 
-// مقدار پوشه
-$('#folderName2').val(folderName);
+<h2>آپلود و کراپ HEIC</h2>
+<input type="file" id="fileInput" accept="image/*">
+<img id="preview" alt="پیش‌نمایش">
 
-// انتخاب فایل
-$('input[id^="pic"]').on('mousedown', function () {
-$(this).val(null);
-});
+<button id="uploadBtn">ارسال</button>
 
-$('input[id^="pic"]').on('change', function (event) {
-inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
-$('#fileShow' + inputID).removeClass('g-color-red');
+<script>
+    let cropper;
+    let fileToUpload;
 
-let files = event.target.files,
-done = function (url) {
-image.src = url;
-$modal.modal('show');
-};
+    document.getElementById('fileInput').addEventListener('change', async function(e){
+        const file = e.target.files[0];
+        if (!file) return;
 
-if (files && files.length > 0) {
-let reader = new FileReader();
-reader.onload = function () {
-done(reader.result);
-};
-reader.readAsDataURL(files[0]);
-file_type = files[0].type;
-}
-});
+        fileToUpload = file;
 
-// وقتی مودال باز شد
-$modal.on('shown.bs.modal', function () {
-cropper = new Cropper(image, {
-aspectRatio: 4 / 5,
-viewMode: 1,
-responsive: true,
-autoCropArea: 1,
-zoomable: true,
-movable: true,
-cropBoxResizable: false,
-cropBoxMovable: false,
-dragMode: 'move'
-});
-$(document.body).addClass('me-position-fix');
-$(document.body).removeClass('me-position-normally');
-});
+        // تبدیل HEIC به JPG در مرورگر
+        if(file.type === "image/heic" || file.name.toLowerCase().endsWith(".heic")){
+            try {
+                const convertedBlob = await window.heic2any({
+                    blob: file,
+                    toType: "image/jpeg",
+                    quality: 0.9
+                });
+                fileToUpload = new File([convertedBlob], file.name.replace(/\.heic$/i, ".jpg"), { type: "image/jpeg" });
+            } catch(err){
+                console.error("خطا در تبدیل HEIC:", err);
+                alert("خطا در تبدیل HEIC به JPG");
+                return;
+            }
+        }
 
-// وقتی مودال بسته شد
-$modal.on('hidden.bs.modal', function () {
-cropper.destroy();
-cropper = null;
-document.getElementById("img-file-label" + inputID).scrollIntoView();
-});
+        const url = URL.createObjectURL(fileToUpload);
+        const preview = document.getElementById('preview');
+        preview.src = url;
 
-// ابزارهای کنترل
-$('#zoomIn').on('click', () => cropper.zoom(0.1));
-$('#zoomOut').on('click', () => cropper.zoom(-0.1));
-$('#rotateLeft').on('click', () => cropper.rotate(-90));
-$('#rotateRight').on('click', () => cropper.rotate(90));
-$('#reset').on('click', () => cropper.reset());
+        if(cropper) cropper.destroy();
+        cropper = new window.Cropper(preview, { aspectRatio: 1, viewMode: 1 });
+    });
 
-// برش و آپلود
-$('#crop').on('click', function () {
-let canvas = cropper.getCroppedCanvas({
-width: 1080,
-height: 1350
-});
+    document.getElementById('uploadBtn').addEventListener('click', async function(){
+        if(!fileToUpload) return alert("ابتدا یک تصویر انتخاب کنید!");
 
-canvas.toBlob(function (blob) {
-let url = URL.createObjectURL(blob),
-reader = new FileReader();
-reader.readAsDataURL(blob);
-reader.onloadend = function () {
-$modal.modal('hide');
+        const canvas = cropper.getCroppedCanvas();
+        canvas.toBlob(async function(blob){
+            const formData = new FormData();
+            const croppedFile = new File([blob], fileToUpload.name, { type: 'image/jpeg' });
+            formData.append('file', croppedFile);
 
-let type = file_type.split('/'),
-form = new FormData();
-file_upload = new File([blob], "pic." + type[1]);
-form.append('imageUrl', file_upload);
-form.append('imgNumber', inputID);
-form.append('folderName', folderName);
+            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            formData.append('_token', token);
 
-$.ajaxSetup({
-headers: {
-'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-}
-});
+            try {
+                const res = await fetch("{{ route('upload') }}", {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                alert("آپلود موفق! مسیر فایل: " + data.path);
+            } catch(err){
+                console.error(err);
+                alert("خطا در آپلود فایل!");
+            }
+        }, 'image/jpeg');
+    });
+</script>
 
-$.ajax({
-url: uploadUrl,
-data: form,
-processData: false,
-contentType: false,
-type: 'POST',
-beforeSend: function () {
-$('#fileShow' + inputID).addClass('d-none');
-$('#uploadingIcon' + inputID).removeClass('d-none');
-$('#uploadingText' + inputID).removeClass('d-none d-inline-block').addClass('d-inline-block');
-$('#errorIcon' + inputID).addClass('d-none');
-$('#errorText' + inputID).addClass('d-none');
-$('#check' + inputID).addClass('d-none');
-},
-success: function (data) {
-inputIdFinshed[counter] = data;
-counter++;
-},
-error: function () {
-$('#uploadingIcon' + inputID).addClass('d-none');
-$('#uploadingText' + inputID).addClass('d-none').removeClass('d-inline-block');
-$('#errorIcon' + inputID).removeClass('d-none');
-$('#errorText' + inputID).removeClass('d-none');
-},
-}).done(function () {
-for (let i = 0; i < inputIdFinshed.length; i++) {
-$('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');
-$('#img-file-label' + inputIdFinshed[i]).removeClass('g-color-red');
-addPathCheckMark('pic' + inputIdFinshed[i], 'fileShow' + inputIdFinshed[i], 'check' + inputIdFinshed[i]);
-$('#uploadingText' + inputIdFinshed[i]).addClass('d-none').removeClass('d-inline-block');
-$('#fileShow' + inputIdFinshed[i]).removeClass('d-none');
-}
-});
-};
-});
-});
-
-
-$(document.body).addClass('me-position-normally');
-$(document.body).removeClass('me-position-fix');
+</body>
+</html>

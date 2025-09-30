@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="utf-8">
@@ -37,6 +36,25 @@
             -moz-appearance: textfield;
         }
     </style>
+    <script type="text/javascript">
+        (function() {
+            let font_awesome = document.createElement('link');
+
+            font_awesome.href = "{{ asset('assets/vendor/icon-awesome/css/font-awesome.min.css') }}";
+            font_awesome.rel = 'stylesheet';
+            font_awesome.type = 'text/css';
+            document.getElementsByTagName('head')[0].appendChild(font_awesome);
+        })();
+
+        (function() {
+            let simple_line_icons = document.createElement('link');
+
+            simple_line_icons.href = "{{ asset('assets/vendor/icon-line/css/simple-line-icons.css') }}";
+            simple_line_icons.rel = 'stylesheet';
+            simple_line_icons.type = 'text/css';
+            document.getElementsByTagName('head')[0].appendChild(simple_line_icons);
+        })();
+    </script>
 </head>
 <body>
 <!-- دکمه برگشت شبیه کروم -->

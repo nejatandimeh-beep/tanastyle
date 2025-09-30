@@ -24,7 +24,7 @@
                                             pattern="\d*"
                                             maxlength="1"
                                             class="form-control text-center fs-1 code-input"
-                                            style="width: 50px; height: 58px; font-weight:700; font-size: 30px; outline-color: #72c02c"
+                                            style="width: 50px; height: 58px; font-weight:700; font-size: 30px; outline-color: #72c02c; border-radius: 10px"
                                             aria-label="digit-{{ $i }}"
                                         >
                                     @endfor
@@ -55,7 +55,7 @@
     </div>
 
     {{-- Toast container --}}
-    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100">
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1100; width: 100%;">
         <div id="toastContainer"></div>
     </div>
 
@@ -86,7 +86,8 @@
                 const toast = document.createElement('div');
                 toast.className = `toast align-items-center text-white bg-${type} border-0 show mb-2`;
                 toast.setAttribute('role','alert');
-                toast.innerHTML = `<div class="d-flex"><div class="toast-body">${msg}</div>
+                toast.innerHTML = `<div style="
+" class="d-flex"><div class="toast-body">${msg}</div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
                 toastContainer.appendChild(toast);
                 setTimeout(()=> toast.remove(), 4000);

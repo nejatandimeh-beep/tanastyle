@@ -36,7 +36,6 @@
     @yield('BaseJsLinks')
     @yield('BaseJsFunction')
     @yield('SellerMajorPanelJsFunction')
-    <script src="{{ asset('assets/js/cropper.js') }}"></script>
     <script src="{{ asset('assets/vendor/custombox/custombox.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>

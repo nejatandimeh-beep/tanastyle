@@ -372,3 +372,4 @@ Route::get('/session-table', function() {
 
 // -----------------------------[zarinpal]--------------------------------
 Route::get('/Confirmation','Customer\Basic@orderZarinpal');
+

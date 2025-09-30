@@ -70,7 +70,5 @@
     <!-- Confirm Msg -->
     <link rel="stylesheet" href="{{ asset('css/jquery-confirm.min.css') }}">
 
-    <!-- Cropper img -->
-    <link  href="{{ asset('css/cropper.css') }}" rel="stylesheet">
 <!--End Unify Style-->
 @endsection
