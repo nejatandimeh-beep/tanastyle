@@ -373,3 +373,10 @@ Route::get('/session-table', function() {
 // -----------------------------[zarinpal]--------------------------------
 Route::get('/Confirmation','Customer\Basic@orderZarinpal');
 
+//------------------------------[heic to jpg]-----------------------
+
+
+use App\Http\Controllers\ImageUploadController;
+
+Route::post('/image-upload', [ImageUploadController::class, 'upload'])->name('image.upload');
+

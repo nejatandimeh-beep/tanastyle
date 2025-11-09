@@ -16,7 +16,7 @@
     <!--تخفیفات ویژه-->
     <script src="{{ asset('js/swiper-bundle.js') }}"></script>
     @break
-    @case(strpos($_SERVER['REQUEST_URI'],'/Product'))
+    @case(Str::startsWith($_SERVER['REQUEST_URI'],'/Product'))
     <!--تخفیفات ویژه-->
     <script src="{{ asset('assets/js/components/hs.carousel.js') }}"></script>
     <script

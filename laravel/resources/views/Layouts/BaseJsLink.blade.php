@@ -26,8 +26,5 @@
     {{-- پلاگین‌های متفرقه --}}
     <script src="{{ asset('js/jquery-confirm.min.js') }}"></script>
 
-    {{-- اپلیکیشن خودت (باندل شده با Mix) --}}
-    <script src="{{ mix('js/app.js') }}"></script>
-
 @endsection
 

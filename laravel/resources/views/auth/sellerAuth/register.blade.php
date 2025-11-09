@@ -8,6 +8,23 @@
 @yield('BaseCssLink')
 </head>
 @yield('CustomerNavigation')
+<!-- Loader overlay -->
+<div id="loaderOverlay" style="
+    display:none;
+    position: fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background: rgba(255,255,255,0.8);
+    z-index: 1051;
+    justify-content:center;
+    align-items:center;
+">
+    <div class="spinner-border text-primary" role="status" style="direction:rtl; width:15rem; height:4rem;">
+        <span class="visually-hidden">در حال آماده سازی...</span>
+    </div>
+</div>
+
 <div class="container g-my-40">
     <div class="row justify-content-center">
         <div class="col-md-9">
@@ -1005,7 +1022,7 @@
                                      tabindex="-1" role="dialog"
                                      aria-labelledby="exampleModalCenterTitle"
                                      aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered m-0" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLongTitle">تنظیم اندازه
@@ -1029,10 +1046,9 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button"
-                                                        class="btn btn-secondary" data-dismiss="modal">انصراف
+                                                        class="btn btn-secondary h4 rounded-0" data-dismiss="modal">انصراف
                                                 </button>
-                                                <button type="button" id="crop" class="btn btn-primary g-mr-5">برش
-                                                </button>
+                                                <button type="button" id="crop" class="btn btn-primary g-mr-5 h4 rounded-0">تایید</button>
                                                 <i id="waitingCrop"
                                                    style="display: none"
                                                    class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
@@ -1054,7 +1070,7 @@
 
                                             <div style="display: flex" class="d-custom-block">
                                                 <input style="direction: rtl;"
-                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width g-brd-right-none creditCard"
+                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
                                                        type="text"
                                                        tabindex="30"
                                                        placeholder="0000"
@@ -1065,7 +1081,7 @@
                                                        maxlength="4"
                                                        oninput="if($(this).val().length === 4) $('#creditCard3').focus();">
                                                 <input style="direction: rtl;"
-                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width g-brd-right-none creditCard"
+                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
                                                        type="text"
                                                        tabindex="31"
                                                        placeholder="0000"
@@ -1076,7 +1092,7 @@
                                                        maxlength="4"
                                                        oninput="if($(this).val().length === 4) $('#creditCard2').focus();">
                                                 <input style="direction: rtl;"
-                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width g-brd-right-none creditCard"
+                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
                                                        type="text"
                                                        tabindex="32"
                                                        placeholder="0000"
@@ -1246,6 +1262,7 @@
 </div>
 @yield('CustomerFooter')
 @yield('BaseJsLinks')
+<script src="{{ asset('assets/js/cropper.js') }}"></script>
 </body>
 <script>
     // change persian num to english num
@@ -1267,6 +1284,7 @@
     $(window).on('pageshow', function () {
         $('#load').hide();
     });
+
     $(document).ready(function () {
         let $modal = $('#modal'),
             image = document.getElementById('sample_image'),
@@ -1274,49 +1292,95 @@
 
         // انتخاب فایل
         $('input[id^="pic"]').on('change', function (event) {
-            if ($('#nationalId').val().length === 10) {
-                inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
-                $('#fileShow' + inputID).removeClass('g-color-red');
-
-                let files = event.target.files,
-                    done = function (url) {
-                        image.src = url;
-                        $modal.modal('show');
-                    };
-
-                if (files && files.length > 0) {
-                    let file = files[0];
-
-                    // اگر فرمت HEIC بود → تبدیل به JPG با heic2any
-                    if (file.type === 'image/heic' || file.name.endsWith('.heic')) {
-                        heic2any({ blob: file, toType: 'image/jpeg', quality: 0.9 })
-                            .then(function (converted) {
-                                console.log("✅ HEIC تبدیل شد:", converted);
-                                console.log("نوع داده:", converted.constructor.name); // مثلا باید Blob باشه
-
-                                let reader = new FileReader();
-                                reader.onload = function (e) {
-                                    console.log("✅ تبدیل به Base64 انجام شد:", e.target.result.substring(0, 50) + "...");
-                                    done(e.target.result);
-                                };
-                                reader.readAsDataURL(converted);
-                            })
-                            .catch(err => {
-                                console.error("❌ خطا در HEIC2ANY:", err);
-                                alert("خطا در تبدیل HEIC به JPG");
-                            });
-                    } else {
-                        console.log("فایل heic شناسایی نشد");
-                        // فرمت‌های عادی
-                        let reader = new FileReader();
-                        reader.onload = function (e) {
-                            done(e.target.result);
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                }
-            } else {
+            if ($('#nationalId').val().length !== 10) {
                 alert('ابتدا لطفا کد ملی را بصورت صحیح وارد کنید.');
+                return;
+            }
+
+            let currentID = $(this).attr('id').replace(/[^0-9]/gi, '');
+            inputID=currentID;
+            $('#fileShow' + inputID).removeClass('g-color-red');
+
+            let files = event.target.files;
+            if (!files || files.length === 0) return;
+
+            let file = files[0];
+            let ext = file.name.split('.').pop().toLowerCase();
+
+            $('#loaderOverlay').css('display', 'flex'); // نمایش لودر
+
+            // helper: تبدیل مسیر نسبی به URL کامل
+            function toAbsoluteUrl(path) {
+                if (!path) return path;
+                if (/^https?:\/\//i.test(path)) return path;
+                if (path.startsWith('//')) return window.location.protocol + path;
+                if (path.startsWith('/')) return window.location.origin + path;
+                return window.location.origin + '/' + path;
+            }
+
+            // helper: نمایش در کراپر بعد از اطمینان از لود تصویر
+            function showInCropper(url) {
+                const abs = toAbsoluteUrl(url);
+                const img = new Image();
+                img.onload = function () {
+                    image.src = abs;      // عنصر image که در modal استفاده می‌شود
+                    $modal.modal('show');
+                    $('#loaderOverlay').hide();
+                };
+                img.onerror = function () {
+                    console.error('Image load error for:', abs);
+                    $('#loaderOverlay').hide();
+                    alert('خطا در بارگذاری تصویر خروجی. آدرس: ' + abs);
+                };
+                // شروع بارگذاری
+                img.src = abs;
+            }
+
+            if (ext === 'heic' || ext === 'heif') {
+                let formData = new FormData();
+                formData.append('image', file);
+                formData.append('_token', $('input[name=_token]').val());
+                formData.append('pic_number', inputID);
+
+                $.ajax({
+                    url: '/image-upload',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function (response) {
+                        console.log('Server response:', response);
+                        // پشتیبانی از هر دو شکل پاسخ: response.file یا response.files.image
+                        let raw = response.file || (response.files && response.files.image) || response.files?.image;
+                        if (!raw) {
+                            $('#loaderOverlay').hide();
+                            console.error('Missing file in response', response);
+                            alert('پاسخ سرور شامل مسیر فایل نیست');
+                            return;
+                        }
+                        showInCropper(raw);
+                    },
+                    error: function (xhr, status, err) {
+                        $('#loaderOverlay').hide();
+                        console.error('AJAX error', status, err, xhr && xhr.responseText);
+                        alert('خطا در ارتباط با سرور: ' + (xhr && xhr.responseText ? xhr.responseText : status));
+                    }
+                });
+
+            } else {
+                // فایل عادی → مستقیم داخل کراپر (Base64)
+                let reader = new FileReader();
+                reader.onload = function () {
+                    $('#loaderOverlay').hide();
+                    image.src = reader.result;
+                    $modal.modal('show');
+                };
+                reader.onerror = function (e) {
+                    $('#loaderOverlay').hide();
+                    console.error('FileReader error', e);
+                    alert('خطا در خواندن فایل محلی');
+                };
+                reader.readAsDataURL(file);
             }
         });
 
@@ -1334,6 +1398,7 @@
                 multiple: true,
                 movable: true
             });
+            $('#loaderOverlay').fadeOut(200);
         });
 
         // بستن کراپر
@@ -1344,6 +1409,8 @@
 
         // برش تصویر
         $('#crop').on('click', function () {
+            console.log("inputID is:", inputID); // ← بررسی مقدار
+
             let canvas = cropper.getCroppedCanvas({
                 width: 800,
                 height: 450
@@ -1353,15 +1420,27 @@
                 let reader = new FileReader();
                 reader.readAsDataURL(blob);
                 reader.onloadend = function () {
+                    if (!inputID) {
+                        alert("خطا: inputID مشخص نشده!");
+                        return;
+                    }
+
                     $('#imageUrl' + inputID).val(reader.result);
+
                     $modal.modal('hide');
-                    $("#userImageDiv" + inputID).clone().appendTo("#imageUploadForm");
+
+                    if ($("#userImageDiv" + inputID).length) {
+                        $("#userImageDiv" + inputID).clone().appendTo("#imageUploadForm");
+                    }
+
                     $("#imgNumber").val(inputID);
                     $('#imageUploadForm').submit();
+
                     addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
                 };
             });
         });
+
 
         // آپلود Ajax
         $('#imageUploadForm').on('submit', function (e) {
@@ -1394,6 +1473,39 @@
             });
         });
     });
+
+    function addPathCheckMark(picID, filePathID, checkMarkID) {
+        let pic = $('#' + picID);
+        let uploadedVal = pic.val(); // ابتدا مقدار picID
+        let filePath = $('#' + filePathID);
+        let checkMark = $("#" + checkMarkID);
+
+        // اگر pic خالیه، مقدار imageUrlXX رو جایگزین کن
+        if (!uploadedVal) {
+            let imageUrlInput = $('#imageUrl' + picID.replace(/\D/g, ''));
+            if (imageUrlInput.length) {
+                uploadedVal = imageUrlInput.val();
+                pic.val(uploadedVal); // مقدار picID رو هم ست کن
+            }
+        }
+
+        if (uploadedVal) {
+            let ext = uploadedVal.split('.').pop().toLowerCase();
+            if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'heic', 'heif']) !== -1) {
+                let fileName = pic.val().split("\\").pop();
+                filePath.attr("placeholder", fileName);
+                filePath.removeClass('g-brd-red g-color-red');
+                filePath.addClass('g-color-primary');
+                checkMark.css('display', 'inline');
+                return;
+            }
+        }
+
+        // حالت فاقد تصویر
+        filePath.attr("placeholder", 'فاقد تصویر');
+        filePath.addClass('g-brd-red g-color-red');
+        checkMark.css('display', 'none');
+    }
 
 
     function imAgree(ele) {
@@ -1484,26 +1596,6 @@
             $('#waitingSubmit').show();
             $('#save').prop('disabled', true);
             $('#registerForm').submit();
-        }
-    }
-
-    function addPathCheckMark(picID, filePathID, checkMarkID) {
-        let pic = $('#' + picID),
-            ext = pic.val().split('.').pop().toLowerCase(),
-            filePath = $('#' + filePathID),
-            checkMark = $("#" + checkMarkID);
-        if ((pic.val() !== '') && ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) !== -1)) {
-            let fileName = pic.val().split("\\").pop();
-            filePath.attr("placeholder", fileName);
-            filePath.removeClass('g-brd-red');
-            filePath.removeClass('g-color-red');
-            filePath.addClass('g-color-primary');
-            checkMark.css('display', 'inline');
-        } else {
-            filePath.attr("placeholder", 'فاقد تصویر');
-            filePath.addClass('g-brd-red');
-            filePath.addClass('g-color-red');
-            checkMark.css('display', 'none');
         }
     }
 

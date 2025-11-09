@@ -1,83 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Upload HEIC</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-        #preview { max-width: 400px; margin-top: 20px; display:block; }
-        #uploadBtn { margin-top: 10px; padding:5px 15px; }
-    </style>
-</head>
-<body>
+<?php
 
-<h2>آپلود و کراپ HEIC</h2>
-<input type="file" id="fileInput" accept="image/*">
-<img id="preview" alt="پیش‌نمایش">
+namespace App\Http\Controllers;
 
-<button id="uploadBtn">ارسال</button>
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
+use Symfony\Component\Process\Process;
 
-<script>
-    let cropper;
-    let fileToUpload;
-
-    document.getElementById('fileInput').addEventListener('change', async function(e){
-        const file = e.target.files[0];
-        if (!file) return;
-
-        fileToUpload = file;
-
-        // تبدیل HEIC به JPG در مرورگر
-        if(file.type === "image/heic" || file.name.toLowerCase().endsWith(".heic")){
-            try {
-                const convertedBlob = await window.heic2any({
-                    blob: file,
-                    toType: "image/jpeg",
-                    quality: 0.9
-                });
-                fileToUpload = new File([convertedBlob], file.name.replace(/\.heic$/i, ".jpg"), { type: "image/jpeg" });
-            } catch(err){
-                console.error("خطا در تبدیل HEIC:", err);
-                alert("خطا در تبدیل HEIC به JPG");
-                return;
-            }
+class ImageUploadController extends Controller
+{
+    public function upload(Request $request)
+    {
+        if (!$request->hasFile('image')) {
+            return response()->json(['success' => false, 'error' => 'هیچ فایلی دریافت نشد']);
         }
 
-        const url = URL.createObjectURL(fileToUpload);
-        const preview = document.getElementById('preview');
-        preview.src = url;
+        $file = $request->file('image');
 
-        if(cropper) cropper.destroy();
-        cropper = new window.Cropper(preview, { aspectRatio: 1, viewMode: 1 });
-    });
+        if (!$file->isValid()) {
+            return response()->json(['success' => false, 'error' => 'فایل معتبر نیست']);
+        }
 
-    document.getElementById('uploadBtn').addEventListener('click', async function(){
-        if(!fileToUpload) return alert("ابتدا یک تصویر انتخاب کنید!");
+        try {
+            // cast به string برای جلوگیری از خطاهای PHP 8.1
+            $ext = strtolower((string) $file->getClientOriginalExtension());
+            $mime = (string) $file->getClientMimeType();
 
-        const canvas = cropper.getCroppedCanvas();
-        canvas.toBlob(async function(blob){
-            const formData = new FormData();
-            const croppedFile = new File([blob], fileToUpload.name, { type: 'image/jpeg' });
-            formData.append('file', croppedFile);
+            $tmpName = (string) Str::uuid() . '.' . $ext;
+            $tmpRelative = 'tmp/' . $tmpName;
+            $file->storeAs('tmp', $tmpName);
+            $tmpAbsolute = storage_path('app/' . $tmpRelative);
 
-            const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-            formData.append('_token', token);
+            $outputDir = storage_path('app/public/uploads');
+            if (!file_exists($outputDir)) mkdir($outputDir, 0777, true);
 
-            try {
-                const res = await fetch("{{ route('upload') }}", {
-                    method: 'POST',
-                    body: formData
-                });
-                const data = await res.json();
-                alert("آپلود موفق! مسیر فایل: " + data.path);
-            } catch(err){
-                console.error(err);
-                alert("خطا در آپلود فایل!");
+            $isHeic = in_array($ext, ['heic', 'heif']) || in_array($mime, ['image/heic', 'image/heif']);
+
+            if ($isHeic) {
+                $outFilename = pathinfo($tmpName, PATHINFO_FILENAME) . '.jpg';
+                $outAbsolute = $outputDir . DIRECTORY_SEPARATOR . $outFilename;
+
+                $magickPath = strtoupper(substr(PHP_OS, 0, 3)) === 'WIN'
+                    ? 'C:\\Program Files\\ImageMagick-7.1.2-Q16-HDRI\\magick.exe'
+                    : 'magick';
+
+                $proc = new Process([$magickPath, $tmpAbsolute, $outAbsolute]);
+                $proc->run();
+
+                if (!$proc->isSuccessful()) {
+                    Log::error('HEIC convert failed: ' . $proc->getErrorOutput());
+                    throw new ProcessFailedException($proc);
+                }
+
+                Log::info('HEIC converted successfully: ' . $outAbsolute);
+
+                $proc->setTimeout(60);
+                $proc->run();
+
+                if (!$proc->isSuccessful()) {
+                    Log::error('HEIC convert failed: ' . $proc->getErrorOutput());
+                    Log::error('Command line: ' . $proc->getCommandLine());
+                    Storage::delete($tmpRelative);
+                    return response()->json([
+                        'success' => false,
+                        'error' => 'خطای تبدیل HEIC: ' . $proc->getErrorOutput()
+                    ]);
+                }
+
+
+                Storage::delete($tmpRelative);
+                $uploaded = Storage::url('uploads/' . $outFilename);
+            } else {
+                $stored = $file->store('public/uploads');
+                $uploaded = Storage::url(basename($stored));
             }
-        }, 'image/jpeg');
-    });
-</script>
 
-</body>
-</html>
+            // ✅ تعریف واضح $fileKey برای PHP 8.1
+            $fileKey = 'image';
+            return response()->json([
+                'success' => true,
+                'files' => [$fileKey => $uploaded]
+            ]);
+
+        } catch (\Exception $e) {
+            Log::error('Upload error: ' . $e->getMessage());
+            return response()->json(['success' => false, 'error' => 'خطا در آپلود فایل']);
+        }
+    }
+}

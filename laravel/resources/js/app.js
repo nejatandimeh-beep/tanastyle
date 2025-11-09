@@ -31,13 +31,3 @@
 //     el: '#app',
 // });
 
-import Cropper from 'cropperjs';
-import 'cropperjs/dist/cropper.css';
-
-import heic2any from 'heic2any';
-
-// دسترسی عمومی در همه جا
-window.Cropper = Cropper;
-window.heic2any = heic2any;
-
-console.log('app.js loaded!');

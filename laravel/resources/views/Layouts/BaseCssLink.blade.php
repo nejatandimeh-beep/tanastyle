@@ -26,7 +26,7 @@
     <link href="{{ asset('css/fontiran.css') }}" rel="stylesheet">
 
     <!--My Style-->
-    <link href="{{ asset('css/myStyle.css?v=28o85') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css?v=28456yo85') }}" rel="stylesheet">
 <!--Unify Style-->
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">
@@ -69,6 +69,7 @@
 
     <!-- Confirm Msg -->
     <link rel="stylesheet" href="{{ asset('css/jquery-confirm.min.css') }}">
-
+    <!-- Cropper img -->
+    <link  href="{{ asset('css/cropper.css') }}" rel="stylesheet">
 <!--End Unify Style-->
 @endsection
