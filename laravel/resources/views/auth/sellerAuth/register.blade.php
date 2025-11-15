@@ -949,6 +949,10 @@
                                     </label>
                                     <div dir="ltr" class="col-sm-9 force-col-12">
                                         <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
+                                             <span style="cursor: default"
+                                                   class="d-none align-self-center g-bg-primary g-brd-around g-brd-primary
+                                        g-pa-10 g-color-white"
+                                                   id="check11"><i class="fa fa-check"></i></span>
                                             <span style="cursor: default"
                                                   class="d-none align-self-center g-mr-5 g-bg-primary g-pa-15 g-color-white"
                                                   id="uploadingIcon11"><i class="fa fa-spinner fa-spin"></i></span>
@@ -988,6 +992,10 @@
                                     </label>
                                     <div dir="ltr" class="col-sm-9 force-col-12">
                                         <div class="input-group u-file-attach-v1 g-brd-gray-light-v2">
+                                              <span style="cursor: default"
+                                                    class="d-none align-self-center g-bg-primary g-brd-around g-brd-primary
+                                        g-pa-10 g-color-white"
+                                                    id="check12"><i class="fa fa-check"></i></span>
                                             <span style="cursor: default"
                                                   class="d-none align-self-center g-mr-5 g-bg-primary g-pa-15 g-color-white"
                                                   id="uploadingIcon12"><i class="fa fa-spinner fa-spin"></i></span>
@@ -1292,96 +1300,59 @@
 
         // انتخاب فایل
         $('input[id^="pic"]').on('change', function (event) {
-            if ($('#nationalId').val().length !== 10) {
-                alert('ابتدا لطفا کد ملی را بصورت صحیح وارد کنید.');
-                return;
-            }
+            if ($('#nationalId').val().length === 10) {
+                inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
+                $('#fileShow' + inputID).removeClass('g-color-red');
+                let files = event.target.files,
+                    done = function (url) {
+                        image.src = url;
+                        $modal.modal('show');
+                    };
 
-            let currentID = $(this).attr('id').replace(/[^0-9]/gi, '');
-            inputID=currentID;
-            $('#fileShow' + inputID).removeClass('g-color-red');
+                if (files && files.length > 0) {
+                    let file = files[0];
+                    let ext = file.name.split('.').pop().toLowerCase();
 
-            let files = event.target.files;
-            if (!files || files.length === 0) return;
+                    $('#loaderOverlay').css('display', 'flex'); // نمایش لودر
 
-            let file = files[0];
-            let ext = file.name.split('.').pop().toLowerCase();
+                    // اگر HEIC/HEIF بود → ارسال به سرور برای تبدیل
+                    if (ext === 'heic' || ext === 'heif') {
+                        let formData = new FormData();
+                        formData.append('image', file);
+                        formData.append('_token', $('input[name=_token]').val());
+                        formData.append('pic_number', inputID);
 
-            $('#loaderOverlay').css('display', 'flex'); // نمایش لودر
+                        $.ajax({
+                            url: '/image-upload',
+                            type: 'POST',
+                            data: formData,
+                            processData: false,
+                            contentType: false,
+                            success: function (response) {
+                                console.log('Server response:', response); // <--- اضافه کن
+                                if (response.success && response.file) {
+                                    image.src = response.file;  // ← URL مستقیم فایل
+                                    $modal.modal('show');
+                                } else {
+                                    alert('خطا در تبدیل فایل HEIC');
+                                }
+                            },
+                            error: function () {
+                                alert('خطا در ارتباط با سرور');
+                            }
+                        });
 
-            // helper: تبدیل مسیر نسبی به URL کامل
-            function toAbsoluteUrl(path) {
-                if (!path) return path;
-                if (/^https?:\/\//i.test(path)) return path;
-                if (path.startsWith('//')) return window.location.protocol + path;
-                if (path.startsWith('/')) return window.location.origin + path;
-                return window.location.origin + '/' + path;
-            }
-
-            // helper: نمایش در کراپر بعد از اطمینان از لود تصویر
-            function showInCropper(url) {
-                const abs = toAbsoluteUrl(url);
-                const img = new Image();
-                img.onload = function () {
-                    image.src = abs;      // عنصر image که در modal استفاده می‌شود
-                    $modal.modal('show');
-                    $('#loaderOverlay').hide();
-                };
-                img.onerror = function () {
-                    console.error('Image load error for:', abs);
-                    $('#loaderOverlay').hide();
-                    alert('خطا در بارگذاری تصویر خروجی. آدرس: ' + abs);
-                };
-                // شروع بارگذاری
-                img.src = abs;
-            }
-
-            if (ext === 'heic' || ext === 'heif') {
-                let formData = new FormData();
-                formData.append('image', file);
-                formData.append('_token', $('input[name=_token]').val());
-                formData.append('pic_number', inputID);
-
-                $.ajax({
-                    url: '/image-upload',
-                    type: 'POST',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    success: function (response) {
-                        console.log('Server response:', response);
-                        // پشتیبانی از هر دو شکل پاسخ: response.file یا response.files.image
-                        let raw = response.file || (response.files && response.files.image) || response.files?.image;
-                        if (!raw) {
-                            $('#loaderOverlay').hide();
-                            console.error('Missing file in response', response);
-                            alert('پاسخ سرور شامل مسیر فایل نیست');
-                            return;
-                        }
-                        showInCropper(raw);
-                    },
-                    error: function (xhr, status, err) {
-                        $('#loaderOverlay').hide();
-                        console.error('AJAX error', status, err, xhr && xhr.responseText);
-                        alert('خطا در ارتباط با سرور: ' + (xhr && xhr.responseText ? xhr.responseText : status));
+                    } else {
+                        // فایل عادی → مستقیم داخل کراپر
+                        let reader = new FileReader();
+                        reader.onload = function (event) {
+                            done(reader.result);
+                        };
+                        reader.readAsDataURL(file);
                     }
-                });
-
-            } else {
-                // فایل عادی → مستقیم داخل کراپر (Base64)
-                let reader = new FileReader();
-                reader.onload = function () {
-                    $('#loaderOverlay').hide();
-                    image.src = reader.result;
-                    $modal.modal('show');
-                };
-                reader.onerror = function (e) {
-                    $('#loaderOverlay').hide();
-                    console.error('FileReader error', e);
-                    alert('خطا در خواندن فایل محلی');
-                };
-                reader.readAsDataURL(file);
-            }
+                }
+            } else
+                alert('ابتدا لطفا کد ملی را بصورت صحیح وارد کنید.');
         });
 
         // نمایش کراپر
@@ -1436,7 +1407,8 @@
                     $("#imgNumber").val(inputID);
                     $('#imageUploadForm').submit();
 
-                    addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'Check' + inputID);
+                    addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'check' + inputID);
+
                 };
             });
         });
@@ -1496,7 +1468,7 @@
                 filePath.attr("placeholder", fileName);
                 filePath.removeClass('g-brd-red g-color-red');
                 filePath.addClass('g-color-primary');
-                checkMark.css('display', 'inline');
+                checkMark.removeClass('d-none');
                 return;
             }
         }
@@ -1504,7 +1476,7 @@
         // حالت فاقد تصویر
         filePath.attr("placeholder", 'فاقد تصویر');
         filePath.addClass('g-brd-red g-color-red');
-        checkMark.css('display', 'none');
+        checkMark.addClass('d-none');
     }
 
 

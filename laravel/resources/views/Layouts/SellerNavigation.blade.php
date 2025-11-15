@@ -53,7 +53,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-409">پوشاک<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-409"
                                          aria-labelledby="nav-link-409">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
@@ -2183,7 +2183,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408">کالای وارداتی<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
@@ -2303,7 +2303,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408">پزشکی و آرایشی بهداشتی<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <!-- Add pezeshki Product -->
@@ -2805,7 +2805,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408">لوازم خانگی برقی<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <!-- Add lavaze khanegi barghi Product -->
@@ -3318,7 +3318,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408">خانه و آشپزخانه<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden;" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden;" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <!-- Add lavaze khanegi barghi Product -->
@@ -4173,7 +4173,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408">موبایل و تبلت<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
@@ -4535,7 +4535,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408">کالای دیجیتال<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <!-- Add lavaze khanegi barghi Product -->
@@ -5390,7 +5390,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408">لوازم تحریر و سرگرمی<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">
@@ -5678,7 +5678,7 @@
                                        aria-haspopup="true"
                                        aria-expanded="false"
                                        aria-controls="nav-megamenu-408">خودرو و موتور سیکلت<i class="fa fa-plus align-middle g-font-size-15 g-mr-7 g-color-primary"></i></a>
-                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu"
+                                    <div style="direction: ltr; overflow-y: scroll; overflow-x: hidden" class="hs-mega-menu g-font-size-13 megaMenu text-right"
                                          id="nav-megamenu-408"
                                          aria-labelledby="nav-link-408">
                                         <h5 class="card-header g-bg-dark g-brd-around g-brd-gray-light-v4 g-color-gray-dark g-font-size-16 rounded-0 g-mb-5 text-right">

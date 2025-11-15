@@ -232,7 +232,7 @@ class Add extends Controller
     {
         // Upload Images
         $imgNumber = $request->get('imgNumber');
-        $image = $request->file('imageUrl');
+        $image = $request->file('image');
         $folderName = $request->get('folderName');
         $path = 'img/imagesTemp/products/'  . $folderName;
         File::makeDirectory($path, 0777, true, true);
@@ -251,6 +251,7 @@ class Add extends Controller
                 $source = imagecreatefromgif($image);
                 break;
         }
+
         $imageFullPath = $path . '/pic' . (int)($imgNumber+1) . '.jpg';
         imagejpeg($source, $imageFullPath);
 

@@ -926,20 +926,36 @@
         // ---------------------------------- Add Image Success Icon ----------------------------
         // Add FileName and Check Mark when Uploaded Image
         function addPathCheckMark(picID, filePathID, checkMarkID) {
-            let pic = $('#' + picID),
-                ext = pic.val().split('.').pop().toLowerCase(),
-                filePath = $('#' + filePathID),
-                checkMark = $("#" + checkMarkID);
-            if ((pic.val() !== '') && ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) !== -1)) {
-                let fileName = pic.val().split("\\").pop();
-                filePath.attr("placeholder", fileName);
-                filePath.addClass('g-color-primary');
-                checkMark.removeClass('d-none');
-            } else {
-                filePath.attr("placeholder", 'فاقد تصویر');
-                filePath.addClass('g-color-red');
-                checkMark.addClass('d-none');
+            let pic = $('#' + picID);
+            let uploadedVal = pic.val(); // ابتدا مقدار picID
+            let filePath = $('#' + filePathID);
+            let checkMark = $("#" + checkMarkID);
+
+            // اگر pic خالیه، مقدار imageUrlXX رو جایگزین کن
+            if (!uploadedVal) {
+                let imageUrlInput = $('#imageUrl' + picID.replace(/\D/g, ''));
+                if (imageUrlInput.length) {
+                    uploadedVal = imageUrlInput.val();
+                    pic.val(uploadedVal); // مقدار picID رو هم ست کن
+                }
             }
+
+            if (uploadedVal) {
+                let ext = uploadedVal.split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg', 'heic', 'heif']) !== -1) {
+                    let fileName = pic.val().split("\\").pop();
+                    filePath.attr("placeholder", fileName);
+                    filePath.removeClass('g-brd-red g-color-red');
+                    filePath.addClass('g-color-primary');
+                    checkMark.removeClass('d-none');
+                    return;
+                }
+            }
+
+            // حالت فاقد تصویر
+            filePath.attr("placeholder", 'فاقد تصویر');
+            filePath.addClass('g-brd-red g-color-red');
+            checkMark.addClass('d-none');
         }
 
         // ---------------------------------- End Add Image Success Icon ----------------------------------------
@@ -1025,70 +1041,18 @@
             return result;
         }
 
-        $(document).on('ready', function () {
-            if ($('.orderDetail').length > 0) {
-                $('.receiverStateCity').text(autoCity($('#receiverState').text(), $('#receiverCity').text(), 'onlyToOutput'));
-            }
-
-            if ($('#regulationTab').length > 0) {
-                let tab = $('#regulationTab').text();
-                switch (tab) {
-                    case 'returnProduct':
-                        setTimeout(function () {
-                            $('#returnProduct').trigger('click')
-                        }, 100);
-                        break;
-                    case 'falseProduct':
-                        setTimeout(function () {
-                            $('#falseProduct').trigger('click')
-                        }, 100);
-                        break;
-                    case 'emptyProduct':
-                        setTimeout(function () {
-                            $('#emptyProduct').trigger('click')
-                        }, 100);
-                        break;
-                    case 'deliveryProduct':
-                        setTimeout(function () {
-                            $('#deliveryProduct').trigger('click')
-                        }, 100);
-                        break;
-                    case 'sellerCheckout':
-                        setTimeout(function () {
-                            $('#sellerCheckout').trigger('click')
-                        }, 100);
-                        break;
-                    case 'offlineSelling':
-                        setTimeout(function () {
-                            $('#offlineSelling').trigger('click')
-                        }, 100);
-                        break;
-                    case 'commission':
-                        setTimeout(function () {
-                            $('#commission').trigger('click')
-                        }, 100);
-                        break;
-                    default:
-                }
-            }
-            let mq = window.matchMedia("(max-width: 900px)");
-            if (mq.matches) {
-                $('#bigDevices').remove();
-                $('.bigDevices').remove();
-            } else {
-                $('#smallDevices').remove();
-                $('.smallDevices').remove();
-            }
+        $(document).ready(function () {
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
-                cropper, inputID, inputIdFinshed = [], counter = 0, file_upload, file_type,
+                cropper, inputID, inputIdFinshed = [], counter = 0,
+                file_upload, file_type,
                 folderName = createFolderName(),
                 uploadUrl = (window.location.pathname.includes('Other')) ? '/Add-Other-Product-Upload-Image' : '/Add-Product-Upload-Image';
 
-// مقدار پوشه
+            // مقدار پوشه
             $('#folderName2').val(folderName);
 
-// انتخاب فایل
+            // انتخاب فایل
             $('input[id^="pic"]').on('mousedown', function () {
                 $(this).val(null);
             });
@@ -1097,23 +1061,53 @@
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
                 $('#fileShow' + inputID).removeClass('g-color-red');
 
-                let files = event.target.files,
-                    done = function (url) {
-                        image.src = url;
-                        $modal.modal('show');
-                    };
+                let files = event.target.files;
+                if (!files || files.length === 0) return;
 
-                if (files && files.length > 0) {
+                file_type = files[0].type;
+
+                let ext = files[0].name.split('.').pop().toLowerCase();
+
+                // اگر HEIC/HEIF بود → ارسال به سرور برای تبدیل
+                if (ext === 'heic' || ext === 'heif') {
+                    let formData = new FormData();
+                    formData.append('image', files[0]);
+                    formData.append('_token', $('meta[name="_token"]').attr('content'));
+                    formData.append('pic_number', inputID);
+
+                    $('#loaderOverlay').css('display', 'flex'); // نمایش لودر
+
+                    $.ajax({
+                        url: '/image-upload',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function (response) {
+                            $('#loaderOverlay').fadeOut(200);
+                            if (response.success && response.file) {
+                                image.src = response.file;  // ← URL مستقیم فایل
+                                $modal.modal('show');
+                            } else {
+                                alert('خطا در تبدیل فایل HEIC');
+                            }
+                        },
+                        error: function () {
+                            $('#loaderOverlay').fadeOut(200);
+                            alert('خطا در ارتباط با سرور');
+                        }
+                    });
+                } else {
                     let reader = new FileReader();
                     reader.onload = function () {
-                        done(reader.result);
+                        image.src = reader.result;
+                        $modal.modal('show');
                     };
                     reader.readAsDataURL(files[0]);
-                    file_type = files[0].type;
                 }
             });
 
-// وقتی مودال باز شد
+            // وقتی مودال باز شد
             $modal.on('shown.bs.modal', function () {
                 cropper = new Cropper(image, {
                     aspectRatio: 4 / 5,
@@ -1126,51 +1120,64 @@
                     cropBoxMovable: false,
                     dragMode: 'move'
                 });
-                $(document.body).addClass('me-position-fix');
-                $(document.body).removeClass('me-position-normally');
+                $(document.body).addClass('me-position-fix').removeClass('me-position-normally');
             });
 
-// وقتی مودال بسته شد
+            // وقتی مودال بسته شد
             $modal.on('hidden.bs.modal', function () {
-                cropper.destroy();
+                if (cropper) cropper.destroy();
                 cropper = null;
-                $(document.body).addClass('me-position-normally');
-                $(document.body).removeClass('me-position-fix');
-                document.getElementById("img-file-label" + inputID).scrollIntoView();
+                $(document.body).addClass('me-position-normally').removeClass('me-position-fix');
+                if (inputID) document.getElementById("img-file-label" + inputID).scrollIntoView();
             });
 
-// ابزارهای کنترل
+            // ابزارهای کنترل
             $('#zoomIn').on('click', () => cropper.zoom(0.1));
             $('#zoomOut').on('click', () => cropper.zoom(-0.1));
             $('#rotateLeft').on('click', () => cropper.rotate(-90));
             $('#rotateRight').on('click', () => cropper.rotate(90));
             $('#reset').on('click', () => cropper.reset());
 
-// برش و آپلود
+            // برش و آپلود
             $('#crop').on('click', function () {
-                let canvas = cropper.getCroppedCanvas({
-                    width: 1080,
-                    height: 1350
-                });
+                if (!cropper || !image.src) {
+                    alert("ابتدا یک تصویر انتخاب کنید.");
+                    return;
+                }
+
+                let canvas = cropper.getCroppedCanvas({ width: 1080, height: 1350 });
+                if (!canvas) {
+                    alert("خطا در ایجاد تصویر برش خورده!");
+                    return;
+                }
+
+                let blobType = file_type && file_type.includes('/') ? file_type : 'image/jpeg';
 
                 canvas.toBlob(function (blob) {
-                    let url = URL.createObjectURL(blob),
-                        reader = new FileReader();
-                    reader.readAsDataURL(blob);
+                    if (!blob || blob.size === 0) {
+                        alert("فایل برش خورده خالی است!");
+                        return;
+                    }
+                    if (!inputID) {
+                        alert("خطا: inputID مشخص نشده!");
+                        return;
+                    }
+
+                    let reader = new FileReader();
                     reader.onloadend = function () {
                         $modal.modal('hide');
 
-                        let type = file_type.split('/'),
-                            form = new FormData();
+                        let type = blobType.split('/');
+                        let form = new FormData();
                         file_upload = new File([blob], "pic." + type[1]);
-                        form.append('imageUrl', file_upload);
+
+                        // مهم: نام فیلد باید مطابق validation سرور باشد
+                        form.append('image', file_upload);
                         form.append('imgNumber', inputID);
                         form.append('folderName', folderName);
 
                         $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                            }
+                            headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
                         });
 
                         $.ajax({
@@ -1188,15 +1195,18 @@
                                 $('#check' + inputID).addClass('d-none');
                             },
                             success: function (data) {
+                                console.log(data);
                                 inputIdFinshed[counter] = data;
                                 counter++;
                             },
-                            error: function () {
+                            error: function (xhr, status, error) {
+                                console.error("Ajax Upload Error:", status, error, xhr.responseText);
                                 $('#uploadingIcon' + inputID).addClass('d-none');
                                 $('#uploadingText' + inputID).addClass('d-none').removeClass('d-inline-block');
                                 $('#errorIcon' + inputID).removeClass('d-none');
                                 $('#errorText' + inputID).removeClass('d-none');
-                            },
+                                alert("خطا در آپلود تصویر. لطفا دوباره تلاش کنید.");
+                            }
                         }).done(function () {
                             for (let i = 0; i < inputIdFinshed.length; i++) {
                                 $('#uploadingIcon' + inputIdFinshed[i]).addClass('d-none');
@@ -1207,52 +1217,16 @@
                             }
                         });
                     };
-                });
+
+                    try {
+                        reader.readAsDataURL(blob);
+                    } catch (err) {
+                        console.error("FileReader Error:", err);
+                        alert("خطا در پردازش فایل تصویر.");
+                    }
+
+                }, blobType);
             });
-
-
-            // Back button Force click Reload Page
-            if (!!window.performance && window.performance.navigation.type == 2) {
-                window.location.reload();
-            }
-
-            // Remove Element When Use Big Device
-            if (window.matchMedia('screen and (min-width:900px)').matches) {
-                $('#removeWhenBD').remove();
-                if ($('#picModal').length > 0)
-                    $('#picModal').removeClass('g-ml-minus-4');
-                $('.forceSmallDevice').remove();
-            } else {
-                if ($('#mobile').length > 0)
-                    $('#mobile').attr('pattern', '\d*');
-                $('.forceBigDevice').remove();
-            }
-
-            // Product Table Events Success Message
-            $('#overlay').modal('show');
-
-            setTimeout(function () {
-                $('#overlay').modal('hide');
-            }, 3000);
-
-            // Set Seller Navigation Date
-            nowDate();
-            setInterval('updateClock()', 1000);
-
-            // Set Focus Table Right to left
-            if ($('.rtlPosition').length > 0)
-                $('.table-responsive').animate({scrollLeft: $('.rtlPosition').position().left}, 1);
-
-            // this code block for focus element after page load
-            if ($('#focusAfterPageLoad').length > 0)
-                $('html, body').animate({
-                    scrollTop: $('#focusAfterPageLoad').offset().top
-                }, 1);
-
-            if ($('.parentShow').length > 0) {
-                $('.sizeDetailContainer').removeClass('d-none');
-                $('.sizeDetailContainer').addClass('d-lg-flex');
-            }
         });
 
         function autoCity(state, city, type) {

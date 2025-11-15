@@ -31,8 +31,8 @@
     <script type="text/javascript" src="{{ asset('js/Event.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/Magnifier.js?v=3') }}"></script>
     @break
-    @case(strpos($_SERVER['REQUEST_URI'],'/Customer-Product'))
-    @case(strpos($_SERVER['REQUEST_URI'],'/Customer-SellerPanel'))
+    @case(Str::startsWith($_SERVER['REQUEST_URI'],'/Customer-Product'))
+    @case(Str::startsWith($_SERVER['REQUEST_URI'],'/Customer-SellerPanel'))
     <!--تخفیفات ویژه-->
     <script src="{{ asset('assets/js/components/hs.carousel.js') }}"></script>
     <script
@@ -45,7 +45,7 @@
     <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
     <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
     @break
-    @case(strpos($_SERVER['REQUEST_URI'],'/Customer-Profile/'))
+    @case(Str::startsWith($_SERVER['REQUEST_URI'],'/Customer-Profile/'))
     <!--Side Menu-->
     <script
         src="{{ asset('assets/vendor/revolution-slider/revolution/js/jquery.themepunch.tools.min.js') }}"></script>
@@ -60,7 +60,7 @@
     <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
     <script src="{{ asset('assets/js/components/hs.modal-window.js') }}"></script>
     @break
-    @case(strpos($_SERVER['REQUEST_URI'],'/Customer-Cart'))
+    @case(Str::startsWith($_SERVER['REQUEST_URI'],'/Customer-Cart'))
     <script src="{{ asset('assets/vendor/custombox/custombox.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/malihu-scrollbar/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <script src="{{ asset('assets/js/components/hs.popup.js') }}"></script>
