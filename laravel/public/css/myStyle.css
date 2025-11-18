@@ -1373,6 +1373,7 @@ body a{
     display: block;
 }
 
+/*pic loader*/
 @keyframes pulse {
     0% { transform: scale(0.8); opacity: 0.5; }
     50% { transform: scale(1); opacity: 1; }
@@ -1380,4 +1381,18 @@ body a{
 }
 #loaderOverlay .spinner-border {
     animation: pulse 1s infinite;
+}
+
+.mini-loader {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(0, 123, 255, 0.2);
+    border-top-color: #0d6efd;
+    border-radius: 50%;
+    animation: miniSpin .6s linear infinite;
+}
+
+@keyframes miniSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

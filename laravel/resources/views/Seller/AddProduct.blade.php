@@ -1,6 +1,25 @@
 @extends('Layouts.IndexSeller')
 
 @section('Content')
+    <!-- Loader overlay -->
+    <div id="loaderOverlay" style="
+    display:none;
+    position: fixed;
+    top:0; left:0;
+    width:100%;
+    height:100%;
+    background: rgba(255,255,255,0.8);
+    z-index: 1051;
+    justify-content:center;
+    align-items:center;
+">
+        <div class="spinner-border text-primary" role="status" style="direction:rtl; width:15rem; height:4rem; display:flex; justify-content:center; align-items:center; gap:10px;">
+            <span class="visually-hidden">در حال آماده سازی...</span>
+
+            <!-- 🔥 اسپینر زیبای اضافه شده -->
+            <div class="mini-loader"></div>
+        </div>
+    </div>
     <input id="folderName" name="folderName" type="text" class="d-none">
     <span id="seller" class="d-none">{{Auth::guard('seller')->user()->NationalID}}</span>
     <!-- Info Panel -->
@@ -2803,7 +2822,7 @@
             <hr class="g-brd-gray-light-v4 g-mx-minus-20 smallDevice">
 
             <!-- smallDevice -->
-            <div class="form-group g-mb-20 text-right smallDevices">
+            <div class="form-group g-mb-20 text-right smallDevice">
                 <label id="lblDiscount" class="g-mb-10">قیمت نهایی محصول</label>
                 <div class="input-group d-block g-brd-primary--focus g-mb-10">
                     <span class="input-group-addon g-bg-gray-light-v5 g-brd-right g-brd-gray-light-v3">قیمت فروش بدون تخفیف</span>
@@ -2835,7 +2854,7 @@
             </div>
 
             <!-- bigDevice -->
-            <div class="form-group g-mb-20 text-right bigDevices">
+            <div class="form-group g-mb-20 text-right bigDevice">
                 <label id="lblDiscount" class="g-mb-10">قیمت نهایی محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <span class="input-group-addon g-bg-gray-light-v5" id="toman">تومان</span>
@@ -2941,7 +2960,7 @@
                     </div>
                 </div>
                 <div style="direction: rtl" class="modal fade" id="modal" tabindex="-1" role="dialog">
-                    <div class="modal-dialog modal-fullscreen g-ma-0 mx-set" role="document">
+                    <div class="modal-dialog modal-fullscreen mx-set" role="document">
                         <div style="height: 100vh;" class="modal-content d-flex flex-column">
                             <div class="modal-header">
                                 <h5 class="modal-title">برش تصویر</h5>

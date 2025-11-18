@@ -80,7 +80,7 @@
             </div>
 
             <div class="form-group row g-mb-25">
-                <label for="example-text-input" class="col-sm-2 col-form-label">تخفیف قیمت</label>
+                <label for="example-text-input" class="col-sm-2 col-form-label">تخفیف</label>
                 <div class="input-group col-sm-10 force-col-12">
                     <input class="form-control form-control-md rounded-0 g-color-red" type="number"
                            value="{{ $data->Discount }}"
@@ -94,7 +94,29 @@
                 <label for="example-text-input" class="col-sm-2 col-form-label">قیمت فروش</label>
                 <div class="input-group col-sm-10 force-col-12">
                     <input class="form-control form-control-md rounded-0 g-color-primary" type="text"
+                           value="{{  number_format($data->PriceWithDiscount) }}"
+                           id="example-text-input" readonly>
+                    <span style="border-left: 1px solid lightgrey"
+                          class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">تومان</span>
+                </div>
+            </div>
+
+            <div class="form-group row g-mb-25">
+                <label for="example-text-input" class="col-sm-2 col-form-label">پرداختی به شما</label>
+                <div class="input-group col-sm-10 force-col-12">
+                    <input class="form-control form-control-md rounded-0 g-color-primary" type="text"
                            value="{{  number_format($data->FinalPrice) }}"
+                           id="example-text-input" readonly>
+                    <span style="border-left: 1px solid lightgrey"
+                          class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">تومان</span>
+                </div>
+            </div>
+
+            <div class="form-group row g-mb-25">
+                <label for="example-text-input" class="col-sm-2 col-form-label">کارمزد</label>
+                <div class="input-group col-sm-10 force-col-12">
+                    <input class="form-control form-control-md rounded-0 g-color-primary" type="text"
+                           value="{{  number_format($data->PriceWithDiscount-$data->FinalPrice) }}"
                            id="example-text-input" readonly>
                     <span style="border-left: 1px solid lightgrey"
                           class="input-group-addon g-bg-gray-light-v5 g-brd-right-none">تومان</span>
@@ -382,12 +404,11 @@
                                         </div>
                                     </div>
                                     <div class="text-center">
-                                        <small class="g-font-size-12">با احتساب {{ $data->Discount }}%
-                                            تخفیف {{Auth::guard('seller')->user()->NationalID!==2872282556?' و سهم تانا استایل':''}}
-                                            و 9% ارزش افزوده</small>
+                                        <small class="g-font-size-12">با احتساب {{ $data->Discount }}% تخفیف
+                                            به علاوه 4% کارمزد خدمات پلتفرم</small>
                                         <span
                                             class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-13 g-py-15 g-px-15--lg g-px-5 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
-                                              قیمت فروش
+                                              قیمت نهایی فروش
                                               <span class="d-lg-inline-block g-mt-10 g-color-primary g-mr-5 g-mb-10"
                                                     id="newFinalPrice">...</span>
                                               <span class="g-font-size-12 g-font-weight-300 g-mt-10 g-mr-5">تومان</span>
@@ -448,8 +469,7 @@
                                     </div>
                                     <div class="text-center">
                                         <small class="g-font-size-12">با احتساب تخفیف
-                                            جدید{{Auth::guard('seller')->user()->NationalID!==2872282556?' و سهم تانا استایل':''}}
-                                            و 9% ارزش افزوده</small>
+                                            جدید و 4% کارمزد خدمات پلتفرم</small>
                                         <span
                                             class="u-label g-bg-gray-light-v5 g-color-main g-brd-around g-brd-gray-light-v4 g-font-size-14 g-font-size-16--md g-font-weight-600 g-pa-15 g-mt-5 g-mb-40 g-mb-20--lg text-center col-12">
                                               قیمت فروش

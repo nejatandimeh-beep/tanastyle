@@ -79,6 +79,21 @@
 
             return ret;
         }
+
+        function removeResponsiveElements() {
+            const width = window.innerWidth;
+
+            if (width >= 768) {
+                // حالت صفحه بزرگ → حذف تمام smallDevice ها
+                document.querySelectorAll('.smallDevice').forEach(el => el.remove());
+            } else {
+                // حالت صفحه کوچک → حذف تمام bigDevice ها
+                document.querySelectorAll('.bigDevice').forEach(el => el.remove());
+            }
+        }
+
+        // اجرا در بارگذاری اولیه
+        removeResponsiveElements();
     </script>
     </html>
 @endsection

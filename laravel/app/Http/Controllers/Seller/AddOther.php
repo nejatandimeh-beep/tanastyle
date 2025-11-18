@@ -40,7 +40,7 @@ class AddOther extends Controller
     {
         // Upload Images
         $imgNumber = $request->get('imgNumber');
-        $image = $request->file('imageUrl');
+        $image = $request->file('image');
         $folderName = $request->get('folderName');
         $path = 'img/imagesTemp/otherProducts/' . $folderName;
         File::makeDirectory($path, 0777, true, true);

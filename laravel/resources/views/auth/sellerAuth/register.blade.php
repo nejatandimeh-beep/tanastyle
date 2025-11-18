@@ -20,8 +20,11 @@
     justify-content:center;
     align-items:center;
 ">
-    <div class="spinner-border text-primary" role="status" style="direction:rtl; width:15rem; height:4rem;">
+    <div class="spinner-border text-primary" role="status" style="direction:rtl; width:15rem; height:4rem; display:flex; justify-content:center; align-items:center; gap:10px;">
         <span class="visually-hidden">در حال آماده سازی...</span>
+
+        <!-- 🔥 اسپینر زیبای اضافه شده -->
+        <div class="mini-loader"></div>
     </div>
 </div>
 
@@ -30,22 +33,6 @@
         <div class="col-md-9">
             <div class="card">
                 <h5 class="card-header text-right">ثبت نام در سامانه فروش</h5>
-
-                @if(session()->has('msg'))
-                    <svg id="checkMark" class="checkmark"
-                         xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
-                        <circle class="checkmark__circle" cx="26" cy="26" r="25"
-                                fill="none"/>
-                        <path class="checkmark__check" fill="none"
-                              d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-                    </svg>
-
-                    <div style="direction: rtl;" class="g-mb-60">
-                        <h3 class="g-color-primary text-center">با تشکر از ثبت نام شما در سامانه فروش میوان</h3>
-                        <h6 class="text-center">درخواست شما در صف بررسی قرار گرفت. در صورت تایید اطلاعات، نتیجه را
-                            از طریق پیامک اطلاع رسانی خواهیم نمود.</h6>
-                    </div>
-                @else
                     <div class="card-body">
                         <form action="{{route('sellerNew')}}" method="POST" style="direction: rtl" id="registerForm"
                               enctype="multipart/form-data">
@@ -1263,7 +1250,6 @@
                                class="d-none">
                         <input id="imgNumber" name="imgNumber" type="text" class="d-none">
                     </form>
-                @endif
             </div>
         </div>
     </div>
@@ -1369,7 +1355,7 @@
                 multiple: true,
                 movable: true
             });
-            $('#loaderOverlay').fadeOut(200);
+            $('#loaderOverlay').fadeOut(1);
         });
 
         // بستن کراپر
@@ -2686,7 +2672,7 @@
         const loader = document.getElementById('global-loader');
         if (loader) {
             loader.style.opacity = "0";
-            setTimeout(() => loader.style.display = 'none', 500);
+            setTimeout(() => loader.style.display = 'none', 100);
         }
     }
     function closeOtherMenu() {

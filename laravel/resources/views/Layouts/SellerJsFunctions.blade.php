@@ -822,7 +822,6 @@
                     if ($('.sellerProductDetail').length > 0) {
                         let additionalValue = 4;
 
-                        calc = calc + (calc * (additionalValue)) / 100;
                         calc = Math.ceil(calc / 1000) * 1000;
                         $('#tempFinalPrice').val(calc);
                         $('#newPriceBtn').prop('disabled', false);
@@ -850,13 +849,13 @@
             if (unitPrice >= 10000) {
                 let calc,
                     finalPrice, exValue, exValueWithoutDis, fPriceWithoutDis, dis, mevan;
-                if ($(this).val() === '0'){
+                if ($(this).val() === '0') {
                     calc = unitPrice; //without discount
                 } else {
                     calc = salePrice(discount, unitPrice); //whit discount
                 }
-                calc=Math.ceil(calc / 1000) * 1000; //round to up number
-                              dis = parseInt(unitPrice) - calc;
+                calc = Math.ceil(calc / 1000) * 1000; //round to up number
+                dis = parseInt(unitPrice) - calc;
                 exValue = calc * (additionalValue) / 100;
                 mevan = Math.ceil(exValue / 1000) * 1000; // round to up num
                 finalPrice = calc - mevan;
@@ -864,7 +863,7 @@
                 exValueWithoutDis = parseInt(unitPrice) * (additionalValue) / 100;
                 fPriceWithoutDis = parseInt(unitPrice);
                 fPriceWithoutDis = Math.ceil(fPriceWithoutDis / 1000) * 1000; //round to up num
-                console.log('calc:',calc,'mevan:',mevan,'finalPrice:',finalPrice,'exValueWithoutDis:',exValueWithoutDis,'fPriceWithoutDis:',fPriceWithoutDis,'dis:',dis)
+                console.log('calc:', calc, 'mevan:', mevan, 'finalPrice:', finalPrice, 'exValueWithoutDis:', exValueWithoutDis, 'fPriceWithoutDis:', fPriceWithoutDis, 'dis:', dis)
                 $("#sellerShare").text(finalPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#BsalePrice").text(finalPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $("#SsalePrice").text(finalPrice.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
@@ -892,20 +891,17 @@
 
         //this code for change price after added product
         $("#newDiscount").on('input', function () {
-            if ($(this).val() === '0') {
-                $(this).val('');
-                return false;
-            }
-
-            let discount = $(this).val(),
+            let calc,discount = $(this).val(),
                 currentPrice = $("#currentPrice").val(),
                 temp1;
 
             temp1 = parseInt(currentPrice.replace(new RegExp(',', 'g'), "")); // remove coma
-            if ($(this).val() >= 1 && $(this).val() <= 99) {
-                let calc = salePrice(discount, temp1);
-                let additionalValue = 4;
-                calc = calc + (calc * (additionalValue)) / 100;
+            if ($(this).val() >= 0 && $(this).val() <= 99) {
+                if ($(this).val() === '0') {
+                    calc = temp1; //without discount
+                } else {
+                    calc = salePrice(discount, temp1); //whit discount
+                }
                 calc = Math.ceil(calc / 1000) * 1000;
                 $('#newFinalPriceByNewDiscount').text(calc.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
                 $('#tempNewFinalPrice').val(calc);
@@ -1120,14 +1116,12 @@
                     cropBoxMovable: false,
                     dragMode: 'move'
                 });
-                $(document.body).addClass('me-position-fix').removeClass('me-position-normally');
             });
 
             // وقتی مودال بسته شد
             $modal.on('hidden.bs.modal', function () {
                 if (cropper) cropper.destroy();
                 cropper = null;
-                $(document.body).addClass('me-position-normally').removeClass('me-position-fix');
                 if (inputID) document.getElementById("img-file-label" + inputID).scrollIntoView();
             });
 
@@ -1145,7 +1139,7 @@
                     return;
                 }
 
-                let canvas = cropper.getCroppedCanvas({ width: 1080, height: 1350 });
+                let canvas = cropper.getCroppedCanvas({width: 1080, height: 1350});
                 if (!canvas) {
                     alert("خطا در ایجاد تصویر برش خورده!");
                     return;
@@ -1177,7 +1171,7 @@
                         form.append('folderName', folderName);
 
                         $.ajaxSetup({
-                            headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+                            headers: {'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')}
                         });
 
                         $.ajax({
@@ -2128,6 +2122,18 @@
         window.addEventListener("load", resizeBox);
         window.addEventListener("resize", resizeBox);
 
+        function showLoader() {
+            const loader = document.getElementById('global-loader');
+            if (loader) loader.style.display = 'flex';
+        }
+
+        function hideLoader() {
+            const loader = document.getElementById('global-loader');
+            if (loader) {
+                loader.style.opacity = "0";
+                setTimeout(() => loader.style.display = 'none', 100);
+            }
+        }
     </script>
     </html>
 @endsection

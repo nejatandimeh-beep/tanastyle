@@ -44,6 +44,7 @@ Route::get('/sitemap.xml', function () {
 Route::get('/login/seller', 'AuthSeller\LoginController@showSellerLoginForm')->name('sellerLog');
 Route::post('/logout/seller', 'AuthSeller\LoginController@sellerLogout')->name('sellerLogout');
 Route::get('/register/seller', 'AuthSeller\RegisterController@showSellerRegisterForm')->name('sellerRegister');
+Route::get('/register-success', 'AuthSeller\RegisterController@successRegister')->name('successRegister');
 Route::post('/register/seller-UploadImage', 'AuthSeller\RegisterController@uploadImage')->name('sellerRegisterImage');
 Route::get('/check-seller-mobile', 'AuthSeller\VerifyController@getMobile')->name('getMobileSeller');
 Route::post('/verify-seller-mobile', 'AuthSeller\VerifyController@verifyMobile')->name('verifyMobileSeller');
@@ -380,3 +381,9 @@ use App\Http\Controllers\ImageUploadController;
 
 Route::post('/image-upload', [ImageUploadController::class, 'upload'])->name('image.upload');
 
+Route::get('/test-gd', function () {
+    return [
+        'gd_loaded' => extension_loaded('gd'),
+        'jpeg_func' => function_exists('imagecreatefromjpeg'),
+    ];
+});

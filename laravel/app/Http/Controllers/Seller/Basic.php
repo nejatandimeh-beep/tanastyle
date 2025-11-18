@@ -208,22 +208,15 @@ class Basic extends Controller
 //  Change Product Price
     public function changePriceProduct($id, $unitPrice, $finalPrice, $discount)
     {
-        $priceWithDiscount = $unitPrice - ($unitPrice * $discount / 100);
-        if (Auth::guard('seller')->user()->NationalID === 2872282556) {
-            $companyShare = 0;
-        } else {
-            $companyShare = 10;
-        }
-        $priceWithoutDiscount = $unitPrice + ($unitPrice * ($companyShare + 9) / 100);
-        $priceWithoutDiscount = substr($priceWithoutDiscount, 0, -3);
-        $priceWithoutDiscount .= '000';
+        $companyShare=4;
+        $sellerShare = $finalPrice - ($unitPrice * ($companyShare) / 100);
         DB::table('product')
             ->where('ID', $id)
             ->update([
                 'UnitPrice' => $unitPrice,
-                'PriceWithDiscount' => $priceWithDiscount,
-                'FinalPrice' => $finalPrice,
-                'FinalPriceWithoutDiscount' => $priceWithoutDiscount,
+                'PriceWithDiscount' => $finalPrice,
+                'FinalPrice' => $sellerShare,
+                'FinalPriceWithoutDiscount' => $unitPrice,
             ]);
 
         return redirect('/Seller-Store')->with('changePrice', 'success');
@@ -231,22 +224,15 @@ class Basic extends Controller
 
     public function changeDiscountProduct($id, $discount, $finalPrice, $unitPrice)
     {
-        $priceWithDiscount = $unitPrice - ($unitPrice * $discount / 100);
-        if (Auth::guard('seller')->user()->NationalID === 2872282556) {
-            $companyShare = 0;
-        } else {
-            $companyShare = 10;
-        }
-        $priceWithoutDiscount = $unitPrice + ($unitPrice * ($companyShare + 9) / 100);
-        $priceWithoutDiscount = substr($priceWithoutDiscount, 0, -3);
-        $priceWithoutDiscount .= '000';
+        $companyShare=4;
+        $sellerShare = $finalPrice - ($unitPrice * ($companyShare) / 100);
         DB::table('product')
             ->where('ID', $id)
             ->update([
                 'Discount' => $discount,
-                'PriceWithDiscount' => $priceWithDiscount,
-                'FinalPrice' => $finalPrice,
-                'FinalPriceWithoutDiscount' => $priceWithoutDiscount,
+                'PriceWithDiscount' => $finalPrice,
+                'FinalPrice' => $sellerShare,
+                'FinalPriceWithoutDiscount' => $unitPrice,
             ]);
 
         return redirect('/Seller-Store')->with('changeDiscount', 'success');
@@ -1663,5 +1649,10 @@ class Basic extends Controller
             default :
                 break;
         }
+    }
+
+    public function smartRound($number) {
+        $digits = pow(10, strlen($number) - 1);
+        return ceil($number / $digits) * $digits;
     }
 }

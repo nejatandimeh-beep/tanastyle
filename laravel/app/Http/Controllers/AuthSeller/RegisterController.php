@@ -133,7 +133,7 @@ class RegisterController extends Controller
                 'Signature' => $request->get('signature'),
             ]);
 
-        return redirect()->route('sellerRegister')->with('msg', 'success');
+        return redirect()->route('successRegister');
     }
 
     protected function createSeller(Request $request)
@@ -244,6 +244,10 @@ class RegisterController extends Controller
         return redirect()->route('sellerVerify');
     }
 
+    public function successRegister()
+    {
+        return view('auth.sellerAuth.success');
+    }
     function randomPassword()
     {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890#$%!@&';
