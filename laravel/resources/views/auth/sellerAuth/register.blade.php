@@ -549,12 +549,13 @@
                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
                                                tabindex="3"
                                                id="email"
-                                               onblur=" if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                               onblur="if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                               oninput="checkMail(this)"
                                                name="email"
                                                type="email"
                                                value=""
-                                               placeholder="مثال: najatAndimeh@gmail.com"
-                                        >
+                                               placeholder="مثال: najatAndimeh@gmail.com">
+                                        <div id="emailMessage" class="mt-1" style="font-size: 13px;"></div>
                                     </div>
                                 </div>
 
@@ -1224,7 +1225,8 @@
 
                                             <!-- دکمه موافقت -->
                                             <div class="modal-footer">
-                                                <button id="agreeBtnModal" class="btn btn-primary" disabled type="button">موافقم</button>
+                                                لطفا تا انتها مطالعه بفرمایید..
+                                                <button id="agreeBtnModal" class="btn btn-primary g-mx-5" type="button">موافقم</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1344,7 +1346,7 @@
         // نمایش کراپر
         $modal.on('shown.bs.modal', function () {
             cropper = new Cropper(image, {
-                aspectRatio: 16 / 9,
+                aspectRatio: 1,
                 viewMode: 1,
                 zoomable: true,
                 background: true,
@@ -1394,11 +1396,9 @@
                     $('#imageUploadForm').submit();
 
                     addPathCheckMark('pic' + inputID, 'fileShow' + inputID, 'check' + inputID);
-
                 };
             });
         });
-
 
         // آپلود Ajax
         $('#imageUploadForm').on('submit', function (e) {
@@ -1421,6 +1421,7 @@
                     counter++;
                     console.log("success");
                     console.log(data);
+                    $('#check' + inputID).removeClass('d-none');
                 }
             }).done(function () {
                 for (let i = 0; i <= inputIdFinshed.length; i++) {
@@ -1454,7 +1455,6 @@
                 filePath.attr("placeholder", fileName);
                 filePath.removeClass('g-brd-red g-color-red');
                 filePath.addClass('g-color-primary');
-                checkMark.removeClass('d-none');
                 return;
             }
         }
@@ -1527,24 +1527,35 @@
         }
     }
 
-    // فعال شدن دکمه وقتی اسکرول به پایین برسه
-    document.getElementById("regulationContent").addEventListener("scroll", function () {
-        const content = this;
-        if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
-            document.getElementById("agreeBtnModal").disabled = false;
-        }
+    document.addEventListener("DOMContentLoaded", () => {
+
+        const content = document.getElementById("regulationContent");
+        const btn = document.getElementById("agreeBtnModal");
+
+        // روشن شدن دکمه هنگام اسکرول به پایین
+        content.addEventListener("scroll", () => {
+            if (content.scrollTop + content.clientHeight >= content.scrollHeight) {
+
+                // فعال کردن واقعی
+                btn.disabled = false;
+
+                // اضافه کردن کلاس فعال
+                btn.classList.add("active", "activated");
+
+                // یکبار انیمیشن اجرا شود
+                setTimeout(() => btn.classList.remove("activated"), 500);
+            }
+        });
+
+        // کلیک روی دکمه
+        btn.addEventListener("click", () => {
+            $('#noAgree').addClass('d-none');
+            $('#agree').removeClass('d-none');
+            imAgree($('#signature'));
+            $('#modalRegulation').modal('hide');
+        });
     });
 
-    // کلیک روی دکمه داخل مودال → کلیک روی دکمه بیرون
-    document.getElementById("agreeBtnModal").addEventListener("click", function () {
-        // دکمه بیرونی رو تریگر کن
-        $('#noAgree').addClass('d-none');
-        $('#agree').removeClass('d-none');
-        imAgree($('#signature'));
-
-        // مودال بسته بشه
-        $('#modalRegulation').modal('hide');
-    });
 
     function saveUserData() {
         if (checkData() === 'false' || $('#agree').hasClass('d-none')) {
@@ -2713,5 +2724,43 @@
             window.location.href = '/';
         }
     });
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    });
+
+    function checkMail(input) {
+
+        const email = input.value.trim();
+        const messageBox = document.getElementById("emailMessage");
+
+        if (email === "") {
+            input.classList.remove('input-error', 'input-success');
+            messageBox.innerHTML = "";
+            return;
+        }
+
+        $.ajax({
+            url: "/check-email",
+            method: "POST",
+            data: { email: email },
+            success: function (response) {
+                if (response.exists) {
+                    input.classList.add("input-error");
+                    input.classList.remove("input-success");
+                    messageBox.style.color = "#e3342f";
+                    messageBox.innerHTML = "این ایمیل قبلاً ثبت شده است!";
+                } else {
+                    input.classList.add("input-success");
+                    input.classList.remove("input-error");
+                    messageBox.style.color = "#38c172";
+                    messageBox.innerHTML = "این ایمیل قابل استفاده است.";
+                }
+            }
+        });
+    }
+
 </script>
 @yield('BaseJsFunction')

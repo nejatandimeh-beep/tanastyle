@@ -387,3 +387,6 @@ Route::get('/test-gd', function () {
         'jpeg_func' => function_exists('imagecreatefromjpeg'),
     ];
 });
+
+Route::post('/check-email', [\App\Http\Controllers\Auth\RegisterController::class, 'checkEmail']);
+Route::post('/check-email', 'AuthSeller\RegisterController@checkEmail');

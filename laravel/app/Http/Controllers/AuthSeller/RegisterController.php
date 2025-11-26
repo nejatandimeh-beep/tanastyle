@@ -260,4 +260,11 @@ class RegisterController extends Controller
         return implode($pass); //turn the array into a string
     }
 
+    public function checkEmail(Request $request)
+    {
+        $exists = DB::table('sellers')
+         ->where('email', $request->email)->exists();
+        return response()->json(['exists' => $exists]);
+    }
+
 }
