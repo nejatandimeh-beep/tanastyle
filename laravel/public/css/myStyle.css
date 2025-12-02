@@ -684,7 +684,7 @@ body a{
     }
 
     .mx-set{
-        margin: 0;
+        margin: 0 !important;
     }
 }
 
@@ -1210,9 +1210,16 @@ body a{
 
 .img-container {
     width: 100%;
-    height: 100%;
+    height: 70vh;
+    max-height: 70vh;
     position: relative;
     background: #f8f9fa;
+}
+
+#sample_image {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
 }
 
 .cropper-tools button {
@@ -1362,8 +1369,8 @@ body a{
 /* حالت موبایل */
 @media (max-width: 767px) {
     #backButton {
-        width: 40px;
-        height: 40px;
+        width: 70px;
+        height: 70px;
         bottom: 20px;
         left: 20px;
     }

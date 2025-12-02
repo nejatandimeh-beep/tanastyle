@@ -1014,40 +1014,33 @@
                                 </div>
 
                                 {{--مودال تصاویر--}}
-                                <div style="direction: rtl" class="modal fade bd-example-modal-lg" id="modal"
-                                     tabindex="-1" role="dialog"
-                                     aria-labelledby="exampleModalCenterTitle"
-                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-lg modal-dialog-centered m-0" role="document">
-                                        <div class="modal-content">
+                                <div style="direction: rtl" class="modal fade" id="modal" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog modal-fullscreen mx-set" role="document">
+                                        <div style="height: 100vh;" class="modal-content d-flex flex-column">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">تنظیم اندازه
-                                                    تصویر</h5>
-                                                <button type="button"
-                                                        class="g-brd-none g-bg-transparent g-font-size-20 g-line-height-0 align-self-center"
-                                                        data-dismiss="modal"
-                                                        aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
+                                                <h5 class="modal-title">برش تصویر</h5>
+                                                <button type="button" class="close" data-dismiss="modal">
+                                                    <span>&times;</span>
                                                 </button>
                                             </div>
-                                            <div class="modal-body">
-                                                <div class="img-container">
-                                                    <div class="col-md-12 p-0">
-                                                        <img style="width: 100%;" src="" id="sample_image">
-                                                    </div>
-                                                    {{--                        <div class="col-md-4">--}}
-                                                    {{--                            <div class="preview rounded-circle mx-auto g-mt-20"></div>--}}
-                                                    {{--                        </div>--}}
+
+                                            <div class="modal-body p-0 flex-grow-1 d-flex flex-column">
+                                                <div class="img-container flex-grow-1">
+                                                    <img id="sample_image" class="w-100 h-100" style="object-fit:contain;">
+                                                </div>
+                                                <!-- دکمه‌های ابزار -->
+                                                <div class="cropper-tools text-center py-2 g-bg-white">
+                                                    <button type="button" class="btn btn-light btn-sm" id="zoomIn">🔍+</button>
+                                                    <button type="button" class="btn btn-light btn-sm" id="zoomOut">🔍-</button>
+                                                    <button type="button" class="btn btn-light btn-sm" id="rotateLeft">↩️</button>
+                                                    <button type="button" class="btn btn-light btn-sm" id="rotateRight">↪️</button>
+                                                    <button type="button" class="btn btn-light btn-sm" id="reset">♻️</button>
                                                 </div>
                                             </div>
-                                            <div class="modal-footer">
-                                                <button type="button"
-                                                        class="btn btn-secondary h4 rounded-0" data-dismiss="modal">انصراف
-                                                </button>
-                                                <button type="button" id="crop" class="btn btn-primary g-mr-5 h4 rounded-0">تایید</button>
-                                                <i id="waitingCrop"
-                                                   style="display: none"
-                                                   class="fa fa-spinner fa-spin m-0 g-font-size-20 g-color-primary"></i>
+
+                                            <div class="modal-footer g-bg-white">
+                                                <button type="button" class="btn btn-secondary rounded-0 g-ml-5 g-py-15 g-px-20" data-dismiss="modal">انصراف</button>
+                                                <button type="button" id="crop" class="btn btn-primary rounded-0 g-py-15 g-px-20">برش</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1064,9 +1057,9 @@
                                         <div
                                             class="align-self-center g-color-white text-center text-lg-right">
 
-                                            <div style="display: flex" class="d-custom-block">
+                                            <div style="display: flex">
                                                 <input style="direction: rtl;"
-                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
+                                                       class="need form-control g-brd-red g-brd-right-none form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
                                                        type="text"
                                                        tabindex="30"
                                                        placeholder="0000"
@@ -1077,7 +1070,7 @@
                                                        maxlength="4"
                                                        oninput="if($(this).val().length === 4) $('#creditCard3').focus();">
                                                 <input style="direction: rtl;"
-                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
+                                                       class="need form-control g-brd-red g-brd-right-none form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
                                                        type="text"
                                                        tabindex="31"
                                                        placeholder="0000"
@@ -1088,7 +1081,7 @@
                                                        maxlength="4"
                                                        oninput="if($(this).val().length === 4) $('#creditCard2').focus();">
                                                 <input style="direction: rtl;"
-                                                       class="need form-control g-brd-red form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
+                                                       class="need form-control g-brd-red g-brd-right-none form-control-md m-0 rounded-0 pl-0 pr-0 text-center g-font-size-16 responsive-width creditCard"
                                                        type="text"
                                                        tabindex="32"
                                                        placeholder="0000"
@@ -1284,12 +1277,13 @@
     $(document).ready(function () {
         let $modal = $('#modal'),
             image = document.getElementById('sample_image'),
-            cropper, inputID, inputIdFinshed = [], counter = 0;
+            cropper, inputID, inputIdFinshed = [], counter = 0,imgSize;
 
         // انتخاب فایل
         $('input[id^="pic"]').on('change', function (event) {
             if ($('#nationalId').val().length === 10) {
                 inputID = $(this).attr('id').replace(/[^0-9]/gi, '');
+                imgSize=inputID=='11' ? 1 : (16/9);
                 $('#fileShow' + inputID).removeClass('g-color-red');
                 let files = event.target.files,
                     done = function (url) {
@@ -1343,27 +1337,27 @@
                 alert('ابتدا لطفا کد ملی را بصورت صحیح وارد کنید.');
         });
 
-        // نمایش کراپر
+        // وقتی مودال باز شد
         $modal.on('shown.bs.modal', function () {
             cropper = new Cropper(image, {
-                aspectRatio: 1,
+                aspectRatio: imgSize,
                 viewMode: 1,
-                zoomable: true,
-                background: true,
-                minCropBoxWidth: 800,
-                minCropBoxHeight: 450,
-                dragCrop: true,
+                autoCropArea: 1,
+                responsive: true,
+                background: false,
                 dragMode: 'move',
-                multiple: true,
-                movable: true
             });
+
+            cropper.reset();
             $('#loaderOverlay').fadeOut(1);
+            $('#backButton').hide();
         });
 
         // بستن کراپر
         $modal.on('hidden.bs.modal', function () {
             cropper.destroy();
             cropper = null;
+            $('#backButton').show();
         });
 
         // برش تصویر

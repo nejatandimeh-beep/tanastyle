@@ -2984,8 +2984,8 @@
                             </div>
 
                             <div class="modal-footer g-bg-white">
-                                <button type="button" class="btn btn-secondary rounded-0 g-ml-5" data-dismiss="modal">انصراف</button>
-                                <button type="button" id="crop" class="btn btn-primary rounded-0">برش</button>
+                                <button type="button" class="btn btn-secondary rounded-0 g-ml-5 g-py-15 g-px-20" data-dismiss="modal">انصراف</button>
+                                <button type="button" id="crop" class="btn btn-primary rounded-0 g-py-15 g-px-20">برش</button>
                             </div>
                         </div>
                     </div>

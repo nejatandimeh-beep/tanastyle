@@ -1108,15 +1108,15 @@
                 cropper = new Cropper(image, {
                     aspectRatio: 4 / 5,
                     viewMode: 1,
-                    responsive: true,
                     autoCropArea: 1,
-                    zoomable: true,
-                    movable: true,
-                    cropBoxResizable: false,
-                    cropBoxMovable: false,
-                    dragMode: 'move'
+                    responsive: true,
+                    background: false,
+                    dragMode: 'move',
                 });
+
+                cropper.reset();
             });
+
 
             // وقتی مودال بسته شد
             $modal.on('hidden.bs.modal', function () {

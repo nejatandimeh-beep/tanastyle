@@ -2564,19 +2564,18 @@ class Basic extends Controller
 
         $data = DB::table('product')
             ->select('*')
-            ->where('genderCode', $gender)
+            ->where('GenderCode', $gender)
             ->where('Cat', $cat)
             ->paginate(12);
 
         $size = DB::table('product as p')
-            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount','s.ShopName','p.GenderCode','p.Cat')
+            ->select('pd.Size', 'pd.Color', 'p.ID', 'p.Discount','s.ShopName','p.GenderCode','p.Cat','pd.Qty')
             ->leftJoin('product_detail as pd', 'pd.ProductID', '=', 'p.ID')
             ->leftJoin('sellers as s', 's.id', '=', 'p.SellerID')
             ->where('p.GenderCode', $gender)
             ->where('p.Cat', $cat)
             ->groupBy('p.ID')
             ->paginate(12);
-
         $_SESSION['title'] = isset($data[0]) ? $data[0]->Name . ' ' . $data[0]->Gender : 'نتایج منوی انتخاب شده';
 
         return view('Customer.ProductList', compact('data', 'gender', 'catCode', 'size'));
