@@ -98,10 +98,13 @@ class RegisterController extends Controller
     {
         $nationalId = $request->get('nationalId');
         $path =  'img/imagesTemp/SellerProfileImage/'. $nationalId . '/';
+        $name=$request->get('name');
+        $family=$request->get('family');
+        $mobile=$request->get('mobile');
         DB::table('seller_new')
             ->insert([
-                'Name' => $request->get('name'),
-                'Family' => $request->get('family'),
+                'Name' => $name,
+                'Family' => $family,
                 'ShopName' => $request->get('shopName'),
                 'Email' => $request->get('email'),
                 'NationalID' => $nationalId,
@@ -115,7 +118,7 @@ class RegisterController extends Controller
                 'Gender' => $request->get('gender'),
                 'PrePhone' => '!',
                 'Phone' => '!',
-                'Mobile' => $request->get('mobile'),
+                'Mobile' => $mobile,
                 'State' => $request->get('state'),
                 'City' => $request->get('city'),
                 'HomeAddress' => $request->get('homeAddress'),
@@ -132,6 +135,29 @@ class RegisterController extends Controller
                 'CoverPath' => '!',
                 'Signature' => $request->get('signature'),
             ]);
+
+        //--------------
+        try {
+            $token = $name;
+            $token2 = $family;
+            $token3 = $mobile;
+            Session::put('token', $token);
+            Session::put('token2', $token2);
+            Session::put('token3', $token3);
+
+            $api_key = Config::get('kavenegar.apikey');
+            $var = new Kavenegar\KavenegarApi($api_key);
+            $template = "newSeller";
+            $type = "sms";
+
+            $result = $var->VerifyLookup('09144426149', $token, $token2, $token3, $template, $type);
+        } catch (\Kavenegar\Exceptions\ApiException $e) {
+            // در صورتی که خروجی وب سرویس 200 نباشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        } catch (\Kavenegar\Exceptions\HttpException $e) {
+            // در زمانی که مشکلی در برقرای ارتباط با وب سرویس وجود داشته باشد این خطا رخ می دهد
+            echo $e->errorMessage();
+        }
 
         return redirect()->route('successRegister');
     }

@@ -1681,6 +1681,18 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
+                                                <!-- Info Alert -->
+                                                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                    <h4 class="h5">
+                                                        <i class="fa fa-info-circle"></i>
+                                                        روش انتخاب رنگ
+                                                    </h4>
+                                                    برای نمایش نام رنگ روی آن یکبار کلیک کنید و برای انتخاب رنگ روی آن دوبار کلیک کنید.
+                                                </div>
+                                                <!-- End Info Alert -->
                                                     <div id="accordion-{{$i}}" class="u-accordion u-accordion-color-primary" role="tablist" aria-multiselectable="true">
                                                         <!-- White -->
                                                         <div class="card rounded-0 g-brd-none">
@@ -2757,17 +2769,16 @@
                 <label id="lblUnitPrice" class="g-mb-10">قیمت پایه محصول</label>
                 <div class="input-group g-brd-primary--focus g-mb-10">
                     <span class="input-group-addon g-bg-gray-light-v5">تومان</span>
-                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
+                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16"
+                           type="text"
                            tabindex="6"
                            id="unitPrice"
-                           pattern="\d*"
-                           {{--                           pattern="\d*"--}}
+                           pattern="[0-9\u06F0-\u06F9]*"
                            onkeypress="$('#lblUnitPrice').removeClass('g-color-red');"
                            value="">
                     <b style="direction: rtl" class="tooltip tooltip-top-left u-tooltip--v1">کمترین مقدار 10,000 تومان می
                         باشد.</b>
-                    <input style="display: none" type="number" name="tempPrice" id="tempPrice"
-                           value="">
+                    <input style="display: none" type="number" name="tempPrice" id="tempPrice" value="">
                 </div>
                 <div style="direction: rtl">
                     <small class="text-muted g-font-size-12">قیمت پایه، قیمتی است که بدون در نظر گرفتن تخفیف ذکر می
@@ -2787,11 +2798,11 @@
                           id="BsalePrice">...</span>
                     <span class="input-group-addon g-bg-gray-light-v5 bigDevice">سهم فروشنده</span>
                     <span class="input-group-addon g-bg-gray-light-v5">درصد</span>
-                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
+                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="number"
                            id="discount"
                            tabindex="7"
                            name="discount"
-                           pattern="\d*"
+                           pattern="[0-9\u06F0-\u06F9]*"
                            value=""
                            onkeypress="$('#lblDiscount').removeClass('g-color-red')"
                            maxlength="2">

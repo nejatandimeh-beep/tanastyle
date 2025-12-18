@@ -157,9 +157,11 @@
                 <span class="u-label g-bg-bluegray g-mb-5">پسرانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $boy }}</span>عدد</span>
                 <span class="u-label g-bg-bluegray g-mb-5">نوزادی دخترانه<span
-                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyBoy }}</span>عدد</span>
-                <span class="u-label g-bg-bluegray g-mb-5">نوزادی پسرانه<span
                         class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyGirl }}</span>عدد</span>
+                <span class="u-label g-bg-bluegray g-mb-5">نوزادی پسرانه<span
+                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $babyBoy }}</span>عدد</span>
+                <span class="u-label g-bg-bluegray g-mb-5">فاقد جنسیت<span
+                        class="g-mr-5 g-ml-5 g-color-aqua">{{ $noGender }}</span>عدد</span>
             </div>
             <!-- End Icon Blocks -->
 
@@ -504,9 +506,27 @@
                                 <td class="align-middle text-center g-color-primary">{{ number_format($rec->PriceWithDiscount) }}</td>
                                 <td class="align-middle">
                                     <div class="media">
+                                        @php
+                                            $file = $rec->SampleNumber.'.jpg';
+
+                                            $final = public_path($rec->PicPath.$file);
+                                            $temp  = public_path(
+                                                str_replace('/img/products/', '/img/imagesTemp/products/', $rec->PicPath).$file
+                                            );
+
+                                            if (file_exists($final)) {
+                                                $src = $rec->PicPath.$file;
+                                            } elseif (file_exists($temp)) {
+                                                $src = str_replace('/img/products/', '/img/imagesTemp/products/', $rec->PicPath).$file;
+                                            } else {
+                                                $src = $rec->PicPath.'sample1.jpg';
+                                            }
+                                        @endphp
+
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"
-                                             src="{{ file_exists(public_path($rec->PicPath.$rec->SampleNumber.'.jpg'))?$rec->PicPath.$rec->SampleNumber:$rec->PicPath.'sample1' }}.jpg"
+                                             src="{{ $src }}"
                                              alt="Image Description">
+
                                     </div>
                                 </td>
                                 <td class="align-middle text-center g-color-gray-dark-v1">{{ number_format($rec->VisitCounter) }}</td>

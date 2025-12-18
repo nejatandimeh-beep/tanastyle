@@ -17,7 +17,14 @@ class VerifyController extends Controller
     {
         $source = $request->get('source');
         $mobile = (string)$request->get('mobile');
-        // بررسی حالت forget
+
+        // اگر کاربر شماره جدید وارد کرد → تایمر ریست کنیم
+        if (Session::has('mobile') && Session::get('mobile') !== $mobile) {
+            Session::forget('SEND');   // ریست تایمر
+            Session::forget('token');  // حذف کد قبلی
+        }
+
+        // شرط فراموشی رمز
         if ($source === 'forget') {
             $mobileNum = DB::table('customers')
                 ->select('Mobile')
@@ -29,7 +36,8 @@ class VerifyController extends Controller
                     ->with('message', 'شما قبلا ثبت نام نکرده‌اید');
             }
         }
-        // چک کردن Session
+
+        // اگر تایمر وجود ندارد → ارسال کد
         if (!Session::has('SEND')) {
             Session::put('SEND', time());
             Session::put('mobile', $mobile);
@@ -46,7 +54,9 @@ class VerifyController extends Controller
                         return redirect()->route('requestMobile', ['source' => 'register'])
                             ->with('message', 'شماره موبایل نامعتبر است');
                     }
-                    return view('auth.verifyMobile');
+
+                    // ارسال mobile به view
+                    return view('auth.verifyMobile', ['mobile' => $mobile]);
                 } else {
                     Session::forget('SEND');
                     return redirect()->route('requestMobile', ['source' => 'register'])
@@ -60,17 +70,22 @@ class VerifyController extends Controller
                     return redirect()->route('requestMobile', ['source' => 'forget'])
                         ->with('message', 'شماره موبایل نامعتبر است');
                 }
-                return view('auth.verifyMobile');
+
+                // ارسال mobile به view
+                return view('auth.verifyMobile', ['mobile' => $mobile]);
             }
+        }
+
+        // اگر تایمر فعال است
+        $timer = time() - Session::get('SEND');
+
+        if ($timer >= 120) {
+            Session::forget('SEND');
+            return redirect()->route('requestMobile', ['source' => $source]);
         } else {
-            $timer = time() - Session::get('SEND');
-            if ($timer >= 120) {
-                Session::forget('SEND');
-                return redirect()->route('requestMobile', ['source' => $source]);
-            } else {
-                $timer = 120 - $timer;
-                return view('auth.verifyMobile', compact('timer'));
-            }
+            $timer = 120 - $timer;
+            // ارسال هر دو مقدار timer و mobile به view
+            return view('auth.verifyMobile', ['timer' => $timer, 'mobile' => $mobile]);
         }
     }
 
@@ -98,7 +113,7 @@ class VerifyController extends Controller
 
         if($customer->validateToken($verifyCode)){
             Session::forget('SEND');
-            $redirectUrl = $source==='register'? route('register') : route('resetPassword');
+            $redirectUrl = $source==='register'? route('register') : route('showResetForm');
             if($request->expectsJson()){
                 return response()->json(['success'=>true,'redirect'=>$redirectUrl]);
             }

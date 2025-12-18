@@ -112,6 +112,7 @@ class Basic extends Controller
         $babyGirl = $info['babyGirl'];
         $babyBoy = $info['babyBoy'];
         $sumFPrice = $info['sumFPrice'];
+        $noGender = $info['noGender'];
 
 //      Get Data From Store Table With Pagination
         $data = $this->storeTableLoad('', '', 'pagination', $sellerID);
@@ -120,7 +121,7 @@ class Basic extends Controller
             $id = $this->qtyStatus['productIdChangeQty'];
             return redirect('/Seller-Store')->with('productId', $id);
         } else {
-            return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl', 'boy', 'babyGirl', 'babyBoy'));
+            return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl', 'boy', 'babyGirl', 'babyBoy','noGender'));
         }
     }
 
@@ -1116,6 +1117,7 @@ class Basic extends Controller
         $boy = $info['boy'];
         $babyGirl = $info['babyGirl'];
         $babyBoy = $info['babyBoy'];
+        $noGender = $info['noGender'];
         $data = DB::table('product as p')
             ->select('p.*', 'pod.ID as orderID', 'fp.ID as fpID', 'pd.ID as pDetailID', 'pd.Qty', 'pd.Size', 'pd.Color', 'pd.SampleNumber')
             ->leftjoin('product_detail as pd', 'p.ID', '=', 'pd.ProductID')
@@ -1131,7 +1133,7 @@ class Basic extends Controller
         else
             $valName = 'کم بازدیدترین ها';
 
-        return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl', 'boy', 'babyGirl', 'babyBoy', 'valName'));
+        return view('Seller.Store', compact('data', 'sumFPrice', 'allQty', 'female', 'male', 'girl', 'boy', 'babyGirl', 'babyBoy', 'valName','noGender'));
 
     }
 //  --------------------------------------------------Get Data Functions------------------------------------------------
@@ -1150,6 +1152,7 @@ class Basic extends Controller
                 'boy' => '0',
                 'babyGirl' => '0',
                 'babyBoy' => '0',
+                'noGender' => '0',
                 'avgRating' => '0');
 
             $data = DB::table('product as p')
@@ -1175,7 +1178,7 @@ class Basic extends Controller
                 elseif ($d->Gender === 'نوزادی پسرانه')
                     $generalInfo['babyGirl'] += $d->Qty;
                 else
-                    $generalInfo['babyBoy'] += $d->Qty;
+                    $generalInfo['noGender'] += $d->Qty;
             }
             return $generalInfo;
         }

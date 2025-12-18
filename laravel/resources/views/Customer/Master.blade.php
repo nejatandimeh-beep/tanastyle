@@ -146,12 +146,35 @@
         <div style="background-image: linear-gradient(to bottom, rgba(240,240,240,1), #ffffff);"
              class="g-pb-50 g-pt-20">
             <div style="direction: rtl" class="container text-center g-z-index-1 g-px-30">
-                <h1 class="d-none h1 g-color-gray-dark-v3 g-font-weight-600 g-mb-15">فروشگاه بزرگ میوان</h1>
+                <section class="g-bg-gray-dark-v3 g-color-white g-py-50 g-pa-30 g-mt-30 g-mb-50">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 align-self-center">
+                                <h3 class="h4">همین الان غرفه ات رو بساز
+                                    <a class="g-color-primary" href="#">و از امتیازات طلایی بهره مند شو..</a>
+                                </h3>
+                                <p class="lead g-mb-20 g-mb-0--md">کاربران عزیز در صورتی که تمایل دارید غرفه شخصی خود را بدون هیچ گونه دانش علمی در زمینه طراحی و توسعه وب سایت داشته باشید همین الان از طریق دکمه ثبت نام اقدام نمایید. </p>
+                            </div>
+
+                            <div class="col-md-3 align-self-center text-md-right">
+                                <a style="direction: rtl" href="{{route('sellerLoginMode')}}"
+                                   class="btn btn-xl g-mt-5 btn-primary col-12 g-font-weight-600 g-letter-spacing-0_5 text-uppercase rounded-0">
+                                    <i class="fa fa-user-plus float-left g-font-size-32 g-mr-15"></i>
+                                    <span class="pull-right">
+                                        <span class="g-font-size-25 g-font-weight-600">ثبت نام</span>
+                                        <span class="d-block g-font-size-13">غرفه‌ات رو بساز..</span>
+                                      </span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <h3 class="d-none h1 g-color-gray-dark-v3 g-font-weight-600 g-mb-15">فروشگاه بزرگ میوان</h3>
                 <h1 class="h1 g-color-primary g-font-weight-600 g-mb-15 bigDevice">میوان
                     <span class="g-color-gray-dark-v3 ">ویترین دیجیتال کسب‌ و کار شما</span></h1>
 
-                <h1 class="h2 g-color-primary g-font-weight-600 g-mb-15 smallDevice">میوان
-                    <span class="g-color-gray-dark-v3">ویترین دیجیتال کسب‌ و کار شما</span></h1>
+                <h3 class="h4 g-color-primary g-font-weight-600 g-mb-15 smallDevice">میوان
+                    <span class="g-color-gray-dark-v3">ویترین دیجیتال کسب‌ و کار شما</span></h3>
                 <h4 class="g-color-gray-dark-v5 g-mb-30">از میوان به بازار تنها یک کلیک فاصله‌ست..</h4>
                 <!-- Promo Blocks - Form -->
                 <form style="direction: rtl" class="align-self-center text-center">
@@ -228,9 +251,26 @@
                                 <div class="g-pb-50">
                                     <figure class="g-px-10 g-py-10 productFrame">
                                         <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
+                                            @php
+                                                $final = public_path($row->PicPath.$row->SampleNumber.'.jpg');
+                                                $temp  = public_path(
+                                                    str_replace('/img/products/', '/img/imagesTemp/products/', $row->PicPath)
+                                                    .$row->SampleNumber.'.jpg'
+                                                );
+
+                                                $src = file_exists($final)
+                                                    ? $row->PicPath.$row->SampleNumber.'.jpg'
+                                                    : (
+                                                        file_exists($temp)
+                                                        ? str_replace('/img/products/', '/img/imagesTemp/products/', $row->PicPath).$row->SampleNumber.'.jpg'
+                                                        : '/img/no-image.png'
+                                                    );
+                                            @endphp
+
                                             <img class="img-fluid w-100" loading="lazy"
-                                                 src="{{ $row->PicPath.$row->SampleNumber.'.jpg' }}"
-                                                 alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color  }}">
+                                                 src="{{ $src }}"
+                                                 alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color }}">
+
                                         </a>
                                         <!-- مشخصات محصول -->
                                         <div style="direction: rtl"

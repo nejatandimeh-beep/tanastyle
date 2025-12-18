@@ -654,6 +654,7 @@
             let now = week[d] + " " + day + " " + months[month - 1] + " " + year;
             $('.persianDate').text(now);
             $('#panelPersianDate').text(now);
+            console.log(now);
         }
 
         // Set Time for Seller Navigation
@@ -791,13 +792,33 @@
         // -----------------------------------------------End General Function------------------------------------------
 
         // ------------------------Add coma to Price For Add Product Form--------------------------
-        $("#unitPrice").on('input', function () {
-            if ($(this).val() === '0')
-                $(this).val('');
 
+        $("#unitPrice").on('input', function () {
+
+            let value = $(this).val();
+
+            // ---- 1) تبدیل فارسی به انگلیسی ----
+            const persian = "۰۱۲۳۴۵۶۷۸۹";
+            const english = "0123456789";
+            value = value.replace(/[۰-۹]/g, d => english[persian.indexOf(d)]);
+
+            // ---- 2) حذف هر چیزی غیر از عدد ----
+            value = value.replace(/[^0-9]/g, "");
+
+            // اگر صفر تنها بود → حذف شود
+            if (value === "0") value = "";
+
+            // ---- 3) کاماگذاری ----
+            let formatted = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+            $(this).val(formatted);
+
+            // ---- 4) مقدار خام بدون کاما برای محاسبات ----
+            $("#tempPrice").val(value);
+
+            // ---- ادامه کد خودت کاملاً بدون تغییر ----
             let discount = $("#currentDiscount").val(),
-                unitPrice = $(this).val(),
-                temp1;
+                temp1 = value;
 
             if ($('#addProductPage').length > 0) {
                 if ($("#unitPrice").val() === '') {
@@ -808,11 +829,7 @@
                 }
             }
 
-            $(this).val(unitPrice.toString().replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",")); // add coma
-            temp1 = unitPrice.replace(new RegExp(',', 'g'), ""); // remove coma
-            $("#tempPrice").val(parseInt(temp1));
-
-            // this if for change price after added product
+            // این تکه همان کد اصلی تو است ↓ بدون تغییر
             if (!$('#addProductPage').length > 0) {
                 if (temp1 >= 10000) {
                     let calc = salePrice(discount, temp1);
@@ -820,8 +837,6 @@
                     $('#tempFinalPrice').val(calc);
 
                     if ($('.sellerProductDetail').length > 0) {
-                        let additionalValue = 4;
-
                         calc = Math.ceil(calc / 1000) * 1000;
                         $('#tempFinalPrice').val(calc);
                         $('#newPriceBtn').prop('disabled', false);
@@ -1038,6 +1053,9 @@
         }
 
         $(document).ready(function () {
+            if(window.location.pathname=='/Seller-Panel'){
+                nowDate();
+            }
             let $modal = $('#modal'),
                 image = document.getElementById('sample_image'),
                 cropper, inputID, inputIdFinshed = [], counter = 0,
@@ -1080,7 +1098,7 @@
                         processData: false,
                         contentType: false,
                         success: function (response) {
-                            $('#loaderOverlay').fadeOut(200);
+                            $('#loaderOverlay').fadeOut(1);
                             if (response.success && response.file) {
                                 image.src = response.file;  // ← URL مستقیم فایل
                                 $modal.modal('show');
@@ -1089,7 +1107,7 @@
                             }
                         },
                         error: function () {
-                            $('#loaderOverlay').fadeOut(200);
+                            $('#loaderOverlay').fadeOut(1);
                             alert('خطا در ارتباط با سرور');
                         }
                     });
@@ -1115,6 +1133,7 @@
                 });
 
                 cropper.reset();
+                $('#backButton').hide();
             });
 
 
@@ -1123,6 +1142,7 @@
                 if (cropper) cropper.destroy();
                 cropper = null;
                 if (inputID) document.getElementById("img-file-label" + inputID).scrollIntoView();
+                $('#backButton').show();
             });
 
             // ابزارهای کنترل
@@ -2134,6 +2154,15 @@
                 setTimeout(() => loader.style.display = 'none', 100);
             }
         }
+        document.getElementById("backButton").addEventListener("click", function (e) {
+            e.preventDefault();
+
+            if (document.referrer) {
+                window.location.href = document.referrer;
+            } else {
+                window.history.back(); // fallback طبیعی
+            }
+        });
     </script>
     </html>
 @endsection

@@ -8,28 +8,6 @@
 @yield('BaseCssLink')
 </head>
 @yield('CustomerNavigation')
-<!-- Loader overlay -->
-<div id="loaderOverlay" style="
-    display:none;
-    position: fixed;
-    top:0; left:0;
-    width:100%;
-    height:100%;
-    background: rgba(255,255,255,0.8);
-    z-index: 1051;
-    justify-content:center;
-    align-items:center;
-">
-    <div class="spinner-border text-primary" role="status"
-         style="direction:rtl; width:15rem; height:4rem; display:flex; justify-content:center; align-items:center; gap:10px;">
-        <span class="visually-hidden">در حال آماده سازی...</span>
-
-        <!-- 🔥 اسپینر زیبای اضافه شده -->
-        <div class="mini-loader"></div>
-    </div>
-</div>
-
-
 <div class="container g-my-40">
     <div class="row justify-content-center">
         <div class="col-md-9">

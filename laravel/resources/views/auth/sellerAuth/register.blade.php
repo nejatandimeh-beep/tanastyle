@@ -462,7 +462,7 @@
                                                tabindex="1"
                                                name="name"
                                                maxlength="30"
-                                               onblur=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');"
+                                               oninput=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');"
                                                placeholder="الزاما فارسی"
                                                {{--                                           lang="fa"--}}
                                                onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
@@ -489,7 +489,7 @@
                                             maxlength="30"
                                             type="text"
                                             value=""
-                                            onblur=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                            oninput=" if($(this).val().length>2) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                             placeholder="الزاما فارسی"
                                             {{--                                           lang="fa"--}}
                                             onkeyup="if (!(/^[\u0600-\u06FF\s]+$/.test($(this).val()))) {
@@ -513,7 +513,7 @@
                                                class="form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
                                                tabindex="3"
                                                id="shopName"
-                                               onblur=" if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                               oninput=" if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                                name="shopName"
                                                value=""
                                                placeholder="نامی که در میوان با آن فعالیت خواهید کرد"
@@ -532,7 +532,7 @@
                                                   rows="6"
                                                   tabindex="1"
                                                   value=""
-                                                  onblur=" if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                                  oninput=" if($(this).val()!=='') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                                   placeholder="این توضیحات به مشتری هایتان کمک می کند بیشتر شما را بشناسند"
                                                   name="bio"
                                                   id="bio"
@@ -572,7 +572,7 @@
                                             pattern="\d*"
                                             value=""
                                             oninput="$('#nationalId12').val($(this).val())"
-                                            onblur=" if($(this).val().length===10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                            onblur="if($(this).val().length===10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                             maxlength="10"
                                             placeholder="فقط اعداد"
                                         >
@@ -589,9 +589,8 @@
                                                     class="form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-gray-light-v5 g-brd-red need"
                                                     tabindex="5"
                                                     id="birthday-day"
-                                                    onblur=" if($(this).val()!=='0') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');"
-                                                    name="day"
-                                                    tabindex="3">
+                                                    oninput=" if($(this).val()!=='0') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red');"
+                                                    name="day">
                                                 <option
                                                     value="{{isset($customer->BirthdayD) ? $customer->BirthdayD:'0' }}">{{isset($customer->BirthdayD) ? $customer->BirthdayD:'روز' }}</option>
                                                 <option value="01">1</option>
@@ -630,9 +629,8 @@
                                                     id="birthday-mon"
                                                     class="need form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none g-bg-gray-light-v5 g-brd-red"
                                                     tabindex="6"
-                                                    onblur=" if($(this).val()!=='0') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
-                                                    name="mon"
-                                                    tabindex="4">
+                                                    oninput=" if($(this).val()!=='0') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                                    name="mon">
                                                 <option
                                                     value="{{isset($customer->BirthdayM) ? $customer->BirthdayM:'0' }}">{{isset($customer->BirthdayM) ? $customer->BirthdayM:'ماه' }}</option>
                                                 <option value="01">1</option>
@@ -652,9 +650,8 @@
                                                     id="birthday-year"
                                                     class="need form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-gray-light-v5 g-brd-red"
                                                     tabindex="7"
-                                                    onblur=" if($(this).val()!=='0') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
-                                                    name="year"
-                                                    tabindex="5">
+                                                    oninput=" if($(this).val()!=='0') $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                                    name="year">
                                                 <option
                                                     value="{{isset($customer->BirthdayY) ? $customer->BirthdayY:'0' }}">{{isset($customer->BirthdayY) ? $customer->BirthdayY:'سال' }}</option>
                                                 <option value="1398">1398</option>
@@ -801,7 +798,7 @@
                                                class="text-left form-control form-control-md rounded-0 g-bg-gray-light-v5 g-font-size-16 g-brd-red need"
                                                id="mobile"
                                                tabindex="12"
-                                               onblur="if($(this).val().length===11) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                               oninput="if($(this).val().length===11) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                                name="mobile"
                                                pattern="\d*"
                                                maxlength="11"
@@ -822,7 +819,7 @@
                                             <select id="stateSelect"
                                                     style="direction: rtl; padding-right: 30px !important; height:calc(2.25rem + 9px) !important;"
                                                     tabindex="13"
-                                                    onblur=" if($(this).val()!=='0'){$(this).removeClass('g-brd-red'); $('#citySelect').removeClass('g-brd-red');} else {$(this).addClass('g-brd-red'); $('#citySelect').addClass('g-brd-red');}"
+                                                    oninput=" if($(this).val()!=='0'){$(this).removeClass('g-brd-red'); $('#citySelect').removeClass('g-brd-red');} else {$(this).addClass('g-brd-red'); $('#citySelect').addClass('g-brd-red');}"
                                                     class="need form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-brd-left-none--lg g-bg-gray-light-v5 g-mb-10 g-mb-0--lg g-brd-red"
                                                     name="state"
                                                     onchange="changeState('stateSelect','citySelect')">
@@ -866,8 +863,7 @@
                                                     style="direction: rtl; padding-right: 30px !important; height:calc(2.25rem + 9px) !important;"
                                                     tabindex="14"
                                                     class="need form-control form-control-md custom-select rounded-0 h-25 g-font-size-16 g-bg-gray-light-v5 g-brd-red"
-                                                    name="city"
-                                                    tabindex="4">
+                                                    name="city">
                                                 <option value="">شهر</option>
                                             </select>
                                         </div>
@@ -885,7 +881,7 @@
                                                tabindex="15"
                                                type="text"
                                                value=""
-                                               onblur=" if($(this).val().length>10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                               oninput=" if($(this).val().length>10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                                name="homeAddress"
                                                placeholder="الزاما فارسی"
                                                {{--                                           lang="fa"--}}
@@ -912,7 +908,7 @@
                                                type="text"
                                                tabindex="17"
                                                value=""
-                                               onblur=" if($(this).val().length>10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
+                                               oninput=" if($(this).val().length>10) $(this).removeClass('g-brd-red'); else $(this).addClass('g-brd-red')"
                                                name="workAddress"
                                                placeholder="الزاما فارسی"
                                                {{--                                           lang="fa"--}}
@@ -1109,7 +1105,7 @@
 
                                 <!-- Danger Alert -->
                                 <div style="direction: rtl"
-                                     class="alert alert-danger alert-dismissible fade show text-right g-pa-20--lg g-px-10 g-py-10"
+                                     class="alert alert-warning alert-dismissible fade show text-right g-pa-20--lg g-px-10 g-py-10"
                                      role="alert">
                                     <h4 class="h5"><i class="fa fa-minus-circle"></i> موافقت با قوانین</h4>
                                     <p class="g-mb-10">فروشنده عزیز برای ثبت نام در سامانه فروش میوان لازم و
@@ -1125,7 +1121,7 @@
                                             مطالعه قوانین
                                         </a>
                                     </p>
-                                    <div class="text-left">
+                                    <div id="agreeContainer" class="text-left">
                                         <div class="d-inline-block">
                                             <div style="cursor: pointer"
                                                  id="noAgree"
@@ -1146,6 +1142,15 @@
                                             <input style="display: none" id="signature" name="signature" type="text"
                                                    value="">
                                         </div>
+                                    </div>
+                                    <div style="width: 100px; margin-right: auto" id="agreeCheck" class="d-none">
+                                        <svg id="checkMark" class="checkmark"
+                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                            <circle class="checkmark__circle" cx="26" cy="26" r="25"
+                                                    fill="none"/>
+                                            <path class="checkmark__check" fill="none"
+                                                  d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                                        </svg>
                                     </div>
                                 </div>
 
@@ -1219,7 +1224,7 @@
                                             <!-- دکمه موافقت -->
                                             <div class="modal-footer">
                                                 لطفا تا انتها مطالعه بفرمایید..
-                                                <button id="agreeBtnModal" class="btn btn-primary g-mx-5" type="button">موافقم</button>
+                                                <button id="agreeBtnModal" class="btn btn-md u-btn-primary rounded-0 g-mx-5" type="button">موافقم</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1230,9 +1235,10 @@
                                         class="btn btn-md u-btn-primary rounded-0 force-col-12 g-mt-15"
                                         onclick="saveUserData()">
                                     <span id="submitText">ارسال اطلاعات</span>
-                                    <span id="waitingSubmit"
-                                          style="display: none"
-                                          class="m-0 g-color-white">منتظر بمانید..</span>
+                                    <span id="waitingSubmit" style="display:none;" class="waiting-loader">
+                                        <div class="spinner"></div>
+                                        <span class="text">منتظر بمانید…</span>
+                                    </span>
                                 </button>
                             </div>
                         </form>
@@ -1352,6 +1358,13 @@
             $('#loaderOverlay').fadeOut(1);
             $('#backButton').hide();
         });
+
+        // ابزارهای کنترل
+        $('#zoomIn').on('click', () => cropper.zoom(0.1));
+        $('#zoomOut').on('click', () => cropper.zoom(-0.1));
+        $('#rotateLeft').on('click', () => cropper.rotate(-90));
+        $('#rotateRight').on('click', () => cropper.rotate(90));
+        $('#reset').on('click', () => cropper.reset());
 
         // بستن کراپر
         $modal.on('hidden.bs.modal', function () {
@@ -1514,10 +1527,6 @@
                 alert('لطفا ابتدا قوانین رو مطالعه کردن و قبول کنید');
                 $('#readRegulation').trigger('click')
             }
-        } else {
-            $('#' + btn).addClass('d-none');
-            $('#noAgree').removeClass('d-none');
-            $('#signature').val('');
         }
     }
 
@@ -1525,6 +1534,8 @@
 
         const content = document.getElementById("regulationContent");
         const btn = document.getElementById("agreeBtnModal");
+        const agreeContainer = $("#agreeContainer");
+        const agreeCheck = $("#agreeCheck");
 
         // روشن شدن دکمه هنگام اسکرول به پایین
         content.addEventListener("scroll", () => {
@@ -1547,6 +1558,8 @@
             $('#agree').removeClass('d-none');
             imAgree($('#signature'));
             $('#modalRegulation').modal('hide');
+            agreeContainer.addClass('d-none');
+            agreeCheck.removeClass('d-none');
         });
     });
 
@@ -1556,7 +1569,8 @@
             alert('لطفا فرم را بازبینی بفرمائید و خطاهای رخ داده را رفع و مجدداً تلاش کنید.');
         } else {
             $('#submitText').hide();
-            $('#waitingSubmit').show();
+            // نمایش لودر
+            document.getElementById("waitingSubmit").style.display = "inline-flex";
             $('#save').prop('disabled', true);
             $('#registerForm').submit();
         }
@@ -2724,37 +2738,60 @@
             'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
         }
     });
+    let emailCheckTimer = null;
 
     function checkMail(input) {
 
         const email = input.value.trim();
         const messageBox = document.getElementById("emailMessage");
 
+        // ریست تایمر برای جلوگیری از ارسال‌های زیاد
+        clearTimeout(emailCheckTimer);
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // اگر خالی بود
         if (email === "") {
             input.classList.remove('input-error', 'input-success');
             messageBox.innerHTML = "";
             return;
         }
 
-        $.ajax({
-            url: "/check-email",
-            method: "POST",
-            data: { email: email },
-            success: function (response) {
-                if (response.exists) {
-                    input.classList.add("input-error");
-                    input.classList.remove("input-success");
-                    messageBox.style.color = "#e3342f";
-                    messageBox.innerHTML = "این ایمیل قبلاً ثبت شده است!";
-                } else {
-                    input.classList.add("input-success");
-                    input.classList.remove("input-error");
-                    messageBox.style.color = "#38c172";
-                    messageBox.innerHTML = "این ایمیل قابل استفاده است.";
+        // اگر فرمت ایمیل غلط است
+        if (!emailRegex.test(email)) {
+            input.classList.add("input-error");
+            input.classList.remove("input-success");
+            messageBox.style.color = "#e3342f";
+            messageBox.innerHTML = "فرمت ایمیل صحیح نیست.";
+            return;
+        }
+
+        // اگر فرمت صحیح بود → چک با تأخیر 500ms انجام شود
+        emailCheckTimer = setTimeout(function () {
+
+            $.ajax({
+                url: "/check-email",
+                method: "POST",
+                data: { email: email },
+
+                success: function (response) {
+                    if (response.exists) {
+                        input.classList.add("input-error");
+                        input.classList.remove("input-success");
+                        messageBox.style.color = "#e3342f";
+                        messageBox.innerHTML = "این ایمیل قبلاً ثبت شده است!";
+                    } else {
+                        input.classList.add("input-success");
+                        input.classList.remove("input-error");
+                        messageBox.style.color = "#38c172";
+                        messageBox.innerHTML = "این ایمیل قابل استفاده است.";
+                    }
                 }
-            }
-        });
+            });
+
+        }, 500); // ← مقدار تأخیر (قابل تغییر)
     }
+
 
 </script>
 @yield('BaseJsFunction')

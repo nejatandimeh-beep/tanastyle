@@ -147,6 +147,7 @@ Route::post('/check-customer-mobile', 'Auth\VerifyController@checkMobile')->name
 Route::post('verify-customer-mobile','Auth\VerifyController@verifyMobile')->name('verifyMobile');
 Route::post('resend-customer-code','Auth\VerifyController@resendCode')->name('resendVerifyCode');
 Route::post('reset-password', 'Auth\ResetPasswordController@resetCustomerPassword')->name('mobileResetPassword');
+Route::get('show-reset-form', 'Auth\ResetPasswordController@showResetForm')->name('showResetForm');
 // Customer Change Password Links with email
 //Route::get('change-password', 'Auth\ChangePasswordController@index')->name('changePass');
 //Route::post('change-password', 'Auth\ChangePasswordController@store')->name('change.password');

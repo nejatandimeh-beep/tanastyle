@@ -3208,14 +3208,5 @@
                 });
             });
         });
-
-        document.getElementById('backButton').addEventListener('click', function() {
-            if (document.referrer) {
-                window.history.back();
-            } else {
-                window.location.href = '/';
-            }
-        });
-
     </script>
 @endsection

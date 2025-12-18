@@ -43,10 +43,15 @@
                 <p class="g-mb-10 p-0 g-font-weight-700">وقت بخیر <span>{{ Auth::guard('seller')->user()->name }}</span> عزیز</p>
                 <p class="m-0 p-0 g-font-size-14">امیدواریم با فروش محصولات با کیفیت و مرغوب، فروش روزانه خود را دو
                     چندان نمایید.</p>
-                <p class="m-0 p-0 g-font-size-14">شایان گفتن است که تلاش شبانه روزی تیم تانا استایل بر این است تا
+                <p class="m-0 p-0 g-font-size-14">شایان گفتن است که تلاش شبانه روزی تیم میوان بر این است تا
                     محصولات شما عزیزان به بهترین نحو در صدر کالاهای موجود در کشور باشد.</p>
+                <div class="text-left g-mt-50 d-lg-none">
+                    <a href="#!" class="btn btn-lg rounded-0 u-btn-primary g-mr-10 g-mb-15" id="addProduct">
+                        <i class="fa fa-plus g-mr-5"></i>
+                        افزودن محصول
+                    </a>
+                </div>
             </blockquote>
-            <!-- End Gray Colored Blockquotes -->
         </div>
         <!-- Description Divs -->
     </div>

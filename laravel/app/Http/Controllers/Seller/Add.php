@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Auth;
+use App\Jobs\MoveProductImages;
 
 //use function GuzzleHttp\default_user_agent;
 
@@ -275,136 +276,118 @@ class Add extends Controller
     // Insert Form Data to Database
     public function SaveProduct(Request $request)
     {
-        // Upload Images
-        $folderName = $request->get('folderName2');
-        $source = public_path('img/imagesTemp/products/') . $folderName;
-        $destination= public_path('img/products/').$folderName;
-        $file = new Filesystem();
-        $file->moveDirectory( $source, $destination,true);
+        DB::beginTransaction();
 
-        $qty = $request->get('qty');
-        $j = 0;
-        $imageColor = array([
-            'color' => '',
-            'colorCode' => '',
-            'size' => '',
-            'sizeQty' => '',
-            'hexCode' => '',
-        ]);
-        $repeat = [];  // خروجی نهایی
-        $colorToPicNumber = [];  // برای ردیابی اینکه هر رنگ چه شماره عکسی گرفته
+        try {
 
-        $picNumberCounter = 1;  // شماره عکس ها از 1 شروع می‌کنه
+            $qty = (int)$request->qty;
 
-        for ($i = 0; $i < $qty; $i++) {
-            $temp = (string)$i;
-            $imageColor[$i]['color'] = $request->get('color' . $temp);
-            $imageColor[$i]['colorCode'] = preg_replace('/[^0-9]/', '', $imageColor[$i]['color']);
-            $imageColor[$i]['color'] = preg_replace('/\d+/u', '', $imageColor[$i]['color']);
-            $imageColor[$i]['size'] = $request->get('size' . $temp);
-            $imageColor[$i]['sizeQty'] = $request->get('sizeQty' . $temp);
-            $imageColor[$i]['hexCode'] = $request->get('hexCode' . $temp);
+            /* =====================
+             * Prepare image data
+             * ===================== */
+            $imageColor = [];
+            $repeat = [];
+            $colorToPic = [];
+            $picCounter = 1;
 
-            $color = $imageColor[$i]['color'];
+            for ($i = 0; $i < $qty; $i++) {
+                $raw = $request->get("color$i");
 
-            if (isset($colorToPicNumber[$color])) {
-                // اگر این رنگ قبلا ثبت شده، از همان شماره عکس استفاده کن
-                $repeat[$i] = $colorToPicNumber[$color];
-            } else {
-                // رنگ جدید است، شماره عکس جدید می‌گیرد
-                $repeat[$i] = $picNumberCounter;
-                $colorToPicNumber[$color] = $picNumberCounter;
-                $picNumberCounter++;
+                $color = preg_replace('/\d+/u', '', $raw);
+                $code  = preg_replace('/[^0-9]/', '', $raw);
+
+                $imageColor[$i] = [
+                    'color' => $color,
+                    'colorCode' => $code,
+                    'size' => $request->get("size$i"),
+                    'qty' => $request->get("sizeQty$i"),
+                    'hex' => $request->get("hexCode$i"),
+                ];
+
+                if (!isset($colorToPic[$color])) {
+                    $colorToPic[$color] = $picCounter++;
+                }
+
+                $repeat[$i] = $colorToPic[$color];
             }
-        }
 
-        $imageColor = collect($imageColor)->toArray();
-        $imageColor = array_values($imageColor);
+            /* =====================
+             * Product insert
+             * ===================== */
+            $name  = $request->name;
+            $model = $request->model;
+            $brand = $request->brand;
 
-        // Compilation Pic Path
-        $picPath = '/img/products/' . $folderName . '/';
-        // Get Data From Form
-        $sellerId = Auth::guard('seller')->user()->id;
-        $gender = $request->get('gender');
-        $cat = $request->get('cat');
-        $catCode = $request->get('catCode');
-        $hintCat = $request->get('hintCat');
-        $name = $request->get('name');
-        $model = $request->get('model');
-        $brand = $request->get('brand');
-        $detail = $request->get('detail');
-        $unitPrice = $request->get('tempPrice');
-        $priceWithDiscount = $request->get('priceWithDiscount');
-        $priceWithoutDiscount = $request->get('tempFinalPriceWithoutDiscount');
-        $finalPrice = $request->get('tempFinalPrice');
+            $baseSlug = str_replace(' ', '-', "$name-$model-$brand");
 
-        $discount = $request->get('discount');
-        $regDate = date('Y-m-d');
-        $genderCode = $gender;
-        switch ($gender) {
-            case '0':
-                $gender = 'زنانه';
-                break;
-            case '1':
-                $gender = 'مردانه';
-                break;
-            case '2':
-                $gender = 'دخترانه';
-                break;
-            case '3':
-                $gender = 'پسرانه';
-                break;
-            case '4':
-                $gender = 'نوزادی دخترانه';
-                break;
-            default:
-                $gender = 'نوزادی پسرانه';
-        }
-        // Insert Data to Product DB
-        DB::table('product')->insert([
-            [
-                'SellerID' => $sellerId,
-                'Gender' => $gender,
-                'GenderCode' => $genderCode,
-                'Cat' => $cat,
-                'CatCode' => $catCode,
-                'HintCat' => $hintCat,
+            $productId = DB::table('product')->insertGetId([
+                'SellerID' => auth('seller')->id(),
+                'Gender' => ['زنانه','مردانه','دخترانه','پسرانه','نوزادی دخترانه','نوزادی پسرانه'][$request->gender] ?? 'نوزادی پسرانه',
+                'GenderCode' => $request->gender,
+                'Cat' => $request->cat,
+                'CatCode' => $request->catCode,
+                'HintCat' => $request->hintCat,
                 'Name' => $name,
                 'Model' => $model,
                 'Brand' => $brand,
-                'Detail' => $detail,
-                'UnitPrice' => $unitPrice,
-                'Discount' => $discount,
-                'PriceWithDiscount' => $priceWithDiscount,
-                'FinalPrice' => $finalPrice,
-                'FinalPriceWithoutDiscount' => $priceWithoutDiscount,
-                'PicPath' => $picPath,
-                'RegDate' => $regDate,
-                'slug' => str_replace(" ", "-", $name) . '-' . str_replace(" ", "-", $model) . '-' . str_replace(" ", "-", $brand),
-            ],
-        ]);
+                'Detail' => $request->detail,
+                'UnitPrice' => $request->tempPrice,
+                'Discount' => $request->discount,
+                'PriceWithDiscount' => $request->priceWithDiscount,
+                'FinalPrice' => $request->tempFinalPrice,
+                'FinalPriceWithoutDiscount' => $request->tempFinalPriceWithoutDiscount,
+                'PicPath' => '/img/products/'.$request->folderName2.'/',
+                'RegDate' => now()->toDateString(),
+                'slug' => $baseSlug,
+            ]);
 
-        // Get The Last inserted Product ID
-        $temp = DB::table('product')->select('id')->latest('id')->first();
-        $productId = $temp->id;
-        // Insert Data to ProductDetail DB
-        for ($i = 0; $i < $qty; $i++) {
-            DB::table('product_detail')->insert([
-                [
+            /* =====================
+             * Bulk insert details
+             * ===================== */
+            $rows = [];
+            for ($i = 0; $i < $qty; $i++) {
+                $rows[] = [
                     'ProductID' => $productId,
                     'Size' => $imageColor[$i]['size'],
                     'Color' => $imageColor[$i]['color'],
                     'ColorCode' => $imageColor[$i]['colorCode'],
-                    'HexCode' => $imageColor[$i]['hexCode'],
-                    'Qty' => $imageColor[$i]['sizeQty'],
+                    'HexCode' => $imageColor[$i]['hex'],
+                    'Qty' => $imageColor[$i]['qty'],
                     'PicNumber' => 'pic'.$repeat[$i],
                     'SampleNumber' => 'sample'.$repeat[$i],
-                    'slug' => str_replace(" ", "-", $name) . '-' . str_replace(" ", "-", $model) . '-' . str_replace(" ", "-", $brand) . '-' . str_replace(" ", "-", $imageColor[0]['color']),
-                ],
-            ]);
-        }
+                    'slug' => $baseSlug.'-'.str_replace(' ', '-', $imageColor[$i]['color']),
+                ];
+            }
 
-        return redirect('/Seller-Store')->with('addStatus', 'success');
+            DB::table('product_detail')->insert($rows);
+
+            DB::commit();
+
+            /* =====================
+             * Async file move
+             * ===================== */
+            try {
+                MoveProductImages::dispatch($request->folderName2);
+            } catch (\Throwable $e) {
+
+                Log::warning('QUEUE FAILED - FALLBACK SYNC MOVE', [
+                    'folder' => $request->folderName2,
+                    'error'  => $e->getMessage(),
+                ]);
+
+                \File::moveDirectory(
+                    public_path('img/imagesTemp/products/' . $request->folderName2),
+                    public_path('img/products/' . $request->folderName2),
+                    true
+                );
+            }
+
+            return redirect('/Seller-Store')->with('addStatus','success');
+
+        } catch (\Throwable $e) {
+            DB::rollBack();
+            return back()->withErrors('خطا در ثبت محصول');
+        }
     }
 }
 

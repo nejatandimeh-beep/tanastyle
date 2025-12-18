@@ -1221,7 +1221,7 @@
                     <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
                            tabindex="6"
                            id="unitPrice"
-                           pattern="\d*"
+                           pattern="[0-9\u06F0-\u06F9]*"
                            {{--                           pattern="\d*"--}}
                            onkeypress="$('#lblUnitPrice').removeClass('g-color-red');"
                            value="">
@@ -1249,11 +1249,11 @@
                           id="BsalePrice">...</span>
                     <span class="input-group-addon g-bg-gray-light-v5 bigDevice">سهم فروشنده</span>
                     <span class="input-group-addon g-bg-gray-light-v5">درصد</span>
-                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="text"
+                    <input class="form-control form-control-md rounded-0 pl-0 text-right g-font-size-16" type="number"
                            id="discount"
                            tabindex="7"
                            name="discount"
-                           pattern="\d*"
+                           pattern="[0-9\u06F0-\u06F9]*"
                            value=""
                            onkeypress="$('#lblDiscount').removeClass('g-color-red')"
                            maxlength="2">

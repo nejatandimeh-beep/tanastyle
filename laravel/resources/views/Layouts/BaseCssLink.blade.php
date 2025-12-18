@@ -26,7 +26,7 @@
     <link href="{{ asset('css/fontiran.css') }}" rel="stylesheet">
 
     <!--My Style-->
-    <link href="{{ asset('css/myStyle.css?v=dfssdgfg') }}" rel="stylesheet">
+    <link href="{{ asset('css/myStyle.css?v=dfssdgssffg') }}" rel="stylesheet">
 <!--Unify Style-->
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/bootstrap.min_1.css') }}">
