@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Jobs\MoveProductImages;
 
 //use function GuzzleHttp\default_user_agent;
@@ -364,29 +364,19 @@ class Add extends Controller
             DB::commit();
 
             /* =====================
-             * Async file move
+             * Async file move via Job
              * ===================== */
-            try {
-                MoveProductImages::dispatch($request->folderName2);
-            } catch (\Throwable $e) {
+            MoveProductImages::dispatch(
+                "img/imagesTemp/products/{$request->folderName2}",
+                "img/products/{$request->folderName2}"
+            );
 
-                Log::warning('QUEUE FAILED - FALLBACK SYNC MOVE', [
-                    'folder' => $request->folderName2,
-                    'error'  => $e->getMessage(),
-                ]);
-
-                \File::moveDirectory(
-                    public_path('img/imagesTemp/products/' . $request->folderName2),
-                    public_path('img/products/' . $request->folderName2),
-                    true
-                );
-            }
 
             return redirect('/Seller-Store')->with('addStatus','success');
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            return back()->withErrors('خطا در ثبت محصول');
+            return back()->withErrors('خطا در ثبت محصول: '.$e->getMessage());
         }
     }
 }

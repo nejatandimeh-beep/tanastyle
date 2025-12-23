@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Seller;
 
 use App\Http\Controllers\Controller;
-use File;
+use Illuminate\Support\Facades\File;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Auth;
-
+use Illuminate\Support\Facades\Auth;
+use App\Jobs\MoveProductImages;
+use Illuminate\Support\Facades\Log;
 //use function GuzzleHttp\default_user_agent;
 
 
@@ -82,119 +83,105 @@ class AddOther extends Controller
     // Insert Form Data to Database
     public function SaveProduct(Request $request)
     {
-        // Upload Images
-        $folderName = $request->get('folderName2');
-        $source = public_path('img/imagesTemp/otherProducts/') . $folderName;
-        $destination = public_path('img/otherProducts/') . $folderName;
-        $file = new Filesystem();
-        $file->moveDirectory($source, $destination, true);
+        DB::beginTransaction();
 
-        $imageColor = array([
-            'color' => '',
-            'colorCode' => '',
-            'size' => '',
-            'sizeQty' => '',
-            'hexCode' => '',
-        ]);
+        try {
 
-        $temp = '0';
-        $imageColor[0]['color'] = $request->get('color' . $temp);
-        $imageColor[0]['colorCode'] = preg_replace('/[^0-9]/', '', $imageColor[0]['color']);
-        $imageColor[0]['color'] = preg_replace('/\d+/u', '', $imageColor[0]['color']);
-        $imageColor[0]['size'] = '--';
-        $imageColor[0]['sizeQty'] = $request->get('sizeQty' . $temp);
-        $imageColor[0]['hexCode'] = $request->get('hexCode' . $temp);
+            /* =====================
+             * Image / Variant data
+             * ===================== */
+            $imageColor = [];
 
-        $imageColor = collect($imageColor)->toArray();
-        $imageColor = array_values($imageColor);
+            $rawColor = $request->get('color0');
 
-        // Compilation Pic Path
-        $picPath = '/img/otherProducts/' . $folderName . '/';
-        // Get Data From Form
-        $sellerId = Auth::guard('seller')->user()->id;
-        $gender = $request->get('gender');
-        $cat = $request->get('cat');
-        $catCode = $request->get('catCode');
-        $hintCat = $request->get('hintCat');
-        $subCat = $request->get('subCat');
-        $name = $request->get('name');
-        $model = $request->get('model');
-        $brand = $request->get('brand');
-        $detail = $request->get('detail');
-        $unitPrice = $request->get('tempPrice');
-        $priceWithDiscount = $request->get('priceWithDiscount');
-        $priceWithoutDiscount = $request->get('tempFinalPriceWithoutDiscount');
-        $finalPrice = $request->get('tempFinalPrice');
+            $color = preg_replace('/\d+/u', '', $rawColor);
+            $code  = preg_replace('/[^0-9]/', '', $rawColor);
 
-        $discount = $request->get('discount');
-        $regDate = date('Y-m-d');
-        $genderCode = $gender;
-        switch ($gender) {
-            case '0':
-                $gender = 'زنانه';
-                break;
-            case '1':
-                $gender = 'مردانه';
-                break;
-            case '2':
-                $gender = 'دخترانه';
-                break;
-            case '3':
-                $gender = 'پسرانه';
-                break;
-            case '4':
-                $gender = 'نوزادی دخترانه';
-                break;
-            case '5':
-                $gender = 'نوزادی پسرانه';
-                break;
-            default:
-                $gender = 'فاقد جنسیت';
-        }
-        // Insert Data to Product DB
-        DB::table('product')->insert([
-            [
-                'SellerID' => $sellerId,
-                'Gender' => $gender,
-                'GenderCode' => $genderCode,
-                'Cat' => $cat,
-                'CatCode' => $catCode,
-                'SubCat' => $subCat,
-                'HintCat' => $hintCat,
+            $imageColor[] = [
+                'color'     => $color,
+                'colorCode'=> $code,
+                'size'      => '--',
+                'qty'       => $request->get('sizeQty0'),
+                'hex'       => $request->get('hexCode0'),
+                'pic'       => 'pic1',
+                'sample'    => 'sample1',
+            ];
+
+            /* =====================
+             * Product main insert
+             * ===================== */
+            $name   = $request->name;
+            $model  = $request->model;
+            $brand  = $request->brand;
+
+            $baseSlug = str_replace(' ', '-', "$name-$model-$brand");
+
+            $productId = DB::table('product')->insertGetId([
+                'SellerID' => auth('seller')->id(),
+                'Gender' => [
+                        'زنانه','مردانه','دخترانه','پسرانه',
+                        'نوزادی دخترانه','نوزادی پسرانه'
+                    ][$request->gender] ?? 'فاقد جنسیت',
+                'GenderCode' => $request->gender,
+                'Cat' => $request->cat,
+                'CatCode' => $request->catCode,
+                'SubCat' => $request->subCat,
+                'HintCat' => $request->hintCat,
                 'Name' => $name,
                 'Model' => $model,
                 'Brand' => $brand,
-                'Detail' => $detail,
-                'UnitPrice' => $unitPrice,
-                'Discount' => $discount,
-                'PriceWithDiscount' => $priceWithDiscount,
-                'FinalPrice' => $finalPrice,
-                'FinalPriceWithoutDiscount' => $priceWithoutDiscount,
-                'PicPath' => $picPath,
-                'RegDate' => $regDate,
-                'slug' => str_replace(" ", "-", $name) . '-' . str_replace(" ", "-", $model) . '-' . str_replace(" ", "-", $brand),
-            ],
-        ]);
+                'Detail' => $request->detail,
+                'UnitPrice' => $request->tempPrice,
+                'Discount' => $request->discount,
+                'PriceWithDiscount' => $request->priceWithDiscount,
+                'FinalPrice' => $request->tempFinalPrice,
+                'FinalPriceWithoutDiscount' => $request->tempFinalPriceWithoutDiscount,
+                'PicPath' => '/img/otherProducts/'.$request->folderName2.'/',
+                'RegDate' => now()->toDateString(),
+                'slug' => $baseSlug,
+            ]);
 
-        // Get The Last inserted Product ID
-        $temp = DB::table('product')->select('id')->latest('id')->first();
-        $productId = $temp->id;
-        // Insert Data to ProductDetail DB
-        DB::table('product_detail')->insert([
-            [
+            /* =====================
+             * product_detail insert
+             * ===================== */
+            DB::table('product_detail')->insert([
                 'ProductID' => $productId,
-                'Size' => $imageColor[0]['size'],
+                'Size' => '--',
                 'Color' => $imageColor[0]['color'],
                 'ColorCode' => $imageColor[0]['colorCode'],
-                'HexCode' => $imageColor[0]['hexCode'],
-                'Qty' => $imageColor[0]['sizeQty'],
-                'PicNumber' => 'pic' . (0 + 1),
-                'SampleNumber' => 'sample' . (0 + 1),
-                'slug' => str_replace(" ", "-", $name) . '-' . str_replace(" ", "-", $model) . '-' . str_replace(" ", "-", $brand) . '-' . str_replace(" ", "-", $imageColor[0]['color']),
-            ],
-        ]);
+                'HexCode' => $imageColor[0]['hex'],
+                'Qty' => $imageColor[0]['qty'],
+                'PicNumber' => 'pic1',
+                'SampleNumber' => 'sample1',
+                'slug' => $baseSlug.'-'.str_replace(' ', '-', $imageColor[0]['color']),
+            ]);
 
-        return redirect('/Seller-Store')->with('addStatus', 'success');
+            DB::commit();
+            Log::info('DISPATCH MOVE JOB', [
+                'temp' => "img/imagesTemp/otherProducts/{$request->folderName2}",
+                'final' => "img/otherProducts/{$request->folderName2}",
+            ]);
+
+            /* =====================
+             * Async image move
+             * ===================== */
+            MoveProductImages::dispatch(
+                "img/imagesTemp/otherProducts/{$request->folderName2}",
+                "img/otherProducts/{$request->folderName2}"
+            );
+
+            return redirect('/Seller-Store')->with('addStatus', 'success');
+
+        } catch (\Throwable $e) {
+
+            DB::rollBack();
+
+            Log::error('ADD OTHER PRODUCT FAILED', [
+                'error' => $e->getMessage()
+            ]);
+
+            return back()->withErrors('خطا در ثبت محصول: '.$e->getMessage());
+        }
     }
 }
 

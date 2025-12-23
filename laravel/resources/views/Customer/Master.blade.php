@@ -153,7 +153,9 @@
                                 <h3 class="h4">همین الان غرفه ات رو بساز
                                     <a class="g-color-primary" href="#">و از امتیازات طلایی بهره مند شو..</a>
                                 </h3>
-                                <p class="lead g-mb-20 g-mb-0--md">کاربران عزیز در صورتی که تمایل دارید غرفه شخصی خود را بدون هیچ گونه دانش علمی در زمینه طراحی و توسعه وب سایت داشته باشید همین الان از طریق دکمه ثبت نام اقدام نمایید. </p>
+                                <p class="lead g-mb-20 g-mb-0--md">کاربران عزیز در صورتی که تمایل دارید غرفه شخصی خود را
+                                    بدون هیچ گونه دانش علمی در زمینه طراحی و توسعه وب سایت داشته باشید همین الان از طریق
+                                    دکمه ثبت نام اقدام نمایید. </p>
                             </div>
 
                             <div class="col-md-3 align-self-center text-md-right">
@@ -249,39 +251,53 @@
                             <div class="swiper-slide">
                                 <!-- Product -->
                                 <div class="g-pb-50">
-                                    <figure class="g-px-10 g-py-10 productFrame">
-                                        <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
+                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
+                                        <figure class="g-px-10 g-py-10 productFrame">
                                             @php
-                                                $final = public_path($row->PicPath.$row->SampleNumber.'.jpg');
-                                                $temp  = public_path(
-                                                    str_replace('/img/products/', '/img/imagesTemp/products/', $row->PicPath)
-                                                    .$row->SampleNumber.'.jpg'
+                                                $file = $rec->SampleNumber . '.jpg';
+
+                                                // 1️⃣ ریشه واقعی فایل‌ها (فقط برای file_exists)
+                                                $fsRoot = is_dir('/home/tanastyl/public_html')
+                                                    ? '/home/tanastyl/public_html'
+                                                    : public_path();
+
+                                                // 2️⃣ مسیر نهایی (filesystem)
+                                                $finalFs = $fsRoot . $rec->PicPath . $file;
+
+                                                // 3️⃣ مسیر temp (filesystem)
+                                                $tempPicPath = str_replace(
+                                                    ['/img/products/', '/img/otherProducts/'],
+                                                    ['/img/imagesTemp/products/', '/img/imagesTemp/otherProducts/'],
+                                                    $rec->PicPath
                                                 );
 
-                                                $src = file_exists($final)
-                                                    ? $row->PicPath.$row->SampleNumber.'.jpg'
-                                                    : (
-                                                        file_exists($temp)
-                                                        ? str_replace('/img/products/', '/img/imagesTemp/products/', $row->PicPath).$row->SampleNumber.'.jpg'
-                                                        : '/img/no-image.png'
-                                                    );
+                                                $tempFs = $fsRoot . $tempPicPath . $file;
+
+                                                // 4️⃣ انتخاب src (فقط URL)
+                                                if (file_exists($finalFs)) {
+                                                    $src = $rec->PicPath . $file;
+                                                } elseif (file_exists($tempFs)) {
+                                                    $src = $tempPicPath . $file;
+                                                } else {
+                                                    $src = $rec->PicPath . 'sample1.jpg';
+                                                }
                                             @endphp
 
                                             <img class="img-fluid w-100" loading="lazy"
                                                  src="{{ $src }}"
                                                  alt="{{ $row->Name.' '.$row->Model.' '.$row->Gender.' '.$row->Brand.' '.$row->Size.' '.$row->Color }}">
 
-                                        </a>
-                                        <!-- مشخصات محصول -->
-                                        <div style="direction: rtl"
-                                             class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
-                                            <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
-                                            <div class="d-flex flex-column col-12 g-px-5">
-                                                <h1 class="h6 g-color-black my-1 text-left">
-                                                    {{$row->Brand}}
-                                                </h1>
-                                                <h4 style="text-overflow: ellipsis; overflow: hidden; width: 160px; white-space: nowrap;"
-                                                    class="h6 g-color-black my-1">
+                                    </a>
+                                    <!-- مشخصات محصول -->
+                                    <div style="direction: rtl"
+                                         class="media g-mt-5 g-brd-top g-brd-gray-light-v4 g-pt-5">
+                                        <!-- نام و مدل و جنسیت و دسته و تخفیف و قیمت -->
+                                        <div class="d-flex flex-column col-12 g-px-5">
+                                            <h1 class="h6 g-color-black my-1 text-left">
+                                                {{$row->Brand}}
+                                            </h1>
+                                            <h4 style="text-overflow: ellipsis; overflow: hidden; width: 160px; white-space: nowrap;"
+                                                class="h6 g-color-black my-1">
                                                     <span class="u-link-v5 g-color-black"
                                                           tabindex="0">
                                                         {{ $row->Name }}
@@ -290,40 +306,40 @@
                                                         <span
                                                             class="{{ $row->GenderCode==='6'?'d-none':'' }} g-font-size-12 g-font-weight-300"> {{ $row->Gender }}</span>
                                                     </span>
-                                                </h4>
-                                                <div>
+                                            </h4>
+                                            <div>
                                                     <span class="g-ml-5 {{ $row->Size =='--'?'d-none':'' }}">سایز
                                                         <span class="g-color-primary">{{ $row->Size }}</span>
                                                     </span>
-                                                    <span>رنگ
+                                                <span>رنگ
                                                     <span class="g-color-primary">{{ $row->Color }}</span>
                                                 </span>
-                                                </div>
-                                                <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
-                                                        id="{{ 'cartQty'.$key }}"
-                                                        class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار</span>
-                                                <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
-                                                    {{$row->ShopName}}</h1>
                                             </div>
+                                            <span class="{{ $row->Qty ==0 ?'opacity-0': '' }}"><span
+                                                    id="{{ 'cartQty'.$key }}"
+                                                    class="g-color-primary">{{ $row->Qty }}</span> عدد در انبار</span>
+                                            <h1 class="text-right h6 g-font-weight-300 g-color-black mb-2">فروشنده:
+                                                {{$row->ShopName}}</h1>
                                         </div>
-                                        <div
-                                            class="d-block g-color-black g-font-size-17 g-ml-5">
-                                            <div style="direction: rtl"
-                                                 class="d-flex justify-content-between text-left">
-                                                <div>
-                                                    <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
-                                                    <span
-                                                        class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
+                                    </div>
+                                    <div
+                                        class="d-block g-color-black g-font-size-17 g-ml-5">
+                                        <div style="direction: rtl"
+                                             class="d-flex justify-content-between text-left">
+                                            <div>
+                                                <s class="{{$row->Discount==0?'d-none':''}} g-color-gray-light-v2">{{  number_format($row->FinalPriceWithoutDiscount) }}</s>
+                                                <span
+                                                    class="{{$row->Discount==0?'d-none':''}} g-color-lightred g-mx-5 g-font-weight-500">
                                                         {{  number_format($row->Discount) }}%
                                                     </span>
-                                                </div>
-                                                <div>
-                                                    <span>{{ number_format($row->PriceWithDiscount) }}</span>
-                                                    <span
-                                                        class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
-                                                </div>
+                                            </div>
+                                            <div>
+                                                <span>{{ number_format($row->PriceWithDiscount) }}</span>
+                                                <span
+                                                    class="d-block g-color-gray-light-v2 g-font-size-10">تومان</span>
                                             </div>
                                         </div>
+                                    </div>
                                     </figure>
                                 </div>
                                 <!-- End Product -->

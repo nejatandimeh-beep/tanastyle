@@ -507,27 +507,40 @@
                                 <td class="align-middle">
                                     <div class="media">
                                         @php
-                                            $file = $rec->SampleNumber.'.jpg';
+                                            $file = $rec->SampleNumber . '.jpg';
 
-                                            $final = public_path($rec->PicPath.$file);
-                                            $temp  = public_path(
-                                                str_replace('/img/products/', '/img/imagesTemp/products/', $rec->PicPath).$file
+                                            // 1️⃣ ریشه واقعی فایل‌ها (فقط برای file_exists)
+                                            $fsRoot = is_dir('/home/tanastyl/public_html')
+                                                ? '/home/tanastyl/public_html'
+                                                : public_path();
+
+                                            // 2️⃣ مسیر نهایی (filesystem)
+                                            $finalFs = $fsRoot . $rec->PicPath . $file;
+
+                                            // 3️⃣ مسیر temp (filesystem)
+                                            $tempPicPath = str_replace(
+                                                ['/img/products/', '/img/otherProducts/'],
+                                                ['/img/imagesTemp/products/', '/img/imagesTemp/otherProducts/'],
+                                                $rec->PicPath
                                             );
 
-                                            if (file_exists($final)) {
-                                                $src = $rec->PicPath.$file;
-                                            } elseif (file_exists($temp)) {
-                                                $src = str_replace('/img/products/', '/img/imagesTemp/products/', $rec->PicPath).$file;
+                                            $tempFs = $fsRoot . $tempPicPath . $file;
+
+                                            // 4️⃣ انتخاب src (فقط URL)
+                                            if (file_exists($finalFs)) {
+                                                $src = $rec->PicPath . $file;
+                                            } elseif (file_exists($tempFs)) {
+                                                $src = $tempPicPath . $file;
                                             } else {
-                                                $src = $rec->PicPath.'sample1.jpg';
+                                                $src = $rec->PicPath . 'sample1.jpg';
                                             }
                                         @endphp
 
                                         <img class="d-flex g-width-48 g-height-60 g-rounded-3 mx-auto"
                                              src="{{ $src }}"
                                              alt="Image Description">
-
                                     </div>
+
                                 </td>
                                 <td class="align-middle text-center g-color-gray-dark-v1">{{ number_format($rec->VisitCounter) }}</td>
                                 <td class="align-middle text-center">
