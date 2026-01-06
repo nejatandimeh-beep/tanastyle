@@ -211,7 +211,7 @@
         });
 
         $('#addProductForm').on('submit', function () {
-            $('#addProductBtnCaption').text('لطفا منتظر بمانید..');
+            $('#globalLoader').removeClass('d-none');
             $('#addProductBtn').prop('disabled', true);
 
             let productDetail = $('#addProductDetail');
@@ -2154,15 +2154,6 @@
                 setTimeout(() => loader.style.display = 'none', 100);
             }
         }
-        document.getElementById("backButton").addEventListener("click", function (e) {
-            e.preventDefault();
-
-            if (document.referrer) {
-                window.location.href = document.referrer;
-            } else {
-                window.history.back(); // fallback طبیعی
-            }
-        });
     </script>
     </html>
 @endsection

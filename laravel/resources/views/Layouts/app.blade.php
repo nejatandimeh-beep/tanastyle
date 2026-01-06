@@ -219,13 +219,58 @@
             }
         }
     }
-    document.getElementById('backButton').addEventListener('click', function() {
-        if (document.referrer) {
-            window.history.back();
-        } else {
-            window.location.href = '/';
+    // backButton control
+    (function () {
+        const STACK_KEY = 'app_history_stack';
+
+        function getStack() {
+            return JSON.parse(sessionStorage.getItem(STACK_KEY) || '[]');
         }
+
+        function setStack(stack) {
+            sessionStorage.setItem(STACK_KEY, JSON.stringify(stack));
+        }
+
+        // ثبت مسیر فعلی
+        function pushPage() {
+            const stack = getStack();
+            const current = location.href;
+
+            if (stack[stack.length - 1] !== current) {
+                stack.push(current);
+                setStack(stack);
+            }
+        }
+
+        // برگشت اختصاصی
+        window.appBack = function () {
+            const stack = getStack();
+            stack.pop(); // صفحه فعلی
+
+            const prev = stack.pop();
+            setStack(stack);
+
+            if (prev) {
+                location.replace(prev); // مهم: replace نه href
+            } else {
+                location.replace('/');
+            }
+        };
+
+        pushPage();
+    })();
+
+    document.getElementById('backButton').addEventListener('click', function (e) {
+        e.preventDefault();
+        window.appBack();
     });
+    (function disableBrowserBack() {
+        history.pushState(null, '', location.href);
+
+        window.addEventListener('popstate', function () {
+            history.pushState(null, '', location.href);
+        });
+    })();
 </script>
 </html>
 

@@ -76,7 +76,7 @@
                                             placeholder=""
                                             disabled
                                             value="زنانه">
-                                    @elseif($rec->Gender == 1)
+                                    @elseif($data->Gender == 1)
                                         <input
                                             class="form-control form-control-md  g-bg-gray-dark-v2 g-color-gray-light-v4 rounded-0 text-center g-font-size-16"
                                             type="text"
@@ -84,7 +84,7 @@
                                             placeholder=""
                                             disabled
                                             value="مردانه">
-                                    @elseif($rec->Gender == 2)
+                                    @elseif($data->Gender == 2)
                                         <input
                                             class="form-control form-control-md  g-bg-gray-dark-v2 g-color-gray-light-v4 rounded-0 text-center g-font-size-16"
                                             type="text"
@@ -92,7 +92,7 @@
                                             placeholder=""
                                             disabled
                                             value="بچگانه نوزادی">
-                                    @elseif($rec->Gender == 3)
+                                    @elseif($data->Gender == 3)
                                         <input
                                             class="form-control form-control-md  g-bg-gray-dark-v2 g-color-gray-light-v4 rounded-0 text-center g-font-size-16"
                                             type="text"

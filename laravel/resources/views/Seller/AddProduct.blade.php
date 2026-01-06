@@ -3023,6 +3023,9 @@
                     <button id="addProductBtn" type="submit" class="btn btn-md u-btn-primary rounded-0 g-pa-20--lg"
                             tabindex="12">
                         <span class="fa fa-save g-mr-10 g-font-size-16"></span><span style="direction: rtl" id="addProductBtnCaption" >افزودن به انبار</span>
+                        <span id="addProductLoader" class="btn-loader d-none">
+                            <span></span><span></span><span></span>
+                        </span>
                     </button>
                 </div>
             </div>
@@ -3030,6 +3033,12 @@
             <input id="folderName2" name="folderName2" type="text" class="d-none">
         </form>
 
+    </div>
+    <div id="globalLoader" class="product-loader d-none">
+        <div class="loader-glass">
+            <div class="product-spinner"></div>
+            <div style="direction: rtl; text-align: center" class="product-loader-text">در حال ثبت محصول…</div>
+        </div>
     </div>
 @endsection
 

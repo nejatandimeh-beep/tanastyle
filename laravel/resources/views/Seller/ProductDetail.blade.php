@@ -155,9 +155,40 @@
                 <label for="example-text-input" class="col-sm-2 col-form-label">تصاویر</label>
                 <div style="direction: ltr" class="col-sm-10 text-left p-0">
                     <div class="col-sm-3 g-mb-10">
-                        <img class="img-fluid img-thumbnail g-rounded-1"
-                             src="{{ file_exists(public_path($data->PicPath.$dataDetail->SampleNumber.'.jpg'))?$data->PicPath.$dataDetail->SampleNumber:$data->PicPath.'sample1' }}.jpg"
-                             alt="Image Description">
+                        @php
+                            $file = $dataDetail->SampleNumber . '.jpg';
+
+                            // 1️⃣ ریشه واقعی فایل‌ها (filesystem)
+                            $fsRoot = is_dir('/home/tanastyl/public_html')
+                                ? '/home/tanastyl/public_html'
+                                : public_path();
+
+                            // 2️⃣ مسیر نهایی (filesystem)
+                            $finalFs = $fsRoot . $data->PicPath . $file;
+
+                            // 3️⃣ مسیر temp (filesystem)
+                            $tempPicPath = str_replace(
+                                ['/img/products/', '/img/otherProducts/'],
+                                ['/img/imagesTemp/products/', '/img/imagesTemp/otherProducts/'],
+                                $data->PicPath
+                            );
+
+                            $tempFs = $fsRoot . $tempPicPath . $file;
+
+                            // 4️⃣ انتخاب src (URL)
+                            if (file_exists($finalFs)) {
+                                $src = $data->PicPath . $file;
+                            } elseif (file_exists($tempFs)) {
+                                $src = $tempPicPath . $file;
+                            } else {
+                                $src = $data->PicPath . 'sample1.jpg';
+                            }
+                        @endphp
+
+                        <img
+                            class="img-fluid img-thumbnail g-rounded-1"
+                            src="{{ $src }}"
+                            alt="Image Description">
                     </div>
                 </div>
             </div>

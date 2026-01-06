@@ -251,10 +251,10 @@
                             <div class="swiper-slide">
                                 <!-- Product -->
                                 <div class="g-pb-50">
-                                    <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                         <figure class="g-px-10 g-py-10 productFrame">
+                                            <a href="{{ route('productDetail',[$row->ProductID, $row->Size]) }}">
                                             @php
-                                                $file = $rec->SampleNumber . '.jpg';
+                                                $file = $row->SampleNumber . '.jpg';
 
                                                 // 1️⃣ ریشه واقعی فایل‌ها (فقط برای file_exists)
                                                 $fsRoot = is_dir('/home/tanastyl/public_html')
@@ -262,24 +262,24 @@
                                                     : public_path();
 
                                                 // 2️⃣ مسیر نهایی (filesystem)
-                                                $finalFs = $fsRoot . $rec->PicPath . $file;
+                                                $finalFs = $fsRoot . $row->PicPath . $file;
 
                                                 // 3️⃣ مسیر temp (filesystem)
                                                 $tempPicPath = str_replace(
                                                     ['/img/products/', '/img/otherProducts/'],
                                                     ['/img/imagesTemp/products/', '/img/imagesTemp/otherProducts/'],
-                                                    $rec->PicPath
+                                                    $row->PicPath
                                                 );
 
                                                 $tempFs = $fsRoot . $tempPicPath . $file;
 
                                                 // 4️⃣ انتخاب src (فقط URL)
                                                 if (file_exists($finalFs)) {
-                                                    $src = $rec->PicPath . $file;
+                                                    $src = $row->PicPath . $file;
                                                 } elseif (file_exists($tempFs)) {
                                                     $src = $tempPicPath . $file;
                                                 } else {
-                                                    $src = $rec->PicPath . 'sample1.jpg';
+                                                    $src = $row->PicPath . 'sample1.jpg';
                                                 }
                                             @endphp
 

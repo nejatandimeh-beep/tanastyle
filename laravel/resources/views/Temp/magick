@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# wrapper for the extracted ImageMagick (no sudo required)
+IMAGEMAGICK_DIR="$HOME/imagemagick"
+export LD_LIBRARY_PATH="$IMAGEMAGICK_DIR/usr/lib:$LD_LIBRARY_PATH"
+exec "$IMAGEMAGICK_DIR/usr/bin/magick" "$@"
