@@ -118,109 +118,122 @@
 </div>
 </body>
 <script>
-    $(".forceEnglishNumber").keypress(function (event) {
-        let ew = event.which;
-        if (48 <= ew && ew <= 57)
-            return true;
-        return false;
-    });
+    /* ===============================
+       DOM READY
+    ================================ */
+    document.addEventListener('DOMContentLoaded', function () {
 
-    // change persian num to english num
-    let persianNumbers = [/۰/g, /۱/g, /۲/g, /۳/g, /۴/g, /۵/g, /۶/g, /۷/g, /۸/g, /۹/g],
-        arabicNumbers = [/٠/g, /١/g, /٢/g, /٣/g, /٤/g, /٥/g, /٦/g, /٧/g, /٨/g, /٩/g],
-        fixNumbers = function (str) {
-            if (typeof str === 'string') {
-                for (let i = 0; i < 10; i++) {
-                    str = str.replace(persianNumbers[i], i).replace(arabicNumbers[i], i);
+        /* ===============================
+           1️⃣ فقط عدد انگلیسی (Safe)
+        ================================ */
+        document.querySelectorAll('.forceEnglishNumber').forEach(input => {
+            input.addEventListener('keydown', e => {
+                if (
+                    (e.key >= '0' && e.key <= '9') ||
+                    ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'].includes(e.key)
+                ) {
+                    return;
                 }
+                e.preventDefault();
+            });
+
+            input.addEventListener('input', () => {
+                input.value = input.value.replace(/[^\d]/g, '');
+            });
+        });
+
+
+        /* ===============================
+           2️⃣ تبدیل اعداد فارسی / عربی
+        ================================ */
+        const persian = [/۰/g,/۱/g,/۲/g,/۳/g,/۴/g,/۵/g,/۶/g,/۷/g,/۸/g,/۹/g];
+        const arabic  = [/٠/g,/١/g,/٢/g,/٣/g,/٤/g,/٥/g,/٦/g,/٧/g,/٨/g,/٩/g];
+
+        function fixNumbers(str) {
+            if (typeof str !== 'string') return str;
+            for (let i = 0; i < 10; i++) {
+                str = str.replace(persian[i], i).replace(arabic[i], i);
             }
-            console.log(str);
             return str;
-        };
-    $('input').on('input', function () {
-        $(this).val(fixNumbers($(this).val()));
-    })
+        }
+
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', () => {
+                input.value = fixNumbers(input.value);
+            });
+        });
 
 
-    $(document).on('ready', function () {
-        if ($('#password').length > 0) {
-            let myInput = $('#password'),
-                letter = $("#lowercase"),
-                capital = $("#uppercase"),
-                number = $("#number"),
-                length = $("#length");
+        /* ===============================
+           3️⃣ اعتبارسنجی حرفه‌ای پسورد
+        ================================ */
+        const password = document.getElementById('password');
+        if (password) {
 
-            myInput.on('keyup', function () {
-                // Validate lowercase letters
-                let lowerCaseLetters = /[a-z]/g;
-                if (myInput.val().match(lowerCaseLetters)) {
-                    letter.removeClass("g-bg-red");
-                    letter.addClass("g-bg-primary");
-                } else {
-                    letter.removeClass("g-bg-primary");
-                    letter.addClass("g-bg-red");
-                }
+            const rules = {
+                lowercase: /[a-z]/,
+                uppercase: /[A-Z]/,
+                number: /[0-9]/,
+                length: /.{8,}/
+            };
 
-                // Validate capital letters
-                let upperCaseLetters = /[A-Z]/g;
-                if (myInput.val().match(upperCaseLetters)) {
-                    capital.removeClass("g-bg-red");
-                    capital.addClass("g-bg-primary");
-                } else {
-                    capital.removeClass("g-bg-primary");
-                    capital.addClass("g-bg-red");
-                }
+            const indicators = {
+                lowercase: document.getElementById('lowercase'),
+                uppercase: document.getElementById('uppercase'),
+                number: document.getElementById('number'),
+                length: document.getElementById('length')
+            };
 
-                // Validate numbers
-                let numbers = /[0-9]/g;
-                if (myInput.val().match(numbers)) {
-                    number.removeClass("g-bg-red");
-                    number.addClass("g-bg-primary");
-                } else {
-                    number.removeClass("g-bg-primary");
-                    number.addClass("g-bg-red");
-                }
-
-                // Validate length
-                if (myInput.val().length >= 8) {
-                    length.removeClass("g-bg-red");
-                    length.addClass("g-bg-primary");
-                } else {
-                    length.removeClass("g-bg-primary");
-                    length.addClass("g-bg-red");
-                }
+            password.addEventListener('keyup', () => {
+                Object.keys(rules).forEach(rule => {
+                    if (rules[rule].test(password.value)) {
+                        indicators[rule]?.classList.remove('g-bg-red');
+                        indicators[rule]?.classList.add('g-bg-primary');
+                    } else {
+                        indicators[rule]?.classList.remove('g-bg-primary');
+                        indicators[rule]?.classList.add('g-bg-red');
+                    }
+                });
             });
         }
-        //-------------------------
-        if ($('#currentPage').text() === '/change-seller-password') {
-            $('#homePage').hide();
-        } else {
-            $('#sellerProfile').hide();
-        }
-    });
 
-    function checkPass() {
-        let myInput = $('#password'),
-            letter = $("#lowercase"),
-            capital = $("#uppercase"),
-            number = $("#number"),
-            length = $("#length");
 
-        if (letter.hasClass('g-bg-red') || capital.hasClass('g-bg-red') || number.hasClass('g-bg-red') || length.hasClass('g-bg-red')) {
-            alert('لطفا قواعد رمزگذاری را رعایت کنید.');
-        } else {
-            if (myInput.val() === $('#password-confirm').val()) {
-                $('#submitText').hide();
-                $('#waitingSubmit').hide();
-                $('#save').prop('disabled', true);
-                $('form').submit();
-            } else {
-                alert('رمز و تکرار رمز یکسان نیستند.')
+        /* ===============================
+           4️⃣ ارسال فرم پسورد امن
+        ================================ */
+        window.checkPass = function () {
+
+            const pass = document.getElementById('password');
+            const confirm = document.getElementById('password-confirm');
+
+            if (!pass || !confirm) return;
+
+            const invalid = document.querySelectorAll('#passwordHint .g-bg-red').length;
+
+            if (invalid > 0) {
+                alert('❌ رمز عبور شرایط لازم را ندارد');
+                return;
             }
-        }
-    }
-    // backButton control
-    (function () {
+
+            if (pass.value !== confirm.value) {
+                alert('❌ رمز و تکرار رمز یکسان نیست');
+                return;
+            }
+
+            document.getElementById('save')?.setAttribute('disabled', true);
+            document.getElementById('submitText')?.style.display = 'none';
+            document.getElementById('waitingSubmit')?.style.display = 'inline-block';
+
+            pass.closest('form').submit();
+        };
+
+
+        /* ===============================
+           5️⃣ مدیریت برگشت بدون Loop
+           ⛔️ دکمه مرورگر غیرفعال
+           ✅ فقط دکمه اختصاصی شما
+        ================================ */
+
         const STACK_KEY = 'app_history_stack';
 
         function getStack() {
@@ -231,10 +244,9 @@
             sessionStorage.setItem(STACK_KEY, JSON.stringify(stack));
         }
 
-        // ثبت مسیر فعلی
         function pushPage() {
             const stack = getStack();
-            const current = location.href;
+            const current = location.pathname;
 
             if (stack[stack.length - 1] !== current) {
                 stack.push(current);
@@ -242,35 +254,30 @@
             }
         }
 
-        // برگشت اختصاصی
-        window.appBack = function () {
-            const stack = getStack();
-            stack.pop(); // صفحه فعلی
+        // فقط یک بار ثبت
+        pushPage();
 
+        // دکمه برگشت اختصاصی
+        window.appBack = function () {
+            let stack = getStack();
+            stack.pop(); // صفحه فعلی
             const prev = stack.pop();
             setStack(stack);
 
             if (prev) {
-                location.replace(prev); // مهم: replace نه href
+                location.replace(prev);
             } else {
                 location.replace('/');
             }
         };
 
-        pushPage();
-    })();
-
-    document.getElementById('backButton').addEventListener('click', function (e) {
-        e.preventDefault();
-        window.appBack();
-    });
-    (function disableBrowserBack() {
+        // غیرفعال‌سازی back مرورگر
         history.pushState(null, '', location.href);
-
         window.addEventListener('popstate', function () {
             history.pushState(null, '', location.href);
         });
-    })();
+
+    });
 </script>
 </html>
 

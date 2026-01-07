@@ -52,7 +52,9 @@ class ResetPasswordController extends Controller
             'email' => $email,
         ]);
     }
-
+    public function sellerShowResetForm(Request $request, $token = null){
+        return view('auth.sellerAuth.passwords.resetPassword');
+    }
     protected function validator(array $data)
     {
         return Validator::make($data, [

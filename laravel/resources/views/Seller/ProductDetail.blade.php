@@ -460,7 +460,7 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header g-pr-20 g-pl-20">
-                                    <h4>تغییرات تخفیف محصول</h4>
+                                    <h5>تغییر درصد تخفیف محصول</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <i class="fa fa-close"></i>
                                     </button>

@@ -48,6 +48,7 @@ Route::get('/register-success', 'AuthSeller\RegisterController@successRegister')
 Route::post('/register/seller-UploadImage', 'AuthSeller\RegisterController@uploadImage')->name('sellerRegisterImage');
 Route::get('/check-seller-mobile', 'AuthSeller\VerifyController@getMobile')->name('getMobileSeller');
 Route::post('/verify-seller-mobile', 'AuthSeller\VerifyController@verifyMobile')->name('verifyMobileSeller');
+Route::post('/seller/resend-code', 'AuthSeller\VerifyController@resendCode')->name('resendVerifyCodeSeller');
 Route::post('/login/seller', 'AuthSeller\LoginController@sellerLogin')->name('sellerLogin');
 Route::post('/register/seller/accept', 'AuthSeller\RegisterController@createSeller')->name('sellerSave');
 // Seller Change Password Links
@@ -58,6 +59,7 @@ Route::group(['prefix' => 'sellers'], function(){
  //   Route::post('/password/email','Auth\CustomerForgotPasswordController@sendResetLinkEmail')->name('customer.password.email');
     route::get('/requestMobile', 'AuthSeller\ForgotPasswordController@showLinkRequestForm')->name('sellers.showMobileRequestForm');
     route::post('/sendEmail', 'AuthSeller\ForgotPasswordController@sendResetLinkEmail')->name('sellers.sendResetLink');
+    Route::get('/reset-seller-password', 'AuthSeller\ResetPasswordController@sellerShowResetForm')->name('sellerShowResetForm');
     Route::post('/reset-seller-password', 'AuthSeller\ResetPasswordController@resetPassword')->name('sellerResetPassword');
     route::post('/reset', 'AuthSeller\ResetPasswordController@reset')->name('sellers.password.update');
 });

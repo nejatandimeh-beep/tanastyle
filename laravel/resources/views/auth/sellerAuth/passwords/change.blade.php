@@ -1,102 +1,182 @@
 @extends('Layouts.appSeller')
 
 @section('content')
-    <div class="container">
+    <div class="container py-5">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header text-right">تغییر رمز عبور</div>
+            <div class="col-md-7 col-lg-6">
+                <div class="card shadow-lg border-0 rounded-3">
+                    <h5 class="card-header text-center g-bg-primary text-white py-3">
+                        تغییر رمز عبور فروشنده
+                    </h5>
 
-                    <div style="direction: rtl" class="card-body">
-                        <form method="POST" action="{{ route('changeSellerPassword') }}">
+                    <div class="card-body p-4" style="direction: rtl">
+
+                        {{-- ارورها --}}
+                        @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger py-2">{{ $error }}</div>
+                        @endforeach
+
+                        <form method="POST" action="{{ route('changeSellerPassword') }}" novalidate>
                             @csrf
 
-                            @foreach ($errors->all() as $error)
-                                <p class="text-danger">{{ $error }}</p>
-                            @endforeach
-
-                            <div class="form-group row">
-                                <label for="current_password" class="col-md-4 col-form-label text-md-left">پسورد
-                                    جاری</label>
-
-                                <div class="col-md-6">
-                                    <input id="current_password"
-                                           type="password"
-                                           class="form-control input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
-                                           autofocus
+                            {{-- رمز عبور فعلی --}}
+                            <div class="mb-3">
+                                <label class="form-label fw-bold h6">رمز عبور فعلی</label>
+                                <div style="direction: ltr;" class="input-group">
+                                    <input type="password"
+                                           id="current-password"
                                            name="current_password"
-                                           autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div class="form-group row g-mb-0">
-                                <label for="password" class="col-md-4 col-form-label text-md-left">پسورد جدید</label>
-
-                                <div class="col-md-6">
-                                    <input style="direction:ltr;"
-                                           id="password"
-                                           type="password"
-                                           class="form-control @error('password') is-invalid @enderror input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
-                                           name="password"
-                                           value="{{ old('password') }}"
-                                           required
-                                           autocomplete="off">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="form-group row g-mb-0">
-                                <label for="password-confirm" class="col-md-4 col-form-label g-py-1 text-md-left"></label>
-                                <div id="passwordHint"
-                                     class="col-md-6">
-                                    <div id="length" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg g-mt-5 align-top g-py-1 col-2"></div>
-                                    <div id="number" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
-                                    <div id="uppercase" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
-                                    <div id="lowercase" class="d-inline-block g-bg-red g-mb-5 g-mb-0--lg align-top g-mt-5 g-py-1 col-2"></div>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-left">تکرار پسورد
-                                    جدید</label>
-
-                                <div class="col-md-6">
-                                    <input id="password-confirm"
-                                           type="password"
-                                           class="form-control input-outline-primary rounded-0 g-font-size-18 g-font-size-16--md text-left"
-                                           name="password_confirmation"
-                                           required
-                                           autocomplete="off">
-                                </div>
-                            </div>
-
-                            <div style="direction: rtl" class="form-group row g-mt-30">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-left"></label>
-                                <div class="col-lg-6 text-right g-px-15">
-                                    <small class="text-muted g-font-size-12">* فقط صفحه کلید انگلیسی مجاز است.</small><br>
-                                    <small class="text-muted g-font-size-12">* رمز عبور باید شامل اعداد، حروف بزرگ، حروف کوچک و بیشتر از 8 کاراکتر باشد.</small>
-                                </div>
-                            </div>
-
-                            <div class="form-group row g-mb-60--lg g-mt-20">
-                                <div class="col-md-10 text-left">
-                                    <button type="button" class="force-col-12 btn u-btn-primary rounded-0 g-font-size-16" id="save" onclick="checkPass()">
-                                        <span id="submitText">بروز رسانی رمز عبور</span>
-                                        <span id="waitingSubmit"
-                                              style="display: none"
-                                              class="m-0 g-color-white">منتظر بمانید..</span>
+                                           class="form-control g-py-8 g-brd-gray-light-v3 text-left"
+                                           autocomplete="off"
+                                           required>
+                                    <button type="button"
+                                            class="btn btn-outline-secondary g-brd-gray-light-v3"
+                                            id="toggleCurrentPassword">
+                                        <i class="fa fa-eye"></i>
                                     </button>
                                 </div>
                             </div>
+
+                            {{-- رمز عبور جدید --}}
+                            <div class="mb-3">
+                                <label class="form-label fw-bold h6">رمز عبور جدید</label>
+                                <div style="direction: ltr;" class="input-group">
+                                    <input type="password"
+                                           id="password"
+                                           name="password"
+                                           class="form-control g-py-8 g-brd-gray-light-v3 text-left"
+                                           autocomplete="off"
+                                           required>
+                                    <button type="button"
+                                            class="btn btn-outline-secondary g-brd-gray-light-v3"
+                                            id="togglePassword">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {{-- قوانین رمز عبور --}}
+                            <div id="passwordRules" class="mb-3 small text-muted">
+                                <p class="mb-1 fw-bold">رمز عبور باید شامل موارد زیر باشد:</p>
+                                <ul class="list-unstyled mb-2">
+                                    <li id="rule-length" class="text-danger">حداقل 8 کاراکتر</li>
+                                    <li id="rule-number" class="text-danger">حداقل یک عدد</li>
+                                    <li id="rule-uppercase" class="text-danger">حداقل یک حرف بزرگ</li>
+                                    <li id="rule-lowercase" class="text-danger">حداقل یک حرف کوچک</li>
+                                    <li id="rule-special" class="text-danger">حداقل یک کاراکتر خاص (!@#$%^&*)</li>
+                                </ul>
+
+                                <div class="progress" style="height: 8px;">
+                                    <div id="passwordStrength"
+                                         class="progress-bar bg-danger"
+                                         style="width: 0%;"></div>
+                                </div>
+                            </div>
+
+                            {{-- تکرار رمز --}}
+                            <div style="direction: ltr;" class="mb-4">
+                                <label class="form-label fw-bold h6">تکرار رمز عبور</label>
+                                <div class="input-group">
+                                    <input type="password"
+                                           id="password-confirm"
+                                           name="password_confirmation"
+                                           class="form-control g-py-8 g-brd-gray-light-v3 text-left"
+                                           autocomplete="off"
+                                           required>
+                                    <button type="button"
+                                            class="btn btn-outline-secondary g-brd-gray-light-v3"
+                                            id="togglePasswordConfirm">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            {{-- دکمه --}}
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    اعمال تغییرات
+                                </button>
+                            </div>
+
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    {{-- اسکریپت‌ها (کاملاً ایزوله و امن) --}}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const passwordInput = document.getElementById("password");
+            const passwordConfirmInput = document.getElementById("password-confirm");
+
+            const rules = {
+                length: document.getElementById("rule-length"),
+                number: document.getElementById("rule-number"),
+                uppercase: document.getElementById("rule-uppercase"),
+                lowercase: document.getElementById("rule-lowercase"),
+                special: document.getElementById("rule-special"),
+            };
+
+            const strengthBar = document.getElementById("passwordStrength");
+
+            passwordInput.addEventListener("input", function () {
+                const val = passwordInput.value;
+                let strength = 0;
+
+                if (val.length >= 8) {
+                    rules.length.classList.replace("text-danger", "text-success");
+                    strength++;
+                } else rules.length.classList.replace("text-success", "text-danger");
+
+                if (/[0-9]/.test(val)) {
+                    rules.number.classList.replace("text-danger", "text-success");
+                    strength++;
+                } else rules.number.classList.replace("text-success", "text-danger");
+
+                if (/[A-Z]/.test(val)) {
+                    rules.uppercase.classList.replace("text-danger", "text-success");
+                    strength++;
+                } else rules.uppercase.classList.replace("text-success", "text-danger");
+
+                if (/[a-z]/.test(val)) {
+                    rules.lowercase.classList.replace("text-danger", "text-success");
+                    strength++;
+                } else rules.lowercase.classList.replace("text-success", "text-danger");
+
+                if (/[\W_]/.test(val)) {
+                    rules.special.classList.replace("text-danger", "text-success");
+                    strength++;
+                } else rules.special.classList.replace("text-success", "text-danger");
+
+                const percent = (strength / 5) * 100;
+                strengthBar.style.width = percent + "%";
+                strengthBar.className = "progress-bar";
+
+                if (percent < 40) strengthBar.classList.add("bg-danger");
+                else if (percent < 80) strengthBar.classList.add("bg-warning");
+                else strengthBar.classList.add("bg-success");
+            });
+
+            function toggle(btnId, inputId) {
+                const btn = document.getElementById(btnId);
+                const input = document.getElementById(inputId);
+
+                btn.addEventListener("click", function () {
+                    const isPass = input.type === "password";
+                    input.type = isPass ? "text" : "password";
+                    btn.innerHTML = isPass
+                        ? '<i class="fa fa-eye-slash"></i>'
+                        : '<i class="fa fa-eye"></i>';
+                });
+            }
+
+            toggle("toggleCurrentPassword", "current-password");
+            toggle("togglePassword", "password");
+            toggle("togglePasswordConfirm", "password-confirm");
+
+        });
+    </script>
 @endsection

@@ -4,78 +4,104 @@ namespace App\Http\Controllers\AuthSeller;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use Kavenegar;
+use Illuminate\Support\Facades\Config;
 use App\Seller;
+use Kavenegar;
 
 class VerifyController extends Controller
 {
-    function getMobile()
+    // نمایش فرم درخواست شماره موبایل
+    public function showMobileForm()
     {
-        $mobileNum = DB::table('sellers')
-            ->select('Mobile')
-            ->where('Mobile', (string)$_GET['mobile'])
-            ->first();
-        if (is_null($mobileNum)){
-            return redirect()->route('sellers.showMobileRequestForm')->with('message', 'شما قبلا ثبت نام نکرده اید');
+        return view('auth.sellerAuth.requestMobile');
+    }
+
+    // دریافت شماره موبایل و ارسال کد
+    public function getMobile(Request $request)
+    {
+        $mobile = (string) $request->get('mobile');
+
+        if (Session::has('mobile') && Session::get('mobile') !== $mobile) {
+            Session::forget('SENDSeller');
+            Session::forget('tokenSeller');
         }
 
-        session_start();
-        if (!isset($_SESSION['SENDSeller'])) {
-            $_SESSION['SENDSeller']=time();
-            $seller = new Seller();
-            $mobile = (string)$_GET['mobile'];
+        $mobileNum = Seller::where('Mobile', $mobile)->first();
+        if (!$mobileNum) {
+            return redirect()->route('sellers.showMobileRequestForm')
+                ->with('message', 'شما قبلا ثبت نام نکرده‌اید');
+        }
+
+        if (!Session::has('SENDSeller')) {
+            Session::put('SENDSeller', time());
             Session::put('mobile', $mobile);
-            $sellerExist = Seller::where('Mobile', $mobile)->first();
-                try {
-                    $this->sendToken($mobile);
-                } catch (\Exception $e) {
-                    unset($_SESSION['SENDSeller']);
-                    return redirect()->route('sellers.showMobileRequestForm')->with('message', 'شماره موبایل نامعتبر است');
-                }
-                return view('auth.sellerAuth.verifyMobile');
-        } else {
-            $timer = time() - $_SESSION['SENDSeller'];
-            if($timer>=120) {
-                unset($_SESSION['SENDSeller']);
-                return redirect()->route('sellers.showMobileRequestForm');
-            } else {
-                $timer=120-$timer;
-                return view('auth.sellerAuth.verifyMobile',compact('timer'));
+
+            try {
+                $this->sendToken($mobile);
+            } catch (\Exception $e) {
+                Session::forget('SENDSeller');
+                return redirect()->route('sellers.showMobileRequestForm')
+                    ->with('message', 'شماره موبایل نامعتبر است');
             }
+
+            return view('auth.sellerAuth.verifyMobile', ['mobile' => $mobile]);
+        }
+
+        $timer = time() - Session::get('SENDSeller');
+        if ($timer >= 120) {
+            Session::forget('SENDSeller');
+            return redirect()->route('sellers.showMobileRequestForm');
+        } else {
+            $timer = 120 - $timer;
+            return view('auth.sellerAuth.verifyMobile', ['timer' => $timer, 'mobile' => $mobile]);
         }
     }
 
+    // ارسال کد
     public function sendToken($mobile)
     {
         $token = mt_rand(100000, 999999);
-        Session::put('token', $token);
-//        Session::put('token', $token2);
-//        Session::put('token', $token3);
+        Session::put('tokenSeller', $token);
 
         $api_key = Config::get('kavenegar.apikey');
-        $var = new Kavenegar\KavenegarApi($api_key);
+        $kavenegar = new Kavenegar\KavenegarApi($api_key);
         $template = "verifySeller";
         $type = "sms";
 
-        $result = $var->VerifyLookup($mobile, $token, null, null, $template, $type);
+        $kavenegar->VerifyLookup($mobile, $token, null, null, $template, $type);
     }
 
-    public function verifyMobile(Request $req)
+    // تایید کد
+    public function verifyMobile(Request $request)
     {
-        session_start();
-        $seller = new Seller();
-        $verifyCode = $req->get('verifyCode');
-        if ($seller->validateToken($verifyCode)) {
-            unset($_SESSION['SENDSeller']);
-            return view('auth.sellerAuth.passwords.resetPassword');
+        $verifyCode = $request->get('verifyCode');
+        $mobile = Session::get('mobile');
+
+        if (Session::get('tokenSeller') == $verifyCode) {
+            Session::forget('SENDSeller');
+            Session::forget('tokenSeller');
+            return response()->json([
+                'success' => true,
+                'redirect' => route('sellerShowResetForm')
+            ]);
         } else {
-            echo "کد وارد شده اشتباه است";
+            return response()->json([
+                'success' => false,
+                'message' => 'کد وارد شده اشتباه است'
+            ], 422);
+        }
+    }
+
+    // ارسال مجدد کد
+    public function resendCode(Request $request)
+    {
+        $mobile = Session::get('mobile');
+        if (!$mobile) {
+            return response()->json(['success' => false, 'message' => 'شماره موبایل یافت نشد'], 422);
         }
 
-        return true;
+        $this->sendToken($mobile);
+        return response()->json(['success' => true, 'message' => 'کد جدید ارسال شد']);
     }
 }

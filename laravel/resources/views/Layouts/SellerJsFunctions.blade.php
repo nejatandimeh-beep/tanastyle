@@ -693,7 +693,7 @@
         function applyAddQty(id, container) {
             let val = parseInt($('#' + container + ' #qtyInput').val());
             $.confirm({
-                title: 'حذف محصول',
+                title: 'افزودن موجودی محصول',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
@@ -710,14 +710,14 @@
         function applyDecQty(id, container) {
             let val = parseInt($('#' + container + ' #qtyInput').val());
             $.confirm({
-                title: 'حذف محصول',
+                title: 'کاهش موجودی',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
                         location.href = '/Seller-DecQty/' + id + '/' + val;
                     },
                     انصراف: function () {
-                        $.alert('عملیات افزودن موجودی محصول لغو شد!');
+                        $.alert('عملیات کاهش موجودی محصول لغو شد!');
                         $('#modalDecQtyForm').modal('toggle');
                     },
                 }
@@ -1021,7 +1021,7 @@
 
         function confirmNewDiscount(id, discount, finalPrice, unitPrice) {
             $.confirm({
-                title: 'تغییر قیمت محصول',
+                title: 'تغییر درصد تخفیف',
                 content: 'آیا مطمئن هستید؟',
                 buttons: {
                     تایید: function () {
